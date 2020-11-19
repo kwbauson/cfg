@@ -6,7 +6,9 @@
     let pkgs = nixpkgs.legacyPackages.${system}; in
     rec {
 
-      hello = pkgs.hello;
+      packages = {
+        inherit (pkgs) hello neovim;
+      };
 
       defaultPackage = hello;
 
