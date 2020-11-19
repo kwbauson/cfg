@@ -7,7 +7,7 @@
     rec {
 
       packages = {
-        inherit (pkgs) hello neovim;
+        inherit (pkgs) hello sl;
       };
 
     });
