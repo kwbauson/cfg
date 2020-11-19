@@ -10,7 +10,5 @@
         inherit (pkgs) hello neovim;
       };
 
-      defaultPackage = hello;
-
     });
 }
