@@ -126,10 +126,10 @@
         "homepage": null,
         "owner": "DavHau",
         "repo": "mach-nix",
-        "rev": "9f30dc7fdb0d825de93887a5acdd05c0af24ee37",
-        "sha256": "1nmvlj1hy9qh33jlh91546jn69dlqpncqmxgx6vblilm05zy169p",
+        "rev": "e3ea3aceed19469483dbeaad8807c479385ca693",
+        "sha256": "0i0c6ardx04pbjy8rv8pfq3n6zhx110mq3faq7zn762xlx3qjrkq",
         "type": "tarball",
-        "url": "https://github.com/DavHau/mach-nix/archive/9f30dc7fdb0d825de93887a5acdd05c0af24ee37.tar.gz",
+        "url": "https://github.com/DavHau/mach-nix/archive/e3ea3aceed19469483dbeaad8807c479385ca693.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-18.09": {
