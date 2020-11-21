@@ -151,8 +151,8 @@ with builtins; with pkgs.mylib; {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${HOME}/{${concatStringsSep "," paths}}";
         qemu = "qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
-        ${attrIf isDarwin "local_ops"} = "nix-local-env run -d ~/src/hr/local_ops python dev.py";
-        ${attrIf isDarwin "lo"} = "local_ops";
+        local_ops = "nix-local-env run -d ~/src/hr/local_ops python dev.py";
+        lo = "local_ops";
       };
       initExtra =
         prefixIf

@@ -43,6 +43,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id bl - 5
 bindsym XF86MonBrightnessUp   exec --no-startup-id bl + 5
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id bl - 1
 bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id bl + 1
+bindsym $mod+Control+v exec xpaste
 
 # windows
 bindsym $mod+q kill

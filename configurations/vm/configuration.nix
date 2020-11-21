@@ -18,4 +18,5 @@
 
   users.users.keith.extraGroups = [ "wheel" "docker" ];
   # hardware.parallels.enable = true;
+  virtualisation.docker.enable = true;
 }

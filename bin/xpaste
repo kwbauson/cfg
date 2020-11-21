@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# with-packages xdotool xsel
+sleep 1
+exec xdotool type --clearmodifiers "$(xsel)"
