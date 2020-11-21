@@ -7,7 +7,7 @@
 
   networking = {
     hostName = "keith-vm";
-    interfaces.enp0s3.useDHCP = true;
+    useDHCP = true;
   };
 
   fonts.enableDefaultFonts = true;
@@ -17,5 +17,5 @@
   hardware.pulseaudio.enable = true;
 
   users.users.keith.extraGroups = [ "wheel" "docker" ];
-  hardware.parallels.enable = true;
+  # hardware.parallels.enable = true;
 }
