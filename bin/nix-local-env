@@ -1,0 +1,177 @@
+#!/usr/bin/env bash
+# with-packages bundix bundler direnv nix-prefetch-git niv diffutils nixUnstable
+set -e
+
+name=$(basename "$0")
+[[ -e .disable-$name ]] && exit
+
+nixexpr="(import <nixpkgs> {}).$name { path = ./.; }"
+cachebase=$XDG_CACHE_HOME/$name
+localenvnix=$HOME/.config/nixpkgs/$name.nix
+
+args=$@
+cmd=
+[[ -n $1 && $1 != -d ]] && cmd=$1 && shift
+[[ $1 = -d ]] && shift && cd "$1" && shift
+sourcedir=$PWD
+
+invalid() {
+  echo invalid command: "$args"
+  exit 1
+}
+
+[[ $cmd != run && -n $1 ]] && invalid
+
+buildfiles=(
+  package{,-lock}.json
+  # yarn.{lock,nix}
+  Gemfile{,.lock}
+  gemset.nix
+  requirements{,.dev}.txt
+  local.nix
+  bin
+)
+
+hashfiles() {
+  echo "$localenvnix"
+  echo "$0"
+  for file in ${buildfiles[@]};do
+    if [[ -e $sourcedir/$file ]];then
+      if [[ -d $sourcedir/$file ]];then
+        find "$sourcedir/$file" -type f
+      else
+        echo "$sourcedir/$file"
+      fi
+    fi
+  done
+}
+
+cachedir=$cachebase/$(hashfiles | sort | xargs cat | md5sum | awk '{ print $1 }')
+builddir=$cachedir/build
+result=$cachedir/result
+sourcelink=$cachedir/source
+
+if [[ -z $cmd ]];then
+  "$0" cache
+  exit $?
+fi
+
+envfiles='.env .env.development .development.env'
+
+case $cmd in
+  init)
+    "$0" cache
+    if [[ ! -e .envrc ]];then
+      echo 'eval "$('$name' direnv)"' > .envrc
+    fi
+    direnv allow
+    ;;
+  recache)
+    if [[ -d "$cachebase" ]];then
+      for dir in "$cachebase"/*;do
+        src=$(< "$dir"/source)
+        [[ -d $src ]] && echo "$src"
+      done | sort | uniq | while read src;do
+        cd "$src"
+        set +e
+        "$0" init
+        set -e
+      done
+    fi
+    ;;
+  cache)
+    [[ -e $result ]] && exit
+    mkdir -p "$builddir"
+    echo "$sourcedir" > "$sourcelink"
+    for file in ${buildfiles[@]};do
+      [[ -e $sourcedir/$file ]] && ln -sft "$builddir" "$sourcedir/$file"
+    done
+    "$0" generate -d "$builddir"
+    "$0" rebuild
+    ;;
+  generate)
+    [[ -e Gemfile ]] && bundix
+    ;;
+  rebuild)
+    [[ -d $builddir ]] && cd "$builddir"
+    nix --keep-going build --impure --expr "$nixexpr" --out-link "$result"
+    ;;
+  update)
+    if [[ -e package.json ]];then
+      if ! ncu -e2;then
+        ncu -u
+        npm --package-lock-only i
+      fi
+    fi
+    if [[ -e Gemfile ]];then
+      if ! bundler outdated;then
+        rm Gemfile.lock
+        bundix -l
+      fi
+    fi
+    set +e
+    [[ -e requirements.txt ]] && pur -zfr requirements.txt
+    [[ -e requirements.dev.txt ]] && pur -zfr requirements.dev.txt
+    set -e
+    if [[ -e nix/sources.nix && -e nix/sources.json ]];then
+      tmpfile=$(mktemp)
+      cp nix/sources.json $tmpfile
+      niv update
+      diff -u nix/sources.json $tmpfile || true
+      rm -f $tmpfile
+    fi
+    if [[ -e flake.nix && -e flake.lock ]];then
+      nix flake update --recreate-lock-file
+    fi
+    ;;
+  run)
+    "$0" cache
+    set -a
+    PATH=$result/bin:$PATH
+    for file in $envfiles;do
+      [[ -e $file ]] && source "$file"
+    done
+    set +a
+    "$@"
+    ;;
+  direnv)
+    "$0" cache 1>&2
+    echo source_up
+    printf 'PATH=%q:$PATH\n' "$result/bin"
+    for file in $envfiles;do
+      [[ -e $file ]] && printf 'dotenv %s\n' "$file"
+    done
+    ;;
+  uncache)
+    for dir in $cachebase/*;do
+      [[ $sourcedir = $(< "$dir/source") ]] && rm -rf "$dir"
+    done
+    ;;
+  clean)
+    rm -rf "$cachebase"
+    ;;
+  gc)
+    if [[ -d "$cachebase" ]];then
+      for dir in "$cachebase"/*;do
+        newdir=$(< "$dir"/source)
+        if [[ -d $newdir ]];then
+          [[ $("$0" cachedir -d "$newdir") != $dir ]] && rm -rf "$dir"
+        else
+          rm -rf "$dir"
+        fi
+      done
+    fi
+    ;;
+  build)
+    [[ -d $builddir ]] && cd "$builddir"
+    nix --keep-going build --impure --expr "$nixexpr" --out-link "$sourcedir"/result
+    ;;
+  cachedir)
+    echo "$cachedir"
+    ;;
+  *)
+    invalid
+    ;;
+esac
+
+exit 0

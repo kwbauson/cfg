@@ -1,0 +1,219 @@
+{
+    "amethyst": {
+        "sha256": "16n5vdyjs6m4saqibv3fb420w6x83lsiw182qm3prnilh4q9qld3",
+        "type": "file",
+        "url": "https://github.com/ianyh/Amethyst/releases/download/v0.15.4/Amethyst.zip",
+        "url_template": "https://github.com/ianyh/Amethyst/releases/download/v<version>/Amethyst.zip",
+        "version": "0.15.4"
+    },
+    "any-jump.vim": {
+        "branch": "master",
+        "description": "Jump to any definition and references 👁 IDE madness without overhead 🚀",
+        "homepage": "",
+        "owner": "pechorin",
+        "repo": "any-jump.vim",
+        "rev": "211de97502c0e52289c17241c57ecbf1628f07b1",
+        "sha256": "17c3kbnxg09xa62v6sf3sfbv0795ihh49zr6qjj6c4x496bs81k9",
+        "type": "tarball",
+        "url": "https://github.com/pechorin/any-jump.vim/archive/211de97502c0e52289c17241c57ecbf1628f07b1.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "complete-alias": {
+        "branch": "master",
+        "description": "automagical shell alias completion;",
+        "homepage": "https://repo.cykerway.com/complete-alias",
+        "owner": "cykerway",
+        "repo": "complete-alias",
+        "rev": "00cce5a98815a20e0ad97d450f83218ad141bc38",
+        "sha256": "10w25197zdh9gaxxsvxyw30jwdx7z92msajfjhdznralghbfgrq4",
+        "type": "tarball",
+        "url": "https://github.com/cykerway/complete-alias/archive/00cce5a98815a20e0ad97d450f83218ad141bc38.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "context.vim": {
+        "branch": "master",
+        "description": "Vim plugin that shows the context of the currently visible buffer contents",
+        "homepage": null,
+        "owner": "wellle",
+        "repo": "context.vim",
+        "rev": "e38496f1eb5bb52b1022e5c1f694e9be61c3714c",
+        "sha256": "1iy614py9qz4rwk9p4pr1ci0m1lvxil0xiv3ymqzhqrw5l55n346",
+        "type": "tarball",
+        "url": "https://github.com/wellle/context.vim/archive/e38496f1eb5bb52b1022e5c1f694e9be61c3714c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "dmg-alacritty": {
+        "sha256": "1yy6iqg105msw9n05n1ghgamd29n2679xdz2n4mpf1d9wn16s0wh",
+        "type": "file",
+        "url": "https://github.com/alacritty/alacritty/releases/download/v0.5.0/Alacritty-v0.5.0.dmg",
+        "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
+        "version": "0.5.0"
+    },
+    "dmg-discord": {
+        "sha256": "05v5f02gpl9xcbpah2akmcnix6g1xslgjwas1r1xxvhscxs72ywj",
+        "type": "file",
+        "url": "https://dl.discordapp.net/apps/osx/0.0.259/Discord.dmg",
+        "url_template": "https://dl.discordapp.net/apps/osx/<version>/Discord.dmg",
+        "version": "0.0.259"
+    },
+    "dmg-firefox": {
+        "sha256": "1q0bp9a4cv3x8hcsknq2a7gm67jg61rppmxd913sdcr8709qydh9",
+        "type": "file",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/82.0.2/mac/en-US/Firefox%2082.0.2.dmg",
+        "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
+        "version": "82.0.2"
+    },
+    "dmg-qutebrowser": {
+        "sha256": "03d5bf5lpxyphi0ri6ykh7dr6izsikk22ivh6mh09q0a2y0kdf44",
+        "type": "file",
+        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v1.14.0/qutebrowser-1.14.0.dmg",
+        "url_template": "https://github.com/qutebrowser/qutebrowser/releases/download/v<version>/qutebrowser-<version>.dmg",
+        "version": "1.14.0"
+    },
+    "dmg-signal-desktop": {
+        "sha256": "04kcg7ykj9iapywyipawi6pbvfvnn713qh1cjhgrinw2hgnzcmbx",
+        "type": "file",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.37.3.dmg",
+        "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
+        "version": "1.37.3"
+    },
+    "dmg-spotify": {
+        "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
+        "type": "file",
+        "url": "https://download.scdn.co/Spotify-0.8.5.dmg",
+        "url_template": "https://download.scdn.co/Spotify-<version>.dmg",
+        "version": "0.8.5"
+    },
+    "evilhack": {
+        "branch": "master",
+        "description": "A variant of NetHack that is designed to be a much more challenging experience than the original, drawing inspiration and content from various existing variants along with adding unique and never-before-seen custom content.",
+        "homepage": "",
+        "owner": "k21971",
+        "repo": "EvilHack",
+        "rev": "2d40c32a5bf8d02b33db170d37379df40a62eacd",
+        "sha256": "1spkc4zsjng0kga6nx3c46cf1b0xf1dkj52qk7wc83wcfhpcsmfq",
+        "type": "tarball",
+        "url": "https://github.com/k21971/EvilHack/archive/2d40c32a5bf8d02b33db170d37379df40a62eacd.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "git-trim": {
+        "branch": "master",
+        "description": "Utility to delete git branches interactively",
+        "homepage": null,
+        "owner": "dstnbrkr",
+        "repo": "git-trim",
+        "rev": "68322f146a443937e8f59aab4fa3dd0eb976a4db",
+        "sha256": "1y1z6hzfhs42pwkhwfa8qh1508rhx23idnnq1zmaabxyjkh42v01",
+        "type": "tarball",
+        "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "jsonc.vim": {
+        "branch": "master",
+        "description": "jsonc syntax support for vim",
+        "homepage": null,
+        "owner": "neoclide",
+        "repo": "jsonc.vim",
+        "rev": "6ed704ad0df15f5d4cfd289ed9588c357938f623",
+        "sha256": "01j856zl30vnak70dhvwnip2y39myjhhd047crk47r1z0nllwd0n",
+        "type": "tarball",
+        "url": "https://github.com/neoclide/jsonc.vim/archive/6ed704ad0df15f5d4cfd289ed9588c357938f623.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "mach-nix": {
+        "branch": "master",
+        "description": "Tool to create highly reproducible python environments",
+        "homepage": null,
+        "owner": "DavHau",
+        "repo": "mach-nix",
+        "rev": "9f30dc7fdb0d825de93887a5acdd05c0af24ee37",
+        "sha256": "1nmvlj1hy9qh33jlh91546jn69dlqpncqmxgx6vblilm05zy169p",
+        "type": "tarball",
+        "url": "https://github.com/DavHau/mach-nix/archive/9f30dc7fdb0d825de93887a5acdd05c0af24ee37.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixos-18.09": {
+        "branch": "nixos-18.09",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a7e559a5504572008567383c3dc8e142fa7a8633",
+        "sha256": "16j95q58kkc69lfgpjkj76gw5sx8rcxwi3civm0mlfaxxyw9gzp6",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/a7e559a5504572008567383c3dc8e142fa7a8633.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-bundler1": {
+        "branch": "dc4a0da5ff4b6904f0d9b6cdc636af7513c23e54",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dc4a0da5ff4b6904f0d9b6cdc636af7513c23e54",
+        "sha256": "0v4ba7sm16139yylgs1681p2b7lsyljc4cmz17db1jlmnwss6ycq",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/dc4a0da5ff4b6904f0d9b6cdc636af7513c23e54.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "ranger_devicons": {
+        "branch": "main",
+        "description": "Ranger plugin that adds file glyphs / icon support to Ranger",
+        "homepage": "",
+        "owner": "alexanderjeurissen",
+        "repo": "ranger_devicons",
+        "rev": "68ffbffd086b0e9bb98c74705abe891b756b9e11",
+        "sha256": "150xczhxs9n3xgrwivgp02xwbpqn0xwz65g91n4pl1g2bj3dbp1p",
+        "type": "tarball",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/68ffbffd086b0e9bb98c74705abe891b756b9e11.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "rnix-lsp-unstable": {
+        "branch": "master",
+        "description": "WIP Language Server for Nix! [maintainer=@jD91mZM2]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "rnix-lsp",
+        "rev": "274902aa662379fd30f12f0e310a2e738142da0e",
+        "sha256": "1df74cnzzc6h21msld07615d74vxadrakr4xdn6f8q6lx3m8gbgd",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/rnix-lsp/archive/274902aa662379fd30f12f0e310a2e738142da0e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vim-anyfold": {
+        "branch": "master",
+        "description": "Language agnostic vim plugin for folding and motion based on indentation.",
+        "homepage": "",
+        "owner": "pseewald",
+        "repo": "vim-anyfold",
+        "rev": "3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c",
+        "sha256": "14grfm5vra2lrnilsf6gbfmvn6v4pbi1l94ac713qac592fjq5kv",
+        "type": "tarball",
+        "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vim-code-dark": {
+        "branch": "master",
+        "description": "Dark color scheme for Vim and vim-airline, inspired by Dark+ in Visual Studio Code",
+        "homepage": "",
+        "owner": "tomasiser",
+        "repo": "vim-code-dark",
+        "rev": "9a76050073754a8ccc57cc0c1c51aa4328b00097",
+        "sha256": "1hsq08y68iqmwkscf4zr7lgmw3r6v97gbafj5z0g1flzvb98ly0s",
+        "type": "tarball",
+        "url": "https://github.com/tomasiser/vim-code-dark/archive/9a76050073754a8ccc57cc0c1c51aa4328b00097.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "yarn-completion": {
+        "branch": "master",
+        "description": "Bash completion for Yarn",
+        "homepage": "",
+        "owner": "dsifford",
+        "repo": "yarn-completion",
+        "rev": "5bf2968493a7a76649606595cfca880a77e6ac0e",
+        "sha256": "1w1df1cvf3c1maq60kx927x7x9zmb40n02pfgf3ynaai5n398195",
+        "type": "tarball",
+        "url": "https://github.com/dsifford/yarn-completion/archive/5bf2968493a7a76649606595cfca880a77e6ac0e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

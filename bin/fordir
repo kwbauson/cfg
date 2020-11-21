@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# with-packages tmux
+set -e
+startdir=$PWD
+dirs=$(for dir in *;do
+  if [[ -d $dir ]];then
+    if [[ $1 = git ]];then
+      if [[ -d $dir/.git ]];then
+        echo "$dir"
+      fi
+    else
+      echo "$dir"
+    fi
+  fi
+done)
+length=$(echo "$dirs" | awk '{ print length }' | sort -V | tail -n1)
+cmd=$(printf '%q ' "$@")
+for dir in $dirs;do
+  sep='┤'
+  prefix=$dir
+  tmux -C new bash -ic "cd '$startdir/$dir';$cmd" |
+    sed -n '/^%output %[0-9]\+ /s///p' |
+    tr -d '\n' |
+    sed -u -e 's/\(\\015\\012\)/\1\n/g' |
+    while read -r line; do
+      printf "%${length}s %s %b" "$prefix" "$sep" "$line"
+      if [[ -n $prefix ]];then
+        prefix=
+        sep='│'
+      fi
+    done
+done

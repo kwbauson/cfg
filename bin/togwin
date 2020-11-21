@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# with-packages wmctrl
+wmctrl -ia $(winlist -i | sed -n 2p)

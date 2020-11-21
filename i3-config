@@ -1,0 +1,122 @@
+# startup
+exec --no-startup-id togpad off &
+
+# settings
+set $mod Mod4
+font pango:DejaVuSansMono Nerd Font Mono 11
+floating_modifier $mod
+floating_minimum_size 0 x 10
+workspace_layout tabbed
+hide_edge_borders both
+focus_follows_mouse no
+mouse_warping none
+workspace_auto_back_and_forth yes
+bar {
+  position top
+  status_command statusline i3
+}
+
+# programs
+bindsym $mod+p         exec --no-startup-id termbar
+bindsym $mod+t         exec --no-startup-id term tmux
+bindsym $mod+Shift+t   exec --no-startup-id term
+bindsym $mod+Control+t exec --no-startup-id term tmux attach
+bindsym $mod+e         exec --no-startup-id term tmux new nvim
+bindsym $mod+Shift+e   exec --no-startup-id term nvim
+bindsym $mod+f         exec --no-startup-id term tmux new ranger
+bindsym $mod+Shift+f   exec --no-startup-id term tmux new ranger
+bindsym $mod+w exec --no-startup-id qtbr
+bindsym $mod+space exec --no-startup-id "sleep .5; xset dpms force off"
+bindsym $mod+Shift+space exec i3lock --color 000000
+bindsym $mod+z exec --no-startup-id "sleep .5; systemctl suspend"
+bindsym $mod+m exec --no-startup-id togpad
+bindsym XF86AudioMute         exec --no-startup-id vol m
+bindsym $mod+XF86AudioMute    exec --no-startup-id vol mc
+bindsym XF86AudioLowerVolume  exec --no-startup-id vol - 5
+bindsym XF86AudioRaiseVolume  exec --no-startup-id vol + 5
+bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id vol - 1
+bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id vol + 1
+bindsym XF86AudioPlay exec --no-startup-id medctl play
+bindsym XF86AudioPrev exec --no-startup-id medctl prev
+bindsym XF86AudioNext exec --no-startup-id medctl next
+bindsym XF86MonBrightnessDown exec --no-startup-id bl - 5
+bindsym XF86MonBrightnessUp   exec --no-startup-id bl + 5
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id bl - 1
+bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id bl + 1
+
+# windows
+bindsym $mod+q kill
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+bindsym $mod+apostrophe exec --no-startup-id "xdotool windowfocus $(i3-easyfocus -wa $(echo --color-{urgent,focused,unfocused}-{bg' ffff00',fg' 000000'}))"
+bindsym $mod+Return fullscreen toggle
+bindsym $mod+Tab exec togwin
+bindsym $mod+semicolon exec rofi -show window
+bindsym $mod+r mode "resize"
+mode "resize" {
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym h resize shrink width 1 px or 1 ppt
+  bindsym j resize grow height 1 px or 1 ppt
+  bindsym k resize shrink height 1 px or 1 ppt
+  bindsym l resize grow width 1 px or 1 ppt
+}
+
+# layout and containers
+bindsym $mod+s split vertical
+bindsym $mod+Control+s layout stacking
+bindsym $mod+v split horizontal
+bindsym $mod+d split vertical; layout tabbed
+bindsym $mod+Shift+d layout tabbed
+bindsym $mod+Shift+s layout splitv
+bindsym $mod+Shift+v layout splith
+bindsym $mod+o focus parent
+bindsym $mod+i focus child
+bindsym $mod+grave focus mode_toggle
+bindsym $mod+Shift+grave floating toggle
+
+# workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+Escape workspace blank
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+workspace 1 output eDP-1
+workspace 2 output DP-1
+workspace 2 output DP-1-1
+workspace 3 output DP-1-2
+
+# misc
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+q exit
+
+# rules
+for_window [instance="^termbar$"] floating enable, border none, resize set 700 22, move position 0 0
+no_focus [workspace="background"]
+no_focus [window_role="qutebrowser_background"]
+
+# vim:ft=i3config

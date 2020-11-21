@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# with-packages xorg.xinput xdotool
+pad=$(xinput list | grep Touchpad | awk '{ print $3, $4, $5 }')
+
+if [[ -z $1 ]];then
+  if [[ $(xinput list-props "$pad" | grep 'Device Enabled' | grep ':\s*0') ]];then
+    state=on
+  else
+    state=off
+  fi
+else
+  state=$1
+fi
+
+if [[ $state == on ]];then
+  xinput enable "$pad"
+elif [[ $state == off ]];then
+  xdotool mousemove 10000 0
+  xinput disable "$pad"
+else
+  echo invalid touchpad state
+  exit 1
+fi

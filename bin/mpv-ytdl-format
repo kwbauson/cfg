@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# with-packages youtube-dl mpv
+filter=$1
+url=$2
+shift
+shift
+
+format=$(youtube-dl -F "$url" | sed '1,/^format/d' | cut -d' ' -f1 | grep "$filter" | tail -n1)
+echo using format "$format"
+mpv --ytdl-format="$format" "$url" "$@"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+cd ~/src/nixpkgs
+git pull -q
+new_rev=$(git rev-parse HEAD)
+[[ $(nixpkgs-rev) = $new_rev ]] || echo updates

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+if [[ $1 = --nested ]];then
+  shift
+  package=$1
+  shift
+  pathstart=$(echo "$PATH" | sed 's/:.*//')
+  exe=
+  if [[ -e $pathstart/$package ]];then
+    exe=$package
+  else
+    files=$(ls -1q "$pathstart")
+    if [[ $(echo "$files" | wc -l) = 1 ]];then
+      exe=$(echo "$files" | head -n1)
+    else
+      echo "can't find a suitable exe for $package"
+      exit 1
+    fi
+  fi
+  exec "$exe" "$@"
+else
+  exec nix shell 'cfg#'"$1" -c "$0" --nested "$@"
+fi

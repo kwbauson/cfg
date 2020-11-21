@@ -1,14 +1,27 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    , home-manager
+    , ...
+    }: flake-utils.lib.eachDefaultSystem (system: rec {
 
-  outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
-    let pkgs = nixpkgs.legacyPackages.${system}; in
-    rec {
-
-      packages = {
-        inherit (pkgs) hello sl;
+      packages = import nixpkgs {
+        inherit system;
+        config = import ./config.nix;
+        overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);
       };
+
+      defaultPackage = packages.homeManagerConfiguration.activationPackage;
 
     });
 }

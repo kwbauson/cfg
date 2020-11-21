@@ -1,0 +1,51 @@
+{
+  /* "codeLens.enable": true, */
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.maxWindowHeight": 20,
+  "suggest.removeDuplicateItems": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "jsonc",
+    "json",
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascript.jsx",
+    "nix"
+  ],
+  "list.insertMappings": {
+    "<c-n>": "normal:j",
+    "<c-p>": "normal:k",
+    "<c-t>": "action:tabe",
+    "<c-v>": "action:vsplit"
+  },
+  "session.saveOnVimLeave": false,
+  "prettier.semi": false,
+  "prettier.arrowParens": "avoid",
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.disableSuccessMessage": true,
+  "typescript.preferences.quoteStyle": "single",
+  "tsserver.disableAutomaticTypeAcquisition": true,
+  "tsserver.ignoreLocalTsserver": true,
+  "flow.stopFlowOnExit": false,
+  "git.addGBlameToVirtualText": true,
+  "git.addGBlameToBufferVar": true,
+  "solargraph.definitions": true,
+  "solargraph.hover": true,
+  "solargraph.checkGemVersion": false,
+  "eslint.filetypes": ["javascript"],
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.git.showIgnored": true,
+  "explorer.previewAction.onHover": false,
+
+  "languageserver": {
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": ["nix"]
+    }
+  }
+}
+
+// vim:ft=jsonc

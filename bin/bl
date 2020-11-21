@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# with-packages brightnessctl
+set -e
+if [[ -z $1 ]];then
+  echo no command
+  exit 1
+elif [[ $1 == "+" ]];then
+  brightnessctl -q set +$2%
+elif [[ $1 == "-" ]];then
+  brightnessctl -q set $2%-
+else
+  brightnessctl -q set $1%
+fi

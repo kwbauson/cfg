@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# with-packages youtube-dl
+filter=$1
+if [[ $2 = -f ]];then
+  urls=$(< "$3")
+else
+  urls=$2
+fi
+
+for url in $urls;do
+  format=$(youtube-dl -F "$url" | sed '1,/^format/d' | cut -d' ' -f1 | grep "$filter" | tail -n1)
+  echo using format "$format"
+  youtube-dl -f "$format" "$url"
+done

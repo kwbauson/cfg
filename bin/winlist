@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# with-packages xorg.xprop wmctrl
+join -1 2 \
+  <(xprop -root _NET_CLIENT_LIST_STACKING |
+      sed -e 's/.* # //' -e 's/, /\n/g' |
+      while read x; do printf '0x%08x %d\n' $x $x;done |
+      cat -n | sort -k2) \
+  <(wmctrl -l | sort) |
+  sort -rnk2 | if [[ $1 == -i ]]
+    then
+      cut -d' ' -f 3
+    else
+      cut -d' ' -f 3,6-
+    fi

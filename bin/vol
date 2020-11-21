@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# with-packages pamixer pulseaudioFull xdotool
+cmd=$1
+[[ -n $1 ]] && shift
+
+if [[ -z $cmd ]];then
+  echo no command
+  exit 1
+elif [[ $cmd == "m" ]];then
+  pamixer --allow-boost --toggle-mute
+elif [[ $cmd == '+' ]];then
+  pamixer --allow-boost --increase $1
+elif [[ $cmd == '-' ]];then
+  pamixer --allow-boost --decrease $1
+elif [[ $cmd == 'mc' ]];then
+  pid=$(xdotool getactivewindow getwindowpid)
+  sink=$(
+    pactl list sink-inputs |
+    sed "/application.process.id = \"$pid\"/q" |
+    tac |
+    sed '/Sink Input/q' |
+    tail -n1 |
+    sed 's/Sink Input #//'
+  )
+  if [[ -n $sink ]];then
+    pactl set-sink-input-mute $sink toggle
+  fi
+elif [[ $cmd != '' ]];then
+  pamixer --allow-boost --set-volume $cmd
+fi

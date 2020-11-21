@@ -1,0 +1,80 @@
+#!/usr/bin/env ruby
+# with-packages acpi pamixer pulseaudioFull sysstat
+require 'rb-inotify'
+require 'open-uri'
+require 'json'
+
+def interval(time = 60, &block1)
+  proc { |&block2|
+    block2.(block1.call)
+    loop { block2.(block1.call); sleep time }
+  }
+end
+
+def ifs(condition, result = true, &block)
+  result &&= block.call if block_given?
+  condition ? result : ''
+end
+
+internet = false
+
+blocks = [
+  interval { ifs(internet) { `nix-has-updates` } },
+  interval(5) {
+    internet = begin true if URI.open('http://www.google.com', {read_timeout: 3}) rescue false end
+    ifs !internet, 'no internet'
+  },
+  interval(10) {
+    s, p, hs, ms = `acpi -b`
+      .match(/(?:(C)harging|(D)ischarging|(U)nknown|Full), (\d+)%(?:, (\d+):(\d+))?/)
+      &.captures&.compact || []
+    time = hs.nil? ? '' : " #{hs.to_i}:#{ms}"
+    "#{s.sub('C', '+').sub('D', '-').sub('U', '?')}#{p.to_s}%#{time}" if s
+  },
+  proc { |&block|
+    IO.popen('mpstat && mpstat 3').each_line
+      .grep(/all/) { |l| block.("#{(100 - l.split.last.to_f).round(2)}%") }
+  },
+  interval(10) { `free --si -ht`.lines.last.split[2] },
+  interval { `df / -h`.lines.last.split[3..4].join(' ') },
+  proc { |&block|
+    dir = '/sys/class/backlight/intel_backlight/'
+    if File.exist?(dir)
+      bf, mbf = [dir + 'brightness', dir + 'max_brightness']
+      file_modified = -> { "B #{(File.read(bf).to_f / File.read(mbf).to_f * 100).round}" }
+      block.(file_modified.call)
+      notifier = INotify::Notifier.new
+      notifier.watch(bf, :modify) { block.(file_modified.call) }
+      notifier.run
+    end
+  },
+  proc { |&block|
+    def volume
+      mute, vol = `pamixer --get-mute --get-volume`.split
+      mute == 'false' ? vol : "-#{vol}-"
+    end
+    block.(volume)
+    IO.popen('pactl subscribe').each_line.grep(/sink/) { |l| block.(volume) }
+  },
+  interval { Time.now.strftime('%a %b %_d %_I:%M %p') },
+]
+
+for_i3 = ARGV[0] == 'i3'
+puts "{\"version\": 1}\n[" if for_i3
+
+Thread.abort_on_exception = true
+status = {}
+
+blocks.each_with_index.map do |block, index|
+  Thread.new do
+    block.call do |result|
+      status[index] = result.to_s.chomp
+      line = status.to_a.sort.map(&:last).compact.reject(&:empty?)
+        .join(' │ ').gsub(/\s+/, ' ') + ' '
+      puts(if for_i3 then '[{"full_text": "' + line + '"}],' else line end)
+      STDOUT.flush
+    end
+  end
+end
+
+Thread.list.reject { |t| t == Thread.current }.each(&:join)

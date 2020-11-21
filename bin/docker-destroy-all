@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# with-packages docker findutils
+docker container ls -q | xargs -r docker container kill
+docker container ls -aq | xargs -r docker container rm -f
+
+docker volume ls -q | xargs -r docker volume rm -f
+
+if [[ $1 == -a ]];then
+  docker image ls -aq | xargs -r docker image rm -f
+fi

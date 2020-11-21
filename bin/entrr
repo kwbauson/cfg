@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# with-packages fd entr
+if [[ $1 == "-f" ]];then
+  shift
+  filescmd="echo $1"
+  shift
+else
+  filescmd=fd
+fi
+
+while true;do
+  if [[ -n $TMUX ]];then
+    (echo .; $filescmd) | entr -rdcs "clear; tmux clear-history; $(printf "%q " "$@")"
+  else
+    (echo .; $filescmd) | entr -rdcs "$@"
+  fi
+  if [[ $? == 130 ]];then
+    break
+  fi
+done

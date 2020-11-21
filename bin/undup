@@ -1,0 +1,8 @@
+#!/usr/bin/env perl
+# with-packages perl
+push(@list, $_) while <>;
+%seen = ();
+for $item (reverse @list) {
+  push(@uniq, $item) unless $seen{$item}++;
+}
+print reverse @uniq;
