@@ -440,6 +440,7 @@ with builtins; with pkgs.mylib; {
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ14QkMDvnwU60jit5M8x/KVrUkjxbkVyDdRY8IbPsB keith@keith-xps
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJtcd3xL1BR1RSFzin0Im+HUk6kTWj44wJ56uWxkPM0 keith@kwbauson
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaLZgemYIGQD0yvRU38tvYR4Hp4nLAdZMj9jgwS+p0y keith@keith-vm
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHP+Qko2pm1c2VgfCxCgBjSNk9xvVxjn7gd6HaUQ8JoB keithbauson@keith-mac.local
     '';
   };
 

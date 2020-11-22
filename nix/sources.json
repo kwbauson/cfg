@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-alacritty": {
-        "sha256": "1yy6iqg105msw9n05n1ghgamd29n2679xdz2n4mpf1d9wn16s0wh",
+        "sha256": "0gqqx08nqaldnwz5qdsjqc60wl3rz87b5v7r3crk7j746c357n2n",
         "type": "file",
-        "url": "https://github.com/alacritty/alacritty/releases/download/v0.5.0/Alacritty-v0.5.0.dmg",
+        "url": "https://github.com/alacritty/alacritty/releases/download/v0.6.0-rc1/Alacritty-v0.6.0-rc1.dmg",
         "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
-        "version": "0.5.0"
+        "version": "0.6.0-rc1"
     },
     "dmg-discord": {
         "sha256": "05v5f02gpl9xcbpah2akmcnix6g1xslgjwas1r1xxvhscxs72ywj",
@@ -57,11 +57,11 @@
         "version": "0.0.259"
     },
     "dmg-firefox": {
-        "sha256": "1q0bp9a4cv3x8hcsknq2a7gm67jg61rppmxd913sdcr8709qydh9",
+        "sha256": "1ikfcdsz0pgaiwal47fnbybam513p5a1fn99g74wcf80wj27hlky",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/82.0.2/mac/en-US/Firefox%2082.0.2.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/83.0/mac/en-US/Firefox%2083.0.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "82.0.2"
+        "version": "83.0"
     },
     "dmg-qutebrowser": {
         "sha256": "03d5bf5lpxyphi0ri6ykh7dr6izsikk22ivh6mh09q0a2y0kdf44",
@@ -71,11 +71,11 @@
         "version": "1.14.0"
     },
     "dmg-signal-desktop": {
-        "sha256": "04kcg7ykj9iapywyipawi6pbvfvnn713qh1cjhgrinw2hgnzcmbx",
+        "sha256": "1vf3rzzs8imbg3nmxikhqi48asldwv00wpmhvbisqn1bbrbias5x",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.37.3.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.38.1.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "1.37.3"
+        "version": "1.38.1"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
