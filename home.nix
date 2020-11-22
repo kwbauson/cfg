@@ -71,6 +71,7 @@ with builtins; with pkgs.mylib; {
       ${attrIf (!isGraphical) "non-graphical"} = {
         inherit golint solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
       };
+      broken = { inherit nix-prefetch-scripts; };
     };
 
   home = {
@@ -443,6 +444,7 @@ with builtins; with pkgs.mylib; {
       xsetroot -solid black
       xsetroot -cursor_name left_ptr
       urxvtd -q -o -f
+      [[ $(hostname) = keith-vm ]] && xrandr --output Virtual-1 --mode 1920x1200
     '';
     windowManager = {
       i3 = {

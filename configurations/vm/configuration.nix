@@ -7,7 +7,7 @@
 
   networking = {
     hostName = "keith-vm";
-    useDHCP = true;
+    interfaces.enp0s5.useDHCP = true;
   };
 
   fonts.enableDefaultFonts = true;
