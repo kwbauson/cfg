@@ -434,6 +434,12 @@ with builtins; with pkgs.mylib; {
       "xmonad/.keep".text = "";
     };
   };
+  home.file.authorized_keys = {
+    target = ".ssh/authorized_keys";
+    text = ''
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaLZgemYIGQD0yvRU38tvYR4Hp4nLAdZMj9jgwS+p0y keith@keith-vm
+    '';
+  };
 
   xsession = {
     enable = isNixOS && isGraphical;
