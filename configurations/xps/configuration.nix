@@ -1,13 +1,18 @@
 { pkgs, ... }:
 with builtins;
 {
-  imports = [
-    <nixos-hardware/common/cpu/intel>
-    <nixos-hardware/common/pc/laptop>
-    <nixos-hardware/common/pc/laptop/ssd>
-    ./hardware-configuration.nix
-    ../common.nix
-  ];
+  imports =
+    let
+      cfg = import ../../flake-compat.nix;
+      nixos-hardware = cfg.inputs.nixos-hardware;
+    in
+    [
+      nixos-hardware.nixosModules.common-cpu-intel
+      nixos-hardware.nixosModules.common-pc-laptop
+      nixos-hardware.nixosModules.common-pc-laptop-ssd
+      ./hardware-configuration.nix
+      ../common.nix
+    ];
 
   boot.blacklistedKernelModules = [ "psmouse" ];
   nixpkgs.config.pulseaudio = true;
