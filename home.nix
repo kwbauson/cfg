@@ -437,6 +437,7 @@ with builtins; with pkgs.mylib; {
   home.file.authorized_keys = {
     target = ".ssh/authorized_keys";
     text = ''
+      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ14QkMDvnwU60jit5M8x/KVrUkjxbkVyDdRY8IbPsB keith@keith-xps
       ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILaLZgemYIGQD0yvRU38tvYR4Hp4nLAdZMj9jgwS+p0y keith@keith-vm
     '';
   };

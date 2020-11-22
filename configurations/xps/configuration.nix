@@ -35,7 +35,7 @@ with builtins;
     bluetooth.package = pkgs.bluezFull;
   };
   networking = {
-    hostName = "keith-nixos";
+    hostName = "keith-xps";
     networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
   };
