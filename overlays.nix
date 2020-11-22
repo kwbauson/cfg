@@ -154,7 +154,7 @@
         sources = import "${mylib.sources.rnix-lsp-unstable}/nix/sources.nix";
         inherit pkgs;
         naersk = callPackage sources.naersk { };
-        nur = callPackage sources.NUR { nurpkgs = pkgs; };
+        # nur = callPackage sources.NUR { nurpkgs = pkgs; };
       };
       mach-nix = import sources.mach-nix { inherit pkgs; };
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
