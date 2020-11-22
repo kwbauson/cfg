@@ -434,7 +434,6 @@ with builtins; with pkgs.mylib; {
       "xmonad/.keep".text = "";
     };
   };
-  home.file.".ssh/authorized_keys".source = ./authorized_keys;
 
   xsession = {
     enable = isNixOS && isGraphical;
