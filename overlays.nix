@@ -1,6 +1,6 @@
 [
   (self: super: {
-    cfg = super.cfg or (import (import ./nix/sources.nix).flake-compat { src = ./.; }).defaultNix;
+    cfg = super.cfg or (import ./flake-compat.nix);
   })
   (self: super: with super; rec {
     mylib = with lib; with builtins; lib // rec {

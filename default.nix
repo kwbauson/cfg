@@ -1,1 +1,1 @@
-(import (import ./nix/sources.nix).flake-compat { src = ./.; }).defaultNix.packages.${builtins.currentSystem}
+(import ./flake-compat.nix).packages.${builtins.currentSystem}
