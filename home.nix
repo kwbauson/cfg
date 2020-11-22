@@ -34,7 +34,7 @@ with builtins; with pkgs.mylib; {
           misc = {
             inherit
               adoptopenjdk-bin breeze-icons networkmanagerapplet pandoc qemu qtile
-              steam steam-run-native_18-09 signal-desktop discord
+              steam steam-run-native_18-09 signal-desktop discord zoom-us
               ;
             inherit evilhack;
           };

@@ -14,7 +14,7 @@
           else pkg.name;
       }; "${pkg}/bin/${binName}";
       isNixOS = pathExists /etc/nixos/configuration.nix;
-      isGraphical = !pathExists ./secrets/non-graphical;
+      isGraphical = !pathExists ./var/non-graphical;
       prefixIf = b: x: y: if b then x + y else y;
       HOME = getEnv "HOME";
       HOSTNAME = getEnv "HOSTNAME";
