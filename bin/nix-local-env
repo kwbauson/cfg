@@ -84,7 +84,7 @@ case $cmd in
     mkdir -p "$builddir"
     echo "$sourcedir" > "$sourcelink"
     for file in ${buildfiles[@]};do
-      [[ -e $sourcedir/$file ]] && ln -sft "$builddir" "$sourcedir/$file"
+      [[ -e $sourcedir/$file ]] && cp -rt "$builddir" "$sourcedir/$file"
     done
     "$0" generate -d "$builddir"
     "$0" rebuild
