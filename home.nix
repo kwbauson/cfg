@@ -63,7 +63,7 @@ with builtins; with pkgs.mylib; {
           audacity chromium dbeaver diffoscope i3-easyfocus iproute iputils
           libreoffice-fresh loop networkmanagerapplet pavucontrol pinta qtile
           steam steam-native steam-run-native_18-09 strace sway sxiv usbutils
-          wine zathura obs-studio obs-v4l2sink breeze-icons ccache dzen2
+          wine zathura obs-studio obs-v4l2sink breeze-icons ccache dzen2 zoom-us
           ;
         inherit bl bh medctl runnim statusline vol;
         inherit dejavu_fonts_nerd;
