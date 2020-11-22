@@ -4,7 +4,7 @@
     mylib = with lib; with builtins; lib // rec {
       mapAttrValues = f: mapAttrs (n: v: f v);
       inherit (stdenv) isLinux isDarwin;
-      sources = import ./nix/sources.nix { inherit system pkgs; };
+      sources = import ./nix/sources.nix;
       exe = pkg: with {
         binName =
           if hasAttr "pname" pkg then pkg.pname
