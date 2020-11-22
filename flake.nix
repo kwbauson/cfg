@@ -21,7 +21,7 @@
         overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);
       };
 
-      defaultPackage = packages.homeManagerConfiguration.activationPackage;
+      inherit (packages) defaultPackage;
 
     });
 }

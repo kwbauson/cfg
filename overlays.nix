@@ -11,9 +11,8 @@
           else if hasAttr "version" pkg then removeSuffix "-${pkg.version}" pkg.name
           else pkg.name;
       }; "${pkg}/bin/${binName}";
-      nixosConfig = (import <nixpkgs/nixos> { }).config;
       isNixOS = pathExists /etc/nixos/configuration.nix;
-      isGraphical = (isNixOS && nixosConfig.services.xserver.enable) || isDarwin;
+      isGraphical = !pathExists ./secrets/non-graphical;
       prefixIf = b: x: y: if b then x + y else y;
       HOME = getEnv "HOME";
       HOSTNAME = getEnv "HOSTNAME";
@@ -39,6 +38,7 @@
       configuration = import ./home.nix { inherit pkgs; config = configuration; };
       inherit system pkgs username homeDirectory;
     };
+    defaultPackage = homeManagerConfiguration.activationPackage;
   })
   (self: super: with super; with mylib;
   mapAttrValues (src: import src { inherit system; overlays = [ ]; }) {
