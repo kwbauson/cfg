@@ -3,14 +3,6 @@
     cfg = super.cfg or (import ./flake-compat.nix);
   })
   (self: super: with super; rec {
-    homeManager = cfg.inputs.home-manager;
-    homeManagerConfiguration = homeManager.lib.homeManagerConfiguration rec {
-      configuration = import ./home.nix { inherit pkgs; config = configuration; };
-      inherit system pkgs username homeDirectory;
-    };
-    defaultPackage = homeManagerConfiguration.activationPackage;
-  })
-  (self: super: with super; rec {
     mylib = with lib; with builtins; lib // rec {
       mapAttrValues = f: mapAttrs (n: v: f v);
       inherit (stdenv) isLinux isDarwin;
@@ -90,6 +82,14 @@
       }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
       nix-local-env = import ./nix-local-env.nix;
     } // builtins;
+  })
+  (self: super: with super; with mylib; rec {
+    homeManager = cfg.inputs.home-manager;
+    homeManagerConfiguration = homeManager.lib.homeManagerConfiguration rec {
+      configuration = import ./home.nix { inherit pkgs; config = configuration; };
+      inherit system pkgs username homeDirectory;
+    };
+    defaultPackage = homeManagerConfiguration.activationPackage;
   })
   (self: super: with super; with mylib;
   mapAttrValues (src: import src { inherit system; overlays = [ ]; }) {
