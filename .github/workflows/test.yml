@@ -12,5 +12,4 @@ jobs:
         with:
           name: kwbauson
           signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-      - run: touch secrets/non-graphical && nix-build -A defaultPackage
-      - run: touch secrets/non-graphical && nix-shell -A defaultPackage --run "echo OK"
+      - run: nix-build -A defaultPackage
