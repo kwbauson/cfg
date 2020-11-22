@@ -116,6 +116,7 @@
         name = "local-bin";
         paths = flatten [
           (writeShellScriptBin "nixpkgs-rev" "echo ${nixpkgs-rev}")
+          (writeShellScriptBin "nixpkgs-path" "echo ${pkgs.path}")
           (
             with rec {
               urxvt-term = ''
