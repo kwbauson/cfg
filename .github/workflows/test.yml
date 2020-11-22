@@ -11,5 +11,6 @@ jobs:
       - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
       - run: touch secrets/non-graphical && nix-build -A defaultPackage
+      - run: touch secrets/non-graphical && nix-shell -A defaultPackage --run "echo OK"
