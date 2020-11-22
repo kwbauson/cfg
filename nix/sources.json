@@ -181,7 +181,7 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-pinned": {
-        "branch": "master",
+        "branch": "069f183f16c3ea5d4b6e7625433b92eba77534f7",
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",

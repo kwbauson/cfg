@@ -1,5 +1,1 @@
-let
-  sources = import ./nix/sources.nix;
-  cfg = (import sources.flake-compat { src = ./.; }).defaultNix;
-in
-cfg.packages.${builtins.currentSystem}
+(import (import ./nix/sources.nix).flake-compat { src = ./.; }).defaultNix.packages.${builtins.currentSystem}

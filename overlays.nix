@@ -1,5 +1,7 @@
 [
-  (self: super: { cfg = super.cfg or (builtins.getFlake "path:${toString ./.}"); })
+  (self: super: {
+    cfg = super.cfg or (import (import ./nix/sources.nix).flake-compat { src = ./.; }).defaultNix;
+  })
   (self: super: with super; rec {
     mylib = with lib; with builtins; lib // rec {
       mapAttrValues = f: mapAttrs (n: v: f v);
