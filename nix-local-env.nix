@@ -45,8 +45,7 @@ rec {
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
-        bundler1Env = (import sources.nixpkgs-bundler1 { inherit (pkgs) system; }).bundlerEnv;
-        env = bundler1Env {
+        env = nixpkgs-bundler1.bundlerEnv {
           name = "bundler-env";
           gemfile = file "Gemfile";
           lockfile = file "Gemfile.lock";

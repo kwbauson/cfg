@@ -40,6 +40,10 @@
       inherit system pkgs username homeDirectory;
     };
   })
+  (self: super: with super; with mylib;
+  mapAttrValues (src: import src { inherit system; overlays = [ ]; }) {
+    inherit (sources) nixos-18_09 nixpkgs-bundler1 nixpkgs-pinned;
+  })
   (self: super: with super; with mylib; rec {
     fakePlatform = x: x.overrideAttrs (attrs:
       { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
@@ -109,7 +113,7 @@
       ;
       chromium = chromium.override { enableWideVine = true; };
       steam-native = steam.override { nativeOnly = true; };
-      steam-run-native_18-09 = (import sources."nixos-18.09" { }).steam-run-native;
+      steam-run-native_18-09 = nixos-18_09.steam-run-native;
       dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
       # bin
       local-bin = buildEnv {
@@ -155,6 +159,7 @@
       mach-nix = import sources.mach-nix { inherit pkgs; };
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
+      inherit (nixpkgs-pinned) awscli2;
     }
   )
   (self: super: with super; with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; })
