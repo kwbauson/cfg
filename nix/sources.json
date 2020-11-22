@@ -132,6 +132,18 @@
         "url": "https://github.com/DavHau/mach-nix/archive/bbe8558348660305e5a94f70568376ee8e413571.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "naersk": {
+        "branch": "master",
+        "description": "Build rust crates in Nix. No configuration, no code generation, no IFD. Sandbox friendly.",
+        "homepage": "",
+        "owner": "nmattia",
+        "repo": "naersk",
+        "rev": "ce273fa593dcc94a629d0d869f07d96d2b337e37",
+        "sha256": "1hx47l7gfim0cs9fn8r91wwl0641wi2fdq67ygb4ydx7msb8sm6h",
+        "type": "tarball",
+        "url": "https://github.com/nmattia/naersk/archive/ce273fa593dcc94a629d0d869f07d96d2b337e37.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixos-18_09": {
         "branch": "nixos-18.09",
         "description": "Nix Packages collection",

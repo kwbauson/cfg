@@ -84,7 +84,6 @@
   })
   (
     self: super: with super; with mylib; {
-      nur = import sources.NUR { inherit pkgs; nurpkgs = pkgs; };
       # lib
       runBin = name: script: runCommand
         name
@@ -150,12 +149,7 @@
         name = "coc-explorer";
         src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/coc-explorer $out";
       };
-      rnix-lsp-unstable = import sources.rnix-lsp-unstable rec {
-        sources = import "${mylib.sources.rnix-lsp-unstable}/nix/sources.nix";
-        inherit pkgs;
-        naersk = callPackage sources.naersk { };
-        # nur = callPackage sources.NUR { nurpkgs = pkgs; };
-      };
+      rnix-lsp-unstable = (callPackage sources.naersk { }).buildPackage sources.rnix-lsp-unstable;
       mach-nix = import sources.mach-nix { inherit pkgs; };
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
