@@ -5,7 +5,7 @@ set -e
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-nixexpr="(import <nixpkgs> {}).$name { path = ./.; }"
+nixexpr="(import <nixpkgs> {}).mylib.$name { path = ./.; }"
 cachebase=$XDG_CACHE_HOME/$name
 localenvnix=$HOME/.config/nixpkgs/$name.nix
 
