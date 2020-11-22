@@ -435,8 +435,6 @@ with builtins; with pkgs.mylib; {
     };
   };
 
-  services.gnome-keyring.enable = isNixOS;
-
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
