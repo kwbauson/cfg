@@ -12,7 +12,7 @@
   };
 
   services.nix-serve = {
-    enable = true;
+    # enable = true;
     secretKeyFile = "/etc/nixos/cache-key-private.pem";
   };
 
