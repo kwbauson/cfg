@@ -55,7 +55,7 @@ with builtins; with pkgs.mylib; {
         misc = {
           inherit bitwarden-cli libqalculate local-bin youtube-dl;
         };
-        nix-local-env-packages = (pkgs.nix-local-env { path = ./.; inherit pkgs; }).packages;
+        nix-local-env-packages = (nix-local-env { path = ./.; inherit pkgs; }).packages;
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
       ${attrIf isDarwin "darwin"} = {

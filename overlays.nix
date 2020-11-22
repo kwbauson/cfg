@@ -3,6 +3,14 @@
     cfg = super.cfg or (import ./flake-compat.nix);
   })
   (self: super: with super; rec {
+    homeManager = cfg.inputs.home-manager;
+    homeManagerConfiguration = homeManager.lib.homeManagerConfiguration rec {
+      configuration = import ./home.nix { inherit pkgs; config = configuration; };
+      inherit system pkgs username homeDirectory;
+    };
+    defaultPackage = homeManagerConfiguration.activationPackage;
+  })
+  (self: super: with super; rec {
     mylib = with lib; with builtins; lib // rec {
       mapAttrValues = f: mapAttrs (n: v: f v);
       inherit (stdenv) isLinux isDarwin;
@@ -32,61 +40,17 @@
       username = if isNixOS then "keith" else "keithbauson";
       homeDirectory = "/${if isDarwin then "Users" else "home"}/${username}";
       nixpkgs-rev = cfg.inputs.nixpkgs.rev;
-    } // builtins;
-  })
-  (self: super: with super; with mylib; rec {
-    homeManager = cfg.inputs.home-manager;
-    homeManagerConfiguration = homeManager.lib.homeManagerConfiguration rec {
-      configuration = import ./home.nix { inherit pkgs; config = configuration; };
-      inherit system pkgs username homeDirectory;
-    };
-    defaultPackage = homeManagerConfiguration.activationPackage;
-  })
-  (self: super: with super; with mylib;
-  mapAttrValues (src: import src { inherit system; overlays = [ ]; }) {
-    inherit (sources) nixos-18_09 nixpkgs-bundler1 nixpkgs-pinned;
-  })
-  (self: super: with super; with mylib; rec {
-    fakePlatform = x: x.overrideAttrs (attrs:
-      { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
-    );
-    unpack = src: stdenv.mkDerivation {
-      inherit src;
-      inherit (src) name;
-      installPhase = ''
-        mkdir $out
-        mv * $out
-      '';
-    };
-    mkDmgPackage = pname: src: stdenv.mkDerivation {
-      name = pname + (if src ? version then "-${src.version}" else "");
-      inherit pname src;
-      ${attrIf (src ? version) "version"} = src.version;
-      dontUnpack = true;
-      nativeBuildInputs = [ undmg ];
-      installPhase = ''
-        mkdir -p $out/{Applications,bin}
-        undmg "$src"
-        mv *.app $out/Applications
-        appdir=$(echo $out/Applications/*.app)
-        [[ -d $appdir ]] || exit 1
-        exe=$appdir/Contents/MacOS/${pname}
-        if [[ -e $exe ]];then
-          echo '#!/bin/sh' > $out/bin/${pname}
-          echo "exec \"$exe\" \"\$@\"" >> $out/bin/${pname}
-          chmod +x $out/bin/${pname}
-        fi
-      '';
-    };
-    dmgOverride = name: pkg: with rec {
-      src = sources."dmg-${name}";
-      msg = "${name}: src ${src.version} != pkg ${pkg.version}";
-      checkVersion = lib.assertMsg (pkg.version == src.version) msg;
-    }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
-  })
-  (
-    self: super: with super; with mylib; {
-      # lib
+      fakePlatform = x: x.overrideAttrs (attrs:
+        { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
+      );
+      unpack = src: stdenv.mkDerivation {
+        inherit src;
+        inherit (src) name;
+        installPhase = ''
+          mkdir $out
+          mv * $out
+        '';
+      };
       runBin = name: script: runCommand
         name
         { } ''
@@ -99,7 +63,41 @@
         "  description: ${pkg.meta.description or "null"}"
         "  homepage: ${pkg.meta.homepage or "null"}"
       ];
+      mkDmgPackage = pname: src: stdenv.mkDerivation {
+        name = pname + (if src ? version then "-${src.version}" else "");
+        inherit pname src;
+        ${attrIf (src ? version) "version"} = src.version;
+        dontUnpack = true;
+        nativeBuildInputs = [ undmg ];
+        installPhase = ''
+          mkdir -p $out/{Applications,bin}
+          undmg "$src"
+          mv *.app $out/Applications
+          appdir=$(echo $out/Applications/*.app)
+          [[ -d $appdir ]] || exit 1
+          exe=$appdir/Contents/MacOS/${pname}
+          if [[ -e $exe ]];then
+            echo '#!/bin/sh' > $out/bin/${pname}
+            echo "exec \"$exe\" \"\$@\"" >> $out/bin/${pname}
+            chmod +x $out/bin/${pname}
+          fi
+        '';
+      };
+      dmgOverride = name: pkg: with rec {
+        src = sources."dmg-${name}";
+        msg = "${name}: src ${src.version} != pkg ${pkg.version}";
+        checkVersion = lib.assertMsg (pkg.version == src.version) msg;
+      }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
       nix-local-env = import ./nix-local-env.nix;
+    } // builtins;
+  })
+  (self: super: with super; with mylib;
+  mapAttrValues (src: import src { inherit system; overlays = [ ]; }) {
+    inherit (sources) nixos-18_09 nixpkgs-bundler1 nixpkgs-pinned;
+  })
+  (self: super: with super; with mylib; rec { })
+  (
+    self: super: with super; with mylib; {
       # overrides
       factorio = factorio.override {
         username = "kwbauson";
