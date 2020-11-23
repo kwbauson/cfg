@@ -12,4 +12,4 @@ jobs:
         with:
           name: kwbauson
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: touch var/non-graphical && nix run -f . nix-build-uncached -c nix-build-uncached -A defaultPackage
+      - run: touch var/non-graphical && nix-build -A defaultPackage
