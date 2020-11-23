@@ -33,6 +33,7 @@
       fakePlatform = x: x.overrideAttrs (attrs:
         { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
       );
+      excludeLines = f: text: concatStringsSep "\n" (filter (x: !f x) (splitString "\n" text));
       unpack = src: stdenv.mkDerivation {
         inherit src;
         inherit (src) name;

@@ -82,7 +82,7 @@ rec {
       (
         mach-nix.mkPython {
           requirements = ''
-            ${optionalString hasRequirements (readFile (file "requirements.txt"))}
+            ${optionalString hasRequirements (excludeLines (hasPrefix "itomate") (readFile (file "requirements.txt")))}
             ${optionalString hasRequirementsDev (readFile (file "requirements.dev.txt"))}
           '';
           _.black.buildInputs = [ ];
