@@ -16,8 +16,6 @@
       isNixOS = pathExists /etc/nixos/configuration.nix;
       isGraphical = !pathExists ./var/non-graphical;
       prefixIf = b: x: y: if b then x + y else y;
-      HOME = getEnv "HOME";
-      HOSTNAME = getEnv "HOSTNAME";
       mapLines = f: s: concatMapStringsSep "\n"
         (l: if l != "" then f l else l)
         (splitString "\n" s);

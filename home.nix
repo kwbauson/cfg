@@ -150,7 +150,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         nou = "noc && hmg ${optionalString isNixOS "&& nob"} && hms";
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
-        }; "sudo ln -sft /root ${HOME}/{${concatStringsSep "," paths}}";
+        }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
         qemu = "qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
         local_ops = "nix-local-env run -d ~/src/hr/local_ops python dev.py";
         lo = "local_ops";
@@ -368,7 +368,7 @@ with builtins; with pkgs; with pkgs.mylib; {
     };
     configFile = {
       "ranger/rc.conf".text = ''
-        source ${HOME}/.nix-profile/share/doc/ranger/config/rc.conf
+        source ${homeDirectory}/.nix-profile/share/doc/ranger/config/rc.conf
         set vcs_aware true
         set preview_images_method urxvt
         map D delete
