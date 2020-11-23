@@ -6,13 +6,14 @@ name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
 nixexpr="import NIX_LOCAL_ENV_NIX { path = ./.; }"
-cachebase=$XDG_CACHE_HOME/$name
+fallbackcache=$HOME/.cache
+cachebase=${XDG_CACHE_HOME:-fallbackcache}/$name
 impuredir=$cachebase/.impure
 
 nix() {
   command nix \
     --keep-going \
-    --extra-experimental-features 'nix-command flakes' \
+    --extra-experimental-features 'nix-command flakes ca-references' \
     "$@"
 }
 
