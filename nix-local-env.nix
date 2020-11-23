@@ -21,7 +21,9 @@ rec {
       installPhase = ''
         mkdir -p $out/bin
         cp $src $out/bin/${name}
-        substituteInPlace $out/bin/${name} --replace NIX_LOCAL_ENV_NIX ${cfg.outPath}/nix-local-env.nix
+        substituteInPlace $out/bin/${name} \
+          --replace NIX_LOCAL_ENV_NIX ${cfg.outPath}/nix-local-env.nix \
+          --replace CFG_NIXPKGS_PATH ${cfg.outPath}
       '';
     };
     out = writeShellScriptBin name ''
