@@ -14,7 +14,7 @@ with builtins; with pkgs; with pkgs.mylib; {
             nix-prefetch-scripts nix-tree nmap openssh p7zip patch perl pigz
             procps progress pv ranger ripgrep rlwrap rsync sd socat strace time
             unzip usbutils watch wget which xdg_utils xxd xz zip manix
-            better-comma
+            better-comma nix-build-uncached
             ;
         };
         ${attrIf isGraphical "graphical"} = {

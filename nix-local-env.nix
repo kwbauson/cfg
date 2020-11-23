@@ -77,6 +77,7 @@ rec {
             ${optionalString hasRequirements (readFile (file "requirements.txt"))}
             ${optionalString hasRequirementsDev (readFile (file "requirements.dev.txt"))}
           '';
+          _.black.buildInputs = [ ];
         }
       );
 

@@ -11,5 +11,6 @@ jobs:
       - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
-          signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-      - run: nix-build -A defaultPackage
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix-env -f . -iA nix-build-uncached
+      - run: nix-build-uncached -A defaultPackage
