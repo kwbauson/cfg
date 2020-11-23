@@ -192,7 +192,7 @@ case $cmd in
     echo "$cachedir"
     ;;
   upgrade-nle)
-    nix --tarball-ttl 0 profile install 'github:kwbauson/cfg#nle'
+    nix-env --tarball-ttl 0 -f https://github.com/kwbauson/cfg/tarball/main -iA nle
     ;;
   *)
     invalid
