@@ -173,7 +173,7 @@ case $cmd in
     echo "$cachedir"
     ;;
   upgrade-nle)
-    nix profile install 'github:kwbauson/cfg#nle'
+    nix --tarball-ttl 0 profile install 'github:kwbauson/cfg#nle'
     ;;
   *)
     invalid
