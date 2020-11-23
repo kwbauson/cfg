@@ -84,6 +84,7 @@ rec {
             ${optionalString hasRequirementsDev (readFile (file "requirements.dev.txt"))}
           '';
           _.black.buildInputs = [ ];
+          _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
         }
       );
 
