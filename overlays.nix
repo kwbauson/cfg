@@ -105,8 +105,8 @@
           patches = attrs.patches or [ ] ++ [ ./qutebrowser-background.patch ];
           propagatedBuildInputs = attrs.propagatedBuildInputs or [ ] ++ [ python3Packages.colorama ];
         }
-      )
-      ;
+      );
+      i3 = i3.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./i3-icons.patch ]; });
       chromium = chromium.override { enableWideVine = true; };
       steam-native = steam.override { nativeOnly = true; };
       steam-run-native_18-09 = nixos-18_09.steam-run-native;
