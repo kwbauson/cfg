@@ -140,6 +140,7 @@ case $cmd in
     "$0" cache 1>&2
     echo source_up
     printf 'PATH=%q:$PATH\n' "$result/bin"
+    echo watch_file "${buildfiles[@]}"
     for file in $envfiles;do
       [[ -e $file ]] && printf 'dotenv %s\n' "$file"
     done
