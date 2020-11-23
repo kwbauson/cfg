@@ -192,6 +192,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/069f183f16c3ea5d4b6e7625433b92eba77534f7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "pypi-deps-db": {
+        "branch": "master",
+        "description": "A database with dependencies of all python packages available on pypi",
+        "homepage": "",
+        "owner": "DavHau",
+        "repo": "pypi-deps-db",
+        "rev": "ad8152d1132e63d666bc68fd9af73932a7106f87",
+        "sha256": "1iwjs7pzznjycq8lbyi9xy83w47ww8v3l00x59s354ahmbdll9k0",
+        "type": "tarball",
+        "url": "https://github.com/DavHau/pypi-deps-db/archive/ad8152d1132e63d666bc68fd9af73932a7106f87.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "ranger_devicons": {
         "branch": "main",
         "description": "Ranger plugin that adds file glyphs / icon support to Ranger",

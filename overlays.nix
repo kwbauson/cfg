@@ -147,7 +147,11 @@
         src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-explorer $out";
       };
       rnix-lsp-unstable = (callPackage sources.naersk { }).buildPackage sources.rnix-lsp-unstable;
-      mach-nix = import sources.mach-nix { inherit pkgs; };
+      mach-nix = import sources.mach-nix {
+        inherit pkgs;
+        pypiDataRev = sources.pypi-deps-db.rev;
+        pypiDataSha256 = sources.pypi-deps-db.sha256;
+      };
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
       inherit (nixpkgs-pinned) awscli2;
