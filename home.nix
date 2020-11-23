@@ -378,7 +378,7 @@ with builtins; with pkgs; with pkgs.mylib; {
       "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
       "nix/nix.conf".text = ''
         extra-substituters = https://kwbauson.cachix.org
-        extra-trusted-public-keys = kwbauson.cachix.org-1:qtP3jaTI6FcDJgBFf9Pirt/xURKNSzJ41qnUVQit+5k=
+        extra-trusted-public-keys = kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=
       '' + optionalString (!isNixOS) ''
         max-jobs = auto
         experimental-features = nix-command flakes
