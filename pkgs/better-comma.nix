@@ -36,7 +36,7 @@ buildEnv {
               cur="''${COMP_WORDS[COMP_CWORD]}"
               prev="''${COMP_WORDS[COMP_CWORD-1]}"
               db=$(nix-instantiate --eval --expr '<nixpkgs>' 2> /dev/null)/programs.sqlite
-              sql="select distinct package from Programs where name like '$cur%' order by name"
+              sql="select distinct name from Programs where name like '$cur%' order by name"
 
               if [[ $COMP_CWORD = 1 ]];then
                 COMPREPLY=( $(compgen -W "$(${sqlite}/bin/sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)" -- "$cur") )
