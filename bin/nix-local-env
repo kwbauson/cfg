@@ -7,9 +7,13 @@ name=$(basename "$0")
 
 nixexpr="import NIX_LOCAL_ENV_NIX { path = ./.; }"
 cachebase=$XDG_CACHE_HOME/$name
+impuredir=$cachebase/.impure
 
 nix() {
-  command nix --keep-going --extra-experimental-features 'nix-command flakes' "$@"
+  command nix \
+    --keep-going \
+    --extra-experimental-features 'nix-command flakes' \
+    "$@"
 }
 
 args=$@
@@ -36,8 +40,14 @@ buildfiles=(
 )
 
 hashfiles() {
+  for file in "$@";do
+    echo "$file"
+  done | sort | xargs cat | md5sum | awk '{ print $1 }'
+}
+
+hashbuildfiles() {
   echo "$0"
-  for file in ${buildfiles[@]};do
+  for file in "${buildfiles[@]}";do
     if [[ -e $sourcedir/$file ]];then
       if [[ -d $sourcedir/$file ]];then
         find "$sourcedir/$file" -type f
@@ -48,7 +58,7 @@ hashfiles() {
   done
 }
 
-cachedir=$cachebase/$(hashfiles | sort | xargs cat | md5sum | awk '{ print $1 }')
+cachedir=$cachebase/$(hashbuildfiles | sort | xargs cat | md5sum | awk '{ print $1 }')
 builddir=$cachedir/build
 result=$cachedir/result
 sourcelink=$cachedir/source
@@ -92,7 +102,14 @@ case $cmd in
     "$0" rebuild
     ;;
   generate)
+    impurefile=
+    if [[ -e Gemfile && -e Gemfile.lock ]];then
+      mkdir -p "$impuredir"
+      impurefile=$impuredir/$(hashfiles Gemfile Gemfile.lock)
+      [[ -e $impurefile ]] && cp "$impurefile" gemset.nix
+    fi
     [[ -e Gemfile ]] && bundix
+    [[ -n $impurefile ]] && cp gemset.nix "$impurefile"
     ;;
   rebuild)
     [[ -d $builddir ]] && cd "$builddir"
