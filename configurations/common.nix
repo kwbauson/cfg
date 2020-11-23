@@ -31,6 +31,8 @@
     font = "default8x16";
   };
 
+  fonts.enableDefaultFonts = config.services.xserver.enable;
+
   services = {
     localtime.enable = true;
     tlp.enable = false;

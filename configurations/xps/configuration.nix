@@ -22,13 +22,7 @@ with builtins;
 
     pulseaudio = {
       enable = true;
-      support32Bit = true;
       extraConfig = "load-module module-switch-on-connect";
-    };
-
-    opengl = {
-      driSupport32Bit = true;
-      extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     };
 
     bluetooth.enable = true;
@@ -39,11 +33,11 @@ with builtins;
     networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
   };
-  fonts.enableDefaultFonts = true;
   services.autorandr.enable = true;
   services.xserver.enable = true;
 
   users.mutableUsers = false;
   users.users.keith.hashedPassword = readFile /etc/nixos/secrets/keith-password;
   users.users.root.hashedPassword = readFile /etc/nixos/secrets/root-password;
+  programs.steam.enable = true;
 }

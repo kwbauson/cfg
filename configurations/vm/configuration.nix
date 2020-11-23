@@ -5,18 +5,10 @@
     ../common.nix
   ];
 
-  networking = {
-    hostName = "keith-vm";
-    interfaces.enp0s5.useDHCP = true;
-  };
-
-  fonts.enableDefaultFonts = true;
+  networking.hostName = "keith-vm";
+  networking.interfaces.enp0s5.useDHCP = true;
   services.xserver.enable = true;
-
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  users.users.keith.extraGroups = [ "wheel" "docker" ];
-  # hardware.parallels.enable = true;
   virtualisation.docker.enable = true;
+  programs.steam.enable = true;
 }
