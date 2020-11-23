@@ -7,7 +7,7 @@ name=$(basename "$0")
 
 nixexpr="import NIX_LOCAL_ENV_NIX { path = ./.; pkgs = import CFG_NIXPKGS_PATH; }"
 fallbackcache=$HOME/.cache
-cachebase=${XDG_CACHE_HOME:-fallbackcache}/$name
+cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
 
 nix() {
