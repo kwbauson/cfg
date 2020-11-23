@@ -8,8 +8,8 @@ name=$(basename "$0")
 nixexpr="import NIX_LOCAL_ENV_NIX { path = ./.; }"
 cachebase=$XDG_CACHE_HOME/$name
 
-nixcmd() {
-  nix --keep-going --extra-experimental-features 'nix-command flakes' "$@"
+nix() {
+  command nix --keep-going --extra-experimental-features 'nix-command flakes' "$@"
 }
 
 args=$@
@@ -96,7 +96,7 @@ case $cmd in
     ;;
   rebuild)
     [[ -d $builddir ]] && cd "$builddir"
-    nixcmd build --impure --expr "$nixexpr" --out-link "$result"
+    nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   update)
     if [[ -e package.json ]];then
@@ -123,7 +123,7 @@ case $cmd in
       rm -f $tmpfile
     fi
     if [[ -e flake.nix && -e flake.lock ]];then
-      nixcmd flake update --recreate-lock-file
+      nix flake update --recreate-lock-file
     fi
     ;;
   run)
@@ -167,13 +167,13 @@ case $cmd in
     ;;
   build)
     [[ -d $builddir ]] && cd "$builddir"
-    nixcmd build --impure --expr "$nixexpr" --out-link "$sourcedir"/result
+    nix build --impure --expr "$nixexpr" --out-link "$sourcedir"/result
     ;;
   cachedir)
     echo "$cachedir"
     ;;
-  self-update)
-    nix-env -f https://github.com/kwbauson/cfg/archive/main.zip -iA nle
+  upgrade-nle)
+    nix profile install 'github:kwbauson/cfg#nle'
     ;;
   *)
     invalid
