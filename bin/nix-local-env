@@ -158,6 +158,7 @@ case $cmd in
     "$0" cache 1>&2
     echo source_up
     printf 'PATH=%q:$PATH\n' "$result/bin"
+    echo export IN_NIX_SHELL=impure
     echo watch_file "$0"
     echo watch_file "${buildfiles[@]}"
     for file in $envfiles;do
