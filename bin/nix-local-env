@@ -13,7 +13,7 @@ impuredir=$cachebase/.impure
 nix() {
   command nix \
     --keep-going \
-    --extra-experimental-features 'nix-command flakes ca-references' \
+    --extra-experimental-features 'nix-command flakes' \
     "$@"
 }
 
