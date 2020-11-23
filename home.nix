@@ -46,7 +46,7 @@ with builtins; with pkgs; with pkgs.mylib; {
             bat ccache colordiff ctags diffoscope dhall git-trim golint gron
             highlight httpie hyperfine icdiff jq lazydocker lazygit nim
             nixpkgs-fmt overmind rnix-lsp-unstable shellcheck shfmt solargraph
-            watchexec yarn yarn-completion black
+            watchexec yarn yarn-completion black nle
             ;
           inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (python3Packages) pip bpython;
@@ -55,7 +55,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         misc = {
           inherit bitwarden-cli libqalculate local-bin youtube-dl;
         };
-        nix-local-env-packages = (nix-local-env { path = ./.; inherit pkgs; }).packages;
+        nix-local-env-packages = (import ./nix-local-env.nix { path = ./.; inherit pkgs; }).packages;
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
       ${attrIf isDarwin "darwin"} = {
@@ -135,7 +135,6 @@ with builtins; with pkgs; with pkgs.mylib; {
         rg = "rg --color=always -S --hidden";
         ncdu = "ncdu --color dark -ex";
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
-        nle = "nix-local-env";
         noc = prefixIf isNixOS "sudo nix-channel --update && " "nix-channel --update";
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
         ${attrIf isNixOS "nob"} = "sudo nixos-rebuild boot";

@@ -5,9 +5,8 @@ set -e
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-nixexpr="(import <nixpkgs> {}).mylib.$name { path = ./.; }"
+nixexpr="import NIX_LOCAL_ENV_NIX { path = ./.; }"
 cachebase=$XDG_CACHE_HOME/$name
-localenvnix=$HOME/.config/nixpkgs/$name.nix
 
 args=$@
 cmd=
@@ -33,7 +32,6 @@ buildfiles=(
 )
 
 hashfiles() {
-  echo "$localenvnix"
   echo "$0"
   for file in ${buildfiles[@]};do
     if [[ -e $sourcedir/$file ]];then
@@ -168,6 +166,9 @@ case $cmd in
     ;;
   cachedir)
     echo "$cachedir"
+    ;;
+  self-update)
+    nix-env -f https://github.com/kwbauson/cfg/archive/main.zip -iA nle
     ;;
   *)
     invalid

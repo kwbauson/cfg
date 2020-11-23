@@ -78,7 +78,6 @@
         msg = "${name}: src ${src.version} != pkg ${pkg.version}";
         checkVersion = lib.assertMsg (pkg.version == src.version) msg;
       }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
-      nix-local-env = import ./nix-local-env.nix;
     } // builtins;
   })
   (self: super: with super; with mylib; rec {
