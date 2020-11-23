@@ -117,7 +117,7 @@ case $cmd in
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   update)
-    if [[ -e package.json ]];then
+    if [[ -e package.json && -e package-lock.json ]];then
       if ! ncu -e2;then
         ncu -u
         npm --package-lock-only i
@@ -159,7 +159,6 @@ case $cmd in
     echo source_up
     printf 'PATH=%q:$PATH\n' "$result/bin"
     echo export IN_NIX_SHELL=impure
-    echo watch_file "$0"
     echo watch_file "${buildfiles[@]}"
     for file in $envfiles;do
       [[ -e $file ]] && printf 'dotenv %s\n' "$file"
