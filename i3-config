@@ -44,6 +44,7 @@ bindsym XF86MonBrightnessUp   exec --no-startup-id bl + 5
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id bl - 1
 bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id bl + 1
 bindsym $mod+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
+bindsym $mod+Shift+c exec --no-startup-id maim | xclip -selection clipboard -t image/png
 bindsym $mod+Control+v exec --no-startup-id xpaste
 
 # windows
@@ -112,9 +113,9 @@ workspace 2 output DP-1-1
 workspace 3 output DP-1-2
 
 # misc
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+q exit
+bindsym $mod+Control+c reload
+bindsym $mod+Control+r restart
+bindsym $mod+Control+q exit
 
 # rules
 for_window [instance="^termbar$"] floating enable, border none, resize set 700 22, move position 0 0
