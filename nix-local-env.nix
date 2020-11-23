@@ -46,16 +46,21 @@ rec {
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
         env = nixpkgs-bundler1.bundlerEnv {
+          inherit (nixpkgs-bundler1) ruby;
           name = "bundler-env";
           gemfile = file "Gemfile";
           lockfile = file "Gemfile.lock";
           gemset = file "gemset.nix";
           ignoreCollisions = true;
           allowSubstitutes = true;
-          gemConfig = defaultGemConfig // {
-            zipruby = attrs: { buildInputs = [ zlib ]; };
-            grpc = attrs: { nativeBuildInputs = [ pkgconfig ] ++ optional isDarwin darwin.cctools; };
-            plivo = attrs: { nativeBuildInputs = [ rake ]; };
+          gemConfig = defaultGemConfig // (mapAttrValues (extraInputs: attrs: {
+            buildInputs = attrs.buildInputs or [ ] ++ extraInputs;
+          })) {
+            zipruby = [ zlib ];
+            rmagick = [ pkgconfig glibc imagemagick ];
+            pg = [ glibc postgresql ];
+            grpc = [ pkgconfig glibc boringssl ] ++ optional isDarwin darwin.cctools;
+            plivo = [ rake ];
           };
         };
         paths = [ env.wrappedRuby (hiPrio env) bundix ];

@@ -1,5 +1,5 @@
 { pkgs, config, ... }:
-with builtins; with pkgs.mylib; {
+with builtins; with pkgs; with pkgs.mylib; {
   home.packages = with pkgs;
     drvsExcept
       {
@@ -117,7 +117,7 @@ with builtins; with pkgs.mylib; {
 
   programs = {
     home-manager.enable = true;
-    home-manager.path = pkgs.cfg.inputs.home-manager.outPath;
+    home-manager.path = cfg.inputs.home-manager.outPath;
     command-not-found.enable = true;
     bash = {
       enable = true;
@@ -243,7 +243,7 @@ with builtins; with pkgs.mylib; {
       enable = true;
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
-      plugins = with pkgs; with rec {
+      plugins = with rec {
         plugins = with vimPlugins; {
           inherit
             direnv-vim fzf-vim quick-scope tcomment_vim vim-airline
@@ -262,7 +262,7 @@ with builtins; with pkgs.mylib; {
         });
       }; attrValues plugins
         ++ makeExtraPlugins [ "vim-code-dark" "jsonc.vim" "any-jump.vim" "context.vim" "vim-anyfold" ]
-        ++ optional (!isDarwin) pkgs.vimPlugins.vim-devicons;
+        ++ optional (!isDarwin) vimPlugins.vim-devicons;
     };
     htop = {
       enable = true;
@@ -291,7 +291,7 @@ with builtins; with pkgs.mylib; {
     };
     git = {
       enable = true;
-      package = pkgs.gitAndTools.gitFull;
+      package = gitAndTools.gitFull;
       aliases = {
         a = "add -A";
         br = "branch";
@@ -299,7 +299,7 @@ with builtins; with pkgs.mylib; {
         cap = "! git a; git ci; git p";
         ci = "commit -v";
         co = "checkout";
-        df = "! git -c core.pager='${exe pkgs.gitAndTools.delta} --dark' diff";
+        df = "! git a -N && git -c core.pager='${exe gitAndTools.delta} --dark' diff HEAD";
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "fetch origin master:master";
@@ -308,6 +308,7 @@ with builtins; with pkgs.mylib; {
         p = "put";
         pf = "put --force-with-lease";
         put = "! git push origin `git branch-name`";
+        rt = "reset .";
         ro = "! git reset --hard origin/`git branch-name`";
         ru = "remote update";
         st = "status";
@@ -409,7 +410,7 @@ with builtins; with pkgs.mylib; {
     dataFile = {
       "qutebrowser/userscripts/login-fill" = {
         executable = true;
-        source = pkgs.writeShellScript "login-fill" ''
+        source = writeShellScript "login-fill" ''
           set -e
           items=$(bw list items --url "$QUTE_URL" | jq 'map(.login) | map({ username, password, url: .uris[0].uri })')
           count=$(echo "$items" | jq length)
