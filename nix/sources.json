@@ -138,10 +138,10 @@
         "homepage": null,
         "owner": "DavHau",
         "repo": "mach-nix",
-        "rev": "bbe8558348660305e5a94f70568376ee8e413571",
-        "sha256": "05yqk24v5799ajg0z0715f1qrxvhwvg3gsi0csh9waqy06vs354x",
+        "rev": "f1b3d620e56086e8586600dbb9db7e8d38715197",
+        "sha256": "14win90vswrx40jxb77v54gbsdl9q8y74z43k3dznd27aqzs64i9",
         "type": "tarball",
-        "url": "https://github.com/DavHau/mach-nix/archive/bbe8558348660305e5a94f70568376ee8e413571.tar.gz",
+        "url": "https://github.com/DavHau/mach-nix/archive/f1b3d620e56086e8586600dbb9db7e8d38715197.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "naersk": {

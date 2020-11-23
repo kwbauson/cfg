@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "coc-explorer": "0.11.2",
+    "coc-explorer": "0.11.3",
     "ts-node": "9.0.0",
     "ts-node-dev": "1.0.0",
     "typescript": "4.1.2"
