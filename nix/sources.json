@@ -198,10 +198,10 @@
         "homepage": "",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "ad8152d1132e63d666bc68fd9af73932a7106f87",
-        "sha256": "1iwjs7pzznjycq8lbyi9xy83w47ww8v3l00x59s354ahmbdll9k0",
+        "rev": "c11e3d8c2f244daaf9ec725c476cc3d9dc400246",
+        "sha256": "19v4j7hr1gh3vzp0dgrbngd5na837pra4avcwadzgggjbi6m9l5v",
         "type": "tarball",
-        "url": "https://github.com/DavHau/pypi-deps-db/archive/ad8152d1132e63d666bc68fd9af73932a7106f87.tar.gz",
+        "url": "https://github.com/DavHau/pypi-deps-db/archive/c11e3d8c2f244daaf9ec725c476cc3d9dc400246.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {

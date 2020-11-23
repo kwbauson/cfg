@@ -29,7 +29,6 @@
   "typescript.preferences.quoteStyle": "single",
   "tsserver.disableAutomaticTypeAcquisition": true,
   "tsserver.ignoreLocalTsserver": true,
-  "flow.stopFlowOnExit": false,
   "git.addGBlameToVirtualText": true,
   "git.addGBlameToBufferVar": true,
   "solargraph.definitions": true,
