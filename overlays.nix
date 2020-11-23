@@ -13,7 +13,7 @@
           else if hasAttr "version" pkg then removeSuffix "-${pkg.version}" pkg.name
           else pkg.name;
       }; "${pkg}/bin/${binName}";
-      isNixOS = pathExists /etc/nixos/configuration.nix;
+      isNixOS = !pathExists ./var/non-nixos;
       isGraphical = !pathExists ./var/non-graphical;
       prefixIf = b: x: y: if b then x + y else y;
       mapLines = f: s: concatMapStringsSep "\n"
