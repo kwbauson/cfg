@@ -45,21 +45,23 @@ rec {
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
-        env = nixpkgs-bundler1.bundlerEnv {
-          inherit (nixpkgs-bundler1) ruby;
+        addBuildInputs = (n: extraInputs: attrs: gemConfigOf n //
+          (
+            if isList extraInputs
+            then { buildInputs = attrs.buildInputs or [ ] ++ extraInputs; }
+            else extraInputs (gemConfigOf n)
+          ));
+        gemConfigOf = n: (defaultGemConfig.${n} or (_: { })) { };
+        env = with nixpkgs-bundler1; bundlerEnv {
           name = "bundler-env";
           gemfile = file "Gemfile";
           lockfile = file "Gemfile.lock";
           gemset = file "gemset.nix";
           ignoreCollisions = true;
           allowSubstitutes = true;
-          gemConfig = defaultGemConfig // (mapAttrValues (extraInputs: attrs: {
-            buildInputs = attrs.buildInputs or [ ] ++ extraInputs;
-          })) {
+          gemConfig = defaultGemConfig // mapAttrs addBuildInputs {
             zipruby = [ zlib ];
-            rmagick = [ pkgconfig glibc imagemagick ];
-            pg = [ glibc postgresql ];
-            grpc = [ pkgconfig glibc boringssl ] ++ optional isDarwin darwin.cctools;
+            grpc = attrs: { AROPTS = "-r"; };
             plivo = [ rake ];
           };
         };
