@@ -63,7 +63,10 @@ rec {
             zipruby = [ zlib ];
             grpc = attrs: { AROPTS = "-r"; };
             plivo = [ rake ];
-          };
+          } // {
+            ${attrIf isDarwin "grpc"} = attrs: { buildInputs = [ pkgconfig openssl darwin.cctools ]; };
+          }
+          ;
         };
         paths = [ env.wrappedRuby (hiPrio env) bundix ];
       }.paths;
