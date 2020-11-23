@@ -1,4 +1,4 @@
-pkgs: with pkgs; buildEnv {
+pkgs: with pkgs; with mylib; buildEnv {
   inherit name;
   paths =
     let
@@ -7,6 +7,6 @@ pkgs: with pkgs; buildEnv {
     in
     [
       pkg
-      (writeShellScriptBin "nle" ''exec ${pkg}/bin/nix-local-env "$@"'')
+      (writeShellScriptBin "nle" ''exec ${exe pkg} "$@"'')
     ];
 }

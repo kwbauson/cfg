@@ -144,7 +144,7 @@
       };
       node-env-coc-explorer = vimUtils.buildVimPlugin {
         name = "coc-explorer";
-        src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/coc-explorer $out";
+        src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-explorer $out";
       };
       rnix-lsp-unstable = (callPackage sources.naersk { }).buildPackage sources.rnix-lsp-unstable;
       mach-nix = import sources.mach-nix { inherit pkgs; };
