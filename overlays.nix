@@ -158,6 +158,7 @@
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
       inherit (nixpkgs-pinned) awscli2;
+      ${attrIf isDarwin "cachix"} = nixpkgs-pinned.cachix;
       inherit (nixLocalEnv.packages.bundler-env.gems) docker-sync;
     }
   )
