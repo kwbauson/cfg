@@ -6,7 +6,7 @@ set -e
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-nixfile=NIX_LOCAL_ENV_NIX
+nixfile=CFG_STORE_PATH/nix-local-env.nix
 [[ $1 = -f ]] && shift && nixfile=$2 && shift
 nixexpr="(import $nixfile { path = ./.; })"
 fallbackcache=$HOME/.cache
@@ -50,7 +50,7 @@ hashfiles() {
 }
 
 hashbuildfiles() {
-  echo "$0"
+  echo $nixfile
   for file in "${buildfiles[@]}";do
     if [[ -e $sourcedir/$file ]];then
       if [[ -d $sourcedir/$file ]];then
@@ -62,7 +62,12 @@ hashbuildfiles() {
   done
 }
 
-cachedir=$cachebase/$(hashbuildfiles | sort | xargs cat | md5sum | awk '{ print $1 }')
+hashcontent() {
+  hashbuildfiles | sort | xargs cat
+  echo NIX_LOCAL_ENV_HASH
+}
+
+cachedir=$cachebase/$(hashcontent | md5sum | awk '{ print $1 }')
 builddir=$cachedir/build
 result=$cachedir/result
 sourcelink=$cachedir/source

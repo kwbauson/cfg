@@ -14,6 +14,10 @@ rec {
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
     buildInputs = build-paths ++ map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames;
     pathLines = concatStringsSep "\n" (map (x: "export PATH=${x}/bin:$PATH") buildInputs);
+    selfHash = hashString "sha256" ''
+      ${readFile ./nix-local-env.nix}
+      ${readFile ./bin/nix-local-env}
+    '';
     wrapper = stdenv.mkDerivation {
       name = "${name}-wrapper";
       inherit src buildInputs;
@@ -22,8 +26,8 @@ rec {
         mkdir -p $out/bin
         cp $src $out/bin/${name}
         substituteInPlace $out/bin/${name} \
-          --replace NIX_LOCAL_ENV_NIX ${cfg.outPath}/nix-local-env.nix \
-          --replace CFG_NIXPKGS_PATH ${cfg.outPath}
+          --replace CFG_STORE_PATH ${cfg.outPath} \
+          --replace NIX_LOCAL_ENV_HASH ${selfHash}
       '';
     };
     out = writeShellScriptBin name ''
