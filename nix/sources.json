@@ -126,10 +126,10 @@
         "homepage": null,
         "owner": "neoclide",
         "repo": "jsonc.vim",
-        "rev": "6ed704ad0df15f5d4cfd289ed9588c357938f623",
-        "sha256": "01j856zl30vnak70dhvwnip2y39myjhhd047crk47r1z0nllwd0n",
+        "rev": "63ffa5199a0e64d5ce0515256407f32dfbd67fc3",
+        "sha256": "047c2sc8q49axhi9416lzzpv5ykczc63dqd4xy56rfcfrvsi199j",
         "type": "tarball",
-        "url": "https://github.com/neoclide/jsonc.vim/archive/6ed704ad0df15f5d4cfd289ed9588c357938f623.tar.gz",
+        "url": "https://github.com/neoclide/jsonc.vim/archive/63ffa5199a0e64d5ce0515256407f32dfbd67fc3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "mach-nix": {
@@ -138,10 +138,10 @@
         "homepage": null,
         "owner": "DavHau",
         "repo": "mach-nix",
-        "rev": "f1b3d620e56086e8586600dbb9db7e8d38715197",
-        "sha256": "14win90vswrx40jxb77v54gbsdl9q8y74z43k3dznd27aqzs64i9",
+        "rev": "88300d4b5d458e057dfed88adf8cf30bf36b575c",
+        "sha256": "0bvk4hw02i39jmljy98kzv0w7xv1vpw97l7w6nn37gxza0rrklan",
         "type": "tarball",
-        "url": "https://github.com/DavHau/mach-nix/archive/f1b3d620e56086e8586600dbb9db7e8d38715197.tar.gz",
+        "url": "https://github.com/DavHau/mach-nix/archive/88300d4b5d458e057dfed88adf8cf30bf36b575c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "naersk": {
@@ -198,10 +198,10 @@
         "homepage": "",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "c11e3d8c2f244daaf9ec725c476cc3d9dc400246",
-        "sha256": "19v4j7hr1gh3vzp0dgrbngd5na837pra4avcwadzgggjbi6m9l5v",
+        "rev": "8f7a28105560a71fe140efa663da2ab56c35dcd7",
+        "sha256": "04x3crr2fczxf4hbign86bnr9ks5sasilmz1jsvq99awk6q0mi2m",
         "type": "tarball",
-        "url": "https://github.com/DavHau/pypi-deps-db/archive/c11e3d8c2f244daaf9ec725c476cc3d9dc400246.tar.gz",
+        "url": "https://github.com/DavHau/pypi-deps-db/archive/8f7a28105560a71fe140efa663da2ab56c35dcd7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {

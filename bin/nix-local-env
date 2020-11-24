@@ -6,7 +6,9 @@ set -e
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-nixexpr="import NIX_LOCAL_ENV_NIX { path = ./.; pkgs = import CFG_NIXPKGS_PATH; }"
+nixfile=NIX_LOCAL_ENV_NIX
+[[ $1 = -f ]] && shift && nixfile=$2 && shift
+nixexpr="(import $nixfile { path = ./.; })"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure

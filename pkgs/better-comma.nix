@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { }, ... }: with pkgs;
-buildEnv {
+pkgs: with pkgs; buildEnv {
   name = "better-comma";
   paths = [
     (

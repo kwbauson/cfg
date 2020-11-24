@@ -1,5 +1,5 @@
 { path
-, pkgs ? import <nixpkgs> { }
+, pkgs ? import ./.
 , package-json ? path + "/package.json"
 , package-lock-json ? path + "/package-lock.json"
 , nodejs ? pkgs.nodejs_latest

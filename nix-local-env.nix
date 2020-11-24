@@ -1,4 +1,4 @@
-{ path, pkgs ? import <nixpkgs> { } }:
+{ path, pkgs ? import ./. }:
 with builtins; with pkgs; with mylib;
 rec {
   ifFiles = fs: optional (all (f: pathExists (file f)) (splitString " " fs));
