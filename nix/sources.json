@@ -84,18 +84,6 @@
         "url_template": "https://download.scdn.co/Spotify-<version>.dmg",
         "version": "0.8.5"
     },
-    "docker-sync": {
-        "branch": "0.5.14",
-        "description": "Run your application at full speed while syncing your code for development, finally empowering you to utilize docker for development under OSX/Windows/*Linux",
-        "homepage": "",
-        "owner": "EugenMayer",
-        "repo": "docker-sync",
-        "rev": "126387b4f057dadc570760ded751863a8cb2a2ac",
-        "sha256": "07gn9ynpjl6s1g5w7di3n1x9kzf24xbvvjbg5g5w4a6w1p9slxkf",
-        "type": "tarball",
-        "url": "https://github.com/EugenMayer/docker-sync/archive/126387b4f057dadc570760ded751863a8cb2a2ac.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "evilhack": {
         "branch": "master",
         "description": "A variant of NetHack that is designed to be a much more challenging experience than the original, drawing inspiration and content from various existing variants along with adding unique and never-before-seen custom content.",

@@ -159,7 +159,6 @@
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
       inherit (nixpkgs-pinned) awscli2;
       ${attrIf isDarwin "cachix"} = nixpkgs-pinned.cachix;
-      inherit (nixLocalEnv.packages.bundler-env.gems) docker-sync;
     }
   )
   (self: super: with super; with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; })
