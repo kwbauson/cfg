@@ -84,6 +84,18 @@
         "url_template": "https://download.scdn.co/Spotify-<version>.dmg",
         "version": "0.8.5"
     },
+    "docker-sync": {
+        "branch": "0.5.14",
+        "description": "Run your application at full speed while syncing your code for development, finally empowering you to utilize docker for development under OSX/Windows/*Linux",
+        "homepage": "",
+        "owner": "EugenMayer",
+        "repo": "docker-sync",
+        "rev": "126387b4f057dadc570760ded751863a8cb2a2ac",
+        "sha256": "07gn9ynpjl6s1g5w7di3n1x9kzf24xbvvjbg5g5w4a6w1p9slxkf",
+        "type": "tarball",
+        "url": "https://github.com/EugenMayer/docker-sync/archive/126387b4f057dadc570760ded751863a8cb2a2ac.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "evilhack": {
         "branch": "master",
         "description": "A variant of NetHack that is designed to be a much more challenging experience than the original, drawing inspiration and content from various existing variants along with adding unique and never-before-seen custom content.",
@@ -198,10 +210,10 @@
         "homepage": "",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "8f7a28105560a71fe140efa663da2ab56c35dcd7",
-        "sha256": "04x3crr2fczxf4hbign86bnr9ks5sasilmz1jsvq99awk6q0mi2m",
+        "rev": "62252c0d58ae1454a23dfed7c0ddcc699c729046",
+        "sha256": "1rrikdviqqdz6ivm30ij82d9m5s4xhhcwpqvd336ri085hrs1fhw",
         "type": "tarball",
-        "url": "https://github.com/DavHau/pypi-deps-db/archive/8f7a28105560a71fe140efa663da2ab56c35dcd7.tar.gz",
+        "url": "https://github.com/DavHau/pypi-deps-db/archive/62252c0d58ae1454a23dfed7c0ddcc699c729046.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {

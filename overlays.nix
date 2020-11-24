@@ -158,6 +158,7 @@
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
       inherit (nixpkgs-pinned) awscli2;
+      inherit (nixLocalEnv.packages.bundler-env.gems) docker-sync;
     }
   )
   (self: super: with super; with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; })
