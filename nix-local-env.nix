@@ -18,21 +18,13 @@ rec {
       ${readFile ./nix-local-env.nix}
       ${readFile ./bin/nix-local-env}
     '';
-    wrapper = stdenv.mkDerivation {
-      name = "${name}-wrapper";
-      inherit src buildInputs;
-      dontUnpack = true;
-      installPhase = ''
-        mkdir -p $out/bin
-        cp $src $out/bin/${name}
-        substituteInPlace $out/bin/${name} \
-          --replace CFG_STORE_PATH ${cfg.outPath} \
-          --replace NIX_LOCAL_ENV_HASH ${selfHash}
-      '';
-    };
+    makeScriptText = replaceStrings
+      [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
+      [ cfg.outPath selfHash ];
+    script = writeScript name (makeScriptText text);
     out = writeShellScriptBin name ''
       ${pathLines}
-      exec ${wrapper}/bin/${name} "$@"
+      exec ${script} "$@"
     '';
   }.out;
 
