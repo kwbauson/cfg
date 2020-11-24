@@ -83,6 +83,7 @@ bindsym $mod+o focus parent
 bindsym $mod+i focus child
 bindsym $mod+grave focus mode_toggle
 bindsym $mod+Shift+grave floating toggle
+bindsym $mod+Control+grave sticky toggle
 
 # workspaces
 bindsym $mod+1 workspace 1
