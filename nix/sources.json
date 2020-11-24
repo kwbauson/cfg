@@ -144,18 +144,6 @@
         "url": "https://github.com/DavHau/mach-nix/archive/88300d4b5d458e057dfed88adf8cf30bf36b575c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "naersk": {
-        "branch": "master",
-        "description": "Build rust crates in Nix. No configuration, no code generation, no IFD. Sandbox friendly.",
-        "homepage": "",
-        "owner": "nmattia",
-        "repo": "naersk",
-        "rev": "ce273fa593dcc94a629d0d869f07d96d2b337e37",
-        "sha256": "1hx47l7gfim0cs9fn8r91wwl0641wi2fdq67ygb4ydx7msb8sm6h",
-        "type": "tarball",
-        "url": "https://github.com/nmattia/naersk/archive/ce273fa593dcc94a629d0d869f07d96d2b337e37.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixos-18_09": {
         "branch": "nixos-18.09",
         "description": "Nix Packages collection",
@@ -198,10 +186,10 @@
         "homepage": "",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "62252c0d58ae1454a23dfed7c0ddcc699c729046",
-        "sha256": "1rrikdviqqdz6ivm30ij82d9m5s4xhhcwpqvd336ri085hrs1fhw",
+        "rev": "328132804e07c5b29447f352b7a1fb8623a11cd3",
+        "sha256": "0rgrcgr4lcpzqq45rh32dmb147c3rh9j6vgnb7jzb5mxgg76zw35",
         "type": "tarball",
-        "url": "https://github.com/DavHau/pypi-deps-db/archive/62252c0d58ae1454a23dfed7c0ddcc699c729046.tar.gz",
+        "url": "https://github.com/DavHau/pypi-deps-db/archive/328132804e07c5b29447f352b7a1fb8623a11cd3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {
@@ -214,18 +202,6 @@
         "sha256": "150xczhxs9n3xgrwivgp02xwbpqn0xwz65g91n4pl1g2bj3dbp1p",
         "type": "tarball",
         "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/68ffbffd086b0e9bb98c74705abe891b756b9e11.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "rnix-lsp-unstable": {
-        "branch": "master",
-        "description": "WIP Language Server for Nix! [maintainer=@jD91mZM2]",
-        "homepage": "",
-        "owner": "nix-community",
-        "repo": "rnix-lsp",
-        "rev": "274902aa662379fd30f12f0e310a2e738142da0e",
-        "sha256": "1df74cnzzc6h21msld07615d74vxadrakr4xdn6f8q6lx3m8gbgd",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/rnix-lsp/archive/274902aa662379fd30f12f0e310a2e738142da0e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {

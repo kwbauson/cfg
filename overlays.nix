@@ -153,7 +153,7 @@
         name = "coc-pyright";
         src = runCommand "coc-pyright-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-pyright $out";
       };
-      rnix-lsp-unstable = (callPackage sources.naersk { }).buildPackage sources.rnix-lsp-unstable;
+      rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
       mach-nix = import sources.mach-nix {
         inherit pkgs;
         pypiDataRev = sources.pypi-deps-db.rev;
