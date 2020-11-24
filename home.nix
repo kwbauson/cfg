@@ -250,9 +250,9 @@ with builtins; with pkgs; with pkgs.mylib; {
             vim-lastplace vim-multiple-cursors vim-peekaboo vim-polyglot
             vim-sensible vim-startify vim-vinegar
 
-            coc-nvim coc-eslint coc-git coc-json coc-lists
-            coc-prettier coc-python coc-solargraph coc-tsserver
-            node-env-coc-explorer
+            coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
+            coc-solargraph coc-tsserver
+            node-env-coc-explorer node-env-coc-pyright
             ;
         };
         makeExtraPlugins = map (name: vimUtils.buildVimPlugin {

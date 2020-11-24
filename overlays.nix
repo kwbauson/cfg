@@ -149,6 +149,10 @@
         name = "coc-explorer";
         src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-explorer $out";
       };
+      node-env-coc-pyright = vimUtils.buildVimPlugin {
+        name = "coc-pyright";
+        src = runCommand "coc-pyright-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-pyright $out";
+      };
       rnix-lsp-unstable = (callPackage sources.naersk { }).buildPackage sources.rnix-lsp-unstable;
       mach-nix = import sources.mach-nix {
         inherit pkgs;

@@ -110,10 +110,13 @@ case $cmd in
     if [[ -e Gemfile && -e Gemfile.lock ]];then
       mkdir -p "$impuredir"
       impurefile=$impuredir/$(hashfiles Gemfile Gemfile.lock)
-      [[ -e $impurefile ]] && cp "$impurefile" gemset.nix
+      if [[ -e $impurefile ]];then
+        cp "$impurefile" gemset.nix
+      else
+        bundix
+        cp gemset.nix "$impurefile"
+      fi
     fi
-    [[ -e Gemfile ]] && bundix
-    [[ -n $impurefile ]] && cp gemset.nix "$impurefile"
     ;;
   rebuild)
     [[ -d $builddir ]] && cd "$builddir"

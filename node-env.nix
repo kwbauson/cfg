@@ -109,7 +109,7 @@ rec {
 
   env = (
     buildEnv {
-      name = "${name}-env";
+      name = "node-env";
       paths = [ wrapped-nodejs bin ];
     }
   ) // { node_modules = out; };
