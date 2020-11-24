@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# with-packages bundix bundler direnv nix-prefetch-git niv diffutils nixUnstable
+# with-packages bundix bundler direnv nix-prefetch-git niv diffutils
+# with-packages nixUnstable nodePackages.npm-check-updates
 set -e
 
 name=$(basename "$0")
