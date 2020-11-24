@@ -42,6 +42,7 @@
           mv * $out
         '';
       };
+      nixLocalEnv = import ./nix-local-env.nix { path = ./.; inherit pkgs; };
       runBin = name: script: runCommand
         name
         { } ''
@@ -74,6 +75,7 @@
           fi
         '';
       };
+      inherit (nixLocalEnv.packages) fordir;
       dmgOverride = name: pkg: with rec {
         src = sources."dmg-${name}";
         msg = "${name}: src ${src.version} != pkg ${pkg.version}";
