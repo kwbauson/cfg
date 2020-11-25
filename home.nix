@@ -14,7 +14,8 @@ with builtins; with pkgs; with pkgs.mylib; {
             nix-prefetch-scripts nix-tree nmap openssh p7zip patch perl pigz
             procps progress pv ranger ripgrep rlwrap rsync sd socat strace time
             unzip usbutils watch wget which xdg_utils xxd xz zip manix
-            better-comma nix-build-uncached
+            better-comma nix-build-uncached bitwarden-cli libqalculate
+            youtube-dl
             ;
         };
         ${attrIf isGraphical "graphical"} = {
@@ -51,10 +52,12 @@ with builtins; with pkgs; with pkgs.mylib; {
           inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
-        misc = {
-          inherit bitwarden-cli libqalculate local-bin youtube-dl;
-        };
         inherit (nixLocalEnv) packages;
+        local-bin = [
+          (alias "nixpkgs-rev" "echo ${nixpkgs-rev}")
+          (alias "nixpkgs-path" "echo ${pkgs.path}")
+          (alias "local_ops" "nix-local-env run -d ~/src/hr/local_ops python dev.py")
+        ];
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
       ${attrIf isDarwin "darwin"} = {
@@ -124,7 +127,7 @@ with builtins; with pkgs; with pkgs.mylib; {
       inherit (config.home) sessionVariables;
       historyFileSize = -1;
       historySize = -1;
-      shellAliases = with { cfg-git = "git -C ${toString ./.}"; }; {
+      shellAliases = {
         l = "ls -lh";
         ll = "l -a";
         ls = "ls --color=auto";
@@ -144,8 +147,8 @@ with builtins; with pkgs; with pkgs.mylib; {
         hmb = "hm build";
         hms = "hm switch";
         hme = "hm edit && hms";
-        hmg = "${cfg-git} g && ${cfg-git} df";
-        hmp = "${cfg-git} cap";
+        hmg = "git -C ~/cfg g && git -C ~/cfg df";
+        hmp = "git -C ~/cfg cap";
         nou = "noc && hmg ${optionalString isNixOS "&& nob"} && hms";
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";

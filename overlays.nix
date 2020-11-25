@@ -24,7 +24,7 @@
       drvs = x: if isDerivation x || isList x then flatten x else flatten (mapAttrsToList (_: v: drvs v) x);
       drvsExcept = x: e: with {
         excludeNames = concatMap attrNames (attrValues e);
-      }; drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x);
+      }; flatten (drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x));
       userName = "Keith Bauson";
       userEmail = "kwbauson@gmail.com";
       username = if isNixOS then "keith" else "keithbauson";
@@ -55,6 +55,7 @@
         "  description: ${pkg.meta.description or "null"}"
         "  homepage: ${pkg.meta.homepage or "null"}"
       ];
+      alias = name: x: writeShellScriptBin name ''exec ${if isDerivation x then exe x else x} "$@"'';
       mkDmgPackage = pname: src: stdenv.mkDerivation {
         name = pname + (if src ? version then "-${src.version}" else "");
         inherit pname src;
@@ -114,15 +115,6 @@
       steam-native = steam.override { nativeOnly = true; };
       steam-run-native_18-09 = nixos-18_09.steam-run-native;
       dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
-      # bin
-      local-bin = buildEnv {
-        name = "local-bin";
-        paths = flatten [
-          (writeShellScriptBin "nixpkgs-rev" "echo ${nixpkgs-rev}")
-          (writeShellScriptBin "nixpkgs-path" "echo ${pkgs.path}")
-          (writeShellScriptBin "local_ops" ''exec nix-local-env run -d ~/src/hr/local_ops python dev.py "$@"'')
-        ];
-      };
       node-env-coc-explorer = vimUtils.buildVimPlugin {
         name = "coc-explorer";
         src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-explorer $out";
