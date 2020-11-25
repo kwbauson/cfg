@@ -132,18 +132,6 @@
         "url": "https://github.com/neoclide/jsonc.vim/archive/63ffa5199a0e64d5ce0515256407f32dfbd67fc3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "mach-nix": {
-        "branch": "master",
-        "description": "Tool to create highly reproducible python environments",
-        "homepage": null,
-        "owner": "DavHau",
-        "repo": "mach-nix",
-        "rev": "88300d4b5d458e057dfed88adf8cf30bf36b575c",
-        "sha256": "0bvk4hw02i39jmljy98kzv0w7xv1vpw97l7w6nn37gxza0rrklan",
-        "type": "tarball",
-        "url": "https://github.com/DavHau/mach-nix/archive/88300d4b5d458e057dfed88adf8cf30bf36b575c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nixos-18_09": {
         "branch": "nixos-18.09",
         "description": "Nix Packages collection",
@@ -178,18 +166,6 @@
         "sha256": "1by9rqvr2k6iz2yipf89yaj254yicpwq384ijgyy8p71lfxbbww2",
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs/archive/069f183f16c3ea5d4b6e7625433b92eba77534f7.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "pypi-deps-db": {
-        "branch": "master",
-        "description": "A database with dependencies of all python packages available on pypi",
-        "homepage": "",
-        "owner": "DavHau",
-        "repo": "pypi-deps-db",
-        "rev": "328132804e07c5b29447f352b7a1fb8623a11cd3",
-        "sha256": "0rgrcgr4lcpzqq45rh32dmb147c3rh9j6vgnb7jzb5mxgg76zw35",
-        "type": "tarball",
-        "url": "https://github.com/DavHau/pypi-deps-db/archive/328132804e07c5b29447f352b7a1fb8623a11cd3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {

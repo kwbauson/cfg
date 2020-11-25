@@ -168,11 +168,7 @@
         src = runCommand "coc-pyright-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-pyright $out";
       };
       rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
-      mach-nix = import sources.mach-nix {
-        inherit pkgs;
-        pypiDataRev = sources.pypi-deps-db.rev;
-        pypiDataSha256 = sources.pypi-deps-db.sha256;
-      };
+      mach-nix = cfg.inputs.mach-nix.lib.${system};
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
       inherit (nixpkgs-pinned) awscli2;

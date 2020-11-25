@@ -3,8 +3,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
+    rnix-lsp.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    mach-nix.url = "github:DavHau/mach-nix";
+    mach-nix.inputs.nixpkgs.follows = "nixpkgs";
+    mach-nix.inputs.flake-utils.follows = "flake-utils";
   };
   outputs =
     { self
