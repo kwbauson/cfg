@@ -82,6 +82,7 @@
         msg = "${name}: src ${src.version} != pkg ${pkg.version}";
         checkVersion = lib.assertMsg (pkg.version == src.version) msg;
       }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
+      importNixpkgs = src: import src { inherit system; overlays = [ ]; };
     } // builtins;
   })
   (self: super: with super; with mylib; rec {
@@ -92,8 +93,7 @@
     };
     defaultPackage = homeManagerConfiguration.activationPackage;
   })
-  (self: super: with super; with mylib;
-  mapAttrValues (src: import src { inherit system; overlays = [ ]; }) {
+  (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-18_09 nixpkgs-bundler1 nixpkgs-pinned;
   })
   (self: super: with super; with mylib; rec { })
