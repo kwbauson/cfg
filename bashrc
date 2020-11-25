@@ -3,6 +3,7 @@
 PS1="\[\e[1;32m\]${_host}\[\e[s\e[\${_place}C\e[1;31m\${_status}\e[u\e[0;34m\]\w \[\e[0;${_color}m\]${_prompt}\[\e[m\] "
 
 set -o vi
+set +h
 _promptcmd() {
     ret=$?
     [[ $ret -eq 0 || $ret -eq 148 ]] && rstat= || rstat=$ret
