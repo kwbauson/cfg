@@ -120,7 +120,7 @@
         paths = flatten [
           (writeShellScriptBin "nixpkgs-rev" "echo ${nixpkgs-rev}")
           (writeShellScriptBin "nixpkgs-path" "echo ${pkgs.path}")
-          (writeShellScriptBin "local_ops" "exec nix-local-env run -d ~/src/hr/local_ops python dev.py")
+          (writeShellScriptBin "local_ops" ''exec nix-local-env run -d ~/src/hr/local_ops python dev.py "$@"'')
         ];
       };
       node-env-coc-explorer = vimUtils.buildVimPlugin {
