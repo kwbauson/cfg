@@ -121,6 +121,20 @@
           (writeShellScriptBin "nixpkgs-rev" "echo ${nixpkgs-rev}")
           (writeShellScriptBin "nixpkgs-path" "echo ${pkgs.path}")
           (
+            writeShellScriptBin "push-to-cachix"
+              ''
+                set -e
+                dir=$(mktemp -d)
+                nix build ~/cfg --out-link "$dir/result"
+                ${cachix}/bin/cachix push kwbauson \
+                  /nix/var/nix/profiles/per-user/$USER/profile \
+                  /nix/var/nix/profiles/per-user/$USER/home-manager \
+                  "$dir/result"
+                unlink "$dir/result"
+                rmdir "$dir"
+              ''
+          )
+          (
             with rec {
               urxvt-term = ''
                 urxvtc "$@"
