@@ -120,43 +120,7 @@
         paths = flatten [
           (writeShellScriptBin "nixpkgs-rev" "echo ${nixpkgs-rev}")
           (writeShellScriptBin "nixpkgs-path" "echo ${pkgs.path}")
-          (
-            writeShellScriptBin "push-to-cachix"
-              ''
-                set -e
-                dir=$(mktemp -d)
-                nix build ~/cfg --out-link "$dir/result"
-                ${cachix}/bin/cachix push kwbauson \
-                  /nix/var/nix/profiles/per-user/$USER/profile \
-                  /nix/var/nix/profiles/per-user/$USER/home-manager \
-                  "$dir/result"
-                unlink "$dir/result"
-                rmdir "$dir"
-              ''
-          )
-          (
-            with rec {
-              urxvt-term = ''
-                urxvtc "$@"
-                if [ $? -eq 2 ]; then
-                   urxvtd -q -o -f
-                   urxvtc "$@"
-                fi
-              '';
-              init-file = writeText "init-file" ''
-                [[ -e ~/.bash_profile ]] && . ~/.bash_profile
-                PROMPT_COMMAND="$PROMPT_COMMAND; trap 'history -a; bash -c \"\$BASH_COMMAND\" < /dev/null & exit' DEBUG"
-              '';
-              term = writeShellScriptBin "term" ''
-                [[ -n $1 ]] && set -- -e "$@"
-                ${urxvt-term}
-              '';
-              termbar = writeShellScriptBin "termbar" ''
-                set -- -name termbar -e bash --init-file ${init-file}
-                ${urxvt-term}
-              '';
-            }; [ term termbar ]
-          )
+          (writeShellScriptBin "local_ops" "exec nix-local-env run -d ~/src/hr/local_ops python dev.py")
         ];
       };
       node-env-coc-explorer = vimUtils.buildVimPlugin {
