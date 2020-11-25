@@ -187,7 +187,6 @@ case $cmd in
     if [[ -d "$cachebase" ]];then
       for dir in "$cachebase"/*;do
         newdir=$(< "$dir"/source)
-        echo "$dir: $newdir"
         if [[ -d $newdir ]];then
           [[ $("$0" cachedir -d "$newdir") != $dir ]] && rm -rf "$dir"
         else
