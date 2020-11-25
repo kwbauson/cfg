@@ -20,7 +20,7 @@ rec {
     '';
     makeScriptText = replaceStrings
       [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
-      [ cfg.outPath selfHash ];
+      [ (toString cfg.outPath) selfHash ];
     script = writeScript name (makeScriptText text);
     out = writeShellScriptBin name ''
       ${pathLines}
