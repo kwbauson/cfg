@@ -376,7 +376,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         map ! shell bash
       '';
       "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
-      ${attrIf (!isDarwin) "nix/nix.conf"}.text = ''
+      ${attrIf isDarwin "nix/nix.conf"}.text = ''
         max-jobs = auto
         experimental-features = nix-command flakes
         builders-use-substitutes = true
