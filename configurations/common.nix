@@ -20,6 +20,18 @@
     extra-trusted-public-keys = kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=
     builders-use-substitutes = true
   '';
+  # nix.distributedBuilds = true;
+  nix.buildMachines = [{
+    hostName = "eu.nixbuild.net";
+    system = "x86_64-linux";
+    maxJobs = 100;
+    supportedFeatures = [ "benchmark" "big-parallel" ];
+  }];
+  programs.ssh.extraConfig = ''
+    Host eu.nixbuild.net
+      PubkeyAcceptedKeyTypes ssh-ed25519
+      IdentityFile /etc/nixos/secrets/nixbuild-id_ed25519
+  '';
 
   nixpkgs.config.allowUnfree = true;
 
