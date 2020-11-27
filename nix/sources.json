@@ -102,10 +102,10 @@
         "homepage": null,
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "19576c2aea7f074ff0da818b21a8b0950ff6ec86",
-        "sha256": "13jf267qvd4fvph27flp5slrn6w2q26mhpakr8bj2ppqgyjamb79",
+        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
+        "sha256": "0x2jn3vrawwv9xp15674wjz9pixwjyj3j771izayl962zziivbx2",
         "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/19576c2aea7f074ff0da818b21a8b0950ff6ec86.tar.gz",
+        "url": "https://github.com/edolstra/flake-compat/archive/99f1c2157fba4bfe6211a321fd0ee43199025dbf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-trim": {
@@ -118,6 +118,18 @@
         "sha256": "1y1z6hzfhs42pwkhwfa8qh1508rhx23idnnq1zmaabxyjkh42v01",
         "type": "tarball",
         "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "jitsi-meet": {
+        "branch": "master",
+        "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
+        "homepage": "https://jitsi.org/meet",
+        "owner": "jitsi",
+        "repo": "jitsi-meet",
+        "rev": "997c3f75b582baa7130315a80f242b010bf94d6d",
+        "sha256": "019qf8qmang7slxnvba177m4rigvyad62iqcb2rrpqmq31rbw48f",
+        "type": "tarball",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/997c3f75b582baa7130315a80f242b010bf94d6d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
