@@ -120,18 +120,6 @@
         "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "jitsi-meet": {
-        "branch": "master",
-        "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
-        "homepage": "https://jitsi.org/meet",
-        "owner": "jitsi",
-        "repo": "jitsi-meet",
-        "rev": "997c3f75b582baa7130315a80f242b010bf94d6d",
-        "sha256": "019qf8qmang7slxnvba177m4rigvyad62iqcb2rrpqmq31rbw48f",
-        "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/997c3f75b582baa7130315a80f242b010bf94d6d.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "jsonc.vim": {
         "branch": "master",
         "description": "jsonc syntax support for vim",
