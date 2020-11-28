@@ -83,6 +83,10 @@
         checkVersion = lib.assertMsg (pkg.version == src.version) msg;
       }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
       importNixpkgs = src: import src { inherit system; overlays = [ ]; };
+      buildDir = paths:
+        let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") paths;
+        in runCommand "build-dir" { } "mkdir $out\n${cmds}";
+      nodeEnv = callPackage "${pkgs.path}/pkgs/development/node-packages/node-env.nix" { nodejs = nodejs_latest; };
     } // builtins;
   })
   (self: super: with super; with mylib; rec {
@@ -94,7 +98,7 @@
     defaultPackage = homeManagerConfiguration.activationPackage;
   })
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
-    inherit (sources) nixos-18_09 nixpkgs-bundler1 nixpkgs-pinned;
+    inherit (sources) nixos-18_09 nixpkgs-bundler1;
   })
   (self: super: with super; with mylib; rec { })
   (
@@ -127,8 +131,6 @@
       mach-nix = cfg.inputs.mach-nix.lib.${system};
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
-      inherit (nixpkgs-pinned) awscli2;
-      ${attrIf isDarwin "cachix"} = nixpkgs-pinned.cachix;
     }
   )
   (self: super: with super; with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; })

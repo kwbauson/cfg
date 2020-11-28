@@ -156,18 +156,6 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/96a1dbac972c4f67aea7ee548f4e5531003f8ab0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixpkgs-pinned": {
-        "branch": "069f183f16c3ea5d4b6e7625433b92eba77534f7",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "069f183f16c3ea5d4b6e7625433b92eba77534f7",
-        "sha256": "1by9rqvr2k6iz2yipf89yaj254yicpwq384ijgyy8p71lfxbbww2",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/069f183f16c3ea5d4b6e7625433b92eba77534f7.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "ranger_devicons": {
         "branch": "main",
         "description": "Ranger plugin that adds file glyphs / icon support to Ranger",
