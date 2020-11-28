@@ -39,8 +39,16 @@ rec {
         paths = flatten [ out ];
       }.paths;
   node-modules-paths =
-    ifFiles "package.json package-lock.json"
-      (import ./node-env.nix { inherit path pkgs; });
+    ifFiles "package.json package-lock.json node-packages.nix"
+      rec {
+        originalArgs = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args;
+        args = originalArgs // {
+          src = buildDir (map file [ "package.json" "package-lock.json" ]);
+          dontNpmInstall = true;
+        };
+        node_modules = (nodeEnv.buildNodeDependencies args).overrideAttrs (_: { name = "node_modules"; });
+        out = lowPrio node_modules;
+      }.out;
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {

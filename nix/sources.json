@@ -156,6 +156,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/96a1dbac972c4f67aea7ee548f4e5531003f8ab0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "node2nix": {
+        "branch": "master",
+        "description": "Generate Nix expressions to build NPM packages",
+        "homepage": "",
+        "owner": "svanderburg",
+        "repo": "node2nix",
+        "rev": "12e2fed0c7d0b2e50c9294dcde97242d58861c1e",
+        "sha256": "0jbxfn45kxsk7k87ssjbf6lndsf672c9665wgkvqn8pf35qq6g9y",
+        "type": "tarball",
+        "url": "https://github.com/svanderburg/node2nix/archive/12e2fed0c7d0b2e50c9294dcde97242d58861c1e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "ranger_devicons": {
         "branch": "main",
         "description": "Ranger plugin that adds file glyphs / icon support to Ranger",

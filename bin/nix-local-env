@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# with-packages bundix bundler direnv nix-prefetch-git niv diffutils
-# with-packages nixUnstable nodePackages.npm-check-updates
+# with-packages bundix bundler direnv nix-prefetch-git niv diffutils nixUnstable
+# with-packages nodePackages.npm-check-updates nodePackages.node2nix
 set -e
 
 name=nle
@@ -81,11 +81,11 @@ envfiles='.env .env.development .development.env'
 
 case $cmd in
   init)
-    "$0" cache
     if [[ ! -e .envrc ]];then
       echo 'eval "$('$name' direnv)"' > .envrc
     fi
     direnv allow
+    "$0" cache
     ;;
   recache)
     if [[ -d "$cachebase" ]];then
@@ -111,15 +111,25 @@ case $cmd in
     "$0" rebuild
     ;;
   generate)
+    [[ -e $impuredir ]] || mkdir -p "$impuredir"
     impurefile=
     if [[ -e Gemfile && -e Gemfile.lock ]];then
-      mkdir -p "$impuredir"
-      impurefile=$impuredir/$(hashfiles Gemfile Gemfile.lock)
+      impurefile=$impuredir/$(hashfiles Gemfile{,.lock})
       if [[ -e $impurefile ]];then
         cp "$impurefile" gemset.nix
       else
         bundix
         cp gemset.nix "$impurefile"
+      fi
+    fi
+    impurefile=
+    if [[ -e package.json && -e package-lock.json ]];then
+      impurefile=$impuredir/$(hashfiles package{,-lock}.json)
+      if [[ -e $impurefile ]];then
+        cp "$impurefile" node-packages.nix
+      else
+        node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
+        cp node-packages.nix "$impurefile"
       fi
     fi
     ;;
@@ -134,10 +144,16 @@ case $cmd in
         npm --package-lock-only i
       fi
     fi
-    if [[ -e Gemfile ]];then
+    if [[ -e Gemfile && -e Gemfile.lock ]];then
       if ! bundler outdated;then
+        if [[ -e gemset.nix ]];then
+          hasgemset=1
+        else
+          hasgemset=
+        fi
         rm Gemfile.lock
         bundix -l
+        [[ -n $hasgemset ]] && rm gemset.nix
       fi
     fi
     set +e
@@ -154,6 +170,7 @@ case $cmd in
     if [[ -e flake.nix && -e flake.lock ]];then
       nix flake update --recreate-lock-file
     fi
+    "$0" generate
     ;;
   run)
     "$0" cache

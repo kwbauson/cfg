@@ -1,4 +1,6 @@
 {
+  "name": "cfg",
+  "version": "1.0.0",
   "dependencies": {
     "coc-explorer": "0.11.4",
     "coc-pyright": "1.1.87",

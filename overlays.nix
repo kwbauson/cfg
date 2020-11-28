@@ -84,9 +84,9 @@
       }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
       importNixpkgs = src: import src { inherit system; overlays = [ ]; };
       buildDir = paths:
-        let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") paths;
+        let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
         in runCommand "build-dir" { } "mkdir $out\n${cmds}";
-      nodeEnv = callPackage "${pkgs.path}/pkgs/development/node-packages/node-env.nix" { nodejs = nodejs_latest; };
+      nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
     } // builtins;
   })
   (self: super: with super; with mylib; rec {
