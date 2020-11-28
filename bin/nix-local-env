@@ -170,9 +170,9 @@ case $cmd in
     if [[ -e flake.nix && -e flake.lock ]];then
       git status &> /dev/null
       nix flake update --recreate-lock-file
-      git status &> /dev/null
     fi
     "$0" generate
+    [[ -e flake.nix && -e flake.lock ]] && git status &> /dev/null
     ;;
   run)
     "$0" cache
