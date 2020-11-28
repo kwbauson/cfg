@@ -1,5 +1,7 @@
 pkgs: with pkgs; with mylib; buildEnv {
   inherit name;
-  paths = let pkg = nixLocalEnv.packages.nix-local-env; in
-    [ pkg (alias "nle" pkg) ];
+  paths = [
+    nixLocalEnv.pkgs.nix-local-env
+    (alias "nle" nixLocalEnv.pkgs.nix-local-env)
+  ];
 }

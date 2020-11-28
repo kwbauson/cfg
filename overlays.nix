@@ -86,6 +86,7 @@
       buildDir = paths:
         let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
         in runCommand "build-dir" { } "mkdir $out\n${cmds}";
+      copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out";
       nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
     } // builtins;
   })
@@ -121,11 +122,11 @@
       dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
       node-env-coc-explorer = vimUtils.buildVimPlugin {
         name = "coc-explorer";
-        src = runCommand "coc-explorer-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-explorer $out";
+        src = copyPath "${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-explorer";
       };
       node-env-coc-pyright = vimUtils.buildVimPlugin {
         name = "coc-pyright";
-        src = runCommand "coc-pyright-src" { } "cp -Lr ${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-pyright $out";
+        src = copyPath "${(import ./node-env.nix { inherit pkgs; path = cfg.outPath; }).node_modules}/coc-pyright";
       };
       rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
       mach-nix = cfg.inputs.mach-nix.lib.${system};
