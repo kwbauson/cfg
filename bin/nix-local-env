@@ -168,6 +168,7 @@ case $cmd in
       rm -f $tmpfile
     fi
     if [[ -e flake.nix && -e flake.lock ]];then
+      git status &> /dev/null
       nix flake update --recreate-lock-file
     fi
     "$0" generate
