@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-# with-packages cachix
-set -e
-dir=$(mktemp -d)
-nix build ~/cfg --out-link "$dir/result"
-cachix push kwbauson \
+exec cachix push kwbauson \
   /nix/var/nix/profiles/per-user/$USER/profile \
-  /nix/var/nix/profiles/per-user/$USER/home-manager \
-  "$dir/result"
-unlink "$dir/result"
-rmdir "$dir"
+  /nix/var/nix/profiles/per-user/$USER/home-manager

@@ -1,18 +1,15 @@
-name: 'Test'
+name: 'Build'
 on:
   pull_request:
   push:
 jobs:
-  tests:
+  kwbauson:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: nixbuild/nix-quick-install-action@v4
-      # - uses: nixbuild/nixbuild-action@v2
-      #   with:
-      #     nixbuild_ssh_key: ${{ secrets.nixbuild_ssh_key }}
       - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: touch var/non-graphical && nix-build -A defaultPackage
+      - run: touch var/non-graphical && nix-build -A cfg.homeConfigurations.kwbauson

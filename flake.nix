@@ -43,5 +43,9 @@
       nixosConfigurations.keith-xps = lib.nixosSystem "keith-xps";
       nixosConfigurations.kwbauson = lib.nixosSystem "kwbauson";
       nixosConfigurations.keith-vm = lib.nixosSystem "keith-vm";
+
+      homeConfigurations.keith-xps = self.defaultPackage.x86_64-linux;
+      homeConfigurations.kwbauson = self.defaultPackage.x86_64-linux;
+      homeConfigurations.keith-vm = self.defaultPackage.x86_64-linux;
     };
 }
