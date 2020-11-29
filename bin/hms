@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+tmpdir=$(mktemp -d)
+result="$tmpdir"/result
+nix build ~/cfg --out-link "$result"
+"$result"/activate
+unlink "$result"
+rmdir "$tmpdir"

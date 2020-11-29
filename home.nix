@@ -144,8 +144,6 @@ with builtins; with pkgs; with pkgs.mylib; {
         ${attrIf isNixOS "nos"} = "sudo nixos-rebuild switch";
         ${attrIf isNixOS "noe"} = "nixos-rebuild edit && nos";
         hm = "home-manager --keep-going";
-        hmb = "hm build";
-        hms = "hm switch";
         hme = "hm edit && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
         hmp = "git -C ~/cfg cap";
