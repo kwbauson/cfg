@@ -4,10 +4,11 @@ pkgs: with pkgs; buildEnv {
     (
       writeShellScriptBin ","
         ''
+          ${pathAdd [ sqlite coreutils fzy nixUnstable ]}
           cmd=$1
           db=$(nix-instantiate --eval --expr '<nixpkgs>' 2> /dev/null)/programs.sqlite
           sql="select distinct package from Programs where name = '$cmd'"
-          packages=$(${sqlite}/bin/sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)
+          packages=$(sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)
 
           if [[ $(echo "$packages" | wc -l) = 1 ]];then
             if [[ -z $packages ]];then
@@ -17,10 +18,10 @@ pkgs: with pkgs; buildEnv {
               attr=$packages
             fi
           else
-            attr=$(echo "$packages" | ${fzy}/bin/fzy)
+            attr=$(echo "$packages" | fzy)
           fi
           if [[ -n $attr ]];then
-            exec ${nixUnstable}/bin/nix --experimental-features 'nix-command = nix-flakes' \
+            exec nix --experimental-features 'nix-command = nix-flakes' \
               shell -f ${toString path} "$attr" --command "$@"
           fi
         ''
@@ -38,7 +39,7 @@ pkgs: with pkgs; buildEnv {
               sql="select distinct name from Programs where name like '$cur%' order by name"
 
               if [[ $COMP_CWORD = 1 ]];then
-                COMPREPLY=( $(compgen -W "$(${sqlite}/bin/sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)" -- "$cur") )
+                COMPREPLY=( $(compgen -W "$(${exe sqlite} -init /dev/null "$db" "$sql" 2> /dev/null)" -- "$cur") )
               else
                 COMPREPLY=( $(compgen -f -- "$cur") )
               fi

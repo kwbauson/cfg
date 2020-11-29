@@ -88,6 +88,7 @@
         in runCommand "build-dir" { } "mkdir $out\n${cmds}";
       copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out";
       nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
+      pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
     } // builtins;
   })
   (self: super: with super; with mylib; rec {
