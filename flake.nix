@@ -15,6 +15,7 @@
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
   };
+
   outputs =
     { self
     , nixpkgs
@@ -30,5 +31,16 @@
 
       inherit (packages) defaultPackage;
 
-    });
+    }) // rec {
+      lib = {
+        nixosSystem = hostname: nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ (./configurations + "/${hostname}/configuration.nix") ];
+        };
+      };
+
+      nixosConfigurations.keith-xps = lib.nixosSystem "keith-xps";
+      nixosConfigurations.kwbauson = lib.nixosSystem "kwbauson";
+      nixosConfigurations.keith-vm = lib.nixosSystem "keith-vm";
+    };
 }
