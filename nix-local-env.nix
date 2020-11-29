@@ -107,5 +107,8 @@ rec {
 
   packages = listToAttrs (map (x: { name = x.name; value = x; }) paths);
 
-  out = (buildEnv { name = "local-env"; inherit paths; }) // { pkgs = packages; };
+  out = (buildEnv { name = "local-env"; inherit paths; }) // {
+    pkgs = packages;
+    nle = import ./nix-local-env.nix;
+  };
 }.out
