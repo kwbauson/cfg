@@ -31,6 +31,7 @@ pkgs: with pkgs; with mylib; buildEnv {
         ''
           _better-comma()
           {
+              ${pathAdd sqlite}
               local cur prev opts db sql
               COMPREPLY=()
               cur="''${COMP_WORDS[COMP_CWORD]}"
@@ -39,7 +40,7 @@ pkgs: with pkgs; with mylib; buildEnv {
               sql="select distinct name from Programs where name like '$cur%' order by name"
 
               if [[ $COMP_CWORD = 1 ]];then
-                COMPREPLY=( $(compgen -W "$(${exe sqlite} -init /dev/null "$db" "$sql" 2> /dev/null)" -- "$cur") )
+                COMPREPLY=( $(compgen -W "$(sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)" -- "$cur") )
               else
                 COMPREPLY=( $(compgen -f -- "$cur") )
               fi

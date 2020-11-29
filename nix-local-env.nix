@@ -7,13 +7,13 @@ rec {
   wrapScriptWithPackages = src: env: rec {
     text = readFile src;
     name = baseNameOf src;
+    lines = splitString "\n" text;
     pkgsMark = " with-packages ";
     pkgsLines = map
       (x: splitString pkgsMark x)
-      (filter (hasInfix pkgsMark) (splitString "\n" text));
+      (filter (hasInfix pkgsMark) lines);
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
     buildInputs = build-paths ++ map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames;
-    pathLines = concatStringsSep "\n" (map (x: "export PATH=${x}/bin:$PATH") buildInputs);
     selfHash = hashString "sha256" ''
       ${readFile ./nix-local-env.nix}
       ${readFile ./bin/nix-local-env}
@@ -21,10 +21,12 @@ rec {
     makeScriptText = replaceStrings
       [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
       [ (toString cfg.outPath) selfHash ];
-    script = writeScript name (makeScriptText text);
+    isBash = hasSuffix "bash" (head lines);
+    script = writeScript "${name}-unwrapped" (makeScriptText text);
+    textTail = concatStringsSep "\n" (tail lines);
     out = writeShellScriptBin name ''
-      ${pathLines}
-      exec ${script} "$@"
+      export ${pathAdd buildInputs}
+      ${if isBash then textTail else ''exec ${script} "$@"''}
     '';
   }.out;
 
