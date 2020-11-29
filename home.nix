@@ -201,6 +201,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         "\\C-d" = "possible-completions";
         "\\C-l" = "complete";
         "\\C-f" = "complete-filename";
+        "\\C-e" = "complete-command";
         "\\C-a" = "insert-completions";
         "\\C-k" = "kill-whole-line";
         "\\C-w" = ''" \edba\b"'';
