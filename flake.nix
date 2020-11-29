@@ -35,14 +35,12 @@
       lib = {
         nixosSystem = hostname: nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ (./configurations + "/${hostname}/configuration.nix") ];
+          modules = let module = import (./configurations + "/${hostname}/configuration.nix"); in
+            [ ({ pkgs, config, ... }@args: module (self.inputs // args)) ];
         };
       };
 
-      nixosConfigurations.keith-xps = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ (import ./configurations/keith-xps/configuration.nix self) ];
-      };
+      nixosConfigurations.keith-xps = lib.nixosSystem "keith-xps";
       nixosConfigurations.kwbauson = lib.nixosSystem "kwbauson";
       nixosConfigurations.keith-vm = lib.nixosSystem "keith-vm";
     };

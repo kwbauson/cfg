@@ -1,18 +1,13 @@
-self:
-{ pkgs, ... }:
+{ pkgs, nixos-hardware, ... }:
 with builtins;
 {
-  imports =
-    let
-      nixos-hardware = self.inputs.nixos-hardware;
-    in
-    [
-      nixos-hardware.nixosModules.common-cpu-intel
-      nixos-hardware.nixosModules.common-pc-laptop
-      nixos-hardware.nixosModules.common-pc-laptop-ssd
-      ./hardware-configuration.nix
-      ../common.nix
-    ];
+  imports = [
+    nixos-hardware.nixosModules.common-cpu-intel
+    nixos-hardware.nixosModules.common-pc-laptop
+    nixos-hardware.nixosModules.common-pc-laptop-ssd
+    ./hardware-configuration.nix
+    ../common.nix
+  ];
 
   boot.blacklistedKernelModules = [ "psmouse" ];
   nixpkgs.config.pulseaudio = true;
