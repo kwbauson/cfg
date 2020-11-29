@@ -13,7 +13,7 @@ rec {
       (x: splitString pkgsMark x)
       (filter (hasInfix pkgsMark) lines);
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
-    buildInputs = build-paths ++ map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames;
+    buildInputs = map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames ++ build-paths;
     selfHash = hashString "sha256" ''
       ${readFile ./nix-local-env.nix}
       ${readFile ./bin/nix-local-env}
@@ -23,10 +23,10 @@ rec {
       [ (toString cfg.outPath) selfHash ];
     isBash = hasSuffix "bash" (head lines);
     script = writeScript "${name}-unwrapped" (makeScriptText text);
-    textTail = concatStringsSep "\n" (tail lines);
+    scriptTail = makeScriptText (concatStringsSep "\n" (tail lines));
     out = writeShellScriptBin name ''
       export ${pathAdd buildInputs}
-      ${if isBash then textTail else ''exec ${script} "$@"''}
+      ${if isBash then scriptTail else ''exec ${script} "$@"''}
     '';
   }.out;
 
