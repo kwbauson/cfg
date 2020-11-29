@@ -5,5 +5,5 @@ cd ~/cfg
 git add . -N
 nix build --out-link "$result"
 "$result"/activate
-unlink "$result"
+rm -f "$result"
 rmdir "$tmpdir"

@@ -1,4 +1,4 @@
-pkgs: with pkgs; buildEnv {
+pkgs: with pkgs; with mylib; buildEnv {
   name = "better-comma";
   paths = [
     (
@@ -22,7 +22,7 @@ pkgs: with pkgs; buildEnv {
           fi
           if [[ -n $attr ]];then
             exec nix --experimental-features 'nix-command = nix-flakes' \
-              shell -f ${toString path} "$attr" --command "$@"
+              shell -f ${toString pkgs.path} "$attr" --command "$@"
           fi
         ''
     )
