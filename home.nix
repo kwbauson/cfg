@@ -15,7 +15,7 @@ with builtins; with pkgs; with pkgs.mylib; {
             procps progress pv ranger ripgrep rlwrap rsync sd socat strace time
             unzip usbutils watch wget which xdg_utils xxd xz zip manix
             better-comma nix-build-uncached bitwarden-cli libqalculate
-            youtube-dl
+            youtube-dl speedtest-cli
             ;
         };
         ${attrIf isGraphical "graphical"} = {
