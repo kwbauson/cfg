@@ -136,7 +136,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         rg = "rg --color=always -S --hidden";
         ncdu = "ncdu --color dark -ex";
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
-        noc = "nix-channel --update";
+        noc = prefixIf isNixOS "sudo " "nix-channel --update";
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
         ${attrIf isNixOS "nob"} = "git -C ~/cfg a -N && sudo nixos-rebuild boot --flake ~/cfg";
         ${attrIf isNixOS "nos"} = "git -C ~/cfg a -N && sudo nixos-rebuild switch --flake ~/cfg";
