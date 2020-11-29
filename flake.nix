@@ -39,7 +39,10 @@
         };
       };
 
-      nixosConfigurations.keith-xps = lib.nixosSystem "keith-xps";
+      nixosConfigurations.keith-xps = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ (import ./configurations/keith-xps/configuration.nix self) ];
+      };
       nixosConfigurations.kwbauson = lib.nixosSystem "kwbauson";
       nixosConfigurations.keith-vm = lib.nixosSystem "keith-vm";
     };

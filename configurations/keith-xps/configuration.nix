@@ -1,10 +1,10 @@
+self:
 { pkgs, ... }:
 with builtins;
 {
   imports =
     let
-      cfg = import ../../flake-compat.nix;
-      nixos-hardware = cfg.inputs.nixos-hardware;
+      nixos-hardware = self.inputs.nixos-hardware;
     in
     [
       nixos-hardware.nixosModules.common-cpu-intel
@@ -37,7 +37,7 @@ with builtins;
   services.xserver.enable = true;
 
   users.mutableUsers = false;
-  users.users.keith.hashedPassword = readFile /etc/nixos/secrets/keith-password;
-  users.users.root.hashedPassword = readFile /etc/nixos/secrets/root-password;
+  users.users.keith.passwordFile = "/etc/nixos/secrets/keith-password";
+  users.users.root.passwordFile = "/etc/nixos/secrets/root-password";
   programs.steam.enable = true;
 }

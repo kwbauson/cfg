@@ -7,7 +7,7 @@ map <silent> <leader>w :set invwrap wrap?<cr>
 map <silent> <leader>n :set invnumber number?<cr>
 map <silent> <leader>N :set invrelativenumber relativenumber?<cr>
 map <silent> <leader>r :up<bar>vs<bar>term %:p<cr>i
-map <silent> <leader>, :e ~/.config/nixpkgs/init.vim<cr>
+map <silent> <leader>, :e ~/cfg/init.vim<cr>
 
 set mouse= title
 set nojoinspaces smartindent
@@ -65,7 +65,7 @@ autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
 autocmd BufNewFile,BufRead *.flow setlocal filetype=javascript.jsx
 let g:polyglot_disabled = ['csv']
 let g:javascript_plugin_flow = 1
-let g:coc_config_home = getenv('HOME') . '/.config/nixpkgs'
+let g:coc_config_home = getenv('HOME') . '/cfg'
 
 set hidden nobackup nowritebackup updatetime=300 shortmess+=c signcolumn=yes:1
 highlight link CocHighlightText Search
