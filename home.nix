@@ -84,8 +84,6 @@ with builtins; with pkgs; with pkgs.mylib; {
     sessionVariables = {
       BROWSER = "chromium";
       BUGSNAG_RELEASE_STAGE = "local";
-      ${attrIf (pathExists ./secrets/bw-session) "BW_SESSION"} = readFile ./secrets/bw-session;
-      ${attrIf (pathExists ./secrets/github-token) "GITHUB_TOKEN"} = readFile ./secrets/github-token;
       DBTUNNELUSER = "keith";
       EDITOR = "nvim";
       EMAIL = "${userName} <${userEmail}>";
@@ -171,6 +169,8 @@ with builtins; with pkgs; with pkgs.mylib; {
           export GPG_TTY=$(tty)
         '' ''
           ${readFile ./bashrc}
+          [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
+          [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
           source ${sources.complete-alias}/complete_alias
           for a in $(alias | sed 's/=/ /' | cut -d' ' -f2);do complete -F _complete_alias $a;done
         '';
