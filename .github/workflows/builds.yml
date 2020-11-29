@@ -1,4 +1,4 @@
-name: 'Build'
+name: Builds
 on:
   pull_request:
   push:
@@ -11,5 +11,5 @@ jobs:
       - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: touch var/non-graphical && nix-build -A cfg.homeConfigurations.kwbauson
