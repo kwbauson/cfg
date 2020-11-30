@@ -241,6 +241,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         set -g status-left ""
         set -g status-right ""
       '';
+      plugins = with tmuxPlugins; [ jump ];
     };
     neovim = {
       enable = true;
