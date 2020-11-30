@@ -171,7 +171,6 @@ case $cmd in
       git status &> /dev/null
       nix flake update --recreate-lock-file
     fi
-    "$0" generate
     [[ -e flake.nix && -e flake.lock ]] && git status &> /dev/null
     ;;
   run)
