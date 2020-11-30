@@ -32,11 +32,11 @@
 
     }) // rec {
       lib = {
-        nixosConfiguration = hostname: nixpkgs.lib.nixosSystem {
+        nixosConfiguration = hostname: (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = let module = import (./configurations + "/${hostname}/configuration.nix"); in
             [ ({ pkgs, config, ... }@args: module (self.inputs // args)) ];
-        };
+        }) // { drv = (lib.nixosConfiguration hostname).config.system.build.toplevel; };
         homeConfiguration =
           { system ? "x86_64-linux"
           , pkgs ? self.packages.${system}
