@@ -10,6 +10,7 @@ jobs:
           - nixosConfigurations.keith-xps.drv
           - nixosConfigurations.kwbauson.drv
           - nixosConfigurations.keith-vm.drv
+          - homeConfigurations.keith-xps
           - homeConfigurations.kwbauson
     runs-on: ubuntu-20.04
     steps:
