@@ -21,8 +21,8 @@ pkgs: with pkgs; with mylib; buildEnv {
             attr=$(echo "$packages" | fzy)
           fi
           if [[ -n $attr ]];then
-            exec nix --experimental-features 'nix-command = nix-flakes' \
-              shell -f ${toString pkgs.path} "$attr" --command "$@"
+            exec nix --extra-experimental-features 'nix-command flakes' \
+              shell "${cfg.outPath}#$attr" --command "$@"
           fi
         ''
     )
