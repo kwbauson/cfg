@@ -2,11 +2,11 @@ name: Builds
 on: [pull_request, push]
 jobs:
   build:
-    name: ${{ matrix.attribute }}
+    name: ${{ matrix.output }}
     strategy:
       fail-fast: false
       matrix:
-        attribute:
+        output:
           - nixosConfigurations.keith-xps.drv
           - nixosConfigurations.kwbauson.drv
           - nixosConfigurations.keith-vm.drv
@@ -20,4 +20,4 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix-build -A cfg.${{ matrix.attribute }}
+      - run: nix run -f . nix-build-uncached -c nix-build-uncached -A cfg.${{ matrix.output }}

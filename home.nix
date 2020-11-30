@@ -169,11 +169,13 @@ with builtins; with pkgs; with pkgs.mylib; {
           export GPG_TTY=$(tty)
         '' ''
           ${readFile ./bashrc}
-          [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
-          [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
           source ${sources.complete-alias}/complete_alias
           for a in $(alias | sed 's/=/ /' | cut -d' ' -f2);do complete -F _complete_alias $a;done
         '';
+      profileExtra = ''
+        [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
+        [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
+      '';
     };
     readline = {
       enable = true;
