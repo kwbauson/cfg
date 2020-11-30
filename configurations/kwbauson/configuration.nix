@@ -18,7 +18,10 @@
 
   nixpkgs.overlays = [
     (self: super: {
-      jitsi-meet = super.jitsi-meet.overrideAttrs (_: { src = ../../var/jitsi-meet.tar.bz2; });
+      jitsi-meet = super.jitsi-meet.overrideAttrs (attrs: {
+        src = let path = ../../jitsi-meet.tar.bz2; in
+          if builtins.pathExists path then path else attrs.src;
+      });
     })
   ];
 
