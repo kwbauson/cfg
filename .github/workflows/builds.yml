@@ -1,7 +1,14 @@
 name: Builds
 on: [pull_request, push]
 jobs:
-  prepare:
+  build:
+    strategy:
+      matrix:
+        attribute:
+          - nixosConfigurations.keith-xps
+          - nixosConfigurations.kwbauson
+          - nixosConfigurations.keith-vm
+          - homeConfigurations.kwbauson
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
@@ -10,8 +17,4 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-  homeConfigurations-kwbauson:
-    runs-on: ubuntu-20.04
-    needs: prepare
-    steps:
-      - run: nix-build -A cfg.homeConfigurations.kwbauson
+      - run: nix-build -A cfg.${{ matrix.attribute }}
