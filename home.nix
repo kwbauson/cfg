@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, username, homeDirectory, isNixOS, isGraphical, ... }:
 with builtins; with pkgs; with pkgs.mylib; {
   home.packages = with pkgs;
     drvsExcept

@@ -13,8 +13,6 @@
           else if hasAttr "version" pkg then removeSuffix "-${pkg.version}" pkg.name
           else pkg.name;
       }; "${pkg}/bin/${binName}";
-      isNixOS = !pathExists ./var/non-nixos;
-      isGraphical = !pathExists ./var/non-graphical;
       prefixIf = b: x: y: if b then x + y else y;
       mapLines = f: s: concatMapStringsSep "\n"
         (l: if l != "" then f l else l)
@@ -27,8 +25,6 @@
       }; flatten (drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x));
       userName = "Keith Bauson";
       userEmail = "kwbauson@gmail.com";
-      username = if isNixOS then "keith" else "keithbauson";
-      homeDirectory = "/${if isDarwin then "Users" else "home"}/${username}";
       nixpkgs-rev = cfg.inputs.nixpkgs.rev;
       fakePlatform = x: x.overrideAttrs (attrs:
         { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
@@ -90,14 +86,6 @@
       nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
       pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
     } // builtins;
-  })
-  (self: super: with super; with mylib; rec {
-    homeManager = cfg.inputs.home-manager;
-    homeManagerConfiguration = homeManager.lib.homeManagerConfiguration rec {
-      configuration = import ./home.nix { inherit pkgs; config = configuration; };
-      inherit system pkgs username homeDirectory;
-    };
-    defaultPackage = homeManagerConfiguration.activationPackage;
   })
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-18_09 nixpkgs-bundler1;

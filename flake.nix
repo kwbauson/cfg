@@ -20,6 +20,7 @@
     { self
     , nixpkgs
     , flake-utils
+    , home-manager
     , ...
     }: flake-utils.lib.eachDefaultSystem (system: rec {
 
@@ -29,23 +30,34 @@
         overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);
       };
 
-      inherit (packages) defaultPackage;
-
     }) // rec {
       lib = {
-        nixosSystem = hostname: nixpkgs.lib.nixosSystem {
+        nixosConfiguration = hostname: nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = let module = import (./configurations + "/${hostname}/configuration.nix"); in
             [ ({ pkgs, config, ... }@args: module (self.inputs // args)) ];
         };
+        homeConfiguration =
+          { system ? "x86_64-linux"
+          , pkgs ? self.packages.${system}
+          , username ? "keith"
+          , homeDirectory ? "/home/${username}"
+          , ...
+          }@args: (home-manager.lib.homeManagerConfiguration rec {
+            configuration = import ./home.nix ({
+              inherit pkgs username homeDirectory;
+              config = configuration;
+            } // args);
+            inherit system pkgs username homeDirectory;
+          }).activationPackage;
       };
 
-      nixosConfigurations.keith-xps = lib.nixosSystem "keith-xps";
-      nixosConfigurations.kwbauson = lib.nixosSystem "kwbauson";
-      nixosConfigurations.keith-vm = lib.nixosSystem "keith-vm";
+      nixosConfigurations.keith-xps = lib.nixosConfiguration "keith-xps";
+      nixosConfigurations.kwbauson = lib.nixosConfiguration "kwbauson";
+      nixosConfigurations.keith-vm = lib.nixosConfiguration "keith-vm";
 
-      homeConfigurations.keith-xps = self.defaultPackage.x86_64-linux;
-      homeConfigurations.kwbauson = self.defaultPackage.x86_64-linux;
-      homeConfigurations.keith-vm = self.defaultPackage.x86_64-linux;
+      homeConfigurations.keith-xps = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
+      homeConfigurations.kwbauson = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
+      homeConfigurations.keith-vm = homeConfigurations.keith-xps;
     };
 }
