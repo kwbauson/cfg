@@ -72,7 +72,6 @@
           fi
         '';
       };
-      inherit (nixLocalEnv.packages) fordir;
       dmgOverride = name: pkg: with rec {
         src = sources."dmg-${name}";
         msg = "${name}: src ${src.version} != pkg ${pkg.version}";
@@ -120,6 +119,7 @@
       mach-nix = cfg.inputs.mach-nix.lib.${system};
       spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
       discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
+      inherit (nixLocalEnv.pkgs) fordir;
     }
   )
   (self: super: with super; with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; })
