@@ -46,6 +46,8 @@ c.url.searchengines = {
 }
 c.url.start_pages = ['about:blank']
 c.window.title_format = '{perc}{current_title}'
+c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.prefers_color_scheme_dark = True
 
 # c.bindings.default = {}
 
