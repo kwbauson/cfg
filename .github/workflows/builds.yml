@@ -10,14 +10,16 @@ jobs:
           - nixosConfigurations.keith-xps.drv
           - nixosConfigurations.kwbauson.drv
           - nixosConfigurations.keith-vm.drv
-          - homeConfigurations.keith-xps
           - homeConfigurations.kwbauson
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
+        with:
+          nix_version: 3.0pre20200829_f156513
+          nix_conf: experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix run -f . nix-build-uncached -c nix-build-uncached -A cfg.${{ matrix.output }}
+      - run: nix build .#${{ matrix.output }}
