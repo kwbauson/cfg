@@ -1,6 +1,6 @@
 black
 bpython==0.20.1
 emborg==1.18.0
-pip==20.2.4
+pip==20.3
 pur==5.3.0
 pylint==2.6.0
