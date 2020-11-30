@@ -1,8 +1,9 @@
 name: Builds
 on: [pull_request, push]
+defaults:
+  runs-on: ubuntu-20.04
 jobs:
   prepare:
-    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: nixbuild/nix-quick-install-action@v4
