@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-cd ~/src/nixpkgs
-git pull -q
-new_rev=$(git rev-parse HEAD)
+# with-packages git
+set -e
+cd "$(nixpkgs-repo-cache)"
+new_rev=$(git rev-parse origin/nixos-unstable)
 [[ $(nixpkgs-rev) = $new_rev ]] || echo updates

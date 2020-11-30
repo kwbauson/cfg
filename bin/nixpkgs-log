@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-cd ~/src/nixpkgs
-git pull
-exec git log $(nixpkgs-rev).. --no-merges --reverse
+# with-packages git
+set -e
+cd "$(nixpkgs-repo-cache)"
+exec git log $(nixpkgs-rev)..origin/nixos-unstable --no-merges --reverse

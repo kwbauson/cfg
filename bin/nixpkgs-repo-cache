@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# with-packages git
+set -e
+cachedir=~/.cache/nixpkgs-repo
+branch=nixos-unstable
+if [[ ! -d $cachedir ]];then
+  mkdir -p "$cachedir"
+  cd "$cachedir"
+  git init --quiet
+  git remote add origin https://github.com/NixOS/nixpkgs
+else
+  cd "$cachedir"
+fi
+git fetch origin "$branch" --quiet
+echo "$cachedir"
