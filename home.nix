@@ -5,7 +5,7 @@ with builtins; with pkgs; with pkgs.mylib; {
       {
         core = {
           inherit
-            acpi atool banner bashCompletion bashInteractive bc binutils
+            acpi atool banner bash-completion bashInteractive bc binutils
             borgbackup bvi bzip2 cacert cachix coreutils-full cowsay curl
             diffutils dos2unix ed fd file findutils gawk gnugrep gnused gnutar
             gzip htop inetutils iproute iputils ldns less libarchive libnotify

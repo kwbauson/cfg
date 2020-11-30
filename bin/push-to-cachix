@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# with-packages cachix
 exec cachix push kwbauson \
   /nix/var/nix/profiles/per-user/$USER/profile \
   /nix/var/nix/profiles/per-user/$USER/home-manager

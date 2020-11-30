@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-cmd=$1
-if [[ $cmd = repl ]];then
-  exec nix repl ~/nic.nix --arg file ./cfg.nix
-else
-  echo invalid command
-  exit 1
-fi

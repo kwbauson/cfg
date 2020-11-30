@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-cd ~/src/nixpkgs
-git pull
-exec git diff $(nixpkgs-rev)..
+# with-packages git
+set -e
+cd "$(nixpkgs-repo-cache)"
+exec git diff $(nixpkgs-rev)..origin/nixos-unstable

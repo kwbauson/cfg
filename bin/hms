@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# with-packages nixUnstable
 tmpdir=$(mktemp -d)
 result="$tmpdir"/result
 cd ~/cfg
