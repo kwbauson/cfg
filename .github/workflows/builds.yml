@@ -11,5 +11,6 @@ jobs:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
   homeConfigurations.kwbauson:
-    - needs: prepare
-    - run: nix-build -A cfg.homeConfigurations.kwbauson
+    needs: prepare
+    steps:
+      - run: nix-build -A cfg.homeConfigurations.kwbauson
