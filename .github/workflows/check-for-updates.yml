@@ -19,3 +19,9 @@ jobs:
       - run: nix shell .#nle -c nle update
       - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
       - uses: peter-evans/create-pull-request@v3
+        with:
+          delete-branch: true
+          title: Automatic update
+          commit-message: automatic update
+          branch: automatic-update
+          token: ${{ secrets.PAT }}
