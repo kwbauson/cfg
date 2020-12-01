@@ -28,14 +28,14 @@ with builtins; with pkgs; with pkgs.mylib; {
           };
           multi-media = {
             inherit
-              audacity chromium ffmpeg firefox libreoffice-fresh mediainfo
-              obs-studio obs-v4l2sink pavucontrol pinta sox zathura qtbr spotify
+              chromium ffmpeg firefox libreoffice-fresh mediainfo pavucontrol
+              sox qtbr
               ;
           };
           misc = {
             inherit
-              adoptopenjdk-bin breeze-icons networkmanagerapplet pandoc qemu qtile
-              steam steam-run-native_18-09 signal-desktop discord zoom-us
+              breeze-icons networkmanagerapplet steam steam-run-native_18-09
+              signal-desktop discord zoom-us
               ;
             inherit evilhack;
           };
@@ -45,9 +45,9 @@ with builtins; with pkgs; with pkgs.mylib; {
         development = {
           inherit
             bat ccache colordiff ctags diffoscope dhall git-trim golint gron
-            highlight httpie hyperfine icdiff jq lazydocker lazygit nim
-            nixpkgs-fmt overmind rnix-lsp-unstable shellcheck shfmt solargraph
-            watchexec yarn yarn-completion nodejs_latest nle
+            highlight httpie icdiff jq nim nixpkgs-fmt rnix-lsp-unstable
+            shellcheck shfmt solargraph watchexec yarn yarn-completion
+            nodejs_latest nle
             ;
           inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
@@ -149,7 +149,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
-        qemu = "qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
+        qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
         lo = "local_ops";
         lo-early-talent = "lo start -s early-talent && lo logs -s early-talent; lo stop -s all";
       };
@@ -314,6 +314,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         put = "! git push origin `git branch-name`";
         rt = "reset .";
         ro = "! git reset --hard origin/`git branch-name`";
+        f = "fetch --all";
         ru = "remote update";
         st = "status";
         unhide = "update-index --no-skip-worktree";

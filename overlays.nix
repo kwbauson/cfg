@@ -78,7 +78,7 @@
     buildDir = paths:
       let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
       in runCommand "build-dir" { } "mkdir $out\n${cmds}";
-    copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
+    copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out";
     nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
     pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
   } // builtins))
