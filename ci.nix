@@ -1,14 +1,9 @@
 with import ./flake-compat.nix;
 {
-  recurseForDerivations = true;
+  nixosConfigurations-keith-xps = nixosConfigurations.keith-xps.drv;
+  nixosConfigurations-kwbauson = nixosConfigurations.kwbauson.drv;
+  nixosConfigurations-keith-vm = nixosConfigurations.keith-vm.drv;
 
-  nixosConfigurations = with nixosConfigurations; {
-    keith-xps = nixosConfigurations.keith-xps.drv;
-    kwbauson = nixosConfigurations.kwbauson.drv;
-    keith-vm = nixosConfigurations.keith-vm.drv;
-  };
-
-  homeConfigurations = with homeConfigurations; {
-    inherit non-graphical graphical;
-  };
+  homeConfigurations-non-graphical = homeConfigurations.non-graphical;
+  homeConfigurations-graphical = homeConfigurations.graphical;
 }
