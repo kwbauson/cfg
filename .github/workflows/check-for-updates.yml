@@ -1,4 +1,4 @@
-name: Check for Updates
+name: Check for updates
 on:
   schedule:
     - cron: '0 * * * *'
@@ -26,7 +26,6 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
       - run: |
-          nix shell .#nle -c nle update
-          nix flake update --override-input nixpkgs github:NixOS/nixpkgs
           [[ -z $(git status --porcelain) ]] && nix build .#${{ matrix.output }}
