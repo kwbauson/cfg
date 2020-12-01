@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages git nixUnstable
+# with-packages git nix-wrapped
 set -e
 if [[ $1 = --nested ]];then
   shift
@@ -20,6 +20,5 @@ if [[ $1 = --nested ]];then
   fi
   exec "$exe" "$@"
 else
-  git -C ~/cfg add -N .
-  exec nix shell ~/cfg'#'"$1" -c "$0" --nested "$@"
+  exec nix shell CFG_STORE_PATH'#'"$1" -c "$0" --nested "$@"
 fi

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages nixUnstable
+# with-packages nix-wrapped
 tmpdir=$(mktemp -d)
 result="$tmpdir"/result
 cd ~/cfg

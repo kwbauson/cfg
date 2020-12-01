@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages bundix bundler direnv nix-prefetch-git niv diffutils nixUnstable
+# with-packages bundix bundler direnv nix-prefetch-git niv diffutils nix-wrapped
 # with-packages nodePackages.npm-check-updates nodePackages.node2nix
 set -e
 
@@ -12,13 +12,6 @@ nixexpr="(import $nixfile { path = ./.; })"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
-
-nix() {
-  command nix \
-    --keep-going \
-    --extra-experimental-features 'nix-command flakes' \
-    "$@"
-}
 
 args=$@
 cmd=

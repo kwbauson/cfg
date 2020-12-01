@@ -4,7 +4,7 @@ pkgs: with pkgs; with mylib; buildEnv {
     (
       writeShellScriptBin ","
         ''
-          ${pathAdd [ sqlite coreutils fzy nixUnstable ]}
+          ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
           cmd=$1
           db=$(nix-instantiate --eval --expr '<nixpkgs>' 2> /dev/null)/programs.sqlite
           sql="select distinct package from Programs where name = '$cmd'"
@@ -21,8 +21,7 @@ pkgs: with pkgs; with mylib; buildEnv {
             attr=$(echo "$packages" | fzy)
           fi
           if [[ -n $attr ]];then
-            exec nix --extra-experimental-features 'nix-command flakes' \
-              shell "${cfg.outPath}#$attr" --command "$@"
+            exec nix shell "${cfg.outPath}#$attr" --command "$@"
           fi
         ''
     )
@@ -31,7 +30,7 @@ pkgs: with pkgs; with mylib; buildEnv {
         ''
           _better-comma()
           {
-              ${pathAdd sqlite}
+              ${pathAdd [ nix-wrapped sqlite ]}
               local cur prev opts db sql
               COMPREPLY=()
               cur="''${COMP_WORDS[COMP_CWORD]}"

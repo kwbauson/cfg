@@ -59,8 +59,8 @@
       homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
       homeConfigurations.non-graphical = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
 
-      homeConfigurations.keith-xps = lib.homeConfigurations.graphical;
-      homeConfigurations.kwbauson = lib.homeConfigurations.non-graphical;
+      homeConfigurations.keith-xps = homeConfigurations.graphical;
+      homeConfigurations.kwbauson = homeConfigurations.non-graphical;
       homeConfigurations.keith-vm = homeConfigurations.graphical;
     };
 }

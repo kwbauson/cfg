@@ -9,13 +9,13 @@ with builtins; with pkgs; with pkgs.mylib; {
             borgbackup bvi bzip2 cacert cachix coreutils-full cowsay curl
             diffutils dos2unix ed fd file findutils gawk gnugrep gnused gnutar
             gzip htop inetutils iproute iputils ldns less libarchive libnotify
-            loop lsof man-pages moreutils nano ncdu netcat-gnu niv nixUnstable
-            nix-bash-completions nix-index nix-info nix-prefetch-github
-            nix-prefetch-scripts nix-tree nmap openssh p7zip patch perl pigz
-            procps progress pv ranger ripgrep rlwrap rsync sd socat strace time
-            unzip usbutils watch wget which xdg_utils xxd xz zip manix
-            better-comma nix-build-uncached bitwarden-cli libqalculate
-            youtube-dl speedtest-cli
+            loop lsof man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped
+            nix-index nix-info nix-prefetch-github nix-prefetch-scripts
+            nix-tree nmap openssh p7zip patch perl pigz procps progress pv
+            ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils
+            watch wget which xdg_utils xxd xz zip manix better-comma
+            nix-build-uncached bitwarden-cli libqalculate youtube-dl
+            speedtest-cli
             ;
         };
         ${attrIf isGraphical "graphical"} = {
