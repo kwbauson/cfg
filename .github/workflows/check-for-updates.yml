@@ -5,19 +5,13 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    name: ${{ matrix.output }}
-    strategy:
-      fail-fast: false
-      matrix:
-        output:
-          - nixosConfigurations.keith-xps.drv
-          - nixosConfigurations.kwbauson.drv
-          - nixosConfigurations.keith-vm.drv
-          - homeConfigurations.graphical
-          - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: 'main'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: nixbuild/nix-quick-install-action@v4
         with:
           nix_version: 3.0pre20200829_f156513
@@ -26,5 +20,5 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - run: nix shell .#nle -c nle update
       - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
-      - run: nix build .#${{ matrix.output }}
