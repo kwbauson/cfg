@@ -11,11 +11,6 @@
     device = "/dev/vda";
   };
 
-  services.nix-serve = {
-    # enable = true;
-    secretKeyFile = "/etc/nixos/cache-key-private.pem";
-  };
-
   nixpkgs.overlays = [
     (self: super: {
       jitsi-meet = super.jitsi-meet.overrideAttrs (attrs: {
@@ -59,7 +54,6 @@
       enable = true;
       hostName = "jitsi.${config.networking.hostName}.${config.networking.domain}";
       config.enableNoisyMicDetection = false;
-      config.p2p.enabled = false;
 
       interfaceConfig = {
         SHOW_JITSI_WATERMARK = false;
@@ -67,14 +61,14 @@
       };
     };
     jitsi-videobridge.openFirewall = true;
-    nginx.virtualHosts.${config.services.jitsi-meet.hostName} = {
-      forceSSL = true;
-      enableACME = true;
-    };
-    prosody = {
-      uploadHttp.domain = "upload.${config.services.jitsi-meet.hostName}";
-      muc = [{ domain = "muc.${config.services.jitsi-meet.hostName}"; }];
-    };
+    # nginx.virtualHosts.${config.services.jitsi-meet.hostName} = {
+    #   forceSSL = true;
+    #   enableACME = true;
+    # };
+    # prosody = {
+    #   uploadHttp.domain = "upload.${config.services.jitsi-meet.hostName}";
+    #   muc = [{ domain = "muc.${config.services.jitsi-meet.hostName}"; }];
+    # };
     hercules-ci-agent.enable = true;
   };
 
