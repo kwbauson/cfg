@@ -26,6 +26,6 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      # - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
+      - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
       - run: |
           [[ -z $(git status --porcelain) ]] && nix build .#${{ matrix.output }} || true
