@@ -17,7 +17,7 @@ jobs:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix shell .#nle -c nle update
-      - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
+      # - run: nix flake update --override-input nixpkgs github:NixOS/nixpkgs
       - uses: peter-evans/create-pull-request@v3
         with:
           delete-branch: true
