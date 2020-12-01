@@ -58,7 +58,6 @@ with builtins; with pkgs; with pkgs.mylib; {
           (alias "nixpkgs-path" "echo ${pkgs.path}")
           (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
           (alias "local_ops" "nix-local-env run -d ~/src/hr/local_ops python dev.py")
-          (alias "discord" "${discord}/bin/Discord")
         ];
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
