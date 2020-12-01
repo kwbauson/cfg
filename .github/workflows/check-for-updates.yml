@@ -1,17 +1,14 @@
 name: Check for updates
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 jobs:
-  build:
+  check:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: 'main'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: peter-evans/create-pull-request@v3
       - uses: nixbuild/nix-quick-install-action@v4
         with:
           nix_version: 3.0pre20200829_f156513
