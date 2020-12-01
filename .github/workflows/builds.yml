@@ -10,8 +10,8 @@ jobs:
           - nixosConfigurations.keith-xps.drv
           - nixosConfigurations.kwbauson.drv
           - nixosConfigurations.keith-vm.drv
-          - homeConfigurations.keith-xps
-          - homeConfigurations.kwbauson
+          - homeConfigurations.graphical
+          - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2

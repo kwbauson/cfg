@@ -56,8 +56,11 @@
       nixosConfigurations.kwbauson = lib.nixosConfiguration "kwbauson";
       nixosConfigurations.keith-vm = lib.nixosConfiguration "keith-vm";
 
-      homeConfigurations.keith-xps = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
-      homeConfigurations.kwbauson = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
-      homeConfigurations.keith-vm = homeConfigurations.keith-xps;
+      homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
+      homeConfigurations.non-graphical = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
+
+      homeConfigurations.keith-xps = lib.homeConfigurations.graphical;
+      homeConfigurations.kwbauson = lib.homeConfigurations.non-graphical;
+      homeConfigurations.keith-vm = homeConfigurations.graphical;
     };
 }
