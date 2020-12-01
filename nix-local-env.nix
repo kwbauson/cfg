@@ -17,6 +17,8 @@ rec {
     selfHash = hashString "sha256" ''
       ${readFile ./nix-local-env.nix}
       ${readFile ./bin/nix-local-env}
+      ${cfg.inputs.nixpkgs.outPath}
+      ${cfg.inputs.mach-nix.outPath}
     '';
     makeScriptText = replaceStrings
       [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
