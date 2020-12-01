@@ -32,6 +32,8 @@
     interfaces.ens3.useDHCP = true;
   };
 
+  services.hercules-ci-agent.enable = true;
+
   services = {
     openssh = {
       enable = true;
