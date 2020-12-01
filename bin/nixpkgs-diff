@@ -2,4 +2,4 @@
 # with-packages git
 set -e
 cd "$(nixpkgs-repo-cache)"
-exec git diff $(nixpkgs-rev)..origin/nixos-unstable
+exec git diff $(nixpkgs-rev)..origin/$(nixpkgs-branch)

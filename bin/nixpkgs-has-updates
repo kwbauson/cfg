@@ -2,5 +2,5 @@
 # with-packages git
 set -e
 cd "$(nixpkgs-repo-cache)"
-new_rev=$(git rev-parse origin/nixos-unstable)
+new_rev=$(git rev-parse origin/$(nixpkgs-branch))
 [[ $(nixpkgs-rev) = $new_rev ]] || echo updates

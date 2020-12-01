@@ -2,7 +2,6 @@
 # with-packages git
 set -e
 cachedir=~/.cache/nixpkgs-repo
-branch=nixos-unstable
 if [[ ! -d $cachedir ]];then
   mkdir -p "$cachedir"
   cd "$cachedir"
@@ -11,5 +10,5 @@ if [[ ! -d $cachedir ]];then
 else
   cd "$cachedir"
 fi
-git fetch origin "$branch" --quiet
+git fetch origin $(nixpkgs-branch) --quiet
 echo "$cachedir"

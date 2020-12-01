@@ -23,6 +23,8 @@
     userName = "Keith Bauson";
     userEmail = "kwbauson@gmail.com";
     nixpkgs-rev = cfg.inputs.nixpkgs.rev;
+    nixpkgs-branch = let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url; in
+      if length urlParts == 3 then elemAt urlParts 2 else "master";
     fakePlatform = x: x.overrideAttrs (attrs:
       { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
     );
