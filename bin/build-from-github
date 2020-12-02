@@ -3,7 +3,7 @@
 set -x
 rev=$1
 output=$2
-link=/tmp/$output_$rev
+link=/tmp/${output}_${rev}
 nix build --tarball-ttl 0 -o $link github:kwbauson/cfg?rev=$rev#$output
 status=$?
 cachix push kwbauson $link
