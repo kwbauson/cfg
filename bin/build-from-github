@@ -5,13 +5,20 @@ ref=${1:-main}
 output=${2:-homeConfigurations.$HOSTNAME}
 link=/tmp/$output
 build=github:kwbauson/cfg?ref=$ref#$output
-buildcmd="nix build -o $link $build"
 if [[ -z $SELF_CALL ]];then
   SELF_CALL=1 exec nix shell $build -c build-from-github "$@"
 else
+  buildcmd="nix build -o $link $build"
   # try multiple builds in case of failure
   $buildcmd --tarball-ttl 0
-  for i in {2..5};do [[ $? = 0 ]] && break || $buildcmd; done
+  for i in {2..5};do
+    if [[ $? = 0 ]];then
+      break
+    else
+      sleep 5
+      $buildcmd
+    fi
+  done
 fi
 status=$?
 [[ $status = 0 ]] && cachix push kwbauson $link
