@@ -70,7 +70,7 @@
       uploadHttp.domain = "upload.${config.services.jitsi-meet.hostName}";
       muc = [{ domain = "muc.${config.services.jitsi-meet.hostName}"; }];
     };
-    hercules-ci-agent.enable = true;
+    # hercules-ci-agent.enable = true;
   };
 
   security.acme = {
