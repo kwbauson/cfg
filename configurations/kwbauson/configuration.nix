@@ -54,6 +54,7 @@
       enable = true;
       hostName = "jitsi.${config.networking.hostName}.${config.networking.domain}";
       config.enableNoisyMicDetection = false;
+      config.p2p.enabled = false;
 
       interfaceConfig = {
         SHOW_JITSI_WATERMARK = false;
