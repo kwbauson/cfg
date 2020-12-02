@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 # with-packages nix-wrapped cachix
 set -x
-rev=${1:-main}
+ref=${1:-main}
 output=${2:-homeConfigurations.$HOSTNAME}
-link=/tmp/${output}_${rev}
-for i in {1..3};do
-  nix build --tarball-ttl 0 -o $link "github:kwbauson/cfg?ref=$rev#$output"
-done
+link=/tmp/${output}_${ref}
+build=github:kwbauson/cfg?ref=$ref#$output
+if [[ -z $SELF_CALL ]];then
+  SELF_CALL=1 nix shell $build -c build-from-github "$@"
+else
+  for i in {1..3};do
+    nix build --tarball-ttl 0 -o $link $build
+  done
+fi
 status=$?
 cachix push kwbauson $link
 exit $status
