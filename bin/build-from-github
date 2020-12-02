@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# with-packages nix-wrapped cachix
+# with-packages nix-wrapped cachix loop
 set -x
-rev=$1
-output=$2
+rev=${1:-main}
+output=${2:-homeConfigurations.$HOSTNAME}
 link=/tmp/${output}_${rev}
-nix build --tarball-ttl 0 -o $link github:kwbauson/cfg?rev=$rev#$output
+loop -n3 -- nix build --tarball-ttl 0 -o $link github:kwbauson/cfg?ref=$rev#$output
 status=$?
 cachix push kwbauson $link
 exit $status
