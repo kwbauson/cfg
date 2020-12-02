@@ -162,10 +162,10 @@
         "homepage": "",
         "owner": "svanderburg",
         "repo": "node2nix",
-        "rev": "52436bba120d78f33bf7432c7147078b2de1b264",
-        "sha256": "0j1bfl5klvpl73bnmkj10z6lgjizm4b3q62nfknqdxiifs3sp3rp",
+        "rev": "d1d67a28de03a09bcb24cadce004e79f973ba49f",
+        "sha256": "17vll9jrdy4asnjm6kva7y4giwl9859xms1xcazx4g41qkv58rb8",
         "type": "tarball",
-        "url": "https://github.com/svanderburg/node2nix/archive/52436bba120d78f33bf7432c7147078b2de1b264.tar.gz",
+        "url": "https://github.com/svanderburg/node2nix/archive/d1d67a28de03a09bcb24cadce004e79f973ba49f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {
