@@ -14,9 +14,8 @@ jobs:
           - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04
     steps:
-      - uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: kwbauson.com
-          username: keith
-          key: ${{ secrets.PRIVATE_KEY }}
-          script: build-from-github ${{ github.sha }} ${{ matrix.output }}
+      - name: build on kwbauson.com
+        run: |
+          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh -o StrictHostKeyChecking=no keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
