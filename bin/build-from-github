@@ -11,7 +11,7 @@ if [[ -z $SELF_CALL ]];then
 else
   # try multiple builds in case of failure
   $buildcmd --tarball-ttl 0
-  for i in {2..5};do $buildcmd; done
+  for i in {2..5};do [[ $? = 0 ]] && break || $buildcmd; done
 fi
 status=$?
 [[ $status = 0 ]] && cachix push kwbauson $link
