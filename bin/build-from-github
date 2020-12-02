@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # with-packages nix-wrapped cachix
 set -x
-output=$1
-rev=$2
+rev=$1
+output=$2
 link=/tmp/$output:$rev
 nix build --tarball-ttl 0 -o $link github:kwbauson/cfg?rev=$rev#$output
 status=$?
