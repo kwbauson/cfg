@@ -3,7 +3,7 @@
 set -x
 ref=${1:-main}
 output=${2:-homeConfigurations.$HOSTNAME}
-link=/tmp/${output}_${ref}
+link=/tmp/$output
 build=github:kwbauson/cfg?ref=$ref#$output
 if [[ -z $SELF_CALL ]];then
   SELF_CALL=1 exec nix shell $build -c build-from-github "$@"
