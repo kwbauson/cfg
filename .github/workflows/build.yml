@@ -18,5 +18,6 @@ jobs:
       - run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          echo 'kwbauson.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHFy+QKGMIQVTDtvQywKbpVSEZuuL9jeepj28kr9oPKK' > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/id_ed25519
           dir=$(ssh keith@kwbauson.com mktemp -d)
