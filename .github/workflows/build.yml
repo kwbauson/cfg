@@ -22,6 +22,6 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
 
           dir=$(ssh keith@kwbauson.com mktemp -d /tmp/cfg.XXXXXX)
-          scp -r . keith@kwbauson.com:$dir/cfg
+          scp -r $PWD keith@kwbauson.com:$dir/cfg
           ssh keith@kwbauson.com nix build $dir/cfg#${{ matrix.output }}
           ssh keith@kwbauson.com rm -rf $dir
