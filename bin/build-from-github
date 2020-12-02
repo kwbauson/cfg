@@ -10,7 +10,9 @@ if [[ -z $SELF_CALL ]];then
 else
   # try multiple builds in case of failure
   nix build --tarball-ttl 0 -o $link $build
-  nix build -o $link $build
+  for i in {2..5};do
+    nix build -o $link $build
+  done
 fi
 status=$?
 [[ $status = 0 ]] && cachix push kwbauson $link
