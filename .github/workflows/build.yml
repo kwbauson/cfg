@@ -16,7 +16,5 @@ jobs:
     steps:
       - name: build on kwbauson.com
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh -o StrictHostKeyChecking=no keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
+          echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 key
+          ssh -i key -o StrictHostKeyChecking=no keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
