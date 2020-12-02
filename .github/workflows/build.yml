@@ -19,4 +19,4 @@ jobs:
           host: kwbauson.com
           username: keith
           key: ${{ secrets.PRIVATE_KEY }}
-          script: nix --tarball-ttl 0 --no-link github:kwbauson/cfg?rev=${{ github.sha }}#${{ matrix.output }}
+          script: nix --tarball-ttl 0 build --no-link github:kwbauson/cfg?rev=${{ github.sha }}#${{ matrix.output }}
