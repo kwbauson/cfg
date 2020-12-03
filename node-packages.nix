@@ -193,13 +193,13 @@ let
         sha512 = "N8eg6lgEnPFKwKiFw1G0ukM0qrJt5WZ1KN2naaoZoBjeH30JsmvGIb/ENW1Wf8rVme4Ydj8n4tdlSxija7Pa+w==";
       };
     };
-    "coc-pyright-1.1.87" = {
+    "coc-pyright-1.1.91" = {
       name = "coc-pyright";
       packageName = "coc-pyright";
-      version = "1.1.87";
+      version = "1.1.91";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.87.tgz";
-        sha512 = "cMIFSFLTy/ltRRFqfLZgVoPVg/AtVRn4ondeucMLuvk3l93KxYYqcm3gX/57ddzZIz1BTHoRrvEt9JRwm+8O2A==";
+        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.91.tgz";
+        sha512 = "06neBJq4/YBDo8OIBnzaOhigJSOD7LL9qkMQrFUk2XMS8G2+L5mg/Mrzg0PrBmw6TKk4p8pGa+HhSjjuhUQKBA==";
       };
     };
     "concat-map-0.0.1" = {
@@ -218,6 +218,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/cp-file/-/cp-file-6.2.0.tgz";
         sha512 = "fmvV4caBnofhPe8kOcitBwSn2f39QLjnAnGq3gO9dfd75mUytzKNZB1hde6QHunW2Rt+OwuBOMc3i1tNElbszA==";
+      };
+    };
+    "create-require-1.1.1" = {
+      name = "create-require";
+      packageName = "create-require";
+      version = "1.1.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz";
+        sha512 = "dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==";
       };
     };
     "cross-spawn-async-2.2.5" = {
@@ -904,13 +913,13 @@ let
         sha1 = "f052a28da70e618917ef0a8ac34c1ae5a68286b3";
       };
     };
-    "pyright-1.1.88" = {
+    "pyright-1.1.91" = {
       name = "pyright";
       packageName = "pyright";
-      version = "1.1.88";
+      version = "1.1.91";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.88.tgz";
-        sha512 = "1bjnvqNd5xlqTzlwr1W0/WLj+fKItMpQuBr2fvI3OPnWz5iRNcIdj30pR5yCP5ddThSW8xHjQmutf/aked2I8w==";
+        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.91.tgz";
+        sha512 = "9oyA7kcBMF1vIazyCRWAzatxj/99acmEbuCPhFY1x6hvVhHb8RGiKDwix4FNeEhVI0Rm7+Gr69cv9ymmk3JYoA==";
       };
     };
     "read-pkg-1.1.0" = {
@@ -1156,13 +1165,13 @@ let
         sha1 = "5887966bb582a4503a41eb524f7d35011815a613";
       };
     };
-    "ts-node-9.0.0" = {
+    "ts-node-9.1.0" = {
       name = "ts-node";
       packageName = "ts-node";
-      version = "9.0.0";
+      version = "9.1.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ts-node/-/ts-node-9.0.0.tgz";
-        sha512 = "/TqB4SnererCDR/vb4S/QvSZvzQMJN8daAslg7MeaiHvD8rDZsSfXmNeNumyZZzMned72Xoq/isQljYSt8Ynfg==";
+        url = "https://registry.npmjs.org/ts-node/-/ts-node-9.1.0.tgz";
+        sha512 = "0yqcL4sgruCvM+w64LiAfNJo6+lHfCYc5Ajj4yiLNkJ9oZ2HWaa+Kso7htYOOxVQ7+csAjdUjffOe9PIqC4pMg==";
       };
     };
     "ts-node-dev-1.0.0" = {
@@ -1309,7 +1318,7 @@ let
       sources."chokidar-3.4.3"
       sources."clean-stack-2.2.0"
       sources."coc-explorer-0.11.4"
-      sources."coc-pyright-1.1.87"
+      sources."coc-pyright-1.1.91"
       sources."concat-map-0.0.1"
       (sources."cp-file-6.2.0" // {
         dependencies = [
@@ -1318,6 +1327,7 @@ let
           sources."semver-5.7.1"
         ];
       })
+      sources."create-require-1.1.1"
       sources."cross-spawn-async-2.2.5"
       sources."currently-unhandled-0.4.1"
       sources."dateformat-1.0.12"
@@ -1405,7 +1415,7 @@ let
       sources."pinkie-2.0.4"
       sources."pinkie-promise-2.0.1"
       sources."pseudomap-1.0.2"
-      sources."pyright-1.1.88"
+      sources."pyright-1.1.91"
       (sources."read-pkg-1.1.0" // {
         dependencies = [
           sources."path-type-1.1.0"
@@ -1440,7 +1450,7 @@ let
       sources."trash-6.1.1"
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
-      sources."ts-node-9.0.0"
+      sources."ts-node-9.1.0"
       sources."ts-node-dev-1.0.0"
       (sources."tsconfig-7.0.0" // {
         dependencies = [
