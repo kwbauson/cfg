@@ -10,5 +10,6 @@ if [[ ! -d $cachedir ]];then
 else
   cd "$cachedir"
 fi
-git fetch origin $(nixpkgs-branch) --quiet
+ref=${1:-$(nixpkgs-branch)}
+git fetch origin $ref --quiet
 echo "$cachedir"
