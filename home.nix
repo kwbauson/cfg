@@ -127,6 +127,7 @@ with builtins; with pkgs; with pkgs.mylib; {
       historyFileSize = -1;
       historySize = -1;
       shellAliases = {
+        gh = "GITHUB_TOKEN= gh";
         l = "ls -lh";
         ll = "l -a";
         ls = "ls --color=auto";
