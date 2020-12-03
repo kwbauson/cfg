@@ -56,14 +56,20 @@ rec {
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
-        addBuildInputs = (n: extraInputs: attrs: gemConfigOf n //
-          (
-            if isList extraInputs
-            then { buildInputs = attrs.buildInputs or [ ] ++ extraInputs; }
-            else extraInputs (gemConfigOf n)
-          ));
-        gemConfigOf = n: (defaultGemConfig.${n} or (_: { })) { };
-        env = with nixpkgs-bundler1; bundlerEnv {
+        locktext = readFile (file "Gemfile.lock");
+        latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
+        hasLatestBundler = hasSuffix latestBundlerMark locktext;
+        namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
+        env = with namespace; let
+          addBuildInputs = (n: extraInputs: attrs: gemConfigOf n //
+            (
+              if isList extraInputs
+              then { buildInputs = attrs.buildInputs or [ ] ++ extraInputs; }
+              else extraInputs (gemConfigOf n)
+            ));
+          gemConfigOf = n: (defaultGemConfig.${n} or (_: { })) { };
+        in
+        bundlerEnv {
           name = "bundler-env";
           gemfile = file "Gemfile";
           lockfile = file "Gemfile.lock";

@@ -17,4 +17,5 @@ jobs:
       - name: build on kwbauson.com
         run: |
           echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 key
-          ssh -i key -o StrictHostKeyChecking=no keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
+          ssh -i key -o StrictHostKeyChecking=no -o ServerAliveInterval=15 \
+            keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
