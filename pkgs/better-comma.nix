@@ -5,8 +5,19 @@ pkgs: with pkgs; with mylib; buildEnv {
       writeShellScriptBin ","
         ''
           ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
+          set -e
           cmd=$1
+          if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
+            echo usage: , COMMAND ARGS
+            exit
+          fi
           db=$(nix-instantiate --eval --expr '<nixpkgs>' 2> /dev/null)/programs.sqlite
+          if [[ ! -e $db ]];then
+            echo "$db file not found"
+            echo currently you need to be following one of the `nixos` channels
+            echo hopefully this will be fixed in the future
+            exit 1
+          fi
           sql="select distinct package from Programs where name = '$cmd'"
           packages=$(sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)
 
