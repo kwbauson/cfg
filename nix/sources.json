@@ -120,6 +120,18 @@
         "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "inlets": {
+        "branch": "master",
+        "description": "Cloud Native Tunnel for APIs",
+        "homepage": "https://docs.inlets.dev",
+        "owner": "inlets",
+        "repo": "inlets",
+        "rev": "65e9928fa675a215c02fc3cc8c60f2e93e618b99",
+        "sha256": "1ninwaavv9w0dmh4ig54yhinhw0jycpz7rc5qn1b610cz48ajrgz",
+        "type": "tarball",
+        "url": "https://github.com/inlets/inlets/archive/65e9928fa675a215c02fc3cc8c60f2e93e618b99.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "jsonc.vim": {
         "branch": "master",
         "description": "jsonc syntax support for vim",
