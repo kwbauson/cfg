@@ -358,6 +358,23 @@ with builtins; with pkgs; with pkgs.mylib; {
     mpv.enable = isGraphical;
     qutebrowser = {
       enable = isGraphical;
+      aliases = {
+        h = "help";
+        q = "quit";
+        w = "session-save";
+        wq = "quit --save";
+      };
+      searchEngines = {
+        DEFAULT = "https://www.google.com/search?q={}";
+        aur = "https://aur.archlinux.org/packages/?K={}";
+        aw = "https://wiki.archlinux.org/index.php?search={}";
+        g = "https://www.google.com/search?q={}";
+        nw = "https://nixos.wiki/index.php?search={}&go=Go";
+        tv = "https://www.google.com/search?q=site:tvtropes.org+{}";
+        w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
+        yt = "http://www.youtube.com/results?search_query={}";
+        b = "https://www.biblegateway.com/passage/?version=NLT&search={}";
+      };
       extraConfig = readFile ./qutebrowser-config.py;
     };
   };

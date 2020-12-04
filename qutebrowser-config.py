@@ -1,10 +1,4 @@
 config.load_autoconfig()
-c.aliases = {
-    'h': 'help',
-    'q': 'quit',
-    'w': 'session-save',
-    'wq': 'quit --save',
-}
 c.confirm_quit = ['downloads']
 c.new_instance_open_target = 'window'
 c.session.default_name = 'default'
@@ -33,17 +27,6 @@ c.tabs.show = 'multiple'
 c.tabs.tabs_are_windows = True
 c.url.default_page = 'about:blank'
 c.url.open_base_url = True
-c.url.searchengines = {
-    'DEFAULT': 'https://www.google.com/search?q={}',
-    'aur': 'https://aur.archlinux.org/packages/?K={}',
-    'aw': 'https://wiki.archlinux.org/index.php?search={}',
-    'g': 'https://www.google.com/search?q={}',
-    'nw': 'https://nixos.wiki/index.php?search={}&go=Go',
-    'tv': 'https://www.google.com/search?q=site:tvtropes.org+{}',
-    'w': 'https://en.wikipedia.org/wiki/Special:Search?search={}',
-    'yt': 'http://www.youtube.com/results?search_query={}',
-    'b': 'https://www.biblegateway.com/passage/?version=NLT&search={}',
-}
 c.url.start_pages = ['about:blank']
 c.window.title_format = '{perc}{current_title}'
 c.colors.webpage.prefers_color_scheme_dark = True
@@ -76,6 +59,7 @@ config.bind('c', 'tab-clone')
 config.bind('gb', 'open qute:bookmarks')
 config.bind('gp', 'spawn -u login-fill')
 config.bind('gq', 'open https://github.com/qutebrowser/qutebrowser/commits/master')
+config.bind('gc', 'open https://github.com/kwbauson/cfg')
 config.bind('gs', 'set')
 config.bind('gv', 'open qute:version')
 config.bind('h', 'scroll-px -40 0')
