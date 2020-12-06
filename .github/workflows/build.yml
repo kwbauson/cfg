@@ -15,4 +15,6 @@ jobs:
     runs-on: ubuntu-20.04
     container: kwbauson/build-cfg:latest
     steps:
-      - run: build-from-github ${{ github.sha }} ${{ matrix.output }}
+      - name: build ${{ matrix.output }}
+        run: |
+          nix build github:kwbauson/cfg?ref=${{ github.sha }}#${{ matrix.output }}
