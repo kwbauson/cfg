@@ -5,10 +5,7 @@ ref=${1:-main}
 output=${2:-homeConfigurations.$(hostname -s)}
 link=/tmp/$output
 build=github:kwbauson/cfg?ref=$ref#$output
-lock=/tmp/building-from-github
 if [[ -z $SELF_CALL ]];then
-  for i in {1..10};do sleep 5; [[ ! -e $lock ]] && break;done
-  touch $lock
   SELF_CALL=1 exec nix shell $build -c build-from-github "$@"
 else
   buildcmd="nix build -o $link $build"
@@ -25,5 +22,4 @@ else
 fi
 status=$?
 [[ $status = 0 ]] && cachix push kwbauson $link
-rm -f $lock
 exit $status

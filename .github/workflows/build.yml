@@ -13,9 +13,6 @@ jobs:
           - homeConfigurations.graphical
           - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04
+    container: kwbauson/build-cfg:latest
     steps:
-      - name: build on kwbauson.com
-        run: |
-          echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 key
-          ssh -i key -o StrictHostKeyChecking=no -o ServerAliveInterval=15 \
-            keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
+      - run: build-from-github ${{ github.sha }} ${{ matrix.output }}

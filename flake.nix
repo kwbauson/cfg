@@ -69,5 +69,18 @@
         username = "keithbauson";
         homeDirectory = "/Users/keithbauson";
       };
+
+      build-cfg-image = with self.packages.x86_64-linux; dockerTools.buildLayeredImage {
+        name = "kwbauson/build-cfg";
+        tag = "latest";
+        contents = [
+          dockerTools.binSh
+          "${nixosConfigurations.keith-xps.drv}/sw"
+          "${nixosConfigurations.kwbauson.drv}/sw"
+          "${nixosConfigurations.keith-vm.drv}/sw"
+          # "${homeConfigurations.graphical}/home-path"
+          "${homeConfigurations.non-graphical}/home-path"
+        ];
+      };
     };
 }
