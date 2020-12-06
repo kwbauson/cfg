@@ -30,8 +30,9 @@
     );
     excludeLines = f: text: concatStringsSep "\n" (filter (x: !f x) (splitString "\n" text));
     unpack = src: stdenv.mkDerivation {
-      inherit src;
-      inherit (src) name;
+      src = if src ? url && src ? sha256 then fetchurl { inherit (src) url sha256; } else src;
+      name = src.name or "source";
+      phases = [ "unpackPhase" "installPhase" ];
       installPhase = ''
         mkdir $out
         mv * $out
@@ -88,6 +89,7 @@
     inherit (sources) nixos-18_09 nixpkgs-bundler1;
   })
   (self: super: with super; with mylib; {
+    programs-sqlite = copyPath "${unpack sources.nixos-unstable-channel}/programs.sqlite";
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [

@@ -22,7 +22,7 @@
     , flake-utils
     , home-manager
     , ...
-    }: flake-utils.lib.eachDefaultSystem (system: rec {
+    }@inputs: flake-utils.lib.eachDefaultSystem (system: rec {
 
       packages = import nixpkgs {
         inherit system;
@@ -35,7 +35,7 @@
         nixosConfiguration = hostname: (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = let module = import (./configurations + "/${hostname}/configuration.nix"); in
-            [ ({ pkgs, config, ... }@args: module (self.inputs // args)) ];
+            [ ({ pkgs, config, ... }@args: module (inputs // args)) ];
         }) // { drv = (lib.nixosConfiguration hostname).config.system.build.toplevel; };
         homeConfiguration =
           { system ? "x86_64-linux"
@@ -51,6 +51,8 @@
             inherit system pkgs username homeDirectory;
           }).activationPackage;
       };
+
+      inherit (self.packages.x86_64-linux) programs-sqlite;
 
       nixosConfigurations.keith-xps = lib.nixosConfiguration "keith-xps";
       nixosConfigurations.kwbauson = lib.nixosConfiguration "kwbauson";

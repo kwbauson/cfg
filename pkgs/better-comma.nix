@@ -11,15 +11,8 @@ pkgs: with pkgs; with mylib; buildEnv {
             echo usage: , COMMAND ARGS
             exit
           fi
-          db=$(nix-instantiate --eval --expr '<nixpkgs>' 2> /dev/null)/programs.sqlite
-          if [[ ! -e $db ]];then
-            echo "$db file not found"
-            echo currently you need to be following one of the `nixos` channels
-            echo hopefully this will be fixed in the future
-            exit 1
-          fi
           sql="select distinct package from Programs where name = '$cmd'"
-          packages=$(sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)
+          packages=$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)
 
           if [[ $(echo "$packages" | wc -l) = 1 ]];then
             if [[ -z $packages ]];then
@@ -41,16 +34,15 @@ pkgs: with pkgs; with mylib; buildEnv {
         ''
           _better-comma()
           {
-              ${pathAdd [ nix-wrapped sqlite ]}
-              local cur prev opts db sql
+              ${pathAdd [ sqlite ]}
+              local cur prev opts sql
               COMPREPLY=()
               cur="''${COMP_WORDS[COMP_CWORD]}"
               prev="''${COMP_WORDS[COMP_CWORD-1]}"
-              db=$(nix-instantiate --eval --expr '<nixpkgs>' 2> /dev/null)/programs.sqlite
               sql="select distinct name from Programs where name like '$cur%' order by name"
 
               if [[ $COMP_CWORD = 1 ]];then
-                COMPREPLY=( $(compgen -W "$(sqlite3 -init /dev/null "$db" "$sql" 2> /dev/null)" -- "$cur") )
+                COMPREPLY=( $(compgen -W "$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)" -- "$cur") )
               else
                 COMPREPLY=( $(compgen -f -- "$cur") )
               fi
