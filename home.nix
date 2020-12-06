@@ -139,7 +139,6 @@ with builtins; with pkgs; with pkgs.mylib; {
         rg = "rg --color=always -S --hidden";
         ncdu = "ncdu --color dark -ex";
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
-        noc = prefixIf isNixOS "sudo " "nix-channel --update";
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
         ${attrIf isNixOS "nob"} = "git -C ~/cfg a -N && sudo nixos-rebuild boot --flake ~/cfg";
         ${attrIf isNixOS "nos"} = "git -C ~/cfg a -N && sudo nixos-rebuild switch --flake ~/cfg";
@@ -148,7 +147,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         hme = "nvim ~/cfg/home.nix && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
         hmp = "git -C ~/cfg cap";
-        nou = "hmg && noc ${optionalString isNixOS "&& nos"} && hms";
+        nou = "hmg && ${optionalString isNixOS "&& nos"} && hms";
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
