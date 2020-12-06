@@ -33,7 +33,7 @@
       IdentityFile /etc/nixos/secrets/nixbuild-id_ed25519
   '';
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = import ../config.nix;
 
   zramSwap = {
     enable = true;
