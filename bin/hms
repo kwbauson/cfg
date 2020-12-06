@@ -4,7 +4,7 @@ tmpdir=$(mktemp -d)
 result="$tmpdir"/result
 cd ~/cfg
 git add . -N
-nix build .#homeConfigurations.$HOSTNAME \
+nix build .#homeConfigurations.$(hostname -s) \
   --out-link "$result" && "$result"/activate
 rm -f "$result"
 rmdir "$tmpdir"

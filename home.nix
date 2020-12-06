@@ -142,7 +142,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
         ${attrIf isNixOS "nob"} = "git -C ~/cfg a -N && sudo nixos-rebuild boot --flake ~/cfg";
         ${attrIf isNixOS "nos"} = "git -C ~/cfg a -N && sudo nixos-rebuild switch --flake ~/cfg";
-        ${attrIf isNixOS "noe"} = "nvim ~/cfg/configurations/$HOSTNAME/configuration.nix && nos";
+        ${attrIf isNixOS "noe"} = "nvim ~/cfg/configurations/$(hostname -s)/configuration.nix && nos";
         hm = "home-manager --keep-going";
         hme = "nvim ~/cfg/home.nix && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
@@ -289,7 +289,7 @@ with builtins; with pkgs; with pkgs.mylib; {
       enable = true;
     };
     urxvt = {
-      enable = isGraphical;
+      enable = !isDarwin && isGraphical;
       extraConfig.reverseVideo = true;
       extraConfig.termName = "xterm-256color";
       fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];

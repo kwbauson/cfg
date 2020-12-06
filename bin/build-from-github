@@ -2,7 +2,7 @@
 # with-packages nix-wrapped cachix
 set -x
 ref=${1:-main}
-output=${2:-homeConfigurations.$HOSTNAME}
+output=${2:-homeConfigurations.$(hostname -s)}
 link=/tmp/$output
 build=github:kwbauson/cfg?ref=$ref#$output
 if [[ -z $SELF_CALL ]];then

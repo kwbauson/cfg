@@ -62,5 +62,12 @@
       homeConfigurations.keith-xps = homeConfigurations.graphical;
       homeConfigurations.kwbauson = homeConfigurations.non-graphical;
       homeConfigurations.keith-vm = homeConfigurations.graphical;
+      homeConfigurations.keith-mac = lib.homeConfiguration {
+        isNixOS = false;
+        isGraphical = true;
+        system = "x86_64-darwin";
+        username = "keithbauson";
+        homeDirectory = "/Users/keithbauson";
+      };
     };
 }

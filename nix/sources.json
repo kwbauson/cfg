@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-alacritty": {
-        "sha256": "0gqqx08nqaldnwz5qdsjqc60wl3rz87b5v7r3crk7j746c357n2n",
+        "sha256": "01lklmv1rlc46b63y9hb5wmiy39l3b6ycnmmvz94bhsb958zanra",
         "type": "file",
-        "url": "https://github.com/alacritty/alacritty/releases/download/v0.6.0-rc1/Alacritty-v0.6.0-rc1.dmg",
+        "url": "https://github.com/alacritty/alacritty/releases/download/v0.6.0/Alacritty-v0.6.0.dmg",
         "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
-        "version": "0.6.0-rc1"
+        "version": "0.6.0"
     },
     "dmg-discord": {
         "sha256": "05v5f02gpl9xcbpah2akmcnix6g1xslgjwas1r1xxvhscxs72ywj",
@@ -64,18 +64,18 @@
         "version": "83.0"
     },
     "dmg-qutebrowser": {
-        "sha256": "03d5bf5lpxyphi0ri6ykh7dr6izsikk22ivh6mh09q0a2y0kdf44",
+        "sha256": "1a4pakpn39pq72bgkqd1f1rik139c0shjfszxh1iqn7fb3dqrqmj",
         "type": "file",
-        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v1.14.0/qutebrowser-1.14.0.dmg",
+        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v1.14.1/qutebrowser-1.14.1.dmg",
         "url_template": "https://github.com/qutebrowser/qutebrowser/releases/download/v<version>/qutebrowser-<version>.dmg",
-        "version": "1.14.0"
+        "version": "1.14.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "1vf3rzzs8imbg3nmxikhqi48asldwv00wpmhvbisqn1bbrbias5x",
+        "sha256": "0bxmbc2n76jai18ri7dpkv4zl6z8rladfl2kqg46bis64kq36jf6",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.38.1.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.38.2.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "1.38.1"
+        "version": "1.38.2"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
