@@ -1,5 +1,6 @@
 {
   inputs = {
+    nix.url = "github:NixOS/nix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager.url = "github:nix-community/home-manager";
@@ -31,11 +32,11 @@
       };
 
     }) // rec {
-      lib = {
+      lib = rec {
+        callModule = path: { pkgs, config, ... }@args: import path (inputs // args);
         nixosConfiguration = hostname: (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = let module = import (./configurations + "/${hostname}/configuration.nix"); in
-            [ ({ pkgs, config, ... }@args: module (inputs // args)) ];
+          modules = [ (callModule (./configurations + "/${hostname}/configuration.nix")) ];
         }) // { drv = (lib.nixosConfiguration hostname).config.system.build.toplevel; };
         homeConfiguration =
           { system ? "x86_64-linux"

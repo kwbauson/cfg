@@ -1,8 +1,8 @@
-{ pkgs, config, ... }:
+{ pkgs, config, self, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    ../common.nix
+    (self.lib.callModule ../common.nix)
   ];
 
   boot.loader.grub = {

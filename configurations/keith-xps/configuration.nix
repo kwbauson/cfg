@@ -6,7 +6,7 @@ with builtins;
     nixos-hardware.nixosModules.common-pc-laptop
     nixos-hardware.nixosModules.common-pc-laptop-ssd
     ./hardware-configuration.nix
-    ../common.nix
+    (self.lib.callModule ../common.nix)
   ];
 
   boot.blacklistedKernelModules = [ "psmouse" ];
@@ -35,5 +35,4 @@ with builtins;
   users.users.keith.passwordFile = "/etc/nixos/secrets/keith-password";
   users.users.root.passwordFile = "/etc/nixos/secrets/root-password";
   programs.steam.enable = true;
-  programs.command-not-found.dbPath = self.programs-sqlite;
 }

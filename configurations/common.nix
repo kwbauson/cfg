@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, self, ... }:
 {
   boot = {
     loader = {
@@ -13,7 +13,7 @@
     tmpOnTmpfs = true;
   };
 
-  nix.package = pkgs.nixUnstable;
+  nix.package = self.packages.${pkgs.system}.nixUnstable;
   nix.extraOptions = ''
     extra-experimental-features = nix-command flakes
     extra-substituters = https://kwbauson.cachix.org
@@ -80,4 +80,5 @@
 
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.03";
+  programs.command-not-found.dbPath = self.programs-sqlite;
 }

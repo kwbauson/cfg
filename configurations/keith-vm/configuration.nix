@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../common.nix
+    (self.lib.callModule ../common.nix)
   ];
 
   networking.hostName = "keith-vm";
@@ -11,5 +11,4 @@
   hardware.pulseaudio.enable = true;
   virtualisation.docker.enable = true;
   programs.steam.enable = true;
-  programs.command-not-found.dbPath = self.programs-sqlite;
 }

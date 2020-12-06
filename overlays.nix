@@ -90,13 +90,14 @@
   })
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${unpack sources.nixos-unstable-channel}/programs.sqlite";
+    nixMaster = cfg.inputs.nix.defaultPackage.${system};
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [
         nixUnstable
         (
           writeShellScriptBin "nix" ''
-            ${pathAdd nixUnstable}
+            ${pathAdd self.nixMaster}
             exec nix \
               --keep-going \
               --extra-experimental-features 'nix-command flakes' \
