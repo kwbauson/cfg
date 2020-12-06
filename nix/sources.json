@@ -156,6 +156,13 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/a7e559a5504572008567383c3dc8e142fa7a8633.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixos-unstable-channel": {
+        "sha256": "1p98g58h2f68x9klplawwb7j2phpxyrdvdk00ld65vw3whydicy7",
+        "type": "file",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre256292.296793637b2/nixexprs.tar.xz",
+        "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
+        "version": "nixos-21.03pre256292.296793637b2"
+    },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
         "description": "Nix Packages collection",

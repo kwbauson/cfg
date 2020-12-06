@@ -131,6 +131,7 @@ case $cmd in
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   update)
+    [[ -x update-helper ]] && ./update-helper
     if [[ -e package.json && -e package-lock.json ]];then
       if ! ncu -e2;then
         ncu -u

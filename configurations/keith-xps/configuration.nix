@@ -1,4 +1,4 @@
-{ pkgs, nixos-hardware, ... }:
+{ pkgs, nixos-hardware, self, ... }:
 with builtins;
 {
   imports = [
@@ -35,4 +35,5 @@ with builtins;
   users.users.keith.passwordFile = "/etc/nixos/secrets/keith-password";
   users.users.root.passwordFile = "/etc/nixos/secrets/root-password";
   programs.steam.enable = true;
+  programs.command-not-found.dbPath = self.programs-sqlite;
 }

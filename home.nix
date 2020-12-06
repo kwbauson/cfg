@@ -121,6 +121,7 @@ with builtins; with pkgs; with pkgs.mylib; {
     home-manager.enable = true;
     home-manager.path = cfg.inputs.home-manager.outPath;
     command-not-found.enable = true;
+    command-not-found.dbPath = programs-sqlite;
     bash = {
       enable = true;
       inherit (config.home) sessionVariables;

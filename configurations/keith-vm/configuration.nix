@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, self, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -11,4 +11,5 @@
   hardware.pulseaudio.enable = true;
   virtualisation.docker.enable = true;
   programs.steam.enable = true;
+  programs.command-not-found.dbPath = self.programs-sqlite;
 }
