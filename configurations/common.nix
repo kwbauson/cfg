@@ -13,7 +13,7 @@
     tmpOnTmpfs = true;
   };
 
-  nix.package = self.packages.${pkgs.system}.nixUnstable;
+  nix.package = self.packages.${pkgs.system}.nixMaster;
   nix.extraOptions = ''
     extra-experimental-features = nix-command flakes
     extra-substituters = https://kwbauson.cachix.org

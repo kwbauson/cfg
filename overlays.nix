@@ -88,16 +88,16 @@
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-18_09 nixpkgs-bundler1;
   })
+  (self: super: with super; { nixMaster = cfg.inputs.nix.defaultPackage.${system}; })
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${unpack sources.nixos-unstable-channel}/programs.sqlite";
-    nixMaster = cfg.inputs.nix.defaultPackage.${system};
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [
-        nixUnstable
-        (
+        nixMaster
+        (hiPrio (
           writeShellScriptBin "nix" ''
-            ${pathAdd self.nixMaster}
+            ${pathAdd nixMaster}
             exec nix \
               --keep-going \
               --extra-experimental-features 'nix-command flakes' \
@@ -105,7 +105,7 @@
               --extra-trusted-public-keys 'kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=' \
               "$@"
           ''
-        )
+        ))
       ];
     };
     factorio = factorio.override {
