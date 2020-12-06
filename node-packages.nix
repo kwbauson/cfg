@@ -913,13 +913,13 @@ let
         sha1 = "f052a28da70e618917ef0a8ac34c1ae5a68286b3";
       };
     };
-    "pyright-1.1.91" = {
+    "pyright-1.1.92" = {
       name = "pyright";
       packageName = "pyright";
-      version = "1.1.91";
+      version = "1.1.92";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.91.tgz";
-        sha512 = "9oyA7kcBMF1vIazyCRWAzatxj/99acmEbuCPhFY1x6hvVhHb8RGiKDwix4FNeEhVI0Rm7+Gr69cv9ymmk3JYoA==";
+        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.92.tgz";
+        sha512 = "kL6c2wafnJgbXmG2Svz9isAhAMWARnmMiUGBRytcdVsse11crLDzaWusegA4P6sTweoHMcT3+P8fmLv2Av1u/Q==";
       };
     };
     "read-pkg-1.1.0" = {
@@ -1075,13 +1075,13 @@ let
         sha512 = "cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==";
       };
     };
-    "spdx-license-ids-3.0.6" = {
+    "spdx-license-ids-3.0.7" = {
       name = "spdx-license-ids";
       packageName = "spdx-license-ids";
-      version = "3.0.6";
+      version = "3.0.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz";
-        sha512 = "+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==";
+        url = "https://registry.npmjs.org/spdx-license-ids/-/spdx-license-ids-3.0.7.tgz";
+        sha512 = "U+MTEOO0AiDzxwFvoa4JVnMV6mZlJKk2sBLt90s7G0Gd0Mlknc7kxEn3nuDPNZRta7O2uy8oLcZLVT+4sqNZHQ==";
       };
     };
     "strip-bom-2.0.0" = {
@@ -1415,7 +1415,7 @@ let
       sources."pinkie-2.0.4"
       sources."pinkie-promise-2.0.1"
       sources."pseudomap-1.0.2"
-      sources."pyright-1.1.91"
+      sources."pyright-1.1.92"
       (sources."read-pkg-1.1.0" // {
         dependencies = [
           sources."path-type-1.1.0"
@@ -1441,7 +1441,7 @@ let
       sources."spdx-correct-3.1.1"
       sources."spdx-exceptions-2.3.0"
       sources."spdx-expression-parse-3.0.1"
-      sources."spdx-license-ids-3.0.6"
+      sources."spdx-license-ids-3.0.7"
       sources."strip-bom-2.0.0"
       sources."strip-eof-1.0.0"
       sources."strip-indent-1.0.1"
