@@ -403,7 +403,6 @@ with builtins; with pkgs; with pkgs.mylib; {
       "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
       ${attrIf isDarwin "nix/nix.conf"}.text = ''
         max-jobs = auto
-        experimental-features = nix-command flakes
         builders-use-substitutes = true
         builders = ssh://keith@kwbauson.com x86_64-linux
       '';
