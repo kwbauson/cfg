@@ -28,7 +28,7 @@
     supportedFeatures = [ "benchmark" "big-parallel" ];
   }];
   programs.ssh.extraConfig = ''
-    Host eu.nixbuild.net
+    Host beta.nixbuild.net
       PubkeyAcceptedKeyTypes ssh-ed25519
       IdentityFile /root/.ssh/id_ed25519
   '';
