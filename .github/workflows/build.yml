@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
         with:
-          nix_version: 2.4pre20201201_5a6ddb3
+          nix_version: 3.0pre20200829_f156513
           nix_conf: experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v8
         with:
