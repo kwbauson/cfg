@@ -112,7 +112,8 @@
       username = "kwbauson";
       token = readFile ./secrets/factorio-token;
     };
-    qutebrowser = qutebrowser.overrideAttrs (
+    python3 = python3 // { pkgs = python3.pkgs // { inherit (nixos-unstable-channel.python3.pkgs) tldextract nix-prefetch-github llfuse; }; };
+    qutebrowser = nixos-unstable-channel.qutebrowser.overrideAttrs (
       attrs: {
         patches = attrs.patches or [ ] ++ [ ./qutebrowser-background.patch ];
         propagatedBuildInputs = attrs.propagatedBuildInputs or [ ] ++ [ python3Packages.colorama ];
