@@ -34,8 +34,7 @@
       name = src.name or "source";
       phases = [ "unpackPhase" "installPhase" ];
       installPhase = ''
-        mkdir $out
-        mv * $out
+        mv $PWD $out
       '';
     };
     nixLocalEnv = import ./nix-local-env.nix { path = ./.; inherit pkgs; };
@@ -84,13 +83,14 @@
     copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
     nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
     pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
+    nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
   } // builtins))
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-18_09 nixpkgs-bundler1;
   })
   (self: super: with super; { nixMaster = cfg.inputs.nix.defaultPackage.${system}; })
   (self: super: with super; with mylib; {
-    programs-sqlite = copyPath "${unpack sources.nixos-unstable-channel}/programs.sqlite";
+    programs-sqlite = copyPath "${nixos-unstable-channel.path}/programs.sqlite";
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [

@@ -90,10 +90,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "898680369f7d9fc5702fa992fc6dbc8bc28ef1dc",
-        "sha256": "15d84rh1pk5wn0w31fv83nw21xxvih6pjsky378zhvc1x8q8w9cl",
+        "rev": "52d0e27deedeb680a3198e26c97137318e89588b",
+        "sha256": "0whbzjb3828a5ljca36bfpbwrj5rqmb9f9lnsdff0pazdqjfck02",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/898680369f7d9fc5702fa992fc6dbc8bc28ef1dc.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/52d0e27deedeb680a3198e26c97137318e89588b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -161,7 +161,7 @@
         "type": "file",
         "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre256292.296793637b2/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.03pre256292.296793637b2"
+        "version": "nixos-21.03pre257339.83cbad92d73"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
