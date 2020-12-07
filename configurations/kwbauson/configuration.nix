@@ -11,6 +11,7 @@
     device = "/dev/vda";
   };
 
+  nix.distributedBuilds = true;
   nixpkgs.overlays = [
     (self: super: {
       jitsi-meet = super.jitsi-meet.overrideAttrs (attrs: {
