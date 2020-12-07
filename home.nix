@@ -131,7 +131,7 @@ with builtins; with pkgs; with pkgs.mylib; {
         gh = "GITHUB_TOKEN= gh";
         l = "ls -lh";
         ll = "l -a";
-        ls = "ls --color=auto";
+        ls = "ls --color=auto --group-directories-first";
         file = "file -s";
         sudo = "sudo ";
         su = "sudo su";
