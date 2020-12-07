@@ -1165,13 +1165,13 @@ let
         sha1 = "5887966bb582a4503a41eb524f7d35011815a613";
       };
     };
-    "ts-node-9.1.0" = {
+    "ts-node-9.1.1" = {
       name = "ts-node";
       packageName = "ts-node";
-      version = "9.1.0";
+      version = "9.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ts-node/-/ts-node-9.1.0.tgz";
-        sha512 = "0yqcL4sgruCvM+w64LiAfNJo6+lHfCYc5Ajj4yiLNkJ9oZ2HWaa+Kso7htYOOxVQ7+csAjdUjffOe9PIqC4pMg==";
+        url = "https://registry.npmjs.org/ts-node/-/ts-node-9.1.1.tgz";
+        sha512 = "hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==";
       };
     };
     "ts-node-dev-1.0.0" = {
@@ -1450,7 +1450,7 @@ let
       sources."trash-6.1.1"
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
-      sources."ts-node-9.1.0"
+      sources."ts-node-9.1.1"
       sources."ts-node-dev-1.0.0"
       (sources."tsconfig-7.0.0" // {
         dependencies = [
