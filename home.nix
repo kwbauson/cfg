@@ -355,6 +355,7 @@ with builtins; with pkgs; with pkgs.mylib; {
       '';
     };
     vscode.enable = isGraphical;
+    vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
     mpv.enable = isGraphical;
     qutebrowser = {
       enable = isGraphical;

@@ -10,8 +10,8 @@
     "yaml",
     "typescript",
     "typescriptreact",
-    "javascript",
-    "javascript.jsx",
+    /* "javascript", */
+    /* "javascript.jsx", */
     "nix"
   ],
   "list.insertMappings": {
