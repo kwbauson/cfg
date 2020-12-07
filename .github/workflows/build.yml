@@ -13,9 +13,15 @@ jobs:
           - homeConfigurations.graphical
           - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04
     steps:
-      - name: build on kwbauson.com
-        run: |
-          echo "${{ secrets.PRIVATE_KEY }}" > key && chmod 600 key
-          ssh -i key -o StrictHostKeyChecking=no -o ServerAliveInterval=15 \
-            keith@kwbauson.com build-from-github ${{ github.sha }} ${{ matrix.output }}
+      - uses: actions/checkout@v2
+      - uses: nixbuild/nix-quick-install-action@v4
+        with:
+          nix_version: 2.4pre20201201_5a6ddb3
+          nix_conf: experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v8
+        with:
+          name: kwbauson
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - run: nix build .#${{ matrix.output }}
