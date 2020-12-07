@@ -30,7 +30,7 @@
   programs.ssh.extraConfig = ''
     Host eu.nixbuild.net
       PubkeyAcceptedKeyTypes ssh-ed25519
-      IdentityFile /etc/nixos/secrets/nixbuild-id_ed25519
+      IdentityFile /root/.ssh/id_ed25519
   '';
 
   nixpkgs.config = import ../config.nix;
