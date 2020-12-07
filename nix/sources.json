@@ -12,10 +12,10 @@
         "homepage": "",
         "owner": "pechorin",
         "repo": "any-jump.vim",
-        "rev": "211de97502c0e52289c17241c57ecbf1628f07b1",
-        "sha256": "17c3kbnxg09xa62v6sf3sfbv0795ihh49zr6qjj6c4x496bs81k9",
+        "rev": "71cda6679432d77d6a029ce11fcb2280e7b701b9",
+        "sha256": "028jmfsdmrpq6x4rg7kylhb6yxrhjd9lns5zn0mvy39cw6lxxyd9",
         "type": "tarball",
-        "url": "https://github.com/pechorin/any-jump.vim/archive/211de97502c0e52289c17241c57ecbf1628f07b1.tar.gz",
+        "url": "https://github.com/pechorin/any-jump.vim/archive/71cda6679432d77d6a029ce11fcb2280e7b701b9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "complete-alias": {
