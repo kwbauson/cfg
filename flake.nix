@@ -55,9 +55,8 @@
             } // args);
             inherit system pkgs username homeDirectory;
           }) // {
-            self = homeConfiguration args;
-            drv = self.activationPackage;
-            paths = self.config.home.packages;
+            drv = (homeConfiguration args).activationPackage;
+            paths = (homeConfiguration args).config.home.packages;
           };
       };
 
