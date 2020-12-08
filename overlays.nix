@@ -94,10 +94,10 @@
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [
-        nixMaster
+        nixUnstable
         (hiPrio (
           writeShellScriptBin "nix" ''
-            ${pathAdd nixMaster}
+            ${pathAdd nixUnstable}
             exec nix \
               --keep-going \
               --extra-experimental-features 'nix-command flakes' \
