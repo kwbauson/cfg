@@ -88,7 +88,6 @@
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-18_09 nixpkgs-bundler1;
   })
-  (self: super: with super; { nixMaster = cfg.inputs.nix.defaultPackage.${system}; })
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${nixos-unstable-channel.path}/programs.sqlite";
     nix-wrapped = buildEnv {
