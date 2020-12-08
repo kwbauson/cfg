@@ -7,20 +7,17 @@ jobs:
       fail-fast: false
       matrix:
         output:
-          - nixosConfigurations.keith-xps.drv
-          - nixosConfigurations.kwbauson.drv
-          - nixosConfigurations.keith-vm.drv
+          - nixosConfigurations.keith-xps
+          - nixosConfigurations.kwbauson
+          - nixosConfigurations.keith-vm
           - homeConfigurations.graphical
           - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
-        with:
-          nix_version: 3.0pre20200829_f156513
-          nix_conf: experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix shell .#nix-build-uncached -c nix-build-uncached . -A cfg.${{ matrix.output }}.paths
+      - run: nix run -f . nix-build-uncached -c nix-build-uncached . -A cfg.${{ matrix.output }}.paths
