@@ -179,8 +179,8 @@ case $cmd in
     ;;
   direnv)
     "$0" cache 1>&2
-    echo source_up
-    printf 'PATH=%q:$PATH\n' "$result/bin"
+    echo '[[ -z $IN_NIX_SHELL ]] && source_up'
+    echo PATH_add "$result/bin"
     echo export IN_NIX_SHELL=impure
     echo watch_file "${buildfiles[@]}"
     for file in $envfiles;do
