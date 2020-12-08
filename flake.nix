@@ -37,9 +37,10 @@
         nixosConfiguration = hostname: (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ (callModule (./configurations + "/${hostname}/configuration.nix")) ];
-        }) // {
-          drv = (nixosConfiguration hostname).config.system.build.toplevel;
-          paths = [ ];
+        }) // rec {
+          self = nixosConfiguration hostname;
+          drv = self.config.system.build.toplevel;
+          paths = self.config.environment.systemPackages;
         };
         homeConfiguration =
           { system ? "x86_64-linux"
@@ -54,8 +55,9 @@
             } // args);
             inherit system pkgs username homeDirectory;
           }) // {
-            drv = (homeConfiguration args).activationPackage;
-            paths = (homeConfiguration args).config.home.packages;
+            self = homeConfiguration args;
+            drv = self.activationPackage;
+            paths = self.config.home.packages;
           };
       };
 
