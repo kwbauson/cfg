@@ -37,7 +37,10 @@
         nixosConfiguration = hostname: (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ (callModule (./configurations + "/${hostname}/configuration.nix")) ];
-        }) // { drv = (lib.nixosConfiguration hostname).config.system.build.toplevel; };
+        }) // {
+          drv = (nixosConfiguration hostname).config.system.build.toplevel;
+          paths = [ ];
+        };
         homeConfiguration =
           { system ? "x86_64-linux"
           , pkgs ? self.packages.${system}
@@ -50,7 +53,10 @@
               config = configuration;
             } // args);
             inherit system pkgs username homeDirectory;
-          }).activationPackage;
+          }) // {
+            drv = (homeConfiguration args).activationPackage;
+            paths = (homeConfiguration args).config.home.packages;
+          };
       };
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
