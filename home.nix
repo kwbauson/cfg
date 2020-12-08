@@ -282,6 +282,8 @@ with builtins; with pkgs; with mylib; {
       meters.left = words "LeftCPUs Blank Memory Swap";
       meters.right = words "RightCPUs Tasks Uptime LoadAverage";
       showProgramPath = false;
+      showThreadNames = true;
+      sortKey = "PID";
       treeView = true;
       updateProcessNames = true;
       vimMode = true;
