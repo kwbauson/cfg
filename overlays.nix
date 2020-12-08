@@ -111,7 +111,7 @@
       username = "kwbauson";
       token = readFile ./secrets/factorio-token;
     };
-    python3 = python3 // { pkgs = python3.pkgs // { inherit (nixos-unstable-channel.python3.pkgs) tldextract nix-prefetch-github llfuse; }; };
+    python3 = python3 // { pkgs = python3.pkgs // { inherit (nixos-unstable-channel.python3.pkgs) tldextract; }; };
     qutebrowser = nixos-unstable-channel.qutebrowser.overrideAttrs ({ patches ? [ ], ... }: { patches = patches ++ [ ./qutebrowser-background.patch ]; });
     i3 = i3.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./i3-icons.patch ]; });
     steam-native = steam.override { nativeOnly = true; };
