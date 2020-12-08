@@ -7,9 +7,9 @@ jobs:
       fail-fast: false
       matrix:
         output:
-          - nixosConfigurations.keith-xps.drv
-          - nixosConfigurations.kwbauson.drv
-          - nixosConfigurations.keith-vm.drv
+          - nixosConfigurations.keith-xps
+          - nixosConfigurations.kwbauson
+          - nixosConfigurations.keith-vm
           - homeConfigurations.graphical
           - homeConfigurations.non-graphical
     runs-on: ubuntu-20.04

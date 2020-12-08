@@ -34,10 +34,11 @@
     }) // rec {
       lib = rec {
         callModule = path: { pkgs, config, ... }@args: import path (inputs // args);
-        nixosConfiguration = hostname: (nixpkgs.lib.nixosSystem {
+        buildSystem = args: (system: system.config.system.build.toplevel // system) (nixpkgs.lib.nixosSystem args);
+        nixosConfiguration = hostname: buildSystem {
           system = "x86_64-linux";
           modules = [ (callModule (./configurations + "/${hostname}/configuration.nix")) ];
-        }) // { drv = (lib.nixosConfiguration hostname).config.system.build.toplevel; };
+        };
         homeConfiguration =
           { system ? "x86_64-linux"
           , pkgs ? self.packages.${system}
