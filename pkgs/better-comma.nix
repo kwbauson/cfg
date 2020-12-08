@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; buildEnv {
+pkgs: with pkgs; with mylib; buildEnv rec {
   name = "better-comma";
   paths = [
     (
@@ -6,6 +6,7 @@ pkgs: with pkgs; with mylib; buildEnv {
         ''
           ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
           set -e
+          [[ $1 = -u ]] && uncache=1 && shift
           cmd=$1
           if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
             echo usage: , COMMAND ARGS
@@ -22,7 +23,15 @@ pkgs: with pkgs; with mylib; buildEnv {
               attr=$packages
             fi
           else
-            attr=$(echo "$packages" | fzy)
+            cachefile=~/.cache/${name}/$cmd
+            [[ -n $uncache ]] && rm -f "$cachefile"
+            if [[ -e $cachefile ]];then
+              attr=$(< "$cachefile")
+            else
+              attr=$(echo "$packages" | fzy)
+              mkdir -p "$(dirname "$cachefile")"
+              echo "$attr" > "$cachefile"
+            fi
           fi
           if [[ -n $attr ]];then
             exec nix shell "${cfg.outPath}#$attr" --command "$@"
@@ -30,9 +39,9 @@ pkgs: with pkgs; with mylib; buildEnv {
         ''
     )
     (
-      writeTextDir "etc/bash_completion.d/better-comma.sh"
+      writeTextDir "etc/bash_completion.d/${name}.sh"
         ''
-          _better-comma()
+          _${name}()
           {
               ${pathAdd [ sqlite ]}
               local cur prev opts sql
@@ -48,7 +57,7 @@ pkgs: with pkgs; with mylib; buildEnv {
               fi
               return 0
           }
-          complete -F _better-comma ,
+          complete -F _${name} ,
         ''
     )
   ];
