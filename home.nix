@@ -76,7 +76,6 @@ with builtins; with pkgs; with mylib; {
       ${attrIf (!isGraphical) "non-graphical"} = {
         inherit golint solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
       };
-      broken = { inherit nix-prefetch-scripts; };
     };
 
   home = {
