@@ -76,6 +76,7 @@ rec {
           gemset = file "gemset.nix";
           ignoreCollisions = true;
           allowSubstitutes = true;
+          groups = [ "default" "development" "test" ];
           gemConfig = defaultGemConfig // mapAttrs addBuildInputs {
             zipruby = [ zlib ];
             grpc = attrs: { AROPTS = "-r"; };
