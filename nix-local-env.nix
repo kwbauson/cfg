@@ -60,16 +60,7 @@ rec {
         latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
         hasLatestBundler = hasSuffix latestBundlerMark locktext;
         namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
-        env = with namespace; let
-          addBuildInputs = (n: extraInputs: attrs: gemConfigOf n //
-            (
-              if isList extraInputs
-              then { buildInputs = attrs.buildInputs or [ ] ++ extraInputs; }
-              else extraInputs (gemConfigOf n)
-            ));
-          gemConfigOf = n: (defaultGemConfig.${n} or (_: { })) { };
-        in
-        bundlerEnv {
+        env = with namespace; bundlerEnv {
           name = "bundler-env";
           gemfile = file "Gemfile";
           lockfile = file "Gemfile.lock";
@@ -77,14 +68,13 @@ rec {
           ignoreCollisions = true;
           allowSubstitutes = true;
           groups = [ "default" "development" "test" ];
-          gemConfig = defaultGemConfig // mapAttrs addBuildInputs {
-            zipruby = [ zlib ];
-            grpc = attrs: { AROPTS = "-r"; };
-            plivo = [ rake ];
-          } // {
-            ${attrIf isDarwin "grpc"} = attrs: { buildInputs = [ pkgconfig openssl darwin.cctools ]; };
-          }
-          ;
+          gemConfig = defaultGemConfig // {
+            zipruby = _: { buildInputs = [ zlib ]; };
+            grpc = attrs: defaultGemConfig.grpc attrs // {
+              AROPTS = "-r";
+            };
+            plivo = _: { buildInputs = [ rake ]; };
+          };
         };
         paths = [ env.wrappedRuby (hiPrio env) bundix ];
       }.paths;
