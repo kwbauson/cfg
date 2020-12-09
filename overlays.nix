@@ -84,6 +84,17 @@
     nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
     pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
     nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
+    override = x: y:
+      if x == null then y
+      else if isString x && isString y then x + y
+      else if isList x && isList y then x ++ y
+      else if isDerivation x && isAttrs y then
+        override x.overrideAttrs y
+      else if isFunction x && isAttrs y then
+        x (attrs: mapAttrs (n: v: if hasAttr n attrs then override attrs.${n} v else v) y)
+      else if isAttrs x && isAttrs y then
+        mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
+      else throw "don't know how to override";
   } // builtins))
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-18_09 nixpkgs-bundler1;
@@ -112,8 +123,8 @@
       token = readFile ./secrets/factorio-token;
     };
     python3 = python3 // { pkgs = python3.pkgs // { inherit (nixos-unstable-channel.python3.pkgs) tldextract; }; };
-    qutebrowser = nixos-unstable-channel.qutebrowser.overrideAttrs (attrs: { patches = attrs.patches ++ [ ./qutebrowser-background.patch ]; });
-    i3 = i3.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./i3-icons.patch ]; });
+    qutebrowser = override nixos-unstable-channel.qutebrowser { patches = [ ./qutebrowser-background.patch ]; };
+    i3 = override i3 { patches = [ ./i3-icons.patch ]; };
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
