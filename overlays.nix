@@ -112,7 +112,7 @@
       token = readFile ./secrets/factorio-token;
     };
     python3 = python3 // { pkgs = python3.pkgs // { inherit (nixos-unstable-channel.python3.pkgs) tldextract; }; };
-    qutebrowser = nixos-unstable-channel.qutebrowser.overrideAttrs ({ patches ? [ ], ... }: { patches = patches ++ [ ./qutebrowser-background.patch ]; });
+    qutebrowser = nixos-unstable-channel.qutebrowser.overrideAttrs (attrs: { patches = attrs.patches ++ [ ./qutebrowser-background.patch ]; });
     i3 = i3.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./i3-icons.patch ]; });
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
