@@ -1,42 +1,44 @@
 pkgs: with pkgs; with mylib; buildEnv rec {
-  name = "better-comma";
+  inherit name;
   paths = [
     (
-      writeShellScriptBin ","
-        ''
-          ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
-          set -e
-          [[ $1 = -u ]] && uncache=1 && shift
-          cmd=$1
-          if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
-            echo usage: , COMMAND ARGS
-            exit
-          fi
-          sql="select distinct package from Programs where name = '$cmd'"
-          packages=$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)
+      (
+        writeShellScriptBin ","
+          ''
+            ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
+            set -e
+            [[ $1 = -u ]] && uncache=1 && shift
+            cmd=$1
+            if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
+              echo usage: , COMMAND ARGS
+              exit
+            fi
+            sql="select distinct package from Programs where name = '$cmd'"
+            packages=$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)
 
-          if [[ $(echo "$packages" | wc -l) = 1 ]];then
-            if [[ -z $packages ]];then
-              echo "$cmd": command not found
-              exit 127
+            if [[ $(echo "$packages" | wc -l) = 1 ]];then
+              if [[ -z $packages ]];then
+                echo "$cmd": command not found
+                exit 127
+              else
+                attr=$packages
+              fi
             else
-              attr=$packages
+              cachefile=~/.cache/${name}/$cmd
+              [[ -n $uncache ]] && rm -f "$cachefile"
+              if [[ -e $cachefile ]];then
+                attr=$(< "$cachefile")
+              else
+                attr=$(echo "$packages" | fzy)
+                mkdir -p "$(dirname "$cachefile")"
+                echo "$attr" > "$cachefile"
+              fi
             fi
-          else
-            cachefile=~/.cache/${name}/$cmd
-            [[ -n $uncache ]] && rm -f "$cachefile"
-            if [[ -e $cachefile ]];then
-              attr=$(< "$cachefile")
-            else
-              attr=$(echo "$packages" | fzy)
-              mkdir -p "$(dirname "$cachefile")"
-              echo "$attr" > "$cachefile"
+            if [[ -n $attr ]];then
+              exec nix shell "${cfg.outPath}#$attr" --command "$@"
             fi
-          fi
-          if [[ -n $attr ]];then
-            exec nix shell "${cfg.outPath}#$attr" --command "$@"
-          fi
-        ''
+          ''
+      ).overrideAttrs (_: { inherit name; })
     )
     (
       writeTextDir "etc/bash_completion.d/${name}.sh"
