@@ -3,4 +3,4 @@
 channel=${1:-nixos-unstable}
 url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
 version=$(echo "$url" | awk -F/ '{ print $NF }')
-niv modify $channel-channel -v $version
+niv update $channel-channel -v $version

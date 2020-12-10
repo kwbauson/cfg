@@ -32,16 +32,16 @@ rec {
     '';
   }.out;
 
+  localfile = file "local.nix";
   local-bin-paths =
     ifFiles "bin"
       (map (x: wrapScriptWithPackages (file "bin/${x}") { }) (attrNames (readDir (file "bin"))));
-  local-nix-paths =
-    ifFiles "local.nix"
-      rec {
-        imported = import (file "local.nix");
-        out = if isFunction imported then imported pkgs else imported;
-        paths = flatten [ out ];
-      }.paths;
+  local-nix = rec {
+    imported = import localfile;
+    result = if isFunction imported then imported pkgs else imported;
+    out = if pathExists localfile then result else null;
+  }.out;
+  local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];
   node-modules-paths =
     ifFiles "package.json package-lock.json node-packages.nix"
       rec {
@@ -106,8 +106,15 @@ rec {
 
   packages = listToAttrs (map (x: { name = x.name; value = x; }) paths);
 
-  out = (buildEnv { name = "local-env"; inherit paths; }) // {
+  out = (buildEnv { name = "local-env"; inherit paths; }) // rec {
     pkgs = packages;
     nle = import ./nix-local-env.nix;
+    pinned =
+      if local-nix ? rev && local-nix ? sha256
+      then fetchTarball {
+        url = "https://github.com/kwbauson/cfg/archive/${local-nix.rev}.tar.gz";
+        inherit (local-nix) sha256;
+      }
+      else nle { inherit path; };
   };
 }.out
