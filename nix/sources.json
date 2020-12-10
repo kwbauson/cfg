@@ -157,9 +157,9 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable-channel": {
-        "sha256": "1p98g58h2f68x9klplawwb7j2phpxyrdvdk00ld65vw3whydicy7",
+        "sha256": "0qrc1w30cfvlj6xvxqrlln1m5gykdjz37ldcld6gkj0jhh6icsb9",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre256292.296793637b2/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre257780.e9158eca70a/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
         "version": "nixos-21.03pre257780.e9158eca70a"
     },
