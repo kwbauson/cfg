@@ -128,7 +128,6 @@ with builtins; with pkgs; with mylib; {
       historyFileSize = -1;
       historySize = -1;
       shellAliases = {
-        gh = "GITHUB_TOKEN= gh";
         l = "ls -lh";
         ll = "l -a";
         ls = "ls --color=auto --group-directories-first";
@@ -140,10 +139,8 @@ with builtins; with pkgs; with mylib; {
         ncdu = "ncdu --color dark -ex";
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
-        ${attrIf isNixOS "nob"} = "git -C ~/cfg a -N && sudo nixos-rebuild boot --flake ~/cfg";
-        ${attrIf isNixOS "nos"} = "git -C ~/cfg a -N && sudo nixos-rebuild switch --flake ~/cfg";
-        ${attrIf isNixOS "noe"} = "nvim ~/cfg/configurations/$(hostname -s)/configuration.nix && nos";
-        hm = "home-manager --keep-going";
+        nob = "git -C ~/cfg a -N && sudo nixos-rebuild boot --flake ~/cfg";
+        noe = "nvim ~/cfg/configurations/$(hostname -s)/configuration.nix && nos";
         hme = "nvim ~/cfg/home.nix && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
         hmp = "git -C ~/cfg cap";

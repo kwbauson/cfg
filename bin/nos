@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# with-packages nix-wrapped
+tmpdir=$(mktemp -d)
+result="$tmpdir"/result
+cd ~/cfg
+git add . -N
+nix build .#nixosConfigurations.$(hostname -s) \
+  --out-link "$result" && sudo "$result"/bin/switch-to-configuration switch
+rm -f "$result"
+rmdir "$tmpdir"
