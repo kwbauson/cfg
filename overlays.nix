@@ -86,6 +86,7 @@
     nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
     override = x: y:
       if x == null then y
+      else if y ? _replace then y._replace
       else if isString x && isString y then x + y
       else if isList x && isList y then x ++ y
       else if isDerivation x && isAttrs y then
@@ -122,8 +123,10 @@
       username = "kwbauson";
       token = readFile ./secrets/factorio-token;
     };
-    python3 = python3 // { pkgs = python3.pkgs // { inherit (nixos-unstable-channel.python3.pkgs) tldextract; }; };
-    qutebrowser = override nixos-unstable-channel.qutebrowser { patches = [ ./qutebrowser-background.patch ]; };
+    python3 = python3 // {
+      pkgs = override python3.pkgs { tldextract.buildInputs = [ python3.pkgs.filelock ]; };
+    };
+    qutebrowser = override qutebrowser { patches = [ ./qutebrowser-background.patch ]; };
     i3 = override i3 { patches = [ ./i3-icons.patch ]; };
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
