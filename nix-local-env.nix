@@ -50,7 +50,7 @@ rec {
           src = buildDir (map file [ "package.json" "package-lock.json" ]);
           dontNpmInstall = true;
         };
-        node_modules = (nodeEnv.buildNodeDependencies args).overrideAttrs (_: { name = "node_modules"; });
+        node_modules = override (nodeEnv.buildNodeDependencies args) { name._replace = "node_modules"; };
         out = lowPrio node_modules;
       }.out;
   bundler-paths =
