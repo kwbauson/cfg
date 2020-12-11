@@ -64,7 +64,7 @@ with builtins; with pkgs; with mylib; {
       } {
       ${attrIf isDarwin "darwin"} = {
         inherit
-          audacity chromium dbeaver diffoscope i3-easyfocus iproute iputils
+          audacity chromium dbeaver diffoscope i3-easyfocus iproute2 iputils
           libreoffice-fresh loop networkmanagerapplet pavucontrol pinta qtile
           steam steam-native steam-run-native_18-09 strace sway sxiv usbutils
           wine zathura obs-studio obs-v4l2sink breeze-icons ccache dzen2 zoom-us
