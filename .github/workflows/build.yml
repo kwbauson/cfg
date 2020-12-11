@@ -30,7 +30,7 @@ jobs:
       fail-fast: false
       matrix:
         output:
-          - homeConfigurations.graphical
+          - homeConfigurations.keith-mac
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
