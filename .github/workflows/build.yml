@@ -29,7 +29,3 @@ jobs:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix build .#${{ matrix.output }} && cd result && pwd -P
-      - uses: actions/upload-artifact@v2
-        with:
-          name: nix-${{ matrix.output }}-cache
-          path: ~/.cache/nix
