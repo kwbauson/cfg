@@ -16,8 +16,8 @@ jobs:
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
     steps:
       - uses: actions/cache@v2
-        key: ${{ matrix.output }}-cache
         with:
+          key: ${{ matrix.output }}-cache
           path: ~/.cache/nix
       - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
