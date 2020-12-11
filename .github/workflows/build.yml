@@ -15,6 +15,10 @@ jobs:
           - homeConfigurations.keith-mac
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
     steps:
+      - uses: actions/cache@v2
+        key: ${{ matrix.output }}-cache
+        with:
+          path: ~/.cache/nix
       - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
         with:
@@ -27,4 +31,5 @@ jobs:
       - run: nix build .#${{ matrix.output }} && cd result && pwd -P
       - uses: actions/upload-artifact@v2
         with:
+          name: nix-${{ matrix.output }}-cache
           path: ~/.cache/nix
