@@ -10,28 +10,10 @@ jobs:
           - nixosConfigurations.keith-xps
           - nixosConfigurations.kwbauson
           - nixosConfigurations.keith-vm
-          - homeConfigurations.graphical
           - homeConfigurations.non-graphical
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: nixbuild/nix-quick-install-action@v4
-        with:
-          nix_version: 3.0pre20200829_f156513
-          nix_conf: experimental-features = nix-command flakes
-      - uses: cachix/cachix-action@v8
-        with:
-          name: kwbauson
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix build .#${{ matrix.output }}
-  build-macos:
-    name: ${{ matrix.output }}
-    strategy:
-      fail-fast: false
-      matrix:
-        output:
+          - homeConfigurations.graphical
           - homeConfigurations.keith-mac
-    runs-on: macos-latest
+    runs-on: ${{ endsWith(matrix.output, 'keith-mac') || 'ubuntu-20.04' && 'macos-latest' }}
     steps:
       - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
