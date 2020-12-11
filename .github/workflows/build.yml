@@ -13,7 +13,7 @@ jobs:
           - homeConfigurations.non-graphical
           - homeConfigurations.graphical
           - homeConfigurations.keith-mac
-    runs-on: ${{ endsWith(matrix.output, 'keith-mac') || 'ubuntu-20.04' && 'macos-latest' }}
+    runs-on: ${{ ! endsWith(matrix.output, 'keith-mac') && 'ubuntu-20.04' || 'macos-latest' }}
     steps:
       - uses: actions/checkout@v2
       - uses: nixbuild/nix-quick-install-action@v4
