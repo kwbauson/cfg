@@ -52,7 +52,7 @@ with builtins; with pkgs; with mylib; {
           inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
-        inherit nle;
+        inherit nle nr;
         inherit nle-cfg-pkgs;
         local-bin = [
           (alias "nixpkgs-rev" "echo ${nixpkgs-rev}")

@@ -1,9 +1,16 @@
 pkgs: with pkgs; with mylib; buildEnv {
   inherit name;
   paths = let env = nle { path = ./.; }; in
-    [ env (alias "nle" env.pkgs.nix-local-env) ];
+    [ (alias name env.pkgs.nix-local-env) env ];
 } // {
   __functor = let nixpkgs = pkgs; in
     self: { path, pkgs ? nixpkgs }:
       import ./nix-local-env.nix { inherit pkgs path; };
+  scripts = mapAttrs (n: v: writeShellScriptBin n v) {
+    update-python = ''
+      [[ -e requirements.txt ]] && ${exe pur} -zfr requirements.txt
+      [[ -e requirements.dev.txt ]] && ${exe pur} -zfr requirements.dev.txt
+      true
+    '';
+  };
 }

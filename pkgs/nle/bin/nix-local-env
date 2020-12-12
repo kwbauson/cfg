@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped coreutils
+# with-packages direnv niv diffutils nix-wrapped nr
 set -e
 
 name=nle
 [[ -e .disable-$name ]] && exit
 
-cfg_path=CFG_STORE_PATH
-[[ $1 = -f ]] && shift && cfg_path=$2 && shift
-nixexpr="(import $cfg_path).nle { path = ./.; }"
+nixexpr="(import CFG_STORE_PATH).nle { path = ./.; }"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
@@ -17,13 +15,6 @@ cmd=
 [[ -n $1 && $1 != -d ]] && cmd=$1 && shift
 [[ $1 = -d ]] && shift && cd "$1" && shift
 sourcedir=$PWD
-
-runpkg() {
-  pkg=$1
-  shift
-  cmd=$(echo "$pkg" | cut -d. -f2)
-  nix shell "$cfg_path#$pkg" --command "$cmd" "$@"
-}
 
 invalid() {
   echo invalid command: "$args"
@@ -124,7 +115,7 @@ case $cmd in
       if [[ -e $impurefile ]];then
         cp "$impurefile" gemset.nix
       else
-        runpkg bundix
+        nr bundix
         cp gemset.nix "$impurefile"
       fi
     fi
@@ -134,7 +125,7 @@ case $cmd in
       if [[ -e $impurefile ]];then
         cp "$impurefile" node-packages.nix
       else
-        runpkg nodePackages.node2nix -c /dev/null \
+        nr nodePackages.node2nix -c /dev/null \
           --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
         cp node-packages.nix "$impurefile"
       fi
@@ -142,27 +133,24 @@ case $cmd in
     ;;
   update)
     if [[ -e package.json && -e package-lock.json ]];then
-      if ! runpkg nodePackages.npm-check-updates -e2;then
-        runpkg nodePackages.npm-check-updates -u
-        runpkg nodePackages.npm --package-lock-only i
+      if ! nr nodePackages.npm-check-updates -e2;then
+        nr nodePackages.npm-check-updates -u
+        nr nodePackages.npm --package-lock-only i
       fi
     fi
     if [[ -e Gemfile && -e Gemfile.lock ]];then
-      if ! runpkg bundler outdated;then
+      if ! nr bundler outdated;then
         if [[ -e gemset.nix ]];then
           hasgemset=1
         else
           hasgemset=
         fi
         rm Gemfile.lock
-        runpkg bundix -l
+        nr bundix -l
         [[ -n $hasgemset ]] && rm gemset.nix
       fi
     fi
-    set +e
-    [[ -e requirements.txt ]] && runpkg pur -zfr requirements.txt
-    [[ -e requirements.dev.txt ]] && runpkg pur -zfr requirements.dev.txt
-    set -e
+    nr nle.scripts.update-python
     if [[ -e nix/sources.nix && -e nix/sources.json ]];then
       tmpfile=$(mktemp)
       cp nix/sources.json $tmpfile
