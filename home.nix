@@ -53,7 +53,7 @@ with builtins; with pkgs; with mylib; {
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
         inherit nle;
-        nle-cfg = lowPrio (nle { path = ./.; });
+        inherit nle-cfg-pkgs;
         local-bin = [
           (alias "nixpkgs-rev" "echo ${nixpkgs-rev}")
           (alias "nixpkgs-path" "echo ${pkgs.path}")
