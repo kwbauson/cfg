@@ -123,9 +123,6 @@
       username = "kwbauson";
       token = readFile ./secrets/factorio-token;
     };
-    python3 = python3 // {
-      pkgs = override python3.pkgs { tldextract.buildInputs = [ python3.pkgs.filelock ]; };
-    };
     qutebrowser = override qutebrowser { patches = [ ./qutebrowser-background.patch ]; };
     i3 = override i3 { patches = [ ./i3-icons.patch ]; };
     steam-native = steam.override { nativeOnly = true; };
