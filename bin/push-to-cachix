@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# with-packages cachix
-exec cachix push kwbauson \
-  /nix/var/nix/profiles/per-user/$USER/profile \
-  /nix/var/nix/profiles/per-user/$USER/home-manager
+# with-packages nix-wrapped cachix
+hostname=$(hostname -s)
+tmpdir=$(mktemp -d)
+cd ~/cfg
+[[ $hostname != keith-mac ]] && nix build .#nixosConfigurations.$hostname -o "$tmpdir"/nixos
+nix build .#homeConfigurations.$hostname -o "$tmpdir"/home
+cachix push kwbauson "$tmpdir"/*
+rm -rf "$tmpdir"
