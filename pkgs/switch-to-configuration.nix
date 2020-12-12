@@ -4,15 +4,20 @@ let
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeScript = text: writeShellScriptBin "switch" text;
   inherit (cfg) nixosConfigurations homeConfigurations;
+  profile = name: "/nix/var/nix/profiles/${name}";
   scripts = eachHost (host: rec {
-    hms = let conf = homeConfigurations.${host}; in
-      makeScript ''
-        [[ $(realpath /nix/var/nix/profiles/per-user/$USER/home-manager) != ${conf} ]] &&
-          ${conf}/activate'';
     nos = let conf = nixosConfigurations.${host}; in
       makeScript ''
-        [[ $(realpath /run/current-system) != ${conf} ]] &&
+        if [[ $(realpath ${profile "system"}) != ${conf} ]];then
+          sudo nix-env -p ${profile "system"} --set ${conf}
           sudo ${conf}/bin/switch-to-configuration switch
+        fi
+      '';
+    hms = let conf = homeConfigurations.${host}; in
+      makeScript ''
+        if [[ $(realpath ${profile "per-user/$USER/home-manager"}) != ${conf} ]];then
+          ${conf}/activate
+        fi
       '';
     nos-hms = makeScript ''
       ${optionalString (host != "keith-mac") (exe nos)}
@@ -26,5 +31,5 @@ let
 in
 buildEnv {
   inherit name;
-  paths = map makeBin (words "hms nos nos-hms");
+  paths = map makeBin (words "nos hms nos-hms");
 } // { inherit scripts; }
