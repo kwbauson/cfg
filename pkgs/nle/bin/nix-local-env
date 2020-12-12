@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped
+# with-packages direnv niv diffutils nix-wrapped coreutils
 set -e
 
 name=nle
@@ -19,7 +19,10 @@ cmd=
 sourcedir=$PWD
 
 runpkg() {
-  nix shell "$cfg_path#$1" --command "$@"
+  pkg=$1
+  shift
+  cmd=$(echo "$pkg" | cut -d. -f2)
+  nix shell "$cfg_path#$1" --command "$cmd" "$@"
 }
 
 invalid() {
