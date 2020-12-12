@@ -8,7 +8,7 @@ name=nle
 
 nixfile=CFG_STORE_PATH/nix-local-env.nix
 [[ $1 = -f ]] && shift && nixfile=$2 && shift
-nixexpr="(import $nixfile { path = ./.; })"
+nixexpr="import $nixfile { path = ./.; }"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
@@ -131,7 +131,6 @@ case $cmd in
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   update)
-    [[ -x update-helper ]] && ./update-helper
     if [[ -e package.json && -e package-lock.json ]];then
       if ! ncu -e2;then
         ncu -u
@@ -166,6 +165,7 @@ case $cmd in
       nix flake update --recreate-lock-file
     fi
     [[ -e flake.nix && -e flake.lock ]] && git status &> /dev/null
+    [[ -x update-helper ]] && ./update-helper
     ;;
   run)
     "$0" cache

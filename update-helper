@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-# with-packages curl niv gawk
+# with-packages curl niv gawk nix-wrapped
 channel=${1:-nixos-unstable}
 url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
 version=$(echo "$url" | awk -F/ '{ print $NF }')
 niv update $channel-channel -v $version
+
+for pkg in qutebrowser alacritty signal-desktop firefox;do
+  version=$(nix eval --raw ".#$pkg.version")
+  niv update dmg-$pkg -v $version
+done
