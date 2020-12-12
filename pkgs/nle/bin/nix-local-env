@@ -22,7 +22,7 @@ runpkg() {
   pkg=$1
   shift
   cmd=$(echo "$pkg" | cut -d. -f2)
-  nix shell "$cfg_path#$1" --command "$cmd" "$@"
+  nix shell "$cfg_path#$pkg" --command "$cmd" "$@"
 }
 
 invalid() {
