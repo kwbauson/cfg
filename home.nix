@@ -60,6 +60,7 @@ with builtins; with pkgs; with mylib; {
           (alias "local_ops" "nix-local-env run -d ~/src/hr/local_ops python dev.py --no-banner")
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
         ];
+        inherit switch-to-configuration;
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
       ${attrIf isDarwin "darwin"} = {
@@ -141,7 +142,7 @@ with builtins; with pkgs; with mylib; {
         hme = "nvim ~/cfg/home.nix && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
         hmp = "git -C ~/cfg cap";
-        nou = "hmg ${optionalString isNixOS "&& nos"} && hms";
+        nou = "hmg && switch-to-configuration";
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";

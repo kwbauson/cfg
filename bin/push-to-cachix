@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 # with-packages nix-wrapped cachix
-hostname=$(hostname -s)
 tmpdir=$(mktemp -d)
+result="$tmpdir"/result
 cd ~/cfg
-[[ $hostname != keith-mac ]] && nix build .#nixosConfigurations.$hostname -o "$tmpdir"/nixos
-nix build .#homeConfigurations.$hostname -o "$tmpdir"/home
-cachix push kwbauson "$tmpdir"/*
-rm -rf "$tmpdir"
+git add . -N
+nix build \
+  .#switch-to-configuration.switch.$(hostname -s) \
+  --out-link "$result" \
+  && cachix push kwbauson "$result"
+rm -f "$result"
+rmdir "$tmpdir"
