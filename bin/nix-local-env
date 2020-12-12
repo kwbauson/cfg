@@ -72,6 +72,14 @@ fi
 envfiles='.env .env.development .development.env'
 
 case $cmd in
+  build)
+    [[ -d $builddir ]] && cd "$builddir"
+    nix build --impure --expr "$nixexpr" --out-link "$sourcedir"/result
+    ;;
+  rebuild)
+    [[ -d $builddir ]] && cd "$builddir"
+    nix build --impure --expr "$nixexpr" --out-link "$result"
+    ;;
   init)
     if [[ ! -e .envrc ]];then
       echo 'eval "$('$name' direnv)"' > .envrc
@@ -124,10 +132,6 @@ case $cmd in
         cp node-packages.nix "$impurefile"
       fi
     fi
-    ;;
-  rebuild)
-    [[ -d $builddir ]] && cd "$builddir"
-    nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   update)
     if [[ -e package.json && -e package-lock.json ]];then
@@ -205,10 +209,6 @@ case $cmd in
         fi
       done
     fi
-    ;;
-  build)
-    [[ -d $builddir ]] && cd "$builddir"
-    nix build --impure --expr "$nixexpr" --out-link "$sourcedir"/result
     ;;
   cachedir)
     echo "$cachedir"
