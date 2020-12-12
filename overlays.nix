@@ -101,7 +101,6 @@
   })
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${nixos-unstable-channel.path}/programs.sqlite";
-    nixLocalEnv = import ./nix-local-env.nix { path = ./.; inherit pkgs; };
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [
@@ -140,7 +139,8 @@
     mach-nix = cfg.inputs.mach-nix.lib.${system};
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
     discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
-    inherit (nixLocalEnv.pkgs) fordir;
+    nle-env = nle { path = ./.; inherit pkgs; };
+    inherit (nle-env.pkgs) fordir;
   })
   (self: super: with super;
   with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }

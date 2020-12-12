@@ -35,7 +35,7 @@ pkgs: with pkgs; with mylib; buildEnv rec {
               fi
             fi
             if [[ -n $attr ]];then
-              exec nix shell "${toString ./.}#$attr" --command "$@"
+              exec nix shell "${toString ../.}#$attr" --command "$@"
             fi
           ''
       ).overrideAttrs (_: { inherit name; })

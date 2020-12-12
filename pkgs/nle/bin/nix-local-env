@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# with-packages bundix bundler direnv nix-prefetch-git niv diffutils nix-wrapped
-# with-packages nodePackages.npm-check-updates nodePackages.node2nix
+# with-packages direnv niv diffutils nix-wrapped
 set -e
 
 name=nle
@@ -8,7 +7,7 @@ name=nle
 
 cfg_path=CFG_STORE_PATH
 [[ $1 = -f ]] && shift && cfg_path=$2 && shift
-nixexpr="(import $cfg_path).nixLocalEnv.nle { path = ./.; }"
+nixexpr="(import $cfg_path).nle { path = ./.; }"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
@@ -18,6 +17,10 @@ cmd=
 [[ -n $1 && $1 != -d ]] && cmd=$1 && shift
 [[ $1 = -d ]] && shift && cd "$1" && shift
 sourcedir=$PWD
+
+runpkg() {
+  nix shell "$cfg_path#$1" --command "$@"
+}
 
 invalid() {
   echo invalid command: "$args"
@@ -118,7 +121,7 @@ case $cmd in
       if [[ -e $impurefile ]];then
         cp "$impurefile" gemset.nix
       else
-        bundix
+        runpkg bundix
         cp gemset.nix "$impurefile"
       fi
     fi
@@ -128,7 +131,8 @@ case $cmd in
       if [[ -e $impurefile ]];then
         cp "$impurefile" node-packages.nix
       else
-        node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
+        runpkg nodePackages.node2nix -c /dev/null \
+          --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
         cp node-packages.nix "$impurefile"
       fi
     fi
@@ -136,19 +140,19 @@ case $cmd in
   update)
     if [[ -e package.json && -e package-lock.json ]];then
       if ! ncu -e2;then
-        ncu -u
-        npm --package-lock-only i
+        runpkg nodePackages.npm-check-updates -u
+        runpkg nodePackages.npm --package-lock-only i
       fi
     fi
     if [[ -e Gemfile && -e Gemfile.lock ]];then
-      if ! bundler outdated;then
+      if ! runpkg bundler outdated;then
         if [[ -e gemset.nix ]];then
           hasgemset=1
         else
           hasgemset=
         fi
         rm Gemfile.lock
-        bundix -l
+        runpkg bundix -l
         [[ -n $hasgemset ]] && rm gemset.nix
       fi
     fi

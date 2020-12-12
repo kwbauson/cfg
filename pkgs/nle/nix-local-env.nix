@@ -22,7 +22,7 @@ rec {
     '';
     makeScriptText = replaceStrings
       [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
-      [ (toString ./.) selfHash ];
+      [ (toString ../..) selfHash ];
     isBash = hasSuffix "bash" (head lines);
     script = writeScript "${name}-unwrapped" (makeScriptText text);
     scriptTail = makeScriptText (concatStringsSep "\n" (tail lines));

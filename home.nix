@@ -52,12 +52,13 @@ with builtins; with pkgs; with mylib; {
           inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
-        inherit (nixLocalEnv) pkgs;
+        inherit nle;
+        nle-cfg = lowPrio (nle { path = ./.; });
         local-bin = [
           (alias "nixpkgs-rev" "echo ${nixpkgs-rev}")
           (alias "nixpkgs-path" "echo ${pkgs.path}")
           (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
-          (alias "local_ops" "nix-local-env run -d ~/src/hr/local_ops python dev.py --no-banner")
+          (alias "local_ops" "nle run -d ~/src/hr/local_ops python dev.py --no-banner")
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
         ];
         inherit switch-to-configuration;
