@@ -1,4 +1,4 @@
-{ pkgs, config, username, homeDirectory, isNixOS, isGraphical, ... }:
+{ pkgs, config, self, username, homeDirectory, isNixOS, isGraphical, ... }:
 with builtins; with pkgs; with mylib; {
   home.packages = with pkgs;
     drvsExcept
@@ -110,10 +110,7 @@ with builtins; with pkgs; with mylib; {
     };
   };
 
-  nixpkgs = {
-    config = import ./config.nix;
-    overlays = import ./overlays.nix;
-  };
+  nixpkgs = { inherit (self) config overlays; };
 
   fonts.fontconfig.enable = true;
 

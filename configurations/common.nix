@@ -33,7 +33,7 @@
       IdentityFile /root/.ssh/id_ed25519
   '';
 
-  nixpkgs.config = import ../config.nix;
+  nixpkgs = { inherit (self) config; };
 
   zramSwap = {
     enable = true;

@@ -23,15 +23,13 @@
     , home-manager
     , ...
     }@inputs: flake-utils.lib.eachDefaultSystem (system: rec {
-
       packages = import nixpkgs {
         inherit system;
-        config = import ./config.nix;
-        overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);
+        inherit (self) overlays config;
       };
-
     }) // rec {
-      lib = rec {
+      lib = with builtins; with nixpkgs.lib; rec {
+        mapSubDirs = f: path: mapAttrs (n: v: f n) (filterAttrs (v: n: n == "directory") (readDir path));
         callModule = path: { pkgs, config, ... }@args: import path (inputs // args);
         buildSystem = args: (system: system.config.system.build.toplevel // system) (nixpkgs.lib.nixosSystem args);
         nixosConfiguration = hostname: buildSystem {
@@ -48,16 +46,17 @@
             configuration = import ./home.nix ({
               inherit pkgs username homeDirectory;
               config = configuration;
-            } // args);
+            } // args // { inherit self; });
             inherit system pkgs username homeDirectory;
           }).activationPackage;
       };
 
+      overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);
+      config = import ./config.nix;
+
       inherit (self.packages.x86_64-linux) programs-sqlite;
 
-      nixosConfigurations.keith-xps = lib.nixosConfiguration "keith-xps";
-      nixosConfigurations.kwbauson = lib.nixosConfiguration "kwbauson";
-      nixosConfigurations.keith-vm = lib.nixosConfiguration "keith-vm";
+      nixosConfigurations = lib.mapSubDirs lib.nixosConfiguration ./configurations;
 
       homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
       homeConfigurations.non-graphical = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
