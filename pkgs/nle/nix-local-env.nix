@@ -85,14 +85,15 @@ rec {
     optional
       (hasRequirements || hasRequirementsDev)
       (
-        mach-nix.mkPython {
-          requirements = ''
-            ${optionalString hasRequirements (excludeLines (hasPrefix "itomate") (readFile (file "requirements.txt")))}
-            ${optionalString hasRequirementsDev (readFile (file "requirements.dev.txt"))}
-          '';
-          _.black.buildInputs = [ ];
-          _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
-        }
+        override
+          (mach-nix.mkPython {
+            requirements = ''
+              ${optionalString hasRequirements (excludeLines (hasPrefix "itomate") (readFile (file "requirements.txt")))}
+              ${optionalString hasRequirementsDev (readFile (file "requirements.dev.txt"))}
+            '';
+            _.black.buildInputs = [ ];
+            _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
+          }) { name._replace = "python-env"; }
       );
 
   build-paths = flatten [

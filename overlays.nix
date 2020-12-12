@@ -140,7 +140,8 @@
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
     discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
-    inherit (nle-cfg-pkgs) fordir;
+    inherit (self.nle-cfg-pkgs) fordir;
+    inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
   })
   (self: super: with super;
   with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
