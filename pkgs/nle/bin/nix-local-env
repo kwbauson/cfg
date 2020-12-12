@@ -142,7 +142,7 @@ case $cmd in
     ;;
   update)
     if [[ -e package.json && -e package-lock.json ]];then
-      if ! ncu -e2;then
+      if ! runpkg nodePackages.npm-check-updates -e2;then
         runpkg nodePackages.npm-check-updates -u
         runpkg nodePackages.npm --package-lock-only i
       fi
