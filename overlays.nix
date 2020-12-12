@@ -37,7 +37,6 @@
         mv $PWD $out
       '';
     };
-    nixLocalEnv = import ./nix-local-env.nix { path = ./.; inherit pkgs; };
     runBin = name: script: runCommand
       name
       { } ''
@@ -102,6 +101,7 @@
   })
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${nixos-unstable-channel.path}/programs.sqlite";
+    nixLocalEnv = import ./nix-local-env.nix { path = ./.; inherit pkgs; };
     nix-wrapped = buildEnv {
       name = "nix-wrapped";
       paths = [

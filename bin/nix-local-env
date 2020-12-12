@@ -6,9 +6,9 @@ set -e
 name=nle
 [[ -e .disable-$name ]] && exit
 
-nixfile=CFG_STORE_PATH/nix-local-env.nix
-[[ $1 = -f ]] && shift && nixfile=$2 && shift
-nixexpr="import $nixfile { path = ./.; }"
+cfg_path=CFG_STORE_PATH
+[[ $1 = -f ]] && shift && cfg_path=$2 && shift
+nixexpr="(import $cfg_path).nixLocalEnv.nle { path = ./.; }"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
@@ -43,7 +43,6 @@ hashfiles() {
 }
 
 hashbuildfiles() {
-  echo $nixfile
   for file in "${buildfiles[@]}";do
     if [[ -e $sourcedir/$file ]];then
       if [[ -d $sourcedir/$file ]];then
