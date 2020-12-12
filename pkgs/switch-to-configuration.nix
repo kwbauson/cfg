@@ -5,8 +5,15 @@ let
   makeScript = text: writeShellScriptBin "switch" text;
   inherit (cfg) nixosConfigurations homeConfigurations;
   scripts = eachHost (host: rec {
-    hms = makeScript "${homeConfigurations.${host}}/activate";
-    nos = makeScript "sudo ${nixosConfigurations.${host}}/bin/switch-to-configuration switch";
+    hms = let conf = homeConfigurations.${host}; in
+      makeScript ''
+        [[ $(realpath /nix/var/nix/profiles/per-user/$USER/home-manager) != ${conf} ]] &&
+          ${conf}/activate'';
+    nos = let conf = nixosConfigurations.${host}; in
+      makeScript ''
+        [[ $(realpath /run/current-system) != ${conf} ]] &&
+          sudo ${conf}/bin/switch-to-configuration switch
+      '';
     nos-hms = makeScript ''
       ${optionalString (host != "keith-mac") (exe nos)}
       ${exe hms}
