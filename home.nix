@@ -142,7 +142,7 @@ with builtins; with pkgs; with mylib; {
         hme = "nvim ~/cfg/home.nix && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
         hmp = "git -C ~/cfg cap";
-        nou = "hmg && switch-to-configuration";
+        nou = "hmg && nos-hms";
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";

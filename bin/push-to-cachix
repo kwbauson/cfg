@@ -5,7 +5,7 @@ result="$tmpdir"/result
 cd ~/cfg
 git add . -N
 nix build \
-  .#switch-to-configuration.switch.$(hostname -s) \
+  .#switch-to-configuration.scripts.$(hostname -s).nos-hms \
   --out-link "$result" \
   && cachix push kwbauson "$result"
 rm -f "$result"

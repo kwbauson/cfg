@@ -1,16 +1,23 @@
 pkgs: with pkgs; with mylib;
 let
-  script = writeShellScriptBin name ''
-    ${pathAdd [ nix-wrapped inetutils ]}
-    exec nix run ~/cfg#switch-to-configuration.switch.$(hostname -s)
-  '';
   hosts = words "keith-xps kwbauson keith-vm keith-mac";
-  switchToHost = hostname: writeShellScriptBin "switch-${hostname}" ''
-    ${optionalString (hostname != "keith-mac")
-      "sudo ${cfg.nixosConfigurations.${hostname}}/bin/switch-to-configuration switch"
-    }
-    ${cfg.homeConfigurations.${hostname}}/activate
+  eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
+  makeScript = text: writeShellScriptBin "switch" text;
+  inherit (cfg) nixosConfigurations homeConfigurations;
+  scripts = eachHost (host: rec {
+    hms = makeScript "${homeConfigurations.${host}}/activate";
+    nos = makeScript "sudo ${nixosConfigurations.${host}}/bin/switch-to-configuration switch";
+    nos-hms = makeScript ''
+      ${optionalString (host != "keith-mac") (exe nos)}
+      ${exe hms}
+    '';
+  });
+  makeBin = name: writeShellScriptBin name ''
+    ${pathAdd [ nix-wrapped inetutils ]}
+    exec nix run ~/cfg#switch-to-configuration.scripts.$(hostname -s).${name}
   '';
-  switch = listToAttrs (map (name: { inherit name; value = switchToHost name; }) hosts);
 in
-script // { inherit switch; }
+buildEnv {
+  inherit name;
+  paths = map makeBin (words "hms nos nos-hms");
+} // { inherit scripts; }
