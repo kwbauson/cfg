@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr
+# with-packages direnv diffutils nix-wrapped nr
 set -e
 
 name=nle
@@ -154,7 +154,7 @@ case $cmd in
     if [[ -e nix/sources.nix && -e nix/sources.json ]];then
       tmpfile=$(mktemp)
       cp nix/sources.json $tmpfile
-      niv update
+      nr niv update
       diff -u nix/sources.json $tmpfile || true
       rm -f $tmpfile
     fi
