@@ -1,5 +1,4 @@
 [
-  (self: super: { cfg = super.cfg or (import ./flake-compat.nix); })
   (self: super: (x: { mylib = x; }) (with super; with lib; with builtins; lib // rec {
     mapAttrValues = f: mapAttrs (n: v: f v);
     inherit (stdenv) isLinux isDarwin;
