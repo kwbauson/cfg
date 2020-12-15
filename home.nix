@@ -161,7 +161,6 @@ with builtins; with pkgs; with mylib; {
             unset NIX_LINK
           else
             source ~/.nix-profile/etc/profile.d/nix.sh
-            export NIX_PATH=nixpkgs=$HOME/.nix-defexpr/channels/nixos:$HOME/.nix-defexpr/channels
             export XDG_DATA_DIRS="$HOME/.nix-profile/share:''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
           fi
           source ~/.nix-profile/etc/profile.d/bash_completion.sh

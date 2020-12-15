@@ -14,6 +14,7 @@
   };
 
   nix.package = pkgs.nixUnstable;
+  nix.nixPath = [ ];
   nix.extraOptions = ''
     extra-experimental-features = nix-command flakes
     extra-substituters = https://kwbauson.cachix.org
