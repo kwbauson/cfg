@@ -139,7 +139,7 @@
       name = src.name;
     };
     jitsi-meet = let path = ./jitsi-meet.tar.bz2; in
-      override jitsi-meet { ${attrIf (pathExists path) "src"} = path; };
+      override jitsi-meet { ${attrIf (pathExists path) "src"}._replace = path; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = cfg.inputs.mach-nix.lib.${system};
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
