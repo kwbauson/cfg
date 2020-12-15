@@ -211,6 +211,9 @@ case $cmd in
   upgrade-nle)
     nix-env --tarball-ttl 0 -f https://github.com/kwbauson/cfg/tarball/main -iA nle
     ;;
+  pin)
+    nr nle.scripts.print-pin
+    ;;
   *)
     invalid
     ;;

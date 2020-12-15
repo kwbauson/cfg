@@ -6,11 +6,17 @@ pkgs: with pkgs; with mylib; buildEnv {
   __functor = let nixpkgs = pkgs; in
     self: { path, pkgs ? nixpkgs }:
       import ./nix-local-env.nix { inherit pkgs path; };
-  scripts = mapAttrs (n: v: writeShellScriptBin n v) {
+  scripts = makeScripts {
     update-python = ''
       [[ -e requirements.txt ]] && ${exe pur} -zfr requirements.txt
       [[ -e requirements.dev.txt ]] && ${exe pur} -zfr requirements.dev.txt
       true
+    '';
+    print-pin = echo ''
+      {
+        rev = ${if cfg ? rev then "${cfg.rev}" else "null"};
+        hash = "${cfg.narHash}";
+      }
     '';
   };
 }

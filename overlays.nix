@@ -83,6 +83,9 @@
     nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
     pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
     nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
+    makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else script);
+    makeScripts = mapAttrs makeScript;
+    echo = text: writeShellScript "echo-script" ''echo "$(< ${writeText "text" text})"'';
     override = x: y:
       if x == null then y
       else if y ? _replace then y._replace
