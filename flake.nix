@@ -42,13 +42,15 @@
           , username ? "keith"
           , homeDirectory ? "/home/${username}"
           , ...
-          }@args: (home-manager.lib.homeManagerConfiguration rec {
+          }@args:
+          let conf = (home-manager.lib.homeManagerConfiguration rec {
             configuration = import ./home.nix ({
               inherit pkgs username homeDirectory;
               config = configuration;
             } // args // { inherit self; });
             inherit system pkgs username homeDirectory;
-          }).activationPackage;
+          });
+          in conf.activationPackage // conf;
       };
 
       overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);

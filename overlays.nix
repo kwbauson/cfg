@@ -113,7 +113,7 @@
             ${pathAdd nixUnstable}
             exec nix \
               --keep-going \
-              --extra-experimental-features 'nix-command flakes' \
+              --extra-experimental-features 'nix-command flakes ca-references' \
               --extra-substituters https://kwbauson.cachix.org \
               --extra-trusted-public-keys 'kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=' \
               "$@"
