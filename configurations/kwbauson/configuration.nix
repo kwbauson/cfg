@@ -11,8 +11,6 @@
     device = "/dev/vda";
   };
 
-  nix.distributedBuilds = true;
-
   networking = {
     hostName = "kwbauson";
     domain = "com";
