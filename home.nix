@@ -8,9 +8,8 @@ with builtins; with pkgs; with mylib; {
             acpi atool banner bash-completion bashInteractive bc binutils
             borgbackup bvi bzip2 cacert cachix coreutils-full cowsay curl
             diffutils dos2unix ed fd file findutils gawk gnugrep gnused gnutar
-            gzip inetutils iproute2 iputils ldns less libarchive libnotify
-            loop lsof man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped
-            nix-index nix-info nix-prefetch-github nix-prefetch-scripts
+            gzip inetutils iproute2 iputils ldns less libarchive libnotify loop
+            lsof man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped
             nix-tree nmap openssh p7zip patch perl pigz procps progress pv
             ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils
             watch wget which xdg_utils xxd xz zip manix better-comma
