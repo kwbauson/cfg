@@ -193,13 +193,13 @@ let
         sha512 = "TtuboE4ASkc/L9B3MS4LYgZ045JEiTrtFdENTzgISKDDosPxdXqh7RE2Xajwf4gTkogRvU5mKPBoeMbtNw3zLw==";
       };
     };
-    "coc-pyright-1.1.94" = {
+    "coc-pyright-1.1.95" = {
       name = "coc-pyright";
       packageName = "coc-pyright";
-      version = "1.1.94";
+      version = "1.1.95";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.94.tgz";
-        sha512 = "r3mFrA3aSnnWpAur9Te3LTIH9ZHhNNqhfUSFZH54p21TQcZeGS7E6KAXFVnBKQ5Qejn1TScL/fw/KOcnDDfcIw==";
+        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.95.tgz";
+        sha512 = "8JnB/H80SFiCLXNJCImRg/DjknM7Vc/O9D73EvGYHcp6AC1QNZLDdbmAczvh9zTX2g4DfLny4H5LUXs+WduIWQ==";
       };
     };
     "concat-map-0.0.1" = {
@@ -913,13 +913,13 @@ let
         sha1 = "f052a28da70e618917ef0a8ac34c1ae5a68286b3";
       };
     };
-    "pyright-1.1.94" = {
+    "pyright-1.1.95" = {
       name = "pyright";
       packageName = "pyright";
-      version = "1.1.94";
+      version = "1.1.95";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.94.tgz";
-        sha512 = "n2SE1nLmuvF34RdnaYSPcOrcWP7qdiTRTUCxw9Ia9APVdB9qUQCgr0RYkiOYUHfqR7DKAX2JAE+YYbeIQ+jfvQ==";
+        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.95.tgz";
+        sha512 = "Hr4eT7jcKU0YCyEsslqDseVen5uTjaLbwdfHYsDhMzmwWu4nxX3OrpfUNstaiYZdqNAFwFRHQzPWaibS9cm05A==";
       };
     };
     "read-pkg-1.1.0" = {
@@ -1318,7 +1318,7 @@ let
       sources."chokidar-3.4.3"
       sources."clean-stack-2.2.0"
       sources."coc-explorer-0.12.1"
-      sources."coc-pyright-1.1.94"
+      sources."coc-pyright-1.1.95"
       sources."concat-map-0.0.1"
       (sources."cp-file-6.2.0" // {
         dependencies = [
@@ -1415,7 +1415,7 @@ let
       sources."pinkie-2.0.4"
       sources."pinkie-promise-2.0.1"
       sources."pseudomap-1.0.2"
-      sources."pyright-1.1.94"
+      sources."pyright-1.1.95"
       (sources."read-pkg-1.1.0" // {
         dependencies = [
           sources."path-type-1.1.0"
