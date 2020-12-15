@@ -14,8 +14,7 @@ pkgs: with pkgs; with mylib; buildEnv {
     '';
     print-pin = echo ''
       {
-        rev = ${if cfg ? rev then "${cfg.rev}" else "null"};
-        hash = "${cfg.narHash}";
+        outPath = ${cfg.outPath};
       }
     '';
   };
