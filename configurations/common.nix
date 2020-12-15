@@ -34,7 +34,7 @@
       IdentityFile /root/.ssh/id_ed25519
   '';
 
-  nixpkgs = { inherit (self) config; };
+  nixpkgs = { inherit (self) config overlays; };
 
   zramSwap = {
     enable = true;

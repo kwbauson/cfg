@@ -12,14 +12,6 @@
   };
 
   nix.distributedBuilds = true;
-  nixpkgs.overlays = [
-    (self: super: {
-      jitsi-meet = super.jitsi-meet.overrideAttrs (attrs: {
-        src = let path = ../../jitsi-meet.tar.bz2; in
-          if builtins.pathExists path then path else attrs.src;
-      });
-    })
-  ];
 
   networking = {
     hostName = "kwbauson";

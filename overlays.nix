@@ -138,6 +138,8 @@
       src = copyPath "${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/coc-pyright";
       name = src.name;
     };
+    jitsi-meet = let path = ./jitsi-meet.tar.bz2; in
+      override jitsi-meet { ${attrIf (pathExists path) "src"} = path; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = cfg.inputs.mach-nix.lib.${system};
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
