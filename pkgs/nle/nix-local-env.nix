@@ -14,12 +14,7 @@ rec {
       (filter (hasInfix pkgsMark) lines);
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
     buildInputs = map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames ++ build-paths;
-    selfHash = hashString "sha256" ''
-      ${readFile ./nix-local-env.nix}
-      ${readFile ./bin/nix-local-env}
-      ${cfg.inputs.nixpkgs.outPath}
-      ${cfg.inputs.mach-nix.outPath}
-    '';
+    selfHash = hashString "sha256" selfpkgs.outPath;
     makeScriptText = replaceStrings
       [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
       [ selfpkgs.outPath selfHash ];
