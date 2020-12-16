@@ -73,7 +73,7 @@ final: prev: with prev; with lib; with builtins; lib // rec {
     in runCommand "build-dir" { } "mkdir $out\n${cmds}";
   copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
   nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
-  pathAdd = pkgs: "PATH=${concatMapStringsSep ":" (pkg: "${pkg}/bin") (toList pkgs)}:$PATH";
+  pathAdd = pkgs: "PATH=${makeBinPath (toList pkgs)}:$PATH";
   nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
   makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else script);
   makeScripts = mapAttrs makeScript;
