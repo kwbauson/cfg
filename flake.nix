@@ -56,7 +56,10 @@
           in conf.activationPackage // conf;
       };
 
-      overlays = [ (_: _: { cfg = self; }) ] ++ (import ./overlays.nix);
+      overlays = [
+        (_: _: { cfg = self; })
+        (final: prev: { mylib = import ./mylib.nix final prev; })
+      ] ++ (import ./overlays.nix);
       config = import ./config.nix;
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
