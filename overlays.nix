@@ -1,7 +1,7 @@
 [
-  (self: super: with super; with mylib; mapAttrValues importNixpkgs {
-    inherit (sources) nixos-18_09 nixpkgs-bundler1;
-  })
+  (self: super: with super; with mylib;
+  mapAttrValues importNixpkgs { inherit (sources) nixos-18_09 nixpkgs-bundler1; }
+  )
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${nixos-unstable-channel.path}/programs.sqlite";
     nix-wrapped = buildEnv {
@@ -56,12 +56,13 @@
       ./overlays.nix
     ] ++ self.nle.lib.build-paths ./.);
   })
-  (self: super: with super;
-  with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
+  (self: super: with super; with mylib;
+  mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
   )
-  (self: super: with super; with mylib; mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; })
-  (self: super: with super; with mylib; (fn: optionalAttrs
-    (pathExists ./pkgs)
+  (self: super: with super; with mylib;
+  mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; }
+  )
+  (self: super: with super; with mylib; (fn:
     (listToAttrs (mapAttrsToList fn (readDir ./pkgs)))
   ) (n: _: rec {
     name = removeSuffix ".nix" n;
