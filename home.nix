@@ -1,4 +1,4 @@
-{ pkgs, config, self, username, homeDirectory, isNixOS, isGraphical, ... }:
+{ pkgs, config, self, username, homeDirectory, isNixOS, isGraphical, isServer ? false, ... }:
 with builtins; with pkgs; with mylib; {
   home.packages = with pkgs;
     drvsExcept
@@ -20,7 +20,7 @@ with builtins; with pkgs; with mylib; {
           graphical-core = {
             inherit
               dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term sxiv
-              xclip xdotool xsel xterm maim
+              xclip xdotool xsel xterm maim pbgopy
               ;
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
@@ -92,12 +92,15 @@ with builtins; with pkgs; with mylib; {
       BUNDLE_USER_PLUGIN = "$XDG_DATA_HOME/bundle";
       RLWRAP_HOME = "$XDG_DATA_HOME/rlwrap";
       SOLARGRAPH_CACHE = "$XDG_CACHE_HOME/solargraph";
+      PBGOPY_SERVER = "http://kwbauson.com:9090/";
     };
   };
 
   nixpkgs = { inherit (self) config overlays; };
 
   fonts.fontconfig.enable = true;
+
+  services.pbgopy.enable = isServer;
 
   programs = {
     home-manager.enable = true;

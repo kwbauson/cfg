@@ -70,7 +70,11 @@
       nixosConfigurations = with lib; mapAttrValues nixosConfiguration (importDir ./configurations);
 
       homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
-      homeConfigurations.non-graphical = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
+      homeConfigurations.non-graphical = lib.homeConfiguration {
+        isNixOS = true;
+        isGraphical = false;
+        hostname = "kwbauson";
+      };
 
       homeConfigurations.keith-xps = homeConfigurations.graphical;
       homeConfigurations.kwbauson = homeConfigurations.non-graphical;
