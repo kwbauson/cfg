@@ -52,16 +52,14 @@ with builtins; with pkgs; with mylib; {
       } {
       ${attrIf isDarwin "darwin"} = {
         inherit
-          audacity chromium dbeaver diffoscope i3-easyfocus iproute2 iputils
-          libreoffice-fresh loop networkmanagerapplet pavucontrol pinta qtile
-          steam steam-native strace sway sxiv usbutils zathura obs-studio
-          obs-v4l2sink breeze-icons ccache dzen2 zoom-us maim
+          chromium diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
+          steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
           ;
         inherit bl bh medctl runnim statusline vol;
         inherit dejavu_fonts_nerd;
       };
       ${attrIf (!isGraphical) "non-graphical"} = {
-        inherit golint solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
+        inherit solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
       };
     };
 
