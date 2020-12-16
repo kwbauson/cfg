@@ -59,6 +59,7 @@ with builtins; with pkgs; with mylib; {
           (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
           (alias "local_ops" "nle run -d ~/src/hr/local_ops python dev.py --no-banner")
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
+          (alias "selfpkgs-path" "echo ${selfpkgs.outPath}")
         ];
         inherit switch-to-configuration;
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
