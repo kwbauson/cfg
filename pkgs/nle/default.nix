@@ -9,7 +9,7 @@ pkgs: with pkgs; with mylib; buildEnv {
   lib = rec {
     build-files = words ''
       bin nix local.nix
-      flake.nix flake.lock
+      flake.nix flake.lock default.nix
       package.json package-lock.json node-packages.nix
       Gemfile Gemfile.lock gemset.nix
       requirements.txt requirements.dev.txt

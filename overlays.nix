@@ -50,7 +50,6 @@
     selfpkgs = buildDir ([
       ./pkgs
       ./config.nix
-      ./default.nix
       ./flake-compat.nix
       ./mylib.nix
       ./overlays.nix
