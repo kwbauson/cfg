@@ -54,7 +54,7 @@ with builtins; with pkgs; with mylib; {
         inherit nle nr;
         inherit nle-cfg-pkgs;
         local-bin = [
-          (alias "nixpkgs-rev" "echo ${nixpkgs-rev}")
+          (alias "nixpkgs-rev" "echo ${cfg.inputs.nixpkgs.rev}")
           (alias "nixpkgs-path" "echo ${pkgs.path}")
           (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
           (alias "local_ops" "nle run -d ~/src/hr/local_ops python dev.py --no-banner")

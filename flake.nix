@@ -57,8 +57,7 @@
       };
 
       overlays = [
-        (_: _: { cfg = self; })
-        (final: prev: { mylib = import ./mylib.nix final prev; })
+        (final: prev: { cfg = self; mylib = import ./mylib.nix final prev; })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
 

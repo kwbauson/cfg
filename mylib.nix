@@ -20,7 +20,6 @@ final: prev: with prev; with lib; with builtins; lib // rec {
   }; flatten (drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x));
   userName = "Keith Bauson";
   userEmail = "kwbauson@gmail.com";
-  nixpkgs-rev = cfg.inputs.nixpkgs.rev;
   nixpkgs-branch = let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url; in
     if length urlParts == 3 then elemAt urlParts 2 else "master";
   fakePlatform = x: x.overrideAttrs (attrs:
