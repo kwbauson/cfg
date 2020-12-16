@@ -73,7 +73,7 @@
       homeConfigurations.non-graphical = lib.homeConfiguration {
         isNixOS = true;
         isGraphical = false;
-        hostname = "kwbauson";
+        isServer = true;
       };
 
       homeConfigurations.keith-xps = homeConfigurations.graphical;
