@@ -100,7 +100,7 @@ with builtins; with pkgs; with mylib; {
 
   fonts.fontconfig.enable = true;
 
-  services.pbgopy.enable = isServer;
+  services.${attrIf isServer "pbgopy"}.enable = true;
 
   programs = {
     home-manager.enable = true;
