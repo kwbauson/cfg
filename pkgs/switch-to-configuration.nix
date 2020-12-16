@@ -13,6 +13,7 @@ let
           sudo ${conf}/bin/switch-to-configuration switch
         fi
       '';
+    nob = makeScript "sudo ${nixosConfigurations.${host}}/bin/switch-to-configuration boot";
     hms = let conf = homeConfigurations.${host}; in
       makeScript ''
         if [[ $(realpath ${profile "per-user/$USER/home-manager"}) != ${conf} ]];then
@@ -25,11 +26,12 @@ let
     '';
   });
   makeBin = name: writeShellScriptBin name ''
-    ${pathAdd [ nix-wrapped inetutils ]}
+    ${pathAdd [ nix-wrapped inetutils git ]}
+    git -C ~/cfg add --intent-to-add .
     exec nix run ~/cfg#switch-to-configuration.scripts.$(hostname -s).${name}
   '';
 in
 buildEnv {
   inherit name;
-  paths = map makeBin (words "nos hms nos-hms");
+  paths = map makeBin (attrNames scripts.${head (attrNames scripts)});
 } // { inherit scripts; }
