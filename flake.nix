@@ -41,9 +41,14 @@
         };
         homeConfiguration =
           { system ? "x86_64-linux"
-          , pkgs ? self.packages.${system}
+          , pkgs ? import nixpkgs {
+              inherit system;
+              inherit (self) config;
+              overlays = self.overlays ++ [ (_: _: { inherit isNixOS; }) ];
+            }
           , username ? "keith"
           , homeDirectory ? "/home/${username}"
+          , isNixOS ? false
           , ...
           }@args:
           let conf = (home-manager.lib.homeManagerConfiguration rec {

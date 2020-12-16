@@ -4,22 +4,27 @@
   )
   (self: super: with super; with mylib; {
     programs-sqlite = copyPath "${nixos-unstable-channel.path}/programs.sqlite";
-    nix-wrapped = buildEnv {
-      name = "nix-wrapped";
-      paths = [
-        nixUnstable
-        (hiPrio (
-          writeShellScriptBin "nix" ''
-            ${pathAdd nixUnstable}
-            exec nix \
-              --keep-going \
-              --extra-experimental-features 'nix-command flakes ca-references' \
-              --extra-substituters https://kwbauson.cachix.org \
-              --extra-trusted-public-keys 'kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=' \
-              "$@"
-          ''
-        ))
+    isNixOS = false;
+    nix-wrapped = (
+      if self.isNixOS
+      then nixUnstable
+      else buildEnv {
+        name = "nix-wrapped";
+        paths = [
+          nixUnstable
+          (hiPrio (writeShellScriptBin "nix" '' exec ${exe nixUnstable} ${self.nix-wrapped.flags} "$@" ''))
+        ];
+      }
+    ) // rec {
+      options = [
+        "keep-going"
+        "builders-use-substitutes"
+        [ "extra-experimental-features" "nix-command flakes ca-references" ]
+        [ "extra-substituters" "https://kwbauson.cachix.org" ]
+        [ "extra-trusted-public-keys" "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=" ]
       ];
+      flags = concatMapStringsSep " " (s: if isString s then "--${s}" else "--${head s} '${lib.last s}'") options;
+      conf = concatMapStringsSep "\n" (s: if isString s then "${s} = true" else concatStringsSep " = " s) options;
     };
     factorio = factorio.override {
       username = "kwbauson";
