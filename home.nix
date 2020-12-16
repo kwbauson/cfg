@@ -12,47 +12,34 @@ with builtins; with pkgs; with mylib; {
             lsof man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped
             nix-tree nmap openssh p7zip patch perl pigz procps progress pv
             ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils
-            watch wget which xdg_utils xxd xz zip manix better-comma
-            nix-build-uncached bitwarden-cli libqalculate youtube-dl
-            speedtest-cli
+            watch wget which xdg_utils xxd xz zip better-comma bitwarden-cli
+            libqalculate youtube-dl speedtest-cli
             ;
         };
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
             inherit
-              arandr dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway
-              term sxiv xclip xdotool xsel xterm wine maim
+              dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term sxiv
+              xclip xdotool xsel xterm maim
               ;
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
-          multi-media = {
-            inherit
-              chromium ffmpeg firefox libreoffice-fresh mediainfo pavucontrol
-              sox qtbr
-              ;
-          };
-          misc = {
-            inherit
-              breeze-icons networkmanagerapplet steam steam-run-native_18-09
-              signal-desktop discord zoom-us
-              ;
-            inherit evilhack;
-          };
-          ghcEnv = ghc.withPackages (pkgs: with pkgs; [ xmonad xmonad-contrib lens taggy-lens ]);
-          fonts = { inherit dejavu_fonts dejavu_fonts_nerd; };
+          inherit
+            chromium ffmpeg firefox mediainfo pavucontrol sox qtbr breeze-icons
+            steam signal-desktop discord zoom-us evilhack dejavu_fonts
+            dejavu_fonts_nerd
+            ;
         };
         development = {
           inherit
-            bat ccache colordiff ctags diffoscope dhall git-trim golint gron
-            highlight httpie icdiff jq nim nixpkgs-fmt rnix-lsp-unstable
-            shellcheck shfmt solargraph watchexec yarn yarn-completion
-            nodejs_latest nle
+            bat colordiff ctags diffoscope dhall git-trim gron highlight httpie
+            icdiff jq nim nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
+            solargraph watchexec yarn yarn-completion nodejs_latest nle
             ;
           inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
-        inherit nle nr;
-        inherit nle-cfg-pkgs;
+        inherit nle nle-cfg-pkgs nr switch-to-configuration;
         local-bin = [
           (alias "nixpkgs-rev" "echo ${cfg.inputs.nixpkgs.rev}")
           (alias "nixpkgs-path" "echo ${pkgs.path}")
@@ -61,16 +48,14 @@ with builtins; with pkgs; with mylib; {
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
           (alias "selfpkgs-path" "echo ${selfpkgs.outPath}")
         ];
-        inherit switch-to-configuration;
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
       ${attrIf isDarwin "darwin"} = {
         inherit
           audacity chromium dbeaver diffoscope i3-easyfocus iproute2 iputils
           libreoffice-fresh loop networkmanagerapplet pavucontrol pinta qtile
-          steam steam-native steam-run-native_18-09 strace sway sxiv usbutils
-          wine zathura obs-studio obs-v4l2sink breeze-icons ccache dzen2 zoom-us
-          maim
+          steam steam-native strace sway sxiv usbutils zathura obs-studio
+          obs-v4l2sink breeze-icons ccache dzen2 zoom-us maim
           ;
         inherit bl bh medctl runnim statusline vol;
         inherit dejavu_fonts_nerd;

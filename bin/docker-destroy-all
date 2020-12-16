@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages docker findutils
+# with-packages findutils
 docker container ls -q | xargs -r docker container kill
 docker container ls -aq | xargs -r docker container rm -f
 

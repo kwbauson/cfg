@@ -53,6 +53,7 @@
       ./pkgs
       ./config.nix
       ./default.nix
+      ./flake-compat.nix
       ./flake.lock
       ./flake.nix
       ./Gemfile
