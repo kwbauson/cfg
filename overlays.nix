@@ -47,25 +47,14 @@
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
-    selfpkgs = buildDir [
-      ./bin
-      ./nix
+    selfpkgs = buildDir ([
       ./pkgs
       ./config.nix
       ./default.nix
       ./flake-compat.nix
-      ./flake.lock
-      ./flake.nix
-      ./Gemfile
-      ./Gemfile.lock
-      ./gemset.nix
       ./mylib.nix
-      ./node-packages.nix
       ./overlays.nix
-      ./package-lock.json
-      ./package.json
-      ./requirements.txt
-    ];
+    ] ++ self.nle.lib.build-paths ./.);
   })
   (self: super: with super;
   with mylib; mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }

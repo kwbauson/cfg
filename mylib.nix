@@ -2,17 +2,12 @@ final: prev: with prev; with lib; with builtins; lib // rec {
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
   sources = import ./nix/sources.nix { inherit system pkgs; };
-  exe = pkg: with {
-    binName =
-      if hasAttr "pname" pkg then pkg.pname
-      else if hasAttr "version" pkg then removeSuffix "-${pkg.version}" pkg.name
-      else pkg.name;
-  }; "${pkg}/bin/${binName}";
+  exe = pkg: "${pkg}/bin/${(parseDrvName pkg.name).name}";
   prefixIf = b: x: y: if b then x + y else y;
   mapLines = f: s: concatMapStringsSep "\n"
     (l: if l != "" then f l else l)
     (splitString "\n" s);
-  words = splitString " ";
+  words = string: filter (x: isString x && x != "") (split "[[:space:]]+" string);
   attrIf = check: name: if check then name else null;
   drvs = x: if isDerivation x || isList x then flatten x else flatten (mapAttrsToList (_: v: drvs v) x);
   drvsExcept = x: e: with {
@@ -82,7 +77,7 @@ final: prev: with prev; with lib; with builtins; lib // rec {
   nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
   makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else script);
   makeScripts = mapAttrs makeScript;
-  echo = text: writeShellScript "echo-script" ''echo "$(< ${writeText "text" text})"'';
+  echo = text: writeShellScript "echo-script" ''echo "$(< ${toFile "text" text})"'';
   override = x: y:
     if x == null then y
     else if y ? _replace then y._replace
