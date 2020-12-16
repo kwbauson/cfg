@@ -66,13 +66,7 @@
   (self: super: with super; with mylib;
   mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; }
   )
-  (self: super: with super; with mylib; (fn:
-    (listToAttrs (mapAttrsToList fn (readDir ./pkgs)))
-  ) (n: _: rec {
-    name = removeSuffix ".nix" n;
-    value = import (./pkgs + ("/" + n)) (pkgs // {
-      inherit name;
-      src = sources.${name};
-    });
-  }))
+  (self: super: with super; with mylib;
+  mapAttrs (name: f: f (pkgs // { inherit name; src = sources.${name}; })) (importDir ./pkgs)
+  )
 ]

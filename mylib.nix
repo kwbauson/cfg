@@ -1,4 +1,4 @@
-final: prev: with prev; with lib; with builtins; lib // rec {
+prev: with prev; with lib; with builtins; lib // rec {
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
   sources = import ./nix/sources.nix { inherit system pkgs; };
@@ -78,6 +78,7 @@ final: prev: with prev; with lib; with builtins; lib // rec {
   makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else script);
   makeScripts = mapAttrs makeScript;
   echo = text: writeShellScript "echo-script" ''echo "$(< ${toFile "text" text})"'';
+  attrsToList = mapAttrsToList (name: value: { inherit name value; });
   override = x: y:
     if x == null then y
     else if y ? _replace then y._replace
@@ -90,4 +91,24 @@ final: prev: with prev; with lib; with builtins; lib // rec {
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else throw "don't know how to override";
+  importDir = dir:
+    let
+      dirList = attrsToList (readDir dir);
+      path = p: dir + "/${p}";
+      importPath = p: import (path p);
+      hasPath = p: pathExists (path p);
+      canImport = { name, value }:
+        (value != "directory" && hasSuffix ".nix" name)
+          || pathExists (dir + "/${name}/default.nix")
+          || pathExists (dir + "/${name}/configuration.nix");
+      importEntry = { name, value }:
+        if hasSuffix ".nix" name
+        then { name = removeSuffix ".nix" name; value = importPath name; }
+        else if hasPath "${name}/default.nix"
+        then { inherit name; value = importPath name; }
+        else if hasPath "${name}/configuration.nix"
+        then { inherit name; value = importPath "${name}/configuration.nix"; }
+        else null;
+    in
+    listToAttrs (filter (x: x != null) (map importEntry dirList));
 } // builtins

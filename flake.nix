@@ -32,13 +32,12 @@
       };
     }) // rec {
       lib = with builtins; with nixpkgs.lib; rec {
-        mapSubDirs = f: path: mapAttrs (n: v: f n) (filterAttrs (v: n: n == "directory") (readDir path));
-        callModule = path: { pkgs, config, ... }@args: import path (inputs // args);
-        buildSystem = args: (system: system.config.system.build.toplevel // system) (nixpkgs.lib.nixosSystem args);
-        nixosConfiguration = hostname: buildSystem {
-          system = "x86_64-linux";
-          modules = [ (callModule (./configurations + "/${hostname}/configuration.nix")) ];
-        };
+        mylib = import ./mylib.nix nixpkgs;
+        inherit (mylib) mapAttrValues importDir;
+        nixosConfiguration = module: buildSystem { system = "x86_64-linux"; modules = [ (callModule module) ]; };
+        buildSystem = args: (system: system.config.system.build.toplevel // system) (nixosSystem args);
+        callModule =
+          module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
         homeConfiguration =
           { system ? "x86_64-linux"
           , pkgs ? import nixpkgs {
@@ -62,13 +61,13 @@
       };
 
       overlays = [
-        (final: prev: { cfg = self; mylib = import ./mylib.nix final prev; })
+        (_: prev: { cfg = self; mylib = import ./mylib.nix prev; })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
 
-      nixosConfigurations = lib.mapSubDirs lib.nixosConfiguration ./configurations;
+      nixosConfigurations = with lib; mapAttrValues nixosConfiguration (importDir ./configurations);
 
       homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
       homeConfigurations.non-graphical = lib.homeConfiguration { isNixOS = true; isGraphical = false; };
