@@ -67,7 +67,7 @@
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
 
-      nixosConfigurations = with lib; mapAttrValues nixosConfiguration (importDir ./configurations);
+      nixosConfigurations = with lib; mapAttrValues nixosConfiguration (importDir ./hosts);
 
       homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
       homeConfigurations.non-graphical = lib.homeConfiguration {

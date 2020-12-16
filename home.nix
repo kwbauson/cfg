@@ -125,7 +125,7 @@ with builtins; with pkgs; with mylib; {
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
         nob = "git -C ~/cfg a -N && sudo nixos-rebuild boot --flake ~/cfg";
-        noe = "nvim ~/cfg/configurations/$(hostname -s)/configuration.nix && nos";
+        noe = "nvim ~/cfg/hosts/$(hostname -s)/configuration.nix && nos";
         hme = "nvim ~/cfg/home.nix && hms";
         hmg = "git -C ~/cfg g && git -C ~/cfg df";
         hmp = "git -C ~/cfg cap";
