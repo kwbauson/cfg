@@ -288,7 +288,7 @@ with builtins; with pkgs; with mylib; {
         cap = "! git a; git ci; git p";
         ci = "commit -v";
         co = "checkout";
-        df = "! git a -N && git -c core.pager='${exe gitAndTools.delta} --dark' diff HEAD && true";
+        df = ''! git a -N && git -c core.pager='${exe gitAndTools.delta} --dark' diff "''${@:-HEAD}" && true'';
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "fetch origin master:master";
