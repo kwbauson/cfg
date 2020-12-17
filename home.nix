@@ -293,7 +293,7 @@ with builtins; with pkgs; with mylib; {
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "fetch origin master:master";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
-        hide = "update-index --skip-worktree";
+        hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
         p = "put";
         pf = "put --force-with-lease";
         put = "! git push origin `git branch-name`";

@@ -25,7 +25,7 @@ invalid() {
 
 buildfiles=(
   package{,-lock}.json
-  yarn.lock npm-{package,deps}.nix
+  yarn.lock npm-{package,deps}.nix .disable-nle-yarn
   Gemfile{,.lock}
   gemset.nix
   requirements{,.dev}.txt
@@ -130,7 +130,7 @@ case $cmd in
         cp node-packages.nix "$impurefile"
       fi
     fi
-    if [[ -e package.json && -e yarn.lock ]];then
+    if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
       nr yarn2nix --template > npm-package.nix
       nr yarn2nix > npm-deps.nix
     fi
@@ -182,7 +182,7 @@ case $cmd in
   direnv)
     "$0" cache 1>&2
     [[ -L node_modules ]] && unlink node_modules
-    [[ -e package.json && -e yarn.lock && ! -e node_modules ]] \
+    [[ -e package.json && -e yarn.lock && ! -e node_modules && ! -e .disable-nle-yarn ]] \
       && ln -sf "$result"/node_modules node_modules
     echo '[[ -z $IN_NIX_SHELL ]] && source_up'
     echo PATH_add "$result/bin"
