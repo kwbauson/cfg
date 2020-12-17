@@ -184,13 +184,13 @@ let
         sha512 = "4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==";
       };
     };
-    "coc-explorer-0.12.1" = {
+    "coc-explorer-0.13.0" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.12.1";
+      version = "0.13.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.12.1.tgz";
-        sha512 = "TtuboE4ASkc/L9B3MS4LYgZ045JEiTrtFdENTzgISKDDosPxdXqh7RE2Xajwf4gTkogRvU5mKPBoeMbtNw3zLw==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.13.0.tgz";
+        sha512 = "zWYcEMV74L/vnW1oA7XUudkZUxJikJG3QRo4nvLFa2gwJwI+yghynKaud43PxzQjXytbDhjXPWwM7jX0AjWsaQ==";
       };
     };
     "coc-pyright-1.1.95" = {
@@ -1317,7 +1317,7 @@ let
       sources."camelcase-keys-2.1.0"
       sources."chokidar-3.4.3"
       sources."clean-stack-2.2.0"
-      sources."coc-explorer-0.12.1"
+      sources."coc-explorer-0.13.0"
       sources."coc-pyright-1.1.95"
       sources."concat-map-0.0.1"
       (sources."cp-file-6.2.0" // {
