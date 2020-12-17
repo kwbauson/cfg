@@ -48,6 +48,22 @@ rec {
         node_modules = override (nodeEnv.buildNodeDependencies args) { name = "node_modules"; };
         out = lowPrio node_modules;
       }.out;
+
+  yarn-paths =
+    ifFiles "package.json yarn.lock npm-package.nix npm-deps.nix"
+      rec {
+        inherit (yarn2nix.nixLib) callTemplate buildNodeDeps linkNodeDeps;
+        built = callTemplate (file "npm-package.nix") (buildNodeDeps (callPackage (file "npm-deps.nix") { }));
+        link = linkNodeDeps { name = "yarn"; dependencies = built.nodeBuildInputs; };
+        out =
+          runCommand "node_modules"
+            { } ''
+            mkdir $out
+            [[ -e ${link}/.bin ]] && ln -s ${link}/.bin $out/bin
+            ln -s ${link} $out/node_modules
+          '';
+      }.out;
+
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
@@ -95,6 +111,7 @@ rec {
     local-nix-paths
     bundler-paths
     node-modules-paths
+    yarn-paths
     python-paths
   ];
 
