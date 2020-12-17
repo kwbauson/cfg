@@ -59,7 +59,7 @@ rec {
             built = callTemplate (file "npm-package.nix") (buildNodeDeps (callPackage (file "npm-deps.nix") { }));
             link = linkNodeDeps { name = "yarn"; dependencies = built.nodeBuildInputs; };
             out =
-              runCommand "node_modules"
+              runCommand "yarn-env"
                 { } ''
                 mkdir $out
                 [[ -e ${link}/.bin ]] && ln -s ${link}/.bin $out/bin
