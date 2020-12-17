@@ -3,16 +3,29 @@
   mapAttrValues importNixpkgs { inherit (sources) nixos-18_09 nixpkgs-bundler1; }
   )
   (self: super: with super; with mylib; {
-    programs-sqlite = stdenv.mkDerivation {
+    programs-sqlite = stdenv.mkDerivation rec {
       name = "programs-sqlite";
       buildInputs = [ sqlite ];
       dontUnpack = true;
+      extra-programs = toFile "extra-programs" (
+        concatMapStringsSep ","
+          (s: if isString s then "${s},x86_64-linux,${s}" else "${head s},x86_64-linux,${lib.last s}")
+          [
+            "nle"
+            [ "nix-local-env" "nle" ]
+            "nr"
+            "evilhack"
+            "git-trim"
+            "fordir"
+            "inlets"
+          ]
+      );
       installPhase = ''
         cp ${nixos-unstable-channel.path}/programs.sqlite $out
         chmod +w $out
         sqlite3 $out <<EOF
         .mode csv
-        .import ${./extra-programs.csv} Programs
+        .import ${extra-programs} Programs
         EOF
       '';
     };
