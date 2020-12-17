@@ -54,6 +54,7 @@ hashbuildfiles() {
 hashcontent() {
   hashbuildfiles | sort | xargs cat
   echo NIX_LOCAL_ENV_HASH
+  [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
 
 cachedir=$cachebase/$(hashcontent | md5sum | awk '{ print $1 }')

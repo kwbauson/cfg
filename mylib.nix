@@ -79,6 +79,8 @@ prev: with prev; with lib; with builtins; lib // rec {
   makeScripts = mapAttrs makeScript;
   echo = text: writeShellScript "echo-script" ''echo "$(< ${toFile "text" text})"'';
   attrsToList = mapAttrsToList (name: value: { inherit name value; });
+  joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
+  joinLines = joinStrings "\n";
   override = x: y:
     if x == null then y
     else if y ? _replace then y._replace

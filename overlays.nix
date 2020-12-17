@@ -8,8 +8,9 @@
       buildInputs = [ sqlite ];
       dontUnpack = true;
       extra-programs = toFile "extra-programs" (
-        concatMapStringsSep ","
-          (s: if isString s then "${s},x86_64-linux,${s}" else "${head s},x86_64-linux,${lib.last s}")
+        joinLines
+          (x: "${x},x86_64-linux,${x}")
+          (x: y: "${x},x86_64-linux,${y}")
           [
             "nle"
             [ "nix-local-env" "nle" ]
@@ -48,8 +49,8 @@
         [ "extra-substituters" "https://kwbauson.cachix.org" ]
         [ "extra-trusted-public-keys" "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=" ]
       ];
-      flags = concatMapStringsSep " " (s: if isString s then "--${s}" else "--${head s} '${lib.last s}'") options;
-      conf = concatMapStringsSep "\n" (s: if isString s then "${s} = true" else concatStringsSep " = " s) options;
+      flags = joinStrings " " (x: "--${x}") (x: y: "--${x} '${y}'") options;
+      conf = joinLines (x: "${x} = true") (x: y: "${x} = ${y}") options;
     };
     factorio = factorio.override {
       username = "kwbauson";
