@@ -240,7 +240,7 @@ with builtins; with pkgs; with mylib; {
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver
-            node-env-coc-explorer node-env-coc-pyright
+            npm-coc-explorer npm-coc-pyright npm-coc-deno
             ;
         };
         makeExtraPlugins = map (name: vimUtils.buildVimPlugin {
@@ -288,7 +288,7 @@ with builtins; with pkgs; with mylib; {
         cap = "! git a; git ci; git p";
         ci = "commit -v";
         co = "checkout";
-        df = "! git a -N && git -c core.pager='${exe gitAndTools.delta} --dark' diff HEAD";
+        df = "! git a -N && git -c core.pager='${exe gitAndTools.delta} --dark' diff HEAD && true";
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "fetch origin master:master";

@@ -60,14 +60,13 @@
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
-    node-env-coc-explorer = vimUtils.buildVimPlugin rec {
-      src = copyPath "${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/coc-explorer";
-      name = src.name;
+    buildNpmVimPlugin = name: vimUtils.buildVimPlugin {
+      inherit name;
+      src = copyPath "${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/${name}";
     };
-    node-env-coc-pyright = vimUtils.buildVimPlugin rec {
-      src = copyPath "${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/coc-pyright";
-      name = src.name;
-    };
+    npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
+    npm-coc-pyright = self.buildNpmVimPlugin "coc-pyright";
+    npm-coc-deno = self.buildNpmVimPlugin "coc-deno";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = cfg.inputs.mach-nix.lib.${system};
