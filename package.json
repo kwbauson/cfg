@@ -2,7 +2,7 @@
   "name": "cfg",
   "version": "1.0.0",
   "dependencies": {
-    "coc-explorer": "0.12.1",
+    "coc-explorer": "0.13.0",
     "coc-pyright": "1.1.95",
     "ts-node": "9.1.1",
     "ts-node-dev": "1.1.1",
