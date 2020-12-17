@@ -82,7 +82,10 @@ prev: with prev; with lib; with builtins; lib // rec {
   override = x: y:
     if x == null then y
     else if y ? _replace then y._replace
-    else if isString x && isString y then x + y
+    else if y ? _append then x + y._append
+    else if isString x && isString y then y
+    else if isDerivation x && isPath y && pathExists y then y
+    else if isDerivation x && isPath y && !pathExists y then x
     else if isList x && isList y then x ++ y
     else if isDerivation x && isAttrs y then
       override x.overrideAttrs y
@@ -90,7 +93,7 @@ prev: with prev; with lib; with builtins; lib // rec {
       x (attrs: mapAttrs (n: v: if hasAttr n attrs then override attrs.${n} v else v) y)
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
-    else throw "don't know how to override";
+    else throw "don't know how to override ${typeOf x} with ${typeOf y}";
   importDir = dir:
     let
       dirList = attrsToList (readDir dir);

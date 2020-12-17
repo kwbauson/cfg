@@ -45,7 +45,7 @@ rec {
           src = buildDir (map file [ "package.json" "package-lock.json" ]);
           dontNpmInstall = true;
         };
-        node_modules = override (nodeEnv.buildNodeDependencies args) { name._replace = "node_modules"; };
+        node_modules = override (nodeEnv.buildNodeDependencies args) { name = "node_modules"; };
         out = lowPrio node_modules;
       }.out;
   bundler-paths =
@@ -88,7 +88,7 @@ rec {
             '';
             _.black.buildInputs = [ ];
             _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
-          }) { name._replace = "python-env"; }
+          }) { name = "python-env"; }
       );
 
   build-paths = flatten [
