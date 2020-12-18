@@ -71,11 +71,11 @@
         "version": "1.14.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "1g5iiid4lkhw3a938wdkqynr35l1vdz4w5f39vba8mr3hg3mjfzd",
+        "sha256": "0di73h6hf8py18l1xgzh35lq1hpvm17lnavb9pan9w5wp29x35w6",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.39.2.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.39.4.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "1.39.2"
+        "version": "1.39.4"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
