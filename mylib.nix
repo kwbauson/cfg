@@ -2,7 +2,9 @@ prev: with prev; with lib; with builtins; lib // rec {
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
   sources = import ./nix/sources.nix { inherit system pkgs; };
-  exe = pkg: "${pkg}/bin/${(parseDrvName pkg.name).name}";
+  exe = pkg:
+    let b = removePrefix "node_" (pkg.pname or (parseDrvName pkg.name).name);
+    in "${pkg}/bin/${b}";
   prefixIf = b: x: y: if b then x + y else y;
   mapLines = f: s: concatMapStringsSep "\n"
     (l: if l != "" then f l else l)
@@ -75,7 +77,7 @@ prev: with prev; with lib; with builtins; lib // rec {
   nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
   pathAdd = pkgs: "PATH=${makeBinPath (toList pkgs)}:$PATH";
   nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
-  makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else script);
+  makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
   makeScripts = mapAttrs makeScript;
   echo = text: writeShellScript "echo-script" ''echo "$(< ${toFile "text" text})"'';
   attrsToList = mapAttrsToList (name: value: { inherit name value; });

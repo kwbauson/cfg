@@ -137,12 +137,7 @@ case $cmd in
     fi
     ;;
   update)
-    if [[ -e package.json && -e package-lock.json ]];then
-      if ! nr nodePackages.npm-check-updates -e2;then
-        nr nodePackages.npm-check-updates -u
-        nr nodePackages.npm --package-lock-only i
-      fi
-    fi
+    nr nle.scripts.update
     if [[ -e Gemfile && -e Gemfile.lock ]];then
       if ! nr bundler outdated;then
         if [[ -e gemset.nix ]];then
@@ -155,7 +150,6 @@ case $cmd in
         [[ -n $hasgemset ]] && rm gemset.nix
       fi
     fi
-    nr nle.scripts.update
     if [[ -e nix/sources.nix && -e nix/sources.json ]];then
       tmpfile=$(mktemp)
       cp nix/sources.json $tmpfile
@@ -163,11 +157,6 @@ case $cmd in
       diff -u nix/sources.json $tmpfile || true
       rm -f $tmpfile
     fi
-    if [[ -e flake.nix && -e flake.lock ]];then
-      git status &> /dev/null
-      nix flake update --recreate-lock-file
-    fi
-    [[ -e flake.nix && -e flake.lock ]] && git status &> /dev/null
     [[ -x update-helper ]] && ./update-helper
     ;;
   run)
@@ -220,7 +209,7 @@ case $cmd in
     nix-env --tarball-ttl 0 -f https://github.com/kwbauson/cfg/tarball/main -iA nle
     ;;
   pin)
-    nr nle.scripts.print-pin
+    nr nle.scripts.pin
     ;;
   *)
     invalid
