@@ -11,7 +11,7 @@ pkgs: with pkgs; with mylib; buildEnv {
       bin nix local.nix
       flake.nix flake.lock default.nix
       package.json package-lock.json node-packages.nix
-      yarn.lock npm-package.nix npm-deps.nix
+      yarn.lock npm-package.nix npm-deps.nix .npmrc
       Gemfile Gemfile.lock gemset.nix
       requirements.txt requirements.dev.txt
     '';

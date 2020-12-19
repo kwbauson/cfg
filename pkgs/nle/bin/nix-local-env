@@ -25,7 +25,7 @@ invalid() {
 
 buildfiles=(
   package{,-lock}.json
-  yarn.lock npm-{package,deps}.nix .disable-nle-yarn
+  yarn.lock npm-{package,deps}.nix .disable-nle-yarn .npmrc
   Gemfile{,.lock}
   gemset.nix
   requirements{,.dev}.txt
@@ -133,7 +133,13 @@ case $cmd in
     fi
     if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
       nr yarn2nix --template > npm-package.nix
+      sed -i 's,git+ssh://git@,git+git@,' package.json yarn.lock
       nr yarn2nix > npm-deps.nix
+      if [[ -e .npmrc ]];then
+        token=$(sed -n 1s/.*:_authToken=//p .npmrc)
+        sed -i '1s/ }:/, writeText }:/' npm-deps.nix
+        sed -i '/fetchurl {$/s/{$/{ curlOpts = "-H @${writeText "headers.txt" "Authorization: Bearer '"$token"'"}";/' npm-deps.nix
+      fi
     fi
     ;;
   update)
