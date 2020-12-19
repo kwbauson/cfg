@@ -90,10 +90,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "226d59bc77b65f42aec583398a469cc111fc9587",
-        "sha256": "1jnn1g1jy552gdy8in254dxjw0h8csk9b8f49b9nf88idjcz8biw",
+        "rev": "0bee10c4d64313bc64fdd70162b692260a7db756",
+        "sha256": "059kpfknqxgssvzmfxgcn9z3jz60lspd74l6qyhk0jn7vqxf2a4z",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/226d59bc77b65f42aec583398a469cc111fc9587.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/0bee10c4d64313bc64fdd70162b692260a7db756.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
