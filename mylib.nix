@@ -38,11 +38,6 @@ prev: with prev; with lib; with builtins; lib // rec {
     ${exe (writeShellScriptBin "script" script)} > $out/bin/${name}
     chmod +x $out/bin/${name}
   '';
-  desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
-    "  name: ${pkg.name or pkg.pname or "null"}"
-    "  description: ${pkg.meta.description or "null"}"
-    "  homepage: ${pkg.meta.homepage or "null"}"
-  ];
   alias = name: x: writeShellScriptBin name ''exec ${if isDerivation x then exe x else x} "$@"'';
   mkDmgPackage = pname: src: stdenv.mkDerivation {
     name = pname + (if src ? version then "-${src.version}" else "");

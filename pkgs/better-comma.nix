@@ -8,6 +8,7 @@ pkgs: with pkgs; with mylib; buildEnv rec {
             ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
             set -e
             [[ $1 = -u ]] && uncache=1 && shift
+            [[ $1 = -d ]] && desc=1 && shift
             cmd=$1
             if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
               echo usage: , COMMAND ARGS
@@ -35,7 +36,11 @@ pkgs: with pkgs; with mylib; buildEnv rec {
               fi
             fi
             if [[ -n $attr ]];then
-              exec nix shell "${selfpkgs.outPath}#$attr" --command "$@"
+              if [[ $desc = 1 ]];then
+                exec nix eval --impure --expr "with import ${selfpkgs.outPath}; desc $attr"
+              else
+                exec nix shell "${selfpkgs.outPath}#$attr" --command "$@"
+              fi
             fi
           ''
       ).overrideAttrs (_: { inherit name; })
@@ -52,7 +57,7 @@ pkgs: with pkgs; with mylib; buildEnv rec {
               prev="''${COMP_WORDS[COMP_CWORD-1]}"
               sql="select distinct name from Programs where name like '$cur%' order by name"
 
-              if [[ $COMP_CWORD = 1 ]];then
+              if [[ $COMP_CWORD = 1 ]] || [[ $prev = -* && $COMP_CWORD = 2 ]];then
                 COMPREPLY=( $(compgen -W "$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)" -- "$cur") )
               else
                 COMPREPLY=( $(compgen -f -- "$cur") )

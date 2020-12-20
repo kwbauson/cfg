@@ -19,6 +19,8 @@
             "git-trim"
             "fordir"
             "inlets"
+            "pur"
+            "emborg"
           ]
       );
       installPhase = ''
@@ -84,6 +86,11 @@
       ./mylib.nix
       ./overlays.nix
     ] ++ self.nle.lib.build-paths ./.);
+    desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
+      "  name: ${pkg.name or pkg.pname or "null"}"
+      "  description: ${pkg.meta.description or "null"}"
+      "  homepage: ${pkg.meta.homepage or "null"}"
+    ];
   })
   (self: super: with super; with mylib;
   mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
