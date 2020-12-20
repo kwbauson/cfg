@@ -15,12 +15,16 @@ jobs:
           - homeConfigurations.keith-mac
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
     steps:
-      - uses: actions/checkout
-      - uses: nixbuild/nix-quick-install-action
+      - uses: actions/cache@v2
+        with:
+          key: ${{ matrix.output }}-cache
+          path: ~/.cache
+      - uses: actions/checkout@v2
+      - uses: nixbuild/nix-quick-install-action@v4
         with:
           nix_version: 3.0pre20200829_f156513
           nix_conf: experimental-features = nix-command flakes
-      - uses: cachix/cachix-action
+      - uses: cachix/cachix-action@v8
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
