@@ -57,11 +57,11 @@
         "version": "0.0.259"
     },
     "dmg-firefox": {
-        "sha256": "1ikfcdsz0pgaiwal47fnbybam513p5a1fn99g74wcf80wj27hlky",
+        "sha256": "1zgyhyppz45sy79d20blqq1kwiw71aprb61sz7vg8a5j1q2wlysc",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/83.0/mac/en-US/Firefox%2083.0.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0/mac/en-US/Firefox%2084.0.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "83.0"
+        "version": "84.0"
     },
     "dmg-qutebrowser": {
         "sha256": "1a4pakpn39pq72bgkqd1f1rik139c0shjfszxh1iqn7fb3dqrqmj",
@@ -90,10 +90,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "869cfbb9133317fefdca062de4043dc87c82d4eb",
-        "sha256": "0q3szjfxpmb9mk0n1x22s4mj8yv8gqv5kqp83nxkqf6cwrkm6k87",
+        "rev": "05500add3094001635326f0cc76632ee2598cb8c",
+        "sha256": "1z5dzc9xgl94rhqvmn75na0iy7jgxrc5q16maxh1fi1g5ly1sygj",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/869cfbb9133317fefdca062de4043dc87c82d4eb.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/05500add3094001635326f0cc76632ee2598cb8c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
