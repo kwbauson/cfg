@@ -18,7 +18,7 @@
     interfaces.ens3.useDHCP = true;
   };
 
-  services = {
+  services = with config; with networking; {
     openssh = {
       enable = true;
       passwordAuthentication = false;
@@ -31,7 +31,7 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       virtualHosts = {
-        "${config.networking.hostName}.${config.networking.domain}" = {
+        "${hostName}.${domain}" = {
           enableACME = true;
           forceSSL = true;
           locations."/" = {
@@ -43,7 +43,7 @@
     };
     jitsi-meet = {
       enable = true;
-      hostName = "jitsi.${config.networking.hostName}.${config.networking.domain}";
+      hostName = "jitsi.${hostName}.${domain}";
       config.enableNoisyMicDetection = false;
       config.p2p.enabled = false;
 
@@ -53,13 +53,13 @@
       };
     };
     jitsi-videobridge.openFirewall = true;
-    nginx.virtualHosts.${config.services.jitsi-meet.hostName} = {
+    nginx.virtualHosts.${services.jitsi-meet.hostName} = {
       forceSSL = true;
       enableACME = true;
     };
     prosody = {
-      uploadHttp.domain = "upload.${config.services.jitsi-meet.hostName}";
-      muc = [{ domain = "muc.${config.services.jitsi-meet.hostName}"; }];
+      uploadHttp.domain = "upload.${services.jitsi-meet.hostName}";
+      muc = [{ domain = "muc.${services.jitsi-meet.hostName}"; }];
     };
     # hercules-ci-agent.enable = true;
   };
