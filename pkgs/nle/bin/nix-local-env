@@ -110,7 +110,7 @@ case $cmd in
       done | sort | uniq | while read src;do
         cd "$src"
         set +e
-        "$0" init
+        "$0" cache
         set -e
       done
     fi
