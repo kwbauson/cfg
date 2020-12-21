@@ -19,8 +19,7 @@ pkgs: with pkgs; with mylib; buildEnv rec {
 
             if [[ $(echo "$packages" | wc -l) = 1 ]];then
               if [[ -z $packages ]];then
-                echo "$cmd": command not found
-                exit 127
+                attr=$cmd
               else
                 attr=$packages
               fi
