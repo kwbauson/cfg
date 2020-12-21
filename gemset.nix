@@ -14,10 +14,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1r37jp5l7jw2q87gn9ykcz8i07yx8cjs20d6xha36fsyyfx83wh1";
+      sha256 = "15hgiy09i8ywjihyzyvjvk42ivi3kmy6dm21s5sgg9j7y3h3zkkx";
       type = "gem";
     };
-    version = "1.14.1";
+    version = "1.14.2";
   };
   method_source = {
     groups = ["default"];
