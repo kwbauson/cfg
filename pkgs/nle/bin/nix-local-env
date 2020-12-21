@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr
+# with-packages direnv niv diffutils nix-wrapped nr coreutils
 set -e
 
 name=nle
@@ -57,6 +57,23 @@ hashcontent() {
   [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
 
+impure() {
+  local deps out impurefile file
+  deps=$1 && shift
+  out=$1 && shift
+  for file in $deps;do
+    [[ -e $file ]] || return 0
+  done
+  [[ -e $impuredir ]] || mkdir -p "$impuredir"
+  impurefile=$impuredir/$(hashfiles $deps)
+  if [[ -e $impurefile ]];then
+    cp "$impurefile" "$out"
+  else
+    "$@"
+    cp "$out" "$impurefile"
+  fi
+}
+
 cachedir=$cachebase/$(hashcontent | md5sum | awk '{ print $1 }')
 builddir=$cachedir/build
 result=$cachedir/result
@@ -109,36 +126,28 @@ case $cmd in
     "$0" rebuild
     ;;
   generate)
-    [[ -e $impuredir ]] || mkdir -p "$impuredir"
-    impurefile=
-    if [[ -e Gemfile && -e Gemfile.lock ]];then
-      impurefile=$impuredir/$(hashfiles Gemfile{,.lock})
-      if [[ -e $impurefile ]];then
-        cp "$impurefile" gemset.nix
-      else
-        nr bundix
-        cp gemset.nix "$impurefile"
-      fi
-    fi
-    impurefile=
-    if [[ -e package.json && -e package-lock.json ]];then
-      impurefile=$impuredir/$(hashfiles package{,-lock}.json)
-      if [[ -e $impurefile ]];then
-        cp "$impurefile" node-packages.nix
-      else
-        nr nodePackages.node2nix -c /dev/null \
-          --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
-        cp node-packages.nix "$impurefile"
-      fi
-    fi
+    impure "Gemfile Gemfile.lock" gemset.nix \
+      nr bundix
+    impure "package.json package-lock.json" node-packages.nix \
+      nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
     if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
-      nr yarn2nix --template > npm-package.nix
       sed -i 's,git+ssh://git@,git+git@,' package.json yarn.lock
-      nr yarn2nix > npm-deps.nix
+      grep '^  resolved "' yarn.lock | grep -v '#' | sed -e 's/[^"]*"//' -e 's/"$//' | while read url;do
+        echo prefetching "$url"
+        sha=$(nix-prefetch-url --name source.tgz --type sha1 "$url")
+        sed -i "s^$url^$url#$sha^" yarn.lock
+      done
+      impure package.json npm-package.nix \
+        sh -c 'nr yarn2nix --template > npm-package.nix'
+      impure yarn.lock npm-deps.nix \
+        sh -c 'nr yarn2nix > npm-deps.nix'
       if [[ -e .npmrc ]];then
         token=$(sed -n 1s/.*:_authToken=//p .npmrc)
-        sed -i '1s/ }:/, writeText }:/' npm-deps.nix
-        sed -i '/fetchurl {$/s/{$/{ curlOpts = "-H @${writeText "headers.txt" "Authorization: Bearer '"$token"'"}";/' npm-deps.nix
+        sed -i '1s/ }:/, writeText, lib }:/' npm-deps.nix
+        header="Authorization: Bearer $token"
+        curlOpts='"-H @${writeText "headers.txt" "'"$header"'"}"'
+        name='if lib.hasSuffix ".tgz" url then "" else "source.tgz"'
+        sed -i '/fetchurl {$/s/{$/'"rec { curlOpts = $curlOpts; name = $name;/" npm-deps.nix
       fi
     fi
     ;;
