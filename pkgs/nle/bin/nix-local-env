@@ -107,29 +107,25 @@ case $cmd in
     direnv allow
     ;;
   re)
-    if [[ -d "$cachebase" ]];then
-      for dir in "$cachebase"/*;do
-        src=$(< "$dir"/source)
-        [[ -d $src ]] && echo "$src"
-      done | sort | uniq | while read src;do
-        cd "$src"
-        set +e
-        "$0" activate
-        set -e
-      done
-    fi
+    "$0" cached | while read src;do
+      set +e
+      "$0" activate -d "$src"
+      set -e
+    done
     ;;
   recache)
+    "$0" cached | while read src;do
+      set +e
+      "$0" cache -d "$src"
+      set -e
+    done
+    ;;
+  cached)
     if [[ -d "$cachebase" ]];then
       for dir in "$cachebase"/*;do
         src=$(< "$dir"/source)
         [[ -d $src ]] && echo "$src"
-      done | sort | uniq | while read src;do
-        cd "$src"
-        set +e
-        "$0" cache
-        set -e
-      done
+      done | sort | uniq
     fi
     ;;
   cache)
@@ -165,6 +161,9 @@ case $cmd in
         curlOpts='"-H @${writeText "headers.txt" "'"$header"'"}"'
         name='if lib.hasSuffix ".tgz" url then "" else "source.tgz"'
         sed -i '/fetchurl {$/s/{$/'"rec { curlOpts = $curlOpts; name = $name;/" npm-deps.nix
+        unpackPackage='tar xzvf $src; chmod +x package; mv package/* .; rmdir package'
+        unpackPhase='if key == "char-regex" then "'"$unpackPackage"'" else null'
+        sed -i "s:src = fetchurl:unpackPhase = $unpackPhase; "'\0:' npm-deps.nix
       fi
     fi
     ;;
