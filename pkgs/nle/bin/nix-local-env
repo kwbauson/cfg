@@ -95,12 +95,29 @@ case $cmd in
     [[ -d $builddir ]] && cd "$builddir"
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
-  init)
-    if [[ ! -e .envrc ]];then
-      echo 'eval "$('$name' direnv)"' > .envrc
-    fi
-    direnv allow
+  activate)
     "$0" cache
+    [[ -L node_modules ]] && unlink node_modules || true
+    [[ -e package.json && -e yarn.lock && ! -e node_modules && ! -e .disable-nle-yarn ]] \
+      && ln -sf "$result"/node_modules node_modules || true
+    ;;
+  init)
+    "$0" activate
+    [[ ! -e .envrc ]] && echo 'eval "$('$name' direnv)"' > .envrc
+    direnv allow
+    ;;
+  re)
+    if [[ -d "$cachebase" ]];then
+      for dir in "$cachebase"/*;do
+        src=$(< "$dir"/source)
+        [[ -d $src ]] && echo "$src"
+      done | sort | uniq | while read src;do
+        cd "$src"
+        set +e
+        "$0" activate
+        set -e
+      done
+    fi
     ;;
   recache)
     if [[ -d "$cachebase" ]];then
@@ -185,10 +202,7 @@ case $cmd in
     "$@"
     ;;
   direnv)
-    "$0" cache 1>&2
-    [[ -L node_modules ]] && unlink node_modules
-    [[ -e package.json && -e yarn.lock && ! -e node_modules && ! -e .disable-nle-yarn ]] \
-      && ln -sf "$result"/node_modules node_modules
+    "$0" activate 1>&2
     echo '[[ -z $IN_NIX_SHELL ]] && source_up'
     echo PATH_add "$result/bin"
     echo export IN_NIX_SHELL=impure
