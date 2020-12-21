@@ -80,7 +80,7 @@ result=$cachedir/result
 sourcelink=$cachedir/source
 
 if [[ -z $cmd ]];then
-  "$0" cache
+  "$0" activate
   exit $?
 fi
 
