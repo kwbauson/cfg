@@ -151,7 +151,7 @@ case $cmd in
       done
       # FIXME hack around t1/react-click-outside
       sed -i '/^react-click-outside/,+3d' yarn.lock
-      sed -i '/react-click-outside/d' yarn.lock
+      sed -i '/react-click-outside/d' yarn.lock package.json
       impure 'package.json yarn.lock' yarn.nix \
         sh -c 'nr yarn2nix --builtin-fetchgit > yarn.nix'
       if [[ -e .npmrc ]];then
