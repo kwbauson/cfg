@@ -234,17 +234,5 @@
         "type": "tarball",
         "url": "https://github.com/dsifford/yarn-completion/archive/5bf2968493a7a76649606595cfca880a77e6ac0e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "yarn2nix": {
-        "branch": "master",
-        "description": "Build and deploy node packages with nix from yarn.lock files.",
-        "homepage": "",
-        "owner": "Profpatsch",
-        "repo": "yarn2nix",
-        "rev": "7db64eaaecf8034f26601d65a22b8a5905c81b18",
-        "sha256": "17vmgm52q3yzqdp1y054wc52c3ixn1lnf1g4fchmbi1llv4p5ahc",
-        "type": "tarball",
-        "url": "https://github.com/Profpatsch/yarn2nix/archive/7db64eaaecf8034f26601d65a22b8a5905c81b18.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

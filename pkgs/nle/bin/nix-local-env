@@ -144,27 +144,37 @@ case $cmd in
     impure "package.json package-lock.json" node-packages.nix \
       nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
     if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
-      sed -i 's,git+ssh://git@,git+git@,' package.json yarn.lock
       grep '^  resolved "' yarn.lock | grep -v '#' | sed -e 's/[^"]*"//' -e 's/"$//' | while read url;do
         echo prefetching "$url"
-        sha=$(nix-prefetch-url --name source.tgz --type sha1 "$url")
-        sed -i "s^$url^$url#$sha^" yarn.lock
+        sha1=$(nix-prefetch-url --type sha1 "$url")
+        sed -i "s^$url^$url#$sha1^" yarn.lock
       done
-      impure package.json npm-package.nix \
-        sh -c 'nr yarn2nix --template > npm-package.nix'
-      impure yarn.lock npm-deps.nix \
-        sh -c 'nr yarn2nix > npm-deps.nix'
+      # FIXME hack around t1/react-click-outside
+      sed -i '/^react-click-outside/,+3d' yarn.lock
+      sed -i '/react-click-outside/d' yarn.lock
+      impure 'package.json yarn.lock' yarn.nix \
+        sh -c 'nr yarn2nix --builtin-fetchgit > yarn.nix'
       if [[ -e .npmrc ]];then
         token=$(sed -n 1s/.*:_authToken=//p .npmrc)
-        sed -i '1s/ }:/, writeText, lib }:/' npm-deps.nix
         header="Authorization: Bearer $token"
         curlOpts='"-H @${writeText "headers.txt" "'"$header"'"}"'
-        name='if lib.hasSuffix ".tgz" url then "" else "source.tgz"'
-        sed -i '/fetchurl {$/s/{$/'"rec { curlOpts = $curlOpts; name = $name;/" npm-deps.nix
-        unpackPackage='tar xzvf $src; chmod +x package; mv package/* .; rmdir package'
-        unpackPhase='if key == "char-regex" then "'"$unpackPackage"'" else null'
-        sed -i "s:src = fetchurl:unpackPhase = $unpackPhase; "'\0:' npm-deps.nix
+      else
+        curlOpts='""'
       fi
+      sed -i \
+        -e '1s/^{ /\0writeText, /' \
+        -e "1acurlOpts = $curlOpts;" \
+        -e "2,$(wc -l yarn.nix | cut -d' ' -f1)s/fetchurl/customFetchurl/" \
+        -e '2acustomFetchurl = args: fetchurl (args // { inherit curlOpts; });' \
+        -e 's,ssh://,,' \
+        -e 's/builtins.fetchGit/fetchgit/' \
+        -e '/^\s\+ref = /d' \
+        yarn.nix
+      sed -n '/repo = fetchgit/,+2s/.*url = "\(.*\)";/\1/p;s/.* rev = "\(.*\)";/\1/p' yarn.nix |
+        paste - - | while read url rev;do
+        sha256=$(nr nix-prefetch-git "$url" --rev "$rev" | jq -r .sha256)
+        sed -i "s^$url\";^\0 sha256 = \"$sha256\";^" yarn.nix
+      done
     fi
     ;;
   update)

@@ -76,12 +76,6 @@
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
     discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
-    yarn2nix = import sources.yarn2nix {
-      pkgs = import "${sources.yarn2nix}/nixpkgs-pinned.nix" {
-        inherit system;
-        overlays = [ (_: _: { nodejs = nodejs_latest; }) ];
-      };
-    };
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
     selfpkgs = buildDir ([

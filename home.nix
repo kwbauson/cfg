@@ -306,6 +306,7 @@ with builtins; with pkgs; with mylib; {
       };
       inherit userName userEmail;
       extraConfig = {
+        clean.requireForce = false;
         checkout.defaultRemote = "origin";
         core.autocrlf = "input";
         fetch.prune = true;

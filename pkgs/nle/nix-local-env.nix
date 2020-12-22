@@ -53,20 +53,22 @@ rec {
     optional
       (!pathExists (file ".disable-nle-yarn"))
       (
-        ifFiles "package.json yarn.lock npm-package.nix npm-deps.nix"
+        ifFiles "package.json yarn.lock yarn.nix"
           rec {
-            inherit (yarn2nix.nixLib) callTemplate buildNodeDeps linkNodeDeps;
-            deps = buildNodeDeps (callPackage (file "npm-deps.nix") { });
-            moduleDeps = attrValues (removeAttrs deps [ "_buildNodePackage" ]);
-            built = callTemplate (file "npm-package.nix") deps;
-            package = linkNodeDeps { name = "yarn"; dependencies = built.nodeBuildInputs; };
-            modules = linkNodeDeps { name = "yarn"; dependencies = moduleDeps; };
+            package = yarn2nix-moretea.mkYarnModules rec {
+              name = pname;
+              pname = "yarn-modules";
+              version = "";
+              packageJSON = file "package.json";
+              yarnLock = file "yarn.lock";
+              yarnNix = file "yarn.nix";
+            };
             out =
               runCommand "yarn-env"
                 { } ''
                 mkdir $out
-                [[ -e ${package}/.bin ]] && ln -s ${package}/.bin $out/bin
-                ln -s ${package} $out/node_modules
+                [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
+                ln -s ${package}/node_modules $out/node_modules
               '';
           }.out
       );
