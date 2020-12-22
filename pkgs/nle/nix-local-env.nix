@@ -55,13 +55,14 @@ rec {
       (
         ifFiles "package.json yarn.lock yarn.nix"
           rec {
-            package = yarn2nix-moretea.mkYarnModules rec {
+            package = with yarn2nix-moretea; mkYarnModules rec {
               name = pname;
               pname = "yarn-modules";
               version = "";
               packageJSON = file "package.json";
               yarnLock = file "yarn.lock";
               yarnNix = file "yarn.nix";
+              # yarnFlags = remove "--ignore-scripts" defaultYarnFlags;
             };
             out =
               runCommand "yarn-env"
