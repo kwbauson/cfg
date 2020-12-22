@@ -3,9 +3,12 @@ pkgs: with pkgs; with mylib; buildEnv {
   paths = let env = nle { path = ./.; }; in
     [ (alias name env.pkgs.nix-local-env) env ];
 } // rec {
-  __functor = let nixpkgs = pkgs; in
-    _: { path, pkgs ? nixpkgs }:
-      import ./nix-local-env.nix { inherit pkgs path; };
+  __functor =
+    let
+      nixpkgs = pkgs;
+      f = { path, pkgs ? nixpkgs }: import ./nix-local-env.nix { inherit pkgs path; };
+    in
+    _: arg: if isAttrs arg then f arg else f { path = arg; };
   lib = rec {
     build-files = words ''
       bin nix local.nix

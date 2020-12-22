@@ -56,14 +56,17 @@ rec {
         ifFiles "package.json yarn.lock npm-package.nix npm-deps.nix"
           rec {
             inherit (yarn2nix.nixLib) callTemplate buildNodeDeps linkNodeDeps;
-            built = callTemplate (file "npm-package.nix") (buildNodeDeps (callPackage (file "npm-deps.nix") { }));
-            link = linkNodeDeps { name = "yarn"; dependencies = built.nodeBuildInputs; };
+            deps = buildNodeDeps (callPackage (file "npm-deps.nix") { });
+            moduleDeps = attrValues (removeAttrs deps [ "_buildNodePackage" ]);
+            built = callTemplate (file "npm-package.nix") deps;
+            package = linkNodeDeps { name = "yarn"; dependencies = built.nodeBuildInputs; };
+            modules = linkNodeDeps { name = "yarn"; dependencies = moduleDeps; };
             out =
               runCommand "yarn-env"
                 { } ''
                 mkdir $out
-                [[ -e ${link}/.bin ]] && ln -s ${link}/.bin $out/bin
-                ln -s ${link} $out/node_modules
+                [[ -e ${package}/.bin ]] && ln -s ${package}/.bin $out/bin
+                ln -s ${package} $out/node_modules
               '';
           }.out
       );
