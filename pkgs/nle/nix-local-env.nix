@@ -62,7 +62,6 @@ rec {
               packageJSON = file "package.json";
               yarnLock = file "yarn.lock";
               yarnNix = file "yarn.nix";
-              # yarnFlags = remove "--ignore-scripts" defaultYarnFlags;
             };
             out =
               runCommand "yarn-env"

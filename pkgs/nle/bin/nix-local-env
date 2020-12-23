@@ -145,9 +145,9 @@ case $cmd in
       nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
     if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
       grep '^  resolved "' yarn.lock | grep -v '#' | sed -e 's/[^"]*"//' -e 's/"$//' | while read url;do
-        echo prefetching "$url"
-        sha1=$(nix-prefetch-url --type sha1 "$url")
-        sed -i "s^$url^$url#$sha1^" yarn.lock
+        name=$(echo $url | sed 's:/:_:g')
+        impure <(echo $url) $name sh -c "nix-prefetch-url --type sha1 $url > $name"
+        sed -i "s^$url^$url#$(< $name)^" yarn.lock
       done
       # FIXME hack around t1/react-click-outside
       sed -i -e '/^react-click-outside/,/^$/d' -e '/react-click-outside/d' yarn.lock package.json
@@ -156,7 +156,7 @@ case $cmd in
       if [[ -e .npmrc ]];then
         token=$(sed -n 1s/.*:_authToken=//p .npmrc)
         header="Authorization: Bearer $token"
-        curlOpts='"-H @${writeText "headers.txt" "'"$header"'"}"'
+        curlOpts='"-H @${writeText "headers.txt" "'$header'"}"'
       else
         curlOpts='""'
       fi
@@ -171,8 +171,9 @@ case $cmd in
         yarn.nix
       sed -n '/repo = fetchgit/,+2s/.*url = "\(.*\)";/\1/p;s/.* rev = "\(.*\)";/\1/p' yarn.nix |
         paste - - | while read url rev;do
-        sha256=$(nr nix-prefetch-git "$url" --rev "$rev" | jq -r .sha256)
-        sed -i "s^$url\";^\0 sha256 = \"$sha256\";^" yarn.nix
+        name=$(echo $url | sed 's:/:_:g')
+        impure <(echo $url $rev) $name sh -c "nr nix-prefetch-git $url --rev $rev | jq -r .sha256 > $name"
+        sed -i "s^$url\";^\0 sha256 = \"$(< $name)\";^" yarn.nix
       done
     fi
     ;;
