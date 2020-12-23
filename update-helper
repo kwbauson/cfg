@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages curl niv gawk nix-wrapped
+# with-packages curl niv gawk nix-wrapped nr
 channel=${1:-nixos-unstable}
 url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
 version=$(echo "$url" | awk -F/ '{ print $NF }')
@@ -9,3 +9,8 @@ for pkg in qutebrowser alacritty signal-desktop firefox;do
   version=$(nix eval --raw ".#$pkg.version")
   niv update dmg-$pkg -v $version
 done
+
+node_version=$(nr -c node nodejs_latest --version)
+url=https://nodejs.org/download/release/$node_version/node-$node_version-headers.tar.gz
+sha256=$(nix-prefetch-url $url)
+echo "builtins.fetchurl { url = \"$url\"; sha256 = \"$sha256\"; }" > pkgs/nle/node-headers.nix

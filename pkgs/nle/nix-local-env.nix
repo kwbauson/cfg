@@ -55,10 +55,11 @@ rec {
       (
         ifFiles "package.json yarn.lock yarn.nix"
           rec {
-            node-headers = fetchurl {
-              url = "https://nodejs.org/download/release/v14.15.3/node-v14.15.3-headers.tar.gz";
-              sha256 = "1y2liq26js618qnnj5d4q2m7nzsizfj0flzcr6sz20f1q6m4a4kg";
-            };
+            yarn2nix-moretea =
+              callPackage
+                "${pkgs.path}/pkgs/development/tools/yarn2nix-moretea/yarn2nix" {
+                nodejs = nodejs_latest;
+              };
             package = with yarn2nix-moretea; mkYarnModules rec {
               name = pname;
               pname = "yarn-modules";
@@ -75,7 +76,7 @@ rec {
                 PATH=$PWD/.bin:$PATH
                 if [[ -d canvas ]];then
                   cd canvas
-                  node-pre-gyp install --build-from-source --tarball ${node-headers}
+                  node-pre-gyp install --build-from-source --tarball ${import ./node-headers.nix}
                   cd ..
                 fi
               '';
