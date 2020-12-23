@@ -24,10 +24,11 @@ pkgs: with pkgs; with mylib; buildEnv {
   scripts = with lib; makeScripts {
     update = joinMapAttrValuesIf nr (hasPrefix "update-") scripts;
     update-npm = ''
+      ${pathAdd [ nodejs_latest nodePackages.npm-check-updates ]}
       if [[ -e package.json && package-lock.json ]];then
-        if ! ${nr nodePackages.npm-check-updates} -e2;then
-          ${nr nodePackages.npm-check-updates} -u
-          ${nr nodePackages.npm} --package-lock-only i
+        if ! ncu -e2;then
+          ncu -u
+          npm --package-lock-only i
         fi
       fi
     '';

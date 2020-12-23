@@ -55,6 +55,10 @@ rec {
       (
         ifFiles "package.json yarn.lock yarn.nix"
           rec {
+            node-headers = fetchurl {
+              url = "https://nodejs.org/download/release/v14.15.3/node-v14.15.3-headers.tar.gz";
+              sha256 = "1y2liq26js618qnnj5d4q2m7nzsizfj0flzcr6sz20f1q6m4a4kg";
+            };
             package = with yarn2nix-moretea; mkYarnModules rec {
               name = pname;
               pname = "yarn-modules";
@@ -62,6 +66,19 @@ rec {
               packageJSON = file "package.json";
               yarnLock = file "yarn.lock";
               yarnNix = file "yarn.nix";
+              pkgConfig = {
+                node-pre-gyp.buildInputs = [ python2 gnumake coreutils gcc gnused binutils gnugrep pkg-config ];
+                canvas.buildInputs = [ pango libjpeg ];
+              };
+              postBuild = ''
+                cd $out/node_modules
+                PATH=$PWD/.bin:$PATH
+                if [[ -d canvas ]];then
+                  cd canvas
+                  node-pre-gyp install --build-from-source --tarball ${node-headers}
+                  cd ..
+                fi
+              '';
             };
             out =
               runCommand "yarn-env"
