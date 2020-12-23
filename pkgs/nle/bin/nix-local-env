@@ -11,17 +11,15 @@ cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
 
 args=$@
-cmd=
-[[ -n $1 && $1 != -d ]] && cmd=$1 && shift
 [[ $1 = -d ]] && shift && cd "$1" && shift
+
 sourcedir=$PWD
+cmd=${1:-activate} && [[ -n $1 ]] && shift
 
 invalid() {
   echo invalid command: "$args"
   exit 1
 }
-
-[[ $cmd != run && -n $1 ]] && invalid
 
 buildfiles=(
   package{,-lock}.json
@@ -78,11 +76,6 @@ cachedir=$cachebase/$(hashcontent | md5sum | awk '{ print $1 }')
 builddir=$cachedir/build
 result=$cachedir/result
 sourcelink=$cachedir/source
-
-if [[ -z $cmd ]];then
-  "$0" activate
-  exit $?
-fi
 
 envfiles='.env .env.development .development.env'
 
@@ -201,7 +194,7 @@ case $cmd in
     [[ -x update-helper ]] && ./update-helper
     ;;
   run)
-    "$0" cache
+    "$0" activate
     set -a
     PATH=$result/bin:$PATH
     for file in $envfiles;do
