@@ -211,22 +211,22 @@ let
         sha512 = "0we/UrRQVy6/Ogf5XRHt+jmYJzfrYatymgt82BHDg0BBUXrY/E9J+JXfc8IeQ9eonJdgzujlT/Es22lv/Zxgsg==";
       };
     };
-    "coc-explorer-0.13.5" = {
+    "coc-explorer-0.13.6" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.13.5";
+      version = "0.13.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.13.5.tgz";
-        sha512 = "KKHn9OI5lcQNUG20Rc6DdMLQ3gg8Nd2IlS4OdM9gvw1/wjv1To6LKoWrub0xyXF0tHZmD62ZKs+2pBye6Ojk6Q==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.13.6.tgz";
+        sha512 = "1kcVbchAFXmBb6MOLOc5tP8vJV4Az5UFEkpvgppU9KuSKhMWn5+FAPCxtOzdiBJ9+LvJMSbDCKctCU3SBdcKHA==";
       };
     };
-    "coc-pyright-1.1.95" = {
+    "coc-pyright-1.1.96" = {
       name = "coc-pyright";
       packageName = "coc-pyright";
-      version = "1.1.95";
+      version = "1.1.96";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.95.tgz";
-        sha512 = "8JnB/H80SFiCLXNJCImRg/DjknM7Vc/O9D73EvGYHcp6AC1QNZLDdbmAczvh9zTX2g4DfLny4H5LUXs+WduIWQ==";
+        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.96.tgz";
+        sha512 = "hkl/UJrQgkUfeFT460HG8n6qr7Eo3np7SoD82T6XbMTLmiLhFP1xjuG8Cwpiaod++5a6gW6CBT6gQjKGGLnrtw==";
       };
     };
     "concat-map-0.0.1" = {
@@ -1084,13 +1084,13 @@ let
         sha512 = "LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==";
       };
     };
-    "pyright-1.1.95" = {
+    "pyright-1.1.96" = {
       name = "pyright";
       packageName = "pyright";
-      version = "1.1.95";
+      version = "1.1.96";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.95.tgz";
-        sha512 = "Hr4eT7jcKU0YCyEsslqDseVen5uTjaLbwdfHYsDhMzmwWu4nxX3OrpfUNstaiYZdqNAFwFRHQzPWaibS9cm05A==";
+        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.96.tgz";
+        sha512 = "swcN/v0b9Cf7dM3vxxUb2FDX8Qgfdzz3T9z/4iedA5Cn8sHeV+3B17PtjEOAObfy1I2lwwsBp2JTAiBm8CzTKQ==";
       };
     };
     "read-pkg-1.1.0" = {
@@ -1509,8 +1509,8 @@ let
       sources."clean-stack-2.2.0"
       sources."clone-deep-0.2.4"
       sources."coc-deno-0.11.0"
-      sources."coc-explorer-0.13.5"
-      sources."coc-pyright-1.1.95"
+      sources."coc-explorer-0.13.6"
+      sources."coc-pyright-1.1.96"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
       sources."cross-spawn-7.0.3"
@@ -1620,7 +1620,7 @@ let
       sources."pinkie-2.0.4"
       sources."pinkie-promise-2.0.1"
       sources."pump-3.0.0"
-      sources."pyright-1.1.95"
+      sources."pyright-1.1.96"
       (sources."read-pkg-1.1.0" // {
         dependencies = [
           sources."path-type-1.1.0"
