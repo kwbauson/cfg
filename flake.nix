@@ -39,10 +39,7 @@
           let system = nixosSystem args;
           in
           system.config.system.build.toplevel // system // {
-            paths = self.packages.x86_64-linux.buildEnv {
-              name = "nixos-paths";
-              paths = filter (x: x.allowSubstitutes or true) system.config.environment.systemPackages;
-            };
+            paths = filter (x: x.allowSubstitutes or true) system.config.environment.systemPackages;
           };
         callModule =
           module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
@@ -67,10 +64,7 @@
           });
           in
           conf.activationPackage // conf // {
-            paths = pkgs.buildEnv {
-              name = "home-paths";
-              paths = filter (x: x.allowSubstitutes or true) conf.config.home.packages;
-            };
+            paths = filter (x: x.allowSubstitutes or true) conf.config.home.packages;
           };
       };
 
