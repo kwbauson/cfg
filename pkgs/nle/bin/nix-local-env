@@ -102,14 +102,14 @@ case $cmd in
   re)
     "$0" cached | while read src;do
       set +e
-      "$0" activate -d "$src"
+      "$0" -d "$src" activate
       set -e
     done
     ;;
   recache)
     "$0" cached | while read src;do
       set +e
-      "$0" cache -d "$src"
+      "$0" -d "$src" cache
       set -e
     done
     ;;
@@ -128,7 +128,7 @@ case $cmd in
     for file in ${buildfiles[@]};do
       [[ -e $sourcedir/$file ]] && cp -rt "$builddir" "$sourcedir/$file"
     done
-    "$0" generate -d "$builddir"
+    "$0" -d "$builddir" generate
     "$0" rebuild
     ;;
   generate)
@@ -226,7 +226,7 @@ case $cmd in
       for dir in "$cachebase"/*;do
         newdir=$(< "$dir"/source)
         if [[ -d $newdir ]];then
-          [[ $("$0" cachedir -d "$newdir") != $dir ]] && rm -rf "$dir"
+          [[ $("$0" -d "$newdir" cachedir) != $dir ]] && rm -rf "$dir"
         else
           rm -rf "$dir"
         fi
