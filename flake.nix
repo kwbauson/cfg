@@ -35,7 +35,15 @@
         mylib = import ./mylib.nix nixpkgs;
         inherit (mylib) mapAttrValues importDir;
         nixosConfiguration = module: buildSystem { system = "x86_64-linux"; modules = [ (callModule module) ]; };
-        buildSystem = args: (system: system.config.system.build.toplevel // system) (nixosSystem args);
+        buildSystem = args:
+          let system = nixosSystem args;
+          in
+          system.config.system.build.toplevel // system // {
+            paths = self.packages.x86_64-linux.buildEnv {
+              name = "nixos-paths";
+              paths = system.config.environment.systemPackages;
+            };
+          };
         callModule =
           module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
         homeConfiguration =
@@ -57,7 +65,13 @@
             } // args // { inherit self; });
             inherit system pkgs username homeDirectory;
           });
-          in conf.activationPackage // conf;
+          in
+          conf.activationPackage // conf // {
+            paths = pkgs.buildEnv {
+              name = "home-paths";
+              paths = conf.config.home.packages;
+            };
+          };
       };
 
       overlays = [
