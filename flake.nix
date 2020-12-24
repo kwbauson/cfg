@@ -41,7 +41,7 @@
           system.config.system.build.toplevel // system // {
             paths = self.packages.x86_64-linux.buildEnv {
               name = "nixos-paths";
-              paths = system.config.environment.systemPackages;
+              paths = filter (x: x.allowSubstitutes or true) system.config.environment.systemPackages;
             };
           };
         callModule =
@@ -69,7 +69,7 @@
           conf.activationPackage // conf // {
             paths = pkgs.buildEnv {
               name = "home-paths";
-              paths = conf.config.home.packages;
+              paths = filter (x: x.allowSubstitutes or true) conf.config.home.packages;
             };
           };
       };
