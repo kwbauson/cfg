@@ -10,7 +10,7 @@ for pkg in qutebrowser alacritty signal-desktop firefox;do
   niv update dmg-$pkg -v $version
 done
 
-node_version=$(nr -c node nodejs_latest --version)
+node_version=$(nix shell ".#nodejs_latest" -c node --version)
 url=https://nodejs.org/download/release/$node_version/node-$node_version-headers.tar.gz
 sha256=$(nix-prefetch-url $url)
 echo "builtins.fetchurl { url = \"$url\"; sha256 = \"$sha256\"; }" > pkgs/nle/node-headers.nix
