@@ -90,9 +90,13 @@ case $cmd in
     ;;
   activate)
     "$0" cache
-    [[ -L node_modules ]] && unlink node_modules || true
-    [[ -e package.json && -e yarn.lock && ! -e node_modules && ! -e .disable-nle-yarn ]] \
-      && ln -sf "$result"/node_modules node_modules || true
+    if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
+      if [[ ! -e node_modules || -L node_modules ]];then
+        ln -sft . "$result"/node_modules
+      else
+        echo warning: node_modules already exists, not linking
+      fi
+    fi
     ;;
   init)
     "$0" activate
