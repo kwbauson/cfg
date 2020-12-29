@@ -57,11 +57,11 @@
         "version": "0.0.259"
     },
     "dmg-firefox": {
-        "sha256": "1zgyhyppz45sy79d20blqq1kwiw71aprb61sz7vg8a5j1q2wlysc",
+        "sha256": "159jkkyzhsq66c0fvq10yvaq03wahg8xxhhvrqj58r74qg4c93wy",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0/mac/en-US/Firefox%2084.0.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0.1/mac/en-US/Firefox%2084.0.1.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "84.0"
+        "version": "84.0.1"
     },
     "dmg-qutebrowser": {
         "sha256": "1a4pakpn39pq72bgkqd1f1rik139c0shjfszxh1iqn7fb3dqrqmj",
@@ -90,10 +90,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "424a3d00edcf162a330595302e567b3f34d73e9e",
-        "sha256": "0hw6946b9gn82yairblh4ab6b649p0mxl64yrycmvrhmnwz61six",
+        "rev": "3c9e7491c087f8239e3fe1e65ce8283300ec6e3f",
+        "sha256": "1b7n3svs97xlh86lrmb0ygcnkxp8vwdg2yp6i00cnwzdjv91pfzx",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/424a3d00edcf162a330595302e567b3f34d73e9e.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/3c9e7491c087f8239e3fe1e65ce8283300ec6e3f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -126,10 +126,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "6244ca85fee41a0fb42152ad1a8b6cd0d170ba06",
-        "sha256": "08bqyz8rj4csiz27d4342vx46zrxn7gg8jkcfrr8r376yjpsiyj7",
+        "rev": "b1135d800d70ce991601005ecf1a875a3a58c3dd",
+        "sha256": "05nqa5245i57imjwr0f1yglwxfqx9f9l4lzgiy1ndjjfznyji0ix",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/6244ca85fee41a0fb42152ad1a8b6cd0d170ba06.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/b1135d800d70ce991601005ecf1a875a3a58c3dd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -157,11 +157,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable-channel": {
-        "sha256": "16sl3385xf5ksxygcr8nd4vhfbgd77ha5v0n6hnf627zlxh5l33y",
+        "sha256": "1fqc36rks6gjiq0lym6bkdcg3wzzjlk7bfr9yibxy06wxidrkxsl",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre259605.57a787c9fa9/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre259928.2f47650c2f2/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.03pre259605.57a787c9fa9"
+        "version": "nixos-21.03pre259928.2f47650c2f2"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
