@@ -44,7 +44,7 @@ with builtins; with pkgs; with mylib; {
           (alias "nixpkgs-rev" "echo ${cfg.inputs.nixpkgs.rev}")
           (alias "nixpkgs-path" "echo ${pkgs.path}")
           (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
-          (alias "local_ops" "nle run -d ~/src/hr/local_ops python dev.py --no-banner")
+          (alias "local_ops" "nle -d ~/src/hr/local_ops run python dev.py --no-banner")
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
           (alias "selfpkgs-path" "echo ${selfpkgs.outPath}")
         ];
