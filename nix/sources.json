@@ -90,10 +90,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "e90daf4c5d938a91bc8e979b599813f60f5e9b86",
-        "sha256": "0c2bgq9z7021j78szizf5rsj8qhgkwg2p3g5qc03v8z7rwaad585",
+        "rev": "0dbc5e0ad5aa5597b9ff40f0d14ac8cc60f0e3a9",
+        "sha256": "0gy3hi2j3v1y3xg466iqil86zr00yvcf5g070g4j4jzv782jhsqp",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/e90daf4c5d938a91bc8e979b599813f60f5e9b86.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/0dbc5e0ad5aa5597b9ff40f0d14ac8cc60f0e3a9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -193,10 +193,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "68ffbffd086b0e9bb98c74705abe891b756b9e11",
-        "sha256": "150xczhxs9n3xgrwivgp02xwbpqn0xwz65g91n4pl1g2bj3dbp1p",
+        "rev": "d8f98ba64076b731e784f2d75b6bbad4c0e704ef",
+        "sha256": "14gxzk2zwsg3ram33w483zhgm5ds6gcfg23hn3imjqjd5k0piw2z",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/68ffbffd086b0e9bb98c74705abe891b756b9e11.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/d8f98ba64076b731e784f2d75b6bbad4c0e704ef.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
