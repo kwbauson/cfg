@@ -104,7 +104,7 @@ rec {
           gemset = file "gemset.nix";
           ignoreCollisions = true;
           allowSubstitutes = true;
-          groups = [ "default" "development" "test" ];
+          groups = null;
           gemConfig = defaultGemConfig // {
             zipruby = _: { buildInputs = [ zlib ]; };
             grpc = attrs: defaultGemConfig.grpc attrs // {
