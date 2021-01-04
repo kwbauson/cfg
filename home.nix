@@ -105,7 +105,7 @@ with builtins; with pkgs; with mylib; {
   programs = {
     home-manager.enable = true;
     home-manager.path = cfg.inputs.home-manager.outPath;
-    command-not-found.enable = true;
+    command-not-found.enable = !isNixOS;
     command-not-found.dbPath = programs-sqlite;
     bash = {
       enable = true;
