@@ -78,6 +78,7 @@
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
+    inherit (nixos-unstable-channel) cachix;
     selfpkgs = buildDir ([
       ./pkgs
       ./config.nix
