@@ -69,7 +69,11 @@
       };
 
       overlays = [
-        (_: prev: { cfg = self; mylib = import ./mylib.nix prev; })
+        (_: nixpkgs: {
+          cfg = self;
+          mylib = import ./mylib.nix nixpkgs;
+          inherit nixpkgs;
+        })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
 
