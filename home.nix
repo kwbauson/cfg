@@ -385,11 +385,6 @@ with builtins; with pkgs; with mylib; {
         map ! shell bash
       '';
       "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
-      ${attrIf isDarwin "nix/nix.conf"}.text = ''
-        max-jobs = auto
-        builders-use-substitutes = true
-        builders = ssh://keith@kwbauson.com x86_64-linux
-      '';
       "emborg/settings".text = ''
         configurations = "default"
         encryption = "none"

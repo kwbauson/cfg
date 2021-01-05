@@ -45,6 +45,7 @@
       }
     ) // rec {
       options = [
+        [ "max-jobs" "auto" ]
         "keep-going"
         "builders-use-substitutes"
         [ "extra-experimental-features" "nix-command flakes ca-references" ]
