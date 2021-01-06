@@ -297,7 +297,7 @@ with builtins; with pkgs; with mylib; {
         p = "put";
         pf = "put --force-with-lease";
         put = "! git push origin `git branch-name`";
-        rt = "reset .";
+        rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ro = "! git reset --hard origin/`git branch-name`";
         f = "fetch --all";
         ru = "remote update";
