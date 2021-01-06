@@ -79,7 +79,7 @@
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
-    pinned-if-darwin = if isDarwin then nixos-unstable-channel else prev;
+    pinned-if-darwin = if isDarwin then nixos-unstable-channel else super;
     inherit (self.pinned-if-darwin) nix nixUnstable;
     selfpkgs = buildDir ([
       ./pkgs
