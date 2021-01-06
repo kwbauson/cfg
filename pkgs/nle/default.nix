@@ -17,6 +17,7 @@ pkgs: with pkgs; with mylib; buildEnv {
       yarn.lock npm-package.nix npm-deps.nix .npmrc
       Gemfile Gemfile.lock gemset.nix
       requirements.txt requirements.dev.txt
+      pyproject.toml poetry.lock
     '';
     build-paths = path: filter pathExists (map (p: path + "/${p}") build-files);
     joinMapAttrValuesIf = f: p: as: concatMapStringsSep "\n" f (attrValues (filterAttrs (n: v: p n) as));
