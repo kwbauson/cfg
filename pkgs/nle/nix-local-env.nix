@@ -1,7 +1,9 @@
 { path, pkgs }:
 with builtins; with pkgs; with mylib;
 rec {
-  ifFiles = fs: optional (all (f: pathExists (file f)) (splitString " " fs));
+  hasFiles = fs: all (f: pathExists (file f)) (splitString " " fs);
+  ifFiles = fs: optional (hasFiles fs);
+  ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
 
   wrapScriptWithPackages = src: env: rec {
@@ -38,7 +40,7 @@ rec {
   }.out;
   local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];
   node-modules-paths =
-    ifFiles "package.json package-lock.json node-packages.nix"
+    ifFilesAndNot "package.json package-lock.json node-packages.nix" "yarn.nix"
       rec {
         originalArgs = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args;
         args = originalArgs // {
@@ -50,46 +52,42 @@ rec {
       }.out;
 
   yarn-paths =
-    optional
-      (!pathExists (file ".disable-nle-yarn"))
-      (
-        ifFiles "package.json yarn.lock yarn.nix"
-          rec {
-            yarn2nix-moretea =
-              callPackage
-                "${pkgs.path}/pkgs/development/tools/yarn2nix-moretea/yarn2nix" {
-                nodejs = nodejs_latest;
-              };
-            package = with yarn2nix-moretea; mkYarnModules rec {
-              name = pname;
-              pname = "yarn-modules";
-              version = "";
-              packageJSON = file "package.json";
-              yarnLock = file "yarn.lock";
-              yarnNix = file "yarn.nix";
-              pkgConfig = {
-                node-pre-gyp.buildInputs = [ python2 gnumake coreutils gcc gnused binutils gnugrep pkg-config ];
-                canvas.buildInputs = [ pango libjpeg ];
-              };
-              postBuild = ''
-                cd $out/node_modules
-                PATH=$PWD/.bin:$PATH
-                if [[ -d canvas ]];then
-                  cd canvas
-                  node-pre-gyp install --build-from-source --tarball ${import ./node-headers.nix}
-                  cd ..
-                fi
-              '';
-            };
-            out =
-              runCommand "yarn-env"
-                { } ''
-                mkdir $out
-                [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
-                ln -s ${package}/node_modules $out/node_modules
-              '';
-          }.out
-      );
+    ifFilesAndNot "package.json yarn.lock yarn.nix" ".disable-nle-yarn"
+      rec {
+        yarn2nix-moretea =
+          callPackage
+            "${pkgs.path}/pkgs/development/tools/yarn2nix-moretea/yarn2nix" {
+            nodejs = nodejs_latest;
+          };
+        package = with yarn2nix-moretea; mkYarnModules rec {
+          name = pname;
+          pname = "yarn-modules";
+          version = "";
+          packageJSON = file "package.json";
+          yarnLock = file "yarn.lock";
+          yarnNix = file "yarn.nix";
+          pkgConfig = {
+            node-pre-gyp.buildInputs = [ python2 gnumake coreutils gcc gnused binutils gnugrep pkg-config ];
+            canvas.buildInputs = [ pango libjpeg ];
+          };
+          postBuild = ''
+            cd $out/node_modules
+            PATH=$PWD/.bin:$PATH
+            if [[ -d canvas ]];then
+              cd canvas
+              node-pre-gyp install --build-from-source --tarball ${import ./node-headers.nix}
+              cd ..
+            fi
+          '';
+        };
+        out =
+          runCommand "yarn-env"
+            { } ''
+            mkdir $out
+            [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
+            ln -s ${package}/node_modules $out/node_modules
+          '';
+      }.out;
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
@@ -115,12 +113,12 @@ rec {
         };
         paths = [ env.wrappedRuby (hiPrio env) bundix ];
       }.paths;
-  python-paths = with rec {
+  mach-nix-paths = with rec {
     hasRequirements = pathExists (file "requirements.txt");
     hasRequirementsDev = pathExists (file "requirements.dev.txt");
   };
     optional
-      (hasRequirements || hasRequirementsDev)
+      ((hasRequirements || hasRequirementsDev) && !hasFiles "poetry.lock")
       (
         override
           (mach-nix.mkPython {
@@ -133,12 +131,31 @@ rec {
           }) { name = "python-env"; }
       );
 
+  poetry-paths =
+    ifFiles "pyproject.toml poetry.lock" (
+      override
+        (
+          poetry2nix.mkPoetryEnv {
+            projectDir = buildDir [ (file "pyproject.toml") (file "poetry.lock") ];
+            overrides = poetry2nix.overrides.withDefaults (self: super: {
+              inform = super.inform.overridePythonAttrs (old: {
+                buildInputs = old.buildInputs ++ [ self.pytest-runner ];
+              });
+              shlib = super.shlib.overridePythonAttrs (old: {
+                buildInputs = old.buildInputs ++ [ self.pytest-runner ];
+              });
+            });
+          }
+        ) { name = "python-env"; }
+    );
+
   build-paths = flatten [
     local-nix-paths
     bundler-paths
     node-modules-paths
     yarn-paths
-    python-paths
+    mach-nix-paths
+    poetry-paths
   ];
 
   paths = flatten [ (map (setPrio 1) (flatten local-bin-paths)) build-paths ];

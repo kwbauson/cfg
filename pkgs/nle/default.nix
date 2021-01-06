@@ -33,8 +33,15 @@ pkgs: with pkgs; with mylib; buildEnv {
       fi
     '';
     update-python = ''
-      [[ -e requirements.txt ]] && ${nr pur} -zfr requirements.txt || true
-      [[ -e requirements.dev.txt ]] && ${nr pur} -zfr requirements.dev.txt || true
+      ${pathAdd [ pur coreutils dasel poetry ]}
+      [[ -e requirements.txt ]] && pur -zfr requirements.txt || true
+      [[ -e requirements.dev.txt ]] && pur -zfr requirements.dev.txt || true
+      [[ -e pyproject.toml && -e poetry.lock ]] &&
+        dasel -f pyproject.toml .tool.poetry.dependencies |
+        cut -d' ' -f1 |
+        grep -v python |
+        sed 's/$/:latest/' |
+        xargs poetry add --lock
     '';
     update-flake = ''
       ${pathAdd [ git nix-wrapped ]}

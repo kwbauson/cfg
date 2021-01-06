@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "cfg"
+version = "0.1.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pur = "^5.3.0"
+emborg = "^1.19.0"
