@@ -35,12 +35,12 @@
     isNixOS = false;
     nix-wrapped = (
       if self.isNixOS
-      then nixUnstable
+      then self.nixUnstable
       else buildEnv {
         name = "nix-wrapped";
         paths = [
-          nixUnstable
-          (hiPrio (writeShellScriptBin "nix" '' exec ${exe nixUnstable} ${self.nix-wrapped.flags} "$@" ''))
+          self.nixUnstable
+          (hiPrio (alias "nix" "${exe self.nixUnstable} ${self.nix-wrapped.flags}"))
         ];
       }
     ) // rec {
@@ -79,6 +79,8 @@
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
+    pinned-if-darwin = if isDarwin then nixos-unstable-channel else super;
+    inherit (self.pinned-if-darwin) nix nixUnstable;
     selfpkgs = buildDir ([
       ./pkgs
       ./config.nix
