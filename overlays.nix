@@ -82,10 +82,8 @@
     pinned-if-darwin = if isDarwin then nixos-unstable-channel else super;
     selfpkgs = buildDir ([
       ./pkgs
-      ./config.nix
       ./flake-compat.nix
       ./mylib.nix
-      ./overlays.nix
     ] ++ self.nle.lib.build-paths ./.);
     desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
       "  name: ${pkg.name or pkg.pname or "null"}"

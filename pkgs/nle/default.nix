@@ -84,5 +84,8 @@ pkgs: with pkgs; with mylib; buildEnv {
     nix = {
       extraFiles = "default.nix flake.nix flake.lock local.nix";
     };
+    nixpkgs = {
+      extraFiles = "config.nix overlays.nix";
+    };
   };
 }
