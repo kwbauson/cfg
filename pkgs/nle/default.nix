@@ -10,15 +10,9 @@ pkgs: with pkgs; with mylib; buildEnv {
     in
     _: arg: if isAttrs arg then f arg else f { path = arg; };
   lib = rec {
-    build-files = words ''
-      bin nix local.nix
-      flake.nix flake.lock default.nix
-      package.json package-lock.json node-packages.nix
-      yarn.lock npm-package.nix npm-deps.nix .npmrc
-      Gemfile Gemfile.lock gemset.nix
-      requirements.txt requirements.dev.txt
-      pyproject.toml poetry.lock
-    '';
+    build-files = unique (
+      flatten (mapAttrsToList (n: v: words "${v.files or ""} ${v.extraFiles or ""} ${v.generated or ""}") conf)
+    );
     build-paths = path: filter pathExists (map (p: path + "/${p}") build-files);
     joinMapAttrValuesIf = f: p: as: concatMapStringsSep "\n" f (attrValues (filterAttrs (n: v: p n) as));
   };
@@ -57,5 +51,38 @@ pkgs: with pkgs; with mylib; buildEnv {
         outPath = ${cfg.outPath};
       }
     '';
+  };
+  conf = mapAttrs (n: v: v // { enable = true; }) {
+    bin = {
+      files = "bin";
+    };
+    niv = {
+      files = "nix";
+    };
+    npm = {
+      files = "package.json package-lock.json";
+      extraFiles = ".npmrc";
+      notFiles = "yarn.nix";
+      generated = "node-packages.nix";
+    };
+    yarn = {
+      files = "package.json yarn.lock";
+      extraFiles = ".npmrc";
+      generated = "yarn.nix";
+    };
+    pip = {
+      files = "requirements.txt";
+      extraFiles = "requirements.dev.txt";
+    };
+    poetry = {
+      files = "pyproject.toml poetry.lock";
+    };
+    bundler = {
+      files = "Gemfile Gemfile.lock";
+      generated = "gemset.nix";
+    };
+    nix = {
+      extraFiles = "default.nix flake.nix flake.lock local.nix";
+    };
   };
 }
