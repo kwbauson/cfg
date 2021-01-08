@@ -236,7 +236,7 @@ with builtins; with pkgs; with mylib; {
             direnv-vim fzf-vim quick-scope tcomment_vim vim-airline
             vim-better-whitespace vim-bufkill vim-easymotion vim-fugitive
             vim-lastplace vim-multiple-cursors vim-peekaboo vim-polyglot
-            vim-sensible vim-startify vim-vinegar
+            vim-sensible vim-startify vim-vinegar nvim-scrollview
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver
