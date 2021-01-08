@@ -157,11 +157,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable-channel": {
-        "sha256": "1xqjs2xv0ndj1dllaa0wdhq14mjrl36fwxaqjgjyz0kzx67hxzh8",
+        "sha256": "1hvsmg3gxyg57zsldbmjyqv6qqf4fw8jrhgv9zbgy5d2vabklz9a",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre261529.d9dba88d08a/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre262020.f211631c1cb/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.03pre261529.d9dba88d08a"
+        "version": "nixos-21.03pre262020.f211631c1cb"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
