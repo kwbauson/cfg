@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-alacritty": {
-        "sha256": "01lklmv1rlc46b63y9hb5wmiy39l3b6ycnmmvz94bhsb958zanra",
+        "sha256": "0h95kxw8g6wa33rv0442ljincd7ldm9fhh9bi3r5zhk7j05kkja0",
         "type": "file",
-        "url": "https://github.com/alacritty/alacritty/releases/download/v0.6.0/Alacritty-v0.6.0.dmg",
+        "url": "https://github.com/alacritty/alacritty/releases/download/v0.7.1/Alacritty-v0.7.1.dmg",
         "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
-        "version": "0.6.0"
+        "version": "0.7.1"
     },
     "dmg-discord": {
         "sha256": "05v5f02gpl9xcbpah2akmcnix6g1xslgjwas1r1xxvhscxs72ywj",
@@ -90,10 +90,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "b6da9655a902d11cbd6605e67f08805cd08cffb5",
-        "sha256": "1fizidzb3mis8b3m4ag5yahx3gm7gqlljwa263zqvb4qsj4lm6vc",
+        "rev": "c19e1fe63977690791ae2d95a1cf71759b307f0e",
+        "sha256": "128gxclkql58cvbqixz6ym1clgc3gg4lyw50ghgghrrfyynvacvy",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/b6da9655a902d11cbd6605e67f08805cd08cffb5.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/c19e1fe63977690791ae2d95a1cf71759b307f0e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -157,11 +157,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable-channel": {
-        "sha256": "1hvsmg3gxyg57zsldbmjyqv6qqf4fw8jrhgv9zbgy5d2vabklz9a",
+        "sha256": "06l08i16na6f3kbal9a27sbhp2pbinnhawqjwi3cmvv3mm42lcj6",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre262020.f211631c1cb/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre262347.257cbbcd3ab/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.03pre262020.f211631c1cb"
+        "version": "nixos-21.03pre262347.257cbbcd3ab"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
