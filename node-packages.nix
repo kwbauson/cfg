@@ -220,13 +220,13 @@ let
         sha512 = "pxa/se8IFoZ7+Rb0gsTT9HGp+TZSlrtOUJvG05noyXJjdAcjcfOGeXaU/zcjjMXwYrpnCL2T2F+Vl+ozQIjfyw==";
       };
     };
-    "coc-pyright-1.1.98" = {
+    "coc-pyright-1.1.100" = {
       name = "coc-pyright";
       packageName = "coc-pyright";
-      version = "1.1.98";
+      version = "1.1.100";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.98.tgz";
-        sha512 = "6z5PNjyKrn8OLn0ju9QRwSpMtWdtHjnJihh6VSmX0204L67pDyuNCD8iC5dVown997TCk+hwjrHYLNHmk2A+Yw==";
+        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.100.tgz";
+        sha512 = "LRvHOzd5cqBU1rHu9tgmcZPsJQv99LgTdDIwj6RhfXeIDIcRJ3BF0zG6hVAxY14vVJ1g6Nv4v0rDIW4zJ0BA8w==";
       };
     };
     "concat-map-0.0.1" = {
@@ -1084,13 +1084,13 @@ let
         sha512 = "LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==";
       };
     };
-    "pyright-1.1.97" = {
+    "pyright-1.1.100" = {
       name = "pyright";
       packageName = "pyright";
-      version = "1.1.97";
+      version = "1.1.100";
       src = fetchurl {
-        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.97.tgz";
-        sha512 = "6k+Soj2KlsBpnWMhP14PEJU2ozxUuJaiNG2hAySeOdAc5y4CuPVJ5F2InySFXdNIHGzgPGkA8/v33yh8OvVWbw==";
+        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.100.tgz";
+        sha512 = "QY7d5XkIHtUtZt0m4+ppAuyF9PEtZcmK3iyFihEdSyJAUd99/cixjOMq1wNdb6xx8bgz9IsMKzyRORbk0u2WQQ==";
       };
     };
     "read-pkg-1.1.0" = {
@@ -1510,7 +1510,7 @@ let
       sources."clone-deep-0.2.4"
       sources."coc-deno-0.11.0"
       sources."coc-explorer-0.13.11"
-      sources."coc-pyright-1.1.98"
+      sources."coc-pyright-1.1.100"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
       sources."cross-spawn-7.0.3"
@@ -1620,7 +1620,7 @@ let
       sources."pinkie-2.0.4"
       sources."pinkie-promise-2.0.1"
       sources."pump-3.0.0"
-      sources."pyright-1.1.97"
+      sources."pyright-1.1.100"
       (sources."read-pkg-1.1.0" // {
         dependencies = [
           sources."path-type-1.1.0"

@@ -57,11 +57,11 @@
         "version": "0.0.259"
     },
     "dmg-firefox": {
-        "sha256": "159jkkyzhsq66c0fvq10yvaq03wahg8xxhhvrqj58r74qg4c93wy",
+        "sha256": "1xycm3v8ix1lg91qv3kwihqbvq877crx88jn9vqaczvzl1zrdbic",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0.1/mac/en-US/Firefox%2084.0.1.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/84.0.2/mac/en-US/Firefox%2084.0.2.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "84.0.1"
+        "version": "84.0.2"
     },
     "dmg-qutebrowser": {
         "sha256": "1a4pakpn39pq72bgkqd1f1rik139c0shjfszxh1iqn7fb3dqrqmj",
