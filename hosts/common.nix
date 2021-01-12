@@ -45,6 +45,7 @@
 
   services = {
     localtime.enable = true;
+    ntp.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
