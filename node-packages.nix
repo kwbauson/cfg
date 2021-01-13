@@ -211,22 +211,22 @@ let
         sha512 = "0we/UrRQVy6/Ogf5XRHt+jmYJzfrYatymgt82BHDg0BBUXrY/E9J+JXfc8IeQ9eonJdgzujlT/Es22lv/Zxgsg==";
       };
     };
-    "coc-explorer-0.13.11" = {
+    "coc-explorer-0.14.0" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.13.11";
+      version = "0.14.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.13.11.tgz";
-        sha512 = "pxa/se8IFoZ7+Rb0gsTT9HGp+TZSlrtOUJvG05noyXJjdAcjcfOGeXaU/zcjjMXwYrpnCL2T2F+Vl+ozQIjfyw==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.14.0.tgz";
+        sha512 = "T5PU8M1aJXeCPrCfESllfiZqj1O9NcvhocE7D9YMPCGxJuAFD5sC5C+goFEiPH0l4yU4AEwxanwopk0bm6YrnA==";
       };
     };
-    "coc-pyright-1.1.100" = {
+    "coc-pyright-1.1.101" = {
       name = "coc-pyright";
       packageName = "coc-pyright";
-      version = "1.1.100";
+      version = "1.1.101";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.100.tgz";
-        sha512 = "LRvHOzd5cqBU1rHu9tgmcZPsJQv99LgTdDIwj6RhfXeIDIcRJ3BF0zG6hVAxY14vVJ1g6Nv4v0rDIW4zJ0BA8w==";
+        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.101.tgz";
+        sha512 = "uXNShO4P1sdfj5uR9eLB23dT9Quk8GO0eY830dTxezRSMzZm52eONOrRLgAGo6x4fO0ixjzXUWlM8c65fkZiRg==";
       };
     };
     "concat-map-0.0.1" = {
@@ -913,13 +913,13 @@ let
         sha512 = "kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==";
       };
     };
-    "open-7.3.0" = {
+    "open-7.3.1" = {
       name = "open";
       packageName = "open";
-      version = "7.3.0";
+      version = "7.3.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/open/-/open-7.3.0.tgz";
-        sha512 = "mgLwQIx2F/ye9SmbrUkurZCnkoXyXyu9EbHtJZrICjVAJfyMArdHp3KkixGdZx1ZHFPNIwl0DDM1dFFqXbTLZw==";
+        url = "https://registry.npmjs.org/open/-/open-7.3.1.tgz";
+        sha512 = "f2wt9DCBKKjlFbjzGb8MOAW8LH8F0mrs1zc7KTjAJ9PZNQbfenzWbNP1VZJvw6ICMG9r14Ah6yfwPn7T7i646A==";
       };
     };
     "os-homedir-1.0.2" = {
@@ -1509,8 +1509,8 @@ let
       sources."clean-stack-2.2.0"
       sources."clone-deep-0.2.4"
       sources."coc-deno-0.11.0"
-      sources."coc-explorer-0.13.11"
-      sources."coc-pyright-1.1.100"
+      sources."coc-explorer-0.14.0"
+      sources."coc-pyright-1.1.101"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
       sources."cross-spawn-7.0.3"
@@ -1604,7 +1604,7 @@ let
       sources."object-assign-4.1.1"
       sources."once-1.4.0"
       sources."onetime-5.1.2"
-      sources."open-7.3.0"
+      sources."open-7.3.1"
       sources."os-homedir-1.0.2"
       sources."p-finally-2.0.1"
       sources."p-map-4.0.0"
