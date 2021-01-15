@@ -35,8 +35,8 @@ with builtins; with pkgs; with mylib; {
             bat colordiff ctags diffoscope dhall git-trim gron highlight httpie
             icdiff jq nim nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
             solargraph watchexec yarn yarn-completion nodejs_latest nle
+            diff-so-fancy gh git-ignore
             ;
-          inherit (gitAndTools) diff-so-fancy gh git-ignore;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
         inherit nle nle-cfg-pkgs nr switch-to-configuration;
@@ -280,7 +280,7 @@ with builtins; with pkgs; with mylib; {
     };
     git = {
       enable = true;
-      package = gitAndTools.gitFull;
+      package = gitFull;
       aliases = {
         a = "add -A";
         br = "branch";
@@ -288,7 +288,7 @@ with builtins; with pkgs; with mylib; {
         cap = "! git a; git ci; git p";
         ci = "commit -v";
         co = "checkout";
-        df = ''! git a -N && git -c core.pager='${exe gitAndTools.delta} --dark' diff "''${@:-HEAD}" && true'';
+        df = ''! git a -N && git -c core.pager='${exe delta} --dark' diff "''${@:-HEAD}" && true'';
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "fetch origin master:master";
