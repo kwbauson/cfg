@@ -93,6 +93,8 @@ prev: with prev; with lib; with builtins; lib // rec {
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else throw "don't know how to override ${typeOf x} with ${typeOf y}";
+  overridePackage = pkg:
+    let path = head (splitString ":" pkg.meta.position); in callPackage path;
   importDir = dir:
     let
       dirList = attrsToList (readDir dir);

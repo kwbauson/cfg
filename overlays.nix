@@ -90,6 +90,8 @@
       "  description: ${pkg.meta.description or "null"}"
       "  homepage: ${pkg.meta.homepage or "null"}"
     ];
+    nix-prefetch-git = (overridePackage nix-prefetch-git { nix = nixUnstable; }).nix-prefetch-git;
+    bundix = overridePackage bundix { nix = nixUnstable; };
   })
   (self: super: with super; with mylib;
   mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
