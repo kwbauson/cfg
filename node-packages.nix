@@ -211,13 +211,13 @@ let
         sha512 = "0we/UrRQVy6/Ogf5XRHt+jmYJzfrYatymgt82BHDg0BBUXrY/E9J+JXfc8IeQ9eonJdgzujlT/Es22lv/Zxgsg==";
       };
     };
-    "coc-explorer-0.14.0" = {
+    "coc-explorer-0.14.1" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.14.0";
+      version = "0.14.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.14.0.tgz";
-        sha512 = "T5PU8M1aJXeCPrCfESllfiZqj1O9NcvhocE7D9YMPCGxJuAFD5sC5C+goFEiPH0l4yU4AEwxanwopk0bm6YrnA==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.14.1.tgz";
+        sha512 = "CoosZb29j7U27pYnhx6TYy4rQMlXZVdQOIsaCRMoG2y3s1gQLBEzoeyGKLiMeJM1D7lD1nIganCNinAG3R70bg==";
       };
     };
     "coc-pyright-1.1.101" = {
@@ -1509,7 +1509,7 @@ let
       sources."clean-stack-2.2.0"
       sources."clone-deep-0.2.4"
       sources."coc-deno-0.11.0"
-      sources."coc-explorer-0.14.0"
+      sources."coc-explorer-0.14.1"
       sources."coc-pyright-1.1.101"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
