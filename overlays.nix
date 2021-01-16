@@ -60,7 +60,7 @@
       token = readFile ./secrets/factorio-token;
     };
     qutebrowser = override qutebrowser { patches = [ ./qutebrowser-background.patch ]; };
-    i3 = override nixos-unstable-channel.i3 { patches = [ ./i3-icons.patch ]; };
+    i3 = override i3 { patches = [ ./i3-icons.patch ]; };
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
