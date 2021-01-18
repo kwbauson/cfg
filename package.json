@@ -5,7 +5,7 @@
     "coc-deno": "0.11.0",
     "coc-explorer": "0.14.1",
     "coc-pyright": "1.1.101",
-    "ts-node": "8.1.1",
+    "ts-node": "9.1.1",
     "ts-node-dev": "1.1.1",
     "typescript": "4.1.3"
   }
