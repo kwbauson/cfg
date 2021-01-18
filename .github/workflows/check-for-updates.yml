@@ -26,4 +26,3 @@ jobs:
           commit-message: automatic update
           branch: automatic-update
           token: ${{ secrets.PAT }}
-          labels: automerge
