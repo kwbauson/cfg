@@ -26,3 +26,7 @@ jobs:
           commit-message: automatic update
           branch: automatic-update
           token: ${{ secrets.PAT }}
+          labels: automerge
+      - uses: pascalgn/automerge-action@v0.13
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
