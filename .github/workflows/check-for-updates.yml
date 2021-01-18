@@ -26,18 +26,3 @@ jobs:
           commit-message: automatic update
           branch: automatic-update
           token: ${{ secrets.PAT }}
-      - uses: actions/github-script@v3
-        with:
-          script: |
-            const repo = { owner: 'kwbauson', repo: 'cfg' }
-            const [pr] = github.pulls.list({
-              ...repo,
-              state: 'open',
-              head: 'kwbauson:automatic-update',
-            })
-            if (pr) {
-              github.pulls.merge({
-                ...repo,
-                pull_number: pr.pull_number,
-              })
-            }
