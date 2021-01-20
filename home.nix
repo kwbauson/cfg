@@ -314,6 +314,7 @@ with builtins; with pkgs; with mylib; {
         push.default = "simple";
         pull.rebase = false;
         rebase.instructionFormat = "(%an) %s";
+        init.defaultBranch = "main";
       };
     };
     direnv.enable = true;
