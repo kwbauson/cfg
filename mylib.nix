@@ -64,7 +64,7 @@ prev: with prev; with lib; with builtins; lib // rec {
     msg = "${name}: src ${src.version} != pkg ${pkg.version}";
     checkVersion = lib.assertMsg (pkg.version == src.version) msg;
   }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
-  importNixpkgs = src: import src { inherit system; overlays = [ ]; };
+  importNixpkgs = src: import src { inherit system; config = import ./config.nix; overlays = [ ]; };
   buildDir = paths:
     let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
     in runCommand "build-dir" { } "mkdir $out\n${cmds}";

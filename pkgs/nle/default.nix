@@ -87,5 +87,8 @@ pkgs: with pkgs; with mylib; buildEnv {
     nixpkgs = {
       extraFiles = "config.nix overlays.nix";
     };
+    pkgs = {
+      files = "pkgs";
+    };
   };
 }

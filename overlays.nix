@@ -74,15 +74,11 @@
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = cfg.inputs.mach-nix.lib.${system};
-    spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
-    discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.python-env.python.pkgs) pur emborg;
     pinned-if-darwin = if isDarwin then nixos-unstable-channel else super;
     selfpkgs = buildDir ([
-      ./pkgs
-      ./flake-compat.nix
       ./mylib.nix
     ] ++ self.nle.lib.build-paths ./.);
     desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
@@ -96,9 +92,10 @@
   (self: super: with super; with mylib;
   mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
   )
-  (self: super: with super; with mylib;
-  mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; }
-  )
+  (self: super: with super; with mylib; {
+    spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
+    discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
+  } // mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; })
   (self: super: with super; with mylib;
   mapAttrs (name: f: f (pkgs // { inherit name; src = sources.${name}; })) (importDir ./pkgs)
   )
