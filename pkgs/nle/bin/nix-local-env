@@ -132,13 +132,14 @@ case $cmd in
     impure "package.json package-lock.json" node-packages.nix \
       nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
     if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
+      # FIXME hack around t1/react-click-outside
+      sed -i -e '/^"\?react-click-outside/,/^$/d' -e '/react-click-outside/d' yarn.lock package.json
+
       grep '^  resolved "' yarn.lock | grep -v '#' | sed -e 's/[^"]*"//' -e 's/"$//' | while read url;do
         name=$(echo $url | sed 's:/:_:g')
         impure <(echo $url) $name sh -c "nix-prefetch-url --type sha1 $url > $name"
         sed -i "s^$url^$url#$(< $name)^" yarn.lock
       done
-      # FIXME hack around t1/react-click-outside
-      sed -i -e '/^react-click-outside/,/^$/d' -e '/react-click-outside/d' yarn.lock package.json
       impure 'package.json yarn.lock' yarn.nix \
         sh -c 'nr yarn2nix --builtin-fetchgit > yarn.nix'
       if [[ -e .npmrc ]];then
