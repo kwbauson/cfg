@@ -144,9 +144,13 @@ with builtins; with pkgs; with mylib; {
             NIX_LINK=$HOME/.nix-profile/bin
             export PATH=$(echo "$PATH" | sed "s#:$NIX_LINK##; s#\(/usr/local/bin\)#$NIX_LINK:\1#")
             unset NIX_LINK
+          else
+            source ~/.nix-profile/etc/profile.d/nix.sh
+            export XDG_DATA_DIRS="$HOME/.nix-profile/share:''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
           fi
-        '' ''
+          source ~/.nix-profile/etc/profile.d/bash_completion.sh
           export GPG_TTY=$(tty)
+        '' ''
           ${readFile ./bashrc}
           source ${sources.complete-alias}/complete_alias
           for a in $(alias | sed 's/=/ /' | cut -d' ' -f2);do complete -F _complete_alias $a;done
@@ -454,6 +458,4 @@ with builtins; with pkgs; with mylib; {
       };
     };
   };
-
-  targets.genericLinux.enable = !isNixOS;
 }
