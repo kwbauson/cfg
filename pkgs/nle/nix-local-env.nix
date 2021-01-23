@@ -6,6 +6,8 @@ rec {
   ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
 
+  nle-conf = import ./nle.nix { source = path; inherit pkgs; };
+
   wrapScriptWithPackages = src: env: rec {
     text = readFile src;
     name = baseNameOf src;
@@ -119,22 +121,10 @@ rec {
   };
     optional
       ((hasRequirements || hasRequirementsDev) && !hasFiles "poetry.lock")
-      (
-        override
-          (mach-nix.mkPython {
-            requirements = ''
-              ${optionalString hasRequirements (excludeLines (hasPrefix "itomate") (readFile (file "requirements.txt")))}
-              ${optionalString hasRequirementsDev (readFile (file "requirements.dev.txt"))}
-            '';
-            _.black.buildInputs = [ ];
-            _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
-          }) { name = "python-env"; }
-      );
+      (override nle-conf.pip.out { name = "pip-env"; });
 
   poetry-paths =
-    ifFiles "pyproject.toml poetry.lock" (
-      override (import ./nle.nix { source = path; inherit pkgs; }).poetry.out { name = "poetry-env"; }
-    );
+    ifFiles nle-conf.poetry.files (override nle-conf.poetry.out { name = "poetry-env"; });
 
   build-paths = flatten [
     local-nix-paths

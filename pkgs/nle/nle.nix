@@ -1,4 +1,8 @@
-{ source, pkgs }: with pkgs; rec {
+{ source, pkgs }: with pkgs; with mylib; rec {
+  lib = {
+    file = f: source + ("/" + f);
+  };
+
   bin = {
     files = "bin";
   };
@@ -16,9 +20,18 @@
     extraFiles = ".npmrc";
     generated = "yarn.nix";
   };
-  pip = {
+  pip = rec {
     files = "requirements.txt";
     extraFiles = "requirements.dev.txt";
+    read = f: optionalString (pathExists (lib.file f)) (readFile (lib.file f));
+    out = mach-nix.mkPython {
+      requirements = ''
+        ${excludeLines (hasPrefix "itomate") (read "requirements.txt")}
+        ${read "requirements.dev.txt"}
+      '';
+      _.black.buildInputs = [ ];
+      _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
+    };
   };
   poetry = {
     files = "pyproject.toml poetry.lock";
