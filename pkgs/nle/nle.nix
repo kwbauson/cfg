@@ -1,6 +1,16 @@
-{ source, pkgs }: with pkgs; with mylib; rec {
+{ self, source, pkgs }: with pkgs; with mylib; with self.lib; {
   lib = {
     file = f: source + ("/" + f);
+    fileExistBools = fs: map pathExists (words fs);
+    read = f:
+      let p = file f; in optionalString (pathExists p) (readFile p);
+    matches =
+      { enable ? false
+      , files ? ""
+      , extraFiles ? ""
+      , generated ? ""
+      , ...
+      }: enable && all (fileExistBools "${files} ${generated}") || any (fileExistBools extraFiles);
   };
 
   bin = {
@@ -11,22 +21,23 @@
   };
   npm = {
     files = "package.json package-lock.json";
+    generated = "node-packages.nix";
     extraFiles = ".npmrc";
     notFiles = "yarn.nix";
-    generated = "node-packages.nix";
   };
   yarn = {
     files = "package.json yarn.lock";
-    extraFiles = ".npmrc";
     generated = "yarn.nix";
+    extraFiles = ".npmrc";
   };
-  pip = rec {
+  pip = {
+    enable = true;
     files = "requirements.txt";
     extraFiles = "requirements.dev.txt";
-    read = f: optionalString (pathExists (lib.file f)) (readFile (lib.file f));
+    notFiles = self.poetry.files;
     out = mach-nix.mkPython {
-      requirements = ''
-        ${excludeLines (hasPrefix "itomate") (read "requirements.txt")}
+      requirements = excludeLines (hasPrefix "itomate") ''
+        ${read "requirements.txt"}
         ${read "requirements.dev.txt"}
       '';
       _.black.buildInputs = [ ];
@@ -34,6 +45,7 @@
     };
   };
   poetry = {
+    enable = true;
     files = "pyproject.toml poetry.lock";
     out = poetry2nix.mkPoetryEnv {
       projectDir = source;

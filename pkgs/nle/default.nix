@@ -52,8 +52,5 @@ pkgs: with pkgs; with mylib; buildEnv {
       }
     '';
   };
-  conf =
-    mapAttrs
-      (n: v: v // { enable = true; })
-      (import ./nle.nix { source = ./.; inherit pkgs; });
+  conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
 }

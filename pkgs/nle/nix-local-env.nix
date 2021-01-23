@@ -6,7 +6,7 @@ rec {
   ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
 
-  nle-conf = import ./nle.nix { source = path; inherit pkgs; };
+  nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
 
   wrapScriptWithPackages = src: env: rec {
     text = readFile src;

@@ -115,4 +115,6 @@ prev: with prev; with lib; with builtins; lib // rec {
         else null;
     in
     listToAttrs (filter (x: x != null) (map importEntry dirList));
+  fixSelfWith = f: x:
+    let self = f (x // { inherit self; }); in self;
 } // builtins
