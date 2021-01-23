@@ -52,43 +52,8 @@ pkgs: with pkgs; with mylib; buildEnv {
       }
     '';
   };
-  conf = mapAttrs (n: v: v // { enable = true; }) {
-    bin = {
-      files = "bin";
-    };
-    niv = {
-      files = "nix";
-    };
-    npm = {
-      files = "package.json package-lock.json";
-      extraFiles = ".npmrc";
-      notFiles = "yarn.nix";
-      generated = "node-packages.nix";
-    };
-    yarn = {
-      files = "package.json yarn.lock";
-      extraFiles = ".npmrc";
-      generated = "yarn.nix";
-    };
-    pip = {
-      files = "requirements.txt";
-      extraFiles = "requirements.dev.txt";
-    };
-    poetry = {
-      files = "pyproject.toml poetry.lock";
-    };
-    bundler = {
-      files = "Gemfile Gemfile.lock";
-      generated = "gemset.nix";
-    };
-    nix = {
-      extraFiles = "default.nix flake.nix flake.lock local.nix";
-    };
-    nixpkgs = {
-      extraFiles = "config.nix overlays.nix";
-    };
-    pkgs = {
-      files = "pkgs";
-    };
-  };
+  conf =
+    mapAttrs
+      (n: v: v // { enable = true; })
+      (import ./nle.nix { source = ./.; inherit pkgs; });
 }

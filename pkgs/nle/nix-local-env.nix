@@ -133,20 +133,7 @@ rec {
 
   poetry-paths =
     ifFiles "pyproject.toml poetry.lock" (
-      override
-        (
-          poetry2nix.mkPoetryEnv {
-            projectDir = buildDir [ (file "pyproject.toml") (file "poetry.lock") ];
-            overrides = poetry2nix.overrides.withDefaults (self: super: {
-              inform = super.inform.overridePythonAttrs (old: {
-                buildInputs = old.buildInputs ++ [ self.pytest-runner ];
-              });
-              shlib = super.shlib.overridePythonAttrs (old: {
-                buildInputs = old.buildInputs ++ [ self.pytest-runner ];
-              });
-            });
-          }
-        ) { name = "python-env"; }
+      override (import ./nle.nix { source = path; inherit pkgs; }).poetry.out { name = "poetry-env"; }
     );
 
   build-paths = flatten [
