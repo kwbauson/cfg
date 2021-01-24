@@ -330,13 +330,13 @@ with builtins; with pkgs; with mylib; {
       enable = isNixOS && isGraphical;
       theme = "solarized";
       location = "top";
-      extraConfig = ''
-        rofi.show-icons: true
-        rofi.scroll-method: 1
-        rofi.kb-row-tab:
-        rofi.kb-row-select: Tab
-        rofi.monitor:-1
-      '';
+      extraConfig = {
+        show-icons = true;
+        scroll-method = 1;
+        kb-row-tab = "";
+        kb-row-select = "Tab";
+        monitor = -1;
+      };
     };
     vscode.enable = isGraphical;
     # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
