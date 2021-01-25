@@ -86,8 +86,8 @@
       "  description: ${pkg.meta.description or "null"}"
       "  homepage: ${pkg.meta.homepage or "null"}"
     ];
-    nix-prefetch-git = (overridePackage nix-prefetch-git { nix = nixUnstable; }).nix-prefetch-git;
-    bundix = overridePackage bundix { nix = nixUnstable; };
+    nix-prefetch-git = (overridePackage nix-prefetch-git { nix = self.nixUnstable; }).nix-prefetch-git;
+    bundix = overridePackage bundix { nix = self.nixUnstable; };
     inherit (self.pinned-if-darwin) nixUnstable;
   })
   (self: super: with super; with mylib;
