@@ -220,13 +220,13 @@ let
         sha512 = "1Xk8+969TgOdITU1NhyeBRgRWu8RNZtkAma+6WCJmHldxVIa/0SViRXiMYuGxB8EpwfbaguaayHx6wzdrA1saQ==";
       };
     };
-    "coc-pyright-1.1.104" = {
+    "coc-pyright-1.1.105" = {
       name = "coc-pyright";
       packageName = "coc-pyright";
-      version = "1.1.104";
+      version = "1.1.105";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.104.tgz";
-        sha512 = "QSwNomnsJ9vZ2/ZkxGhyKBT9CNQNUaYa0hjOQEfzTX4noHm6Ht4Z2a/w3IJAo2v1MnSOqE9oz4tyuwgesWupEA==";
+        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.105.tgz";
+        sha512 = "ajuF/J017OunKWG+4S7I/jmUI//a8/RhyOVKDqsl8d7FcE6OkbQ2o+rSRAQBleAl0eLCFRcfFVbJtMZlbK3BHA==";
       };
     };
     "concat-map-0.0.1" = {
@@ -1510,7 +1510,7 @@ let
       sources."clone-deep-0.2.4"
       sources."coc-deno-0.11.0"
       sources."coc-explorer-0.15.0"
-      sources."coc-pyright-1.1.104"
+      sources."coc-pyright-1.1.105"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
       sources."cross-spawn-7.0.3"

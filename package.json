@@ -4,7 +4,7 @@
   "dependencies": {
     "coc-deno": "0.11.0",
     "coc-explorer": "0.15.0",
-    "coc-pyright": "1.1.104",
+    "coc-pyright": "1.1.105",
     "ts-node": "9.1.1",
     "ts-node-dev": "1.1.1",
     "typescript": "4.1.3"
