@@ -134,7 +134,7 @@ with builtins; with pkgs; with mylib; {
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
         qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
         lo = "local_ops";
-        lo-early-talent = "lo start -s early-talent && lo logs -s early-talent; lo stop -s all";
+        lo-early-talent = "lo start --always-reseed -s early-talent && lo logs -s early-talent; lo stop -s all";
         g = "git";
       };
       initExtra =
