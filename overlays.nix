@@ -88,7 +88,7 @@
     ];
     nix-prefetch-git = (overridePackage nix-prefetch-git { nix = self.nixUnstable; }).nix-prefetch-git;
     bundix = overridePackage bundix { nix = self.nixUnstable; };
-    inherit (self.pinned-if-darwin) nixUnstable;
+    inherit (self.pinned-if-darwin);
   })
   (self: super: with super; with mylib;
   mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
