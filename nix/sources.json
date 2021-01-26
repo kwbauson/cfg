@@ -126,10 +126,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "9504d3925af6d9d17667404ede7363cd7ff453fa",
-        "sha256": "164kws1r8757ns3m17l4wrv4v0gzj6ks5hdp6hs7ilyzyv3124kx",
+        "rev": "125317ec6175aa0ffd8e0952f618de850c3309f2",
+        "sha256": "1q7hxn78g2j7jhy04nphm80b8qkjd2x4x4v3ibvsmb8rwnkdjbir",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/9504d3925af6d9d17667404ede7363cd7ff453fa.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/125317ec6175aa0ffd8e0952f618de850c3309f2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -157,11 +157,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable-channel": {
-        "sha256": "0lvad19119nwxcc64dswycjn684jmgfvzzkbmr2y4mx6baw57cgf",
+        "sha256": "02bzh3l2ki7mxq4hi1dbkm4pkd50a6fbfy5ch2p2g783rclxla37",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre265130.f217c0ea7c1/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre265961.891f607d530/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.03pre265130.f217c0ea7c1"
+        "version": "nixos-21.03pre265961.891f607d530"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
