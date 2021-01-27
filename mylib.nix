@@ -117,20 +117,12 @@ prev: with prev; with lib; with builtins; lib // rec {
     listToAttrs (filter (x: x != null) (map importEntry dirList));
   fixSelfWith = f: x:
     let self = f (x // { inherit self; }); in self;
-  fetchPR =
-    { owner
-    , repo
-    , pr
-    , sha256 ? fakeSha256
-    }: fetchurl {
-      url = "https://github.com/${owner}/${repo}/pull/${toString pr}.patch";
-      inherit sha256;
-    };
-  overrideWithPRs = pkg: prs:
-    let
-      matches = match ''.*owner = "([^"]*)".*repo = "([^"]*)".*'' (readFile (packageFile pkg));
-      owner = elemAt matches 0;
-      repo = elemAt matches 1;
-    in
-    override pkg { patches = map ({ pr, sha256 }: fetchPR { inherit owner repo pr sha256; }) (toList prs); };
+  overrideWithPRs = pkg: prs: override pkg {
+    patches = map
+      ({ pr, sha256 }: fetchurl {
+        url = "${pkg.src.meta.homepage}/pull/${toString pr}.patch";
+        inherit sha256;
+      })
+      (toList prs);
+  };
 } // builtins
