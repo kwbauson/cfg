@@ -93,8 +93,8 @@ prev: with prev; with lib; with builtins; lib // rec {
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else throw "don't know how to override ${typeOf x} with ${typeOf y}";
-  overridePackage = pkg:
-    let path = head (splitString ":" pkg.meta.position); in callPackage path;
+  packageFile = pkg: head (splitString ":" pkg.meta.position);
+  overridePackage = pkg: callPackage (packageFile pkg);
   importDir = dir:
     let
       dirList = attrsToList (readDir dir);
@@ -126,4 +126,11 @@ prev: with prev; with lib; with builtins; lib // rec {
       url = "https://github.com/${owner}/${repo}/pull/${toString pr}.patch";
       inherit sha256;
     };
+  overrideWithPRs = pkg: prs:
+    let
+      matches = match ''.*owner = "([^"]*)".*repo = "([^"]*)".*'' (readFile (packageFile pkg));
+      owner = elemAt matches 0;
+      repo = elemAt matches 1;
+    in
+    override pkg { patches = map ({ pr, sha256 }: fetchPR { inherit owner repo pr sha256; }) (toList prs); };
 } // builtins
