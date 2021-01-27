@@ -117,4 +117,13 @@ prev: with prev; with lib; with builtins; lib // rec {
     listToAttrs (filter (x: x != null) (map importEntry dirList));
   fixSelfWith = f: x:
     let self = f (x // { inherit self; }); in self;
+  fetchPR =
+    { owner
+    , repo
+    , pr
+    , sha256 ? fakeSha256
+    }: fetchurl {
+      url = "https://github.com/${owner}/${repo}/pull/${toString pr}.patch";
+      inherit sha256;
+    };
 } // builtins

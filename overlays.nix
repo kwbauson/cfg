@@ -89,6 +89,16 @@
     nix-prefetch-git = (overridePackage nix-prefetch-git { nix = self.nixUnstable; }).nix-prefetch-git;
     bundix = overridePackage bundix { nix = self.nixUnstable; };
     inherit (self.pinned-if-darwin);
+    saml2aws = override saml2aws {
+      patches = [
+        (fetchPR {
+          owner = "Versent";
+          repo = "saml2aws";
+          pr = 547;
+          sha256 = "1ssp0abwfm3vnqv09qmj18vf4vn5bcn8zqhcvhvhw5s7h06ax5ff";
+        })
+      ];
+    };
   })
   (self: super: with super; with mylib;
   mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
