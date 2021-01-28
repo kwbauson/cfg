@@ -79,20 +79,18 @@ prev: with prev; with lib; with builtins; lib // rec {
   joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
   joinLines = joinStrings "\n";
   override = x: y:
-    if x == null then y
-    else if y ? _replace then y._replace
+    if y ? _replace then y._replace
     else if y ? _append then x + y._append
-    else if isString x && isString y then y
+    else if isList x && isList y then x ++ y
     else if isDerivation x && isPath y && pathExists y then y
     else if isDerivation x && isPath y && !pathExists y then x
-    else if isList x && isList y then x ++ y
     else if isDerivation x && isAttrs y then
       override x.overrideAttrs y
     else if isFunction x && isAttrs y then
       x (attrs: mapAttrs (n: v: if hasAttr n attrs then override attrs.${n} v else v) y)
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
-    else throw "don't know how to override ${typeOf x} with ${typeOf y}";
+    else y;
   packageFile = pkg: head (splitString ":" pkg.meta.position);
   overridePackage = pkg: callPackage (packageFile pkg);
   importDir = dir:

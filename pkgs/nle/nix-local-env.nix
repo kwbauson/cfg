@@ -44,12 +44,8 @@ rec {
   node-modules-paths =
     ifFilesAndNot "package.json package-lock.json node-packages.nix" "yarn.nix"
       rec {
-        originalArgs = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args;
-        args = originalArgs // {
-          src = buildDir (map file [ "package.json" "package-lock.json" ]);
-          dontNpmInstall = true;
-        };
-        node_modules = override (nodeEnv.buildNodeDependencies args) { name = "node_modules"; };
+        nodeDependencies = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).nodeDependencies;
+        node_modules = override nodeDependencies { name = "node_modules"; dontNpmInstall = true; };
         out = lowPrio node_modules;
       }.out;
 
