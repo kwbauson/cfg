@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
