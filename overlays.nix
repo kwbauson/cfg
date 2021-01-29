@@ -91,7 +91,7 @@
     inherit (self.pinned-if-darwin);
     saml2aws = overrideWithPRs saml2aws {
       pr = 547;
-      sha256 = "1ssp0abwfm3vnqv09qmj18vf4vn5bcn8zqhcvhvhw5s7h06ax5ff";
+      sha256 = "vQ0c5bBgHwzi0/d/YWPG8csOLjhSJmhOv6WhOneU09c=";
     };
   })
   (self: super: with super; with mylib;

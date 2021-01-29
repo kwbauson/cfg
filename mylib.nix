@@ -117,7 +117,7 @@ prev: with prev; with lib; with builtins; lib // rec {
     let self = f (x // { inherit self; }); in self;
   overrideWithPRs = pkg: prs: override pkg {
     patches = map
-      ({ pr, sha256 }: fetchurl {
+      ({ pr, sha256 }: fetchpatch {
         url = "${pkg.src.meta.homepage}/pull/${toString pr}.patch";
         inherit sha256;
       })
