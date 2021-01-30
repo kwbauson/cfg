@@ -64,11 +64,11 @@
         "version": "85.0"
     },
     "dmg-qutebrowser": {
-        "sha256": "1a4pakpn39pq72bgkqd1f1rik139c0shjfszxh1iqn7fb3dqrqmj",
+        "sha256": "1krb0sg3npjc555m1mxpxnrk4j55aiix04p89kb2b6zvwlnr3qac",
         "type": "file",
-        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v1.14.1/qutebrowser-1.14.1.dmg",
+        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v2.0.1/qutebrowser-2.0.1.dmg",
         "url_template": "https://github.com/qutebrowser/qutebrowser/releases/download/v<version>/qutebrowser-<version>.dmg",
-        "version": "1.14.1"
+        "version": "2.0.1"
     },
     "dmg-signal-desktop": {
         "sha256": "0sayvjimxavd4c4h7n4i78rny4nk94cnlblwq90kw0ypfkx8garf",
