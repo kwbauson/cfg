@@ -45,8 +45,10 @@ with builtins; with pkgs; with mylib; {
           (alias "nixpkgs-path" "echo ${pkgs.path}")
           (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
           (alias "local_ops" "nle -d ~/src/hr/local_ops run python dev.py --no-banner")
+          (alias "lo" "local_ops")
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
           (alias "selfpkgs-path" "echo ${selfpkgs.outPath}")
+          (alias "lo-early-talent" ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all'')
         ];
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
@@ -133,8 +135,6 @@ with builtins; with pkgs; with mylib; {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
         qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
-        lo = "local_ops";
-        lo-early-talent = "lo start --always-reseed -s early-talent && lo logs -s early-talent; lo stop -s all";
         g = "git";
       };
       initExtra =
