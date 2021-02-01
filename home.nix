@@ -48,7 +48,7 @@ with builtins; with pkgs; with mylib; {
           (alias "lo" "local_ops")
           (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
           (alias "selfpkgs-path" "echo ${selfpkgs.outPath}")
-          (alias "lo-early-talent" ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all'')
+          (alias "lo-early-talent" ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'')
         ];
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
