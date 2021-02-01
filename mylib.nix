@@ -38,7 +38,12 @@ prev: with prev; with lib; with builtins; lib // rec {
     ${exe (writeShellScriptBin "script" script)} > $out/bin/${name}
     chmod +x $out/bin/${name}
   '';
-  alias = name: x: writeShellScriptBin name ''exec ${if isDerivation x then exe x else x} "$@"'';
+  alias = name: x:
+    let
+      cmd = if isDerivation x then exe x else x;
+      pre = if any (s: hasInfix s x) [ "&&" "||" ";" ] then "" else "exec";
+    in
+    writeShellScriptBin name ''${pre} ${cmd} "$@"'';
   mkDmgPackage = pname: src: stdenv.mkDerivation {
     name = pname + (if src ? version then "-${src.version}" else "");
     inherit pname src;
