@@ -1,4 +1,5 @@
-prev: with prev; with lib; with builtins; lib // rec {
+prev: with prev; with lib; with builtins;
+cli // generators // lib // builtins // rec {
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
   sources = import ./nix/sources.nix { inherit system pkgs; };
@@ -106,8 +107,8 @@ prev: with prev; with lib; with builtins; lib // rec {
       hasPath = p: pathExists (path p);
       canImport = { name, value }:
         (value != "directory" && hasSuffix ".nix" name)
-          || pathExists (dir + "/${name}/default.nix")
-          || pathExists (dir + "/${name}/configuration.nix");
+        || pathExists (dir + "/${name}/default.nix")
+        || pathExists (dir + "/${name}/configuration.nix");
       importEntry = { name, value }:
         if hasSuffix ".nix" name
         then { name = removeSuffix ".nix" name; value = importPath name; }
@@ -128,4 +129,4 @@ prev: with prev; with lib; with builtins; lib // rec {
       })
       (toList prs);
   };
-} // builtins
+}
