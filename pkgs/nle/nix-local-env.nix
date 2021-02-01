@@ -43,11 +43,7 @@ rec {
   local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];
   node-modules-paths =
     ifFilesAndNot "package.json package-lock.json node-packages.nix" "yarn.nix"
-      rec {
-        nodeDependencies = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).nodeDependencies;
-        node_modules = override nodeDependencies { name = "node_modules"; dontNpmInstall = true; };
-        out = lowPrio node_modules;
-      }.out;
+      (lowPrio nle-conf.npm.out);
 
   yarn-paths =
     ifFilesAndNot "package.json yarn.lock yarn.nix" ".disable-nle-yarn"

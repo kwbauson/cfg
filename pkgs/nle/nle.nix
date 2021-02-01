@@ -24,6 +24,11 @@
     generated = "node-packages.nix";
     extraFiles = ".npmrc";
     notFiles = "yarn.nix";
+    out = override (callPackage (file "node-packages.nix") { inherit nodeEnv; }).nodeDependencies {
+      name = "node_modules";
+      dontNpmInstall = true;
+      src._replace = buildDir (map file (words self.npm.files));
+    };
   };
   yarn = {
     files = "package.json yarn.lock";
