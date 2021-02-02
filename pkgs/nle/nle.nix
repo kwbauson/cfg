@@ -24,11 +24,15 @@
     generated = "node-packages.nix";
     extraFiles = ".npmrc";
     notFiles = "yarn.nix";
-    out = override (callPackage (file "node-packages.nix") { inherit nodeEnv; }).nodeDependencies {
-      name = "node_modules";
-      dontNpmInstall = true;
-      src._replace = buildDir (map file (words self.npm.files));
-    };
+    out =
+      let
+        node-packages = callPackage (file "node-packages.nix") { inherit nodeEnv; };
+        args = node-packages.args // {
+          src = buildDir (map file self.npm.files);
+          dontNpmInstall = true;
+        };
+      in
+      override (nodeEnv.buildNodeDependencies args) { name = "node_modules"; };
   };
   yarn = {
     files = "package.json yarn.lock";
@@ -54,7 +58,7 @@
     files = "pyproject.toml poetry.lock";
     out = poetry2nix.mkPoetryEnv {
       projectDir = source;
-      overrides = poetry2nix.overrides.withDefaults (self: super: {
+      overrides = poetry2nix.overrides.withoutDefaults (self: super: {
         inform = super.inform.overridePythonAttrs (old: {
           buildInputs = old.buildInputs ++ [ self.pytest-runner ];
         });
