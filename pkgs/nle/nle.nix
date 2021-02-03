@@ -28,7 +28,7 @@
       let
         node-packages = callPackage (file "node-packages.nix") { inherit nodeEnv; };
         args = node-packages.args // {
-          src = buildDir (map file self.npm.files);
+          src = buildDir (map file (words self.npm.files));
           dontNpmInstall = true;
         };
       in
