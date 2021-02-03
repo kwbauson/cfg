@@ -78,6 +78,7 @@
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.poetry-env.python.pkgs) pur emborg;
     pinned-if-darwin = if isDarwin then nixos-unstable-channel else super;
+    inherit (self.pinned-if-darwin);
     selfpkgs = buildDir ([
       ./mylib.nix
     ] ++ self.nle.lib.build-paths ./.);
@@ -88,7 +89,6 @@
     ];
     nix-prefetch-git = (overridePackage nix-prefetch-git { nix = self.nixUnstable; }).nix-prefetch-git;
     bundix = overridePackage bundix { nix = self.nixUnstable; };
-    inherit (self.pinned-if-darwin);
     saml2aws = overrideWithPRs saml2aws {
       pr = 547;
       sha256 = "vQ0c5bBgHwzi0/d/YWPG8csOLjhSJmhOv6WhOneU09c=";
