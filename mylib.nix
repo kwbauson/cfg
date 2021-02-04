@@ -21,7 +21,7 @@ cli // generators // lib // builtins // rec {
   nixpkgs-branch = let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url; in
     if length urlParts == 3 then elemAt urlParts 2 else "master";
   fakePlatform = x: x.overrideAttrs (attrs:
-    { meta = attrs.meta or { } // { platforms = stdenv.lib.platforms.all; }; }
+    { meta = attrs.meta or { } // { platforms = lib.platforms.all; }; }
   );
   excludeLines = f: text: concatStringsSep "\n" (filter (x: !f x) (splitString "\n" text));
   unpack = src: stdenv.mkDerivation {
