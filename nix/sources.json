@@ -64,11 +64,11 @@
         "version": "85.0"
     },
     "dmg-qutebrowser": {
-        "sha256": "1krb0sg3npjc555m1mxpxnrk4j55aiix04p89kb2b6zvwlnr3qac",
+        "sha256": "1j5cgsj6k69w2xy32qqffk5w85jwk4qjxfvs8kxp4maj3s5bv4lz",
         "type": "file",
-        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v2.0.1/qutebrowser-2.0.1.dmg",
+        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v2.0.2/qutebrowser-2.0.2.dmg",
         "url_template": "https://github.com/qutebrowser/qutebrowser/releases/download/v<version>/qutebrowser-<version>.dmg",
-        "version": "2.0.1"
+        "version": "2.0.2"
     },
     "dmg-signal-desktop": {
         "sha256": "0sayvjimxavd4c4h7n4i78rny4nk94cnlblwq90kw0ypfkx8garf",
@@ -126,10 +126,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "1dc911215fd40a988854cc511347c892d7e1a924",
-        "sha256": "1icfnh2fd4nf3qwgl6fg0c56k9kyqznyrnn935m6nwyx2cdhkc4j",
+        "rev": "496a05157da76d126dc08938e66487783574ecd7",
+        "sha256": "1lnyh2cd0vrxsl15vs1wraqajrf79shysa5dlh805rdh657dkzgq",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/1dc911215fd40a988854cc511347c892d7e1a924.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/496a05157da76d126dc08938e66487783574ecd7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
