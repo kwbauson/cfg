@@ -113,6 +113,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#nvimlsp#enabled = 0
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
 function! RipgrepFzf(query, fullscreen)
