@@ -49,7 +49,6 @@
         ${read "requirements.txt"}
         ${read "requirements.dev.txt"}
       '';
-      _.${attrIf isDarwin "lazy-object-proxy"}.buildInputs = [ ];
     };
   };
   poetry = {
