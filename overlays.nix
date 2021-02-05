@@ -73,7 +73,11 @@
     npm-coc-deno = self.buildNpmVimPlugin "coc-deno";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
-    mach-nix = cfg.inputs.mach-nix.lib.${system};
+    mach-nix = import cfg.inputs.mach-nix {
+      inherit pkgs;
+      pypiDataRev = cfg.inputs.pypi-deps-db.rev;
+      pypiDataSha256 = cfg.inputs.pypi-deps-db.narHash;
+    };
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.poetry-env.python.pkgs) pur emborg;
