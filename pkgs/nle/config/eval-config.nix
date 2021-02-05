@@ -11,10 +11,10 @@ let
     let x = f x; in x;
   evalConfig = config: fix (self:
     let eval = cfg:
-      if isFunction cfg then cfg self
+      if isFunction cfg then eval (cfg self)
       else if isPath cfg then eval (import cfg)
       else if isList cfg then foldl' override { } (map eval cfg)
-      else if cfg ? imports then eval [ cfg.imports (removeAttrs cfg [ "imports" ]) ]
+      else if cfg ? imports then evalConfig [ cfg.imports config ]
       else cfg;
     in eval config
   ) // { withConfig = cfg: evalConfig [ config cfg ]; };
