@@ -89,7 +89,6 @@ case $cmd in
     ;;
   activate)
     "$0" cache
-    [[ -e .envrc ]] && touch .envrc
     if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
       if [[ ! -e node_modules || -L node_modules ]];then
         ln -sft . "$("$0" result)"/node_modules
