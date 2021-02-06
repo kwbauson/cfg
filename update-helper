@@ -2,8 +2,7 @@
 # with-packages curl niv gawk nix-wrapped nr
 
 # nixpkgs channels
-channel=${1:-nixos-unstable}
-for channel in nixos-unstable nixos-18.09;do
+for channel in nixos-unstable nixos-20.09 nixos-18.09;do
   url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
   version=$(echo "$url" | awk -F/ '{ print $NF }')
   niv update $(echo $channel | tr . _) -v $version
