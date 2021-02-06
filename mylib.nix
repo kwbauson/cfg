@@ -69,14 +69,17 @@ cli // generators // lib // builtins // rec {
     msg = "${name}: src ${src.version} != pkg ${pkg.version}";
     checkVersion = lib.assertMsg (pkg.version == src.version) msg;
   }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
-  importNixpkgs = src: import src { inherit system; config = import ./config.nix; overlays = [ ]; };
+  importNixpkgs = src:
+    let realSrc =
+      if src ? type && src.type == "file" && src ? url_template && hasInfix ".tar." src.url_template
+      then unpack src else src;
+    in import realSrc { inherit system; config = import ./config.nix; overlays = [ ]; };
   buildDir = paths:
     let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
     in runCommand "build-dir" { } "mkdir $out\n${cmds}";
   copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
   nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
   pathAdd = pkgs: "PATH=${makeBinPath (toList pkgs)}:$PATH";
-  nixos-unstable-channel = importNixpkgs (unpack sources.nixos-unstable-channel);
   makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
   makeScripts = mapAttrs makeScript;
   echo = text: writeShellScript "echo-script" ''echo "$(< ${toFile "text" text})"'';

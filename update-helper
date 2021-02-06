@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # with-packages curl niv gawk nix-wrapped nr
 
-# nixos-unstable channel
+# nixpkgs channels
 channel=${1:-nixos-unstable}
-url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
-version=$(echo "$url" | awk -F/ '{ print $NF }')
-niv update $channel-channel -v $version
+for channel in nixos-unstable nixos-18.09;do
+  url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
+  version=$(echo "$url" | awk -F/ '{ print $NF }')
+  niv update $(echo $channel | tr . _) -v $version
+done
 
 # darwin dmgs
 for pkg in qutebrowser alacritty signal-desktop firefox brave;do

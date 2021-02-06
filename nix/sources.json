@@ -152,18 +152,13 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-18_09": {
-        "branch": "nixos-18.09",
-        "description": "Nix Packages collection",
-        "homepage": null,
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "a7e559a5504572008567383c3dc8e142fa7a8633",
-        "sha256": "16j95q58kkc69lfgpjkj76gw5sx8rcxwi3civm0mlfaxxyw9gzp6",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/a7e559a5504572008567383c3dc8e142fa7a8633.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "sha256": "0nykrljsyqi8saih1b9075izpzcw5rx8h0p8kqzqi0cz52l4aq22",
+        "type": "file",
+        "url": "https://releases.nixos.org/nixos/18.09/nixos-18.09.2574.a7e559a5504/nixexprs.tar.xz",
+        "url_template": "https://releases.nixos.org/nixos/18.09/<version>/nixexprs.tar.xz",
+        "version": "nixos-18.09.2574.a7e559a5504"
     },
-    "nixos-unstable-channel": {
+    "nixos-unstable": {
         "sha256": "025qcxhq621wp9r5j7rdp8j22i25iklxv428wzfpfnfqrj616wb9",
         "type": "file",
         "url": "https://releases.nixos.org/nixos/unstable/nixos-21.03pre268206.536fe36e23a/nixexprs.tar.xz",

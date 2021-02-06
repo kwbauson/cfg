@@ -1,7 +1,7 @@
 [
-  (self: super: with super; with mylib;
-  mapAttrValues importNixpkgs { inherit (sources) nixos-18_09 nixpkgs-bundler1; }
-  )
+  (self: super: with super; with mylib; mapAttrValues importNixpkgs {
+    inherit (sources) nixos-unstable nixos-18_09 nixpkgs-bundler1;
+  })
   (self: super: with super; with mylib; {
     programs-sqlite = stdenv.mkDerivation rec {
       name = "programs-sqlite";
@@ -24,7 +24,7 @@
           ]
       );
       installPhase = ''
-        cp ${nixos-unstable-channel.path}/programs.sqlite $out
+        cp ${nixos-unstable.path}/programs.sqlite $out
         chmod +w $out
         sqlite3 $out <<EOF
         .mode csv
@@ -79,8 +79,6 @@
     nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
     inherit (self.nle-cfg-pkgs) fordir;
     inherit (self.nle-cfg-pkgs.poetry-env.python.pkgs) pur emborg;
-    pinned-if-darwin = if isDarwin then nixos-unstable-channel else super;
-    inherit (self.pinned-if-darwin);
     selfpkgs = buildDir ([
       ./mylib.nix
     ] ++ self.nle.lib.build-paths ./.);
@@ -95,6 +93,8 @@
       pr = 547;
       sha256 = "vQ0c5bBgHwzi0/d/YWPG8csOLjhSJmhOv6WhOneU09c=";
     };
+    pinned-if-darwin = if isDarwin then nixos-unstable else super;
+    inherit (self.pinned-if-darwin);
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
