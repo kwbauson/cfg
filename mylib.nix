@@ -58,11 +58,13 @@ cli // generators // lib // builtins // rec {
       appdir=$(echo $out/Applications/*.app)
       [[ -d $appdir ]] || exit 1
       exe=$appdir/Contents/MacOS/${pname}
+      echo '#!/bin/sh' > $out/bin/${pname}
       if [[ -e $exe ]];then
-        echo '#!/bin/sh' > $out/bin/${pname}
         echo "exec \"$exe\" \"\$@\"" >> $out/bin/${pname}
-        chmod +x $out/bin/${pname}
+      else
+        echo "exec open -a $out/Applications/*.app \"\$@\"" >> $out/bin/${pname}
       fi
+      chmod +x $out/bin/${pname}
     '';
   };
   dmgOverride = name: pkg: with rec {

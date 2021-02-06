@@ -7,8 +7,11 @@ built._
 # install
 nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA better-comma
 # usage
-, jq --help
 , dasel --help
+, firefox
+, brave # try out the brave browser
+, signal-desktop # launch the signal messaging app desktop client
+, asciiquarium
 ```
 
 ## nle

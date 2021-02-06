@@ -49,12 +49,19 @@
         "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
         "version": "0.7.1"
     },
-    "dmg-discord": {
-        "sha256": "05v5f02gpl9xcbpah2akmcnix6g1xslgjwas1r1xxvhscxs72ywj",
+    "dmg-brave": {
+        "sha256": "1nk56zb4glr934g9mad9a1f2gm2awfqn5f6m8fqbwjni6pc0y0sw",
         "type": "file",
-        "url": "https://dl.discordapp.net/apps/osx/0.0.259/Discord.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.19.88/Brave-Browser-universal.dmg",
+        "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
+        "version": "1.19.88"
+    },
+    "dmg-discord": {
+        "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
+        "type": "file",
+        "url": "https://dl.discordapp.net/apps/osx/0.0.261/Discord.dmg",
         "url_template": "https://dl.discordapp.net/apps/osx/<version>/Discord.dmg",
-        "version": "0.0.259"
+        "version": "0.0.261"
     },
     "dmg-firefox": {
         "sha256": "1621v7g2y4rc9yszipnijr3pm9yzj84dw9aqlrsg4a8pnp3wzhal",
@@ -90,10 +97,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "55758a8519b025241af0b338a1a107a8b2f2699e",
-        "sha256": "060xpvk80z0birryas5c17npjqh6c1dfh40fr969xzja7g4hsb7q",
+        "rev": "a1cf5d44139251d4049427a78077a9a88287629a",
+        "sha256": "1f2dbb7n2gxw6ilnjcqnpwqzs9vcrf0vmq10k5n7d78lvh993k6y",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/55758a8519b025241af0b338a1a107a8b2f2699e.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/a1cf5d44139251d4049427a78077a9a88287629a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {

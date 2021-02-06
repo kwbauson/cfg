@@ -6,7 +6,7 @@ pkgs: with pkgs; with mylib; buildEnv rec {
         (
           writeShellScriptBin ","
             ''
-              ${pathAdd [ sqlite coreutils fzy nix-wrapped ]}
+              ${pathAdd [ sqlite coreutils fzy nix-wrapped nr ]}
               set -e
               [[ $1 = -u ]] && uncache=1 && shift
               [[ $1 = -d ]] && desc=1 && shift
@@ -15,6 +15,7 @@ pkgs: with pkgs; with mylib; buildEnv rec {
                 echo usage: , COMMAND ARGS
                 exit
               fi
+              shift
               sql="select distinct package from Programs where name = '$cmd'"
               packages=$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)
 
@@ -39,7 +40,11 @@ pkgs: with pkgs; with mylib; buildEnv rec {
                 if [[ $desc = 1 ]];then
                   exec nix eval --impure --expr "with import ${selfpkgs.outPath}; desc $attr"
                 else
-                  exec nix shell "${selfpkgs.outPath}#$attr" --command "$@"
+                  if [[ -z $packages ]];then
+                    exec nr "$cmd" "$@"
+                  else
+                    exec nr -c "$cmd" "$attr" "$@"
+                  fi
                 fi
               fi
             ''
