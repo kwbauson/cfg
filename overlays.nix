@@ -97,13 +97,6 @@
     };
   })
   (self: super: with super; with mylib;
-  mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
-  )
-  (self: super: with super; with mylib; {
-    spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
-    discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
-  } // mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; })
-  (self: super: with super; with mylib;
   mapAttrs (name: f: f (pkgs // { inherit name; src = sources.${name}; })) (importDir ./pkgs)
   )
   (self: super: with super; with mylib;
@@ -115,4 +108,11 @@
       }
     ) ./pkgs
   )
+  (self: super: with super; with mylib;
+  mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
+  )
+  (self: super: with super; with mylib; {
+    spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
+    discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
+  } // mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; })
 ]
