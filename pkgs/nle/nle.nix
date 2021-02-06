@@ -44,12 +44,14 @@
     files = "requirements.txt";
     extraFiles = "requirements.dev.txt";
     notFiles = self.poetry.files;
-    out = mach-nix.mkPython {
-      requirements = excludeLines (hasPrefix "itomate") ''
-        ${read "requirements.txt"}
-        ${read "requirements.dev.txt"}
-      '';
-    };
+    out =
+      (mach-nix.mkPython {
+        requirements = excludeLines (hasPrefix "itomate") ''
+          ${read "requirements.txt"}
+          ${read "requirements.dev.txt"}
+        '';
+        overridesPost = [ (self: super: { inherit (python3Packages) black; }) ];
+      }).override { ignoreCollisions = true; };
   };
   poetry = {
     enable = true;

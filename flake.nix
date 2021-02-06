@@ -15,7 +15,7 @@
     mach-nix.inputs.nixpkgs.follows = "nixpkgs";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
-    pypi-deps-db.url = "github:DavHau/pypi-deps-db?rev=4893bcc959a4e9f3b8c2e1a6c3f254c987552ff0";
+    pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
   };
 
