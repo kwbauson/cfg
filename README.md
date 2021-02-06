@@ -9,9 +9,9 @@ nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA better-comma
 # usage
 , dasel --help
 , firefox
-, brave # try out the brave browser
+, brave # try out the brave web browser
 , signal-desktop # launch the signal messaging app desktop client
-, asciiquarium
+, asciiquarium # watch fish swim in your terminal :)
 ```
 
 ## nle
