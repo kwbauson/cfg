@@ -12,6 +12,7 @@ nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA better-comma
 , brave # try out the brave web browser
 , signal-desktop # launch the signal messaging app desktop client
 , asciiquarium # watch fish swim in your terminal :)
+, opentyrian # play a retro arcade shooter
 ```
 
 ## nle

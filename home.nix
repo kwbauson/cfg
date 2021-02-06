@@ -150,6 +150,11 @@ with builtins; with pkgs; with mylib; {
             export XDG_DATA_DIRS="$HOME/.nix-profile/share:''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
           fi
           source ~/.nix-profile/etc/profile.d/bash_completion.sh
+          if [[ -d ~/.nix-profile/etc/bash_completion.d ]];then
+            for script in ~/.nix-profile/etc/bash_completion.d/*;do
+              source $script
+            done
+          fi
           export GPG_TTY=$(tty)
         '' ''
           [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
