@@ -151,7 +151,33 @@ with builtins; with pkgs; with mylib; {
           source ~/.nix-profile/etc/profile.d/bash_completion.sh
           export GPG_TTY=$(tty)
         '' ''
-          ${readFile ./bashrc}
+          [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
+          [[ -n $SSH_CLIENT ]] && _host="$(hostname --fqdn) " || _host=
+          PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
+
+          set -o vi
+          set +h
+          _promptcmd() {
+              ret=$?
+              [[ $ret -eq 0 || $ret -eq 148 ]] && rstat= || rstat=$ret
+
+              if [[ -z $rstat && -z $jstat ]];then
+                _status=
+              elif [[ -z $rstat ]];then
+                _status=$jstat
+              elif [[ -z $jstat ]];then
+                _status=$rstat
+              else
+                _status="$rstat $jstat"
+              fi
+
+              _place=$(($COLUMNS - $((''${#_host} + ''${#_status}))))
+
+              history -a
+              tail -n1 ~/.bash_history >> ~/.bash_history-all
+          }
+          PROMPT_COMMAND='_promptcmd'
+
           source ${sources.complete-alias}/complete_alias
           for a in $(alias | sed 's/=/ /' | cut -d' ' -f2);do complete -F _complete_alias $a;done
         '';
@@ -440,7 +466,11 @@ with builtins; with pkgs; with mylib; {
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
-      xmodmap ${./Xmodmap}
+      xmodmap ${writeText "Xmodmap" ''
+        remove mod1 = Alt_L
+        keycode 64 = Escape
+        keycode 105 = Super_L
+      ''}
       xsetroot -solid black
       xsetroot -cursor_name left_ptr
       urxvtd -q -o -f
@@ -451,10 +481,6 @@ with builtins; with pkgs; with mylib; {
         enable = isNixOS && isGraphical;
         config = null;
         extraConfig = readFile ./i3-config;
-      };
-      xmonad = {
-        enable = false;
-        enableContribAndExtras = true;
       };
     };
   };
