@@ -59,8 +59,6 @@
       username = "kwbauson";
       token = readFile ./secrets/factorio-token;
     };
-    qutebrowser = override qutebrowser { patches = [ ./qutebrowser-background.patch ]; };
-    i3 = override i3 { patches = [ ./i3-icons.patch ]; };
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
@@ -107,5 +105,14 @@
   } // mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop; })
   (self: super: with super; with mylib;
   mapAttrs (name: f: f (pkgs // { inherit name; src = sources.${name}; })) (importDir ./pkgs)
+  )
+  (self: super: with super; with mylib;
+  mapDirEntries
+    (n: value:
+      optionalAttrs (hasSuffix ".patch" n) rec {
+        name = removeSuffix ".patch" n;
+        value = override super.${name} { patches = [ (./pkgs + ("/" + n)) ]; };
+      }
+    ) ./pkgs
   )
 ]

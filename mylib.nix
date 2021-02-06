@@ -99,17 +99,13 @@ cli // generators // lib // builtins // rec {
     else y;
   packageFile = pkg: head (splitString ":" pkg.meta.position);
   overridePackage = pkg: callPackage (packageFile pkg);
+  mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
   importDir = dir:
     let
-      dirList = attrsToList (readDir dir);
       path = p: dir + "/${p}";
       importPath = p: import (path p);
       hasPath = p: pathExists (path p);
-      canImport = { name, value }:
-        (value != "directory" && hasSuffix ".nix" name)
-        || pathExists (dir + "/${name}/default.nix")
-        || pathExists (dir + "/${name}/configuration.nix");
-      importEntry = { name, value }:
+      importEntry = name: value:
         if hasSuffix ".nix" name
         then { name = removeSuffix ".nix" name; value = importPath name; }
         else if hasPath "${name}/default.nix"
@@ -118,7 +114,7 @@ cli // generators // lib // builtins // rec {
         then { inherit name; value = importPath "${name}/configuration.nix"; }
         else null;
     in
-    listToAttrs (filter (x: x != null) (map importEntry dirList));
+    mapDirEntries importEntry dir;
   fixSelfWith = f: x:
     let self = f (x // { inherit self; }); in self;
   overrideWithPRs = pkg: prs: override pkg {
