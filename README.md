@@ -3,7 +3,7 @@ built._
 
 ## better-comma
 
-```
+```bash
 # install
 nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA better-comma
 # usage
@@ -13,7 +13,7 @@ nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA better-comma
 
 ## nle
 
-```
+```bash
 # install
 nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA nle
 ```
