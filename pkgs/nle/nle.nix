@@ -50,6 +50,7 @@
           ${read "requirements.txt"}
           ${read "requirements.dev.txt"}
         '';
+        _.curtsies.patches = [ ];
         overridesPost = [ (self: super: { inherit (python3Packages) black; }) ];
       }).override { ignoreCollisions = true; };
   };
