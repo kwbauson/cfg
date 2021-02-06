@@ -151,6 +151,18 @@
         "url": "https://github.com/neoclide/jsonc.vim/archive/63ffa5199a0e64d5ce0515256407f32dfbd67fc3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "juicefs": {
+        "branch": "main",
+        "description": "JuiceFS is a distributed POSIX file system built on top of Redis and S3.",
+        "homepage": "",
+        "owner": "juicedata",
+        "repo": "juicefs",
+        "rev": "521896655723abf064c883432278d5bac10455d3",
+        "sha256": "04kw366j01jljc50vsfki6wcxj36ydq9iy1xrshdf1ni7p8k8cs3",
+        "type": "tarball",
+        "url": "https://github.com/juicedata/juicefs/archive/521896655723abf064c883432278d5bac10455d3.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixos-18_09": {
         "sha256": "0nykrljsyqi8saih1b9075izpzcw5rx8h0p8kqzqi0cz52l4aq22",
         "type": "file",

@@ -19,6 +19,7 @@
             "git-trim"
             "fordir"
             "inlets"
+            "juicefs"
             "pur"
             "emborg"
           ]
