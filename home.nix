@@ -56,8 +56,9 @@ with builtins; with pkgs; with mylib; {
         inherit
           chromium diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
           steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
+          acpi progress xdotool
           ;
-        inherit bl bh medctl runnim statusline vol;
+        inherit bl bh medctl runnim statusline vol togpad xpaste;
         inherit dejavu_fonts_nerd;
       };
       ${attrIf (!isGraphical) "non-graphical"} = {

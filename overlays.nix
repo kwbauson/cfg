@@ -95,6 +95,10 @@
       pr = 547;
       sha256 = "vQ0c5bBgHwzi0/d/YWPG8csOLjhSJmhOv6WhOneU09c=";
     };
+    allowUnsupportedSystem = import pkgs.path {
+      inherit system;
+      config = cfg.config // { allowUnsupportedSystem = true; };
+    };
   })
   (self: super: with super; with mylib;
   mapAttrs (name: f: f (pkgs // { inherit name; src = sources.${name}; })) (importDir ./pkgs)
@@ -107,9 +111,6 @@
         value = override super.${name} { patches = [ (./pkgs + ("/" + n)) ]; };
       }
     ) ./pkgs
-  )
-  (self: super: with super; with mylib;
-  mapAttrValues fakePlatform { inherit xvfb_run acpi scrot xdotool progress; }
   )
   (self: super: with super; with mylib; {
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });

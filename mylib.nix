@@ -20,9 +20,6 @@ cli // generators // lib // builtins // rec {
   userEmail = "kwbauson@gmail.com";
   nixpkgs-branch = let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url; in
     if length urlParts == 3 then elemAt urlParts 2 else "master";
-  fakePlatform = x: x.overrideAttrs (attrs:
-    { meta = attrs.meta or { } // { platforms = lib.platforms.all; }; }
-  );
   excludeLines = f: text: concatStringsSep "\n" (filter (x: !f x) (splitString "\n" text));
   unpack = src: stdenv.mkDerivation {
     src = if src ? url && src ? sha256 then fetchurl { inherit (src) url sha256; } else src;
