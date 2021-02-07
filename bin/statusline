@@ -19,7 +19,7 @@ end
 internet = false
 
 blocks = [
-  interval { ifs(internet) { `nixpkgs-has-updates` } },
+  interval { ifs(internet) { `has-updates` } },
   interval(5) {
     internet = begin true if URI.open('http://www.google.com', {read_timeout: 3}) rescue false end
     ifs !internet, 'no internet'

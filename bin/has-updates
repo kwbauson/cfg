@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# with-packages git
+branch=${1:-main}
+set -e
+cd ~/cfg
+git fetch --quiet
+[[ $(git rev-parse HEAD) = $(git rev-parse origin/$branch) ]] || echo updates
