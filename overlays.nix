@@ -56,10 +56,6 @@
       flags = joinStrings " " (x: "--${x}") (x: y: "--${x} '${y}'") options;
       conf = joinLines (x: "${x} = true") (x: y: "${x} = ${y}") options;
     };
-    factorio = factorio.override {
-      username = "kwbauson";
-      token = readFile ./secrets/factorio-token;
-    };
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
