@@ -115,6 +115,18 @@
         "url": "https://github.com/edolstra/flake-compat/archive/99f1c2157fba4bfe6211a321fd0ee43199025dbf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "git-fuzzy": {
+        "branch": "master",
+        "description": "interactive `git` with the help of `fzf`",
+        "homepage": "",
+        "owner": "bigH",
+        "repo": "git-fuzzy",
+        "rev": "ecdcd157e537d98586435a40bed83d40c65bd959",
+        "sha256": "1f2iq8bk0fpld99m0siajadn3lr5fwvgwpniwfdh73picxa7hwhk",
+        "type": "tarball",
+        "url": "https://github.com/bigH/git-fuzzy/archive/ecdcd157e537d98586435a40bed83d40c65bd959.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "git-trim": {
         "branch": "master",
         "description": "Utility to delete git branches interactively",
