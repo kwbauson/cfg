@@ -61,7 +61,7 @@
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
     buildNpmVimPlugin = name: vimUtils.buildVimPlugin {
       inherit name;
-      src = copyPath "${(import ./node-env.nix { inherit pkgs; path = ./.; }).node_modules}/${name}";
+      src = copyPath "${(import ./npm-env.nix { inherit pkgs; path = ./.; }).node_modules}/${name}";
     };
     npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
     npm-coc-pyright = self.buildNpmVimPlugin "coc-pyright";
