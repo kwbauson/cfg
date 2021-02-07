@@ -1,0 +1,4 @@
+requiredTitleRegex: '^Automatic update$'
+updateBranch: true
+deleteBranchAfterMerge: true
+mergeMethod: squash
