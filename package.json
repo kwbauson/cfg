@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "coc-deno": "0.11.0",
-    "coc-explorer": "0.15.6",
+    "coc-explorer": "0.15.5",
     "coc-pyright": "1.1.108",
     "ts-node": "9.1.1",
     "ts-node-dev": "1.1.1",
