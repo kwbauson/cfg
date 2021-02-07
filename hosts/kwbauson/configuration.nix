@@ -50,7 +50,7 @@
       interfaceConfig = {
         SHOW_JITSI_WATERMARK = false;
         SHOW_WATERMARK_FOR_GUESTS = false;
-        MOBILE_APP_PROMO = false;
+        # MOBILE_APP_PROMO = false;
       };
     };
     jitsi-videobridge.openFirewall = true;
