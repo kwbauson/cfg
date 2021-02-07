@@ -73,5 +73,6 @@ pkgs: with pkgs; with mylib; stdenv.mkDerivation {
     chmod +x $out/bin/${name}
     ln -s $out/bin/{${name},","}
     installShellCompletion --bash --name better-comma $completionPath
+    installShellCompletion --bash --name , $completionPath
   '';
 }
