@@ -1,5 +1,6 @@
 prev: with prev; with lib; with builtins;
 cli // generators // lib // builtins // rec {
+  ap = x: f: f x;
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
   sources = import ./nix/sources.nix { inherit system pkgs; };

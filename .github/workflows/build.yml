@@ -13,6 +13,8 @@ jobs:
           - homeConfigurations.non-graphical
           - homeConfigurations.graphical
           - homeConfigurations.keith-mac
+          - checks
+          - checks-mac
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
     steps:
       - uses: actions/checkout@v2

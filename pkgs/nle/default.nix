@@ -8,7 +8,7 @@ pkgs: with pkgs; with mylib; buildEnv {
       nixpkgs = pkgs;
       f = { path, pkgs ? nixpkgs }: import ./nix-local-env.nix { inherit pkgs path; };
     in
-    _: arg: if isAttrs arg then f arg else f { path = arg; };
+    _: arg: if any (ap arg) [ isPath isString isDerivation ] then f { path = arg; } else f arg;
   lib = rec {
     build-files = unique (
       flatten (mapAttrsToList (n: v: words "${v.files or ""} ${v.extraFiles or ""} ${v.generated or ""}") conf)
