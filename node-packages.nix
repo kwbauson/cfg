@@ -211,13 +211,13 @@ let
         sha512 = "0we/UrRQVy6/Ogf5XRHt+jmYJzfrYatymgt82BHDg0BBUXrY/E9J+JXfc8IeQ9eonJdgzujlT/Es22lv/Zxgsg==";
       };
     };
-    "coc-explorer-0.15.6" = {
+    "coc-explorer-0.15.5" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.15.6";
+      version = "0.15.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.6.tgz";
-        sha512 = "NegmT0lRVjG7dE7IQDdQLvGPkW8Zcxo0l8D3kU0gy7Cq51QL6Tac7xPMUS/jeqt+4xsVzkPpRa2yZNCw9nplNA==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.5.tgz";
+        sha512 = "wwnhDkcin1Vl5XKd/bqtkorB22TgTfKE+coCdJgHaF8IuDVvuliGoZLQ3N2FxvMR0ssnA2dFwzqvximI/CD9lA==";
       };
     };
     "coc-pyright-1.1.108" = {
@@ -913,13 +913,13 @@ let
         sha512 = "kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==";
       };
     };
-    "open-7.4.0" = {
+    "open-7.3.1" = {
       name = "open";
       packageName = "open";
-      version = "7.4.0";
+      version = "7.3.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/open/-/open-7.4.0.tgz";
-        sha512 = "PGoBCX/lclIWlpS/R2PQuIR4NJoXh6X5AwVzE7WXnWRGvHg7+4TBCgsujUgiPpm0K1y4qvQeWnCWVTpTKZBtvA==";
+        url = "https://registry.npmjs.org/open/-/open-7.3.1.tgz";
+        sha512 = "f2wt9DCBKKjlFbjzGb8MOAW8LH8F0mrs1zc7KTjAJ9PZNQbfenzWbNP1VZJvw6ICMG9r14Ah6yfwPn7T7i646A==";
       };
     };
     "os-homedir-1.0.2" = {
@@ -947,6 +947,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/p-map/-/p-map-4.0.0.tgz";
         sha512 = "/bjOqmgETBYB5BoEeGVea8dmvHb2m9GLy1E9W43yeyfP6QQCZGFNa+XRceJEuDB6zqr+gKpIAmlLebMpykw/MQ==";
+      };
+    };
+    "p-try-2.2.0" = {
+      name = "p-try";
+      packageName = "p-try";
+      version = "2.2.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/p-try/-/p-try-2.2.0.tgz";
+        sha512 = "R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==";
       };
     };
     "parse-json-2.2.0" = {
@@ -1318,13 +1327,13 @@ let
         sha512 = "65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==";
       };
     };
-    "trash-7.1.0" = {
+    "trash-7.0.0" = {
       name = "trash";
       packageName = "trash";
-      version = "7.1.0";
+      version = "7.0.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/trash/-/trash-7.1.0.tgz";
-        sha512 = "AXJynOH6fJ4ua6KVy6vuDAKm8RsDxGgO0UHjAb6rM7O00ChdNb3IAjiCxw2utoVcKAv+0xg62hjr6tZ2Fzjd/A==";
+        url = "https://registry.npmjs.org/trash/-/trash-7.0.0.tgz";
+        sha512 = "xfPzt28GIpIg7XzHFAPDWIV7zrKUQzbP/+EdPPu8UStgsRhbE2M7OQIsSz1QRlwLV9PjAKplhtqDcwrUt3T4Aw==";
       };
     };
     "tree-kill-1.2.2" = {
@@ -1500,7 +1509,7 @@ let
       sources."clean-stack-2.2.0"
       sources."clone-deep-0.2.4"
       sources."coc-deno-0.11.0"
-      sources."coc-explorer-0.15.6"
+      sources."coc-explorer-0.15.5"
       sources."coc-pyright-1.1.108"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
@@ -1595,10 +1604,11 @@ let
       sources."object-assign-4.1.1"
       sources."once-1.4.0"
       sources."onetime-5.1.2"
-      sources."open-7.4.0"
+      sources."open-7.3.1"
       sources."os-homedir-1.0.2"
       sources."p-finally-2.0.1"
       sources."p-map-4.0.0"
+      sources."p-try-2.2.0"
       sources."parse-json-2.2.0"
       sources."path-exists-4.0.0"
       sources."path-is-absolute-1.0.1"
@@ -1649,7 +1659,7 @@ let
       sources."strip-indent-1.0.1"
       sources."strip-json-comments-2.0.1"
       sources."to-regex-range-5.0.1"
-      sources."trash-7.1.0"
+      sources."trash-7.0.0"
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
       sources."ts-node-9.1.1"
