@@ -23,6 +23,6 @@ jobs:
         with:
           delete-branch: true
           title: Automatic update
-          commit-message: automatic update
+          commit-message: Automatic update
           branch: automatic-update
           token: ${{ secrets.PAT }}
