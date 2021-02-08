@@ -164,15 +164,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "juicefs": {
-        "branch": "main",
+        "branch": "v0.10.0",
         "description": "JuiceFS is a distributed POSIX file system built on top of Redis and S3.",
         "homepage": "",
         "owner": "juicedata",
         "repo": "juicefs",
-        "rev": "d4686bac65cfedca47e002582f5f538f318dd0d5",
-        "sha256": "1sqhgb887q9zi7f26h5a76q8swpjyvlvzn23aimj1pay7nh7fsxx",
+        "rev": "4c56261884f432535be2d006ba8b8472e59774cd",
+        "sha256": "185a1c8a1v0sn869x9y5ipcam3l1bll1pim9ws2vsv4lkmghi03q",
         "type": "tarball",
-        "url": "https://github.com/juicedata/juicefs/archive/d4686bac65cfedca47e002582f5f538f318dd0d5.tar.gz",
+        "url": "https://github.com/juicedata/juicefs/archive/4c56261884f432535be2d006ba8b8472e59774cd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-18_09": {

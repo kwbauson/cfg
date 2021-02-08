@@ -98,7 +98,7 @@
     };
   })
   (self: super: with super; with mylib;
-  mapAttrs (name: f: f (pkgs // { inherit name; src = sources.${name}; })) (importDir ./pkgs)
+  mapAttrs (name: f: f (pkgs // { inherit name; pname = name; src = sources.${name}; })) (importDir ./pkgs)
   )
   (self: super: with super; with mylib;
   mapDirEntries
