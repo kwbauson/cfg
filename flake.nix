@@ -104,6 +104,7 @@
         paths = [
           inlets
           juicefs
+          saml2aws
           (nle (writeTextDir "requirements.txt" ''
             black==20.8b1
             bpython==0.20.1
