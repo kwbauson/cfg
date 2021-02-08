@@ -60,19 +60,6 @@ rec {
           packageJSON = file "package.json";
           yarnLock = file "yarn.lock";
           yarnNix = file "yarn.nix";
-          pkgConfig = {
-            node-pre-gyp.nativeBuildInputs = [ python2 gnumake coreutils gcc gnused binutils gnugrep pkg-config ];
-            canvas.buildInputs = [ pango libjpeg ];
-          };
-          postBuild = ''
-            cd $out/node_modules
-            PATH=$PWD/.bin:$PATH
-            if [[ -d canvas ]];then
-              cd canvas
-              node-pre-gyp install --build-from-source --tarball ${import ./node-headers.nix}
-              cd ..
-            fi
-          '';
         };
         out =
           runCommand "yarn-env"
