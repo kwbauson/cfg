@@ -129,7 +129,7 @@ with builtins; with pkgs; with mylib; {
         nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
         noe = "nvim ~/cfg/hosts/$(hostname -s)/configuration.nix && nos";
         hme = "nvim ~/cfg/home.nix && hms";
-        hmg = "git -C ~/cfg fetch && git -C ~/cfg df origin/main && git -C ~/cfg g";
+        hmg = "git -C ~/cfg fetch && git -C ~/cfg df origin/main && git -C ~/cfg rebase origin/main --autostash";
         hmp = "git -C ~/cfg cap";
         nou = "hmg && nos-hms";
         root-symlinks = with {
