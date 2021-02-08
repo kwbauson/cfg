@@ -169,10 +169,10 @@
         "homepage": "",
         "owner": "juicedata",
         "repo": "juicefs",
-        "rev": "521896655723abf064c883432278d5bac10455d3",
-        "sha256": "04kw366j01jljc50vsfki6wcxj36ydq9iy1xrshdf1ni7p8k8cs3",
+        "rev": "d4686bac65cfedca47e002582f5f538f318dd0d5",
+        "sha256": "1sqhgb887q9zi7f26h5a76q8swpjyvlvzn23aimj1pay7nh7fsxx",
         "type": "tarball",
-        "url": "https://github.com/juicedata/juicefs/archive/521896655723abf064c883432278d5bac10455d3.tar.gz",
+        "url": "https://github.com/juicedata/juicefs/archive/d4686bac65cfedca47e002582f5f538f318dd0d5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-18_09": {
