@@ -61,7 +61,7 @@ rec {
           yarnLock = file "yarn.lock";
           yarnNix = file "yarn.nix";
           pkgConfig = {
-            node-pre-gyp.buildInputs = [ python2 gnumake coreutils gcc gnused binutils gnugrep pkg-config ];
+            node-pre-gyp.nativeBuildInputs = [ python2 gnumake coreutils gcc gnused binutils gnugrep pkg-config ];
             canvas.buildInputs = [ pango libjpeg ];
           };
           postBuild = ''
@@ -102,10 +102,10 @@ rec {
             grpc = attrs: defaultGemConfig.grpc attrs // {
               AROPTS = "-r";
             };
-            plivo = _: { buildInputs = [ rake ]; };
+            plivo = _: { nativeBuildInputs = [ rake ]; };
           };
         };
-        paths = [ env.wrappedRuby (hiPrio env) bundix ];
+        paths = [ env.wrappedRuby (hiPrio env) ];
       }.paths;
   mach-nix-paths = with rec {
     hasRequirements = pathExists (file "requirements.txt");
