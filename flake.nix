@@ -89,6 +89,7 @@
       };
 
       homeConfigurations.keith-xps = homeConfigurations.graphical;
+      homeConfigurations.keith-desktop = homeConfigurations.graphical;
       homeConfigurations.kwbauson = homeConfigurations.non-graphical;
       homeConfigurations.keith-vm = homeConfigurations.graphical;
       homeConfigurations.keith-mac = lib.homeConfiguration {

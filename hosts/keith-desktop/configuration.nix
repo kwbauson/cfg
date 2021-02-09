@@ -3,7 +3,7 @@ with builtins;
 {
   imports = [
     nixos-hardware.nixosModules.common-cpu-amd
-    nixos-hardware.nixosModules.common-gpu-nvidia
+    # nixos-hardware.nixosModules.common-gpu-nvidia
     ./hardware-configuration.nix
     (self.lib.callModule ../common.nix)
   ];
