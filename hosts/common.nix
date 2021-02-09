@@ -13,6 +13,8 @@
     tmpOnTmpfs = true;
   };
 
+  boot.blacklistedKernelModules = [ "psmouse" ];
+
   nix.package = pkgs.nixUnstable;
   nix.nixPath = [ ];
   nix.extraOptions = self.packages.${pkgs.system}.nix-wrapped.conf;
@@ -28,6 +30,9 @@
       PubkeyAcceptedKeyTypes ssh-ed25519
       IdentityFile /root/.ssh/id_ed25519
   '';
+
+  hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = true;
 
   nixpkgs = { inherit (self) config overlays; };
 

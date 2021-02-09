@@ -10,11 +10,7 @@ with builtins;
   ];
 
   boot.blacklistedKernelModules = [ "psmouse" ];
-  nixpkgs.config.pulseaudio = true;
   hardware = {
-    cpu.intel.updateMicrocode = true;
-    enableAllFirmware = true;
-
     pulseaudio = {
       enable = true;
       extraConfig = "load-module module-switch-on-connect";
