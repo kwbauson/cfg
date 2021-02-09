@@ -1,6 +1,6 @@
 pkgs: with pkgs; with mylib;
 let
-  hosts = words "keith-xps kwbauson keith-vm keith-mac";
+  hosts = attrNames (readDir ../hosts);
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeScript = text: writeShellScriptBin "switch" text;
   inherit (cfg) nixosConfigurations homeConfigurations;

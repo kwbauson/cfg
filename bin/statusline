@@ -25,11 +25,13 @@ blocks = [
     ifs !internet, 'no internet'
   },
   interval(10) {
-    s, p, hs, ms = `acpi -b`
-      .match(/(?:(C)harging|(D)ischarging|(U)nknown|Full), (\d+)%(?:, (\d+):(\d+))?/)
-      &.captures&.compact || []
-    time = hs.nil? ? '' : " #{hs.to_i}:#{ms}"
-    "#{s.sub('C', '+').sub('D', '-').sub('U', '?')}#{p.to_s}%#{time}" if s
+    unless `acpi -a`.empty?
+      s, p, hs, ms = `acpi -b`
+        .match(/(?:(C)harging|(D)ischarging|(U)nknown|Full), (\d+)%(?:, (\d+):(\d+))?/)
+        &.captures&.compact || []
+      time = hs.nil? ? '' : " #{hs.to_i}:#{ms}"
+      "#{s.sub('C', '+').sub('D', '-').sub('U', '?')}#{p.to_s}%#{time}" if s
+    end
   },
   proc { |&block|
     IO.popen('mpstat && mpstat 3').each_line
