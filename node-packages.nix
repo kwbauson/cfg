@@ -1372,13 +1372,13 @@ let
         sha512 = "vZXmzPrL+EmC4T/4rVlT2jNVMWCi/O4DIiSj3UHg1OE5kCKbk4mfrXc6dZksLgRM/TZlKnousKH9bbTazUWRRw==";
       };
     };
-    "typescript-4.1.4" = {
+    "typescript-4.1.5" = {
       name = "typescript";
       packageName = "typescript";
-      version = "4.1.4";
+      version = "4.1.5";
       src = fetchurl {
-        url = "https://registry.npmjs.org/typescript/-/typescript-4.1.4.tgz";
-        sha512 = "+Uru0t8qIRgjuCpiSPpfGuhHecMllk5Zsazj5LZvVsEStEjmIRRBZe+jHjGQvsgS7M1wONy2PQXd67EMyV6acg==";
+        url = "https://registry.npmjs.org/typescript/-/typescript-4.1.5.tgz";
+        sha512 = "6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==";
       };
     };
     "typescript-deno-plugin-1.31.0" = {
@@ -1659,7 +1659,7 @@ let
           sources."strip-bom-3.0.0"
         ];
       })
-      sources."typescript-4.1.4"
+      sources."typescript-4.1.5"
       sources."typescript-deno-plugin-1.31.0"
       sources."user-home-2.0.0"
       sources."uuid-8.3.2"
