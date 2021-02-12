@@ -190,21 +190,22 @@ case $cmd in
     [[ -x update-helper ]] && ./update-helper
     ;;
   run)
-    "$0" activate
-    set -a
-    PATH=$("$0" result)/bin:$PATH
-    for file in $envfiles;do
-      [[ -e $file ]] && source "$file"
-    done
-    set +a
-    "$@"
+    eval "$(direnv stdlib | grep -v 'log_status "loading $rcfile"')"
+    eval "$("$0" direnv)"
+    exec "$@"
     ;;
   direnv)
     "$0" activate 1>&2
-    echo '[[ -z $IN_NIX_SHELL ]] && source_up'
+    echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
     echo PATH_add "$("$0" result)/bin"
     echo export IN_NIX_SHELL=impure
-    echo watch_file "${buildfiles[@]}"
+    for path in "${buildfiles[@]}";do
+      if [[ -d $path ]];then
+        echo watch_dir "$path"
+      elif [[ -f $path ]];then
+        echo watch_file "$path"
+      fi
+    done
     for file in $envfiles;do
       [[ -e $file ]] && printf 'dotenv %s\n' "$file"
     done
@@ -239,8 +240,8 @@ case $cmd in
   cachedir)
     exec "$0" dir
     ;;
-  upgrade-nle)
-    nix-env --tarball-ttl 0 -f https://github.com/kwbauson/cfg/tarball/main -iA nle
+  update-self)
+    nix-env --refresh -f https://github.com/kwbauson/cfg/tarball/main -iA nle
     ;;
   pin)
     nr nle.scripts.pin
