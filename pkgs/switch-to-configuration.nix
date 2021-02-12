@@ -1,6 +1,6 @@
 pkgs: with pkgs; with mylib;
 let
-  hosts = attrNames (readDir ../hosts);
+  hosts = concatMap attrNames [ cfg.nixosConfigurations cfg.homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeScript = text: writeShellScriptBin "switch" text;
   inherit (cfg) nixosConfigurations homeConfigurations;

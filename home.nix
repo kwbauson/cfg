@@ -230,6 +230,12 @@ with builtins; with pkgs; with mylib; {
       enable = true;
       compression = true;
       forwardAgent = true;
+      ${attrIf isDarwin "extraConfig"} = ''
+        Host vm
+            User hacker
+            Hostname 127.0.0.1
+            Port 24
+      '';
     };
     tmux = {
       enable = true;
