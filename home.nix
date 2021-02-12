@@ -230,11 +230,14 @@ with builtins; with pkgs; with mylib; {
       enable = true;
       compression = true;
       forwardAgent = true;
-      ${attrIf isDarwin "extraConfig"} = ''
+      extraConfig = ''
+        Host kwbauson.com
+          User keith
+      '' + optionalString isDarwin ''
         Host vm
-            User hacker
-            Hostname 127.0.0.1
-            Port 24
+          User hacker
+          Hostname 127.0.0.1
+          Port 24
       '';
     };
     tmux = {
