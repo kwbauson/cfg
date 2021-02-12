@@ -3,12 +3,10 @@ pkgs: with pkgs; with mylib; buildEnv {
   paths = let env = nle { path = ./.; }; in
     [ (alias name env.pkgs.nix-local-env) env ];
   passthru = rec {
-    __functor =
-      let
-        nixpkgs = pkgs;
-        f = { path, pkgs ? nixpkgs }: import ./nix-local-env.nix { inherit pkgs path; };
-      in
-      _: arg: if any (ap arg) [ isPath isString isDerivation ] then f { path = arg; } else f arg;
+    __functor = let nixpkgs = pkgs; in
+      self: { path ? null, pkgs ? nixpkgs }:
+        if path == null then self else
+        import ./nix-local-env.nix { inherit pkgs path; };
     lib = rec {
       build-files = unique (
         flatten (mapAttrsToList (n: v: words "${v.files or ""} ${v.extraFiles or ""} ${v.generated or ""}") conf)
