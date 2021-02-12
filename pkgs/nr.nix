@@ -21,14 +21,14 @@ let
       exit 127
     fi
   '';
+  nr =
+    writeShellScriptBin name ''
+      ${pathAdd nix-wrapped}
+      [[ $1 == -c ]] && shift && cmd=$1 && shift
+      pkg=$1
+      shift
+      cmd=''${cmd:-''${pkg//*.}}
+      exec nix shell "${selfpkgs.outPath}#$pkg" --command ${run-package} "$cmd" "$@"
+    '';
 in
-writeShellScriptBin name ''
-  ${pathAdd nix-wrapped}
-  [[ $1 == -c ]] && shift && cmd=$1 && shift
-  pkg=$1
-  shift
-  cmd=''${cmd:-''${pkg//*.}}
-  exec nix shell "${selfpkgs.outPath}#$pkg" --command ${run-package} "$cmd" "$@"
-'' // {
-  __functor = _: exe;
-}
+nr.overrideAttrs (attrs: { passthru.__functor = _: exe; })

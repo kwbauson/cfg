@@ -34,4 +34,5 @@ in
 buildEnv {
   inherit name;
   paths = map makeBin (attrNames scripts.${head (attrNames scripts)});
-} // { inherit scripts; }
+  passthru = { inherit scripts; };
+}
