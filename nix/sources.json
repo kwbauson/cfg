@@ -121,10 +121,10 @@
         "homepage": "",
         "owner": "bigH",
         "repo": "git-fuzzy",
-        "rev": "82acd8906501ad44d3d680500eda0638fb063d25",
-        "sha256": "044pghfjq19xkwpimx17zs8dplqwlgbjg88y0ivlhd2hnx38pas0",
+        "rev": "a7dad22b200525bcfeec4cc478517f7107acbfa7",
+        "sha256": "06iwanc6bmgpid35486lzz47bxb1yk7zdv69bjx3r6zcwlr69pd7",
         "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/82acd8906501ad44d3d680500eda0638fb063d25.tar.gz",
+        "url": "https://github.com/bigH/git-fuzzy/archive/a7dad22b200525bcfeec4cc478517f7107acbfa7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-trim": {
