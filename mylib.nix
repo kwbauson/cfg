@@ -37,12 +37,15 @@ cli // generators // lib // builtins // rec {
     ${exe (writeShellScriptBin "script" script)} > $out/bin/${name}
     chmod +x $out/bin/${name}
   '';
-  alias = name: x:
-    let
-      cmd = if isDerivation x then exe x else x;
-      pre = if any (s: hasInfix s x) [ "&&" "||" ";" ] then "" else "exec";
-    in
-    writeShellScriptBin name ''${pre} ${cmd} "$@"'';
+  alias = name:
+    if isString name
+    then x:
+      let
+        cmd = if isDerivation x then exe x else x;
+        pre = if any (s: hasInfix s x) [ "&&" "||" ";" ] then "" else "exec";
+      in
+      writeShellScriptBin name ''${pre} ${cmd} "$@"''
+    else mapAttrs alias name;
   mkDmgPackage = pname: src: stdenv.mkDerivation {
     name = pname + (if src ? version then "-${src.version}" else "");
     inherit pname src;

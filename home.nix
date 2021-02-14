@@ -40,16 +40,22 @@ with builtins; with pkgs; with mylib; {
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
         };
         inherit nle nle-cfg-pkgs nr switch-to-configuration;
-        local-bin = [
-          (alias "nixpkgs-rev" "echo ${cfg.inputs.nixpkgs.rev}")
-          (alias "nixpkgs-path" "echo ${pkgs.path}")
-          (alias "nixpkgs-branch" "echo ${nixpkgs-branch}")
-          (alias "local_ops" "nle -d ~/src/hr/local_ops run python dev.py --no-banner")
-          (alias "lo" "local_ops")
-          (alias "nixbuild-net-shell" "${exe rlwrap} ssh beta.nixbuild.net shell")
-          (alias "selfpkgs-path" "echo ${selfpkgs.outPath}")
-          (alias "lo-early-talent" ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'')
-        ];
+        local-bin = attrValues (alias {
+          nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";
+          nixpkgs-path = "echo ${pkgs.path}";
+          nixpkgs-branch = "echo ${nixpkgs-branch}";
+          local_ops = "nle -d ~/src/hr/local_ops run python dev.py --no-banner";
+          lo = "local_ops";
+          nixbuild-net-shell = "${exe rlwrap} ssh beta.nixbuild.net shell";
+          selfpkgs-path = "echo ${selfpkgs.outPath}";
+          lo-early-talent = ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'';
+          hmg = "git -C ~/cfg fetch && git -C ~/cfg df origin/main && git -C ~/cfg rebase origin/main --autostash";
+          hmp = "git -C ~/cfg cap";
+          nou = "hmg && nos-hms";
+          nod = (prefixIf isNixOS "sudo " "nix-collect-garbage -d");
+          noe = "nvim ~/cfg/hosts/$(hostname -s)/configuration.nix && nos";
+          hme = "nvim ~/cfg/home.nix && hms";
+        });
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       } {
       ${attrIf isDarwin "darwin"} = {
@@ -126,12 +132,6 @@ with builtins; with pkgs; with mylib; {
         rg = "rg --color=always -S --hidden";
         ncdu = "ncdu --color dark -ex";
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
-        nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
-        noe = "nvim ~/cfg/hosts/$(hostname -s)/configuration.nix && nos";
-        hme = "nvim ~/cfg/home.nix && hms";
-        hmg = "git -C ~/cfg fetch && git -C ~/cfg df origin/main && git -C ~/cfg rebase origin/main --autostash";
-        hmp = "git -C ~/cfg cap";
-        nou = "hmg && nos-hms";
         root-symlinks = with {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
