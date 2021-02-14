@@ -275,7 +275,7 @@ with builtins; with pkgs; with mylib; {
         plugins = with vimPlugins; {
           inherit
             direnv-vim fzf-vim quick-scope tcomment_vim vim-airline
-            vim-better-whitespace vim-bufkill vim-easymotion vim-fugitive
+            vim-better-whitespace vim-bbye vim-easymotion vim-fugitive
             vim-lastplace vim-multiple-cursors vim-peekaboo vim-polyglot
             vim-sensible vim-startify vim-vinegar nvim-scrollview
 

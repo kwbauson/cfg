@@ -52,7 +52,7 @@ map <leader>f :NERDTreeFind<cr>
 
 map <silent> <leader>e :CocCommand explorer<cr>
 
-map <silent> <leader>d :BW<cr>
+map <silent> <leader>d :Bwipeout<cr>
 
 let g:context_enabled = 0
 

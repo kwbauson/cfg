@@ -81,6 +81,6 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  system.stateVersion = "21.03";
+  system.stateVersion = "21.05";
   programs.command-not-found.dbPath = self.programs-sqlite;
 }
