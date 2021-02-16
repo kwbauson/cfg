@@ -49,7 +49,7 @@ with builtins; with pkgs; with mylib; {
           nixbuild-net-shell = "${exe rlwrap} ssh beta.nixbuild.net shell";
           selfpkgs-path = "echo ${selfpkgs.outPath}";
           lo-early-talent = ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'';
-          hmg = "git -C ~/cfg fetch && git -C ~/cfg df origin/main && git -C ~/cfg rebase origin/main --autostash";
+          hmg = "git -C ~/cfg fetch && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
           nou = "hmg && nos-hms";
           nod = (prefixIf isNixOS "sudo " "nix-collect-garbage -d");
@@ -330,6 +330,7 @@ with builtins; with pkgs; with mylib; {
         ci = "commit -v";
         co = "checkout";
         df = ''! git a -N && git -c core.pager='${exe delta} --dark' diff "''${@:-HEAD}" && true'';
+        dfo = ''! git fetch && git df origin/`git branch-name`'';
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "fetch origin master:master";
