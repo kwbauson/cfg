@@ -190,15 +190,19 @@ case $cmd in
     [[ -x update-helper ]] && ./update-helper
     ;;
   run)
-    eval "$(direnv stdlib | grep -v 'log_status "loading $rcfile"')"
-    eval "$("$0" direnv)"
+    eval "$("$0" env)"
     exec "$@"
+    ;;
+  env)
+    echo "$(direnv stdlib | grep -v 'log_status "loading $rcfile"')"
+    echo "$("$0" direnv)"
     ;;
   direnv)
     "$0" activate 1>&2
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
     echo PATH_add "$("$0" result)/bin"
     echo export IN_NIX_SHELL=impure
+    echo export PATH
     for path in "${buildfiles[@]}";do
       if [[ -d $path ]];then
         echo watch_dir "$path"
