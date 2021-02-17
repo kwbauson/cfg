@@ -121,10 +121,10 @@
         "homepage": "",
         "owner": "bigH",
         "repo": "git-fuzzy",
-        "rev": "706f00fdff0ead144f9fe5b897160ada47b2515b",
-        "sha256": "06dkcs94k0nl4p99shnydq8sx19zdc2qskqdhk3qqphq9g8q5a4b",
+        "rev": "e1a1243cddd53be5a0a5b4b27df7966e2edc74a9",
+        "sha256": "1wwi8span7q3yfrz9qxs3p91swzg752v1gmnj4nbjs3n60z7r9gs",
         "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/706f00fdff0ead144f9fe5b897160ada47b2515b.tar.gz",
+        "url": "https://github.com/bigH/git-fuzzy/archive/e1a1243cddd53be5a0a5b4b27df7966e2edc74a9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-trim": {
@@ -190,11 +190,11 @@
         "version": "nixos-20.09.3157.95ce0f52ec1"
     },
     "nixos-unstable": {
-        "sha256": "1xvij4a53hsfsh4f8g2386xjhza9iqaf19dmwaxqngyqfl8y1xzh",
+        "sha256": "110s55gnsbbf2xcf3ia7b1lpinl2kkfn3b8xpsq3l1n5hyw339v4",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre269929.ff96a0fa563/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre270342.64b46178838/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre269929.ff96a0fa563"
+        "version": "nixos-21.05pre270342.64b46178838"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
