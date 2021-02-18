@@ -89,7 +89,7 @@ case $cmd in
     ;;
   activate)
     "$0" cache
-    if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
+    if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
       if [[ ! -e node_modules || -L node_modules ]];then
         ln -sft . "$("$0" result)"/node_modules
       else
@@ -131,7 +131,7 @@ case $cmd in
       nr bundix
     impure "package.json package-lock.json" node-packages.nix \
       nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
-    if [[ -e package.json && -e yarn.lock && ! -e .disable-nle-yarn ]];then
+    if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
       # FIXME hack around t1/react-click-outside
       sed -i -e '/^"\?react-click-outside/,/^$/d' -e '/react-click-outside/d' yarn.lock package.json
 

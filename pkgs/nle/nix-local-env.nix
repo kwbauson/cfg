@@ -46,7 +46,7 @@ rec {
       (lowPrio nle-conf.npm.out);
 
   yarn-paths =
-    ifFilesAndNot "package.json yarn.lock yarn.nix" ".disable-nle-yarn"
+    ifFilesAndNot "package.json yarn.lock yarn.nix .enable-nle-yarn" ".disable-nle-yarn"
       rec {
         yarn2nix-moretea =
           callPackage
