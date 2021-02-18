@@ -52,6 +52,9 @@
         [ "extra-experimental-features" "nix-command flakes ca-references" ]
         [ "extra-substituters" "https://kwbauson.cachix.org" ]
         [ "extra-trusted-public-keys" "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro=" ]
+        [ "http-connections" "0" ]
+        # [ "min-free" "10G" ]
+        # [ "max-free" "10G" ]
       ];
       flags = joinStrings " " (x: "--${x}") (x: y: "--${x} '${y}'") options;
       conf = joinLines (x: "${x} = true") (x: y: "${x} = ${y}") options;
