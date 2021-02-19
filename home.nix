@@ -351,6 +351,7 @@ with builtins; with pkgs; with mylib; {
         clean.requireForce = false;
         checkout.defaultRemote = "origin";
         core.autocrlf = "input";
+        core.hooksPath = "/dev/null";
         fetch.prune = true;
         pager.branch = false;
         push.default = "simple";

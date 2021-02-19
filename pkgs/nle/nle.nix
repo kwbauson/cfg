@@ -35,7 +35,7 @@
       override (nodeEnv.buildNodeDependencies args) { name = "node_modules"; };
   };
   yarn = {
-    files = "package.json yarn.lock";
+    files = "package.json yarn.lock .enable-nle-yarn";
     generated = "yarn.nix";
     extraFiles = ".npmrc";
   };

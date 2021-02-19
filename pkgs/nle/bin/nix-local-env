@@ -129,8 +129,10 @@ case $cmd in
   generate)
     impure "Gemfile Gemfile.lock" gemset.nix \
       nr bundix
-    impure "package.json package-lock.json" node-packages.nix \
-      nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
+    if [[ ! -e yarn.lock ]];then
+      impure "package.json package-lock.json" node-packages.nix \
+        nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
+    fi
     if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
       # FIXME hack around t1/react-click-outside
       sed -i -e '/^"\?react-click-outside/,/^$/d' -e '/react-click-outside/d' yarn.lock package.json
