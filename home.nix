@@ -1,4 +1,14 @@
-{ pkgs, config, self, username, homeDirectory, isNixOS, isGraphical, isServer ? false, ... }:
+{ pkgs
+, config
+, self
+, username
+, homeDirectory
+, isNixOS
+, isGraphical
+, isServer ? false
+, host ? "generic"
+, ...
+}:
 with builtins; with pkgs; with mylib; {
   home.packages = with pkgs;
     drvsExcept
@@ -41,6 +51,7 @@ with builtins; with pkgs; with mylib; {
         };
         inherit nle nle-cfg-pkgs nr switch-to-configuration;
         local-bin = attrValues (alias {
+          built-as-host = "echo ${host}";
           nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";
           nixpkgs-path = "echo ${pkgs.path}";
           nixpkgs-branch = "echo ${nixpkgs-branch}";
@@ -53,7 +64,7 @@ with builtins; with pkgs; with mylib; {
           hmp = "git -C ~/cfg cap";
           nou = "hmg && nos-hms";
           nod = (prefixIf isNixOS "sudo " "nix-collect-garbage -d");
-          noe = "nvim ~/cfg/hosts/$(hostname -s)/configuration.nix && nos";
+          noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
         });
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
@@ -491,7 +502,7 @@ with builtins; with pkgs; with mylib; {
       xsetroot -solid black
       xsetroot -cursor_name left_ptr
       urxvtd -q -o -f
-      [[ $(hostname) = keith-vm ]] && xrandr --output Virtual-1 --mode 1920x1200
+      ${optionalString (host == "keith-vm") "xrandr --output Virtual-1 --mode 1920x1200"}
     '';
     windowManager = {
       i3 = {

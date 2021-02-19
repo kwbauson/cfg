@@ -43,7 +43,7 @@
           };
         callModule =
           module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
-        homeConfiguration =
+        homeConfiguration = makeOverridable (
           { system ? "x86_64-linux"
           , pkgs ? import nixpkgs {
               inherit system;
@@ -65,7 +65,8 @@
           in
           conf.activationPackage // conf // {
             paths = filter (x: x.allowSubstitutes or true) conf.config.home.packages;
-          };
+          }
+        );
       };
 
       overlays = [
@@ -88,16 +89,17 @@
         isServer = true;
       };
 
-      homeConfigurations.keith-xps = homeConfigurations.graphical;
-      homeConfigurations.keith-desktop = homeConfigurations.graphical;
-      homeConfigurations.kwbauson = homeConfigurations.non-graphical;
-      homeConfigurations.keith-vm = homeConfigurations.graphical;
+      homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
+      homeConfigurations.keith-desktop = homeConfigurations.graphical.override { host = "keith-desktop"; };
+      homeConfigurations.kwbauson = homeConfigurations.non-graphical.override { host = "kwbauson"; };
+      homeConfigurations.keith-vm = homeConfigurations.graphical.override { host = "keith-vm"; };
       homeConfigurations.keith-mac = lib.homeConfiguration {
         isNixOS = false;
         isGraphical = true;
         system = "x86_64-darwin";
         username = "keithbauson";
         homeDirectory = "/Users/keithbauson";
+        host = "keith-mac";
       };
 
       mkChecks = pkgs: with pkgs; buildEnv {

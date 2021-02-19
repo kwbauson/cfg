@@ -28,7 +28,7 @@ let
   makeBin = name: writeBashBin name ''
     ${pathAdd [ nix-wrapped inetutils git ]}
     git -C ~/cfg add --intent-to-add .
-    exec nix run ~/cfg#switch-to-configuration.scripts.$(hostname -s).${name}
+    exec nix run ~/cfg#switch-to-configuration.scripts.$(built-as-host).${name}
   '';
 in
 buildEnv {
