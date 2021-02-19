@@ -454,7 +454,7 @@ with builtins; with pkgs; with mylib; {
     dataFile = {
       "qutebrowser/userscripts/login-fill" = {
         executable = true;
-        source = writeShellScript "login-fill" ''
+        source = writeBash "login-fill" ''
           set -e
           items=$(bw list items --url "$QUTE_URL" | jq 'map(.login) | map({ username, password, url: .uris[0].uri })')
           count=$(echo "$items" | jq length)

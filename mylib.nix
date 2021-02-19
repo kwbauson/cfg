@@ -1,5 +1,6 @@
 prev: with prev; with lib; with builtins;
 cli // generators // lib // builtins // rec {
+  inherit (writers) writeBash writeBashBin;
   ap = x: f: f x;
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
@@ -34,7 +35,7 @@ cli // generators // lib // builtins // rec {
     name
     { } ''
     mkdir -p $out/bin
-    ${exe (writeShellScriptBin "script" script)} > $out/bin/${name}
+    ${exe (writeBashBin "script" script)} > $out/bin/${name}
     chmod +x $out/bin/${name}
   '';
   alias = name:
@@ -44,7 +45,7 @@ cli // generators // lib // builtins // rec {
         cmd = if isDerivation x then exe x else x;
         pre = if any (s: hasInfix s x) [ "&&" "||" ";" ] then "" else "exec";
       in
-      writeShellScriptBin name ''${pre} ${cmd} "$@"''
+      writeBashBin name ''${pre} ${cmd} "$@"''
     else mapAttrs alias name;
   mkDmgPackage = pname: src: stdenv.mkDerivation {
     name = pname + (if src ? version then "-${src.version}" else "");
@@ -84,9 +85,9 @@ cli // generators // lib // builtins // rec {
   copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
   nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
   pathAdd = pkgs: "PATH=${makeBinPath (toList pkgs)}:$PATH";
-  makeScript = name: script: writeShellScriptBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
+  makeScript = name: script: writeBashBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
   makeScripts = mapAttrs makeScript;
-  echo = text: writeShellScript "echo-script" ''echo "$(< ${toFile "text" text})"'';
+  echo = text: writeBash "echo-script" ''echo "$(< ${toFile "text" text})"'';
   attrsToList = mapAttrsToList (name: value: { inherit name value; });
   joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
   joinLines = joinStrings "\n";
@@ -130,5 +131,17 @@ cli // generators // lib // builtins // rec {
         inherit sha256;
       })
       (toList prs);
+  };
+  writeBashBinChecked = name: text: stdenv.mkDerivation {
+    inherit name text;
+    dontUnpack = true;
+    passAsFile = "text";
+    installPhase = ''
+      mkdir -p $out/bin
+      echo '#!/bin/bash' > $out/bin/${name}
+      cat $textPath >> $out/bin/${name}
+      chmod +x $out/bin/${name}
+      ${shellcheck}/bin/shellcheck $out/bin/${name}
+    '';
   };
 }

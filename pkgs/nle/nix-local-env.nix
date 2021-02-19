@@ -25,7 +25,7 @@ rec {
     isBash = hasSuffix "bash" (head lines);
     script = writeScript "${name}-unwrapped" (makeScriptText text);
     scriptTail = makeScriptText (concatStringsSep "\n" (tail lines));
-    out = writeShellScriptBin name ''
+    out = writeBashBin name ''
       export ${pathAdd buildInputs}
       ${if isBash then scriptTail else ''exec ${script} "$@"''}
     '';

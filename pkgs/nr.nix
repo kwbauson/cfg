@@ -1,6 +1,6 @@
 pkgs: with pkgs; with mylib;
 let
-  run-package = writeShellScript "run-package" ''
+  run-package = writeBash "run-package" ''
     cmd=$1
     shift
     bin=''${PATH//:*}
@@ -22,7 +22,7 @@ let
     fi
   '';
   nr =
-    writeShellScriptBin name ''
+    writeBashBin name ''
       ${pathAdd nix-wrapped}
       [[ $1 == -c ]] && shift && cmd=$1 && shift
       pkg=$1
