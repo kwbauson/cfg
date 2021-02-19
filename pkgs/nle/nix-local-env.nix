@@ -32,9 +32,11 @@ rec {
   }.out;
 
   localfile = file "local.nix";
-  local-bin-paths =
-    ifFiles "bin"
-      (map (x: wrapScriptWithPackages (file "bin/${x}") { }) (attrNames (readDir (file "bin"))));
+  local-bin-pkgs =
+    optionalAttrs
+      (hasFiles "bin")
+      (mapAttrs (x: _: setPrio 1 (wrapScriptWithPackages (file "bin/${x}") { })) (readDir (file "bin")));
+  local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
     result = if isFunction imported then imported pkgs else imported;
@@ -114,9 +116,9 @@ rec {
     poetry-paths
   ];
 
-  paths = flatten [ (map (setPrio 1) (flatten local-bin-paths)) build-paths ];
+  paths = flatten [ local-bin-paths build-paths ];
 
-  packages = listToAttrs (map (x: { name = x.name; value = x; }) paths);
+  packages = listToAttrs (map (x: { name = x.name; value = x; }) build-paths) // local-bin-pkgs;
 
   out = (buildEnv { name = "local-env"; inherit paths; }) // {
     pkgs = packages;
