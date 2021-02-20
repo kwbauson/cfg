@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-alacritty": {
-        "sha256": "0h95kxw8g6wa33rv0442ljincd7ldm9fhh9bi3r5zhk7j05kkja0",
+        "sha256": "18fvhrdyc05nxirjw65hwfkzkk67rb1dpd1wmzmr5j8ii01n3wy7",
         "type": "file",
-        "url": "https://github.com/alacritty/alacritty/releases/download/v0.7.1/Alacritty-v0.7.1.dmg",
+        "url": "https://github.com/alacritty/alacritty/releases/download/v0.7.2/Alacritty-v0.7.2.dmg",
         "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
-        "version": "0.7.1"
+        "version": "0.7.2"
     },
     "dmg-brave": {
         "sha256": "1nk56zb4glr934g9mad9a1f2gm2awfqn5f6m8fqbwjni6pc0y0sw",
