@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # with-packages git
-ref=${1:-$(nixpkgs-branch)}
+ref=${1:-origin/$(nixpkgs-branch)}
 set -e
-cd "$(nixpkgs-repo-cache $ref)"
-exec git log $(nixpkgs-rev)..origin/$ref --no-merges --reverse
+cd "$(nixpkgs-repo-cache)"
+exec git log $(nixpkgs-rev)..$ref --no-merges --reverse
