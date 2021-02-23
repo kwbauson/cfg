@@ -19,11 +19,7 @@ with builtins;
     bluetooth.enable = true;
     bluetooth.package = pkgs.bluezFull;
   };
-  networking = {
-    hostName = "keith-xps";
-    networkmanager.enable = true;
-    networkmanager.wifi.powersave = false;
-  };
+  networking.networkmanager.wifi.powersave = false;
   services.autorandr.enable = true;
   services.xserver.enable = true;
 

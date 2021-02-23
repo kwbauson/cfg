@@ -12,10 +12,8 @@
   };
 
   networking = {
-    hostName = "kwbauson";
     domain = "com";
     firewall.allowedTCPPorts = [ 80 443 5000 9090 ];
-    interfaces.ens3.useDHCP = true;
   };
 
   services = with config; with networking; {

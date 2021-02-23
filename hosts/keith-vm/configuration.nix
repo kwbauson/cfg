@@ -5,8 +5,6 @@
     (self.lib.callModule ../common.nix)
   ];
 
-  networking.hostName = "keith-vm";
-  networking.interfaces.enp0s5.useDHCP = true;
   networking.firewall.enable = false;
   services.xserver.enable = true;
   hardware.pulseaudio.enable = true;

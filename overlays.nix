@@ -68,7 +68,6 @@
       src = copyPath "${(import ./npm-env.nix { inherit pkgs; path = ./.; }).node_modules}/${name}";
     };
     npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
-    npm-coc-pyright = self.buildNpmVimPlugin "coc-pyright";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = import cfg.inputs.mach-nix {

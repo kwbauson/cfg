@@ -10,10 +10,6 @@ with builtins;
 
   hardware.pulseaudio.enable = true;
 
-  networking = {
-    hostName = "keith-desktop";
-    networkmanager.enable = true;
-  };
   services.autorandr.enable = true;
   services.xserver.enable = true;
   programs.steam.enable = true;

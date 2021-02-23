@@ -23,7 +23,7 @@ with builtins; with pkgs; with mylib; {
             nix-tree nmap openssh p7zip patch perl pigz procps progress pv
             ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils
             watch wget which xdg_utils xxd xz zip better-comma bitwarden-cli
-            libqalculate youtube-dl speedtest-cli
+            libqalculate youtube-dl speedtest-cli tldr
             ;
         };
         ${attrIf isGraphical "graphical"} = {
@@ -292,8 +292,8 @@ with builtins; with pkgs; with mylib; {
             vim-sensible vim-startify vim-vinegar nvim-scrollview
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
-            coc-solargraph coc-tsserver
-            npm-coc-explorer npm-coc-pyright
+            coc-solargraph coc-tsserver coc-pyright
+            npm-coc-explorer
             ;
         };
         makeExtraPlugins = map (name: vimUtils.buildVimPlugin {

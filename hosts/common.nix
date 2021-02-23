@@ -30,6 +30,7 @@
       PubkeyAcceptedKeyTypes ssh-ed25519
       IdentityFile /root/.ssh/id_ed25519
   '';
+  networking.networkmanager.enable = true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;

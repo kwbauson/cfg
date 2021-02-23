@@ -25,16 +25,23 @@
     , flake-utils
     , home-manager
     , ...
-    }@inputs: flake-utils.lib.eachDefaultSystem (system: rec {
-      packages = import nixpkgs {
-        inherit system;
-        inherit (self) overlays config;
-      };
-    }) // rec {
-      lib = with builtins; with nixpkgs.lib; rec {
+    }@inputs: flake-utils.lib.eachDefaultSystem
+      (system: rec {
+        packages = import nixpkgs {
+          inherit system;
+          inherit (self) overlays config;
+        };
+      }) // rec {
+      lib = with builtins; with nixpkgs.lib; builtins // rec {
         mylib = import ./mylib.nix nixpkgs;
         inherit (mylib) mapAttrValues importDir;
-        nixosConfiguration = module: buildSystem { system = "x86_64-linux"; modules = [ (callModule module) ]; };
+        nixosConfiguration = host: module: buildSystem {
+          system = "x86_64-linux";
+          modules = [
+            { networking.hostName = host; }
+            (callModule module)
+          ];
+        };
         buildSystem = args:
           let system = nixosSystem args;
           in
@@ -80,7 +87,7 @@
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
 
-      nixosConfigurations = with lib; mapAttrValues nixosConfiguration (importDir ./hosts);
+      nixosConfigurations = with lib; mapAttrs nixosConfiguration (importDir ./hosts);
 
       homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
       homeConfigurations.non-graphical = lib.homeConfiguration {
