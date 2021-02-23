@@ -104,8 +104,6 @@ cli // generators // lib // builtins // rec {
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else y;
-  packageFile = pkg: head (splitString ":" pkg.meta.position);
-  overridePackage = pkg: callPackage (packageFile pkg);
   mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
   importDir = dir:
     let

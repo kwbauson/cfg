@@ -86,8 +86,8 @@
       "  description: ${pkg.meta.description or "null"}"
       "  homepage: ${pkg.meta.homepage or "null"}"
     ];
-    nix-prefetch-git = (overridePackage nix-prefetch-git { nix = self.nixUnstable; }).nix-prefetch-git;
-    bundix = overridePackage bundix { nix = self.nixUnstable; };
+    nix-prefetch-git = nix-prefetch-git.override { nix = self.nixUnstable; };
+    bundix = bundix.override { nix = self.nixUnstable; };
     saml2aws = overrideWithPRs saml2aws {
       pr = 547;
       sha256 = "vQ0c5bBgHwzi0/d/YWPG8csOLjhSJmhOv6WhOneU09c=";
