@@ -358,6 +358,7 @@ with builtins; with pkgs; with mylib; {
         ru = "remote update";
         st = "status";
         unhide = "update-index --no-skip-worktree";
+        to = "! git br -u origin/`git branch-name`";
       };
       inherit userName userEmail;
       extraConfig = {
@@ -371,7 +372,6 @@ with builtins; with pkgs; with mylib; {
         pull.rebase = false;
         rebase.instructionFormat = "(%an) %s";
         init.defaultBranch = "main";
-        branch.autoSetupMerge = "always";
       };
     };
     direnv.enable = true;
