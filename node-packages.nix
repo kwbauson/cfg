@@ -1192,13 +1192,13 @@ let
         sha512 = "vZXmzPrL+EmC4T/4rVlT2jNVMWCi/O4DIiSj3UHg1OE5kCKbk4mfrXc6dZksLgRM/TZlKnousKH9bbTazUWRRw==";
       };
     };
-    "typescript-4.1.5" = {
+    "typescript-4.2.2" = {
       name = "typescript";
       packageName = "typescript";
-      version = "4.1.5";
+      version = "4.2.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/typescript/-/typescript-4.1.5.tgz";
-        sha512 = "6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==";
+        url = "https://registry.npmjs.org/typescript/-/typescript-4.2.2.tgz";
+        sha512 = "tbb+NVrLfnsJy3M59lsDgrzWIflR4d4TIUjz+heUnHZwdF7YsrMTKoRERiIvI2lvBG95dfpLxB21WZhys1bgaQ==";
       };
     };
     "user-home-2.0.0" = {
@@ -1444,7 +1444,7 @@ let
           sources."strip-bom-3.0.0"
         ];
       })
-      sources."typescript-4.1.5"
+      sources."typescript-4.2.2"
       sources."user-home-2.0.0"
       sources."uuid-8.3.2"
       sources."validate-npm-package-license-3.0.4"
