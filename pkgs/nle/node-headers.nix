@@ -1,1 +1,1 @@
-builtins.fetchurl { url = "https://nodejs.org/download/release/v15.8.0/node-v15.8.0-headers.tar.gz"; sha256 = "1j6jjnwmr5rwzda0v4adjflkyj0qpl1v17wlv53xjskm99qdv1hv"; }
+builtins.fetchurl { url = "https://nodejs.org/download/release/v15.9.0/node-v15.9.0-headers.tar.gz"; sha256 = "0if5z3x7ln1k3z1q2nfadz36w2pbx0grx8rz8mb57f6ng66cjf37"; }
