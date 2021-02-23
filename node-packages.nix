@@ -193,15 +193,6 @@ let
         sha512 = "NegmT0lRVjG7dE7IQDdQLvGPkW8Zcxo0l8D3kU0gy7Cq51QL6Tac7xPMUS/jeqt+4xsVzkPpRa2yZNCw9nplNA==";
       };
     };
-    "coc-pyright-1.1.113" = {
-      name = "coc-pyright";
-      packageName = "coc-pyright";
-      version = "1.1.113";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/coc-pyright/-/coc-pyright-1.1.113.tgz";
-        sha512 = "a9mC0b7oVLT3KEHbBw1e7D7k2UD0lRaTk/HrZJJ/lkIDlpF/6TrwqTcL/BUWptUjwUA4sOOdAoQQeOR88Ugsww==";
-      };
-    };
     "concat-map-0.0.1" = {
       name = "concat-map";
       packageName = "concat-map";
@@ -922,15 +913,6 @@ let
         sha512 = "LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==";
       };
     };
-    "pyright-1.1.113" = {
-      name = "pyright";
-      packageName = "pyright";
-      version = "1.1.113";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/pyright/-/pyright-1.1.113.tgz";
-        sha512 = "VcitW5t5lG1KY0w8xY/ubMhFZZ2lfXJvhBW4TfTwy067R4WtXKSa23br4to1pdRA1rwpxOREgxVTnOWmf3YkYg==";
-      };
-    };
     "read-pkg-1.1.0" = {
       name = "read-pkg";
       packageName = "read-pkg";
@@ -1327,7 +1309,6 @@ let
       sources."chokidar-3.4.3"
       sources."clean-stack-2.2.0"
       sources."coc-explorer-0.15.6"
-      sources."coc-pyright-1.1.113"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
       sources."cross-spawn-7.0.3"
@@ -1421,7 +1402,6 @@ let
       sources."pinkie-2.0.4"
       sources."pinkie-promise-2.0.1"
       sources."pump-3.0.0"
-      sources."pyright-1.1.113"
       (sources."read-pkg-1.1.0" // {
         dependencies = [
           sources."path-type-1.1.0"
