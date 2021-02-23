@@ -141,11 +141,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1613927707,
-        "narHash": "sha256-IwBzgTRBOFWejDfS1HJlArPBtRmIqZiokmcl2SiStnk=",
+        "lastModified": 1614075989,
+        "narHash": "sha256-BO6W2QzUXJ091JUroq/ro11XQwua+ygF1ortOE2oavw=",
         "owner": "nix-community",
         "repo": "rnix-lsp",
-        "rev": "4b6bce1ebcf4e1332b4004a14a70046579054f46",
+        "rev": "6c12d7fd20e3330669ba1a845b78694d600283a3",
         "type": "github"
       },
       "original": {
