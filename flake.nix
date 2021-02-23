@@ -34,6 +34,14 @@
       }) // rec {
       lib = with builtins; with nixpkgs.lib; builtins // rec {
         mylib = import ./mylib.nix nixpkgs;
+        pkgsForSystem =
+          { system
+          , isNixOS ? false
+          }: import nixpkgs {
+            inherit system;
+            inherit (self) config;
+            overlays = self.overlays ++ [ (_: _: { inherit isNixOS; }) ];
+          };
         inherit (mylib) mapAttrValues importDir;
         nixosConfiguration = host: module: buildSystem {
           system = "x86_64-linux";
@@ -45,18 +53,14 @@
         buildSystem = args:
           let system = nixosSystem args;
           in
-          system.config.system.build.toplevel // system // {
+          ((pkgsForSystem { inherit (args) system; }).mylib.forceCached system.config.system.build.toplevel) // system // {
             paths = filter (x: x.allowSubstitutes or true) system.config.environment.systemPackages;
           };
         callModule =
           module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
         homeConfiguration = makeOverridable (
           { system ? "x86_64-linux"
-          , pkgs ? import nixpkgs {
-              inherit system;
-              inherit (self) config;
-              overlays = self.overlays ++ [ (_: _: { inherit isNixOS; }) ];
-            }
+          , pkgs ? pkgsForSystem { inherit system isNixOS; }
           , username ? "keith"
           , homeDirectory ? "/home/${username}"
           , isNixOS ? false
@@ -70,7 +74,7 @@
             inherit system pkgs username homeDirectory;
           });
           in
-          conf.activationPackage // conf // {
+          (pkgs.mylib.forceCached conf.activationPackage) // conf // {
             paths = filter (x: x.allowSubstitutes or true) conf.config.home.packages;
           }
         );
@@ -109,7 +113,7 @@
         host = "keith-mac";
       };
 
-      mkChecks = pkgs: with pkgs; buildEnv {
+      mkChecks = pkgs: with pkgs; pkgs.mylib.forceCached buildEnv {
         name = "checks";
         paths = [
           inlets

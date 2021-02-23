@@ -105,6 +105,7 @@ cli // generators // lib // builtins // rec {
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else y;
   mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
+  forceCached = callPackage "${nix-build-uncached.src}/scripts/force_cached.nix" { };
   importDir = dir:
     let
       path = p: dir + "/${p}";
