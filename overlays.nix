@@ -37,13 +37,14 @@
     nix-wrapped = (
       if self.isNixOS
       then self.nixUnstable
-      else buildEnv {
-        name = "nix-wrapped";
-        paths = [
-          self.nixUnstable
-          (hiPrio (alias "nix" "${exe self.nixUnstable} ${self.nix-wrapped.flags}"))
-        ];
-      }
+      else
+        buildEnv {
+          name = "nix-wrapped";
+          paths = [
+            self.nixUnstable
+            (hiPrio (alias "nix" "${exe self.nixUnstable} ${self.nix-wrapped.flags}"))
+          ];
+        }
     ) // rec {
       options = [
         [ "max-jobs" "auto" ]
@@ -68,7 +69,6 @@
     };
     npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
     npm-coc-pyright = self.buildNpmVimPlugin "coc-pyright";
-    npm-coc-deno = self.buildNpmVimPlugin "coc-deno";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = import cfg.inputs.mach-nix {

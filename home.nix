@@ -68,20 +68,21 @@ with builtins; with pkgs; with mylib; {
           hme = "nvim ~/cfg/home.nix && hms";
         });
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
-      } {
-      ${attrIf isDarwin "darwin"} = {
-        inherit
-          chromium diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
-          steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
-          acpi progress xdotool
-          ;
-        inherit bl bh medctl runnim statusline vol togpad xpaste;
-        inherit dejavu_fonts_nerd;
+      }
+      {
+        ${attrIf isDarwin "darwin"} = {
+          inherit
+            chromium diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
+            steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
+            acpi progress xdotool
+            ;
+          inherit bl bh medctl runnim statusline vol togpad xpaste;
+          inherit dejavu_fonts_nerd;
+        };
+        ${attrIf (!isGraphical) "non-graphical"} = {
+          inherit solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
+        };
       };
-      ${attrIf (!isGraphical) "non-graphical"} = {
-        inherit solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
-      };
-    };
 
   home = {
     stateVersion = "21.05";
@@ -292,7 +293,7 @@ with builtins; with pkgs; with mylib; {
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver
-            npm-coc-explorer npm-coc-pyright npm-coc-deno
+            npm-coc-explorer npm-coc-pyright
             ;
         };
         makeExtraPlugins = map (name: vimUtils.buildVimPlugin {
