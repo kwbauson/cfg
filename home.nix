@@ -336,7 +336,7 @@ with builtins; with pkgs; with mylib; {
       package = gitFull;
       aliases = {
         a = "add -A";
-        br = "branch";
+        br = "branch -vv";
         branch-name = "rev-parse --abbrev-ref HEAD";
         cap = "! git a; git ci; git p";
         ci = "commit -v";
@@ -354,6 +354,7 @@ with builtins; with pkgs; with mylib; {
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ro = "! git reset --hard origin/`git branch-name`";
         f = "fetch --all";
+        fbr = "!git f && git br";
         ru = "remote update";
         st = "status";
         unhide = "update-index --no-skip-worktree";
@@ -370,6 +371,7 @@ with builtins; with pkgs; with mylib; {
         pull.rebase = false;
         rebase.instructionFormat = "(%an) %s";
         init.defaultBranch = "main";
+        branch.autoSetupMerge = "always";
       };
     };
     direnv.enable = true;
