@@ -76,15 +76,6 @@ let
         sha512 = "58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==";
       };
     };
-    "arr-union-3.1.0" = {
-      name = "arr-union";
-      packageName = "arr-union";
-      version = "3.1.0";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/arr-union/-/arr-union-3.1.0.tgz";
-        sha1 = "e39b09aea9def866a8f206e288af63919bae39c4";
-      };
-    };
     "array-find-index-1.0.2" = {
       name = "array-find-index";
       packageName = "array-find-index";
@@ -193,22 +184,13 @@ let
         sha512 = "4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==";
       };
     };
-    "clone-deep-0.2.4" = {
-      name = "clone-deep";
-      packageName = "clone-deep";
-      version = "0.2.4";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/clone-deep/-/clone-deep-0.2.4.tgz";
-        sha1 = "4e73dd09e9fb971cc38670c5dced9c1896481cc6";
-      };
-    };
-    "coc-deno-0.11.0" = {
+    "coc-deno-3.0.1" = {
       name = "coc-deno";
       packageName = "coc-deno";
-      version = "0.11.0";
+      version = "3.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-deno/-/coc-deno-0.11.0.tgz";
-        sha512 = "0we/UrRQVy6/Ogf5XRHt+jmYJzfrYatymgt82BHDg0BBUXrY/E9J+JXfc8IeQ9eonJdgzujlT/Es22lv/Zxgsg==";
+        url = "https://registry.npmjs.org/coc-deno/-/coc-deno-3.0.1.tgz";
+        sha512 = "+vqtj6tynSFyoEJc5M5Owo11yomsYFc3I+IJ2rylajxJgVK7ZgiQLED5yu5zOqpWBMlG/vYWW7vi0FoLsWRbWw==";
       };
     };
     "coc-explorer-0.15.6" = {
@@ -355,33 +337,6 @@ let
         sha1 = "6b2e9822b1a2ce0a60ab64d610eccad53cb24d0f";
       };
     };
-    "for-in-0.1.8" = {
-      name = "for-in";
-      packageName = "for-in";
-      version = "0.1.8";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/for-in/-/for-in-0.1.8.tgz";
-        sha1 = "d8773908e31256109952b1fdb9b3fa867d2775e1";
-      };
-    };
-    "for-in-1.0.2" = {
-      name = "for-in";
-      packageName = "for-in";
-      version = "1.0.2";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/for-in/-/for-in-1.0.2.tgz";
-        sha1 = "81068d295a8142ec0ac726c6e2200c30fb6d5e80";
-      };
-    };
-    "for-own-0.1.5" = {
-      name = "for-own";
-      packageName = "for-own";
-      version = "0.1.5";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/for-own/-/for-own-0.1.5.tgz";
-        sha1 = "5265c681a4f294dabbf17c9509b6763aa84510ce";
-      };
-    };
     "fs.realpath-1.0.0" = {
       name = "fs.realpath";
       packageName = "fs.realpath";
@@ -490,15 +445,6 @@ let
         sha512 = "Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug==";
       };
     };
-    "import-maps-0.2.4" = {
-      name = "import-maps";
-      packageName = "import-maps";
-      version = "0.2.4";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/import-maps/-/import-maps-0.2.4.tgz";
-        sha512 = "31ZDO53RS3HcZUDIj8OMNuFr6gXkc6wsK+lTZosZuT8CDF/Y1Hk2gAJ6X+bdiEZoj8GkRN+nS5hFZQuOl0f29g==";
-      };
-    };
     "indent-string-2.1.0" = {
       name = "indent-string";
       packageName = "indent-string";
@@ -553,15 +499,6 @@ let
         sha512 = "ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==";
       };
     };
-    "is-buffer-1.1.6" = {
-      name = "is-buffer";
-      packageName = "is-buffer";
-      version = "1.1.6";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/is-buffer/-/is-buffer-1.1.6.tgz";
-        sha512 = "NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==";
-      };
-    };
     "is-core-module-2.2.0" = {
       name = "is-core-module";
       packageName = "is-core-module";
@@ -578,15 +515,6 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/is-docker/-/is-docker-2.1.1.tgz";
         sha512 = "ZOoqiXfEwtGknTiuDEy8pN2CfE3TxMHprvNer1mXiqwkOT77Rw3YVrUQ52EqAOU3QAWDQ+bQdx7HJzrv7LS2Hw==";
-      };
-    };
-    "is-extendable-0.1.1" = {
-      name = "is-extendable";
-      packageName = "is-extendable";
-      version = "0.1.1";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/is-extendable/-/is-extendable-0.1.1.tgz";
-        sha1 = "62b110e289a471418e3ec36a617d472e301dfc89";
       };
     };
     "is-extglob-2.1.1" = {
@@ -634,15 +562,6 @@ let
         sha512 = "/2UGPSgmtqwo1ktx8NDHjuPwZWmHhO+gj0f93EkhLB5RgW9RZevWYYlIkS6zePc6U2WpOdQYIwHe9YC4DWEBVg==";
       };
     };
-    "is-plain-object-2.0.4" = {
-      name = "is-plain-object";
-      packageName = "is-plain-object";
-      version = "2.0.4";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/is-plain-object/-/is-plain-object-2.0.4.tgz";
-        sha512 = "h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==";
-      };
-    };
     "is-stream-2.0.0" = {
       name = "is-stream";
       packageName = "is-stream";
@@ -677,51 +596,6 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz";
         sha1 = "e8fbf374dc556ff8947a10dcb0572d633f2cfa10";
-      };
-    };
-    "isobject-3.0.1" = {
-      name = "isobject";
-      packageName = "isobject";
-      version = "3.0.1";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz";
-        sha1 = "4e431e92b11a9731636aa1f9c8d1ccbcfdab78df";
-      };
-    };
-    "kind-of-2.0.1" = {
-      name = "kind-of";
-      packageName = "kind-of";
-      version = "2.0.1";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/kind-of/-/kind-of-2.0.1.tgz";
-        sha1 = "018ec7a4ce7e3a86cb9141be519d24c8faa981b5";
-      };
-    };
-    "kind-of-3.2.2" = {
-      name = "kind-of";
-      packageName = "kind-of";
-      version = "3.2.2";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/kind-of/-/kind-of-3.2.2.tgz";
-        sha1 = "31ea21a734bab9bbb0f32466d893aea51e4a3c64";
-      };
-    };
-    "lazy-cache-0.2.7" = {
-      name = "lazy-cache";
-      packageName = "lazy-cache";
-      version = "0.2.7";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/lazy-cache/-/lazy-cache-0.2.7.tgz";
-        sha1 = "7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65";
-      };
-    };
-    "lazy-cache-1.0.4" = {
-      name = "lazy-cache";
-      packageName = "lazy-cache";
-      version = "1.0.4";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/lazy-cache/-/lazy-cache-1.0.4.tgz";
-        sha1 = "a1d78fc3a50474cb80845d3b3b6e1da49a446e8e";
       };
     };
     "load-json-file-1.1.0" = {
@@ -778,15 +652,6 @@ let
         sha1 = "72cb668b425228290abbfa856892587308a801fb";
       };
     };
-    "merge-deep-3.0.2" = {
-      name = "merge-deep";
-      packageName = "merge-deep";
-      version = "3.0.2";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/merge-deep/-/merge-deep-3.0.2.tgz";
-        sha512 = "T7qC8kg4Zoti1cFd8Cr0M+qaZfOwjlPDEdZIIPPB2JZctjaPM4fX+i7HOId69tAti2fvO6X5ldfYUONDODsrkA==";
-      };
-    };
     "merge-stream-2.0.0" = {
       name = "merge-stream";
       packageName = "merge-stream";
@@ -821,15 +686,6 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz";
         sha512 = "FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==";
-      };
-    };
-    "mixin-object-2.0.1" = {
-      name = "mixin-object";
-      packageName = "mixin-object";
-      version = "2.0.1";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/mixin-object/-/mixin-object-2.0.1.tgz";
-        sha1 = "4fb949441dab182540f1fe035ba60e1947a5e57e";
       };
     };
     "mkdirp-1.0.4" = {
@@ -1165,15 +1021,6 @@ let
         sha512 = "b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==";
       };
     };
-    "shallow-clone-0.1.2" = {
-      name = "shallow-clone";
-      packageName = "shallow-clone";
-      version = "0.1.2";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/shallow-clone/-/shallow-clone-0.1.2.tgz";
-        sha1 = "5909e874ba77106d73ac414cfec1ffca87d97060";
-      };
-    };
     "shebang-command-2.0.0" = {
       name = "shebang-command";
       packageName = "shebang-command";
@@ -1381,14 +1228,11 @@ let
         sha512 = "6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==";
       };
     };
-    "typescript-deno-plugin-1.31.0" = {
+    "typescript-deno-plugin-node_modules/coc-deno/typescript-deno-plugin" = {
       name = "typescript-deno-plugin";
       packageName = "typescript-deno-plugin";
-      version = "1.31.0";
-      src = fetchurl {
-        url = "https://registry.npmjs.org/typescript-deno-plugin/-/typescript-deno-plugin-1.31.0.tgz";
-        sha512 = "IoF5c8EubyNgjxxarguZfMx8Ph9Av9XqjySop0orepXv8wr02ND3DNNDFFdQyZfQAAcv1/v/u14MQIp8Os4c1w==";
-      };
+      version = 1;
+      src = ./node_modules/coc-deno/typescript-deno-plugin;
     };
     "user-home-2.0.0" = {
       name = "user-home";
@@ -1485,7 +1329,6 @@ let
       sources."aggregate-error-3.1.0"
       sources."anymatch-3.1.1"
       sources."arg-4.1.3"
-      sources."arr-union-3.1.0"
       sources."array-find-index-1.0.2"
       sources."array-union-1.0.2"
       sources."array-uniq-1.0.3"
@@ -1498,8 +1341,7 @@ let
       sources."camelcase-keys-2.1.0"
       sources."chokidar-3.4.3"
       sources."clean-stack-2.2.0"
-      sources."clone-deep-0.2.4"
-      sources."coc-deno-0.11.0"
+      sources."coc-deno-3.0.1"
       sources."coc-explorer-0.15.6"
       sources."coc-pyright-1.1.113"
       sources."concat-map-0.0.1"
@@ -1520,8 +1362,6 @@ let
           sources."path-exists-2.1.0"
         ];
       })
-      sources."for-in-1.0.2"
-      sources."for-own-0.1.5"
       sources."fs.realpath-1.0.0"
       sources."fsevents-2.1.3"
       sources."function-bind-1.1.1"
@@ -1534,29 +1374,22 @@ let
       sources."has-1.0.3"
       sources."hosted-git-info-2.8.8"
       sources."ignore-3.3.10"
-      sources."import-maps-0.2.4"
       sources."indent-string-4.0.0"
       sources."inflight-1.0.6"
       sources."inherits-2.0.4"
       sources."is-arrayish-0.2.1"
       sources."is-binary-path-2.1.0"
-      sources."is-buffer-1.1.6"
       sources."is-core-module-2.2.0"
       sources."is-docker-2.1.1"
-      sources."is-extendable-0.1.1"
       sources."is-extglob-2.1.1"
       sources."is-finite-1.1.0"
       sources."is-glob-4.0.1"
       sources."is-number-7.0.0"
       sources."is-path-inside-3.0.2"
-      sources."is-plain-object-2.0.4"
       sources."is-stream-2.0.0"
       sources."is-utf8-0.2.1"
       sources."is-wsl-2.2.0"
       sources."isexe-2.0.0"
-      sources."isobject-3.0.1"
-      sources."kind-of-3.2.2"
-      sources."lazy-cache-1.0.4"
       (sources."load-json-file-1.1.0" // {
         dependencies = [
           sources."pify-2.3.0"
@@ -1567,16 +1400,10 @@ let
       sources."make-error-1.3.6"
       sources."map-obj-1.0.1"
       sources."meow-3.7.0"
-      sources."merge-deep-3.0.2"
       sources."merge-stream-2.0.0"
       sources."mimic-fn-2.1.0"
       sources."minimatch-3.0.4"
       sources."minimist-1.2.5"
-      (sources."mixin-object-2.0.1" // {
-        dependencies = [
-          sources."for-in-0.1.8"
-        ];
-      })
       sources."mkdirp-1.0.4"
       (sources."mount-point-3.0.0" // {
         dependencies = [
@@ -1628,12 +1455,6 @@ let
       sources."resolve-1.19.0"
       sources."rimraf-2.7.1"
       sources."semver-6.3.0"
-      (sources."shallow-clone-0.1.2" // {
-        dependencies = [
-          sources."kind-of-2.0.1"
-          sources."lazy-cache-0.2.7"
-        ];
-      })
       sources."shebang-command-2.0.0"
       sources."shebang-regex-3.0.0"
       sources."signal-exit-3.0.3"
@@ -1660,7 +1481,7 @@ let
         ];
       })
       sources."typescript-4.1.5"
-      sources."typescript-deno-plugin-1.31.0"
+      sources."typescript-deno-plugin-node_modules/coc-deno/typescript-deno-plugin"
       sources."user-home-2.0.0"
       sources."uuid-8.3.2"
       sources."validate-npm-package-license-3.0.4"

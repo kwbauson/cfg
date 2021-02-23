@@ -2,7 +2,7 @@
   "name": "cfg",
   "version": "1.0.0",
   "dependencies": {
-    "coc-deno": "0.11.0",
+    "coc-deno": "3.0.1",
     "coc-explorer": "0.15.6",
     "coc-pyright": "1.1.113",
     "ts-node": "9.1.1",
