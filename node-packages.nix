@@ -112,13 +112,13 @@ let
         sha1 = "89b4d199ab2bee49de164ea02b89ce462d71b767";
       };
     };
-    "binary-extensions-2.1.0" = {
+    "binary-extensions-2.2.0" = {
       name = "binary-extensions";
       packageName = "binary-extensions";
-      version = "2.1.0";
+      version = "2.2.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.1.0.tgz";
-        sha512 = "1Yj8h9Q+QDF5FzhMs/c9+6UntbD5MkRfRwac8DoEm9ZfUBZ7tZ55YcGVAzEe4bXsdQHEk+s9S5wsOKVdZrw0tQ==";
+        url = "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz";
+        sha512 = "jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==";
       };
     };
     "brace-expansion-1.1.11" = {
@@ -166,13 +166,13 @@ let
         sha1 = "308beeaffdf28119051efa1d932213c91b8f92e7";
       };
     };
-    "chokidar-3.4.3" = {
+    "chokidar-3.5.1" = {
       name = "chokidar";
       packageName = "chokidar";
-      version = "3.4.3";
+      version = "3.5.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/chokidar/-/chokidar-3.4.3.tgz";
-        sha512 = "DtM3g7juCXQxFVSNPNByEC2+NImtBuxQQvWlHunpJIS5Ocr0lG306cC7FCi7cEA0fzmybPUIl4txBIobk1gGOQ==";
+        url = "https://registry.npmjs.org/chokidar/-/chokidar-3.5.1.tgz";
+        sha512 = "9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==";
       };
     };
     "clean-stack-2.2.0" = {
@@ -328,13 +328,13 @@ let
         sha1 = "1504ad2523158caa40db4a2787cb01411994ea4f";
       };
     };
-    "fsevents-2.1.3" = {
+    "fsevents-2.3.2" = {
       name = "fsevents";
       packageName = "fsevents";
-      version = "2.1.3";
+      version = "2.3.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/fsevents/-/fsevents-2.1.3.tgz";
-        sha512 = "Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==";
+        url = "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz";
+        sha512 = "xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==";
       };
     };
     "function-bind-1.1.1" = {
@@ -1174,13 +1174,13 @@ let
         sha512 = "hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==";
       };
     };
-    "ts-node-dev-1.1.1" = {
+    "ts-node-dev-1.1.2" = {
       name = "ts-node-dev";
       packageName = "ts-node-dev";
-      version = "1.1.1";
+      version = "1.1.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ts-node-dev/-/ts-node-dev-1.1.1.tgz";
-        sha512 = "kAO8LUZgXZSY0+PucMPsQ0Bbdv0x+lgbN7j8gcD4PuTI4uKC6YchekaspmYTBNilkiu+rQYkWJA7cK+Q8/B0tQ==";
+        url = "https://registry.npmjs.org/ts-node-dev/-/ts-node-dev-1.1.2.tgz";
+        sha512 = "9EOZgYVS1dn/QPGJ5vXz7KxvBYTWpjSfQHRE0ryFsn8EpOLb5tuJakVp9Y4amQWsivTptNdzOu6dEjI0vtS0hA==";
       };
     };
     "tsconfig-7.0.0" = {
@@ -1300,13 +1300,13 @@ let
       sources."array-union-1.0.2"
       sources."array-uniq-1.0.3"
       sources."balanced-match-1.0.0"
-      sources."binary-extensions-2.1.0"
+      sources."binary-extensions-2.2.0"
       sources."brace-expansion-1.1.11"
       sources."braces-3.0.2"
       sources."buffer-from-1.1.1"
       sources."camelcase-2.1.1"
       sources."camelcase-keys-2.1.0"
-      sources."chokidar-3.4.3"
+      sources."chokidar-3.5.1"
       sources."clean-stack-2.2.0"
       sources."coc-explorer-0.15.6"
       sources."concat-map-0.0.1"
@@ -1328,7 +1328,7 @@ let
         ];
       })
       sources."fs.realpath-1.0.0"
-      sources."fsevents-2.1.3"
+      sources."fsevents-2.3.2"
       sources."function-bind-1.1.1"
       sources."get-stdin-4.0.1"
       sources."get-stream-5.2.0"
@@ -1438,7 +1438,7 @@ let
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
       sources."ts-node-9.1.1"
-      sources."ts-node-dev-1.1.1"
+      sources."ts-node-dev-1.1.2"
       (sources."tsconfig-7.0.0" // {
         dependencies = [
           sources."strip-bom-3.0.0"
