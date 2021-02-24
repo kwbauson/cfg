@@ -78,11 +78,11 @@
         "version": "2.0.2"
     },
     "dmg-signal-desktop": {
-        "sha256": "170v63bmgyis4h5bs9dynzkvps620hngxbz70jsm75w8abvvksln",
+        "sha256": "0xk5gsxlc6imlp5lpkwv1416ryn297sar9hm4xrp4ikvkwn15f1z",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.40.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-1.40.1.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "1.40.0"
+        "version": "1.40.1"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -97,10 +97,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "0a4b0491a6bdfb062cc822376279058ec183e781",
-        "sha256": "026r3iizchvfch8yf9hs43nc2yhk0r2v1b0xzn8d3viwwl14wywk",
+        "rev": "c885e4696635fab9242a80e608465c7b272cb72f",
+        "sha256": "1wf52apr93ffg6mwb93hz6sbjdfbaz2fgd9zwfgz8xplfpia0r6s",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/0a4b0491a6bdfb062cc822376279058ec183e781.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/c885e4696635fab9242a80e608465c7b272cb72f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
