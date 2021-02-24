@@ -11,6 +11,11 @@
     device = "/dev/vda";
   };
 
+  nix.gc = {
+    automatic = true;
+    options = "--min-freed \$((20 * 1024**3)) --max-freed \$((20 * 1024**3))";
+  };
+
   networking = {
     domain = "com";
     firewall.allowedTCPPorts = [ 80 443 5000 9090 ];
