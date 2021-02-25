@@ -1174,13 +1174,13 @@ let
         sha512 = "hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==";
       };
     };
-    "ts-node-dev-1.1.5" = {
+    "ts-node-dev-1.1.6" = {
       name = "ts-node-dev";
       packageName = "ts-node-dev";
-      version = "1.1.5";
+      version = "1.1.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ts-node-dev/-/ts-node-dev-1.1.5.tgz";
-        sha512 = "/5Q0uk7cE7tXTdiEIRWSAFoUGsUteRiH0b5sq8G26T4jUd2kFwz8a/pZcKXXGPXtZnyoNzoJU3LtW4GcxFUUyw==";
+        url = "https://registry.npmjs.org/ts-node-dev/-/ts-node-dev-1.1.6.tgz";
+        sha512 = "RTUi7mHMNQospArGz07KiraQcdgUVNXKsgO2HAi7FoiyPMdTDqdniB6K1dqyaIxT7c9v/VpSbfBZPS6uVpaFLQ==";
       };
     };
     "tsconfig-7.0.0" = {
@@ -1438,7 +1438,7 @@ let
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
       sources."ts-node-9.1.1"
-      sources."ts-node-dev-1.1.5"
+      sources."ts-node-dev-1.1.6"
       (sources."tsconfig-7.0.0" // {
         dependencies = [
           sources."strip-bom-3.0.0"
