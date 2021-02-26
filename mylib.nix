@@ -143,4 +143,28 @@ cli // generators // lib // builtins // rec {
       ${shellcheck}/bin/shellcheck $out/bin/${name}
     '';
   };
+  wrapBins = pkg: script:
+    let wrapped = stdenv.mkDerivation {
+      name = "${pkg.name}-wrapped";
+      inherit script;
+      passAsFile = "script";
+      dontUnpack = true;
+      installPhase = ''
+        mkdir -p $out/bin
+        cd ${pkg}/bin
+        for exe in *;do
+          echo '#!/usr/bin/env bash' > $out/bin/$exe
+          echo "exe=$exe" >> $out/bin/$exe
+          echo "exePath=${pkg}/bin/$exe" >> $out/bin/$exe
+          cat $scriptPath >> $out/bin/$exe
+          chmod +x $out/bin/$exe
+        done
+      '';
+    }; in
+    buildEnv {
+      name = wrapped.name;
+      ignoreCollisions = true;
+      paths = [ wrapped pkg ];
+      passthru = pkg.passthru // { unwrapped = pkg; };
+    };
 }

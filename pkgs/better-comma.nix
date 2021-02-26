@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; stdenv.mkDerivation {
+pkgs: with pkgs; with mylib; latestWrapper (stdenv.mkDerivation {
   inherit name;
   script = ''
     #!/usr/bin/env bash
@@ -75,4 +75,4 @@ pkgs: with pkgs; with mylib; stdenv.mkDerivation {
     installShellCompletion --bash --name better-comma $completionPath
     installShellCompletion --bash --name , $completionPath
   '';
-}
+})

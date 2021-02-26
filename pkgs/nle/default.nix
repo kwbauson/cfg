@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; buildEnv {
+pkgs: with pkgs; with mylib; latestWrapper (buildEnv {
   inherit name;
   paths = let env = nle { path = ./.; }; in
     [ (alias name env.pkgs.nix-local-env) env ];
@@ -52,4 +52,4 @@ pkgs: with pkgs; with mylib; buildEnv {
     };
     conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
   };
-}
+})

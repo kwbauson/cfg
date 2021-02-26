@@ -44,12 +44,13 @@ with builtins; with pkgs; with mylib; {
           inherit
             bat colordiff ctags diffoscope dhall git-trim gron highlight httpie
             icdiff jq nim nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
-            solargraph watchexec yarn yarn-completion nodejs_latest nle
+            solargraph watchexec yarn yarn-completion nodejs_latest
             gh git-ignore git-fuzzy
             ;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
+          nle = nle.unwrapped;
         };
-        inherit nle nle-cfg-pkgs nr switch-to-configuration;
+        inherit nle-cfg-pkgs nr switch-to-configuration;
         local-bin = attrValues (alias {
           built-as-host = "echo ${host}";
           nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";

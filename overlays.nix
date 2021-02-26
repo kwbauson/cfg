@@ -3,6 +3,14 @@
     inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
   (self: super: with super; with mylib; {
+    latestWrapper = pkg: wrapBins pkg ''
+      ${pathAdd self.nix-wrapped}
+      if [[ $LATEST = 1 ]];then
+        exec "$exePath" "$@"
+      else
+        LATEST=1 exec nix shell github:kwbauson/cfg#${pkg.name} -c "$exe" "$@"
+      fi
+    '';
     programs-sqlite = stdenv.mkDerivation rec {
       name = "programs-sqlite";
       buildInputs = [ sqlite ];
