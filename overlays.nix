@@ -94,6 +94,7 @@
       "  description: ${pkg.meta.description or "null"}"
       "  homepage: ${pkg.meta.homepage or "null"}"
     ];
+    inherit (nixos-unstable) chromium;
     nix-prefetch-git = nix-prefetch-git.override { nix = self.nixUnstable; };
     bundix = bundix.override { nix = self.nixUnstable; };
     saml2aws = overrideWithPRs saml2aws {
