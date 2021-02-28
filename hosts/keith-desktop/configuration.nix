@@ -9,6 +9,7 @@ with builtins;
   ];
 
   hardware.pulseaudio.enable = true;
+  time.hardwareClockInLocalTime = true;
 
   services.autorandr.enable = true;
   services.xserver.enable = true;
