@@ -67,6 +67,7 @@ with builtins; with pkgs; with mylib; {
           nod = (prefixIf isNixOS "sudo " "nix-collect-garbage -d");
           noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
+          reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
         });
         ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       }
