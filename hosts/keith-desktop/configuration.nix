@@ -1,4 +1,4 @@
-{ lib, pkgs, nixos-hardware, self, ... }:
+{ pkgs, nixos-hardware, self, ... }:
 with builtins;
 {
   imports = [
@@ -7,8 +7,6 @@ with builtins;
     ./hardware-configuration.nix
     (self.lib.callModule ../common.nix)
   ];
-
-  boot.loader.timeout = lib.mkForce 10;
 
   hardware.pulseaudio.enable = true;
 
