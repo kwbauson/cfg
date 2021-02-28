@@ -8,6 +8,8 @@ with builtins;
     (self.lib.callModule ../common.nix)
   ];
 
+  boot.loader.timeout = 10;
+
   hardware.pulseaudio.enable = true;
 
   services.autorandr.enable = true;
