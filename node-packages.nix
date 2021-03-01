@@ -184,13 +184,13 @@ let
         sha512 = "4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==";
       };
     };
-    "coc-explorer-0.15.6" = {
+    "coc-explorer-0.15.7" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.15.6";
+      version = "0.15.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.6.tgz";
-        sha512 = "NegmT0lRVjG7dE7IQDdQLvGPkW8Zcxo0l8D3kU0gy7Cq51QL6Tac7xPMUS/jeqt+4xsVzkPpRa2yZNCw9nplNA==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.7.tgz";
+        sha512 = "uQyKJeNDVlmP1L3W6iT+/bL9hRpAu0J7aOI5yEVdX+FrxjGEz8WxrHXeYmrkQeDbtUxlOuRAT4Wa9La9rP96LQ==";
       };
     };
     "concat-map-0.0.1" = {
@@ -751,13 +751,13 @@ let
         sha512 = "kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==";
       };
     };
-    "open-7.4.0" = {
+    "open-7.4.2" = {
       name = "open";
       packageName = "open";
-      version = "7.4.0";
+      version = "7.4.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/open/-/open-7.4.0.tgz";
-        sha512 = "PGoBCX/lclIWlpS/R2PQuIR4NJoXh6X5AwVzE7WXnWRGvHg7+4TBCgsujUgiPpm0K1y4qvQeWnCWVTpTKZBtvA==";
+        url = "https://registry.npmjs.org/open/-/open-7.4.2.tgz";
+        sha512 = "MVHddDVweXZF3awtlAS+6pgKLlm/JgxZ90+/NBurBoQctVOOB/zDdVjcyPzQ+0laDGbsWgrRkflI65sQeOgT9Q==";
       };
     };
     "os-homedir-1.0.2" = {
@@ -1308,7 +1308,7 @@ let
       sources."camelcase-keys-2.1.0"
       sources."chokidar-3.5.1"
       sources."clean-stack-2.2.0"
-      sources."coc-explorer-0.15.6"
+      sources."coc-explorer-0.15.7"
       sources."concat-map-0.0.1"
       sources."create-require-1.1.1"
       sources."cross-spawn-7.0.3"
@@ -1387,7 +1387,7 @@ let
       sources."object-assign-4.1.1"
       sources."once-1.4.0"
       sources."onetime-5.1.2"
-      sources."open-7.4.0"
+      sources."open-7.4.2"
       sources."os-homedir-1.0.2"
       sources."p-finally-2.0.1"
       sources."p-map-4.0.0"
