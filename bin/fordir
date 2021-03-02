@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages tmux
+# with-packages tmux bashInteractive
 set -e
 startdir=$PWD
 dirs=$(for dir in *;do
