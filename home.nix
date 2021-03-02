@@ -357,7 +357,7 @@ with builtins; with pkgs; with mylib; {
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ro = "! git reset --hard origin/`git branch-name`";
         f = "fetch --all";
-        fbr = "!git f && git br";
+        fbr = "!git f --quiet && git br";
         ru = "remote update";
         st = "status";
         main = "! echo master";
