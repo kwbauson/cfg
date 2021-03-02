@@ -341,13 +341,14 @@ with builtins; with pkgs; with mylib; {
         br = "branch -vv";
         branch-name = "rev-parse --abbrev-ref HEAD";
         cap = "! git a; git ci; git p";
+        mp = "! git merge origin/`git main` && git p";
         ci = "commit -v";
         co = "checkout";
         df = ''! git a -N && git -c core.pager='${exe delta} --dark' diff "''${@:-HEAD}" && true'';
         dfo = ''! git fetch && git df origin/`git branch-name`'';
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
-        gm = "fetch origin master:master";
+        gm = "! git fetch origin `git main`:`git main`";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
         p = "put";
@@ -359,6 +360,7 @@ with builtins; with pkgs; with mylib; {
         fbr = "!git f && git br";
         ru = "remote update";
         st = "status";
+        main = "! echo master";
         unhide = "update-index --no-skip-worktree";
         to = "! git br -u origin/`git branch-name`";
       };
