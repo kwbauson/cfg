@@ -97,10 +97,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "01dd14eba9238ebf2fe57d0d30212c9c47ab5427",
-        "sha256": "1ppydi1fzlwbfr6dzlrij7yf0hr2v3kc39zy3h8p013z4cjwdyq2",
+        "rev": "dfd6884f659543cde81ddab4ed5c6b6a98a8b53b",
+        "sha256": "1fjz1j27bz06r07g88c5dx4hijjm0kjfy9dn28h23cg0afw25ngg",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/01dd14eba9238ebf2fe57d0d30212c9c47ab5427.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/dfd6884f659543cde81ddab4ed5c6b6a98a8b53b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -145,10 +145,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "dbccc1ee8edfa0a06e4f7b258bbee4a959bc18af",
-        "sha256": "0d7q476x3w1c251dz627026y4mlzmnzrrmnrp0jzaxf95yh6fdk5",
+        "rev": "3de654b582f46d011fa691609ba548c38b30760d",
+        "sha256": "1pfxlmk4sb55vwjckdx6bcmy84vk55qj31x32p2a44mis8k4bixh",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/dbccc1ee8edfa0a06e4f7b258bbee4a959bc18af.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/3de654b582f46d011fa691609ba548c38b30760d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
