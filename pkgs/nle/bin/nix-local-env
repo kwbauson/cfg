@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils
+# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk
 set -e
 
 name=nle
