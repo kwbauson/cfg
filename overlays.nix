@@ -83,9 +83,9 @@
       pypiDataRev = cfg.inputs.pypi-deps-db.rev;
       pypiDataSha256 = cfg.inputs.pypi-deps-db.narHash;
     };
-    nle-cfg-pkgs = (self.nle { path = ./.; }).pkgs;
-    inherit (self.nle-cfg-pkgs) fordir;
-    inherit (self.nle-cfg-pkgs.poetry-env.python.pkgs) pur emborg;
+    nle-cfg = self.nle { path = ./.; };
+    inherit (self.nle-cfg.pkgs) fordir;
+    inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg;
     selfpkgs = buildDir ([
       ./mylib.nix
     ] ++ self.nle.lib.build-paths ./.);

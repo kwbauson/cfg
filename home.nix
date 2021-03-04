@@ -50,7 +50,8 @@ with builtins; with pkgs; with mylib; {
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
           nle = nle.unwrapped;
         };
-        inherit nle-cfg-pkgs nr switch-to-configuration;
+        inherit nr switch-to-configuration;
+        inherit (nle-cfg) pkgs;
         local-bin = attrValues (alias {
           built-as-host = "echo ${host}";
           nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";

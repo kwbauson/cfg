@@ -121,17 +121,12 @@ rec {
 
   packages = listToAttrs (map (x: { name = x.name; value = x; }) build-paths) // local-bin-pkgs;
 
-  out = (buildEnv { name = "local-env"; inherit paths; }) // {
-    pkgs = packages;
-    nle = { path }: import ./nix-local-env.nix { inherit path pkgs; };
-    pinned =
-      if local-nix ? rev && local-nix ? sha256
-      then
-        fetchTarball
-          {
-            url = "https://github.com/kwbauson/cfg/archive/${local-nix.rev}.tar.gz";
-            inherit (local-nix) sha256;
-          }
-      else out.nle { inherit path; };
+  out = buildEnv {
+    name = "local-env";
+    inherit paths;
+    passthru = {
+      inherit paths;
+      pkgs = packages;
+    };
   };
 }.out

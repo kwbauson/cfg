@@ -257,12 +257,6 @@ case $cmd in
   cachedir)
     exec "$0" dir
     ;;
-  update-self)
-    nix-env --refresh -f https://github.com/kwbauson/cfg/tarball/main -iA nle
-    ;;
-  pin)
-    nr nle.scripts.pin
-    ;;
   *)
     invalid
     ;;
