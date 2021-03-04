@@ -183,11 +183,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "1v8p97n86bckm0cw5rr26k39w36cx699hfgqw14svcajhgdw4yif",
+        "sha256": "1f12qh97fzs9nf3vg5pjhirq6wc651rzv6wprpb6473nl5lbs0zw",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3343.8d82c865b41/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3346.4d0ee90c6e2/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3343.8d82c865b41"
+        "version": "nixos-20.09.3346.4d0ee90c6e2"
     },
     "nixos-unstable": {
         "sha256": "1kmfws709rjvhijvaxsmp08cwdwyxvcwfghg4dhjkmcyghwj3094",
@@ -226,10 +226,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "d8f98ba64076b731e784f2d75b6bbad4c0e704ef",
-        "sha256": "14gxzk2zwsg3ram33w483zhgm5ds6gcfg23hn3imjqjd5k0piw2z",
+        "rev": "b58b5f91f140ecadb3f425e540f5d5ad8e37eae8",
+        "sha256": "0d78nhswk3cdd7bvx5q6j6diwarjzg33x2isdqjyk70ahx0g1qwa",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/d8f98ba64076b731e784f2d75b6bbad4c0e704ef.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/b58b5f91f140ecadb3f425e540f5d5ad8e37eae8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
