@@ -5,6 +5,7 @@ rec {
   ifFiles = fs: optional (hasFiles fs);
   ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
+  read = f: optionalString (hasFiles f) (readFile (file f));
 
   nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
 
@@ -35,7 +36,7 @@ rec {
   local-bin-pkgs =
     optionalAttrs
       (hasFiles "bin")
-      (mapAttrs (x: _: setPrio 1 (wrapScriptWithPackages (file "bin/${x}") { })) (readDir (file "bin")));
+      (mapAttrs (x: _: hiPrio (wrapScriptWithPackages (file "bin/${x}") { })) (readDir (file "bin")));
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
@@ -50,12 +51,7 @@ rec {
   yarn-paths =
     ifFilesAndNot "package.json yarn.lock yarn.nix .enable-nle-yarn" ".disable-nle-yarn"
       rec {
-        yarn2nix-moretea =
-          callPackage
-            "${pkgs.path}/pkgs/development/tools/yarn2nix-moretea/yarn2nix" {
-            nodejs = nodejs_latest;
-          };
-        package = with yarn2nix-moretea; mkYarnModules rec {
+        package = with yarn2nix-moretea.override { nodejs = nodejs_latest; }; mkYarnModules rec {
           name = pname;
           pname = "yarn-modules";
           version = "";
@@ -74,7 +70,7 @@ rec {
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
-        locktext = readFile (file "Gemfile.lock");
+        locktext = read "Gemfile.lock";
         latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
         hasLatestBundler = hasSuffix latestBundlerMark locktext;
         namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
@@ -94,7 +90,7 @@ rec {
             plivo = _: { nativeBuildInputs = [ rake ]; };
           };
         };
-        paths = [ env.wrappedRuby (hiPrio env) ];
+        paths = [ (lowPrio env.wrappedRuby) env ];
       }.paths;
   mach-nix-paths = with rec {
     hasRequirements = pathExists (file "requirements.txt");
@@ -125,10 +121,12 @@ rec {
     nle = { path }: import ./nix-local-env.nix { inherit path pkgs; };
     pinned =
       if local-nix ? rev && local-nix ? sha256
-      then fetchTarball {
-        url = "https://github.com/kwbauson/cfg/archive/${local-nix.rev}.tar.gz";
-        inherit (local-nix) sha256;
-      }
+      then
+        fetchTarball
+          {
+            url = "https://github.com/kwbauson/cfg/archive/${local-nix.rev}.tar.gz";
+            inherit (local-nix) sha256;
+          }
       else out.nle { inherit path; };
   };
 }.out
