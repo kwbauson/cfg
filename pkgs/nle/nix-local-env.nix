@@ -10,7 +10,7 @@ rec {
   nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
 
   wrapScriptWithPackages = src: env: rec {
-    text = readFile src;
+    text = read src;
     name = baseNameOf src;
     lines = splitString "\n" text;
     pkgsMark = " with-packages ";
@@ -26,9 +26,14 @@ rec {
     isBash = hasSuffix "bash" (head lines);
     script = writeScript "${name}-unwrapped" (makeScriptText text);
     scriptTail = makeScriptText (concatStringsSep "\n" (tail lines));
+    source = removeSuffix "\n" (read "source");
+    contents =
+      if hasFiles "source"
+      then ''exec ${source}/${src} "$@"''
+      else if isBash then scriptTail else ''exec ${script} "$@"'';
     out = writeBashBin name ''
       export ${pathAdd buildInputs}
-      ${if isBash then scriptTail else ''exec ${script} "$@"''}
+      ${contents}
     '';
   }.out;
 
@@ -36,7 +41,7 @@ rec {
   local-bin-pkgs =
     optionalAttrs
       (hasFiles "bin")
-      (mapAttrs (x: _: hiPrio (wrapScriptWithPackages (file "bin/${x}") { })) (readDir (file "bin")));
+      (mapAttrs (x: _: hiPrio (wrapScriptWithPackages "bin/${x}" { })) (readDir (file "bin")));
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
