@@ -344,7 +344,7 @@ with builtins; with pkgs; with mylib; {
         mp = "! git merge origin/`git main` && git p";
         ci = "commit -v";
         co = "checkout";
-        df = ''! git a -N && git -c core.pager='${exe delta} --dark' diff "''${@:-HEAD}" && true'';
+        df = ''! git a -N && git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true'';
         dfo = ''! git fetch && git df origin/`git branch-name`'';
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
@@ -352,7 +352,14 @@ with builtins; with pkgs; with mylib; {
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
         p = "put";
-        pf = "put --force-with-lease";
+        pf = let script = writeBash "pf" ''
+          set -e
+          git fetch
+          ${delta}/bin/delta <(git log origin/$(git branch-name)) <(git log) || true
+          read -n1 -p "Continue? [y/n]" continue
+          echo
+          [[ $continue = y ]] && put --force-with-lease
+        ''; in "! ${script}";
         put = "! git push origin `git branch-name`";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ro = "! git reset --hard origin/`git branch-name`";
