@@ -13,8 +13,8 @@ impuredir=$cachebase/.impure
 args=$@
 [[ $1 = -d ]] && shift && cd "$1" && shift
 
-if [[ -e ./nle.sh && $(realpath ./nle.sh) != $(realpath "$0") ]];then
-  exec ./nle.sh "$@"
+if [[ -e ./nle.sh && -z $PINNED ]];then
+  PINNED=1 exec ./nle.sh "$@"
 fi
 
 sourcedir=$PWD
