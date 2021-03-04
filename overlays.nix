@@ -98,7 +98,7 @@
     inherit (nixos-20_09) postgresql_10 nodejs-10_x;
     nix-prefetch-git = nix-prefetch-git.override { nix = self.nixUnstable; };
     bundix = bundix.override { nix = self.nixUnstable; };
-    saml2aws = overrideWithPRs saml2aws {
+    saml2aws = overrideWithPRs nixos-20_09.saml2aws {
       pr = 547;
       sha256 = "vQ0c5bBgHwzi0/d/YWPG8csOLjhSJmhOv6WhOneU09c=";
     };
