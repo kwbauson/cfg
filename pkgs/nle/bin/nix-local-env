@@ -107,7 +107,14 @@ case $cmd in
     direnv allow
     ;;
   re)
-    "$0" cached | while read src;do "$0" -d "$src" || true; done
+    "$0" cached | while read src;do
+      cd "$src"
+      if [[ -e .envrc ]];then
+        (direnv stdlib | grep -v 'log_status "loading $rcfile"'; cat .envrc) | bash || true
+      else
+        "$0" || true
+      fi
+    done
     ;;
   recache)
     "$0" cached | while read src;do "$0" -d "$src" cache || true; done
@@ -200,8 +207,8 @@ case $cmd in
     exec "$@"
     ;;
   env)
-    echo "$(direnv stdlib | grep -v 'log_status "loading $rcfile"')"
-    echo "$("$0" direnv)"
+    direnv stdlib | grep -v 'log_status "loading $rcfile"'
+    "$0" direnv
     ;;
   direnv)
     "$0" activate 1>&2
