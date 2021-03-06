@@ -84,6 +84,17 @@
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
 
+      nixConf = ''
+        max-jobs = auto
+        keep-going = true
+        builders-use-substitutes = true
+        extra-experimental-features = nix-command flakes ca-references
+        extra-substituters = https://kwbauson.cachix.org
+        extra-trusted-public-keys = kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro
+        http-connections = 0
+        connect-timeout = 5
+      '';
+
       inherit (self.packages.x86_64-linux) programs-sqlite;
 
       nixosConfigurations = with lib; mapAttrs nixosConfiguration (importDir ./hosts);
