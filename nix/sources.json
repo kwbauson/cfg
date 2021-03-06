@@ -121,10 +121,10 @@
         "homepage": "",
         "owner": "bigH",
         "repo": "git-fuzzy",
-        "rev": "59e06daa092825cf1dcc00dcb22149244a38631a",
-        "sha256": "0ahgzxxlhlkw4k627yxxchbb7ixizdjryk9ajjk0p4gr51f60qmw",
+        "rev": "6f1354411ddfa27c1162ebed73ee61dfbd71eb1a",
+        "sha256": "094p605db42s9xjzbs8akc0yfhwf9l6alzsfimwmil99i8a52sr3",
         "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/59e06daa092825cf1dcc00dcb22149244a38631a.tar.gz",
+        "url": "https://github.com/bigH/git-fuzzy/archive/6f1354411ddfa27c1162ebed73ee61dfbd71eb1a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-trim": {
@@ -183,11 +183,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "11xcazrklg6kavk70yc6qakppz2b9ivrw7pq9bbaric84kmivr0s",
+        "sha256": "1wvdxkr8m5isa3dgyq755bkj5sk5hiqqqzac3nv7c1r1zp3w8cjz",
         "type": "file",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3368.16fc9eb7364/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3376.1ac507ba981/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3368.16fc9eb7364"
+        "version": "nixos-20.09.3376.1ac507ba981"
     },
     "nixos-unstable": {
         "sha256": "1jxwf7xxd4bnk477gc162yvp6nggmnc9wxbv31ynn5d2jhdj1ig6",
