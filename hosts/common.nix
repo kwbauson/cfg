@@ -17,7 +17,7 @@
 
   nix.package = pkgs.nixUnstable;
   nix.nixPath = [ ];
-  nix.extraOptions = self.packages.${pkgs.system}.nix-wrapped.conf;
+  nix.extraOptions = self.nixConf;
   # nix.distributedBuilds = true;
   nix.buildMachines = [{
     hostName = "beta.nixbuild.net";
