@@ -51,11 +51,8 @@
           ];
         };
         buildSystem = args:
-          let system = nixosSystem args;
-          in
-          ((pkgsForSystem { inherit (args) system; }).mylib.forceCached system.config.system.build.toplevel) // system // {
-            paths = filter (x: x.allowSubstitutes or true) system.config.environment.systemPackages;
-          };
+          let system = nixosSystem args; in
+          system.config.system.build.toplevel.overrideAttrs (_: { passthru = system; });
         callModule =
           module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
         homeConfiguration = makeOverridable (
@@ -74,9 +71,7 @@
             inherit system pkgs username homeDirectory;
           });
           in
-          (pkgs.mylib.forceCached conf.activationPackage) // conf // {
-            paths = filter (x: x.allowSubstitutes or true) conf.config.home.packages;
-          }
+          conf.activationPackage.overrideAttrs (_: { passthru = conf; })
         );
       };
 
