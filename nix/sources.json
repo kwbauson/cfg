@@ -145,10 +145,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "5029b500ccf2b23d68e8d49d028f867ac49429be",
-        "sha256": "1cpwxww3kh9mi4vrszx0izcnwz6ws7lnf8rqjd6nm9pl5fcsinjq",
+        "rev": "acb8a23bfc1cc6cf3627f88a3f005b7dfd897489",
+        "sha256": "1hyqbpwhpcddy3wjhdj1khn975yvw39z9p5619vmlhaqww47wkzs",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/5029b500ccf2b23d68e8d49d028f867ac49429be.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/acb8a23bfc1cc6cf3627f88a3f005b7dfd897489.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
