@@ -50,11 +50,11 @@
         "version": "0.7.2"
     },
     "dmg-brave": {
-        "sha256": "0pslbz3k1k8cy0k5pgqj6yipfbd1vzscl68mrxpcj84wzrp90w7d",
+        "sha256": "1mrpfmcc9ivdnw7ys2dj1132y4adqnp2qagzm49p6vwg3i0csqid",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.20.110/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.21.73/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.20.110"
+        "version": "1.21.73"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
