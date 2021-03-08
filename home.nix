@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";
           nixpkgs-path = "echo ${pkgs.path}";
           nixpkgs-branch = "echo ${nixpkgs-branch}";
-          local_ops = "nle -d ~/src/hr/local_ops run local_ops --no-banner";
+          local_ops = "nle -d ~/src/hr/local_ops run local_ops --no-banner --skip-update";
           lo = "local_ops";
           nixbuild-net-shell = "${exe rlwrap} ssh beta.nixbuild.net shell";
           selfpkgs-path = "echo ${selfpkgs.outPath}";
