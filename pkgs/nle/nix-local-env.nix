@@ -95,7 +95,7 @@ rec {
             plivo = _: { nativeBuildInputs = [ rake ]; };
           };
         };
-        paths = [ (lowPrio env.wrappedRuby) env ];
+        paths = [ env.wrappedRuby (hiPrio env) ];
       }.paths;
   mach-nix-paths = with rec {
     hasRequirements = pathExists (file "requirements.txt");
@@ -117,13 +117,14 @@ rec {
     poetry-paths
   ];
 
-  paths = flatten [ local-bin-paths build-paths ];
+  paths = flatten [ build-paths local-bin-paths ];
 
   packages = listToAttrs (map (x: { name = x.name; value = x; }) build-paths) // local-bin-pkgs;
 
   out = buildEnv {
     name = "local-env";
     inherit paths;
+    ignoreCollisions = true;
     passthru = {
       inherit paths;
       pkgs = packages;
