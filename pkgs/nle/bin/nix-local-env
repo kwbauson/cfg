@@ -33,6 +33,7 @@ buildfiles=(
   requirements{,.dev}.txt
   local.nix
   bin
+  pkgs nix
 )
 
 hashfiles() {
