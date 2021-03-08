@@ -95,7 +95,7 @@ rec {
             plivo = _: { nativeBuildInputs = [ rake ]; };
           };
         };
-        paths = [ (lowPrio env.wrappedRuby) env ];
+        paths = [ env.wrappedRuby (hiPrio env) ];
       }.paths;
   mach-nix-paths = with rec {
     hasRequirements = pathExists (file "requirements.txt");
