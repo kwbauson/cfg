@@ -360,7 +360,7 @@ with builtins; with pkgs; with mylib; {
           ${delta}/bin/delta <(git log origin/$(git branch-name)) <(git log) || true
           read -n1 -p "Continue? [y/n]" continue
           echo
-          [[ $continue = y ]] && put --force-with-lease
+          [[ $continue = y ]] && git put --force-with-lease
         ''; in "! ${script}";
         put = "! git push origin `git branch-name`";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
