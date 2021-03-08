@@ -63,7 +63,7 @@
     };
     nle-cfg = self.nle { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
-    inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg;
+    inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
     selfpkgs = buildDir ([
       ./mylib.nix
     ] ++ self.nle.lib.build-paths ./.);
