@@ -123,6 +123,14 @@ cli // generators // lib // builtins // rec {
     mapDirEntries importEntry dir;
   fixSelfWith = f: x:
     let self = f (x // { inherit self; }); in self;
+  overrideWithPRs = pkg: prs: override pkg {
+    patches = map
+      ({ pr, sha256 }: fetchpatch {
+        url = "${pkg.src.meta.homepage}/pull/${toString pr}.patch";
+        inherit sha256;
+      })
+      (toList prs);
+  };
   writeBashBinChecked = name: text: stdenv.mkDerivation {
     inherit name text;
     dontUnpack = true;
