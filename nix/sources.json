@@ -250,10 +250,10 @@
         "homepage": "",
         "owner": "tomasiser",
         "repo": "vim-code-dark",
-        "rev": "9a76050073754a8ccc57cc0c1c51aa4328b00097",
-        "sha256": "1hsq08y68iqmwkscf4zr7lgmw3r6v97gbafj5z0g1flzvb98ly0s",
+        "rev": "531c0a027024b46aad24923642a9078764652b50",
+        "sha256": "06xm26bckszpjhixpjbcs5mvkqv7ax06qmrkgkb80gghkbal24y4",
         "type": "tarball",
-        "url": "https://github.com/tomasiser/vim-code-dark/archive/9a76050073754a8ccc57cc0c1c51aa4328b00097.tar.gz",
+        "url": "https://github.com/tomasiser/vim-code-dark/archive/531c0a027024b46aad24923642a9078764652b50.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "yarn-completion": {
