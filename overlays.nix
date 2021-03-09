@@ -64,6 +64,7 @@
     nle-cfg = self.nle { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
+    inherit (self.nle-cfg.pkgs.bundler-env.gems) pry fakes3;
     selfpkgs = buildDir ([
       ./mylib.nix
     ] ++ self.nle.lib.build-paths ./.);
