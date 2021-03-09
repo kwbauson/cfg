@@ -388,7 +388,6 @@ with builtins; with pkgs; with mylib; {
       };
     };
     direnv.enable = true;
-    direnv.enableNixDirenvIntegration = true;
     fzf = {
       enable = true;
       enableBashIntegration = false;
