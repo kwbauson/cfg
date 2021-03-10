@@ -57,8 +57,7 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";
           nixpkgs-path = "echo ${pkgs.path}";
           nixpkgs-branch = "echo ${nixpkgs-branch}";
-          local_ops = "nle -d ~/src/hr/local_ops run local_ops --no-banner --skip-update";
-          lo = "local_ops";
+          lo = "local_ops --no-banner --skip-update";
           nixbuild-net-shell = "${exe rlwrap} ssh beta.nixbuild.net shell";
           selfpkgs-path = "echo ${selfpkgs.outPath}";
           lo-early-talent = ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'';
