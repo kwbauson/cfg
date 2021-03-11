@@ -1,4 +1,5 @@
 {
+  nixConfig.extra-substituters = "https://kwbauson.cachix.org";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
