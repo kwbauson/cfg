@@ -45,7 +45,7 @@
     nix-wrapped =
       if self.isNixOS
       then self.nixUnstable
-      else wrapBins self.nixUnstable ''NIX_USER_CONF_FILES=${writeText "nix.conf" cfg.nixConf} exec "$exePath" "$@"'';
+      else wrapBins self.nixUnstable ''NIX_CONFIG=$(< ${writeText "nix.conf" cfg.nixConf}) exec "$exePath" "$@"'';
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
