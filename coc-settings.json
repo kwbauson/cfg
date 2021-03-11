@@ -12,6 +12,7 @@
     "typescriptreact",
     "javascript",
     "javascript.jsx",
+    "python",
     "nix"
   ],
   "list.insertMappings": {
@@ -20,6 +21,8 @@
     "<c-t>": "action:tabe",
     "<c-v>": "action:vsplit"
   },
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/keith/.nix-profile/bin/black",
   "session.saveOnVimLeave": false,
   "prettier.semi": false,
   "prettier.arrowParens": "avoid",
@@ -34,7 +37,6 @@
   "solargraph.definitions": true,
   "solargraph.hover": true,
   "solargraph.checkGemVersion": false,
-  "eslint.filetypes": ["javascript"],
   "explorer.icon.enableNerdfont": true,
   "explorer.file.showHiddenFiles": true,
   "explorer.git.showIgnored": true,
