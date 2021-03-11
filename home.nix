@@ -45,7 +45,7 @@ with builtins; with pkgs; with mylib; {
             bat colordiff ctags diffoscope dhall git-trim gron highlight httpie
             icdiff jq nim nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
             solargraph watchexec yarn yarn-completion nodejs_latest
-            gh git-ignore git-fuzzy
+            gh git-ignore git-fuzzy black
             ;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
           nle = nle.unwrapped;
