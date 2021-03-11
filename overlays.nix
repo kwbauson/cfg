@@ -78,7 +78,7 @@
     nix-prefetch-git = nix-prefetch-git.override { nix = self.nixUnstable; };
     bundix = bundix.override { nix = self.nixUnstable; };
     pinned-if-darwin = if isDarwin then nixos-unstable else super;
-    inherit (self.pinned-if-darwin);
+    inherit (self.pinned-if-darwin) wget;
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
