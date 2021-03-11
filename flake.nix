@@ -95,8 +95,9 @@ rec {
         extra-experimental-features = nix-command flakes ca-references
         extra-substituters = ${nixConfig.extra-substituters}
         extra-trusted-public-keys = ${nixConfig.extra-trusted-public-keys}
-        http-connections = 0
-        connect-timeout = 5
+        keep-env-derivations = true
+        keep-outputs = true
+        narinfo-cache-negative-ttl = 5
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
