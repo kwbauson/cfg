@@ -1,7 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
@@ -11,7 +10,6 @@
     naersk.url = "github:nmattia/naersk";
     naersk.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
-    mach-nix.url = "github:DavHau/mach-nix";
     mach-nix.inputs.nixpkgs.follows = "nixpkgs";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
@@ -24,6 +22,8 @@
     , nixpkgs
     , flake-utils
     , home-manager
+    , mach-nix
+    , nixos-hardware
     , ...
     }@inputs: flake-utils.lib.eachDefaultSystem
       (system: rec {
