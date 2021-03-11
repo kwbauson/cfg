@@ -1,5 +1,8 @@
 {
-  nixConfig.extra-substituters = "https://kwbauson.cachix.org";
+  nixConfig = {
+    extra-substituters = "https://kwbauson.cachix.org";
+    extra-trusted-public-keys = "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro";
+  };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
