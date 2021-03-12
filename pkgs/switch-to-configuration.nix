@@ -25,7 +25,7 @@ let
         fi
       '';
     nos-hms = makeScript ''
-      ${optionalString (host != "keith-mac") (exe nos)}
+      ${optionalString isNixOS (exe nos)}
       ${exe hms}
     '';
   });
