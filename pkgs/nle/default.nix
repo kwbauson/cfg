@@ -40,7 +40,7 @@ pkgs: with pkgs; with mylib; latestWrapper (buildEnv {
         ${pathAdd [ git nix-wrapped ]}
         if [[ -e flake.nix && -e flake.lock ]];then
           git status &> /dev/null
-          nix flake update --recreate-lock-file
+          nix flake update
           git status &> /dev/null
         fi
       '';
