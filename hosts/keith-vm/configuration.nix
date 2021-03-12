@@ -1,8 +1,6 @@
-{ pkgs, self, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    (self.lib.callModule ../common.nix)
   ];
 
   networking.firewall.enable = false;

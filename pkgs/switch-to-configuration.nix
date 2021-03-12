@@ -2,10 +2,11 @@ pkgs: with pkgs; with mylib;
 let
   hosts = concatMap attrNames [ cfg.nixosConfigurations cfg.homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
-  makeScript = text: writeBashBin "switch" ''
-    ${pathAdd ([ nix-wrapped coreutils git ] ++ optional (!isDarwin) sudo) }
+  makeNamedScript = name: text: writeBashBin name ''
+    ${pathAdd [ nix-wrapped coreutils git ] }
     ${text}
   '';
+  makeScript = makeNamedScript "switch";
   inherit (cfg) nixosConfigurations homeConfigurations;
   profile = name: "/nix/var/nix/profiles/${name}";
   scripts = eachHost (host: rec {
@@ -28,7 +29,7 @@ let
       ${exe hms}
     '';
   });
-  makeBin = name: writeBashBin name ''
+  makeBin = name: makeNamedScript name ''
     ${pathAdd [ nix-wrapped git ]}
     git -C ~/cfg add --intent-to-add .
     exec nix run ~/cfg#switch-to-configuration.scripts.$(built-as-host).${name}

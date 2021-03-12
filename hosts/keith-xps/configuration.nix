@@ -1,4 +1,4 @@
-{ pkgs, nixos-hardware, self, ... }:
+{ pkgs, nixos-hardware, ... }:
 with builtins;
 {
   imports = [
@@ -6,7 +6,6 @@ with builtins;
     nixos-hardware.nixosModules.common-pc-laptop
     nixos-hardware.nixosModules.common-pc-laptop-ssd
     ./hardware-configuration.nix
-    (self.lib.callModule ../common.nix)
   ];
 
   boot.blacklistedKernelModules = [ "psmouse" ];

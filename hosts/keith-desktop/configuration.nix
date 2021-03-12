@@ -1,11 +1,10 @@
-{ pkgs, nixos-hardware, self, ... }:
+{ nixos-hardware, ... }:
 with builtins;
 {
   imports = [
     nixos-hardware.nixosModules.common-cpu-amd
     # nixos-hardware.nixosModules.common-gpu-nvidia
     ./hardware-configuration.nix
-    (self.lib.callModule ../common.nix)
   ];
 
   hardware.pulseaudio.enable = true;
