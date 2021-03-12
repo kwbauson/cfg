@@ -82,7 +82,7 @@ rec {
 
       overlays = [
         (_: nixpkgs: {
-          cfg = self;
+          cfg = { inherit nixConf inputs homeConfigurations nixosConfigurations; };
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs;
         })
