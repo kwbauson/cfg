@@ -143,7 +143,7 @@ with builtins; with pkgs; with mylib; {
         sudo = "sudo ";
         su = "sudo su";
         grep = "grep --color -I";
-        rg = "rg --color=always -S --hidden";
+        rg = "rg --color=always -S --hidden --no-require-git --glob '!/.git/'";
         ncdu = "ncdu --color dark -ex";
         wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
         root-symlinks = with {

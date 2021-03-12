@@ -125,7 +125,7 @@ rec {
         host = "keith-mac";
       };
 
-      mkChecks = pkgs: with pkgs; pkgs.mylib.forceCached buildEnv {
+      mkChecks = pkgs: with pkgs; buildEnv {
         name = "checks";
         paths = [
           inlets
