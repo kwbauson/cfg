@@ -152,7 +152,7 @@ rec {
       keith-desktop = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-desktop.nos-hms;
       kwbauson = self.packages.x86_64-linux.switch-to-configuration.scripts.kwbauson.nos-hms;
       keith-vm = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-vm.nos-hms;
-      keith-mac = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-mac.nos-hms;
+      keith-mac = self.packages.x86_64-darwin.switch-to-configuration.scripts.keith-mac.nos-hms;
 
       checks = mkChecks self.packages.x86_64-linux;
       checks-mac = mkChecks self.packages.x86_64-darwin;
