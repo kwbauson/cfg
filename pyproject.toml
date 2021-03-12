@@ -7,5 +7,5 @@ authors = []
 [tool.poetry.dependencies]
 python = "^3.8"
 pur = "^5.3.0"
-emborg = "^1.20.0"
+emborg = "^1.21.0"
 git-remote-codecommit = "^1.15.1"
