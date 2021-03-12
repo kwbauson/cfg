@@ -1,13 +1,13 @@
 pkgs: with pkgs; with mylib;
 let
-  hosts = concatMap attrNames [ cfg.nixosConfigurations cfg.homeConfigurations ];
+  inherit (cfg) nixosConfigurations homeConfigurations;
+  hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeNamedScript = name: text: writeBashBin name ''
     ${pathAdd [ nix-wrapped coreutils git ] }
     ${text}
   '';
   makeScript = makeNamedScript "switch";
-  inherit (cfg) nixosConfigurations homeConfigurations;
   profile = name: "/nix/var/nix/profiles/${name}";
   scripts = eachHost (host: rec {
     nos = let conf = nixosConfigurations.${host}; in
