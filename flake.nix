@@ -154,7 +154,7 @@ rec {
       keith-vm = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-vm.nos-hms;
       keith-mac = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-mac.nos-hms;
 
-      checks = self.mkChecks self.packages.x86_64-linux;
-      checks-mac = self.mkChecks self.packages.x86_64-darwin;
+      checks = mkChecks self.packages.x86_64-linux;
+      checks-mac = mkChecks self.packages.x86_64-darwin;
     };
 }
