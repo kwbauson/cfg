@@ -28,7 +28,7 @@ let
       pkg=$1
       shift
       cmd=''${cmd:-''${pkg//*.}}
-      exec nix shell "${selfpkgs.outPath}#$pkg" --command ${run-package} "$cmd" "$@"
+      exec nix shell "${self-path}#$pkg" --command ${run-package} "$cmd" "$@"
     '';
 in
 nr.overrideAttrs (attrs: { passthru.__functor = _: exe; })

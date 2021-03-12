@@ -65,9 +65,7 @@
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) pry fakes3;
-    selfpkgs = buildDir ([
-      ./mylib.nix
-    ] ++ self.nle.lib.build-paths ./.);
+    self-path = ./.;
     desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
       "  name: ${pkg.name or pkg.pname or "null"}"
       "  description: ${pkg.meta.description or "null"}"

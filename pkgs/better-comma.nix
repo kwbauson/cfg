@@ -34,7 +34,7 @@ pkgs: with pkgs; with mylib; latestWrapper (stdenv.mkDerivation {
     fi
     if [[ -n $attr ]];then
       if [[ $desc = 1 ]];then
-        exec nix eval --impure --expr "with import ${selfpkgs.outPath}; desc $attr"
+        exec nix eval --impure --expr "with import ${self-path}; desc $attr"
       else
         if [[ -z $packages ]];then
           exec nr "$cmd" "$@"
