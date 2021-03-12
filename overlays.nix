@@ -74,7 +74,7 @@
     inherit (nixos-20_09) saml2aws postgresql_10 nodejs-10_x;
     nix-prefetch-git = nix-prefetch-git.override { nix = self.nixUnstable; };
     bundix = bundix.override { nix = self.nixUnstable; };
-    pinned-if-darwin = if isDarwin then nixos-unstable else super;
+    pinned-if-darwin = if isDarwin then nixos-20_09 else super;
     inherit (self.pinned-if-darwin) wget;
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
