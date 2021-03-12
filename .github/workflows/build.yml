@@ -7,13 +7,12 @@ jobs:
       fail-fast: false
       matrix:
         output:
-          - nixosConfigurations.keith-xps
-          - nixosConfigurations.keith-desktop
-          - nixosConfigurations.kwbauson
-          - nixosConfigurations.keith-vm
-          - homeConfigurations.non-graphical
-          - homeConfigurations.graphical
-          - homeConfigurations.keith-mac
+          - keith-xps
+          - keith-desktop
+          - kwbauson
+          - keith-vm
+          - keith-mac
+
           - checks
           - checks-mac
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
