@@ -56,7 +56,7 @@ python-versions = "*"
 
 [[package]]
 name = "emborg"
-version = "1.20.0"
+version = "1.21.0"
 description = "Borg front end."
 category = "main"
 optional = false
@@ -167,7 +167,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "39044f5e20e75f16630271b167045e70d46b72e0fef28100937e052b66e284a9"
+content-hash = "16620560c442cc19c5cd03ba432f88bd4f8819983b3cd1c0b5cba752faaf676b"
 
 [metadata.files]
 appdirs = [
@@ -194,8 +194,8 @@ docopt = [
     {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
 ]
 emborg = [
-    {file = "emborg-1.20.0-py3-none-any.whl", hash = "sha256:9e8459190e8a2655175dc01bdabf0899c094d304b93f64279d5099e5c52f85e6"},
-    {file = "emborg-1.20.0.tar.gz", hash = "sha256:f5e55e2cc73be5bf8ada95e252e9248fed4f5f68af4682691a4127311469243b"},
+    {file = "emborg-1.21.0-py3-none-any.whl", hash = "sha256:ce2f947b9a2291220854ef79cd89a29ce0e08ba97d659ae71b165f0aee7ccaf5"},
+    {file = "emborg-1.21.0.tar.gz", hash = "sha256:eee88987f65eeead9d56cf1f0ac934f081c36ef63ece8eff89d9fcf02837f44d"},
 ]
 git-remote-codecommit = [
     {file = "git-remote-codecommit-1.15.1.tar.gz", hash = "sha256:cd99d44a94f9adf8c5f15110d830f62af5fe644030fecc0df68cbda4880a5214"},
