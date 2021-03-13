@@ -8,10 +8,6 @@ pkgs: with pkgs; with mylib; latestWrapper (buildEnv {
         if path == null then self else
         import ./nix-local-env.nix { inherit pkgs path; };
     lib = rec {
-      build-files = unique (
-        flatten (mapAttrsToList (n: v: words "${v.files or ""} ${v.extraFiles or ""} ${v.generated or ""}") conf)
-      );
-      build-paths = path: filter pathExists (map (p: path + "/${p}") build-files);
       joinMapAttrValuesIf = f: p: as: concatMapStringsSep "\n" f (attrValues (filterAttrs (n: v: p n) as));
     };
     scripts = with lib; makeScripts {
@@ -43,11 +39,6 @@ pkgs: with pkgs; with mylib; latestWrapper (buildEnv {
           nix flake update
           git status &> /dev/null
         fi
-      '';
-      pin = echo ''
-        {
-          outPath = ${cfg.outPath};
-        }
       '';
     };
     conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
