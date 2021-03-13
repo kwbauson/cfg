@@ -159,12 +159,11 @@ case $cmd in
       if [[ -e .npmrc ]];then
         token=$(sed -n 1s/.*:_authToken=//p .npmrc)
         header="Authorization: Bearer $token"
-        curlOpts='"-H @${writeText "headers.txt" "'$header'"}"'
+        curlOpts='"-H @${builtins.toFile "headers.txt" "'$header'"}"'
       else
         curlOpts='""'
       fi
       sed -i \
-        -e '1s/^{ /\0writeText, /' \
         -e "1acurlOpts = $curlOpts;" \
         -e "2,$(wc -l yarn.nix | cut -d' ' -f1)s/fetchurl/customFetchurl/" \
         -e '2acustomFetchurl = args: fetchurl (args // { inherit curlOpts; });' \

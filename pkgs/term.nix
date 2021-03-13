@@ -7,7 +7,7 @@ let
        urxvtc "$@"
     fi
   '';
-  init-file = writeText "init-file" ''
+  init-file = toFile "init-file" ''
     [[ -e ~/.bash_profile ]] && . ~/.bash_profile
     PROMPT_COMMAND="$PROMPT_COMMAND; trap 'history -a; bash -c \"\$BASH_COMMAND\" < /dev/null & exit' DEBUG"
   '';

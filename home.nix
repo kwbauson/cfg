@@ -507,7 +507,7 @@ with builtins; with pkgs; with mylib; {
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
-      xmodmap ${writeText "Xmodmap" ''
+      xmodmap ${toFile "Xmodmap" ''
         remove mod1 = Alt_L
         keycode 64 = Escape
         keycode 105 = Super_L

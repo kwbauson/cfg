@@ -44,7 +44,7 @@ rec {
           }: import nixpkgs {
             inherit system;
             inherit (self) config;
-            overlays = self.overlays ++ [ (_: _: { inherit isNixOS; }) ];
+            overlays = [ (_: _: { inherit isNixOS; }) ] ++ self.overlays;
           };
         inherit (mylib) mapAttrValues importDir;
         nixosConfiguration = host: module: buildSystem {
@@ -86,6 +86,7 @@ rec {
           cfg = { inherit nixConf inputs homeConfigurations nixosConfigurations; };
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs;
+          isNixOS = nixpkgs.isNixOS or false;
         })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;

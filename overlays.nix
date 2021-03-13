@@ -2,6 +2,12 @@
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
+  (_: super: with super; with mylib; {
+    nix-wrapped =
+      if isNixOS
+      then nixUnstable
+      else wrapBins nixUnstable ''NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf}) exec "$exePath" "$@"'';
+  })
   (self: super: with super; with mylib; {
     latestWrapper = pkg: wrapBins pkg ''
       ${pathAdd self.nix-wrapped}
@@ -15,37 +21,31 @@
       name = "programs-sqlite";
       buildInputs = [ sqlite ];
       dontUnpack = true;
-      extra-programs = toFile "extra-programs" (
-        joinLines
-          (x: "${x},x86_64-linux,${x}")
-          (x: y: "${x},x86_64-linux,${y}")
-          [
-            "nle"
-            [ "nix-local-env" "nle" ]
-            "nr"
-            "evilhack"
-            "git-trim"
-            "fordir"
-            "inlets"
-            "juicefs"
-            "pur"
-            "emborg"
-          ]
-      );
+      extraPrograms = joinLines
+        (x: "${x},x86_64-linux,${x}")
+        (x: y: "${x},x86_64-linux,${y}")
+        [
+          "nle"
+          [ "nix-local-env" "nle" ]
+          "nr"
+          "evilhack"
+          "git-trim"
+          "fordir"
+          "inlets"
+          "juicefs"
+          "pur"
+          "emborg"
+        ];
+      passAsFile = "extraPrograms";
       installPhase = ''
         cp ${sources.nixos-unstable}/programs.sqlite $out
         chmod +w $out
         sqlite3 $out <<EOF
         .mode csv
-        .import ${extra-programs} Programs
+        .import $extraProgramsPath Programs
         EOF
       '';
     };
-    isNixOS = false;
-    nix-wrapped =
-      if self.isNixOS
-      then self.nixUnstable
-      else wrapBins self.nixUnstable ''NIX_CONFIG=$(< ${writeText "nix.conf" cfg.nixConf}) exec "$exePath" "$@"'';
     steam-native = steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
@@ -72,8 +72,8 @@
     ];
     inherit (nixos-unstable) chromium diffoscope;
     inherit (nixos-20_09) saml2aws postgresql_10 nodejs-10_x;
-    nix-prefetch-git = nix-prefetch-git.override { nix = self.nixUnstable; };
-    bundix = bundix.override { nix = self.nixUnstable; };
+    nix-prefetch-git = nix-prefetch-git.override { nix = nixUnstable; };
+    bundix = bundix.override { nix = nixUnstable; };
     pinned-if-darwin = if isDarwin then nixos-20_09 else super;
     inherit (self.pinned-if-darwin) wget;
     allowUnsupportedSystem = import pkgs.path {
