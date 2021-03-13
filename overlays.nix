@@ -33,7 +33,7 @@
           ]
       );
       installPhase = ''
-        cp ${nixos-unstable.path}/programs.sqlite $out
+        cp ${sources.nixos-unstable}/programs.sqlite $out
         chmod +w $out
         sqlite3 $out <<EOF
         .mode csv
