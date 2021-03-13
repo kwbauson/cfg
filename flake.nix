@@ -100,6 +100,7 @@ rec {
         keep-env-derivations = true
         keep-outputs = true
         narinfo-cache-negative-ttl = 5
+        connect-timeout = 5
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
