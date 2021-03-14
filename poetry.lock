@@ -103,7 +103,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "pur"
-version = "5.3.0"
+version = "5.4.0"
 description = "Update packages in a requirements.txt file to latest versions."
 category = "main"
 optional = false
@@ -167,7 +167,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "16620560c442cc19c5cd03ba432f88bd4f8819983b3cd1c0b5cba752faaf676b"
+content-hash = "9e9139e7a174b86fae3074dfcd9a1677e9a28a41a7081040d651bd2f5a363080"
 
 [metadata.files]
 appdirs = [
@@ -209,7 +209,8 @@ jmespath = [
     {file = "jmespath-0.10.0.tar.gz", hash = "sha256:b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9"},
 ]
 pur = [
-    {file = "pur-5.3.0.tar.gz", hash = "sha256:8587c548469bcd8f47e1f7bd1cae3c11d9cd9c2e4219c86d08499b8efdfe1e05"},
+    {file = "pur-5.4.0-py2.py3-none-any.whl", hash = "sha256:33c2201e1dc5beca675ddcd9cca19061aebbf9b1af61a83a0430e15652dc2bde"},
+    {file = "pur-5.4.0.tar.gz", hash = "sha256:103173bc65a4bd45f9b39f126ce1e03e937843aa35d21271e2214ddcbe3f3e86"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.1.tar.gz", hash = "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"},
