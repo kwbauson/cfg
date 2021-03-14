@@ -56,7 +56,7 @@ rec {
   yarn-paths =
     ifFilesAndNot "package.json yarn.lock yarn.nix .enable-nle-yarn" ".disable-nle-yarn"
       rec {
-        package = with yarn2nix-moretea.override { nodejs = nodejs_latest; }; mkYarnModules rec {
+        package = (yarn2nix-moretea.override { nodejs = nodejs_latest; }).mkYarnModules rec {
           name = pname;
           pname = "yarn-modules";
           version = "";
@@ -75,11 +75,7 @@ rec {
   bundler-paths =
     ifFiles "Gemfile Gemfile.lock gemset.nix"
       rec {
-        locktext = read "Gemfile.lock";
-        latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
-        hasLatestBundler = hasSuffix latestBundlerMark locktext;
-        namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
-        env = with namespace; bundlerEnv {
+        env = bundlerEnv {
           name = "bundler-env";
           gemfile = file "Gemfile";
           lockfile = file "Gemfile.lock";
