@@ -54,7 +54,7 @@ with builtins; with pkgs; with mylib; {
         inherit (nle-cfg) pkgs;
         local-bin = attrValues (alias {
           built-as-host = "echo ${host}";
-          nixpkgs-rev = "echo ${cfg.inputs.nixpkgs.rev}";
+          nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
           nixpkgs-path = "echo ${pkgs.path}";
           nixpkgs-branch = "echo ${nixpkgs-branch}";
           lo = "local_ops --no-banner --skip-update";
@@ -126,7 +126,7 @@ with builtins; with pkgs; with mylib; {
 
   programs = {
     home-manager.enable = true;
-    home-manager.path = cfg.inputs.home-manager.outPath;
+    home-manager.path = inputs.home-manager.outPath;
     command-not-found.enable = !isNixOS;
     command-not-found.dbPath = programs-sqlite;
     bash = {

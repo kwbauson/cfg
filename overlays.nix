@@ -55,11 +55,11 @@
     };
     npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
-    rnix-lsp-unstable = cfg.inputs.rnix-lsp.defaultPackage.${system};
-    mach-nix = import cfg.inputs.mach-nix {
+    rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
+    mach-nix = import inputs.mach-nix {
       inherit pkgs;
-      pypiDataRev = cfg.inputs.pypi-deps-db.rev;
-      pypiDataSha256 = cfg.inputs.pypi-deps-db.narHash;
+      pypiDataRev = inputs.pypi-deps-db.rev;
+      pypiDataSha256 = inputs.pypi-deps-db.narHash;
     };
     nle-cfg = self.nle { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
