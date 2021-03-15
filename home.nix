@@ -339,7 +339,8 @@ with builtins; with pkgs; with mylib; {
         a = "add -A";
         br = "branch -vv";
         branch-name = "rev-parse --abbrev-ref HEAD";
-        cap = "! git a; git ci; git p";
+        ca = "! git a && git ci";
+        cap = "! git ca && git p";
         mp = "! git merge origin/`git main` && git p";
         ci = "commit -v";
         co = "checkout";
