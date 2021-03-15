@@ -6,6 +6,8 @@ rec {
   ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
   read = f: optionalString (hasFiles f) (readFile (file f));
+  hasSource = hasFiles "source";
+  source = if hasSource then removeSuffix "\n" (read "source") else null;
 
   nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
 
@@ -26,9 +28,8 @@ rec {
     isBash = hasSuffix "bash" (head lines);
     script = writeScript "${name}-unwrapped" (makeScriptText text);
     scriptTail = makeScriptText (concatStringsSep "\n" (tail lines));
-    source = removeSuffix "\n" (read "source");
     contents =
-      if hasFiles "source"
+      if hasSource
       then ''exec ${source}/${src} "$@"''
       else if isBash then scriptTail else ''exec ${script} "$@"'';
     out = writeBashBin name ''
