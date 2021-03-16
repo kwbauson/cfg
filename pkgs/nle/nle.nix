@@ -32,7 +32,7 @@
           dontNpmInstall = true;
         };
       in
-      override nodeDependencies { name = "node_modules"; };
+      override nodeDependencies { name = "node_modules"; passthru = { inherit nodePackages; }; };
   };
   yarn = {
     files = "package.json yarn.lock .enable-nle-yarn";

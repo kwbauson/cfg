@@ -1,9 +1,9 @@
 { path, pkgs }:
 with builtins; with pkgs; with mylib;
 rec {
-  hasFiles = fs: all (f: pathExists (file f)) (words fs);
+  hasFiles = fs: words fs != [ ] && all (f: pathExists (file f)) (words fs);
   ifFiles = fs: optional (hasFiles fs);
-  ifFilesAndNot = fs: fs2: optional (hasFiles fs && fs2 != "" && !hasFiles fs2);
+  ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
   read = f: optionalString (hasFiles f) (readFile (file f));
   hasSource = hasFiles "source";
@@ -67,13 +67,11 @@ rec {
         yarnLock = file "yarn.lock";
         yarnNix = file "yarn.nix";
       };
-      out =
-        runCommand "yarn-env"
-          { } ''
-          mkdir $out
-          [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
-          ln -s ${package}/node_modules $out/node_modules
-        '';
+      out = runCommand "yarn-env" { passthru = { inherit package; }; } ''
+        mkdir $out
+        [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
+        ln -s ${package}/node_modules $out/node_modules
+      '';
     }.out;
 
   bundler-paths = nleFiles "bundler"
