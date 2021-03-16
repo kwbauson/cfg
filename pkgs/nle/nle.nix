@@ -23,7 +23,7 @@
     files = "package.json package-lock.json";
     generated = "node-packages.nix";
     extraFiles = ".npmrc";
-    notFiles = "yarn.nix";
+    notFiles = "yarn.lock";
     out =
       let
         nodePackages = callPackage (file "node-packages.nix") { inherit nodeEnv; };
@@ -44,15 +44,16 @@
     files = "requirements.txt";
     extraFiles = "requirements.dev.txt";
     notFiles = self.poetry.files;
-    out =
-      (mach-nix.mkPython {
+    out = override
+      ((mach-nix.mkPython {
         requirements = excludeLines (hasPrefix "itomate") ''
           ${read "requirements.txt"}
           ${read "requirements.dev.txt"}
         '';
         _.curtsies.patches = [ ];
         overridesPost = [ (self: super: { inherit (python3Packages) black; }) ];
-      }).override { ignoreCollisions = true; };
+      }).override { ignoreCollisions = true; })
+      { name = "pip-env"; };
   };
   poetry = {
     enable = true;
@@ -70,6 +71,7 @@
     };
   };
   bundler = {
+    enable = true;
     files = "Gemfile Gemfile.lock";
     generated = "gemset.nix";
   };

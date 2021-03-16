@@ -1,15 +1,18 @@
 { path, pkgs }:
 with builtins; with pkgs; with mylib;
 rec {
-  hasFiles = fs: all (f: pathExists (file f)) (splitString " " fs);
+  hasFiles = fs: all (f: pathExists (file f)) (words fs);
   ifFiles = fs: optional (hasFiles fs);
-  ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
+  ifFilesAndNot = fs: fs2: optional (hasFiles fs && fs2 != "" && !hasFiles fs2);
   file = f: path + ("/" + f);
   read = f: optionalString (hasFiles f) (readFile (file f));
   hasSource = hasFiles "source";
   source = if hasSource then removeSuffix "\n" (read "source") else null;
 
   nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
+  nleFiles = name: ifFilesAndNot
+    "${nle-conf.${name}.files or ""} ${nle-conf.${name}.generated or ""}"
+    (nle-conf.notFiles or "");
 
   wrapScriptWithPackages = src: env: rec {
     text = read src;
@@ -54,56 +57,56 @@ rec {
     ifFilesAndNot "package.json package-lock.json node-packages.nix" "yarn.nix yarn.lock"
       (lowPrio nle-conf.npm.out);
 
-  yarn-paths =
-    ifFilesAndNot "package.json yarn.lock yarn.nix .enable-nle-yarn" ".disable-nle-yarn"
-      rec {
-        package = (yarn2nix-moretea.override { nodejs = nodejs_latest; }).mkYarnModules rec {
-          name = pname;
-          pname = "yarn-modules";
-          version = "";
-          packageJSON = file "package.json";
-          yarnLock = file "yarn.lock";
-          yarnNix = file "yarn.nix";
-        };
-        out =
-          runCommand "yarn-env"
-            { } ''
-            mkdir $out
-            [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
-            ln -s ${package}/node_modules $out/node_modules
-          '';
-      }.out;
-  bundler-paths =
-    ifFiles "Gemfile Gemfile.lock gemset.nix"
-      rec {
-        env = bundlerEnv {
-          name = "bundler-env";
-          gemfile = file "Gemfile";
-          lockfile = file "Gemfile.lock";
-          gemset = file "gemset.nix";
-          ignoreCollisions = true;
-          allowSubstitutes = true;
-          groups = null;
-          gemConfig = defaultGemConfig // {
-            zipruby = _: { buildInputs = [ zlib ]; };
-            grpc = attrs: defaultGemConfig.grpc attrs // {
-              AROPTS = "-r";
-            };
-            plivo = _: { nativeBuildInputs = [ rake ]; };
+  yarn-paths = nleFiles "yarn"
+    rec {
+      package = (yarn2nix-moretea.override { nodejs = nodejs_latest; }).mkYarnModules rec {
+        name = pname;
+        pname = "yarn-modules";
+        version = "";
+        packageJSON = file "package.json";
+        yarnLock = file "yarn.lock";
+        yarnNix = file "yarn.nix";
+      };
+      out =
+        runCommand "yarn-env"
+          { } ''
+          mkdir $out
+          [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
+          ln -s ${package}/node_modules $out/node_modules
+        '';
+    }.out;
+
+  bundler-paths = nleFiles "bundler"
+    rec {
+      env = bundlerEnv {
+        name = "bundler-env";
+        gemfile = file "Gemfile";
+        lockfile = file "Gemfile.lock";
+        gemset = file "gemset.nix";
+        ignoreCollisions = true;
+        allowSubstitutes = true;
+        groups = null;
+        gemConfig = defaultGemConfig // {
+          zipruby = _: { buildInputs = [ zlib ]; };
+          grpc = attrs: defaultGemConfig.grpc attrs // {
+            AROPTS = "-r";
           };
+          plivo = _: { nativeBuildInputs = [ rake ]; };
         };
-        paths = [ env.wrappedRuby (hiPrio env) ];
-      }.paths;
+      };
+      paths = [ env.wrappedRuby (hiPrio env) ];
+    }.paths;
+
   mach-nix-paths = with rec {
     hasRequirements = pathExists (file "requirements.txt");
     hasRequirementsDev = pathExists (file "requirements.dev.txt");
   };
     optional
       ((hasRequirements || hasRequirementsDev) && !hasFiles "poetry.lock")
-      (override nle-conf.pip.out { name = "pip-env"; });
+      nle-conf.pip.out;
 
   poetry-paths =
-    ifFiles nle-conf.poetry.files (override nle-conf.poetry.out { name = "poetry-env"; });
+    nleFiles "poetry" (override nle-conf.poetry.out { name = "poetry-env"; });
 
   build-paths = flatten [
     local-nix-paths
