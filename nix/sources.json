@@ -97,10 +97,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "2806372f78e9564942b9b50f3b0ac639ac63a878",
-        "sha256": "0f801yb9j3hy67nnkgqv9xpwsmpkqy2d3rbzx1gfrvq8xs0wg49z",
+        "rev": "59f3575fb1130f3cf051663f81bc851106f4a928",
+        "sha256": "16275bvmd9jk9kkw5fgnp1lf1br95gfbpk8wy9aj32n2g59zxsfm",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/2806372f78e9564942b9b50f3b0ac639ac63a878.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/59f3575fb1130f3cf051663f81bc851106f4a928.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -183,18 +183,18 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "1vrxw4ip67qdfhbv3wsigs0hky2xyq9b7pkz2xbjzv45g7rwmzp2",
+        "sha256": "17mij1bkgywdk8vhqjzgpj8904qsrnn33jxywyj056mlfnhk2ckg",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3456.bba2f2bdc4d/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3492.36e15cd6e7d/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3456.bba2f2bdc4d"
+        "version": "nixos-20.09.3492.36e15cd6e7d"
     },
     "nixos-unstable": {
-        "sha256": "08jmvzjnzjc5crg0nr3lwan91njvh7rgg0jf6r7h1g0w0v3drc61",
+        "sha256": "0197fw40w5h3h649nsci9wi27pb1gq7c7y8zv39z7x191xk82g1l",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre275822.916ee862e87/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre276379.266dc8c3d05/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre275822.916ee862e87"
+        "version": "nixos-21.05pre276379.266dc8c3d05"
     },
     "node2nix": {
         "branch": "master",
