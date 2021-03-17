@@ -42,13 +42,6 @@
         "url": "https://github.com/wellle/context.vim/archive/e38496f1eb5bb52b1022e5c1f694e9be61c3714c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "dmg-alacritty": {
-        "sha256": "18fvhrdyc05nxirjw65hwfkzkk67rb1dpd1wmzmr5j8ii01n3wy7",
-        "type": "file",
-        "url": "https://github.com/alacritty/alacritty/releases/download/v0.7.2/Alacritty-v0.7.2.dmg",
-        "url_template": "https://github.com/alacritty/alacritty/releases/download/v<version>/Alacritty-v<version>.dmg",
-        "version": "0.7.2"
-    },
     "dmg-brave": {
         "sha256": "1p1gsavnw8jpbl7jabqbxdmh74fzp8bb4r3pyflqlis4q95y43mp",
         "type": "file",

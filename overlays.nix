@@ -96,5 +96,5 @@
   (self: super: with super; with mylib; {
     spotify = dmgOverride "spotify" (spotify // { version = sources.dmg-spotify.version; });
     discord = dmgOverride "discord" (discord // { version = sources.dmg-discord.version; });
-  } // mapAttrs dmgOverride { inherit alacritty qutebrowser firefox signal-desktop brave; })
+  } // mapAttrs dmgOverride { inherit qutebrowser firefox signal-desktop brave; })
 ]
