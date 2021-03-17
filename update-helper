@@ -9,7 +9,7 @@ for channel in nixos-unstable nixos-20.09 nixos-18.09;do
 done
 
 # darwin dmgs
-for pkg in qutebrowser alacritty signal-desktop firefox brave;do
+for pkg in signal-desktop firefox brave;do
   version=$(nix eval --raw ".#$pkg.version")
   niv update dmg-$pkg -v $version
 done

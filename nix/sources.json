@@ -63,13 +63,6 @@
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
         "version": "86.0.1"
     },
-    "dmg-qutebrowser": {
-        "sha256": "1j5cgsj6k69w2xy32qqffk5w85jwk4qjxfvs8kxp4maj3s5bv4lz",
-        "type": "file",
-        "url": "https://github.com/qutebrowser/qutebrowser/releases/download/v2.0.2/qutebrowser-2.0.2.dmg",
-        "url_template": "https://github.com/qutebrowser/qutebrowser/releases/download/v<version>/qutebrowser-<version>.dmg",
-        "version": "2.0.2"
-    },
     "dmg-signal-desktop": {
         "sha256": "0xk5gsxlc6imlp5lpkwv1416ryn297sar9hm4xrp4ikvkwn15f1z",
         "type": "file",
