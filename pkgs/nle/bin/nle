@@ -2,7 +2,7 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk
 set -e
 
-name=nle
+name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
 nixexpr="(import CFG_STORE_PATH).nle { path = ./.; }"

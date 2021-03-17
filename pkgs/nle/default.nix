@@ -1,12 +1,11 @@
-pkgs: with pkgs; with mylib; latestWrapper (buildEnv {
-  inherit name;
-  paths = let env = nle { path = ./.; }; in
-    [ (alias name env.pkgs.nix-local-env) env ];
+pkgs: with pkgs; with mylib;
+let
+  nleFunc = let nixpkgs = pkgs; in
+    { path, pkgs ? nixpkgs }:
+    import ./nix-local-env.nix { inherit pkgs path; };
+  pkg = (nleFunc { path = ./.; }).overrideAttrs (_: { inherit passthru; });
   passthru = rec {
-    __functor = let nixpkgs = pkgs; in
-      self: { path ? null, pkgs ? nixpkgs }:
-        if path == null then self else
-        import ./nix-local-env.nix { inherit pkgs path; };
+    __functor = _: nleFunc;
     lib = rec {
       joinMapAttrValuesIf = f: p: as: concatMapStringsSep "\n" f (attrValues (filterAttrs (n: v: p n) as));
     };
@@ -43,4 +42,5 @@ pkgs: with pkgs; with mylib; latestWrapper (buildEnv {
     };
     conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
   };
-})
+in
+latestWrapper pkg
