@@ -274,13 +274,13 @@ let
         sha512 = "OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==";
       };
     };
-    "coc-explorer-0.15.7" = {
+    "coc-explorer-0.15.8" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.15.7";
+      version = "0.15.8";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.7.tgz";
-        sha512 = "uQyKJeNDVlmP1L3W6iT+/bL9hRpAu0J7aOI5yEVdX+FrxjGEz8WxrHXeYmrkQeDbtUxlOuRAT4Wa9La9rP96LQ==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.8.tgz";
+        sha512 = "LUJNDPx4Z613rqS8BjeKrclEj4iHwlzgnpK8flCaFzCIcExoDqTsRi9nzM6FcCbfSZKhK9u99QCO/L3BBEnM/g==";
       };
     };
     "color-convert-1.9.3" = {
@@ -389,6 +389,15 @@ let
       src = fetchurl {
         url = "https://registry.npmjs.org/decamelize/-/decamelize-1.2.0.tgz";
         sha1 = "f6534d15148269b20352e7bee26f501f9a191290";
+      };
+    };
+    "define-lazy-prop-2.0.0" = {
+      name = "define-lazy-prop";
+      packageName = "define-lazy-prop";
+      version = "2.0.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/define-lazy-prop/-/define-lazy-prop-2.0.0.tgz";
+        sha512 = "Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og==";
       };
     };
     "diff-4.0.2" = {
@@ -742,13 +751,13 @@ let
         sha512 = "41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==";
       };
     };
-    "is-path-inside-3.0.2" = {
+    "is-path-inside-3.0.3" = {
       name = "is-path-inside";
       packageName = "is-path-inside";
-      version = "3.0.2";
+      version = "3.0.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/is-path-inside/-/is-path-inside-3.0.2.tgz";
-        sha512 = "/2UGPSgmtqwo1ktx8NDHjuPwZWmHhO+gj0f93EkhLB5RgW9RZevWYYlIkS6zePc6U2WpOdQYIwHe9YC4DWEBVg==";
+        url = "https://registry.npmjs.org/is-path-inside/-/is-path-inside-3.0.3.tgz";
+        sha512 = "Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==";
       };
     };
     "is-stream-2.0.0" = {
@@ -994,13 +1003,13 @@ let
         sha512 = "kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==";
       };
     };
-    "open-7.4.2" = {
+    "open-8.0.3" = {
       name = "open";
       packageName = "open";
-      version = "7.4.2";
+      version = "8.0.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/open/-/open-7.4.2.tgz";
-        sha512 = "MVHddDVweXZF3awtlAS+6pgKLlm/JgxZ90+/NBurBoQctVOOB/zDdVjcyPzQ+0laDGbsWgrRkflI65sQeOgT9Q==";
+        url = "https://registry.npmjs.org/open/-/open-8.0.3.tgz";
+        sha512 = "7nsHNw3rOIPTwhF5iYkgE+LVM/oUHWC3cgrWNxPqa+W+Wl5Ekvo32qayB5PYX8zNjXzUkrTaJsWpaGmuw8Aspg==";
       };
     };
     "os-homedir-1.0.2" = {
@@ -1471,13 +1480,13 @@ let
         sha512 = "65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==";
       };
     };
-    "trash-7.1.0" = {
+    "trash-7.1.1" = {
       name = "trash";
       packageName = "trash";
-      version = "7.1.0";
+      version = "7.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/trash/-/trash-7.1.0.tgz";
-        sha512 = "AXJynOH6fJ4ua6KVy6vuDAKm8RsDxGgO0UHjAb6rM7O00ChdNb3IAjiCxw2utoVcKAv+0xg62hjr6tZ2Fzjd/A==";
+        url = "https://registry.npmjs.org/trash/-/trash-7.1.1.tgz";
+        sha512 = "iG43vKNh4Q540RrfefjSxll6hkqc2t6tAM1AfikXUXbW6O7jEKftMQZho6dg6VLUWng/uWu4brGrvE9a0uQbOQ==";
       };
     };
     "tree-kill-1.2.2" = {
@@ -1716,7 +1725,7 @@ let
       sources."chokidar-3.5.1"
       sources."clean-stack-2.2.0"
       sources."cliui-7.0.4"
-      sources."coc-explorer-0.15.7"
+      sources."coc-explorer-0.15.8"
       sources."color-convert-2.0.1"
       sources."color-name-1.1.4"
       sources."concat-map-0.0.1"
@@ -1732,6 +1741,7 @@ let
       sources."date-fns-2.19.0"
       sources."dateformat-1.0.12"
       sources."decamelize-1.2.0"
+      sources."define-lazy-prop-2.0.0"
       sources."diff-4.0.2"
       sources."dir-glob-2.2.2"
       sources."dynamic-dedupe-0.3.0"
@@ -1773,7 +1783,7 @@ let
       sources."is-fullwidth-code-point-3.0.0"
       sources."is-glob-4.0.1"
       sources."is-number-7.0.0"
-      sources."is-path-inside-3.0.2"
+      sources."is-path-inside-3.0.3"
       sources."is-stream-2.0.0"
       sources."is-utf8-0.2.1"
       sources."is-wsl-2.2.0"
@@ -1814,7 +1824,7 @@ let
       sources."object-assign-4.1.1"
       sources."once-1.4.0"
       sources."onetime-5.1.2"
-      sources."open-7.4.2"
+      sources."open-8.0.3"
       sources."os-homedir-1.0.2"
       sources."p-finally-2.0.1"
       sources."p-map-4.0.0"
@@ -1867,7 +1877,7 @@ let
       sources."strip-json-comments-2.0.1"
       sources."supports-color-8.1.1"
       sources."to-regex-range-5.0.1"
-      sources."trash-7.1.0"
+      sources."trash-7.1.1"
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
       sources."ts-node-9.1.1"
