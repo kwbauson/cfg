@@ -63,7 +63,7 @@ with builtins; with pkgs; with mylib; {
           hmg = "git -C ~/cfg fetch && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
           nou = "hmg && nos-hms";
-          nod = (prefixIf isNixOS "sudo " "nix-collect-garbage -d");
+          nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
           noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
           reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
@@ -357,7 +357,7 @@ with builtins; with pkgs; with mylib; {
           set -e
           git fetch
           ${delta}/bin/delta <(git log origin/$(git branch-name)) <(git log) || true
-          read -n1 -p "Continue? [y/n]" continue
+          read -n1 -p "Continue? [y/n] " continue
           echo
           [[ $continue = y ]] && git put --force-with-lease
         ''; in "! ${script}";
