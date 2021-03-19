@@ -101,6 +101,13 @@ case $cmd in
         echo warning: node_modules already exists, not linking
       fi
     fi
+    if [[ -e package.json && -e package-lock.json ]];then
+      if [[ ! -e node_modules || -L node_modules ]];then
+        ln -sft . "$("$0" result)"/lib/node_modules
+      else
+        echo warning: node_modules already exists, not linking
+      fi
+    fi
     ;;
   init)
     "$0" activate
