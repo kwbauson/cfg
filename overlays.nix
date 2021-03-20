@@ -70,16 +70,16 @@
       "  description: ${pkg.meta.description or "null"}"
       "  homepage: ${pkg.meta.homepage or "null"}"
     ];
-    inherit (nixos-unstable) chromium diffoscope;
-    inherit (nixos-20_09) saml2aws postgresql_10 nodejs-10_x;
     nix-prefetch-git = nix-prefetch-git.override { nix = nixUnstable; };
     bundix = bundix.override { nix = nixUnstable; };
     pinned-if-darwin = if isDarwin then nixos-20_09 else super;
-    inherit (self.pinned-if-darwin);
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
     };
+    inherit (nixos-unstable);
+    inherit (nixos-20_09);
+    inherit (self.pinned-if-darwin);
   })
   (self: super: with super; with mylib;
   mapAttrs (name: f: callPackage f (pkgs // { inherit name; pname = name; src = sources.${name}; })) (importDir ./pkgs)
