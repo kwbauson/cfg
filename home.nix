@@ -22,9 +22,10 @@ with builtins; with pkgs; with mylib; {
             lsof man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped
             nix-tree nmap openssh p7zip patch perl pigz procps progress pv
             ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils
-            watch wget which xdg_utils xxd xz zip better-comma bitwarden-cli
+            watch wget which xdg_utils xxd xz zip bitwarden-cli
             libqalculate youtube-dl speedtest-cli tldr
             ;
+          better-comma = better-comma.unwrapped;
         };
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
@@ -45,7 +46,7 @@ with builtins; with pkgs; with mylib; {
             bat colordiff ctags diffoscope dhall git-trim gron highlight xh
             icdiff jq nim nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
             solargraph watchexec yarn yarn-completion nodejs_latest
-            gh git-ignore git-fuzzy black
+            gh git-ignore git-fuzzy black deno
             ;
           inherit (nodePackages) npm-check-updates parcel-bundler prettier;
           nle = nle.unwrapped;
