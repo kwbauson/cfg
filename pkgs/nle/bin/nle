@@ -13,10 +13,6 @@ impuredir=$cachebase/.impure
 args=$@
 [[ $1 = -d ]] && shift && cd "$1" && shift
 
-if [[ -e ./nle.sh && -z $PINNED ]];then
-  PINNED=1 exec ./nle.sh "$@"
-fi
-
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
 
