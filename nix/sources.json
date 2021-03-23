@@ -131,10 +131,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "1e64f9decdc0de31fab20e130900990d5421c387",
-        "sha256": "17kv728wjf8lvzjf3c7pbpdfjrx439yp00xrfyq7zv9m6vkzjhf8",
+        "rev": "e3178eca7458c88413fc9ddda77dcd97fa8885c6",
+        "sha256": "0cdvpspd0hnln27y2xjrk3bdqkpi1ikjhkhkh4srkk3p6dfzdq7y",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/1e64f9decdc0de31fab20e130900990d5421c387.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/e3178eca7458c88413fc9ddda77dcd97fa8885c6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "10w3ppji7r58303qxd680jrf6ch7jl7yzf50vczbnjbh71g13f9n",
+        "sha256": "0yjg2sygrsp8aj3img15nhf48cg6wwq5kbayds7vc2mb5wkmgach",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3547.9b8530e3721/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3554.f8929dce13e/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3547.9b8530e3721"
+        "version": "nixos-20.09.3554.f8929dce13e"
     },
     "nixos-unstable": {
         "sha256": "0xfbd7g2hac74kvjcfcw768q3nafkhkh0790hjavy3847959dqsq",
