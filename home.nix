@@ -283,6 +283,7 @@ with builtins; with pkgs; with mylib; {
     };
     neovim = {
       enable = true;
+      package = neovim-nightly;
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
       plugins = with rec {

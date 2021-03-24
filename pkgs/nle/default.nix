@@ -43,4 +43,4 @@ let
     conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
   };
 in
-latestWrapper pkg
+latestWrapper (override pkg { name = "nle"; })

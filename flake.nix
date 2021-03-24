@@ -19,17 +19,12 @@ rec {
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
+    neovim.url = "github:neovim/neovim/nightly?dir=contrib";
+    neovim.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , flake-utils
-    , home-manager
-    , mach-nix
-    , nixos-hardware
-    , ...
-    }@inputs: flake-utils.lib.eachDefaultSystem
+    { nixos-hardware, ... }@inputs: with inputs; flake-utils.lib.eachDefaultSystem
       (system: rec {
         packages = import nixpkgs {
           inherit system;
@@ -87,6 +82,7 @@ rec {
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
           isNixOS = nixpkgs.isNixOS or false;
+          neovim-nightly = neovim.defaultPackage.${nixpkgs.system};
         })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
