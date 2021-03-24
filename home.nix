@@ -78,7 +78,7 @@ with builtins; with pkgs; with mylib; {
             steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
             acpi progress xdotool
             ;
-          inherit bl bh medctl runnim statusline vol togpad xpaste;
+          inherit bl bh medctl runnim statusline vol togpad xpaste borgbackup;
           inherit dejavu_fonts_nerd;
         };
         ${attrIf (!isGraphical) "non-graphical"} = {

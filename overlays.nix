@@ -79,7 +79,7 @@
     };
     inherit (nixos-unstable) niv;
     inherit (nixos-20_09);
-    inherit (self.pinned-if-darwin);
+    inherit (self.pinned-if-darwin) borgbackup;
   })
   (self: super: with super; with mylib;
   mapAttrs (name: f: callPackage f (pkgs // { inherit name; pname = name; src = sources.${name}; })) (importDir ./pkgs)
