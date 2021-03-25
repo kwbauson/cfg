@@ -33,7 +33,7 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       virtualHosts = {
-        "${hostName}.${domain}" = {
+        ${fqdn} = {
           enableACME = true;
           forceSSL = true;
           locations."/" = {
@@ -45,9 +45,8 @@
     };
     jitsi-meet = {
       enable = true;
-      hostName = "jitsi.${hostName}.${domain}";
+      hostName = "jitsi.${fqdn}";
       config.enableNoisyMicDetection = false;
-      config.p2p.enabled = false;
 
       interfaceConfig = {
         SHOW_JITSI_WATERMARK = false;
@@ -56,15 +55,6 @@
       };
     };
     jitsi-videobridge.openFirewall = true;
-    nginx.virtualHosts.${services.jitsi-meet.hostName} = {
-      forceSSL = true;
-      enableACME = true;
-    };
-    prosody = {
-      uploadHttp.domain = "upload.${services.jitsi-meet.hostName}";
-      muc = [{ domain = "muc.${services.jitsi-meet.hostName}"; }];
-    };
-    # hercules-ci-agent.enable = true;
   };
 
   security.acme = {
