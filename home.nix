@@ -63,7 +63,7 @@ with builtins; with pkgs; with mylib; {
           lo-early-talent = ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'';
           hmg = "git -C ~/cfg fetch && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
-          nou = "hmg && nos-hms";
+          nou = "hmg && nix run ~/cfg#$(built-as-host)";
           nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
           noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
