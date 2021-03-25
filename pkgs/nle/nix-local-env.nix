@@ -90,7 +90,10 @@ rec {
             AROPTS = "-r";
           };
           plivo = _: { nativeBuildInputs = [ rake ]; };
-          mimemagic = _: { nativeBuildInputs = [ rake ]; };
+          mimemagic = _: {
+            FREEDESKTOP_MIME_TYPES_PATH = "${mime-types}/etc/mime.types";
+            nativeBuildInputs = [ rake ];
+          };
         };
       };
       paths = [ env.wrappedRuby (hiPrio env) ];
