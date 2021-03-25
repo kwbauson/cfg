@@ -1,9 +1,9 @@
 pkgs: with pkgs; with mylib;
 let
   nleFunc = let nixpkgs = pkgs; in
-    { path, pkgs ? nixpkgs }:
+    { path ? ./., pkgs ? nixpkgs }:
     import ./nix-local-env.nix { inherit pkgs path; };
-  pkg = (nleFunc { path = ./.; }).overrideAttrs (_: { inherit passthru; });
+  pkg = (nleFunc { }).overrideAttrs (_: { inherit passthru; });
   passthru = rec {
     __functor = _: nleFunc;
     lib = rec {
