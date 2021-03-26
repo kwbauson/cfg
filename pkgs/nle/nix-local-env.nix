@@ -78,11 +78,7 @@ rec {
     rec {
       env = bundlerEnv {
         name = "bundler-env";
-        gemfile = file "Gemfile";
-        lockfile = file "Gemfile.lock";
-        gemset = file "gemset.nix";
-        ignoreCollisions = true;
-        allowSubstitutes = true;
+        gemdir = buildDir (map file (words "Gemfile Gemfile.lock gemset.nix"));
         groups = null;
         gemConfig = defaultGemConfig // {
           zipruby = _: { buildInputs = [ zlib ]; };
