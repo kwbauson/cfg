@@ -132,7 +132,6 @@ rec {
           juicefs
           saml2aws
           mysql57
-          bundler1
           (nle {
             path = writeTextDir "requirements.txt" ''
               black==20.8b1
