@@ -26,5 +26,5 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix -vvL build .#${{ matrix.output }}
+      - run: nix -vL build .#${{ matrix.output }}
       - run: cd result && pwd -P
