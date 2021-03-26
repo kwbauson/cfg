@@ -16,7 +16,7 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix -vL profile install .#nle.unwrapped
+      - run: nix --fallback -vL profile install .#nle.unwrapped
       - run: nle update
       - run: nle generate
       - uses: peter-evans/create-pull-request@v3
