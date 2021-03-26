@@ -1,15 +1,17 @@
 pkgs: with pkgs; with mylib;
 let
   urxvt-term = ''
+    ${pathAdd rxvt-unicode}
     urxvtc "$@"
     if [ $? -eq 2 ]; then
        urxvtd -q -o -f
        urxvtc "$@"
     fi
   '';
-  init-file = toFile "init-file" ''
+  init-file = writeText "init-file" ''
     [[ -e ~/.bash_profile ]] && . ~/.bash_profile
-    PROMPT_COMMAND="$PROMPT_COMMAND; trap 'history -a; bash -c \"\$BASH_COMMAND\" < /dev/null & exit' DEBUG"
+    ${pathAdd tmux}
+    PROMPT_COMMAND="$PROMPT_COMMAND; trap 'history -a; tmux new -d \"\$BASH_COMMAND\"; exit' DEBUG"
   '';
   term = writeBashBin "term" ''
     [[ -n $1 ]] && set -- -e "$@"
