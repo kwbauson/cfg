@@ -274,13 +274,13 @@ let
         sha512 = "OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==";
       };
     };
-    "coc-explorer-0.15.8" = {
+    "coc-explorer-0.16.0" = {
       name = "coc-explorer";
       packageName = "coc-explorer";
-      version = "0.15.8";
+      version = "0.16.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.15.8.tgz";
-        sha512 = "LUJNDPx4Z613rqS8BjeKrclEj4iHwlzgnpK8flCaFzCIcExoDqTsRi9nzM6FcCbfSZKhK9u99QCO/L3BBEnM/g==";
+        url = "https://registry.npmjs.org/coc-explorer/-/coc-explorer-0.16.0.tgz";
+        sha512 = "P5FRDcXHYSIP8eDl9dEp6uW7yZwoJY7RT9rKdNH52A7mzhDEtcOV3xy9g8QJRhk8M2Mchy05FnSYplynF+MAjw==";
       };
     };
     "color-convert-1.9.3" = {
@@ -1725,7 +1725,7 @@ let
       sources."chokidar-3.5.1"
       sources."clean-stack-2.2.0"
       sources."cliui-7.0.4"
-      sources."coc-explorer-0.15.8"
+      sources."coc-explorer-0.16.0"
       sources."color-convert-2.0.1"
       sources."color-name-1.1.4"
       sources."concat-map-0.0.1"
