@@ -76,7 +76,11 @@ rec {
 
   bundler-paths = nleFiles "bundler"
     rec {
-      env = bundlerEnv {
+      locktext = read "Gemfile.lock";
+      latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
+      hasLatestBundler = hasSuffix latestBundlerMark locktext;
+      namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
+      env = with namespace; bundlerEnv {
         name = "bundler-env";
         gemdir = buildDir (map file (words "Gemfile Gemfile.lock gemset.nix"));
         groups = null;
@@ -89,9 +93,6 @@ rec {
           mimemagic = _: {
             FREEDESKTOP_MIME_TYPES_PATH = "${mime-types}/etc/mime.types";
             nativeBuildInputs = [ rake ];
-          };
-          rmagick = attrs: override (defaultGemConfig.rmagick attrs) {
-            buildInputs = [ imagemagick6 ];
           };
         };
       };
