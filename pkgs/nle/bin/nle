@@ -216,7 +216,7 @@ case $cmd in
   direnv)
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
     echo "$0 activate 1>&2"
-    echo "PATH_add $("$0" result)/bin"
+    echo 'PATH_add "$('"$0"' result)/bin"'
     echo export IN_NIX_SHELL=impure
     echo export PATH
     for path in "${buildfiles[@]}";do

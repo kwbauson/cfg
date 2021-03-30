@@ -82,13 +82,16 @@ rec {
         groups = null;
         gemConfig = defaultGemConfig // {
           zipruby = _: { buildInputs = [ zlib ]; };
-          grpc = attrs: defaultGemConfig.grpc attrs // {
+          grpc = attrs: override (defaultGemConfig.grpc attrs) {
             AROPTS = "-r";
           };
           plivo = _: { nativeBuildInputs = [ rake ]; };
           mimemagic = _: {
             FREEDESKTOP_MIME_TYPES_PATH = "${mime-types}/etc/mime.types";
             nativeBuildInputs = [ rake ];
+          };
+          rmagick = attrs: override (defaultGemConfig.rmagick attrs) {
+            buildInputs = [ imagemagick6 ];
           };
         };
       };
