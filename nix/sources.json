@@ -182,6 +182,18 @@
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
         "version": "nixos-21.05pre279012.ad47284f8b0"
     },
+    "nixpkgs-bundler1": {
+        "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
+        "sha256": "0mx335ym9ai3ci3dgwszk289xjpvsqf6xx6g43250y5zwz9692mz",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/96a1dbac972c4f67aea7ee548f4e5531003f8ab0.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "node2nix": {
         "branch": "master",
         "description": "Generate Nix expressions to build NPM packages",

@@ -1,6 +1,6 @@
 [
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
-    inherit (sources) nixos-unstable nixos-20_09 nixos-18_09;
+    inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
   (_: super: with super; with mylib; {
     nix-wrapped =
