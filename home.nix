@@ -278,6 +278,7 @@ with builtins; with pkgs; with mylib; {
         set -g window-status-separator ""
         set -g status-left ""
         set -g status-right ""
+        set -g default-command "''${SHELL}"
       '';
       plugins = with tmuxPlugins; [ jump ];
     };
