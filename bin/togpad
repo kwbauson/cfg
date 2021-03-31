@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages xorg.xinput xdotool
 pad=$(xinput list | grep Touchpad | awk '{ print $3, $4, $5 }')
 

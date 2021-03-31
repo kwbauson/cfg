@@ -51,11 +51,12 @@ rec {
     '';
   }.out;
 
+  fileForPlatform = n: !isLinux && hasInfix "ONLY_LINUX" (read n);
   localfile = file "local.nix";
   local-bin-pkgs =
     optionalAttrs
       (hasFiles "bin")
-      (mapAttrs (x: _: wrapScriptWithPackages "bin/${x}" { }) (readDir (file "bin")));
+      (mapAttrs (x: _: wrapScriptWithPackages "bin/${x}" { }) (filterAttrs (n: v: !fileForPlatform "bin/${n}") (readDir (file "bin"))));
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
@@ -143,15 +144,13 @@ rec {
 
   packages = listToAttrs (map (x: { name = x.name; value = x; }) build-paths) // local-bin-pkgs;
 
-  outExcept = exclude: buildEnv {
+  out = buildEnv {
     name = "local-env";
-    paths = filter (x: !elem x.name exclude) paths;
+    inherit paths;
     ignoreCollisions = true;
     passthru = {
-      inherit paths outExcept;
+      inherit paths;
       pkgs = packages;
     };
   };
-
-  out = outExcept [ ];
 }.out

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages nim tinycc
 mkdir -p /tmp/runnim
 cp -a "$1" /tmp/runnim

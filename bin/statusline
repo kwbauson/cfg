@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# ONLY_LINUX
 # with-packages acpi pamixer pulseaudioFull sysstat
 require 'rb-inotify'
 require 'open-uri'

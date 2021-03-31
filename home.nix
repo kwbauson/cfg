@@ -50,14 +50,7 @@ with builtins; with pkgs; with mylib; {
           nle = nle.unwrapped;
         };
         inherit nr switch-to-configuration;
-        nle-bin = nle-cfg.outExcept (attrNames {
-          ${attrIf isDarwin "darwin"} = {
-            inherit bl bh medctl runnim statusline vol togpad xpaste borgbackup;
-          };
-          ${attrIf (!isGraphical) "non-graphical"} = {
-            inherit medctl mpv-ytdl-format togpad togwin winlist;
-          };
-        });
+        inherit nle-cfg;
         local-bin = attrValues (alias {
           built-as-host = "echo ${builtAsHost}";
           nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";

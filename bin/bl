@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages brightnessctl
 set -e
 if [[ -z $1 ]];then

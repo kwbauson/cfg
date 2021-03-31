@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages pamixer pulseaudioFull xdotool
 cmd=$1
 [[ -n $1 ]] && shift
