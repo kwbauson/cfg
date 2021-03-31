@@ -1,7 +1,7 @@
 rec {
   nixConfig = {
-    extra-substituters = "https://kwbauson.cachix.org";
-    extra-trusted-public-keys = "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro";
+    extra-substituters = "https://kwbauson.cachix.org https://hr-local-ops.cachix.org";
+    extra-trusted-public-keys = "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro hr-local-ops.cachix.org-1:2L4C3esJAmbWH+WviK+NAIpY+E8yomthahM1VHXgghI=&";
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
@@ -34,12 +34,15 @@ rec {
       lib = with builtins; with nixpkgs.lib; builtins // rec {
         mylib = import ./mylib.nix nixpkgs;
         pkgsForSystem =
-          { system
-          , isNixOS ? false
-          }: import nixpkgs {
+          { system, isNixOS, host }: import nixpkgs {
             inherit system;
             inherit (self) config;
-            overlays = [ (_: _: { inherit isNixOS; }) ] ++ self.overlays;
+            overlays = [
+              (_: _: {
+                inherit isNixOS;
+                builtAsHost = host;
+              })
+            ] ++ self.overlays;
           };
         inherit (mylib) mapAttrValues importDir;
         nixosConfiguration = host: module: buildSystem {
@@ -57,10 +60,11 @@ rec {
           module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
         homeConfiguration = makeOverridable (
           { system ? "x86_64-linux"
-          , pkgs ? pkgsForSystem { inherit system isNixOS; }
+          , pkgs ? pkgsForSystem { inherit system isNixOS host; }
           , username ? "keith"
           , homeDirectory ? "/home/${username}"
           , isNixOS ? false
+          , host ? "generic"
           , ...
           }@args:
           let conf = (home-manager.lib.homeManagerConfiguration rec {
@@ -71,7 +75,7 @@ rec {
             inherit system pkgs username homeDirectory;
           });
           in
-          conf.activationPackage.overrideAttrs (_: { passthru = conf; })
+          conf.activationPackage.overrideAttrs (_: { passthru = conf // { inherit pkgs; }; })
         );
       };
 
@@ -109,7 +113,6 @@ rec {
       homeConfigurations.non-graphical = lib.homeConfiguration {
         isNixOS = true;
         isGraphical = false;
-        isServer = true;
       };
 
       homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
@@ -148,11 +151,11 @@ rec {
       };
 
 
-      keith-xps = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-xps.nos-hms;
-      keith-desktop = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-desktop.nos-hms;
-      kwbauson = self.packages.x86_64-linux.switch-to-configuration.scripts.kwbauson.nos-hms;
-      keith-vm = self.packages.x86_64-linux.switch-to-configuration.scripts.keith-vm.nos-hms;
-      keith-mac = self.packages.x86_64-darwin.switch-to-configuration.scripts.keith-mac.nos-hms;
+      keith-xps = homeConfigurations.keith-xps.pkgs.switch;
+      keith-desktop = homeConfigurations.keith-desktop.pkgs.switch;
+      kwbauson = homeConfigurations.kwbauson.pkgs.switch;
+      keith-vm = homeConfigurations.keith-vm.pkgs.switch;
+      keith-mac = homeConfigurations.keith-mac.pkgs.switch;
 
       checks = mkChecks self.packages.x86_64-linux;
       checks-mac = mkChecks self.packages.x86_64-darwin;

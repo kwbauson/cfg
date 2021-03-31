@@ -5,8 +5,6 @@
 , homeDirectory
 , isNixOS
 , isGraphical
-, isServer ? false
-, host ? "generic"
 , ...
 }:
 with builtins; with pkgs; with mylib; {
@@ -61,7 +59,7 @@ with builtins; with pkgs; with mylib; {
           };
         });
         local-bin = attrValues (alias {
-          built-as-host = "echo ${host}";
+          built-as-host = "echo ${builtAsHost}";
           nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
           nixpkgs-path = "echo ${pkgs.path}";
           nixpkgs-branch = "echo ${nixpkgs-branch}";
@@ -124,8 +122,6 @@ with builtins; with pkgs; with mylib; {
   nixpkgs = { inherit (self) config overlays; };
 
   fonts.fontconfig.enable = true;
-
-  services.${attrIf isServer "pbgopy"}.enable = true;
 
   programs = {
     home-manager.enable = true;
