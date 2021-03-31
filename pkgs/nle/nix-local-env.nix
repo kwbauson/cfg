@@ -29,7 +29,17 @@ rec {
       [ "CFG_STORE_PATH" "NIX_LOCAL_ENV_HASH" ]
       [ self-path selfHash ];
     isBash = hasSuffix "bash" (head lines);
-    script = writeScript "${name}-unwrapped" (makeScriptText text);
+    script = stdenv.mkDerivation {
+      name = "${name}-unwrapped";
+      text = makeScriptText text;
+      inherit buildInputs;
+      passAsFile = "text";
+      dontUnpack = true;
+      installPhase = ''
+        cp $textPath $out
+        chmod +x $out
+      '';
+    };
     scriptTail = makeScriptText (concatStringsSep "\n" (tail lines));
     contents =
       if hasSource
@@ -80,10 +90,19 @@ rec {
       latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
       hasLatestBundler = hasSuffix latestBundlerMark locktext;
       namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
+      postBuild = optionalString hasSource ''
+        cd $out/bin
+        if [[ $(echo *) != '*' ]];then
+          for exe in *;do
+            substituteInPlace "$exe" --replace "${env.confFiles}" "${source}"
+          done
+        fi
+      '';
       env = with namespace; bundlerEnv {
         name = "bundler-env";
         gemdir = buildDir (map file (words "Gemfile Gemfile.lock gemset.nix"));
         groups = null;
+        inherit postBuild;
         gemConfig = defaultGemConfig // {
           zipruby = _: { buildInputs = [ zlib ]; };
           grpc = attrs: override (defaultGemConfig.grpc attrs) {
@@ -96,7 +115,8 @@ rec {
           };
         };
       };
-      paths = [ env.wrappedRuby (hiPrio env) ];
+      wrappedRuby = override env.wrappedRuby.overrideAttrs { buildCommand._append = postBuild; };
+      paths = [ env wrappedRuby ];
     }.paths;
 
   mach-nix-paths = with rec {
