@@ -52,7 +52,14 @@ with builtins; with pkgs; with mylib; {
           nle = nle.unwrapped;
         };
         inherit nr switch-to-configuration;
-        inherit (nle-cfg) pkgs;
+        nle-bin = nle-cfg.outExcept (attrNames {
+          ${attrIf isDarwin "darwin"} = {
+            inherit bl bh medctl runnim statusline vol togpad xpaste borgbackup;
+          };
+          ${attrIf (!isGraphical) "non-graphical"} = {
+            inherit medctl mpv-ytdl-format togpad togwin winlist;
+          };
+        });
         local-bin = attrValues (alias {
           built-as-host = "echo ${host}";
           nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
@@ -76,13 +83,8 @@ with builtins; with pkgs; with mylib; {
           inherit
             chromium diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
             steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
-            acpi progress xdotool
+            acpi progress xdotool dejavu_fonts_nerd
             ;
-          inherit bl bh medctl runnim statusline vol togpad xpaste borgbackup;
-          inherit dejavu_fonts_nerd;
-        };
-        ${attrIf (!isGraphical) "non-graphical"} = {
-          inherit solargraph yarn medctl mpv-ytdl-format togpad togwin winlist;
         };
       };
 

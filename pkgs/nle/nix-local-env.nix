@@ -55,7 +55,7 @@ rec {
   local-bin-pkgs =
     optionalAttrs
       (hasFiles "bin")
-      (mapAttrs (x: _: hiPrio (wrapScriptWithPackages "bin/${x}" { })) (readDir (file "bin")));
+      (mapAttrs (x: _: wrapScriptWithPackages "bin/${x}" { }) (readDir (file "bin")));
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
@@ -139,17 +139,19 @@ rec {
     poetry-paths
   ];
 
-  paths = flatten [ build-paths local-bin-paths ];
+  paths = flatten [ local-bin-paths build-paths ];
 
   packages = listToAttrs (map (x: { name = x.name; value = x; }) build-paths) // local-bin-pkgs;
 
-  out = buildEnv {
+  outExcept = exclude: buildEnv {
     name = "local-env";
-    inherit paths;
+    paths = filter (x: !elem x.name exclude) paths;
     ignoreCollisions = true;
     passthru = {
-      inherit paths;
+      inherit paths outExcept;
       pkgs = packages;
     };
   };
+
+  out = outExcept [ ];
 }.out
