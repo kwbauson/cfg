@@ -149,9 +149,6 @@ case $cmd in
         nr nodePackages.node2nix -c /dev/null --pkgs-name nodejs_latest -l package-lock.json --no-copy-node-env
     fi
     if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
-      # FIXME hack around t1/react-click-outside
-      sed -i -e '/^"\?react-click-outside/,/^$/d' -e '/react-click-outside/d' yarn.lock package.json
-
       grep '^  resolved "' yarn.lock | grep -v '#' | sed -e 's/[^"]*"//' -e 's/"$//' | while read url;do
         name=$(echo $url | sed 's:/:_:g')
         impure <(echo $url) $name sh -c "nix-prefetch-url --type sha1 $url > $name"
@@ -207,7 +204,13 @@ case $cmd in
     ;;
   run)
     eval "$("$0" env)"
-    exec "$@"
+    cmd=$1 && shift
+    exe=$("$0" result)/bin/$cmd
+    if [[ ! -e $exe ]];then
+      echo "$cmd: command not found"
+      exit 127
+    fi
+    exec "$exe" "$@"
     ;;
   env)
     direnv stdlib | grep -v 'log_status "loading $rcfile"'
@@ -215,7 +218,7 @@ case $cmd in
     ;;
   direnv)
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
-    echo "$0 activate 1>&2"
+    echo "$0 activate 1>&2 || exit 1"
     echo 'PATH_add "$('"$0"' result)/bin"'
     echo export IN_NIX_SHELL=impure
     echo export PATH
