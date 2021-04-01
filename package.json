@@ -2,7 +2,7 @@
   "name": "cfg",
   "version": "1.0.0",
   "dependencies": {
-    "coc-explorer": "0.16.0",
+    "coc-explorer": "0.17.0",
     "concurrently": "6.0.0",
     "ts-node": "9.1.1",
     "ts-node-dev": "1.1.6",
