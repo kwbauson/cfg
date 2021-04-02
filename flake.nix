@@ -154,7 +154,6 @@ rec {
               atlassian-python-api==3.4.1
             '';
           })
-          (optional stdenv.isLinux steam)
         ];
       };
 
