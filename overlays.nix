@@ -46,7 +46,7 @@
         EOF
       '';
     };
-    steam-native = steam.override { nativeOnly = true; };
+    steam-native = self.steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
     buildNpmVimPlugin = name: vimUtils.buildVimPlugin {
@@ -77,7 +77,7 @@
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
     };
-    inherit (nixos-unstable) niv;
+    inherit (nixos-unstable) steam;
     inherit (nixos-20_09);
     inherit (self.pinned-if-darwin) borgbackup;
     switch = self.switch-to-configuration.scripts.${builtAsHost}.nos-hms;
