@@ -77,7 +77,7 @@
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
     };
-    inherit (nixos-unstable) niv;
+    inherit (nixos-unstable) steam;
     inherit (nixos-20_09);
     inherit (self.pinned-if-darwin) borgbackup;
     switch = self.switch-to-configuration.scripts.${builtAsHost}.nos-hms;
