@@ -35,8 +35,7 @@ with builtins; with pkgs; with mylib; {
           };
           inherit
             chromium ffmpeg firefox mediainfo pavucontrol sox qtbr breeze-icons
-            steam signal-desktop discord zoom-us evilhack dejavu_fonts
-            dejavu_fonts_nerd
+            signal-desktop discord zoom-us evilhack dejavu_fonts dejavu_fonts_nerd
             ;
         };
         development = {

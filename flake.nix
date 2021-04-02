@@ -26,6 +26,7 @@ rec {
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
     neovim.url = "github:neovim/neovim/nightly?dir=contrib";
+    neovim.inputs.nixpkgs.follows = "nixpkgs";
     neovim.inputs.flake-utils.follows = "flake-utils";
   };
 
@@ -134,9 +135,9 @@ rec {
         host = "keith-mac";
       };
 
-      mkChecks = pkgs: with pkgs; buildEnv {
+      mkChecks = pkgs: with pkgs; with pkgs.lib; buildEnv {
         name = "checks";
-        paths = [
+        paths = flatten [
           inlets
           juicefs
           saml2aws
@@ -153,6 +154,7 @@ rec {
               atlassian-python-api==3.4.1
             '';
           })
+          (optional stdenv.isLinux steam)
         ];
       };
 
