@@ -109,7 +109,7 @@ rec {
         keep-outputs = true
         narinfo-cache-negative-ttl = 5
         connect-timeout = 5
-        download-attempts = 2
+        download-attempts = 5
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
