@@ -23,7 +23,7 @@ rec {
     mach-nix.inputs.nixpkgs.follows = "nixpkgs";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
-    pypi-deps-db.url = "github:DavHau/pypi-deps-db";
+    pypi-deps-db.url = "github:DavHau/pypi-deps-db/5835dffa2a3b243017ec3ced63b988f875d12ab1";
     pypi-deps-db.flake = false;
     neovim.url = "github:neovim/neovim/nightly?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
