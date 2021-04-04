@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "a9d04b1783a905790659d4de046c23153844139f",
-        "sha256": "1afsgl9c1lkgp2n0jmd7m65dk8dipic8ijlwrafigf9k26nzfd62",
+        "rev": "bfefc9a34793c99d901f8a431c02f1ce0172eb15",
+        "sha256": "0bx5spl3vmar8yvwm1pd58r5dj29pg8xv2b64fhi7zi9vvlr2jqs",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/a9d04b1783a905790659d4de046c23153844139f.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/bfefc9a34793c99d901f8a431c02f1ce0172eb15.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "095g6h85wcxnzvr0msb717svx5g60skq1mgvknv7m4dgx3a672qc",
+        "sha256": "16cb8ms7qd2gmz9rk06rij9yh3dq256abavx2kvwc7s68qsbl2f3",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3709.42a03e4728f/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3719.0c7f43d5917/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3709.42a03e4728f"
+        "version": "nixos-20.09.3719.0c7f43d5917"
     },
     "nixos-unstable": {
         "sha256": "0f8cxchf1shwf1vw42lwfh91x4i8ym03wf72g5lw2sxx8jm9mddr",
@@ -212,10 +212,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "a0e8e0bacbb8af4d2850fb080c60ca389051c531",
-        "sha256": "1yhiln0p0g5d7ys00c6raf5p357i1k2mipl2nsppaginr2xbiq6h",
+        "rev": "e02b6a3203411b76616a0e4328245bf8b47c5dcc",
+        "sha256": "19b06p3icpb214kpbf7irlyy813ax12i2jhibhxd2nflz9n66pg9",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/a0e8e0bacbb8af4d2850fb080c60ca389051c531.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/e02b6a3203411b76616a0e4328245bf8b47c5dcc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
