@@ -96,6 +96,7 @@ rec {
         if [[ $(echo *) != '*' ]];then
           for exe in *;do
             substituteInPlace "$exe" --replace "${env.confFiles}" "${source}"
+            sed -i "/^export BUNDLE_FROZEN='1'$/d" "$exe"
           done
         fi
       '';
