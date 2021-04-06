@@ -328,13 +328,13 @@ let
         sha1 = "d8a96bd77fd68df7793a73036a3ba0d5405d477b";
       };
     };
-    "concurrently-6.0.0" = {
+    "concurrently-6.0.1" = {
       name = "concurrently";
       packageName = "concurrently";
-      version = "6.0.0";
+      version = "6.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/concurrently/-/concurrently-6.0.0.tgz";
-        sha512 = "Ik9Igqnef2ONLjN2o/OVx1Ow5tymVvvEwQeYCQdD/oV+CN9oWhxLk7ibcBdOtv0UzBqHCEKRwbKceYoTK8t3fQ==";
+        url = "https://registry.npmjs.org/concurrently/-/concurrently-6.0.1.tgz";
+        sha512 = "YCF/Wf31a910hXu7eGN9/SyHKD/usw3Shw4IPYuqIsxxC39v92engYlIlOs/zXnBJtX/6aVuhgzfhZeGJkhU4w==";
       };
     };
     "create-require-1.1.1" = {
@@ -1729,7 +1729,7 @@ let
       sources."color-convert-2.0.1"
       sources."color-name-1.1.4"
       sources."concat-map-0.0.1"
-      (sources."concurrently-6.0.0" // {
+      (sources."concurrently-6.0.1" // {
         dependencies = [
           sources."parse-json-5.2.0"
           sources."read-pkg-5.2.0"
