@@ -14,5 +14,5 @@ with builtins;
   services.xserver.enable = true;
   programs.steam.enable = true;
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
 }
