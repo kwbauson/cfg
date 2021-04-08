@@ -1552,13 +1552,13 @@ let
         sha512 = "q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==";
       };
     };
-    "typescript-4.2.3" = {
+    "typescript-4.2.4" = {
       name = "typescript";
       packageName = "typescript";
-      version = "4.2.3";
+      version = "4.2.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/typescript/-/typescript-4.2.3.tgz";
-        sha512 = "qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==";
+        url = "https://registry.npmjs.org/typescript/-/typescript-4.2.4.tgz";
+        sha512 = "V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==";
       };
     };
     "user-home-2.0.0" = {
@@ -1889,7 +1889,7 @@ let
       })
       sources."tslib-1.14.1"
       sources."type-fest-0.6.0"
-      sources."typescript-4.2.3"
+      sources."typescript-4.2.4"
       sources."user-home-2.0.0"
       sources."uuid-8.3.2"
       sources."validate-npm-package-license-3.0.4"
