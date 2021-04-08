@@ -361,7 +361,7 @@ with builtins; with pkgs; with mylib; {
         fbr = "!git f --quiet && git br";
         ru = "remote update";
         st = "status";
-        main = "! echo master";
+        main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
         unhide = "update-index --no-skip-worktree";
         to = "! git br -u origin/`git branch-name`";
       };
