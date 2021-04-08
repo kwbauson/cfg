@@ -56,7 +56,7 @@
     npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
-    mach-nix = import inputs.mach-nix {
+    mach-nix = inputs.mach-nix // import inputs.mach-nix {
       inherit pkgs;
       pypiDataRev = inputs.pypi-deps-db.rev;
       pypiDataSha256 = inputs.pypi-deps-db.narHash;
