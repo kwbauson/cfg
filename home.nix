@@ -498,6 +498,11 @@ with builtins; with pkgs; with mylib; {
     };
   };
 
+  home.file.".irbrc".text = ''
+    IRB.conf[:SAVE_HISTORY] = 2_000_000
+    IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
+  '';
+
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''

@@ -218,6 +218,18 @@
         "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/e02b6a3203411b76616a0e4328245bf8b47c5dcc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "slapper": {
+        "branch": "master",
+        "description": "Simple load testing tool with real-time updated histogram of request timings",
+        "homepage": "",
+        "owner": "ikruglov",
+        "repo": "slapper",
+        "rev": "552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29",
+        "sha256": "0zaz30mkmnahvv79j59bx1c6d6l9i0729qqfbmijpr44h8q5gxvk",
+        "type": "tarball",
+        "url": "https://github.com/ikruglov/slapper/archive/552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "vim-anyfold": {
         "branch": "master",
         "description": "Language agnostic vim plugin for folding and motion based on indentation.",
