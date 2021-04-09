@@ -223,7 +223,7 @@ case $cmd in
     ;;
   direnv)
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
-    echo "$0 activate 1>&2 || exit 1"
+    echo "NOCACHE=$NOCACHE $0 activate 1>&2 || exit 1"
     echo 'PATH_add "$('"$0"' result)/bin"'
     echo export IN_NIX_SHELL=impure
     echo export PATH
@@ -262,7 +262,6 @@ case $cmd in
     echo "$cachedir"
     ;;
   result)
-    "$0" cache
     realpath "$result"
     ;;
   cachedir)
