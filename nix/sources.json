@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "20ad01126e269d7c751026fa54da1eed233ce63c",
-        "sha256": "0md1jb0q5w06kpwxc39xb79rrqlrfx9phy3kdwrd1zl51vqxf4jf",
+        "rev": "5c8810363ebc803bb74ad56ea3fee122b8936430",
+        "sha256": "1fvh1xg36y0f3yv8bm5vjamf7j5y8f5wmhjrdlirqw7hicxlmm5q",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/20ad01126e269d7c751026fa54da1eed233ce63c.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/5c8810363ebc803bb74ad56ea3fee122b8936430.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -169,18 +169,18 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "1khmwcag57f7xj89jvzcmb9dnlv39ld4hfbrc1v3qz96md3yn54w",
+        "sha256": "01wy5p93rsa29z5gh7qdb8iv0xpcgarwa887rrfrlmx9b9zzrzwp",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3765.d6f63659a70/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3771.02fa062f99b/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3765.d6f63659a70"
+        "version": "nixos-20.09.3771.02fa062f99b"
     },
     "nixos-unstable": {
-        "sha256": "1nr9ik5f4hgqhssd854d31ymxbjrk534sp3wzynrnd32vl4xipl2",
+        "sha256": "0bk7gg956axkwzcw1mms11mgladb0d76glcvi79jyqqxhqzrmvsa",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre281334.d1183f3dc44/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre281538.9e377a6ce42/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre281334.d1183f3dc44"
+        "version": "nixos-21.05pre281538.9e377a6ce42"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
@@ -248,10 +248,10 @@
         "homepage": "",
         "owner": "tomasiser",
         "repo": "vim-code-dark",
-        "rev": "531c0a027024b46aad24923642a9078764652b50",
-        "sha256": "06xm26bckszpjhixpjbcs5mvkqv7ax06qmrkgkb80gghkbal24y4",
+        "rev": "670fed53a2ae67542a78ef7b642f4aca6b6326dc",
+        "sha256": "0zdhhv3h8lzba8dpv0amc5abpkzayp6gbjw6qv712p638zyr99vw",
         "type": "tarball",
-        "url": "https://github.com/tomasiser/vim-code-dark/archive/531c0a027024b46aad24923642a9078764652b50.tar.gz",
+        "url": "https://github.com/tomasiser/vim-code-dark/archive/670fed53a2ae67542a78ef7b642f4aca6b6326dc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "yarn-completion": {
