@@ -90,12 +90,12 @@ rec {
       latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
       hasLatestBundler = hasSuffix latestBundlerMark locktext;
       namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
-      postBuild = optionalString hasSource ''
+      postBuild = ''
         cd $out/bin
         if [[ $(echo *) != '*' ]];then
           for exe in *;do
-            substituteInPlace "$exe" --replace "${env.confFiles}" "${source}"
-            sed -i "/^export BUNDLE_FROZEN='1'$/d" "$exe"
+            sed -i /BUNDLE_GEMFILE/d "$exe"
+            sed -i /BUNDLE_FROZEN/d "$exe"
           done
         fi
       '';
