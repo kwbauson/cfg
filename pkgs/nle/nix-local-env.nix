@@ -1,4 +1,4 @@
-{ path, pkgs }:
+{ path, pkgs, source }:
 with builtins; with pkgs; with mylib;
 rec {
   hasFiles = fs: words fs != [ ] && all (f: pathExists (file f)) (words fs);
@@ -6,8 +6,7 @@ rec {
   ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
   file = f: path + ("/" + f);
   read = f: optionalString (hasFiles f) (readFile (file f));
-  hasSource = hasFiles "source";
-  source = if hasSource then removeSuffix "\n" (read "source") else null;
+  hasSource = source != null;
 
   nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
   nleFiles = name: ifFilesAndNot

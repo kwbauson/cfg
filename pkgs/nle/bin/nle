@@ -5,7 +5,6 @@ set -e
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-nixexpr="(import CFG_STORE_PATH).nle { path = ./.; }"
 fallbackcache=$HOME/.cache
 cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
 impuredir=$cachebase/.impure
@@ -15,6 +14,8 @@ args=$@
 
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
+
+nixexpr="(import CFG_STORE_PATH).nle { path = ./.; source = \"$PWD\"; }"
 
 invalid() {
   echo invalid command: "$args"
@@ -86,8 +87,6 @@ case $cmd in
     ;;
   rebuild)
     [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
-    echo "$PWD"
-    echo "$nixexpr"
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   activate)
