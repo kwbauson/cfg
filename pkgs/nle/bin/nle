@@ -81,11 +81,13 @@ envfiles='.env .env.development .development.env'
 
 case $cmd in
   build)
-    [[ -d $cachedir ]] && cd "$cachedir"
+    [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
     nix build --impure --expr "$nixexpr" --out-link "$sourcedir"/result
     ;;
   rebuild)
-    [[ -d $cachedir ]] && cd "$cachedir"
+    [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
+    echo "$PWD"
+    echo "$nixexpr"
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   activate)
@@ -138,7 +140,11 @@ case $cmd in
     for file in ${buildfiles[@]};do
       [[ -e $sourcedir/$file ]] && cp -rt "$cachedir" "$sourcedir/$file"
     done
-    "$0" -d "$cachedir" generate
+    if [[ $NOCACHE != 1 ]];then
+      "$0" -d "$cachedir" generate
+    else
+      "$0" generate
+    fi
     "$0" rebuild
     ;;
   generate)
