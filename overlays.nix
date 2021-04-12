@@ -24,18 +24,18 @@
       extraPrograms = joinLines
         (x: "${x},x86_64-linux,${x}")
         (x: y: "${x},x86_64-linux,${y}")
-        [
-          "nle"
-          [ "nix-local-env" "nle" ]
-          "nr"
-          "evilhack"
-          "git-trim"
-          "fordir"
-          "inlets"
-          "juicefs"
-          "pur"
-          "emborg"
-        ];
+        (
+          [
+            [ "nix-local-env" "nle" ]
+            [ "termbar" "term" ]
+            "pur"
+            "emborg"
+            "git-remote-codecommit"
+            "fakes3"
+          ]
+          ++ (attrNames (readDir ./bin))
+          ++ (attrNames (importDir ./pkgs))
+        );
       passAsFile = "extraPrograms";
       installPhase = ''
         cp ${sources.nixos-unstable}/programs.sqlite $out
