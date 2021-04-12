@@ -28,21 +28,19 @@
           [
             [ "nix-local-env" "nle" ]
             [ "termbar" "term" ]
-            "pur"
-            "emborg"
-            "git-remote-codecommit"
-            "fakes3"
           ]
           ++ (attrNames (readDir ./bin))
-          ++ (attrNames (importDir ./pkgs))
+          ++ (attrNames self)
         );
       passAsFile = "extraPrograms";
       installPhase = ''
         cp ${sources.nixos-unstable}/programs.sqlite $out
+        sqlite3 $out --csv 'select * from Programs' > current
+        grep -vFf current $extraProgramsPath > extra
         chmod +w $out
         sqlite3 $out <<EOF
         .mode csv
-        .import $extraProgramsPath Programs
+        .import extra Programs
         EOF
       '';
     };
