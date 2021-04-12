@@ -21,17 +21,24 @@
       name = "programs-sqlite";
       buildInputs = [ sqlite ];
       dontUnpack = true;
-      extraPrograms = joinLines
-        (x: "${x},x86_64-linux,${x}")
-        (x: y: "${x},x86_64-linux,${y}")
-        (
-          [
-            [ "nix-local-env" "nle" ]
-            [ "termbar" "term" ]
-          ]
-          ++ (attrNames (readDir ./bin))
-          ++ (attrNames self)
-        );
+      extraPrograms =
+        let
+          subPackages = name: map (x: "${name}.${x}") (attrNames self.${name});
+        in
+        joinLines
+          (x: "${x},x86_64-linux,${x}")
+          (x: y: "${x},x86_64-linux,${y}")
+          (
+            [
+              [ "nix-local-env" "nle" ]
+              [ "termbar" "term" ]
+            ]
+            ++ (attrNames (readDir ./bin))
+            ++ (attrNames self)
+            ++ (subPackages "nodePackages")
+            ++ (subPackages "python3Packages")
+            ++ (subPackages "rubyPackages")
+          );
       passAsFile = "extraPrograms";
       installPhase = ''
         cp ${sources.nixos-unstable}/programs.sqlite $out

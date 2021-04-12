@@ -60,7 +60,7 @@ with builtins; with pkgs; with mylib; {
           lo-early-talent = ''lo start --always-reseed -s early-talent "$@" && lo logs -s early-talent; lo stop -s all; :'';
           hmg = "git -C ~/cfg fetch && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
-          nou = "hmg && nix run ~/cfg#$(built-as-host)";
+          nou = "hmg && git -C ~/cfg a && nix run ~/cfg#$(built-as-host)";
           nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
           noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
@@ -339,7 +339,13 @@ with builtins; with pkgs; with mylib; {
         mp = "! git merge origin/`git main` && git p";
         ci = "commit -v";
         co = "checkout";
-        df = ''! git a -N && git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true'';
+        df = let script = writeBash "df" ''
+          export GIT_INDEX_FILE=$(mktemp)
+          cp "$(git rev-parse --show-toplevel)"/.git/index "$GIT_INDEX_FILE"
+          trap 'rm -f "$GIT_INDEX_FILE"' EXIT
+          git add -A
+          git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
+        ''; in "! ${script}";
         dfo = ''! git fetch && git df origin/`git branch-name`'';
         lfo = ''! git fetch && git log HEAD..origin/`git branch-name` --no-merges --reverse'';
         g = "! git pull origin `git branch-name` --rebase --autostash";
