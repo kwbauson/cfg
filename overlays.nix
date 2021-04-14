@@ -54,11 +54,6 @@
     steam-native = self.steam.override { nativeOnly = true; };
     steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
-    buildNpmVimPlugin = name: vimUtils.buildVimPlugin {
-      inherit name;
-      src = copyPath "${(import ./npm-env.nix { inherit pkgs; path = ./.; }).node_modules}/${name}";
-    };
-    npm-coc-explorer = self.buildNpmVimPlugin "coc-explorer";
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
     mach-nix = inputs.mach-nix // import inputs.mach-nix {

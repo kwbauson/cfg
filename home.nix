@@ -288,8 +288,7 @@ with builtins; with pkgs; with mylib; {
             vim-sensible vim-startify vim-vinegar nvim-scrollview
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
-            coc-solargraph coc-tsserver coc-pyright
-            npm-coc-explorer
+            coc-solargraph coc-tsserver coc-pyright coc-explorer
             ;
         };
         makeExtraPlugins = map (name: vimUtils.buildVimPlugin {
