@@ -28,6 +28,7 @@ buildfiles=(
   Gemfile{,.lock}
   gemset.nix
   requirements{,.dev}.txt
+  pyproject.toml poetry.lock
   local.nix
   bin
   pkgs nix
