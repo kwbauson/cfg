@@ -86,6 +86,11 @@
     inherit (nixos-20_09) steam;
     inherit (self.pinned-if-darwin) borgbackup;
     switch = self.switch-to-configuration.scripts.${builtAsHost}.nos-hms;
+    pynixify = let python = python3.override {
+      packageOverrides = self: super: {
+        pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };
+      };
+    }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
   })
   (self: super: with super; with mylib;
   mapAttrs (name: f: callPackage f (pkgs // { inherit name; pname = name; src = sources.${name}; })) (importDir ./pkgs)

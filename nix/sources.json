@@ -206,6 +206,18 @@
         "url": "https://github.com/svanderburg/node2nix/archive/0c94281ea98f1b17532176106f90f909aa133704.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "pynixify": {
+        "branch": "main",
+        "description": "Nix expression generator for Python projects",
+        "homepage": null,
+        "owner": "cript0nauta",
+        "repo": "pynixify",
+        "rev": "140ec9aa7061383aa0d6a45969f6ef4f6570acb4",
+        "sha256": "06rsxrbxwqb8w71vx6w0v09fpisavifia4y7dx9yfj3n601y3rvj",
+        "type": "tarball",
+        "url": "https://github.com/cript0nauta/pynixify/archive/140ec9aa7061383aa0d6a45969f6ef4f6570acb4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "ranger_devicons": {
         "branch": "main",
         "description": "Ranger plugin that adds file glyphs / icon support to Ranger",
