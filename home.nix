@@ -511,9 +511,9 @@ with builtins; with pkgs; with mylib; {
     IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
   '';
 
-  gtk.enable = true;
+  gtk.enable = isLinux;
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-  qt.enable = true;
+  qt.enable = isLinux;
   qt.platformTheme = "gtk";
 
   xsession = {
