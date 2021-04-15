@@ -176,11 +176,11 @@
         "version": "nixos-20.09.3824.dec334fa196"
     },
     "nixos-unstable": {
-        "sha256": "1adhjh93v1zrcybcacaaf79b9ghgv41frlxw9zln3293apr381av",
+        "sha256": "16l80pxm0pd92r5f427l550ffmdwni51s0kz6na06m9h87qqcnii",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre282432.311ceed827f/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre282669.e019872af81/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre282432.311ceed827f"
+        "version": "nixos-21.05pre282669.e019872af81"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
