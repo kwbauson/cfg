@@ -101,7 +101,9 @@ rec {
       '';
       env = with namespace; bundlerEnv {
         name = "bundler-env";
-        gemdir = buildDir (map file (words "Gemfile Gemfile.lock gemset.nix"));
+        gemfile = file "Gemfile";
+        lockfile = file "Gemfile.lock";
+        gemset = file "gemset.nix";
         groups = null;
         inherit postBuild;
         gemConfig = defaultGemConfig // {

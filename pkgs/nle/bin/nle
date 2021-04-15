@@ -137,8 +137,8 @@ case $cmd in
     [[ -e $result ]] && exit
     mkdir -p "$cachedir"
     echo "$sourcedir" > "$sourcelink"
-    for file in ${buildfiles[@]};do
-      [[ -e $sourcedir/$file ]] && cp -rt "$cachedir" "$sourcedir/$file"
+    for file in ${buildfiles[@]} $NLE_EXTRA_FILES;do
+      [[ -e $sourcedir/$file ]] && cp -rt "$cachedir" --parents "$file"
     done
     if [[ $NOCACHE != 1 ]];then
       "$0" -d "$cachedir" generate
