@@ -50,6 +50,7 @@
   fonts.enableDefaultFonts = config.services.xserver.enable;
 
   services = {
+    dbus.packages = with pkgs; [ gnome3.dconf ];
     localtime.enable = true;
     chrony.enable = true;
     tlp.enable = false;

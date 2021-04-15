@@ -34,7 +34,7 @@ with builtins; with pkgs; with mylib; {
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
           inherit
-            chromium ffmpeg firefox mediainfo pavucontrol sox qtbr breeze-icons
+            ffmpeg mediainfo pavucontrol sox qtbr breeze-icons
             signal-desktop discord zoom-us evilhack dejavu_fonts dejavu_fonts_nerd
             ;
         };
@@ -122,6 +122,7 @@ with builtins; with pkgs; with mylib; {
     home-manager.path = inputs.home-manager.outPath;
     command-not-found.enable = !isNixOS;
     command-not-found.dbPath = programs-sqlite;
+    firefox.enable = true;
     bash = {
       enable = true;
       inherit (config.home) sessionVariables;
@@ -509,6 +510,11 @@ with builtins; with pkgs; with mylib; {
     IRB.conf[:SAVE_HISTORY] = 2_000_000
     IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
   '';
+
+  gtk.enable = true;
+  gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+  qt.enable = true;
+  qt.platformTheme = "gtk";
 
   xsession = {
     enable = isNixOS && isGraphical;

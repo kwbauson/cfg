@@ -35,6 +35,7 @@
 .local/share/flatpak
 .local/share/nvim/undo
 .m2
+.mozilla
 .var
 .wine
 Library/Containers
@@ -43,3 +44,5 @@ Library/Python
 mnt
 src/hr
 src/mimir
+src/nixpkgs
+src/jitsi-meet
