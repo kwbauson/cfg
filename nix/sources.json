@@ -169,18 +169,18 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "1i38d1z672gzn73k6gsas2zjbbradg06w7dw3zs9f64l0hr3qd94",
+        "sha256": "0ld59pwfa5mj0wi9ficq50dzzy56k8z78dwcm263bij9k2zlrwa3",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3824.dec334fa196/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3827.389249fa9b3/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3824.dec334fa196"
+        "version": "nixos-20.09.3827.389249fa9b3"
     },
     "nixos-unstable": {
-        "sha256": "16l80pxm0pd92r5f427l550ffmdwni51s0kz6na06m9h87qqcnii",
+        "sha256": "0xwr23sc5gkg2cvcql27kwcq97h7gnfm5w0z007w6jclyfbxfhl8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre282669.e019872af81/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre282843.dcdf30a78a5/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre282669.e019872af81"
+        "version": "nixos-21.05pre282843.dcdf30a78a5"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
