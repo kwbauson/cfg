@@ -361,13 +361,14 @@ with builtins; with pkgs; with mylib; {
           echo
           [[ $continue = y ]] && git put --force-with-lease
         ''; in "! ${script}";
-        put = "! git push origin `git branch-name`";
+        put = "! git push --set-upstream origin `git branch-name`";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ro = "! git reset --hard origin/`git branch-name`";
         f = "fetch --all";
         fbr = "!git f --quiet && git br";
         ru = "remote update";
-        st = "status";
+        s = "! git br && git -c color.status=always status --show-stash | grep --color=never '^Your stash\\|^\\s\\S\\|:$'";
+        fs = "!git f --quiet && git s";
         main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
         unhide = "update-index --no-skip-worktree";
         to = "! git br -u origin/`git branch-name`";
