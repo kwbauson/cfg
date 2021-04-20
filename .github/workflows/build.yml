@@ -40,6 +40,6 @@ jobs:
           git config user.name "$(git log -1 --pretty=format:'%an')"
           git config user.email "$(git log -1 --pretty=format:'%ae')"
           git fetch origin 'refs/notes/*:refs/notes/*'
-          echo ${{ steps.build.outputs }}
+          echo 'outputs: ${{ steps.build.outputs.* }}'
           git notes append --message 'meme'
           git push origin 'refs/notes/*'
