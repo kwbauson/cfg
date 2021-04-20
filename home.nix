@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-branch = "echo ${nixpkgs-branch}";
           lo = "local_ops --no-banner --skip-update";
           los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s all; :'';
-          hmg = "git -C ~/cfg fetch && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
+          hmg = "git -C ~/cfg fetch --all && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
           nou = "hmg && git -C ~/cfg a && nix run ~/cfg#$(built-as-host)";
           nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
