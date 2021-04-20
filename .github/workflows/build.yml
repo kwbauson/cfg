@@ -7,14 +7,14 @@ jobs:
       fail-fast: false
       matrix:
         output:
-          # - keith-xps
-          # - keith-desktop
-          # - kwbauson
-          # - keith-vm
-          # - keith-mac
+          - keith-xps
+          - keith-desktop
+          - kwbauson
+          - keith-vm
+          - keith-mac
 
           - checks
-          # - checks-mac
+          - checks-mac
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
     steps:
       - uses: actions/checkout@v2
@@ -30,16 +30,10 @@ jobs:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix -vL build .#${{ matrix.output }} || nix -vL build .#${{ matrix.output }}
-      - run: echo "::set-output name=${{ matrix.output }}::$(cd result && pwd -P)"
-  note-build-paths:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
+      - name: note build path
+        run: |
           git config user.name "$(git log -1 --pretty=format:'%an')"
           git config user.email "$(git log -1 --pretty=format:'%ae')"
           git fetch origin 'refs/notes/*:refs/notes/*'
-          echo 'outputs: ${{ toJSON(steps) }}'
-          git notes append --message 'meme'
+          git notes append --message "${{ matrix.output }}=$(cd result && pwd -P)"
           git push origin 'refs/notes/*'
