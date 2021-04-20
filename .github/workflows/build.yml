@@ -33,6 +33,7 @@ jobs:
       - run: cd result && echo ::set-output name=${{ matrix.output }}::$(pwd -P)
   note:
     needs: build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: git notes add --message 'meme' && git push 'refs/notes/*'
