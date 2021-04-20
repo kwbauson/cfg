@@ -40,4 +40,4 @@ jobs:
           git config user.name "$(git log -1 --pretty=format:'%an')"
           git config user.email "$(git log -1 --pretty=format:'%ae')"
           git notes add --message 'meme'
-          git push 'refs/notes/*'
+          git push origin 'refs/notes/*'
