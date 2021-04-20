@@ -38,7 +38,7 @@ jobs:
           command: |
             git config user.name "$(git log -1 --pretty=format:'%an')"
             git config user.email "$(git log -1 --pretty=format:'%ae')"
-            git fetch origin 'refs/notes/*:refs/notes/*'
+            git fetch origin '+refs/notes/*:refs/notes/*'
             echo "${{ matrix.output }}: $(cd result && pwd -P)" > message
             git notes show >> message
             git notes add --force --message "$(sort message)"
