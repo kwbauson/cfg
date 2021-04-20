@@ -32,6 +32,7 @@ pkgs: with pkgs; with mylib; latestWrapper (stdenv.mkDerivation {
         echo "$attr" > "$cachefile"
       fi
     fi
+    mkdir -p ~/.local/share/nix
     if [[ -n $attr ]];then
       if [[ $desc = 1 ]];then
         exec nix eval --impure --expr "with import ${self-path}; desc $attr"
