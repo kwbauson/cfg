@@ -30,7 +30,7 @@ jobs:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix -vL build .#${{ matrix.output }} || nix -vL build .#${{ matrix.output }}
-      - run: cd result && echo ::set-output name=${{ matrix.output }}::$(pwd -P)
+      - run: echo "::set-output name=${{ matrix.output }}::$(cd result && pwd -P)"
   note-build-paths:
     needs: build
     runs-on: ubuntu-latest
@@ -40,6 +40,6 @@ jobs:
           git config user.name "$(git log -1 --pretty=format:'%an')"
           git config user.email "$(git log -1 --pretty=format:'%ae')"
           git fetch origin 'refs/notes/*:refs/notes/*'
-          echo 'outputs: ${{ toJSON(steps.build.outputs) }}'
+          echo 'outputs: ${{ toJSON(steps) }}'
           git notes append --message 'meme'
           git push origin 'refs/notes/*'
