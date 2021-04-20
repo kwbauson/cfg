@@ -82,7 +82,7 @@ bindsym $mod+Shift+v layout splith
 bindsym $mod+o focus parent
 bindsym $mod+i focus child
 bindsym $mod+grave focus mode_toggle
-bindsym $mod+Shift+grave floating toggle
+bindsym $mod+Shift+grave floating toggle; sticky toggle
 bindsym $mod+Control+grave sticky toggle
 
 # workspaces
@@ -120,6 +120,7 @@ bindsym $mod+Control+q exit
 
 # rules
 for_window [instance="^termbar$"] floating enable, border none, resize set 700 22, move position 0 0
+for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
 no_focus [window_role="qutebrowser_background"]
 

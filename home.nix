@@ -331,7 +331,7 @@ with builtins; with pkgs; with mylib; {
       package = gitFull;
       aliases = {
         a = "add -A";
-        br = "branch -vv";
+        br = "! git -c color.ui=always branch -vv | sed -E -e 's/: (gone)]/: '$'\\e''[31m\\1'$'\\e'[0m]/ -e 's/: (behind [0-9]*)]/: '$'\\e'[33m'\\1'$'\\e'[0m]/";
         branch-name = "rev-parse --abbrev-ref HEAD";
         ca = "! git a && git ci";
         cap = "! git ca; git p";
