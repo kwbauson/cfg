@@ -80,7 +80,7 @@ with builtins; with pkgs; with mylib; {
       };
 
   home = {
-    stateVersion = "21.05";
+    stateVersion = "20.09";
     inherit username homeDirectory;
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
@@ -111,8 +111,6 @@ with builtins; with pkgs; with mylib; {
       PBGOPY_SERVER = "http://kwbauson.com:9090/";
     };
   };
-
-  nixpkgs = { inherit (self) config overlays; };
 
   fonts.fontconfig.enable = true;
 
