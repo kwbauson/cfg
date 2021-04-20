@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-branch = "echo ${nixpkgs-branch}";
           lo = "local_ops --no-banner --skip-update";
           los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s all; :'';
-          hmg = "git -C ~/cfg fetch --all && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
+          hmg = "git -C ~/cfg f && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
           nou = "hmg && git -C ~/cfg a && nix run ~/cfg#$(built-as-host)";
           nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
@@ -332,10 +332,10 @@ with builtins; with pkgs; with mylib; {
       aliases = {
         a = "add -A";
         br = "! git -c color.ui=always branch -vv | sed -E -e 's/: (gone)]/: '$'\\e''[31m\\1'$'\\e'[0m]/ -e 's/: (behind [0-9]*)]/: '$'\\e'[33m'\\1'$'\\e'[0m]/";
+        brf = "!git f --quiet && git br";
         branch-name = "rev-parse --abbrev-ref HEAD";
         ca = "! git a && git ci";
         cap = "! git ca; git p";
-        mp = "! git merge origin/`git main` && git p";
         ci = "commit -v";
         co = "checkout";
         df = let script = writeBash "df" ''
@@ -346,12 +346,15 @@ with builtins; with pkgs; with mylib; {
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
         ''; in "! ${script}";
         dfo = ''! git fetch && git df origin/`git branch-name`'';
-        lfo = ''! git fetch && git log HEAD..origin/`git branch-name` --no-merges --reverse'';
+        f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "! git fetch origin `git main`:`git main`";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
+        lfo = ''! git fetch && git log HEAD..origin/`git branch-name` --no-merges --reverse'';
+        main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
+        mp = "! git merge origin/`git main` && git p";
         p = "put";
         pf = let script = writeBash "pf" ''
           set -e
@@ -362,16 +365,13 @@ with builtins; with pkgs; with mylib; {
           [[ $continue = y ]] && git put --force-with-lease
         ''; in "! ${script}";
         put = "! git push --set-upstream origin `git branch-name`";
-        rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ro = "! git reset --hard origin/`git branch-name`";
-        f = "fetch --all";
-        fbr = "!git f --quiet && git br";
+        rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         ru = "remote update";
         s = "! git br && git -c color.status=always status --show-stash | grep --color=never '^Your stash\\|^\\s\\S\\|:$'";
-        fs = "!git f --quiet && git s";
-        main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
-        unhide = "update-index --no-skip-worktree";
+        sf = "!git f --quiet && git s";
         to = "! git br -u origin/`git branch-name`";
+        unhide = "update-index --no-skip-worktree";
       };
       inherit userName userEmail;
       extraConfig = {
