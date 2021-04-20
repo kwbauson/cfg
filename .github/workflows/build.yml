@@ -55,3 +55,5 @@ jobs:
           exit 1
           # git notes append --message 'meme'
           # git push origin 'refs/notes/*'
+          # o
+      - run: echo ${{needs.build.outputs.output1}} ${{needs.build.outputs.output2}}
