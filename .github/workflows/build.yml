@@ -36,6 +36,7 @@ jobs:
           git config user.name "$(git log -1 --pretty=format:'%an')"
           git config user.email "$(git log -1 --pretty=format:'%ae')"
           git pull --all
+          git fetch origin 'refs/notes/*:refs/notes/*'
           git notes append --message 'meme'
           git push origin 'refs/notes/*'
   # note-build-paths:
