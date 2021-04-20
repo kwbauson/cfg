@@ -32,6 +32,10 @@ jobs:
       - run: nix -vL build .#${{ matrix.output }} || nix -vL build .#${{ matrix.output }}
       - id: output
         run: echo "::set-output name=${{ matrix.output }}::$(cd result && pwd -P)"
+      - id: step1
+        run: echo "::set-output name=test::hello"
+      - id: step2
+        run: echo "::set-output name=test::world"
       # - name: note build path
       #   run: |
       #     git config user.name "$(git log -1 --pretty=format:'%an')"
