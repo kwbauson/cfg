@@ -31,3 +31,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix -vL build .#${{ matrix.output }} || nix -vL build .#${{ matrix.output }}
       - run: cd result && echo ::set-output name=${{ matrix.output }}::$(pwd -P)
+  note:
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - run: git notes add --message 'meme' && git push 'refs/notes/*'
