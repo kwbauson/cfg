@@ -108,6 +108,7 @@ rec {
         keep-env-derivations = true
         keep-outputs = true
         narinfo-cache-negative-ttl = 10
+        download-attempts = 5
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
