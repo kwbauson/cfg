@@ -30,7 +30,6 @@ let
     '';
   });
   makeBin = name: makeNamedScript name ''
-    ${pathAdd [ nix-wrapped git ]}
     git -C ~/cfg add --all
     exec nix run ~/cfg#switch-to-configuration.scripts.$(built-as-host).${name}
   '';

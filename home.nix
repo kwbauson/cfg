@@ -57,9 +57,24 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-branch = "echo ${nixpkgs-branch}";
           lo = "local_ops --no-banner --skip-update";
           los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s all; :'';
-          hmg = "git -C ~/cfg f && git -C ~/cfg dfo && git -C ~/cfg rebase origin/main --autostash";
+          hmg = "cd ~/cfg && git dfo && git rebase origin/main --autostash";
           hmp = "git -C ~/cfg cap";
-          nou = "hmg && git -C ~/cfg a && nix run ~/cfg#$(built-as-host)";
+          nou = writeBashBin "nou" ''
+            set -e
+            hmg
+            cd ~/cfg
+            git a
+            host=$(built-as-host)
+            path=$(git notes show 2> /dev/null | sed -n "s/$host: //p")
+            if [[ -n $path && -z $(git status --short) ]];then
+              if nix build --no-link "$path";then
+                exec "$path"/bin/switch
+              else
+                exec nix run .#$host
+              fi
+            fi
+            exec nix run .#$host
+          '';
           nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
           noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
@@ -353,7 +368,7 @@ with builtins; with pkgs; with mylib; {
           git add -A
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
         '';
-        dfo = ''! git fetch && git df origin/`git branch-name`'';
+        dfo = ''! git f && git df origin/`git branch-name`'';
         f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
