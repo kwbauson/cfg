@@ -348,7 +348,7 @@ with builtins; with pkgs; with mylib; {
           esc=$'\e'
           reset=$esc[0m
           red=$esc[31m
-          yellow=$esc[34m
+          yellow=$esc[33m
           green=$esc[32m
           git -c color.ui=always branch -vv | sed -E \
             -e "s/: (gone)]/: $red\\1$reset]/" \
