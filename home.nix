@@ -373,11 +373,12 @@ with builtins; with pkgs; with mylib; {
         g = "! git pull origin `git branch-name` --rebase --autostash";
         get = "! git pull origin `git branch-name` --ff-only";
         gm = "! git fetch origin `git main`:`git main`";
+        gmp = "! git gm && git mp";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
         lfo = ''! git fetch && git log HEAD..origin/`git branch-name` --no-merges --reverse'';
         main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
-        mp = "! git merge origin/`git main` && git p";
+        mp = "! git merge `git main` && git p";
         p = "put";
         pf = scriptAlias ''
           set -e
