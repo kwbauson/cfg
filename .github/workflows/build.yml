@@ -41,5 +41,5 @@ jobs:
             git fetch origin '+refs/notes/*:refs/notes/*'
             echo "${{ matrix.output }}: $(cd result && pwd -P)" > message
             git notes show >> message
-            git notes add --force --message "$(sort message)"
+            git notes add --force --message "$(sort message | uniq -u)"
             git push origin 'refs/notes/*'
