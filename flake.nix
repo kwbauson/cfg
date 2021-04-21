@@ -107,9 +107,7 @@ rec {
         extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys}
         keep-env-derivations = true
         keep-outputs = true
-        narinfo-cache-negative-ttl = 5
-        connect-timeout = 10
-        download-attempts = 5
+        narinfo-cache-negative-ttl = 10
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;
