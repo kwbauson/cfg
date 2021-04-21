@@ -24,10 +24,12 @@ let
           ${conf}/activate
         fi
       '';
-    nos-hms = makeScript ''
-      ${optionalString isNixOS (exe nos)}
-      ${exe hms}
-    '';
+    nos-hms = override
+      (makeScript ''
+        ${optionalString isNixOS (exe nos)}
+        ${exe hms}
+      '')
+      { name = "switch-${host}"; };
   });
   makeBin = name: makeNamedScript name ''
     ${pathAdd [ nix-wrapped git ]}
