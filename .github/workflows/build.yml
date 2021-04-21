@@ -7,14 +7,13 @@ jobs:
       fail-fast: false
       matrix:
         output:
+          - checks
+          - checks-mac
           - keith-xps
           - keith-desktop
           - kwbauson
           - keith-vm
           - keith-mac
-
-          - checks
-          - checks-mac
     runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
     steps:
       - uses: actions/checkout@v2
