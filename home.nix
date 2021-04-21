@@ -324,25 +324,35 @@ with builtins; with pkgs; with mylib; {
       scroll.bar.enable = false;
       scroll.lines = 0;
     };
-    git = {
+    git = with { scriptAlias = text: "! ${writeBash "git-alias-script" text}"; }; {
       enable = true;
       package = gitFull;
       aliases = {
         a = "add -A";
-        br = "! git -c color.ui=always branch -vv | sed -E -e 's/: (gone)]/: '$'\\e''[31m\\1'$'\\e'[0m]/ -e 's/: (behind [0-9]*)]/: '$'\\e'[33m'\\1'$'\\e'[0m]/";
+        br = scriptAlias ''
+          esc=$'\e'
+          reset=$esc[0m
+          red=$esc[31m
+          yellow=$esc[34m
+          green=$esc[32m
+          git -c color.ui=always branch -vv | sed -E \
+            -e "s/: (gone)]/: $red\\1$reset]/" \
+            -e "s/: (behind [0-9]*)]/: $yellow\\1$reset]/" \
+            -e "s/: (ahead [0-9]*)]/: $green\\1$reset]/"
+        '';
         brf = "!git f --quiet && git br";
         branch-name = "rev-parse --abbrev-ref HEAD";
         ca = "! git a && git ci";
         cap = "! git ca; git p";
         ci = "commit -v";
         co = "checkout";
-        df = let script = writeBash "df" ''
+        df = scriptAlias ''
           export GIT_INDEX_FILE=$(mktemp)
           cp "$(git rev-parse --show-toplevel)"/.git/index "$GIT_INDEX_FILE"
           trap 'rm -f "$GIT_INDEX_FILE"' EXIT
           git add -A
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
-        ''; in "! ${script}";
+        '';
         dfo = ''! git fetch && git df origin/`git branch-name`'';
         f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
         g = "! git pull origin `git branch-name` --rebase --autostash";
@@ -354,14 +364,14 @@ with builtins; with pkgs; with mylib; {
         main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
         mp = "! git merge origin/`git main` && git p";
         p = "put";
-        pf = let script = writeBash "pf" ''
+        pf = scriptAlias ''
           set -e
           git fetch
           ${delta}/bin/delta <(git log origin/$(git branch-name)) <(git log) || true
           read -n1 -p "Continue? [y/n] " continue
           echo
           [[ $continue = y ]] && git put --force-with-lease
-        ''; in "! ${script}";
+        '';
         put = "! git push --set-upstream origin `git branch-name`";
         ro = "! git reset --hard origin/`git branch-name`";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
