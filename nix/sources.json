@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "00ill63915k24rsznp2k40l7j26ns6ccs7x69lg4xxxiwc19n1i1",
+        "sha256": "1bssd9r3g3lpilr6zcr7xcsir0xc6cvdgg6yqkbyriq7j0rfkww7",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.21.77/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.23.71/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.21.77"
+        "version": "1.23.71"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "84e40875785a1f37b39658f441409befe1c8a4fc",
-        "sha256": "1wwhzcvpdwlcdn3d78j3nbpx0cdw8ax81jkwsbdxiqwmvq7szasp",
+        "rev": "689e8ef98e9d981b493d899b68d988be603288b2",
+        "sha256": "108l39i3b3p2d6svwz83pwg7pkwq7y37qqrhh1m59vhld263agnx",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/84e40875785a1f37b39658f441409befe1c8a4fc.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/689e8ef98e9d981b493d899b68d988be603288b2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "1wms57v18lrb98hvbqgyan39prpygylyj2m8qkx2vfxrbawj0jm1",
+        "sha256": "1kx2l1zdr0mcllz39g6rn693jrjg0c8yfgfmrnr6cjcmqyrgdgfj",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3877.17a28909d4e/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3881.d202d4e491a/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3877.17a28909d4e"
+        "version": "nixos-20.09.3881.d202d4e491a"
     },
     "nixos-unstable": {
         "sha256": "0kag7zclxspyl42bvik0q59mwn0kdik9wny31ishj1ll3rc8whss",
