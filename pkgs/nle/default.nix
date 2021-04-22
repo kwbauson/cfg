@@ -1,10 +1,10 @@
 pkgs: with pkgs; with mylib;
 let
-  nleFunc = let nixpkgs = pkgs; in
-    { path ? ./., pkgs ? nixpkgs, source ? null }:
+  build = let nixpkgs = pkgs; in
+    { path, pkgs ? nixpkgs, source ? null }:
     import ./nix-local-env.nix { inherit pkgs path source; };
   passthru = rec {
-    __functor = _: nleFunc;
+    inherit build;
     lib = rec {
       joinMapAttrValuesIf = f: p: as: concatMapStringsSep "\n" f (attrValues (filterAttrs (n: v: p n) as));
     };
@@ -41,6 +41,6 @@ let
     };
     conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
   };
-  pkg = override ((nleFunc { }).overrideAttrs (_: { inherit passthru; })) { name = "nle"; };
+  pkg = override (build { path = ./.; }) { name = "nle"; inherit passthru; };
 in
 latestWrapper name pkg

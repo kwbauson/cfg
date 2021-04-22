@@ -15,7 +15,7 @@ args=$@
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
 
-nixexpr="(import CFG_STORE_PATH).nle { path = ./.; source = \"$PWD\"; }"
+nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$PWD\"; }"
 
 invalid() {
   echo invalid command: "$args"
@@ -291,7 +291,7 @@ fi
 
 if [[ ! -e $result ]];then
   mkdir -p "$(dirname "$result")"
-  nix-build "$url" --attr nle --out-link "$result" > /dev/null
+  nix-build "$url" --attr nle.unwrapped --out-link "$result" > /dev/null
 fi
 
 exec "$result"/bin/nle "$@"
