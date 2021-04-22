@@ -4,9 +4,13 @@
   })
   (_: super: with super; with mylib; {
     nix-wrapped =
-      if isNixOS
+      if false
       then nixUnstable
-      else wrapBins nixUnstable ''NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})$'\n'$NIX_CONFIG exec "$exePath" "$@"'';
+      else
+        wrapBins nixUnstable ''
+          export NIX_USER_CONF_FILES=${toFile "nix.conf" cfg.nixConf}:$NIX_USER_CONF_FILES
+          exec "$exePath" "$@"
+        '';
   })
   (self: super: with super; with mylib; {
     latestWrapper = name: pkg: wrapBins pkg ''
