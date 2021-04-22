@@ -211,7 +211,7 @@ case $cmd in
     [[ -x update-helper ]] && ./update-helper
     ;;
   run)
-    eval "$("$0" env)"
+    eval "$("$0" export)"
     cmd=$1 && shift
     exe=$("$0" result)/bin/$cmd
     if [[ ! -e $exe ]];then
@@ -230,6 +230,9 @@ case $cmd in
       fi
       env | grep -v -e '^_=' -e '^DIRENV_IN_ENVRC=' -e '^DIRENV_WATCHES=' | sed "s#$PATH_added:##"
     )
+    ;;
+  export)
+    "$0" env | sed 's/^/export /'
     ;;
   direnv)
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
