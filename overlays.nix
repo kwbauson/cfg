@@ -9,12 +9,12 @@
       else wrapBins nixUnstable ''NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})$'\n'$NIX_CONFIG exec "$exePath" "$@"'';
   })
   (self: super: with super; with mylib; {
-    latestWrapper = pkg: wrapBins pkg ''
+    latestWrapper = name: pkg: wrapBins pkg ''
       ${pathAdd self.nix-wrapped}
       if [[ $LATEST = 1 ]];then
         exec "$exePath" "$@"
       else
-        LATEST=1 exec nix shell github:kwbauson/cfg#${pkg.name} -c "$exe" "$@"
+        LATEST=1 exec nix shell github:kwbauson/cfg#${name} -c "$exe" "$@"
       fi
     '';
     programs-sqlite = stdenv.mkDerivation rec {

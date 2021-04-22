@@ -282,6 +282,7 @@ case $cmd in
 set -e
 rev=REPLACE
 result=~/.cache/nle/.pinned/$rev
+url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
 
 nixConf=$(dirname "$0")/nix/nix.conf
 if [[ -e $nixConf ]];then
@@ -290,7 +291,7 @@ fi
 
 if [[ ! -e $result ]];then
   mkdir -p "$(dirname "$result")"
-  nix build "github:kwbauson/cfg?rev=$rev#nle.unwrapped" --out-link "$result"
+  nix build "$url" -A nle --out-link "$result" > /dev/null
 fi
 
 exec "$result"/bin/nle "$@"

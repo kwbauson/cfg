@@ -3,7 +3,6 @@ let
   nleFunc = let nixpkgs = pkgs; in
     { path ? ./., pkgs ? nixpkgs, source ? null }:
     import ./nix-local-env.nix { inherit pkgs path source; };
-  pkg = (nleFunc { }).overrideAttrs (_: { inherit passthru; });
   passthru = rec {
     __functor = _: nleFunc;
     lib = rec {
@@ -42,5 +41,6 @@ let
     };
     conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
   };
+  pkg = override ((nleFunc { }).overrideAttrs (_: { inherit passthru; })) { name = "nle"; };
 in
-latestWrapper (override pkg { name = "nle"; })
+latestWrapper name pkg

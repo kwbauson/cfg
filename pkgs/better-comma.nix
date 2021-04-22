@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; latestWrapper (stdenv.mkDerivation {
+pkgs: with pkgs; with mylib; latestWrapper name (stdenv.mkDerivation {
   inherit name;
   script = ''
     #!/usr/bin/env bash
