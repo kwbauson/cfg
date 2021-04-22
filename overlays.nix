@@ -4,7 +4,7 @@
   })
   (_: super: with super; with mylib; {
     nix-wrapped =
-      if false
+      if isNixOS
       then nixUnstable
       else
         wrapBins nixUnstable ''
