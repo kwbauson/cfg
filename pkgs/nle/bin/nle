@@ -15,12 +15,14 @@ args=$@
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
 
-nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$PWD\"; }"
+nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$sourcedir\"; }"
 
 invalid() {
   echo invalid command: "$args"
   exit 1
 }
+
+export NIX_USER_CONF_FILES=$sourcedir/nix/nix.conf
 
 buildfiles=(
   package{,-lock}.json
