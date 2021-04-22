@@ -1,13 +1,7 @@
 rec {
   nixConfig = {
-    extra-substituters = [
-      "https://kwbauson.cachix.org"
-      "https://hr-local-ops.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro"
-      "hr-local-ops.cachix.org-1:2L4C3esJAmbWH+WviK+NAIpY+E8yomthahM1VHXgghI=&"
-    ];
+    extra-substituters = [ "https://kwbauson.cachix.org" ];
+    extra-trusted-public-keys = [ "kwbauson.cachix.org-1:vwR1JZD436rg3cA/AeE6uUbVosNT4zCXqAmmsVLW8ro" ];
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";

@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
   ];
 
+  nix.extraOptions = "extra-trusted-users = keith";
   networking.firewall.enable = false;
   services.xserver.enable = true;
   hardware.pulseaudio.enable = true;
