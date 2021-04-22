@@ -219,8 +219,15 @@ case $cmd in
     exec "$exe" "$@"
     ;;
   env)
-    direnv stdlib | grep -v 'log_status "loading $rcfile"'
-    "$0" direnv
+    grep -vFf <(env) <(
+      eval "$(direnv stdlib | grep -v 'log_status "loading $rcfile"')"
+      if [[ -e .envrc ]];then
+        source_env .
+      else
+        eval "$("$0" direnv)"
+      fi
+      env | grep -v -e '^_=' -e '^DIRENV_IN_ENVRC=' -e '^DIRENV_WATCHES=' | sed "s#$PATH_added:##"
+    )
     ;;
   direnv)
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
@@ -283,7 +290,7 @@ fi
 
 if [[ ! -e $result ]];then
   mkdir -p "$(dirname "$result")"
-  nix build "github:kwbauson/cfg?rev=$rev#nle" --out-link "$result"
+  nix build "github:kwbauson/cfg?rev=$rev#nle.unwrapped" --out-link "$result"
 fi
 
 exec "$result"/bin/nle "$@"

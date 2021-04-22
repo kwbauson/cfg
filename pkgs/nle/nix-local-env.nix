@@ -42,6 +42,7 @@ rec {
       then ''exec ${source}/${src} "$@"''
       else if isBash then scriptTail else ''exec ${script} "$@"'';
     out = writeBashBin name ''
+      export PATH_added=${makeBinPath buildInputs}
       export ${pathAdd buildInputs}
       ${contents}
     '';
