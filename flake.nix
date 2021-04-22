@@ -136,7 +136,7 @@ rec {
           juicefs
           saml2aws
           mysql57
-          (nle {
+          (nle.build {
             path = writeTextDir "requirements.txt" ''
               black==20.8b1
               bpython==0.20.1
