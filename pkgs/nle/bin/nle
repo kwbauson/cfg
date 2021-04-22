@@ -291,7 +291,7 @@ fi
 
 if [[ ! -e $result ]];then
   mkdir -p "$(dirname "$result")"
-  nix build "$url" -A nle --out-link "$result" > /dev/null
+  nix-build "$url" --attr nle --out-link "$result" > /dev/null
 fi
 
 exec "$result"/bin/nle "$@"
