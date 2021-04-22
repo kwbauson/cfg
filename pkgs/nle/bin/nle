@@ -54,7 +54,7 @@ hashbuildfiles() {
 
 hashcontent() {
   hashbuildfiles | sort | xargs cat
-  echo NIX_LOCAL_ENV_HASH
+  echo CFG_STORE_PATH
   [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
 

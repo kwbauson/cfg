@@ -35,7 +35,7 @@ pkgs: with pkgs; with mylib; latestWrapper (stdenv.mkDerivation {
     mkdir -p ~/.local/share/nix
     if [[ -n $attr ]];then
       if [[ $desc = 1 ]];then
-        exec nix eval --impure --expr "with import ${self-path}; desc $attr"
+        exec nix eval --impure --expr "with import ${self-source}; desc $attr"
       else
         if [[ -z $packages ]];then
           exec nr "$cmd" "$@"

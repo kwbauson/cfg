@@ -81,8 +81,8 @@ rec {
       };
 
       overlays = [
-        (_: nixpkgs: {
-          self-path = "${./.}";
+        (_: nixpkgs: with builtins; {
+          self-source = filterSource (p: _: baseNameOf p != ".git") ./.;
           cfg = { inherit config nixConf homeConfigurations nixosConfigurations; };
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
