@@ -6,7 +6,7 @@
     nix-wrapped =
       if isNixOS
       then nixUnstable
-      else wrapBins nixUnstable ''NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf}) exec "$exePath" "$@"'';
+      else wrapBins nixUnstable ''NIX_CONFIG="$NIX_CONFIG\n$(< ${toFile "nix.conf" cfg.nixConf})" exec "$exePath" "$@"'';
   })
   (self: super: with super; with mylib; {
     latestWrapper = pkg: wrapBins pkg ''

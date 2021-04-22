@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk
+# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk git
 set -e
 
 name=$(basename "$0")
@@ -267,6 +267,27 @@ case $cmd in
     ;;
   cachedir)
     exec "$0" dir
+    ;;
+  pin)
+    rev=$(git ls-remote https://github.com/kwbauson/cfg HEAD | cut -f1)
+    sed "s/^rev=REPLACE$/rev=$rev/" > nle-pinned.sh <<'EOF'
+#!/usr/bin/env bash
+set -e
+rev=REPLACE
+result=~/.cache/nle/.pinned/$rev
+
+nixConf=$(dirname "$0")/nix/nix.conf
+if [[ -e $nixConf ]];then
+  export NIX_CONFIG=$(< "$nixConf")
+fi
+
+if [[ ! -e $result ]];then
+  mkdir -p "$(dirname "$result")"
+  nix build "github:kwbauson/cfg?rev=$rev#nle" --out-link "$result"
+fi
+
+exec "$result"/bin/nle "$@"
+EOF
     ;;
   *)
     invalid
