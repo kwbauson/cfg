@@ -82,7 +82,6 @@ with builtins; with pkgs; with mylib; {
           ns = "pkg=$1 && shift && nix shell ~/cfg#$pkg";
           reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
         });
-        ${attrIf isDarwin "darwinpkgs"} = [ skhd amethyst ];
       }
       {
         ${attrIf isDarwin "darwin"} = {
