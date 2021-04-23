@@ -354,13 +354,16 @@ with builtins; with pkgs; with mylib; {
             -e "s/: (gone)]/: $red\\1$reset]/" \
             -e "s/: (behind [0-9]*)]/: $yellow\\1$reset]/" \
             -e "s/: (ahead [0-9]*)]/: $green\\1$reset]/"
+          git --no-pager stash list
         '';
         brf = "!git f --quiet && git br";
+        main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
         branch-name = "rev-parse --abbrev-ref HEAD";
         ca = "! git a && git ci";
         cap = "! git ca; git p";
         ci = "commit -v";
         co = "checkout";
+        com = "! git co $(git main)";
         df = scriptAlias ''
           export GIT_INDEX_FILE=$(mktemp)
           cp "$(git rev-parse --show-toplevel)"/.git/index "$GIT_INDEX_FILE"
@@ -368,34 +371,32 @@ with builtins; with pkgs; with mylib; {
           git add -A
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
         '';
-        dfo = ''! git f && git df origin/`git branch-name`'';
+        dfo = ''! git f && git df origin/$(git branch-name)'';
         f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
-        g = "! git pull origin `git branch-name` --rebase --autostash";
-        get = "! git pull origin `git branch-name` --ff-only";
-        gm = "! git fetch origin `git main`:`git main`";
+        g = "! git pull origin $(git branch-name) --rebase --autostash";
+        get = "! git pull origin $(git branch-name) --ff-only";
+        gm = "! git fetch origin $(git main):$(git main)";
         gmp = "! git gm && git mp";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
-        lfo = ''! git fetch && git log HEAD..origin/`git branch-name` --no-merges --reverse'';
-        main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
-        mp = "! git merge `git main` && git p";
+        unhide = "update-index --no-skip-worktree";
+        l = "log";
+        lfo = ''! git fetch && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
+        mp = "! git merge $(git main) && git p";
         p = "put";
         pf = scriptAlias ''
           set -e
           git fetch
-          ${delta}/bin/delta <(git log origin/$(git branch-name)) <(git log) || true
+          ${nr delta} <(git log origin/$(git branch-name)) <(git log) || true
           read -n1 -p "Continue? [y/n] " continue
           echo
           [[ $continue = y ]] && git put --force-with-lease
         '';
-        put = "! git push --set-upstream origin `git branch-name`";
-        ro = "! git reset --hard origin/`git branch-name`";
+        put = "! git push --set-upstream origin $(git branch-name)";
+        ro = "! git reset --hard origin/$(git branch-name)";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
-        ru = "remote update";
-        s = "! git br && git -c color.status=always status --show-stash | grep --color=never '^Your stash\\|^\\s\\S\\|:$'";
+        s = "! git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$'";
         sf = "!git f --quiet && git s";
-        to = "! git br -u origin/`git branch-name`";
-        unhide = "update-index --no-skip-worktree";
       };
       inherit userName userEmail;
       extraConfig = {
