@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk git
+# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl
 set -e
 
 name=$(basename "$0")
@@ -281,7 +281,7 @@ case $cmd in
     exec "$0" dir
     ;;
   pin)
-    rev=$(git ls-remote https://github.com/kwbauson/cfg HEAD | cut -f1)
+    rev=$(curl -s https://api.github.com/repos/kwbauson/cfg/branches/main | sed -n -e 's/.*"sha": "//' -e 's/",$//' -e '4p')
     sed "s/^rev=REPLACE$/rev=$rev/" > nle-pinned.sh <<'EOF'
 #!/usr/bin/env bash
 set -e
