@@ -1,6 +1,5 @@
 config: with config.lib; {
-  lib = builtins // {
-    inherit (config.nixpkgs.pkgs.lib) flatten;
+  lib = (import config.nixpkgs.path { }).lib // builtins // {
     file = p: config.source + "/${p}";
     hasFile = p: tryFile p != null;
     tryFile = p:
