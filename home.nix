@@ -50,6 +50,30 @@ with builtins; with pkgs; with mylib; {
         };
         inherit nr switch-to-configuration;
         inherit nle-cfg;
+        g = writeBashBin "g" ''
+          dirs=$(for dir in *;do
+            if [[ -d $dir/.git ]];then
+              echo "$dir"
+            fi
+          done)
+          length=$(echo "$dirs" | awk '{ print length }' | sort -V | tail -n1)
+          if [[ ! -z $1 && ! -d .git ]];then
+            for dir in $dirs;do
+              first=1
+              git -C "$dir" "$@" | while IFS=$'\n' read -r line;do
+                if [[ -n $first ]];then
+                  first=
+                  printf "%''${length}s ┤ %s\n" "$dir" "$line"
+                else
+                  printf "%''${length}s │ %s\n" "" "$line"
+                fi
+              done
+            done
+          fi
+          if [[ -z $1 || -z $dirs ]];then
+            git "$@"
+          fi
+        '';
         local-bin = attrValues (alias {
           built-as-host = "echo ${builtAsHost}";
           nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
@@ -154,7 +178,6 @@ with builtins; with pkgs; with mylib; {
           paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
         qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
-        g = "git";
       };
       initExtra =
         prefixIf
@@ -203,7 +226,10 @@ with builtins; with pkgs; with mylib; {
           PROMPT_COMMAND='_promptcmd'
 
           source ${sources.complete-alias}/complete_alias
-          for a in $(alias | sed 's/=/ /' | cut -d' ' -f2);do complete -F _complete_alias $a;done
+          complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
+
+          _completion_loader git
+          ___git_complete g __git_main
         '';
       profileExtra = ''
         [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
@@ -350,9 +376,9 @@ with builtins; with pkgs; with mylib; {
           yellow=$esc[33m
           green=$esc[32m
           git -c color.ui=always branch -vv | sed -E \
-            -e "s/: (gone)]/: $red\\1$reset]/" \
-            -e "s/: (behind [0-9]*)]/: $yellow\\1$reset]/" \
-            -e "s/: (ahead [0-9]*)]/: $green\\1$reset]/"
+            -e "s/: (gone)]/: $red\1$reset]/" \
+            -e "s/[:,] (ahead [0-9]*)([],])/: $green\1$reset\2/g" \
+            -e "s/[:,] (behind [0-9]*)([],])/: $yellow\1$reset\2/g"
           git --no-pager stash list
         '';
         brf = "!git f --quiet && git br";
@@ -384,7 +410,7 @@ with builtins; with pkgs; with mylib; {
         l = "log";
         lfo = ''! git fetch && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
         p = "put";
-        pf = scriptAlias ''
+        fp = scriptAlias ''
           set -e
           git fetch
           ${nr delta} <(git log origin/$(git branch-name)) <(git log) || true
