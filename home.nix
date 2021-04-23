@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-branch = "echo ${nixpkgs-branch}";
           lo = "local_ops --no-banner --skip-update";
           los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s all; :'';
-          hmg = "cd ~/cfg && git dfo && git rebase origin/main --autostash";
+          hmg = "cd ~/cfg && git dfo && git gr";
           hmp = "git -C ~/cfg cap";
           nou = writeBashBin "nou" ''
             set -e
@@ -372,8 +372,8 @@ with builtins; with pkgs; with mylib; {
         '';
         dfo = ''! git f && git df origin/$(git branch-name)'';
         f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
-        g = "! git pull origin $(git branch-name) --rebase --autostash";
-        get = "! git pull origin $(git branch-name) --ff-only";
+        g = "! git pull origin $(git branch-name) --ff-only";
+        gr = "! git pull origin $(git branch-name) --rebase --autostash";
         gm = "! git fetch origin $(git main):$(git main)";
         gmp = "! git gm && git mp";
         mm = "! git merge $(git main)";
