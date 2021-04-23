@@ -69,11 +69,6 @@
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
-    desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
-      "  name: ${pkg.name or pkg.pname or "null"}"
-      "  description: ${pkg.meta.description or "null"}"
-      "  homepage: ${pkg.meta.homepage or "null"}"
-    ];
     nix-prefetch-git = nix-prefetch-git.override { nix = nixUnstable; };
     bundix = bundix.override { nix = nixUnstable; };
     pinned-if-darwin = if isDarwin then nixos-20_09 else super;
