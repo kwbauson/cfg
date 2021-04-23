@@ -376,12 +376,13 @@ with builtins; with pkgs; with mylib; {
         get = "! git pull origin $(git branch-name) --ff-only";
         gm = "! git fetch origin $(git main):$(git main)";
         gmp = "! git gm && git mp";
+        mm = "! git merge $(git main)";
+        mp = "! git mm && git p";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
         unhide = "update-index --no-skip-worktree";
         l = "log";
         lfo = ''! git fetch && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
-        mp = "! git merge $(git main) && git p";
         p = "put";
         pf = scriptAlias ''
           set -e
