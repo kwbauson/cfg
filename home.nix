@@ -86,9 +86,9 @@ with builtins; with pkgs; with mylib; {
       {
         ${attrIf isDarwin "darwin"} = {
           inherit
-            chromium diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
+            diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
             steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
-            acpi progress xdotool dejavu_fonts_nerd
+            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl
             ;
         };
       };
@@ -98,7 +98,7 @@ with builtins; with pkgs; with mylib; {
     inherit username homeDirectory;
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
-      BROWSER = "chromium";
+      BROWSER = "firefox";
       BUGSNAG_RELEASE_STAGE = "local";
       DBTUNNELUSER = "keith";
       EDITOR = "nvim";
@@ -433,9 +433,9 @@ with builtins; with pkgs; with mylib; {
     };
     vscode.enable = isGraphical;
     # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
-    mpv.enable = isGraphical;
+    mpv.enable = isGraphical && isLinux;
     qutebrowser = {
-      enable = isGraphical;
+      enable = isGraphical && isLinux;
       aliases = {
         h = "help";
         q = "quit";

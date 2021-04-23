@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages youtube-dl
 filter=$1
 if [[ $2 = -f ]];then
