@@ -359,7 +359,7 @@ with builtins; with pkgs; with mylib; {
         main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
         branch-name = "rev-parse --abbrev-ref HEAD";
         ca = "! git a && git ci";
-        cap = "! git ca; git p";
+        cap = "! git ca && git p";
         ci = "commit -v";
         co = "checkout";
         com = "! git co $(git main)";
