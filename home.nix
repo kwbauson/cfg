@@ -56,7 +56,7 @@ with builtins; with pkgs; with mylib; {
           nixpkgs-path = "echo ${pkgs.path}";
           nixpkgs-branch = "echo ${nixpkgs-branch}";
           lo = "local_ops --no-banner --skip-update";
-          los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s all; :'';
+          los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s $service; :'';
           hmg = "cd ~/cfg && git dfo && git gr";
           hmp = "git -C ~/cfg cap";
           nou = writeBashBin "nou" ''
