@@ -70,8 +70,10 @@ with builtins; with pkgs; with mylib; {
               done
             done
           fi
-          if [[ -z $1 || -z $dirs ]];then
-            git "$@"
+          if [[ -z $1 ]];then
+            exec g s
+          elif [[ -z $dirs ]];then
+            exec git "$@"
           fi
         '';
         local-bin = attrValues (alias {
