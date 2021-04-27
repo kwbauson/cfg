@@ -52,7 +52,7 @@
         '';
         overridesPost = [
           (self: super: with super; {
-            lazy-object-proxy = lazy-object-proxy.overridePythonAttrs (attrs: with attrs; rec {
+            ${attrIf isDarwin "lazy-object-proxy"} = lazy-object-proxy.overridePythonAttrs (attrs: with attrs; rec {
               version = "1.4.4";
               src = fetchPypi {
                 inherit pname version;
