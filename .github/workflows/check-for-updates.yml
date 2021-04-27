@@ -23,13 +23,9 @@ jobs:
       - run: nle update
       - run: nle generate
       - uses: peter-evans/create-pull-request@v3
-        id: create-pull-request
         with:
           delete-branch: true
           title: Automatic update
           commit-message: Automatic update
           branch: automatic-update
           token: ${{ secrets.PAT }}
-      - run: gh pr merge --auto --merge "${{ steps.create-pull-request.outputs.pull-request-url }}"
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
