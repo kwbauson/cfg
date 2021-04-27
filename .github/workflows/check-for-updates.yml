@@ -23,9 +23,14 @@ jobs:
       - run: nle update
       - run: nle generate
       - uses: peter-evans/create-pull-request@v3
+        id: cpr
         with:
           delete-branch: true
           title: Automatic update
           commit-message: Automatic update
           branch: automatic-update
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
