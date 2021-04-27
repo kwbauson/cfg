@@ -28,4 +28,4 @@ jobs:
           title: Automatic update
           commit-message: Automatic update
           branch: automatic-update
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
