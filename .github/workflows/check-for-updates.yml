@@ -29,6 +29,3 @@ jobs:
           commit-message: Automatic update
           branch: automatic-update
           token: ${{ secrets.PAT }}
-      - run: gh pr merge --auto --merge "${{github.event.pull_request.html_url}}"
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
