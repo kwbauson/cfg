@@ -1,0 +1,5 @@
+# for https://github.com/bobvanderlinden/probot-auto-merge
+requiredTitleRegex: '^Automatic update$'
+updateBranch: true
+deleteBranchAfterMerge: true
+mergeMethod: squash
