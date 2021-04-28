@@ -2,6 +2,10 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl
 set -e
 
+if [[ $PINNED != '1' && -e nle-pinned.sh ]];then
+  PINNED=1 exec ./nle-pinned.sh "$@"
+fi
+
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
@@ -299,6 +303,9 @@ fi
 
 exec "$result"/bin/nle "$@"
 EOF
+  if [[ -e .envrc ]];then
+    sed -i 's#nle direnv#./nle-pinned.sh direnv#' .envrc
+  fi
     ;;
   *)
     invalid
