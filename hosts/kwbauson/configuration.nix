@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -55,6 +55,12 @@
       };
     };
     jitsi-videobridge.openFirewall = true;
+    github-runner = {
+      enable = true;
+      tokenFile = "/etc/nixos/self-hosted-runner-token";
+      url = "https://github.com/kwbauson/cfg";
+      extraPackages = with pkgs; [ coreutils cachix git gh ];
+    };
   };
 
   security.acme = {
