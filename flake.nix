@@ -82,7 +82,8 @@ rec {
 
       overlays = [
         (_: nixpkgs: with builtins; {
-          self-source = filterSource (p: _: baseNameOf p != ".git") ./.;
+          self-source = filterSource (p_: _:
+            let p = baseNameOf p_; in p != ".git" && p != ".github") ./.;
           cfg = { inherit config nixConf homeConfigurations nixosConfigurations; };
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
@@ -161,5 +162,11 @@ rec {
 
       checks = mkChecks self.packages.x86_64-linux;
       checks-mac = mkChecks self.packages.x86_64-darwin;
+
+      defaultPackage.x86_64-linux = with self.packages.x86_64-linux; buildEnv {
+        name = "build";
+        ignoreCollisions = true;
+        paths = [ checks keith-xps keith-desktop kwbauson keith-vm ];
+      };
     };
 }

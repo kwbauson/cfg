@@ -1,49 +1,23 @@
 name: Build
-on: [push, workflow_dispatch]
+on: [workflow_dispatch, push]
 jobs:
   build:
-    name: ${{ matrix.output }}
-    strategy:
-      fail-fast: false
-      matrix:
-        output:
-          - checks
-          - checks-mac
-          - keith-xps
-          - keith-desktop
-          - kwbauson
-          - keith-vm
-          - keith-mac
-    runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v13
-        with:
-          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210207_fd6eaa1/install
-          extra_nix_config: |
-            experimental-features = nix-command flakes ca-references
-            connect-timeout = 10
-            download-attempts = 5
-      - uses: cachix/cachix-action@v10
-        with:
-          name: kwbauson
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: nix -vL build .#${{ matrix.output }}
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 300
-          max_attempts: 2
-          command: nix -vL build .#${{ matrix.output }}
-      - name: note build path
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 5
-          max_attempts: 3
-          command: |
-            git config user.name "$(git log -1 --pretty=format:'%an')"
-            git config user.email "$(git log -1 --pretty=format:'%ae')"
-            git fetch origin '+refs/notes/*:refs/notes/*'
-            echo "${{ matrix.output }}: $(cd result && pwd -P)" > message
-            git notes show 2> /dev/null >> message
-            git notes add --force --message "$(sort message | uniq -u)"
-            git push origin 'refs/notes/*'
+      - run: nix -vL build
+      - name: push to cachix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+        run: |
+          cachix authtoken "$CACHIX_AUTH_TOKEN"
+          cachix push kwbauson result
+      # - name: note build path
+      #   run: |
+      #     git config user.name "$(git log -1 --pretty=format:'%an')"
+      #     git config user.email "$(git log -1 --pretty=format:'%ae')"
+      #     git fetch origin '+refs/notes/*:refs/notes/*'
+      #     echo "${{ matrix.output }}: $(realpath result)" > message
+      #     git notes show 2> /dev/null >> message
+      #     git notes add --force --message "$(sort message | uniq -u)"
+      #     git push origin 'refs/notes/*'
