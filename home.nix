@@ -21,7 +21,7 @@ with builtins; with pkgs; with mylib; {
             nix-tree nmap openssh p7zip patch perl pigz procps progress pv
             ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils
             watch wget which xdg_utils xxd xz zip bitwarden-cli
-            libqalculate youtube-dl speedtest-cli tldr
+            libqalculate youtube-dl speedtest-cli tldr nix-top
             ;
           better-comma = better-comma.unwrapped;
         };
