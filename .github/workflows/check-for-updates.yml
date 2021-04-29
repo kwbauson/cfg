@@ -1,27 +1,15 @@
 name: Check for updates
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v13
-        with:
-          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210207_fd6eaa1/install
-          extra_nix_config: |
-            experimental-features = nix-command flakes ca-references
-            connect-timeout = 10
-            download-attempts = 5
-      - uses: cachix/cachix-action@v10
-        with:
-          name: kwbauson
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - run: nix -vL profile install .#nle.unwrapped
-      - run: nle update
-      - run: nle generate
+      - run: nix -vL run .#nle.unwrapped update
+      - run: nix -vL run .#nle.unwrapped generate
       - uses: peter-evans/create-pull-request@v3
         id: cpr
         with:
