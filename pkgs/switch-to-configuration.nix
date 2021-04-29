@@ -3,10 +3,12 @@ let
   inherit (cfg) nixosConfigurations homeConfigurations;
   hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
-  makeNamedScript = name: text: writeBashBin name ''
-    ${pathAdd [ nix-wrapped coreutils git ] }
-    ${text}
-  '';
+  makeNamedScript = name: text: (writeBashBin name
+    ''
+      ${pathAdd [ nix-wrapped coreutils git ] }
+      ${text}
+    '').overrideAttrs
+    (_: { meta.mainProgram = name; });
   makeScript = makeNamedScript "switch";
   profile = name: "/nix/var/nix/profiles/${name}";
   scripts = eachHost (host: rec {
@@ -24,10 +26,10 @@ let
           ${conf}/activate
         fi
       '';
-    nos-hms = makeScript ''
+    nos-hms = (makeScript ''
       ${optionalString isNixOS (exe nos)}
       ${exe hms}
-    '';
+    '').overrideAttrs (_: { name = "${host}-nos-hms"; });
   });
   makeBin = name: makeNamedScript name ''
     git -C ~/cfg add --all
