@@ -22,12 +22,12 @@ jobs:
           cachix push kwbauson result
         env:
           CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: note build path
-        run: |
-          git config user.name "$(git log -1 --pretty=format:'%an')"
-          git config user.email "$(git log -1 --pretty=format:'%ae')"
-          git fetch origin '+refs/notes/*:refs/notes/*'
-          echo "${{ matrix.output }}: $(realpath result)" > message
-          git notes show 2> /dev/null >> message
-          git notes add --force --message "$(sort message | uniq -u)"
-          git push origin 'refs/notes/*'
+      # - name: note build path
+      #   run: |
+      #     git config user.name "$(git log -1 --pretty=format:'%an')"
+      #     git config user.email "$(git log -1 --pretty=format:'%ae')"
+      #     git fetch origin '+refs/notes/*:refs/notes/*'
+      #     echo "${{ matrix.output }}: $(realpath result)" > message
+      #     git notes show 2> /dev/null >> message
+      #     git notes add --force --message "$(sort message | uniq -u)"
+      #     git push origin 'refs/notes/*'
