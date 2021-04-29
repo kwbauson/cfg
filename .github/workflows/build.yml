@@ -15,23 +15,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - uses: cachix/install-nix-action@v13
-        with:
-          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210207_fd6eaa1/install
-          extra_nix_config: |
-            experimental-features = nix-command flakes ca-references
-            connect-timeout = 10
-            download-attempts = 5
-      - uses: cachix/cachix-action@v10
-        with:
-          name: kwbauson
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: nix -vL build .#${{ matrix.output }}
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 300
-          max_attempts: 2
-          command: nix -vL build .#${{ matrix.output }}
+      - run: nix -vL build .#${{ matrix.output }}
       - name: note build path
         uses: nick-invision/retry@v2
         with:
