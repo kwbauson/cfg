@@ -6,6 +6,8 @@ on:
 jobs:
   check:
     runs-on: self-hosted
+    env:
+      GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - run: nix -vL run .#nle.unwrapped update
@@ -18,7 +20,4 @@ jobs:
           commit-message: Automatic update
           branch: automatic-update
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      - run: gh pr merge --auto --squash "$PR_URL"
-        env:
-          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
