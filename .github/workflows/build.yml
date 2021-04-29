@@ -30,4 +30,4 @@ jobs:
           echo "${{ matrix.output }}: $(realpath result)" > message
           git notes show 2> /dev/null >> message
           git notes add --force --message "$(sort message | uniq -u)"
-          git push origin 'refs/notes/*' || true
+          git push origin 'refs/notes/*'
