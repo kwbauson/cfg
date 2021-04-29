@@ -4,24 +4,23 @@ jobs:
   build:
     name: ${{ matrix.output }}
     strategy:
-      fail-fast: false
       matrix:
         output:
           - checks
-          - keith-xps
           - keith-desktop
-          - kwbauson
           - keith-vm
+          - keith-xps
+          - kwbauson
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - run: nix -vL build .#${{ matrix.output }}
       - name: push to cachix
+        env:
+          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
         run: |
           cachix authtoken "$CACHIX_AUTH_TOKEN"
           cachix push kwbauson result
-        env:
-          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
       # - name: note build path
       #   run: |
       #     git config user.name "$(git log -1 --pretty=format:'%an')"
