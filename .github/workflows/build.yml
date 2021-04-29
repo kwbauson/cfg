@@ -8,13 +8,11 @@ jobs:
       matrix:
         output:
           - checks
-          - checks-mac
           - keith-xps
           - keith-desktop
           - kwbauson
           - keith-vm
-          - keith-mac
-    runs-on: ${{ ! endsWith(matrix.output, '-mac') && 'ubuntu' || 'macos' }}-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - uses: cachix/install-nix-action@v13
