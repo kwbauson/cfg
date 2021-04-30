@@ -68,7 +68,7 @@
     enable = true;
     files = "pyproject.toml poetry.lock";
     out = poetry2nix.mkPoetryEnv {
-      projectDir = source;
+      projectDir = buildDir (map file (words self.poetry.files));
       overrides = poetry2nix.overrides.withoutDefaults (self: super: {
         inform = super.inform.overridePythonAttrs (old: {
           buildInputs = old.buildInputs ++ [ self.pytest-runner ];

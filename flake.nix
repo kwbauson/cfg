@@ -25,7 +25,7 @@ rec {
   };
 
   outputs =
-    { nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
+    { self, nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
       (system: rec {
         packages = import nixpkgs {
           inherit system;
@@ -82,10 +82,12 @@ rec {
 
       overlays = [
         (_: nixpkgs: {
-          self-source = filterSource
-            (p_: _:
-              let p = baseNameOf p_; in p != ".git" && p != ".github" && p != "output-paths") ./.;
-          cfg = { inherit config nixConf homeConfigurations nixosConfigurations; };
+          cfg = self;
+          self-source = nixpkgs.nix-gitignore.gitignoreSourcePure [
+            ".git"
+            ".github"
+            "output-paths"
+          ] ./.;
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
           isNixOS = nixpkgs.isNixOS or false;
