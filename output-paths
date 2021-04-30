@@ -1,0 +1,5 @@
+checks: /nix/store/h3c6niqyqb023h0zrzf0lmvp3ygacyk6-checks
+keith-desktop: /nix/store/crjzbk74gbp3l03p9d2qyzvalf1nz76z-keith-desktop-nos-hms
+keith-vm: /nix/store/bs1zy46kn597ygiswchwp6pchm45dp6i-keith-vm-nos-hms
+keith-xps: /nix/store/qd729dxvv6rivnggja45bdkspvfb6a0s-keith-xps-nos-hms
+kwbauson: /nix/store/fkq5r4nwwchrx4iq9f8wwjzdhzy9bsai-kwbauson-nos-hms

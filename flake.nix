@@ -84,7 +84,7 @@ rec {
         (_: nixpkgs: {
           self-source = filterSource
             (p_: _:
-              let p = baseNameOf p_; in p != ".git" && p != ".github" && p != "build-outputs.json") ./.;
+              let p = baseNameOf p_; in p != ".git" && p != ".github" && p != "output-paths") ./.;
           cfg = { inherit config nixConf homeConfigurations nixosConfigurations; };
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
@@ -164,8 +164,9 @@ rec {
       checks = mkChecks self.packages.x86_64-linux;
       checks-mac = mkChecks self.packages.x86_64-darwin;
 
-      build-outputs = { inherit checks keith-xps keith-desktop kwbauson keith-vm; };
+      outputs = { inherit checks keith-xps keith-desktop kwbauson keith-vm; };
+      output-paths = concatStringsSep "\n" (mapAttrsToList (n: v: "${n}: ${toString v}") outputs) + "\n";
 
-      defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues build-outputs);
+      defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues outputs);
     };
 }
