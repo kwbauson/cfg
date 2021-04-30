@@ -166,8 +166,10 @@ rec {
       checks = mkChecks self.packages.x86_64-linux;
       checks-mac = mkChecks self.packages.x86_64-darwin;
 
-      outputs = { inherit checks keith-xps keith-desktop kwbauson keith-vm; };
-      output-paths = concatStringsSep "\n" (mapAttrsToList (n: v: "${n}: ${toString v}") outputs) + "\n";
+      inherit (self.packages.x86_64-linux) self-source;
+
+      outputs = { inherit self-source keith-xps keith-desktop kwbauson keith-vm; };
+      output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
 
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues outputs);
     };
