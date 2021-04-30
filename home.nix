@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
             fi
           done)
           length=$(echo "$dirs" | awk '{ print length }' | sort -V | tail -n1)
-          if [[ ! -z $1 && ! -d .git ]];then
+          if [[ ! -z $1 && ! -d .git && $1 != 'clone' ]];then
             for dir in $dirs;do
               first=1
               git -C "$dir" "$@" | while IFS=$'\n' read -r line;do
@@ -69,10 +69,9 @@ with builtins; with pkgs; with mylib; {
                 fi
               done
             done
-          fi
-          if [[ -z $1 ]];then
+          elif [[ -z $1 ]];then
             exec g s
-          elif [[ -z $dirs ]];then
+          else
             exec git "$@"
           fi
         '';
