@@ -90,9 +90,10 @@ with builtins; with pkgs; with mylib; {
             hmg
             cd ~/cfg
             git a
+            source_path=$(nix eval --raw .#self-source --no-warn-dirty)
             host=$(built-as-host)
             path=$(sed -n "s/$host=//p" output-paths)
-            if [[ -n $path && $(nix eval --raw .#self-source --no-warn-dirty) = $(< source-path) ]];then
+            if [[ -n $path ]] && grep -qF "$source_path" output-paths;then
               if nix build --no-link "$path";then
                 exec "$path"/bin/switch
               else
