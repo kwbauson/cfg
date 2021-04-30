@@ -1,5 +1,6 @@
-keith-desktop=/nix/store/mi290666q3mf71smgndsv12l9q27cbsv-keith-desktop-nos-hms
-keith-vm=/nix/store/vr3dl4rgq3f8hxi71f22g4aqzq2k8y35-keith-vm-nos-hms
-keith-xps=/nix/store/kg3v7a38zcv0ihbshgnhz4l8hiqrkssi-keith-xps-nos-hms
-kwbauson=/nix/store/pk80ffdw4wqrshd3y4wsbsw04mni1vwy-kwbauson-nos-hms
-self-source=/nix/store/57w46w168y9agpwwfg3zxhzvsvz3c0yv-pa6082ny937ja78wcm0dhygjkxvs62ss-source
+checks=/nix/store/h3c6niqyqb023h0zrzf0lmvp3ygacyk6-checks
+keith-desktop=/nix/store/5dga9bary7y5ihkxvh8gxi3crqdv0j7m-keith-desktop-nos-hms
+keith-vm=/nix/store/rwz16d0a9pwy5l4r29lxzv4bli431j49-keith-vm-nos-hms
+keith-xps=/nix/store/nfn6lskymkqxbxcskccwpl26fp4f9bii-keith-xps-nos-hms
+kwbauson=/nix/store/s14nli0wbalad3zc0hx19zd4ck3n4q50-kwbauson-nos-hms
+self-source=/nix/store/li3saqihyhckihrmlj8rnnbff2gcsax4-4vpsniglqf81gdkhxn6ja481llxr3f0c-source
