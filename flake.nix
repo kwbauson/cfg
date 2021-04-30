@@ -19,7 +19,7 @@ rec {
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
-    neovim.url = "github:neovim/neovim/nightly?dir=contrib";
+    neovim.url = "github:neovim/neovim?dir=contrib";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
     neovim.inputs.flake-utils.follows = "flake-utils";
   };
