@@ -87,6 +87,7 @@ rec {
             ".git"
             ".github"
             "output-paths"
+            "source-path"
           ] ./.;
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
@@ -168,7 +169,7 @@ rec {
 
       inherit (self.packages.x86_64-linux) self-source;
 
-      outputs = { inherit self-source keith-xps keith-desktop kwbauson keith-vm; };
+      outputs = { inherit keith-xps keith-desktop kwbauson keith-vm; };
       output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
 
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues outputs);
