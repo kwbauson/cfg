@@ -93,7 +93,7 @@ with builtins; with pkgs; with mylib; {
             source_path=$(nix eval --raw .#self-source --no-warn-dirty)
             host=$(built-as-host)
             path=$(sed -n "s/$host=//p" output-paths)
-            echo "$source_line"
+            echo "$source_path"
             echo "$path"
             if [[ -n $path ]] && grep -qF "$source_path" output-paths;then
               if nix build --no-link "$path";then
