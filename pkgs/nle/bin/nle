@@ -214,6 +214,8 @@ case $cmd in
       rm -f $tmpfile
     fi
     [[ -x update-helper ]] && ./update-helper
+    [[ -e output-paths ]] && cp <(nix eval --raw '.#output-paths') output-paths
+    exec "$0" generate
     ;;
   run)
     eval "$("$0" export)"

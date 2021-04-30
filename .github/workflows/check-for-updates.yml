@@ -8,8 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: nix -vL run .#nle.unwrapped update
-      - run: nix -vL run .#nle.unwrapped generate
-      - run: nix eval --raw .#output-paths | sponge output-paths
       - uses: peter-evans/create-pull-request@v3
         id: cpr
         with:
