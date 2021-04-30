@@ -8,3 +8,4 @@ jobs:
     steps:
       - run: nix -vL build github:$GITHUB_REPOSITORY/$GITHUB_SHA
       - run: cachix push kwbauson result
+      - run: echo "ALL YOUR SERVER BELONG TO US!"
