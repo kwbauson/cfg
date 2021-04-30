@@ -25,14 +25,14 @@ rec {
   };
 
   outputs =
-    { nixos-hardware, ... }@inputs: with inputs; flake-utils.lib.eachDefaultSystem
+    { nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
       (system: rec {
         packages = import nixpkgs {
           inherit system;
           inherit (self) overlays config;
         };
       }) // rec {
-      lib = with builtins; with nixpkgs.lib; builtins // rec {
+      lib = builtins // rec {
         mylib = import ./mylib.nix nixpkgs;
         pkgsForSystem =
           { system, isNixOS, host }: import nixpkgs {
@@ -81,10 +81,10 @@ rec {
       };
 
       overlays = [
-        (_: nixpkgs: with builtins; {
+        (_: nixpkgs: {
           self-source = filterSource
             (p_: _:
-              let p = baseNameOf p_; in p != ".git" && p != ".github") ./.;
+              let p = baseNameOf p_; in p != ".git" && p != ".github" && p != "build-outputs.json") ./.;
           cfg = { inherit config nixConf homeConfigurations nixosConfigurations; };
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
@@ -131,7 +131,7 @@ rec {
         host = "keith-mac";
       };
 
-      mkChecks = pkgs: with pkgs; with pkgs.lib; buildEnv {
+      mkChecks = pkgs: with pkgs; buildEnv {
         name = "checks";
         paths = flatten [
           inlets
@@ -164,7 +164,8 @@ rec {
       checks = mkChecks self.packages.x86_64-linux;
       checks-mac = mkChecks self.packages.x86_64-darwin;
 
-      defaultPackage.x86_64-linux = with self.packages.x86_64-linux; linkFarmFromDrvs "build"
-        [ checks keith-xps keith-desktop kwbauson keith-vm ];
+      build-outputs = { inherit checks keith-xps keith-desktop kwbauson keith-vm; };
+
+      defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues build-outputs);
     };
 }
