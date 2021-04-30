@@ -60,7 +60,7 @@ with builtins; with pkgs; with mylib; {
           if [[ ! -z $1 && ! -d .git && $1 != 'clone' ]];then
             for dir in $dirs;do
               first=1
-              git -C "$dir" "$@" | while IFS=$'\n' read -r line;do
+              git -C "$dir" "$@" 2>&1 | while IFS=$'\n' read -r line;do
                 if [[ -n $first ]];then
                   first=
                   printf "%''${length}s ┤ %s\n" "$dir" "$line"
@@ -68,6 +68,10 @@ with builtins; with pkgs; with mylib; {
                   printf "%''${length}s │ %s\n" "" "$line"
                 fi
               done
+              git_exit=''${PIPESTATUS[0]}
+              if [[ $git_exit != '0' ]];then
+                exit "$git_exit"
+              fi
             done
           elif [[ -z $1 ]];then
             exec g s
@@ -423,7 +427,7 @@ with builtins; with pkgs; with mylib; {
         put = "! git push --set-upstream origin $(git branch-name)";
         ro = "! git reset --hard origin/$(git branch-name)";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
-        s = "! git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$'";
+        s = "! git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
         sf = "!git f --quiet && git s";
       };
       inherit userName userEmail;
