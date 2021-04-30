@@ -50,6 +50,7 @@
           ${read "requirements.txt"}
           ${read "requirements.dev.txt"}
         '';
+        _.curtsies.patches = [ ];
         overridesPost = [
           (self: super: with super; {
             ${attrIf isDarwin "lazy-object-proxy"} = lazy-object-proxy.overridePythonAttrs (attrs: with attrs; rec {
