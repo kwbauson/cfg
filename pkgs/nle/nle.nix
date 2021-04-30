@@ -25,14 +25,14 @@
     extraFiles = ".npmrc";
     notFiles = "yarn.lock";
     out =
-      let
-        nodePackages = callPackage (file "node-packages.nix") { inherit nodeEnv; };
-        nodeDependencies = nodePackages.nodeDependencies.override {
+      let args = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args; in
+      override
+        (nodeEnv.buildNodeDependencies {
+          inherit (args) name packageName version;
           src = buildDir (map file (words self.npm.files));
           dontNpmInstall = true;
-        };
-      in
-      override nodeDependencies { name = "node_modules"; passthru = { inherit nodePackages; }; };
+        })
+        { name = "node_modules"; };
   };
   yarn = {
     files = "package.json yarn.lock .enable-nle-yarn";
