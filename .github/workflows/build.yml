@@ -3,21 +3,8 @@ on: [workflow_dispatch, push]
 jobs:
   build:
     runs-on: self-hosted
+    env:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-      - run: nix -vL build
-      - name: push to cachix
-        env:
-          CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-        run: |
-          cachix authtoken "$CACHIX_AUTH_TOKEN"
-          cachix push kwbauson result
-      # - name: note build path
-      #   run: |
-      #     git config user.name "$(git log -1 --pretty=format:'%an')"
-      #     git config user.email "$(git log -1 --pretty=format:'%ae')"
-      #     git fetch origin '+refs/notes/*:refs/notes/*'
-      #     echo "${{ matrix.output }}: $(realpath result)" > message
-      #     git notes show 2> /dev/null >> message
-      #     git notes add --force --message "$(sort message | uniq -u)"
-      #     git push origin 'refs/notes/*'
+      - run: nix -vL build github:$GITHUB_REPOSITORY/$GITHUB_SHA
+      - run: cachix push kwbauson result
