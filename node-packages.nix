@@ -1242,7 +1242,7 @@ let
     name = "cfg";
     packageName = "cfg";
     version = "1.0.0";
-    src = null;
+    src = ./.;
     dependencies = [
       sources."@babel/code-frame-7.12.13"
       sources."@babel/helper-validator-identifier-7.12.11"
