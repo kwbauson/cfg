@@ -65,7 +65,7 @@
       pypiDataRev = inputs.pypi-deps-db.rev;
       pypiDataSha256 = inputs.pypi-deps-db.narHash;
     };
-    nle-cfg = self.nle.build { path = ./.; };
+    nle-cfg = self.nle.build { path = self-source; };
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
