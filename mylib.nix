@@ -83,7 +83,12 @@ cli // generators // lib // builtins // rec {
   importNixpkgs = src: import src { inherit system; config = import ./config.nix; overlays = [ ]; };
   buildDir = paths:
     let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
-    in runCommand "build-dir" { } "mkdir $out\n${cmds}";
+    in runCommand "source" { } "mkdir $out\n${cmds}";
+  buildDirExcept = path: except: buildDir (map (x: path + ("/" + x)) (
+    filter
+      (x: ! any (y: y == x) except)
+      (attrNames (readDir path))
+  ));
   copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
   nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
   pathAdd = pkgs: "PATH=${makeBinPath (toList pkgs)}:$PATH";

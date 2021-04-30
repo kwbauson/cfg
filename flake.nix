@@ -81,13 +81,10 @@ rec {
       };
 
       overlays = [
-        (_: nixpkgs: {
+        (final: nixpkgs: {
           cfg = self;
-          self-source = nixpkgs.nix-gitignore.gitignoreSourcePure [
-            ".git"
-            ".github"
-            "output-paths"
-          ] ./.;
+          self-source = final.mylib.buildDirExcept ./.
+            [ ".git" ".github" "output-paths" "secrets" ];
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
           isNixOS = nixpkgs.isNixOS or false;
@@ -168,8 +165,8 @@ rec {
 
       inherit (self.packages.x86_64-linux) self-source;
 
-      outputs = { inherit checks keith-xps keith-desktop kwbauson keith-vm; };
-      output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs // { inherit self-source; });
+      outputs = { inherit self-source checks keith-xps keith-desktop kwbauson keith-vm; };
+      output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
 
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues outputs);
     };
