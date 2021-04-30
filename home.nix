@@ -325,7 +325,7 @@ with builtins; with pkgs; with mylib; {
             direnv-vim fzf-vim quick-scope tcomment_vim vim-airline
             vim-better-whitespace vim-bbye vim-easymotion vim-fugitive
             vim-lastplace vim-multiple-cursors vim-peekaboo vim-polyglot
-            vim-sensible vim-startify vim-vinegar nvim-scrollview
+            vim-sensible vim-startify vim-vinegar nvim-scrollview vim-code-dark
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver coc-pyright coc-explorer
@@ -336,7 +336,7 @@ with builtins; with pkgs; with mylib; {
           src = sources.${name};
         });
       }; attrValues plugins
-        ++ makeExtraPlugins [ "vim-code-dark" "jsonc.vim" "any-jump.vim" "context.vim" "vim-anyfold" ]
+        ++ makeExtraPlugins [ "jsonc.vim" "any-jump.vim" "context.vim" "vim-anyfold" ]
         ++ optional (!isDarwin) vimPlugins.vim-devicons;
     };
     htop = {

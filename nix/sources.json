@@ -254,18 +254,6 @@
         "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "vim-code-dark": {
-        "branch": "master",
-        "description": "Dark color scheme for Vim and vim-airline, inspired by Dark+ in Visual Studio Code",
-        "homepage": "",
-        "owner": "tomasiser",
-        "repo": "vim-code-dark",
-        "rev": "670fed53a2ae67542a78ef7b642f4aca6b6326dc",
-        "sha256": "0zdhhv3h8lzba8dpv0amc5abpkzayp6gbjw6qv712p638zyr99vw",
-        "type": "tarball",
-        "url": "https://github.com/tomasiser/vim-code-dark/archive/670fed53a2ae67542a78ef7b642f4aca6b6326dc.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "yarn-completion": {
         "branch": "master",
         "description": "Bash completion for Yarn",
