@@ -59,7 +59,7 @@
       enable = true;
       tokenFile = "/etc/nixos/self-hosted-runner-token";
       url = "https://github.com/kwbauson/cfg";
-      extraPackages = with pkgs; [ coreutils cachix git gh ];
+      extraPackages = with pkgs; [ coreutils cachix gh ];
     };
   };
 
