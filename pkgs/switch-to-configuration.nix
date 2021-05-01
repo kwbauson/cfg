@@ -40,15 +40,15 @@ let
     host=$(built-as-host)
     path=$(sed -n "s/$host=//p" output-paths)
     if [[ -n $path ]] && grep -qF "$source_path" output-paths;then
-      if nix build --no-link "$path";then
+      if nix build --no-link "$path" "$@";then
         exec "$path"/bin/switch
       else
-        exec nix run .#$host
+        exec nix run .#$host "$@"
       fi
     fi
-    exec nix run .#$host
+    exec nix run .#$host "$@"
     '' else ''
-    exec nix run .#switch-to-configuration.scripts.$(built-as-host).${name}
+    exec nix run .#switch-to-configuration.scripts.$(built-as-host).${name} "$@"
     ''}
   '';
 in
