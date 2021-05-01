@@ -14,6 +14,7 @@ config: with config.lib; {
         paths = attrs.build attrs.settings or { };
       } else attrs else attrs // { paths = [ ]; };
   };
+
   nixpkgs = {
     config = tryImport "config.nix" { };
     overlays = tryImport "overlays.nix" [ ];
