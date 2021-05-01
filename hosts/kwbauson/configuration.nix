@@ -41,6 +41,10 @@
             extraConfig = "autoindex on;";
           };
         };
+        "cache.${fqdn}" = {
+          enableACME = true;
+          forceSSL = true;
+        };
       };
     };
     jitsi-meet = {
@@ -61,6 +65,7 @@
       url = "https://github.com/kwbauson/cfg";
       extraPackages = with pkgs; [ cachix gh ];
     };
+    nix-serve.enable = true;
   };
 
   security.acme = {
