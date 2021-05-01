@@ -76,8 +76,8 @@
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
     };
-    inherit (nixos-unstable);
-    inherit (nixos-20_09) steam;
+    inherit (nixos-unstable) neovimUtils;
+    inherit (nixos-20_09);
     inherit (self.pinned-if-darwin) borgbackup;
     switch = self.switch-to-configuration.scripts.${builtAsHost}.nos-hms;
     pynixify = let python = python3.override {

@@ -320,7 +320,7 @@ with builtins; with pkgs; with mylib; {
     };
     neovim = {
       enable = true;
-      package = neovim-nightly;
+      package = neovim-master;
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
       plugins = with rec {

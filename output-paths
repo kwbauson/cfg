@@ -1,0 +1,6 @@
+checks=/nix/store/lwv8rbgdhqjb1lqg7102lbif8ydnrjp5-checks
+keith-desktop=/nix/store/had6h13qnz48swasrrjyzqj9za35lwxy-keith-desktop-nos-hms
+keith-vm=/nix/store/7x8cw84qs2s3g5pnggc6hrk3mz2qzldi-keith-vm-nos-hms
+keith-xps=/nix/store/rjcn4gyv075sz20frdqfwfzxicwdrzzi-keith-xps-nos-hms
+kwbauson=/nix/store/319qwjyckbj4c2kn8mpy4clfn2i6wfy8-kwbauson-nos-hms
+self-source=/nix/store/3scgq1h5p2qq3h8fqwmxgmxsfsy5gjqw-source
