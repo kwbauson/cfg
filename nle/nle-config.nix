@@ -22,6 +22,7 @@ config: with config.lib; {
       inherit (config.nixpkgs) system config overlays;
     };
   };
+
   bundler = makePaths {
     enable = all hasFile [ "Gemfile" "Gemfile.lock" "gemset.nix" ];
     build = config.nixpkgs.pkgs.bundlerEnv;

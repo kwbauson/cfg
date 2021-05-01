@@ -85,6 +85,7 @@
         pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };
       };
     }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
+    nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system path; }; };
   })
   (self: super: with super; with mylib;
   mapAttrs (name: f: callPackage f (pkgs // { inherit name; pname = name; src = sources.${name}; })) (importDir ./pkgs)

@@ -9,6 +9,7 @@ let
     else y;
   fix = f:
     let x = f x; in x;
+  flatten = x: if isList x then concatMap (y: flatten y) x else [ x ];
   evalConfig = config: fix
     (self:
       let eval = cfg:
@@ -17,6 +18,10 @@ let
         else if isList cfg then foldl' override { } (map eval cfg)
         else cfg;
       in eval config
-    ) // { withConfig = cfg: evalConfig [ config cfg ]; };
+    ) // {
+    withConfig = cfg:
+      let configs = flatten [ config cfg ]; in
+      evalConfig configs // { inherit configs; };
+  };
 in
 evalConfig
