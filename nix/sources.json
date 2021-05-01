@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "2f1726dba6458e1b6e26a28a676a26ddeab829bc",
-        "sha256": "1fqmsmz6sbaq3lk9bv46zl5yzvvc25rdiw77ajb2h74pxqdyscz1",
+        "rev": "8271f3db8123fdfbe6b9d06a22956bdcb13a485f",
+        "sha256": "15kh7mi8xl8af884b184adl1xmcaf8pzfgx2qlrpzixlprfk2njf",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/2f1726dba6458e1b6e26a28a676a26ddeab829bc.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/8271f3db8123fdfbe6b9d06a22956bdcb13a485f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "0m86nk5ni0kmga8rh9mf67nzfpiilyy4m92a0md9diin9brjh9j8",
+        "sha256": "0r2qnbz8jnx04mwk83vl6pf58bklnk19844zbygfxdg83qs8rhyb",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.3990.7a9104b6d4b/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4001.be58d0fbaa4/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.3990.7a9104b6d4b"
+        "version": "nixos-20.09.4001.be58d0fbaa4"
     },
     "nixos-unstable": {
         "sha256": "0wlm9l137hgx3s79734my2y6h3igcl4yid2q8fav3s9p23gyywi7",
