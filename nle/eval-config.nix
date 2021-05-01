@@ -1,9 +1,10 @@
 with builtins;
-let
+let lib = rec {
   override = x: y:
     if y ? _apply then y._apply x
     else if y ? _replace then y._replace
     else if isList x && isList y then x ++ y
+    else if isList x then x ++ [ y ]
     else if isAttrs x && isAttrs y then
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else y;
@@ -23,5 +24,4 @@ let
       let configs = flatten [ config cfg ]; in
       evalConfig configs // { inherit configs; };
   };
-in
-evalConfig
+}; in (lib.evalConfig { inherit lib; }).withConfig

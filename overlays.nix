@@ -2,12 +2,12 @@
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
-  (_: super: with super; with mylib; {
+  (self: super: with super; with mylib; {
     nix-wrapped =
       if isNixOS
-      then nixUnstable
+      then self.nixUnstable
       else
-        wrapBins nixUnstable ''
+        wrapBins self.nixUnstable ''
           export NIX_USER_CONF_FILES=${toFile "nix.conf" cfg.nixConf}:$NIX_USER_CONF_FILES
           exec "$exePath" "$@"
         '';
@@ -88,7 +88,14 @@
     nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system path; }; };
   })
   (self: super: with super; with mylib;
-  mapAttrs (name: f: callPackage f (pkgs // { inherit name; pname = name; src = sources.${name}; })) (importDir ./pkgs)
+  mapAttrs
+    (name: f: callPackage f (pkgs // {
+      inherit name;
+      pname = name;
+      src = sources.${name};
+      ${name} = super.${name};
+    }))
+    (importDir ./pkgs)
   )
   (self: super: with super; with mylib;
   mapDirEntries

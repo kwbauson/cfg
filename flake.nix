@@ -57,8 +57,8 @@ rec {
         buildSystem = args:
           let system = nixosSystem args; in
           system.config.system.build.toplevel.overrideAttrs (_: { passthru = system; });
-        callModule =
-          module: { pkgs, config, ... }@args: (if isPath module then import module else module) (inputs // args);
+        callModule = module: { pkgs, config, ... }@args:
+          (if isPath module then import module else module) (inputs // args);
         homeConfiguration = makeOverridable (
           { system ? "x86_64-linux"
           , pkgs ? pkgsForSystem { inherit system isNixOS host; }
@@ -105,6 +105,7 @@ rec {
         narinfo-cache-negative-ttl = 10
         connect-timeout = 10
         download-attempts = 5
+        require-sigs = false
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;

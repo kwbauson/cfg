@@ -1,0 +1,113 @@
+From 08d4ae1a6831e13556abfb620a1a8fc592276f70 Mon Sep 17 00:00:00 2001
+From: Matthew Bauer <mjbauer95@gmail.com>
+Date: Wed, 21 Apr 2021 18:12:27 -0500
+Subject: [PATCH 1/2] Add traceContext primop
+
+This primop lets you get information on paths realised (pathExists,
+import, readFile) by Nix. It tracks paths realised in Nix & puts the
+results under the "paths" attr. For instance:
+
+$ nix eval --impure --expr '(builtins.traceContext (import ./.).outPath)'
+{ paths = [ "/nix/store/2mpgi4bvn8py4liv9w3mjxd2c5r7bvv8-source" "/nix/store/3k7i1rdqcgyzjxvqm37hapdidy4ls4s3-source" "/nix/store/kqxic0j6wpsaw2bb51hr1yc1nb1z2xw8-source" ]; value = "/nix/store/3k7i1rdqcgyzjxvqm37hapdidy4ls4s3-source"; }
+
+This is an alternative to the --include-eval-refs from
+https://github.com/NixOS/nix/pull/3523 & --include-ifd from
+https://github.com/NixOS/nix/pull/3506.
+---
+ src/libexpr/eval.hh    |  4 ++++
+ src/libexpr/primops.cc | 37 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
+
+diff --git a/src/libexpr/eval.hh b/src/libexpr/eval.hh
+index e3eaed6d3be..d46c72c2eb7 100644
+--- a/src/libexpr/eval.hh
++++ b/src/libexpr/eval.hh
+@@ -342,6 +342,10 @@ private:
+     friend struct ExprSelect;
+     friend void prim_getAttr(EvalState & state, const Pos & pos, Value * * args, Value & v);
+     friend void prim_match(EvalState & state, const Pos & pos, Value * * args, Value & v);
++
++    bool trackRealisedPaths;
++    std::vector<StorePath> realisedPaths;
++    friend void prim_traceContext(EvalState & state, const Pos & pos, Value * * args, Value & v);
+ };
+ 
+ 
+diff --git a/src/libexpr/primops.cc b/src/libexpr/primops.cc
+index 428adf4c21a..5d7e8b73104 100644
+--- a/src/libexpr/primops.cc
++++ b/src/libexpr/primops.cc
+@@ -42,6 +42,8 @@ void EvalState::realiseContext(const PathSet & context)
+         auto ctx = store->parseStorePath(ctxS);
+         if (!store->isValidPath(ctx))
+             throw InvalidPathError(store->printStorePath(ctx));
++        if (trackRealisedPaths)
++            realisedPaths.push_back(ctx);
+         if (!outputName.empty() && ctx.isDerivation()) {
+             drvs.push_back({ctx, {outputName}});
+         }
+@@ -3498,6 +3500,41 @@ static RegisterPrimOp primop_splitVersion({
+     .fun = prim_splitVersion,
+ });
+ 
++void prim_traceContext(EvalState & state, const Pos & pos, Value * * args, Value & v)
++{
++    bool oldTrackRealisedPaths = state.trackRealisedPaths;
++    state.trackRealisedPaths = true;
++
++    std::vector<StorePath> oldRealisedPaths = std::move(state.realisedPaths);
++    state.realisedPaths = {};
++
++    state.mkAttrs(v, 2);
++
++    state.forceValueDeep(*args[0]);
++    v.attrs->push_back(Attr(state.sValue, args[0]));
++
++    Value * paths = state.allocAttr(v, state.symbols.create("paths"));
++    state.mkList(*paths, state.realisedPaths.size());
++    int n = 0;
++    for (auto p : state.realisedPaths)
++        mkString(*(paths->listElems()[n++] = state.allocValue()), state.store->printStorePath(p));
++
++    state.trackRealisedPaths = oldTrackRealisedPaths;
++    state.realisedPaths.insert(state.realisedPaths.begin(), oldRealisedPaths.begin(), oldRealisedPaths.end());
++}
++
++static RegisterPrimOp primop_traceContext({
++    .name = "__traceContext",
++    .args = {"e"},
++    .doc = R"(
++      Evaluate expression *e*, recording what paths are realised.
++      Then return an attrset with the expression results under "value"
++      and the paths realised "paths". This function is useful for
++      finding what paths are needed for an expression to evaluation.
++    )",
++    .fun = prim_traceContext,
++});
++
+ 
+ /*************************************************************
+  * Primop registration
+
+From 54559c98ffadebdc6ffcc1e63ac38299eb8e928b Mon Sep 17 00:00:00 2001
+From: Matthew Bauer <mjbauer95@gmail.com>
+Date: Fri, 23 Apr 2021 14:43:15 -0500
+Subject: [PATCH 2/2] Don't use forceValueDeep
+
+---
+ src/libexpr/primops.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/libexpr/primops.cc b/src/libexpr/primops.cc
+index 5d7e8b73104..cbb9f9a2234 100644
+--- a/src/libexpr/primops.cc
++++ b/src/libexpr/primops.cc
+@@ -3510,7 +3510,7 @@ void prim_traceContext(EvalState & state, const Pos & pos, Value * * args, Value
+ 
+     state.mkAttrs(v, 2);
+ 
+-    state.forceValueDeep(*args[0]);
++    state.forceValue(*args[0]);
+     v.attrs->push_back(Attr(state.sValue, args[0]));
+ 
+     Value * paths = state.allocAttr(v, state.symbols.create("paths"));

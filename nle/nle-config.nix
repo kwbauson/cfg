@@ -1,5 +1,5 @@
 config: with config.lib; {
-  lib = (import config.nixpkgs.path { }).lib // builtins // {
+  lib = builtins // {
     file = p: config.source + "/${p}";
     hasFile = p: tryFile p != null;
     tryFile = p:

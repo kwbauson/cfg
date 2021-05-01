@@ -6,7 +6,6 @@
 
   nix.extraOptions = ''
     extra-trusted-users = keith
-    require-sigs = false
   '';
   networking.firewall.enable = false;
   services.xserver.enable = true;
