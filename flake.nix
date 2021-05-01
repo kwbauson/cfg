@@ -88,7 +88,7 @@ rec {
           mylib = import ./mylib.nix nixpkgs;
           inherit nixpkgs inputs;
           isNixOS = nixpkgs.isNixOS or false;
-          neovim-nightly = neovim.defaultPackage.${nixpkgs.system};
+          neovim-master = neovim.defaultPackage.${nixpkgs.system};
         })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
