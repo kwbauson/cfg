@@ -88,23 +88,7 @@ with builtins; with pkgs; with mylib; {
           los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s $service; lo stop -s $service; :'';
           hmg = "cd ~/cfg && git dfo && git gr";
           hmp = "git -C ~/cfg cap";
-          nou = writeBashBin "nou" ''
-            set -e
-            hmg
-            cd ~/cfg
-            git a
-            source_path=$(nix eval --raw .#self-source --no-warn-dirty)
-            host=$(built-as-host)
-            path=$(sed -n "s/$host=//p" output-paths)
-            if [[ -n $path ]] && grep -qF "$source_path" output-paths;then
-              if nix build --no-link "$path";then
-                exec "$path"/bin/switch
-              else
-                exec nix run .#$host
-              fi
-            fi
-            exec nix run .#$host
-          '';
+          nou = "hmg && noa";
           nod = prefixIf isNixOS "sudo " "nix-collect-garbage -d";
           noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
           hme = "nvim ~/cfg/home.nix && hms";
@@ -370,7 +354,14 @@ with builtins; with pkgs; with mylib; {
       scroll.bar.enable = false;
       scroll.lines = 0;
     };
-    git = with { scriptAlias = text: "! ${writeBash "git-alias-script" text}"; }; {
+    git = with {
+      scriptAlias = text: "! ${writeBash "git-alias-script" text}";
+      tmpGitIndex = ''
+        export GIT_INDEX_FILE=$(mktemp)
+        cp "$(git rev-parse --show-toplevel)"/.git/index "$GIT_INDEX_FILE"
+        trap 'rm -f "$GIT_INDEX_FILE"' EXIT
+      '';
+    }; {
       enable = true;
       package = gitFull;
       aliases = {
@@ -396,13 +387,11 @@ with builtins; with pkgs; with mylib; {
         co = "checkout";
         com = "! git co $(git main)";
         df = scriptAlias ''
-          export GIT_INDEX_FILE=$(mktemp)
-          cp "$(git rev-parse --show-toplevel)"/.git/index "$GIT_INDEX_FILE"
-          trap 'rm -f "$GIT_INDEX_FILE"' EXIT
+          ${tmpGitIndex}
           git add -A
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
         '';
-        dfo = ''! git f && git df origin/$(git branch-name)'';
+        dfo = "! git f && git df origin/$(git branch-name)";
         f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
         g = "! git pull origin $(git branch-name) --ff-only";
         gr = "! git pull origin $(git branch-name) --rebase --autostash";

@@ -28,7 +28,7 @@
       let args = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args; in
       override
         (nodeEnv.buildNodeDependencies {
-          inherit (args) name packageName version;
+          inherit (args) name packageName version dependencies;
           src = buildDir (map file (words self.npm.files));
           dontNpmInstall = true;
         })

@@ -79,7 +79,7 @@
     inherit (nixos-unstable) neovimUtils;
     inherit (nixos-20_09);
     inherit (self.pinned-if-darwin) borgbackup;
-    switch = self.switch-to-configuration.scripts.${builtAsHost}.nos-hms;
+    switch = self.switch-to-configuration.scripts.${builtAsHost}.noa;
     pynixify = let python = python3.override {
       packageOverrides = self: super: {
         pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };

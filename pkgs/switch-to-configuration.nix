@@ -5,6 +5,7 @@ let
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeNamedScript = name: text: (writeBashBin name
     ''
+      set -e
       ${pathAdd [ nix-wrapped coreutils git ] }
       ${text}
     '').overrideAttrs
@@ -26,14 +27,29 @@ let
           ${conf}/activate
         fi
       '';
-    nos-hms = (makeScript ''
+    noa = (makeScript ''
       ${optionalString isNixOS (exe nos)}
       ${exe hms}
-    '').overrideAttrs (_: { name = "${host}-nos-hms"; });
+    '').overrideAttrs (_: { name = "${host}-noa"; });
   });
   makeBin = name: makeNamedScript name ''
-    git -C ~/cfg add --all
-    exec nix run ~/cfg#switch-to-configuration.scripts.$(built-as-host).${name}
+    cd ~/cfg
+    git add --all
+    ${if name == "noa" then ''
+    source_path=$(nix eval --raw .#self-source --no-warn-dirty)
+    host=$(built-as-host)
+    path=$(sed -n "s/$host=//p" output-paths)
+    if [[ -n $path ]] && grep -qF "$source_path" output-paths;then
+      if nix build --no-link "$path";then
+        exec "$path"/bin/switch
+      else
+        exec nix run .#$host
+      fi
+    fi
+    exec nix run .#$host
+    '' else ''
+    exec nix run .#switch-to-configuration.scripts.$(built-as-host).${name}
+    ''}
   '';
 in
 buildEnv {

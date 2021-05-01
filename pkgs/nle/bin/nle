@@ -133,7 +133,7 @@ case $cmd in
     "$0" cached | while read src;do "$0" -d "$src" cache || true; done
     ;;
   cached)
-    if [[ -d "$cachebase" ]];then
+    if [[ -d "$cachebase" && $(echo "$cachebase"/*) != "$cachebase/*" ]];then
       for dir in "$cachebase"/*;do
         src=$(< "$dir"/source)
         [[ -d $src ]] && echo "$src"
