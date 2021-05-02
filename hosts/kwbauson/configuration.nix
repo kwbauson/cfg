@@ -17,7 +17,7 @@
 
   networking = {
     domain = "com";
-    firewall.allowedTCPPorts = [ 80 443 5000 9090 3000 8000 ];
+    firewall.allowedTCPPorts = [ 80 443 ];
   };
 
   services = with config; with networking; {
