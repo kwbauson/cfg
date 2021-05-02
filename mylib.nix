@@ -90,7 +90,7 @@ cli // generators // lib // builtins // rec {
       (attrNames (readDir path))
   ));
   copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
-  nodeEnv = callPackage "${sources.node2nix}/nix/node-env.nix" { nodejs = nodejs_latest; };
+  nodeEnv = callPackage "${inputs.nixpkgs}/pkgs/development/node-packages/node-env.nix" { nodejs = nodejs_latest; };
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
   makeScript = name: script: writeBashBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
   makeScripts = mapAttrs makeScript;
