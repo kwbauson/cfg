@@ -10,11 +10,6 @@
     device = "/dev/vda";
   };
 
-  nix.gc = {
-    automatic = true;
-    options = "--min-freed \$((20 * 1024**3)) --max-freed \$((20 * 1024**3))";
-  };
-
   nix.extraOptions = ''
     min-free = ${toString (80 * 1024 * 1024 * 1024)}
     max-free = ${toString (10 * 1024 * 1024 * 1024)}
