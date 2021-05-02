@@ -44,6 +44,7 @@
         "cache.${fqdn}" = {
           enableACME = true;
           forceSSL = true;
+          locations."/".proxyPass = with services.nix-serve; "http://${bindAddress}:${toString port}";
         };
       };
     };
