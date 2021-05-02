@@ -1,6 +1,6 @@
 rec {
   nixConfig = {
-    substituters = [ "https://cache.nixos.org/" "https://cache.kwbauson.com/" ];
+    extra-substituters = [ "https://cache.kwbauson.com/" ];
     extra-trusted-substituters = [ "https://cache.kwbauson.com/" ];
   };
   inputs = {
@@ -98,7 +98,7 @@ rec {
         keep-going = true
         builders-use-substitutes = true
         extra-experimental-features = nix-command flakes ca-references
-        substituters = ${toString nixConfig.substituters}
+        extra-substituters = ${toString nixConfig.extra-substituters}
         extra-trusted-substituters = ${toString nixConfig.extra-trusted-substituters }
         keep-env-derivations = true
         keep-outputs = true
