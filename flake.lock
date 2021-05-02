@@ -91,11 +91,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1619908552,
-        "narHash": "sha256-Ma7TqQUJjtF1KPDkcbWMQXQk0z2udbcW46xYwTXUi7w=",
+        "lastModified": 1619988456,
+        "narHash": "sha256-bLGHgroDlsTZOHOOpUm6m2aj57RagiAVioStxSpW+1U=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "b227cedf82341813514da55baa48511eca4014b0",
+        "rev": "a0da4c3a491f715c28f70bc2295be5fe809d72c2",
         "type": "github"
       },
       "original": {
@@ -137,11 +137,11 @@
     "pypi-deps-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1619940443,
-        "narHash": "sha256-+tN2aa/OZm6S3OTGQdmHolnI1zpQmIcSzlDoz/eOn4w=",
+        "lastModified": 1619981449,
+        "narHash": "sha256-C5g82//AUj6MnwiBJP5M6Q7v7f54tA1ABfoIppuD+8o=",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "379f9ecdea54be8ea0f5c891c1c167985eb0d6a2",
+        "rev": "bc782762c5d0b1d821b1a3893eba09656232de6d",
         "type": "github"
       },
       "original": {
