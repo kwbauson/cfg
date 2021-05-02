@@ -86,6 +86,7 @@
       };
     }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
     nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system path; }; };
+    nixosModules = importDir "${inputs.nixpkgs}/nixos/modules";
   })
   (self: super: with super; with mylib;
   mapAttrs

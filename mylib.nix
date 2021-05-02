@@ -117,13 +117,15 @@ cli // generators // lib // builtins // rec {
       path = p: dir + "/${p}";
       importPath = p: import (path p);
       hasPath = p: pathExists (path p);
-      importEntry = name: value:
+      importEntry = name: type:
         if hasSuffix ".nix" name
         then { name = removeSuffix ".nix" name; value = importPath name; }
         else if hasPath "${name}/default.nix"
         then { inherit name; value = importPath name; }
         else if hasPath "${name}/configuration.nix"
         then { inherit name; value = importPath "${name}/configuration.nix"; }
+        else if type == "directory"
+        then { inherit name; value = importDir (path name); }
         else null;
     in
     mapDirEntries importEntry dir;
