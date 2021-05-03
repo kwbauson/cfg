@@ -19,7 +19,6 @@ with builtins;
     bluetooth.package = pkgs.bluezFull;
   };
   networking.networkmanager.wifi.powersave = false;
-  services.autorandr.enable = true;
   services.xserver.enable = true;
 
   users.mutableUsers = false;

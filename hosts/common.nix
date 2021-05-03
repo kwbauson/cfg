@@ -71,6 +71,7 @@
       ];
       lightdm.enable = true;
     };
+    autorandr.enable = true;
   };
 
   users = {
