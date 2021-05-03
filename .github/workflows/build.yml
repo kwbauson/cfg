@@ -5,4 +5,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - run: nix -vL --show-trace build
+      - run: nix -vL --show-trace profile install
