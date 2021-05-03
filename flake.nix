@@ -1,7 +1,7 @@
 rec {
   nixConfig = {
     extra-substituters = [ "https://cache.kwbauson.com/" ];
-    extra-trusted-substituters = [ "https://cache.kwbauson.com/" ];
+    extra-trusted-public-keys = [ "cache.kwbauson.com:v9VWChI2sZUmlku8aRA9FLUA5OKKVc8IccCJ9flGU5s=" ];
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
@@ -99,13 +99,10 @@ rec {
         builders-use-substitutes = true
         extra-experimental-features = nix-command flakes ca-references
         extra-substituters = ${toString nixConfig.extra-substituters}
-        extra-trusted-substituters = ${toString nixConfig.extra-trusted-substituters }
+        extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
         keep-env-derivations = true
         keep-outputs = true
         narinfo-cache-negative-ttl = 10
-        connect-timeout = 10
-        download-attempts = 5
-        require-sigs = false
       '';
 
       inherit (self.packages.x86_64-linux) programs-sqlite;

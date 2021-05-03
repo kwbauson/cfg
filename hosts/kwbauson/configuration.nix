@@ -66,7 +66,10 @@
       url = "https://github.com/kwbauson/cfg";
       extraPackages = with pkgs; [ cachix gh ];
     };
-    nix-serve.enable = true;
+    nix-serve = {
+      enable = true;
+      secretKeyFile = "/etc/nixos/cache-priv-key.pem";
+    };
   };
 
   security.acme = {
