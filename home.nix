@@ -579,6 +579,7 @@ with builtins; with pkgs; with mylib; {
     windowManager = {
       i3 = {
         enable = isNixOS && isGraphical;
+        config = null;
         extraConfig = readFile ./i3-config;
       };
     };

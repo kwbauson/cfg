@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "9b172963e4916094706044459f1c81de195e5508",
-        "sha256": "0whapzp050s756mkm4gvn7vi8h9fnzpdq8rilbh838kmb0hfiigk",
+        "rev": "08cb486d3ff1f978c252d28dd35f1b5c2507378b",
+        "sha256": "1b9191lxqyvbcyzh3svd0vi60dg6fm1q08i5ill8nyy9cmpaikr7",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/9b172963e4916094706044459f1c81de195e5508.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/08cb486d3ff1f978c252d28dd35f1b5c2507378b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -169,18 +169,18 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "0432qy3kwzd8dis9ynwg1v60x090klismpnglb3rx2qxmkdza182",
+        "sha256": "04s49s40lsggwbd98gal7jk3vn41gix8qv7naxjjaixhh4cvahh8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4034.a565a2165ab/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4029.4a154d47623/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4034.a565a2165ab"
+        "version": "nixos-20.09.4029.4a154d47623"
     },
     "nixos-unstable": {
-        "sha256": "1lhah9jc55qrhp0ji6gf0i8hlh26zp1jgyskpbq83jgisxlw8vp6",
+        "sha256": "0ham3li2w6sayhx14wcsj07dcmr29h7iycxnkm4mi53npvk49c44",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre286880.7cb76200088/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre286647.4518794ee53/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre286880.7cb76200088"
+        "version": "nixos-21.05pre286647.4518794ee53"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
