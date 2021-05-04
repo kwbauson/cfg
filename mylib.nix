@@ -82,14 +82,13 @@ cli // generators // lib // builtins // rec {
   }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
   importNixpkgs = src: import src { inherit system; config = import ./config.nix; overlays = [ ]; };
   buildDir = paths:
-    let cmds = concatMapStringsSep "\n" (p: "cp -r ${p} $out/${baseNameOf p}") (toList paths);
+    let cmds = concatMapStringsSep "\n" (p: "cp -r ${copyPathToStore p} $out/${baseNameOf p}") (toList paths);
     in runCommand "source" { } "mkdir $out\n${cmds}";
   buildDirExcept = path: except: buildDir (map (x: path + ("/" + x)) (
     filter
       (x: ! any (y: y == x) except)
       (attrNames (readDir path))
   ));
-  copyPath = path: runCommand (baseNameOf path) { } "cp -Lr ${path} $out && chmod -R +rw $out";
   nodeEnv = callPackage "${inputs.nixpkgs}/pkgs/development/node-packages/node-env.nix" { nodejs = nodejs_latest; };
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
   makeScript = name: script: writeBashBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
