@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# with-packages nix-wrapped
+tmpfile=$(mktemp)
+trap 'rm "$tmpfile"' EXIT
+ssh kwbauson.com sudo cat /etc/nixos/cache-priv-key.pem > "$tmpfile"
+sudo nix store sign --recursive --key-file "$tmpfile" "$@"
+nix copy --substitute-on-destination --to ssh://kwbauson.com "$@"
