@@ -1,7 +1,10 @@
 rec {
   nixConfig = {
-    extra-substituters = [ "https://cache.kwbauson.com/" ];
-    extra-trusted-public-keys = [ "cache.kwbauson.com:v9VWChI2sZUmlku8aRA9FLUA5OKKVc8IccCJ9flGU5s=" ];
+    extra-substituters = [ "https://cache.kwbauson.com/" "https://cache.ngi0.nixos.org/" ];
+    extra-trusted-public-keys = [
+      "cache.kwbauson.com:v9VWChI2sZUmlku8aRA9FLUA5OKKVc8IccCJ9flGU5s="
+      "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
+    ];
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
