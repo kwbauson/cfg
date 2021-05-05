@@ -32,6 +32,7 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "rev": "225bf275ba8ea3f23728685c12b902dedcd3a666",
         "type": "github"
       }
     },
