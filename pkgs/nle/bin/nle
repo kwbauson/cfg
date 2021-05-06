@@ -308,6 +308,7 @@ fi
 
 exec "$result"/bin/nle "$@"
 EOF
+  chmod +x nle-pinned.sh
   if [[ -e .envrc ]];then
     sed -i 's#nle direnv#./nle-pinned.sh direnv#' .envrc
   fi
