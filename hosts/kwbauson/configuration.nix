@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -14,6 +14,8 @@
     min-free = ${toString (80 * 1024 * 1024 * 1024)}
     max-free = ${toString (10 * 1024 * 1024 * 1024)}
   '';
+
+  boot.tmpOnTmpfs = lib.mkForce false;
 
   networking = {
     domain = "com";
@@ -32,20 +34,15 @@
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      virtualHosts = {
+      virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
         ${fqdn} = {
-          enableACME = true;
-          forceSSL = true;
           locations."/" = {
             root = "/srv/files";
             extraConfig = "autoindex on;";
           };
         };
-        "cache.${fqdn}" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/".proxyPass = with services.nix-serve; "http://${bindAddress}:${toString port}";
-        };
+        "cache.${fqdn}".locations."/".proxyPass = with services.nix-serve; "http://${bindAddress}:${toString port}";
+        "netdata.${fqdn}".locations."/".proxyPass = "http://localhost:19999";
       };
     };
     jitsi-meet = {
@@ -70,6 +67,7 @@
       enable = true;
       secretKeyFile = "/etc/nixos/cache-priv-key.pem";
     };
+    netdata.enable = true;
   };
 
   security.acme = {

@@ -9,4 +9,5 @@
     enableWideVine = true;
     # enablePepperFlash = true;
   };
+  # contentAddressedByDefault = true;
 }
