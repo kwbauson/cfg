@@ -72,6 +72,7 @@
       lightdm.enable = true;
     };
     autorandr.enable = true;
+    earlyoom.enable = true;
   };
 
   users = {
