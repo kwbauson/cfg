@@ -76,6 +76,11 @@
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
     };
+    contentAddressedByDefault = import pkgs.path {
+      inherit system;
+      config = cfg.config // { contentAddressedByDefault = true; };
+    };
+    contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
     inherit (nixos-unstable);
     inherit (nixos-20_09);
     inherit (self.pinned-if-darwin);
