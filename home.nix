@@ -66,7 +66,7 @@ with builtins; with pkgs; with mylib; {
           nb = "pkg=$1 && shift; nix build ~/cfg#$pkg";
           ns = "pkg=$1 && shift; nix shell ~/cfg#$pkg";
           reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
-          lr = ''find "$@" | sort | xargs ls --color=auto -lhd'';
+          lr = ''find "$@" -print0 | sort -z | xargs -0 ls --color=auto -lhd'';
           delete-old-generations = ''
             find /nix/var/nix/profiles -not -type d |
               sed -E 's/-[0-9]+-link$//' |
