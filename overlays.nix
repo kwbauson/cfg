@@ -153,6 +153,11 @@
       nixbuild-shell = "rlwrap ssh eu.nixbuild.net shell";
       nixbuild-status = ''
         set -e
+        esc=$'\e'
+        reset=$esc[0m
+        red=$esc[31m
+        yellow=$esc[33m
+        green=$esc[32m
         clear=$(clear)
         input=
         while :;do
@@ -166,9 +171,13 @@
             if [[ $line = 'Free build'* ]];then
               echo -n "$clear$(printf '%(%F_%H:%M:%S)T\n')$input"
               input=
+              running=
             fi
             input=$input$'\n'$line
-          done
+          done | sed -E \
+            -e "s/(\[(OutOfMemory|Failed|NixOutputRejected|NixPermanentFailure)\])$/$red\1$reset/" \
+            -e "s/(\[Built\])$/$green\1$reset/" \
+            -e "s/(\[(Running|InQueue)\])$/$yellow\1$reset/"
       '';
     };
   })
