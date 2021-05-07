@@ -108,6 +108,18 @@ with builtins; with pkgs; with mylib; {
               exec git "$@"
             fi
           '';
+          nixbuild-shell = "rlwrap ssh eu.nixbuild.net shell";
+          nixbuild-status = ''
+            set -e
+            while :;do
+              clear 1>&2
+              echo usage
+              echo list builds --limit 10
+              sleep 5
+            done |
+              ssh eu.nixbuild.net shell 2>&1 |
+              sed -e '/^The usage metrics/d' -e '/^To find out/d' -e 's/^\s*nixbuild.net> //'
+          '';
         });
       }
       {
