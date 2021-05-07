@@ -175,9 +175,9 @@
             fi
             input=$input$'\n'$line
           done | sed -E \
-            -e "s/(\[(OutOfMemory|Failed|NixOutputRejected|NixPermanentFailure)\])$/$red\1$reset/" \
+            -e "s/(\[(OutOfMemory|Failed|NixOutputRejected|NixPermanentFailure|ClientDisconnect|BackendError)\])$/$red\1$reset/" \
             -e "s/(\[Built\])$/$green\1$reset/" \
-            -e "s/(\[(Running|InQueue)\])$/$yellow\1$reset/"
+            -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
       '';
     };
   })
