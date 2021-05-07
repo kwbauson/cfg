@@ -8,7 +8,7 @@
       then self.nixUnstable
       else
         wrapBins self.nixUnstable ''
-          export NIX_USER_CONF_FILES=${toFile "nix.conf" cfg.nixConf}:$NIX_USER_CONF_FILES
+          export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})
           exec "$exePath" "$@"
         '';
   })

@@ -51,17 +51,6 @@
           ${read "requirements.dev.txt"}
         '';
         _.curtsies.patches = [ ];
-        overridesPost = [
-          (self: super: with super; {
-            ${attrIf isDarwin "lazy-object-proxy"} = lazy-object-proxy.overridePythonAttrs (attrs: with attrs; rec {
-              version = "1.4.4";
-              src = fetchPypi {
-                inherit pname version;
-                sha256 = "/+v9zT3YhFLj56X22RqQm2xlQvgjp9ZEDOEEzfDtJNw=";
-              };
-            });
-          })
-        ];
       }).override { ignoreCollisions = true; })
       { name = "pip-env"; };
   };
