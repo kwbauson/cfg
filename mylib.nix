@@ -6,7 +6,7 @@ cli // generators // lib // builtins // rec {
   inherit (stdenv) isLinux isDarwin;
   sources = import ./nix/sources.nix { inherit system pkgs; };
   exe = pkg:
-    let b = removePrefix "node_" (pkg.pname or (parseDrvName pkg.name).name);
+    let b = (pkg.meta or { }).mainProgram or (removePrefix "node_" (pkg.pname or (parseDrvName pkg.name).name));
     in "${pkg}/bin/${b}";
   prefixIf = b: x: y: if b then x + y else y;
   desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
@@ -46,12 +46,13 @@ cli // generators // lib // builtins // rec {
   '';
   alias = name:
     if isString name
-    then x:
+    then arg:
       let
-        cmd = if isDerivation x then exe x else x;
-        pre = if any (s: hasInfix s x) [ "&&" "||" ";" ] then "" else "exec";
+        cmd = if isDerivation arg then exe arg else arg;
+        pre = if any (s: hasInfix s arg) [ "&&" "||" ";" "|" "\n" ] then "" else "exec";
+        post = if any (s: hasInfix s arg) [ ''"$@"'' "\n" ] then "" else ''"$@"'';
       in
-      writeBashBin name ''${pre} ${cmd} "$@"''
+      writeBashBin name "${pre} ${cmd} ${post}"
     else mapAttrs alias name;
   mkDmgPackage = pname: src: stdenv.mkDerivation {
     name = pname + (if src ? version then "-${src.version}" else "");
