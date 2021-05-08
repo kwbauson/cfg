@@ -5,7 +5,7 @@ rec {
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
-    home-manager.url = "github:nix-community/home-manager/225bf275ba8ea3f23728685c12b902dedcd3a666";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
     rnix-lsp.inputs.nixpkgs.follows = "nixpkgs";

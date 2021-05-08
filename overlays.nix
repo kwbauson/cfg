@@ -99,7 +99,7 @@
       nixpkgs-branch = "echo ${nixpkgs-branch}";
       lo = "local_ops --no-banner --skip-update";
       los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s all; lo stop -s $service'';
-      hmg = "cd ~/cfg && git dfo && git gr";
+      hmg = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
       hmp = "git -C ~/cfg cap";
       nou = "hmg && noa";
       nod = "delete-old-generations && nix store gc -v";
