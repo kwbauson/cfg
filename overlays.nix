@@ -81,6 +81,7 @@
       config = cfg.config // { contentAddressedByDefault = true; };
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
+    vimPlugins = override vimPlugins { inherit (nixos-unstable.vimPlugins) vim-airline; };
     inherit (nixos-unstable);
     inherit (nixos-20_09);
     inherit (self.pinned-if-darwin);
