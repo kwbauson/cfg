@@ -218,7 +218,8 @@ case $cmd in
     exec "$0" generate
     ;;
   dump-output-paths)
-    cp <(nix eval --raw '.#output-paths') output-paths
+    paths=$(nix eval --raw '.#output-paths')
+    echo "$paths" > output-paths
     ;;
   run)
     eval "$("$0" export)"

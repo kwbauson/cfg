@@ -169,5 +169,6 @@ cli // generators // lib // builtins // rec {
       ignoreCollisions = true;
       paths = [ wrapped pkg ];
       passthru = pkg.passthru // { unwrapped = pkg; };
+      meta.mainProgram = baseNameOf (exe pkg);
     };
 }
