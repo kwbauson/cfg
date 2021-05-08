@@ -517,6 +517,7 @@ with builtins; with pkgs; with mylib; {
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   qt.enable = isLinux;
   qt.platformTheme = "gtk";
+  dconf.enable = false;
 
   xsession = {
     enable = isNixOS && isGraphical;
