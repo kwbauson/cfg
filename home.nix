@@ -346,7 +346,7 @@ with builtins; with pkgs; with mylib; {
           git add -A
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
         '';
-        dfo = "! git f && git df origin/$(git branch-name)";
+        dfo = scriptAlias ''git f && git df "origin/''${1:-$(git branch-name)}"'';
         f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
         g = "! git pull origin $(git branch-name) --ff-only";
         gr = "! git pull origin $(git branch-name) --rebase --autostash";

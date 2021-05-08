@@ -12,7 +12,7 @@
   hardware.pulseaudio.enable = true;
   virtualisation.docker.enable = true;
   programs.steam.enable = true;
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;
 
   services.sshd.enable = true;
