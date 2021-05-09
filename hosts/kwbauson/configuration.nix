@@ -61,7 +61,7 @@
       enable = true;
       tokenFile = "/etc/nixos/self-hosted-runner-token";
       url = "https://github.com/kwbauson/cfg";
-      extraPackages = with pkgs; [ cachix gh ];
+      extraPackages = with pkgs; [ gh ];
     };
     nix-serve = {
       enable = true;
