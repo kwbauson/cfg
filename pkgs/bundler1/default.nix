@@ -1,1 +1,1 @@
-pkgs: pkgs.nle { path = ./.; }
+pkgs: pkgs.nle.build { path = ./.; }

@@ -11,26 +11,27 @@ let
     '').overrideAttrs
     (_: { meta.mainProgram = name; });
   makeScript = makeNamedScript "switch";
-  scripts = eachHost (host: rec {
-    nos = let conf = nixosConfigurations.${host}; in
-      makeScript ''
-        if [[ $(realpath /run/current-system) != ${conf} ]];then
-          sudo ${conf}/bin/switch-to-configuration switch
-          sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
-        fi
-      '';
-    nob = makeScript "sudo ${nixosConfigurations.${host}}/bin/switch-to-configuration boot";
-    hms = let conf = homeConfigurations.${host}; in
-      makeScript ''
-        if [[ $(nix-env -q home-manager-path --out-path --no-name) != ${conf.config.home.path} ]];then
-          ${conf}/activate
-        fi
-      '';
-    noa = (makeScript ''
-      ${optionalString isNixOS (exe nos)}
-      ${exe hms}
-    '').overrideAttrs (_: { name = "${host}-noa"; });
-  });
+  scripts = eachHost
+    (host: rec {
+      nos = let conf = nixosConfigurations.${host}; in
+        makeScript ''
+          if [[ $(realpath /run/current-system) != ${conf} ]];then
+            sudo ${conf}/bin/switch-to-configuration switch
+            sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
+          fi
+        '';
+      nob = makeScript "sudo ${nixosConfigurations.${host}}/bin/switch-to-configuration boot";
+      hms = let conf = homeConfigurations.${host}; in
+        makeScript ''
+          if [[ $(nix-env -q home-manager-path --out-path --no-name) != ${conf.config.home.path} ]];then
+            ${conf}/activate
+          fi
+        '';
+      noa = (makeScript ''
+        ${optionalString isNixOS (exe nos)}
+        ${exe hms}
+      '').overrideAttrs (_: { name = "${host}-noa"; });
+    }) // { unknown.noa = null; };
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
     git add --all

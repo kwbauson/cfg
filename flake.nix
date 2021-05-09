@@ -27,9 +27,10 @@ rec {
   outputs =
     { self, nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
       (system: rec {
-        packages = import nixpkgs {
+        packages = self.lib.pkgsForSystem {
           inherit system;
-          inherit (self) overlays config;
+          isNixOS = false;
+          host = "unknown";
         };
       }) // rec {
       lib = builtins // rec {
