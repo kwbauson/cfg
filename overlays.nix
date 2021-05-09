@@ -38,7 +38,7 @@
               [ "termbar" "term" ]
             ]
             ++ (attrNames (readDir ./bin))
-            ++ (attrNames (filterAttrs (n: v: (tryEval v).success) (self // { switch = null; })))
+            ++ (attrNames self)
             ++ (subPackages "nodePackages")
             ++ (subPackages "python3Packages")
             ++ (subPackages "rubyPackages")
