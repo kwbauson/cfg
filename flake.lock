@@ -2,11 +2,11 @@
   "nodes": {
     "flake-utils": {
       "locked": {
-        "lastModified": 1619345332,
-        "narHash": "sha256-qHnQkEp1uklKTpx3MvKtY6xzgcqXDsz5nLilbbuL+3A=",
+        "lastModified": 1620759905,
+        "narHash": "sha256-WiyWawrgmyN0EdmiHyG2V+fqReiVi8bM9cRdMaKQOFg=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "2ebf2558e5bf978c7fb8ea927dfaed8fefab2e28",
+        "rev": "b543720b25df6ffdfcf9227afafc5b8c1fabfae8",
         "type": "github"
       },
       "original": {
@@ -137,11 +137,11 @@
     "pypi-deps-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1620724891,
-        "narHash": "sha256-E2BfkmBpkSpeBTikGlQh4In6KWTRLXh4XcQq+mWqsYc=",
+        "lastModified": 1620765794,
+        "narHash": "sha256-AhLtAMgEn+t1vWabHFQeQenk7T9K6vsbuwEWb15ogiQ=",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "a207b305fcd20578d985a2d19914de754bd35119",
+        "rev": "384e65b0f2bb3dccaadc481e64f53ee5c496c187",
         "type": "github"
       },
       "original": {
