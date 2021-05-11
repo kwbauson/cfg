@@ -45,7 +45,7 @@ with builtins; with pkgs; with mylib; {
             solargraph watchexec yarn yarn-completion nodejs_latest
             gh git-ignore git-fuzzy black
             ;
-          inherit (nodePackages) npm-check-updates parcel-bundler prettier;
+          inherit (nodePackages) npm-check-updates prettier;
           nle = nle.unwrapped;
         };
         inherit nr switch-to-configuration;
