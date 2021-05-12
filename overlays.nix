@@ -11,6 +11,7 @@
           export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})
           exec "$exePath" "$@"
         '';
+    imported = importDir ./.;
   })
   (self: super: with super; with mylib; {
     latestWrapper = name: pkg: wrapBins pkg ''
@@ -190,7 +191,7 @@
       src = sources.${name};
       ${name} = super.${name};
     }))
-    (importDir ./pkgs)
+    imported.pkgs
   )
   (self: super: with super; with mylib;
   mapDirEntries

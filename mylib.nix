@@ -121,12 +121,19 @@ cli // generators // lib // builtins // rec {
       importPath = p: import (path p);
       hasPath = p: pathExists (path p);
       importEntry = name: type:
+        let imported = importPath name; in
         if hasSuffix ".nix" name
-        then { name = removeSuffix ".nix" name; value = importPath name; }
+        then { name = removeSuffix ".nix" name; value = imported; }
         else if hasPath "${name}/default.nix"
-        then { inherit name; value = importPath name; }
-        else if hasPath "${name}/configuration.nix"
-        then { inherit name; value = importPath "${name}/configuration.nix"; }
+        then {
+          inherit name;
+          value =
+            if isAttrs imported && ! imported ? __functor
+            then imported // importDir (path name)
+            # else if isFunction imported
+            # then importDir (path name) // { __functor = _: imported; }
+            else imported;
+        }
         else if type == "directory"
         then { inherit name; value = importDir (path name); }
         else null;
