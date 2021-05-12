@@ -11,7 +11,7 @@
           export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})
           exec "$exePath" "$@"
         '';
-    imported = importDir ./.;
+    imported-nixpkgs = import' inputs.nixpkgs;
   })
   (self: super: with super; with mylib; {
     latestWrapper = name: pkg: wrapBins pkg ''
@@ -93,7 +93,7 @@
       };
     }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
     nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system path; }; };
-    nixosModules = importDir "${inputs.nixpkgs}/nixos/modules";
+    nixosModules = imported-nixpkgs.nixos.modules;
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";
       nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
@@ -191,7 +191,7 @@
       src = sources.${name};
       ${name} = super.${name};
     }))
-    imported.pkgs
+    (filterAttrs (_: v: !isPath v) (import' ./pkgs))
   )
   (self: super: with super; with mylib;
   mapDirEntries

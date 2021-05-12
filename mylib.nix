@@ -115,30 +115,24 @@ cli // generators // lib // builtins // rec {
       mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
     else y;
   mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
-  importDir = dir:
-    let
-      path = p: dir + "/${p}";
-      importPath = p: import (path p);
-      hasPath = p: pathExists (path p);
-      importEntry = name: type:
-        let imported = importPath name; in
-        if hasSuffix ".nix" name
-        then { name = removeSuffix ".nix" name; value = imported; }
-        else if hasPath "${name}/default.nix"
-        then {
-          inherit name;
-          value =
-            if isAttrs imported && ! imported ? __functor
-            then imported // importDir (path name)
-            # else if isFunction imported
-            # then importDir (path name) // { __functor = _: imported; }
-            else imported;
-        }
-        else if type == "directory"
-        then { inherit name; value = importDir (path name); }
-        else null;
+  import' = path:
+    let importEntry = entry: type:
+      if type == "directory" then
+        let
+          mkEntry = file: type: {
+            name = removeSuffix ".nix" file;
+            value = importEntry (entry + "/${file}") type;
+          };
+          entries = listToAttrs (mapAttrsToList mkEntry (readDir entry));
+          default = entries.default or { };
+        in
+        if isAttrs default then default // entries
+        else if isFunction default then entries // { __functor = _: default; __functionArgs = functionArgs default; }
+        else default
+      else if hasSuffix ".nix" entry then import entry
+      else entry;
     in
-    mapDirEntries importEntry dir;
+    importEntry path "directory";
   fixSelfWith = f: x:
     let self = f (x // { inherit self; }); in self;
   writeBashBinChecked = name: text: stdenv.mkDerivation {
