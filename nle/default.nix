@@ -1,1 +1,1 @@
-import ./eval-config.nix ./nle-config.nix
+import ./eval-config.nix [ ./lib.nix ./nle-config.nix ]

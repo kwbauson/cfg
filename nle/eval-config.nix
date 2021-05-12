@@ -1,5 +1,4 @@
-with builtins;
-let lib = rec {
+let lib = with builtins; rec {
   merge = x: y:
     if y ? _apply then y._apply x
     else if y ? _replace then y._replace
