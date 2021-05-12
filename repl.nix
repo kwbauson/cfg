@@ -1,2 +1,2 @@
 let pkgs = import ./.;
-in pkgs.mylib // pkgs // builtins.getFlake (toString ./.)
+in pkgs.mylib // pkgs

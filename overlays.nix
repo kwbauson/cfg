@@ -5,9 +5,9 @@
   (self: super: with super; with mylib; {
     nix-wrapped =
       if isNixOS
-      then self.nixUnstable
+      then self.nixExperimental
       else
-        wrapBins self.nixUnstable ''
+        wrapBins self.nixExperimental ''
           export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})
           exec "$exePath" "$@"
         '';
@@ -70,8 +70,8 @@
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
-    nix-prefetch-git = nix-prefetch-git.override { nix = nixUnstable; };
-    bundix = bundix.override { nix = nixUnstable; };
+    nix-prefetch-git = nix-prefetch-git.override { nix = nixExperimental; };
+    bundix = bundix.override { nix = nixExperimental; };
     pinned-if-darwin = if isDarwin then nixos-20_09 else super;
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
