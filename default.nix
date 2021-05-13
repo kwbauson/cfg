@@ -3,6 +3,6 @@ let
   getFlake = builtins.getFlake or (src:
     (flake-compat { inherit src; }).defaultNix
   );
-  cfg = getFlake (toString ./.);
+  cfg = getFlake (builtins.path { name = "source"; path = ./.; });
 in
 cfg.packages.${builtins.currentSystem} // { inherit getFlake cfg; }
