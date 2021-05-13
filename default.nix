@@ -1,7 +1,8 @@
 let
-  getFlake = src:
-    if builtins ? getFlake
-    then builtins.getFlake (toString src)
-    else (import (import ./nix/sources.nix).flake-compat { src = ./.; }).defaultNix;
+  flake-compat = import (import ./nix/sources.nix).flake-compat;
+  getFlake = builtins.getFlake or (src:
+    (flake-compat { inherit src; }).defaultNix
+  );
+  cfg = getFlake (toString ./.);
 in
-(getFlake ./.).packages.${builtins.currentSystem}
+cfg.packages.${builtins.currentSystem} // { inherit getFlake cfg; }
