@@ -1,9 +1,11 @@
 pkgs: with pkgs; with mylib;
 (writeBashBin name ''
   ${pathAdd nix-wrapped}
-  [[ $1 == -c ]] && shift && cmd=$1 && shift
-  pkg=$1
-  shift
-  cmd=''${cmd:-''${pkg//*.}}
-  exec nix shell "${self-source}#$pkg" --command "$cmd" "$@"
+  if [[ $1 == -c ]];then
+    shift && cmd=$1 && shift
+    exec nix shell "${self-source}#$pkg" --command "$cmd" "$@"
+  else
+    pkg=$1 && shift
+    exec nix run "${self-source}#$pkg" -- "$@"
+  fi
 '').overrideAttrs (attrs: { passthru.__functor = _: exe; })
