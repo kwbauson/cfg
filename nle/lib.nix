@@ -13,11 +13,42 @@ config: with config.lib; (lib: { inherit lib; }) (builtins // {
       let v = set.${name}; in if pred name v then [ (nameValuePair name v) ] else [ ])
     (attrNames set)
   );
+  hasSuffix = suffix: content:
+    let
+      lenContent = stringLength content;
+      lenSuffix = stringLength suffix;
+    in
+    lenContent >= lenSuffix && substring (lenContent - lenSuffix) lenContent content == suffix;
+  removeSuffix = suffix: str:
+    let
+      sufLen = stringLength suffix;
+      sLen = stringLength str;
+    in
+    if sufLen <= sLen && suffix == substring (sLen - sufLen) sufLen str
+    then substring 0 (sLen - sufLen) str
+    else str;
+  hasAttrs = xs: attrs: all (x: hasAttr x attrs) xs;
+  import' = path:
+    let importEntry = entry: type:
+      if type == "directory" then
+        let
+          mkEntry = file: type: {
+            name = removeSuffix ".nix" file;
+            value = importEntry (entry + "/${file}") type;
+          };
+          entries = listToAttrs (mapAttrsToList mkEntry (readDir entry));
+          default = entries.default or { };
+        in
+        if isAttrs default then default // entries
+        else if isFunction default then entries // { __functor = _: default; __functionArgs = functionArgs default; }
+        else default
+      else if hasSuffix ".nix" entry then import entry
+      else entry;
+    in
+    importEntry path "directory";
 
-  hasFile = p: tryFile p != null;
   tryFile = p: findFirst pathExists null
     (reverseList (map (s: s + "/${p}") config.sources));
-  tryRead = p: if tryFile p == null then "" else readFile (tryFile p);
   tryImport = p: nul:
     let f = tryFile p; in if f == null then nul else import f;
 })

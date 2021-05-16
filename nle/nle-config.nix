@@ -1,22 +1,23 @@
 config: with config.lib; {
   sources = [ ];
+  imported._replace = foldl' (a: x: a // import' x) { } config.sources;
 
-  nixpkgs = {
+  nixpkgs = with config; {
     config = tryImport "config.nix" { };
-    overlays = tryImport "overlays.nix" [ ];
-    pkgs = import config.nixpkgs.path {
-      inherit (config.nixpkgs) system config overlays;
+    overlays = imported.overlays or [ ];
+    pkgs = import nixpkgs.path {
+      inherit (nixpkgs) system config overlays;
     };
   };
 
-  bundler = {
-    enable = all hasFile [ "Gemfile" "Gemfile.lock" "gemset.nix" ];
-    build = config.nixpkgs.pkgs.bundlerEnv;
+  bundler = with config; {
+    enable = hasAttrs [ "Gemfile" "Gemfile.lock" "gemset" ] imported;
+    build = nixpkgs.pkgs.bundlerEnv;
     settings = {
       name = "bundler-env";
-      gemfile = tryFile "Gemfile";
-      lockfile = tryFile "Gemfile.lock";
-      gemset = tryFile "gemset.nix";
+      gemfile = imported.Gemfile;
+      lockfile = imported."Gemfile.lock";
+      gemset = imported.gemset;
     };
   };
 
