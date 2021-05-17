@@ -92,7 +92,7 @@
         pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };
       };
     }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
-    nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system path; }; };
+    nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system; }; flake = { inherit inputs; }; };
     nixosModules = imported-nixpkgs.nixos.modules;
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";
