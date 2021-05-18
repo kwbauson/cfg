@@ -21,12 +21,16 @@ cmd=${1:-activate} && [[ -n $1 ]] && shift
 
 nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$sourcedir\"; }"
 
+local_nix_conf=$sourcedir/nix/nix.conf
+
+if [[ -e $local_nix_conf ]];then
+  export NIX_CONFIG=$(< "$local_nix_conf")
+fi
+
 invalid() {
   echo invalid command: "$args"
   exit 1
 }
-
-export NIX_CONFIG=$(< $sourcedir/nix/nix.conf)
 
 buildfiles=(
   package{,-lock}.json
@@ -299,8 +303,11 @@ set -e
 rev=REPLACE
 result=~/.cache/nle/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
+local_nix_conf=$(dirname "$0")/nix/nix.conf)
 
-export NIX_CONFIG=$(< $(dirname "$0")/nix/nix.conf)
+if [[ -e $local_nix_conf ]];then
+  export NIX_CONFIG=$(< "$local_nix_conf")
+fi
 
 if [[ ! -e $result ]];then
   mkdir -p "$(dirname "$result")"
