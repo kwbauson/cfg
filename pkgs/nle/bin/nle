@@ -303,7 +303,7 @@ set -e
 rev=REPLACE
 result=~/.cache/nle/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
-local_nix_conf=$(dirname "$0")/nix/nix.conf)
+local_nix_conf=$(dirname "$0")/nix/nix.conf
 
 if [[ -e $local_nix_conf ]];then
   export NIX_CONFIG=$(< "$local_nix_conf")
