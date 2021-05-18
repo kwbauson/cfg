@@ -26,7 +26,7 @@ invalid() {
   exit 1
 }
 
-export NIX_USER_CONF_FILES=$sourcedir/nix/nix.conf
+export NIX_CONFIG=$(< $sourcedir/nix/nix.conf)
 
 buildfiles=(
   package{,-lock}.json
