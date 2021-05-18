@@ -300,7 +300,7 @@ rev=REPLACE
 result=~/.cache/nle/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
 
-export NIX_USER_CONF_FILES=$(dirname "$0")/nix/nix.conf
+export NIX_CONFIG=$(< $(dirname "$0")/nix/nix.conf)
 
 if [[ ! -e $result ]];then
   mkdir -p "$(dirname "$result")"
