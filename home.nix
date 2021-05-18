@@ -269,7 +269,6 @@ with builtins; with pkgs; with mylib; {
             vim-better-whitespace vim-bbye vim-easymotion vim-fugitive
             vim-lastplace vim-multiple-cursors vim-peekaboo vim-polyglot
             vim-sensible vim-startify vim-vinegar nvim-scrollview vim-code-dark
-            markdown-preview-nvim
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver coc-pyright coc-explorer
