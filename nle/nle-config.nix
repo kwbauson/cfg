@@ -5,7 +5,7 @@ config: with config.lib; {
   nixpkgs = with config; {
     config =
       if imported ? "config.nix"
-      then import imported."config.nix" { }
+      then import imported."config.nix"
       else { };
     overlays = imported.overlays or [ ];
     path = config.flake.inputs.nixpkgs.outPath
@@ -18,6 +18,11 @@ config: with config.lib; {
 
   bundler = with config; {
     enable = hasAttrs [ "Gemfile" "Gemfile.lock" "gemset.nix" ] imported;
+    generate = optionalString (imported ? Gemfile) ''
+      ${nixpkgs.pkgs.bundix}/bin/bundix \
+        --gemfile="${imported.Gemfile}" \
+        ${if imported ? "Gemfile.lock" then ''--lockfile="${imported."Gemfile.lock"}"'' else "-l"}
+    '';
     build = nixpkgs.pkgs.bundlerEnv;
     settings = {
       name = "bundler-env";
