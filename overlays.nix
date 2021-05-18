@@ -8,7 +8,7 @@
       then self.nixExperimental
       else
         wrapBins self.nixExperimental ''
-          export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})
+          export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})$'\n'$NIX_CONFIG
           exec "$exePath" "$@"
         '';
     imported-nixpkgs = import' inputs.nixpkgs;
