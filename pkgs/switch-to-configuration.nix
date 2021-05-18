@@ -13,14 +13,18 @@ let
   makeScript = makeNamedScript "switch";
   scripts = eachHost
     (host: rec {
+      nob = let conf = nixosConfigurations.${host}; in
+        makeScript ''
+          sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
+          sudo ${conf}/bin/switch-to-configuration boot
+        '';
       nos = let conf = nixosConfigurations.${host}; in
         makeScript ''
           if [[ $(realpath /run/current-system) != ${conf} ]];then
-            sudo ${conf}/bin/switch-to-configuration switch
             sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
+            sudo ${conf}/bin/switch-to-configuration switch
           fi
         '';
-      nob = makeScript "sudo ${nixosConfigurations.${host}}/bin/switch-to-configuration boot";
       hms = let conf = homeConfigurations.${host}; in
         makeScript ''
           if [[ $(nix-env -q home-manager-path --out-path --no-name) != ${conf.config.home.path} ]];then
