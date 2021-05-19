@@ -284,19 +284,23 @@ with builtins; with pkgs; with mylib; {
     };
     htop = {
       enable = true;
-      accountGuestInCpuMeter = true;
-      fields = words "PID USER STATE PERCENT_CPU PERCENT_MEM M_RESIDENT STARTTIME COMM";
-      headerMargin = false;
-      hideThreads = true;
-      hideUserlandThreads = true;
-      meters.left = words "LeftCPUs Blank Memory Swap";
-      meters.right = words "RightCPUs Tasks Uptime LoadAverage";
-      showProgramPath = false;
-      showThreadNames = true;
-      sortKey = "USER";
-      treeView = true;
-      updateProcessNames = true;
-      vimMode = true;
+      settings = with config.lib.htop; {
+        account_guest_in_cpu_meter = true;
+        fields = with fields; [ PID USER STATE PERCENT_CPU PERCENT_MEM M_RESIDENT STARTTIME COMM ];
+        header_margin = false;
+        hide_threads = true;
+        hide_userland_threads = true;
+        left_meter_modes = with modes; [ Bar Text Bar Bar ];
+        left_meters = words "LeftCPUs Blank Memory Swap";
+        right_meter_modes = with modes; [ Bar Text Text Text ];
+        right_meters = words "RightCPUs Tasks Uptime LoadAverage";
+        show_program_path = false;
+        show_thread_names = true;
+        sort_key = fields.USER;
+        tree_view = true;
+        update_process_names = true;
+        vim_mode = true;
+      };
     };
     alacritty = {
       enable = true;

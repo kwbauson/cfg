@@ -70,11 +70,13 @@ rec {
           , ...
           }@args:
           let conf = (home-manager.lib.homeManagerConfiguration rec {
-            configuration = import ./home.nix ({
-              inherit pkgs username homeDirectory;
-              config = configuration;
-            } // args // { inherit self; });
             inherit system pkgs username homeDirectory;
+            configuration = {
+              imports = [
+                { _module.args = { inherit pkgs username homeDirectory self; } // args; }
+                ./home.nix
+              ];
+            };
           });
           in
           conf.activationPackage.overrideAttrs (_: { passthru = conf // { inherit pkgs; }; })
