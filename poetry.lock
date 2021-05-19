@@ -86,7 +86,7 @@ botocore = ">=1.17.0"
 
 [[package]]
 name = "inform"
-version = "1.23.0"
+version = "1.24.0"
 description = "print & logging utilities for communicating with user"
 category = "main"
 optional = false
@@ -204,8 +204,8 @@ git-remote-codecommit = [
     {file = "git-remote-codecommit-1.15.1.tar.gz", hash = "sha256:cd99d44a94f9adf8c5f15110d830f62af5fe644030fecc0df68cbda4880a5214"},
 ]
 inform = [
-    {file = "inform-1.23.0-py3-none-any.whl", hash = "sha256:5531c0411a81fcfa8022e092cb891a9a626aabaf7539588e8175e99fcc2d9d11"},
-    {file = "inform-1.23.0.tar.gz", hash = "sha256:bffd243e900d305035a6e7b3abfb91803c011eadb6907bf5ce3e2fbbe82c6c37"},
+    {file = "inform-1.24.0-py3-none-any.whl", hash = "sha256:d762907de77796cdff1e8d99c9c6841665002e0caa9bc544aa0398a51f9e21f2"},
+    {file = "inform-1.24.0.tar.gz", hash = "sha256:c68e2153b88bef303577dc3df884efa39ce3acbbd98299bed014cb4df7b95554"},
 ]
 jmespath = [
     {file = "jmespath-0.10.0-py2.py3-none-any.whl", hash = "sha256:cdf6525904cc597730141d61b36f2e4b8ecc257c420fa2f4549bac2c2d0cb72f"},
