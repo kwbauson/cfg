@@ -6,7 +6,7 @@ let
   makeNamedScript = name: text: (writeBashBin name
     ''
       set -e
-      ${pathAdd [ nix-wrapped coreutils git ] }
+      ${pathAdd [ nix-wrapped coreutils git nvd ] }
       ${text}
     '').overrideAttrs
     (_: { meta.mainProgram = name; });
@@ -21,13 +21,16 @@ let
       nos = let conf = nixosConfigurations.${host}; in
         makeScript ''
           if [[ $(realpath /run/current-system) != ${conf} ]];then
+            nvd diff /run/current-system ${conf}
             sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
             sudo ${conf}/bin/switch-to-configuration switch
           fi
         '';
       hms = let conf = homeConfigurations.${host}; in
         makeScript ''
-          if [[ $(nix-env -q home-manager-path --out-path --no-name) != ${conf.config.home.path} ]];then
+          hm_path=$(nix-env -q home-manager-path --out-path --no-name)
+          if [[ $hm_path != ${conf.config.home.path} ]];then
+            nvd diff $hm_path ${conf.config.home.path}
             ${conf}/activate
           fi
         '';
