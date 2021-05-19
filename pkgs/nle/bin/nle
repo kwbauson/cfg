@@ -2,7 +2,7 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl
 set -e
 
-if [[ $PINNED != '1' && -e nle-pinned.sh ]];then
+if [[ $PINNED != '1' && $cmd != pin && -e nle-pinned.sh ]];then
   PINNED=1 exec ./nle-pinned.sh "$@"
 fi
 

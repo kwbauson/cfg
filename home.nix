@@ -324,6 +324,7 @@ with builtins; with pkgs; with mylib; {
       enable = true;
       package = gitFull;
       aliases = {
+        v = "! nvim '+ Git | only'";
         a = "add -A";
         br = scriptAlias ''
           esc=$'\e'
@@ -512,6 +513,7 @@ with builtins; with pkgs; with mylib; {
   };
 
   home.file.".irbrc".text = ''
+    IRB.conf[:USE_READLINE] = true
     IRB.conf[:SAVE_HISTORY] = 2_000_000
     IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
   '';
