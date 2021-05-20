@@ -375,6 +375,7 @@ with builtins; with pkgs; with mylib; {
         '';
         put = "! git push --set-upstream origin $(git branch-name)";
         ro = "! git reset --hard origin/$(git branch-name)";
+        ros = "! git stash && git ro && git stash pop";
         rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
         s = "! git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
         sf = "!git f --quiet && git s";

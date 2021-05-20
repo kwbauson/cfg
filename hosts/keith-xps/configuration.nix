@@ -1,4 +1,4 @@
-{ pkgs, nixos-hardware, ... }:
+{ pkgs, lib, nixos-hardware, ... }:
 with builtins;
 {
   imports = [
@@ -17,6 +17,8 @@ with builtins;
 
     bluetooth.enable = true;
     bluetooth.package = pkgs.bluezFull;
+    # FIXME ffmpeg_3 not secure
+    opengl.extraPackages = with pkgs; lib.mkForce [ vaapiIntel vaapiVdpau intel-media-driver ];
   };
   networking.networkmanager.wifi.powersave = false;
   services.xserver.enable = true;
