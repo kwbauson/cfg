@@ -218,7 +218,7 @@ case $cmd in
       rm -f $tmpfile
     fi
     [[ -x update-helper ]] && ./update-helper
-    [[ -e output-paths ]] && "$0" dump-output-paths
+    [[ -e output-paths ]] && "$0" dump-output-paths || true
     exec "$0" generate
     ;;
   dump-output-paths)
