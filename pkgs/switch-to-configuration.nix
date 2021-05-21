@@ -35,7 +35,7 @@ let
           fi
         '';
       noa = (makeScript ''
-        ${optionalString isNixOS (exe nos)} || true
+        ${optionalString isNixOS "${exe nos} || true"}
         ${exe hms}
       '').overrideAttrs (_: { name = "${host}-noa"; });
     }) // { unknown.noa = null; };
