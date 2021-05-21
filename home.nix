@@ -312,6 +312,7 @@ with builtins; with pkgs; with mylib; {
       fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];
       scroll.bar.enable = false;
       scroll.lines = 0;
+      iso14755 = false;
     };
     git = with {
       scriptAlias = text: "! ${writeBash "git-alias-script" text}";
