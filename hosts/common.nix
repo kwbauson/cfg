@@ -15,7 +15,7 @@
 
   boot.blacklistedKernelModules = [ "psmouse" ];
 
-  nix.package = pkgs.nixExperimental;
+  nix.package = pkgs.nixUnstable;
   nix.nixPath = [ ];
   nix.extraOptions = self.nixConf;
   # nix.distributedBuilds = true;
