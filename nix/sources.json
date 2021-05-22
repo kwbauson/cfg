@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "13mqi0mgiphilbi46kigchxi78ajbh08jypqhyab1l7ic3dcpr79",
+        "sha256": "0laybmncy83dadmlz2a01qfq1d5nn43jwrdcmjk3ga5swfb0hh7d",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.24.85/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.24.86/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.24.85"
+        "version": "1.24.86"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "006y5k7dkfwghhg7015bwv4zhyn05v717y1krz0bzbgmvvz88hpr",
+        "sha256": "10sd9vmk9m3g7qynnwj9adnqnj7bz7n1zrhd9rx990dik4ggb1w6",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4159.a7064e23973/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4165.1f7155200fa/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4159.a7064e23973"
+        "version": "nixos-20.09.4165.1f7155200fa"
     },
     "nixos-unstable": {
         "sha256": "1i57zrdp3jcr2w4k19rijvf1w3rikmkknbb6zfvghxgypkgxrlc3",
