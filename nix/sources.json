@@ -64,11 +64,11 @@
         "version": "88.0.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "0kgkyhfmsnd4pp697gk3h10p3rvx62057fjsvalrk2y2w0kqy6ns",
+        "sha256": "14kjcnj2rdjlqczha1nw4i64dxqbh4zd8pz9n54527gp29v08n4m",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.1.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.2.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.1.0"
+        "version": "5.2.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
