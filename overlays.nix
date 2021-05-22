@@ -85,7 +85,7 @@
     vimPlugins = vimPlugins // { inherit (nixos-unstable.vimPlugins) vim-airline; };
     inherit (nixos-unstable);
     inherit (nixos-20_09);
-    inherit (self.pinned-if-darwin) alacritty;
+    inherit (self.pinned-if-darwin);
     switch = self.switch-to-configuration.scripts.${builtAsHost}.noa;
     pynixify = let python = python3.override {
       packageOverrides = self: super: {
