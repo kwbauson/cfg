@@ -45,13 +45,14 @@
     extraFiles = "requirements.dev.txt";
     notFiles = self.poetry.files;
     out = override
-      ((mach-nix.mkPython {
+      (inputs.mach-nix.lib.${system}.mkPython {
+        ignoreCollisions = true;
         requirements = excludeLines (hasPrefix "itomate") ''
           ${read "requirements.txt"}
           ${read "requirements.dev.txt"}
         '';
         _.curtsies.patches = [ ];
-      }).override { ignoreCollisions = true; })
+      })
       { name = "pip-env"; };
   };
   poetry = {

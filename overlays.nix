@@ -61,11 +61,6 @@
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
-    mach-nix = inputs.mach-nix // import inputs.mach-nix {
-      inherit pkgs;
-      pypiDataRev = inputs.pypi-deps-db.rev;
-      pypiDataSha256 = inputs.pypi-deps-db.narHash;
-    };
     nle-cfg = self.nle.build { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
