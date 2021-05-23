@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # with-packages curl niv gawk nix-wrapped nr
+set -eo pipefail
 
 # nixpkgs channels
 for channel in nixos-unstable nixos-20.09 nixos-18.09;do
