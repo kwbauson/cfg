@@ -31,6 +31,51 @@ let
         sha512 = "5aPpe5XQPzflQrFwL1/QoeHkP2MsA4JCntcXHRhEsdsfPVkvPi2w7Qix4iV7t5S/oC9OodGrggd8aco1g3SZFg==";
       };
     };
+    "@tsconfig/node10-1.0.7" = {
+      name = "_at_tsconfig_slash_node10";
+      packageName = "@tsconfig/node10";
+      version = "1.0.7";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@tsconfig/node10/-/node10-1.0.7.tgz";
+        sha512 = "aBvUmXLQbayM4w3A8TrjwrXs4DZ8iduJnuJLLRGdkWlyakCf1q6uHZJBzXoRA/huAEknG5tcUyQxN3A+In5euQ==";
+      };
+    };
+    "@tsconfig/node12-1.0.7" = {
+      name = "_at_tsconfig_slash_node12";
+      packageName = "@tsconfig/node12";
+      version = "1.0.7";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@tsconfig/node12/-/node12-1.0.7.tgz";
+        sha512 = "dgasobK/Y0wVMswcipr3k0HpevxFJLijN03A8mYfEPvWvOs14v0ZlYTR4kIgMx8g4+fTyTFv8/jLCIfRqLDJ4A==";
+      };
+    };
+    "@tsconfig/node14-1.0.0" = {
+      name = "_at_tsconfig_slash_node14";
+      packageName = "@tsconfig/node14";
+      version = "1.0.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@tsconfig/node14/-/node14-1.0.0.tgz";
+        sha512 = "RKkL8eTdPv6t5EHgFKIVQgsDapugbuOptNd9OOunN/HAkzmmTnZELx1kNCK0rSdUYGmiFMM3rRQMAWiyp023LQ==";
+      };
+    };
+    "@tsconfig/node16-1.0.1" = {
+      name = "_at_tsconfig_slash_node16";
+      packageName = "@tsconfig/node16";
+      version = "1.0.1";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.1.tgz";
+        sha512 = "FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==";
+      };
+    };
+    "@types/node-15.6.0" = {
+      name = "_at_types_slash_node";
+      packageName = "@types/node";
+      version = "15.6.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@types/node/-/node-15.6.0.tgz";
+        sha512 = "gCYSfQpy+LYhOFTKAeE8BkyGqaxmlFxe+n4DKM6DR0wzw/HISUE/hAmkC/KT8Sw5PCJblqg062b3z9gucv3k0A==";
+      };
+    };
     "@types/normalize-package-data-2.4.0" = {
       name = "_at_types_slash_normalize-package-data";
       packageName = "@types/normalize-package-data";
@@ -1111,6 +1156,15 @@ let
         sha1 = "5887966bb582a4503a41eb524f7d35011815a613";
       };
     };
+    "ts-node-10.0.0" = {
+      name = "ts-node";
+      packageName = "ts-node";
+      version = "10.0.0";
+      src = fetchurl {
+        url = "https://registry.npmjs.org/ts-node/-/ts-node-10.0.0.tgz";
+        sha512 = "ROWeOIUvfFbPZkoDis0L/55Fk+6gFQNZwwKPLinacRl6tsxstTF1DbAcLKkovwnpKMVvOMHP1TIbnwXwtLg1gg==";
+      };
+    };
     "ts-node-9.1.1" = {
       name = "ts-node";
       packageName = "ts-node";
@@ -1256,6 +1310,11 @@ let
           sources."supports-color-5.5.0"
         ];
       })
+      sources."@tsconfig/node10-1.0.7"
+      sources."@tsconfig/node12-1.0.7"
+      sources."@tsconfig/node14-1.0.0"
+      sources."@tsconfig/node16-1.0.1"
+      sources."@types/node-15.6.0"
       sources."@types/normalize-package-data-2.4.0"
       sources."@types/strip-bom-3.0.0"
       sources."@types/strip-json-comments-0.0.30"
@@ -1379,8 +1438,12 @@ let
       sources."to-regex-range-5.0.1"
       sources."tree-kill-1.2.2"
       sources."trim-newlines-1.0.0"
-      sources."ts-node-9.1.1"
-      sources."ts-node-dev-1.1.6"
+      sources."ts-node-10.0.0"
+      (sources."ts-node-dev-1.1.6" // {
+        dependencies = [
+          sources."ts-node-9.1.1"
+        ];
+      })
       sources."tsconfig-7.0.0"
       sources."tslib-1.14.1"
       sources."type-fest-0.6.0"
