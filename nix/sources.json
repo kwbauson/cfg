@@ -64,11 +64,11 @@
         "version": "88.0.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "14kjcnj2rdjlqczha1nw4i64dxqbh4zd8pz9n54527gp29v08n4m",
+        "sha256": "1ibr136gkz71vkcqyjhrg72lrhqrg29ryy48i4x647xpzcz78gxs",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.2.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.2.1.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.2.0"
+        "version": "5.2.1"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -169,18 +169,18 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "10sd9vmk9m3g7qynnwj9adnqnj7bz7n1zrhd9rx990dik4ggb1w6",
+        "sha256": "0kdla3cv8vr1g08adr1vxig0vyzabw2fr6drz6ldikaz8kqsinzp",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4165.1f7155200fa/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4169.ac60476ed94/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4165.1f7155200fa"
+        "version": "nixos-20.09.4169.ac60476ed94"
     },
     "nixos-unstable": {
-        "sha256": "1i57zrdp3jcr2w4k19rijvf1w3rikmkknbb6zfvghxgypkgxrlc3",
+        "sha256": "1nl6pzh39ifgmz1zqg6d6jvp6s58g8izalgs5a7v29dgd1rgd7b2",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre291103.d42cd445dde/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.05pre291486.900115a4f7f/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05pre291103.d42cd445dde"
+        "version": "nixos-21.05pre291486.900115a4f7f"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
