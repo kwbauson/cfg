@@ -218,8 +218,8 @@ case $cmd in
       rm -f $tmpfile
     fi
     [[ -x update-helper ]] && ./update-helper
+    "$0" generate
     [[ -e output-paths ]] && "$0" dump-output-paths || true
-    exec "$0" generate
     ;;
   dump-output-paths)
     paths=$(nix eval --raw '.#output-paths')
