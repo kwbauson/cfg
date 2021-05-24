@@ -99,7 +99,7 @@
       hmg = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
       hmp = "git -C ~/cfg cap";
       nou = "hmg && noa";
-      nod = "delete-old-generations && nix store gc -v";
+      nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
       noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
       hme = "nvim ~/cfg/home.nix && hms";
       nb = "pkg=$1 && shift; nix build ~/cfg#$pkg";

@@ -14,9 +14,3 @@ for pkg in signal-desktop firefox brave;do
   version=$(nix eval --raw ".#$pkg.version")
   niv update dmg-$pkg -v $version
 done
-
-# nodejs headers
-node_version=$(nix shell ".#nodejs_latest" -c node --version)
-url=https://nodejs.org/download/release/$node_version/node-$node_version-headers.tar.gz
-sha256=$(nix-prefetch-url $url)
-echo "builtins.fetchurl { url = \"$url\"; sha256 = \"$sha256\"; }" > pkgs/nle/node-headers.nix
