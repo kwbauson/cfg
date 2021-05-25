@@ -28,9 +28,11 @@ let
         '';
       hms = let conf = homeConfigurations.${host}; in
         makeScript ''
-          hm_path=$(nix-env -q home-manager-path --out-path --no-name)
+          hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
           if [[ $hm_path != ${conf.config.home.path} ]];then
-            nvd diff $hm_path ${conf.config.home.path}
+            if [[ -n $hm_path ]];then
+              nvd diff $hm_path ${conf.config.home.path}
+            fi
             ${conf}/activate
           fi
         '';

@@ -48,7 +48,6 @@ pkgs: with pkgs; with mylib; latestWrapper name (stdenv.mkDerivation {
   completion = ''
     _${name}()
     {
-        ${pathAdd [ sqlite ]}
         local cur prev opts sql
         COMPREPLY=()
         cur="''${COMP_WORDS[COMP_CWORD]}"
@@ -56,7 +55,7 @@ pkgs: with pkgs; with mylib; latestWrapper name (stdenv.mkDerivation {
         sql="select distinct name from Programs where name like '$cur%' order by name"
 
         if [[ $COMP_CWORD = 1 ]] || [[ $prev = -* && $COMP_CWORD = 2 ]];then
-          COMPREPLY=( $(compgen -W "$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)" -- "$cur") )
+          COMPREPLY=( $(compgen -W "$(${sqlite}/bin/sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)" -- "$cur") )
         else
           COMPREPLY=( $(compgen -f -- "$cur") )
         fi

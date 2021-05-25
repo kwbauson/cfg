@@ -124,58 +124,56 @@ with builtins; with pkgs; with mylib; {
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
         qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
       };
-      initExtra =
-        prefixIf
-          isDarwin ''
-          if command -v nix &> /dev/null;then
-            NIX_LINK=$HOME/.nix-profile/bin
-            export PATH=$(echo "$PATH" | sed "s#:$NIX_LINK##; s#\(/usr/local/bin\)#$NIX_LINK:\1#")
-            unset NIX_LINK
-          else
-            source ~/.nix-profile/etc/profile.d/nix.sh
-            export XDG_DATA_DIRS="$HOME/.nix-profile/share:''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-          fi
-          source ~/.nix-profile/etc/profile.d/bash_completion.sh
-          if [[ -d ~/.nix-profile/etc/bash_completion.d ]];then
-            for script in ~/.nix-profile/etc/bash_completion.d/*;do
-              source $script
-            done
-          fi
-          export GPG_TTY=$(tty)
-        '' ''
-          [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-          [[ -n $SSH_CLIENT ]] && _host="$(hostname --fqdn) " || _host=
-          PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
+      initExtra = prefixIf (!isNixOS) ''
+        if command -v nix &> /dev/null;then
+          NIX_LINK=$HOME/.nix-profile/bin
+          export PATH=$(echo "$PATH" | sed "s#:$NIX_LINK##; s#\(/usr/local/bin\)#$NIX_LINK:\1#")
+          unset NIX_LINK
+        else
+          source ~/.nix-profile/etc/profile.d/nix.sh
+          export XDG_DATA_DIRS="$HOME/.nix-profile/share:''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+        fi
+        source ~/.nix-profile/etc/profile.d/bash_completion.sh
+        if [[ -d ~/.nix-profile/etc/bash_completion.d ]];then
+          for script in ~/.nix-profile/etc/bash_completion.d/*;do
+            source $script
+          done
+        fi
+        export GPG_TTY=$(tty)
+      '' ''
+        [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
+        [[ -n $SSH_CLIENT ]] && _host="$(hostname --fqdn) " || _host=
+        PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
-          set -o vi
-          set +h
-          _promptcmd() {
-              ret=$?
-              [[ $ret -eq 0 || $ret -eq 148 ]] && rstat= || rstat=$ret
+        set -o vi
+        set +h
+        _promptcmd() {
+            ret=$?
+            [[ $ret -eq 0 || $ret -eq 148 ]] && rstat= || rstat=$ret
 
-              if [[ -z $rstat && -z $jstat ]];then
-                _status=
-              elif [[ -z $rstat ]];then
-                _status=$jstat
-              elif [[ -z $jstat ]];then
-                _status=$rstat
-              else
-                _status="$rstat $jstat"
-              fi
+            if [[ -z $rstat && -z $jstat ]];then
+              _status=
+            elif [[ -z $rstat ]];then
+              _status=$jstat
+            elif [[ -z $jstat ]];then
+              _status=$rstat
+            else
+              _status="$rstat $jstat"
+            fi
 
-              _place=$(($COLUMNS - $((''${#_host} + ''${#_status}))))
+            _place=$(($COLUMNS - $((''${#_host} + ''${#_status}))))
 
-              history -a
-              tail -n1 ~/.bash_history >> ~/.bash_history-all
-          }
-          PROMPT_COMMAND='_promptcmd'
+            history -a
+            tail -n1 ~/.bash_history >> ~/.bash_history-all
+        }
+        PROMPT_COMMAND='_promptcmd'
 
-          source ${sources.complete-alias}/complete_alias
-          complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
+        source ${sources.complete-alias}/complete_alias
+        complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
 
-          _completion_loader git
-          ___git_complete g __git_main
-        '';
+        _completion_loader git
+        ___git_complete g __git_main
+      '';
       profileExtra = ''
         [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
         [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
