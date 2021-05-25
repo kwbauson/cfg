@@ -120,6 +120,7 @@ rec {
 
       homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
       homeConfigurations.keith-desktop = homeConfigurations.graphical.override { host = "keith-desktop"; };
+      homeConfigurations.keith-wsl = homeConfigurations.graphical.override { host = "keith-wsl"; isNixOS = false; };
       homeConfigurations.kwbauson = homeConfigurations.non-graphical.override { host = "kwbauson"; };
       homeConfigurations.keith-vm = homeConfigurations.graphical.override { host = "keith-vm"; };
       homeConfigurations.keith-mac = lib.homeConfiguration {
@@ -157,6 +158,7 @@ rec {
 
       keith-xps = homeConfigurations.keith-xps.pkgs.switch;
       keith-desktop = homeConfigurations.keith-desktop.pkgs.switch;
+      keith-wsl = homeConfigurations.keith-wsl.pkgs.switch;
       kwbauson = homeConfigurations.kwbauson.pkgs.switch;
       keith-vm = homeConfigurations.keith-vm.pkgs.switch;
       keith-mac = homeConfigurations.keith-mac.pkgs.switch;
