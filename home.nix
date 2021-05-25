@@ -287,8 +287,8 @@ with builtins; with pkgs; with mylib; {
         account_guest_in_cpu_meter = true;
         fields = with fields; [ PID USER STATE PERCENT_CPU PERCENT_MEM M_RESIDENT STARTTIME COMM ];
         header_margin = false;
-        hide_threads = true;
         hide_userland_threads = true;
+        hide_kernel_threads = true;
         left_meter_modes = with modes; [ Bar Text Bar Bar ];
         left_meters = words "LeftCPUs Blank Memory Swap";
         right_meter_modes = with modes; [ Bar Text Text Text ];
