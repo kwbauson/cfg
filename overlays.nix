@@ -174,6 +174,14 @@
             -e "s/(\[Built\])$/$green\1$reset/" \
             -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
       '';
+      copy-to-cache = ''
+        ${pathAdd nix-wrapped}
+        tmpfile=$(mktemp)
+        trap 'rm "$tmpfile"' EXIT
+        ssh kwbauson.com sudo cat /etc/nixos/cache-priv-key.pem > "$tmpfile"
+        ${optionalString isNixOS "sudo"} nix store sign --recursive --key-file "$tmpfile" "$@"
+        nix copy --substitute-on-destination --to ssh://kwbauson.com "$@"
+      '';
     };
   })
   (self: super: with super; with mylib;
