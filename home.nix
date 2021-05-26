@@ -174,6 +174,10 @@ with builtins; with pkgs; with mylib; {
 
         _completion_loader git
         ___git_complete g __git_main
+        rpg() {
+          ${exe rpg-cli} "$@"
+          cd "$(${exe rpg-cli} --pwd)"
+        }
       '';
       profileExtra = ''
         [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)

@@ -55,10 +55,6 @@
 
   fonts.enableDefaultFonts = config.services.xserver.enable;
 
-  documentation.dev.enable = true;
-  documentation.info.enable = false;
-  documentation.man.generateCaches = true;
-
   services = {
     dbus.packages = with pkgs; [ gnome3.dconf ];
     localtime.enable = true;
