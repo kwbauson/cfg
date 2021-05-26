@@ -5,6 +5,7 @@ rec {
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nix.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
@@ -25,7 +26,7 @@ rec {
   };
 
   outputs =
-    { self, nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
+    { self, nix, nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
       (system: rec {
         packages = self.lib.pkgsForSystem {
           inherit system;
@@ -86,6 +87,7 @@ rec {
       overlays = [
         (final: nixpkgs: {
           cfg = self;
+          nixMaster = inputs.nix.defaultPackage.${nixpkgs.system};
           self-source = final.mylib.buildDirExcept ./.
             [ ".git" ".github" "output-paths" "secrets" ];
           inherit nixpkgs inputs;

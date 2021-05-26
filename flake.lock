@@ -35,6 +35,23 @@
         "type": "github"
       }
     },
+    "lowdown-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617481909,
+        "narHash": "sha256-SqnfOFuLuVRRNeVJr1yeEPJue/qWoCp5N6o5Kr///p4=",
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "rev": "148f9b2f586c41b7e36e73009db43ea68c7a1a4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kristapsdz",
+        "ref": "VERSION_0_8_4",
+        "repo": "lowdown",
+        "type": "github"
+      }
+    },
     "mach-nix": {
       "inputs": {
         "flake-utils": [
@@ -104,6 +121,26 @@
         "ref": "nightly",
         "repo": "neovim",
         "type": "github"
+      }
+    },
+    "nix": {
+      "inputs": {
+        "lowdown-src": "lowdown-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1621929099,
+        "narHash": "sha256-WowmnKsAwEL9fysvCWlLAhX9YqlrQogZLrINn0hJWWY=",
+        "owner": "NixOS",
+        "repo": "nix",
+        "rev": "19396f2a8ab5f641daa08b8b7fd51f875674536a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nix",
+        "type": "indirect"
       }
     },
     "nixos-hardware": {
@@ -184,6 +221,7 @@
         "mach-nix": "mach-nix",
         "naersk": "naersk",
         "neovim": "neovim",
+        "nix": "nix",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pypi-deps-db": "pypi-deps-db",
