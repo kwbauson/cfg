@@ -218,18 +218,6 @@
         "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/e02b6a3203411b76616a0e4328245bf8b47c5dcc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "rpg-cli": {
-        "branch": "main",
-        "description": "Your filesystem as a dungeon!",
-        "homepage": "",
-        "owner": "facundoolano",
-        "repo": "rpg-cli",
-        "rev": "fae3cff99af47d65b77fea71ab7b8f0a7cad8ec2",
-        "sha256": "0bldc6icfwz9mrmjfm89r5j2hldfi4xriw7pyp95y1gsdgf7vwxf",
-        "type": "tarball",
-        "url": "https://github.com/facundoolano/rpg-cli/archive/fae3cff99af47d65b77fea71ab7b8f0a7cad8ec2.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "slapper": {
         "branch": "master",
         "description": "Simple load testing tool with real-time updated histogram of request timings",
