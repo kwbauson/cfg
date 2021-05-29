@@ -40,10 +40,10 @@ with builtins; with pkgs; with mylib; {
         };
         development = {
           inherit
-            bat colordiff ctags dhall git-trim gron highlight xh
-            icdiff jq nim nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
-            solargraph watchexec yarn yarn-completion nodejs_latest
-            gh git-ignore git-fuzzy black
+            bat colordiff ctags dhall git-trim gron highlight xh icdiff jq nim
+            nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt solargraph
+            watchexec yarn yarn-completion nodejs_latest gh git-ignore
+            git-fuzzy black
             ;
           inherit (nodePackages) npm-check-updates prettier;
           nle = nle.unwrapped;

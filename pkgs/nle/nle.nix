@@ -31,6 +31,7 @@
           inherit (args) name packageName version dependencies;
           src = buildDir (map file (words self.npm.files));
           dontNpmInstall = true;
+          nativeBuildInputs = [ nodePackages.node-gyp-build ];
         })
         { name = "node_modules"; };
   };

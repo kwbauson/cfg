@@ -46,6 +46,10 @@
     "nix": {
       "command": "rnix-lsp",
       "filetypes": ["nix"]
+    },
+    "nim": {
+      "command": "nimlsp",
+      "filetypes": ["nim"]
     }
   }
 }
