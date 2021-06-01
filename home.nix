@@ -490,6 +490,9 @@ with builtins; with pkgs; with mylib; {
         executable = true;
         source = writeBash "login-fill" ''
           set -e
+          if [[ -e ~/cfg/secrets/bw-session ]];then
+            export BW_SESSION=$(< ~/cfg/secrets/bw-session)
+          fi
           items=$(bw list items --url "$QUTE_URL" | jq 'map(.login) | map({ username, password, url: .uris[0].uri })')
           count=$(echo "$items" | jq length)
           if [[ $count -eq 1 ]];then
