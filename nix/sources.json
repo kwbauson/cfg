@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "0laybmncy83dadmlz2a01qfq1d5nn43jwrdcmjk3ga5swfb0hh7d",
+        "sha256": "07qk6xjl321xign904a5q1x88hjjwrn0zhi71zdjpkk9in2ximxm",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.24.86/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.25.68/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.24.86"
+        "version": "1.25.68"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -57,11 +57,11 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "0z9p6jng7is8pq21dffjr6mfk81q08v99fwmhj22g9b1miqxrvcz",
+        "sha256": "0z86q1hlwmhfwrddhapwiy8qrn3v03d7nbsnzhnkr3fc9vz58ga3",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/88.0.1/mac/en-US/Firefox%2088.0.1.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/89.0/mac/en-US/Firefox%2089.0.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "88.0.1"
+        "version": "89.0"
     },
     "dmg-signal-desktop": {
         "sha256": "0fhx2k42p4cvfm7d2l8rvivr3s969rc9zlhnysg22a9y7l0cs9w3",
