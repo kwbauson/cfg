@@ -200,10 +200,10 @@
         "homepage": null,
         "owner": "cript0nauta",
         "repo": "pynixify",
-        "rev": "140ec9aa7061383aa0d6a45969f6ef4f6570acb4",
-        "sha256": "06rsxrbxwqb8w71vx6w0v09fpisavifia4y7dx9yfj3n601y3rvj",
+        "rev": "427efdcd9bedffb5f8ab5caeabc6d9e51453ea3c",
+        "sha256": "1v427grqdi96c6i72krn3cibx6dwc58gdwa23knnx8964s4an63f",
         "type": "tarball",
-        "url": "https://github.com/cript0nauta/pynixify/archive/140ec9aa7061383aa0d6a45969f6ef4f6570acb4.tar.gz",
+        "url": "https://github.com/cript0nauta/pynixify/archive/427efdcd9bedffb5f8ab5caeabc6d9e51453ea3c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ranger_devicons": {
