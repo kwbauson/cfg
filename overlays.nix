@@ -65,6 +65,7 @@
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
     nix-prefetch-git = nix-prefetch-git.override { nix = nix-wrapped; };
     bundix = bundix.override { nix = nix-wrapped; };
+    nix-index = nix-index.override { nix = nix-wrapped; };
     pinned-if-darwin = if isDarwin then nixos-20_09 else super;
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
