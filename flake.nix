@@ -94,7 +94,6 @@ rec {
           isNixOS = nixpkgs.isNixOS or false;
           neovim-master = neovim.defaultPackage.${nixpkgs.system};
         })
-        (_: previous: { mylib = import ./mylib.nix previous; })
       ] ++ (import ./overlays.nix);
       config = import ./config.nix;
 

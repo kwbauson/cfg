@@ -16,14 +16,14 @@ config: with config.lib; {
     };
   };
 
-  bundler = with config; {
+  bundler = with config; with nixpkgs.pkgs; {
     enable = hasAttrs [ "Gemfile" "Gemfile.lock" "gemset.nix" ] imported;
     generate = optionalString (imported ? Gemfile) ''
-      ${nixpkgs.pkgs.bundix}/bin/bundix \
+      ${bundix}/bin/bundix \
         --gemfile="${imported.Gemfile}" \
         ${if imported ? "Gemfile.lock" then ''--lockfile="${imported."Gemfile.lock"}"'' else "-l"}
     '';
-    build = nixpkgs.pkgs.bundlerEnv;
+    build = bundlerEnv;
     settings = {
       name = "bundler-env";
       gemfile = imported.Gemfile;
@@ -32,10 +32,32 @@ config: with config.lib; {
     };
   };
 
+  poetry = with config; with nixpkgs.pkgs; {
+    enable = hasAttrs [ "pyproject.toml" "poetry.lock" ] imported;
+    build = poetry2nix.mkPoetryEnv;
+    settings = {
+      pyproject = imported."pyproject.toml";
+      poetrylock = imported."poetry.lock";
+      overrides = poetry2nix.overrides.withoutDefaults (self: super: {
+        inform = super.inform.overridePythonAttrs (old: {
+          buildInputs = old.buildInputs ++ [ self.pytest-runner ];
+        });
+        shlib = super.shlib.overridePythonAttrs (old: {
+          buildInputs = old.buildInputs ++ [ self.pytest-runner ];
+        });
+      });
+    };
+  };
+
+  modules = with config; [
+    { _module.args = { inherit (flake) inputs; }; }
+    { nixpkgs = { inherit (nixpkgs) config overlays; }; }
+  ];
+
   nixosConfigurations = with config; mapAttrs
-    (hostName: attrs: nixpkgs.pkgs.nixos {
-      imports = [
-        { networking = { inherit hostName; }; }
+    (host: attrs: nixpkgs.pkgs.nixos {
+      imports = modules ++ [
+        { _module.args = { inherit host; }; }
         (imported.configuration or { })
         (attrs.configuration or { })
       ];
@@ -43,15 +65,14 @@ config: with config.lib; {
     (imported.hosts or { });
 
   homeConfigurations = with config; mapAttrs
-    (hostName: attrs:
+    (host: attrs:
       let
         fake-home-module.options.home = {
           homeDirectory = mkOption { type = types.str; };
           username = mkOption { type = types.str; };
         };
-        home-modules = [
-          { options.home.hostName = mkOption { type = types.str; }; }
-          { home = { inherit hostName; }; }
+        home-modules = modules ++ [
+          { _module.args = { inherit host; }; }
           (imported.home or { })
           (attrs.home or { })
         ];
@@ -69,5 +90,6 @@ config: with config.lib; {
     let build = n: cfg:
       if cfg.enable or false then (cfg.build cfg.settings).overrideAttrs (_: { name = "${n}-env"; }) else null;
     in filterAttrs (n: v: v != null) (mapAttrs build (config // { outputs = null; paths = null; }));
+
   paths._replace = attrValues config.outputs;
 }

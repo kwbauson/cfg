@@ -1,4 +1,8 @@
 [
+  (_: prev: {
+    mylib = import ./mylib.nix prev;
+    isNixOS = prev.isNixOS or false;
+  })
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
     inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
@@ -86,7 +90,11 @@
         pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };
       };
     }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
-    nle-config = (import ./nle).withConfig { nixpkgs = { inherit (pkgs) system; }; flake = { inherit inputs; }; };
+    nle-config = (import ./nle).withConfig {
+      nixpkgs = { inherit system; };
+      flake = { inherit inputs; };
+      sources = ./.;
+    };
     nixosModules = imported-nixpkgs.nixos.modules;
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";

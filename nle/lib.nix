@@ -12,9 +12,11 @@ config: with config.lib;
           entries = listToAttrs (concatLists (mapAttrsToList mkEntry (readDir entry)));
           default = entries.default or { };
         in
-        if isAttrs default then default // entries
-        else if isFunction default then entries // { __functor = _: default; __functionArgs = functionArgs default; }
-        else default
+        (
+          if isFunction default
+          then { __functor = _: default; __functionArgs = functionArgs default; }
+          else default
+        ) // entries
       else if hasSuffix ".nix" entry then import entry
       else entry;
     in
