@@ -62,7 +62,10 @@ config: with config.lib; {
         (attrs.configuration or { })
       ];
     })
-    (imported.hosts or { });
+    (imported.hosts or { } // optionalAttrs
+      (imported ? configuration)
+      { default = { inherit (imported) configuration; }; }
+    );
 
   homeConfigurations = with config; mapAttrs
     (host: attrs:
@@ -84,7 +87,10 @@ config: with config.lib; {
         configuration = { imports = home-modules; };
       }
     )
-    (imported.hosts or { });
+    (imported.hosts or { } // optionalAttrs
+      (imported ? home)
+      { default = { inherit (imported) home; }; }
+    );
 
   outputs =
     let build = n: cfg:
