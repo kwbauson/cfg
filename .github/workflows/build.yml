@@ -5,8 +5,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: cachix/cachix-action@v10
-        with:
-          name: kwbauson
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - run: nix -vL --show-trace build

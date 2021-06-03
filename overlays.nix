@@ -6,7 +6,6 @@
     nix-wrapped = let nix = nixMaster; in
       if isNixOS then nix else
       wrapBins nix ''
-        mkdir -p ~/.local/share/nix
         export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})$'\n'$NIX_CONFIG
         exec "$exePath" "$@"
       '';
