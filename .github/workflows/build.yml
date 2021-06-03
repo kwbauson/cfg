@@ -9,5 +9,4 @@ jobs:
         with:
           name: kwbauson
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          installCommand: true
       - run: nix -vL --show-trace build
