@@ -353,18 +353,20 @@ with builtins; with pkgs; with mylib; {
           git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
         '';
         dfo = scriptAlias ''git f && git df "origin/''${1:-$(git branch-name)}"'';
-        f = "fetch origin +refs/heads/*:refs/remotes/origin/* +refs/notes/*:refs/notes/*";
-        g = "! git pull origin $(git branch-name) --ff-only";
+        f = "fetch --all";
+        g = "! git f && git mo";
         gr = "! git pull origin $(git branch-name) --rebase --autostash";
         gm = "! git fetch origin $(git main):$(git main)";
         gmp = "! git gm && git mp";
         mm = "! git merge $(git main)";
-        mp = "! git mm && git p";
+        mo = "! git merge origin/$(git branch-name) --ff-only";
+        mp = "! git mm && git ";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";
         hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
         unhide = "update-index --no-skip-worktree";
         l = "log";
-        lfo = ''! git fetch && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
+        lg = "! git lfo && git mo";
+        lfo = ''! git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
         p = "put";
         fp = scriptAlias ''
           set -e
