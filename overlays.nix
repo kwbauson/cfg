@@ -7,7 +7,7 @@
     inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
   (self: super: with super; with mylib; {
-    nix-wrapped = let nix = nixMaster; in
+    nix-wrapped = let nix = nixUnstable; in
       if isNixOS then nix else
       wrapBins nix ''
         mkdir -p ~/.local/share/nix
