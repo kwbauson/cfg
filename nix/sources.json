@@ -64,11 +64,11 @@
         "version": "89.0"
     },
     "dmg-signal-desktop": {
-        "sha256": "0fhx2k42p4cvfm7d2l8rvivr3s969rc9zlhnysg22a9y7l0cs9w3",
+        "sha256": "0rkbg67kajhykdsx799ljphbz00fak9dyyp4sxl12sdv77ajzc8j",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.3.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.4.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.3.0"
+        "version": "5.4.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -176,11 +176,11 @@
         "version": "nixos-20.09.4244.47e580e291f"
     },
     "nixos-unstable": {
-        "sha256": "0z4a0pklyd14if1nznr2blgx8dx1igf6qlcskfkiz76gbkz28ikx",
+        "sha256": "1g5i44l4lshsk1qyymzxgkby21dwrqz2rx3frp5hy767rx6cvsgc",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre293089.1c2986bbb80/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre293730.1ca6b0a0cc3/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre293089.1c2986bbb80"
+        "version": "nixos-21.11pre293730.1ca6b0a0cc3"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
