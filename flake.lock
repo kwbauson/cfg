@@ -138,11 +138,11 @@
     "pypi-deps-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1623142397,
-        "narHash": "sha256-UxWXJ6Masm+ayCTSxo+uO3ppbffc9C7ahJUMIMhIb7M=",
+        "lastModified": 1623185426,
+        "narHash": "sha256-h1i+y5JveUUmbaEp221GNMN3vpR+9/IuMJTPg3nR99E=",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "7bd2dc86d79a99f09afcd2c15093c499dc979266",
+        "rev": "90f9918e719f130444763537e8aeb0cf3e080433",
         "type": "github"
       },
       "original": {
