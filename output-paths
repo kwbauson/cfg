@@ -1,6 +1,6 @@
 checks=/nix/store/rijwcp5n172wzpf003wwma8l1gbh0l9c-checks
-keith-desktop=/nix/store/znml8bbxx528l7s5vdnycbnn223xd85l-keith-desktop-noa
-keith-vm=/nix/store/lfr32bndc6flh5f5c8vh9vhp9ywssnm1-keith-vm-noa
-keith-xps=/nix/store/ljrysz4caz1i1hkvlv8m56zxqd1ln13r-keith-xps-noa
-kwbauson=/nix/store/61brrd1d3bjz287ypjcl0v5i44g7gpdf-kwbauson-noa
-self-source=/nix/store/39lywbv4crlr6z21sigzjn59d7ksa8a6-source
+keith-desktop=/nix/store/ildnxh3n6l9kfm9vk2yw05fjn9giqh6p-keith-desktop-noa
+keith-vm=/nix/store/626n2rb0d0wyidxhgvb821j20m29mmi6-keith-vm-noa
+keith-xps=/nix/store/kcicd99xjl8ywdlj7m65favxwskrjaym-keith-xps-noa
+kwbauson=/nix/store/xzyyralbhl31lsrb2xz08vl34zyyqmbj-kwbauson-noa
+self-source=/nix/store/4rbnbpwv6lw8nq4n3ad05ccp2ri4sbb9-source
