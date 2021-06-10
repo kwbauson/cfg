@@ -11,6 +11,7 @@ let
       if [[ -e package.json && package-lock.json ]];then
         if ! ncu -e2;then
           ncu -u
+          rm package-lock.json
           npm --package-lock-only i
         fi
       fi
