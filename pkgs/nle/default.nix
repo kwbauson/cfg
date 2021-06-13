@@ -5,7 +5,10 @@ let
     import ./nix-local-env.nix { inherit pkgs path source; };
   joinMapAttrValuesIf = f: p: as: concatMapStringsSep "\n" f (attrValues (filterAttrs (n: v: p n) as));
   scripts = makeScripts {
-    update = joinMapAttrValuesIf nr (hasPrefix "update-") scripts;
+    update = ''
+      set -e
+      ${joinMapAttrValuesIf nr (hasPrefix "update-") scripts}
+    '';
     update-npm = ''
       ${pathAdd [ nodejs_latest nodePackages.npm-check-updates ]}
       if [[ -e package.json && package-lock.json ]];then
