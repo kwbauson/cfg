@@ -99,7 +99,7 @@ rec {
         max-jobs = auto
         keep-going = true
         builders-use-substitutes = true
-        extra-experimental-features = nix-command flakes ca-references ca-derivations
+        extra-experimental-features = nix-command flakes
         extra-substituters = ${toString nixConfig.extra-substituters}
         extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
         keep-env-derivations = true
