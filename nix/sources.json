@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "16bksqryzcrfpprb1478wk8jkkiglzyk9c78cvrj9zs077jaw026",
+        "sha256": "124bj7gp02y1zsa6q2y5l67bsjhqyl15g0wji539gyjm62vvf4hz",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4318.6f3e97e3f8c/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4321.115dbbe82eb/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4318.6f3e97e3f8c"
+        "version": "nixos-20.09.4321.115dbbe82eb"
     },
     "nixos-unstable": {
         "sha256": "1ppmcy2k8k6pdpch73akbczxyanx0panhz7vz3wvf55ssd7k45l9",
