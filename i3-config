@@ -97,6 +97,7 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod+Escape workspace blank
+bindsym $mod+minus workspace floating
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -107,6 +108,7 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+underscore move container to workspace floating
 
 workspace 1 output eDP-1
 workspace 2 output DP-1
@@ -123,5 +125,6 @@ for_window [instance="^termbar$"] floating enable, border none, resize set 700 2
 for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
 no_focus [window_role="qutebrowser_background"]
+for_window [ workspace="floating" ] floating enable
 
 # vim:ft=i3config
