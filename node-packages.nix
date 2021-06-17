@@ -238,13 +238,13 @@ let
         sha512 = "diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==";
       };
     };
-    "chokidar-3.5.1" = {
+    "chokidar-3.5.2" = {
       name = "chokidar";
       packageName = "chokidar";
-      version = "3.5.1";
+      version = "3.5.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/chokidar/-/chokidar-3.5.1.tgz";
-        sha512 = "9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==";
+        url = "https://registry.npmjs.org/chokidar/-/chokidar-3.5.2.tgz";
+        sha512 = "ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==";
       };
     };
     "cliui-7.0.4" = {
@@ -904,13 +904,13 @@ let
         sha1 = "9d63c13276c065918d57f002a57f40a1b643fb02";
       };
     };
-    "readdirp-3.5.0" = {
+    "readdirp-3.6.0" = {
       name = "readdirp";
       packageName = "readdirp";
-      version = "3.5.0";
+      version = "3.6.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/readdirp/-/readdirp-3.5.0.tgz";
-        sha512 = "cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==";
+        url = "https://registry.npmjs.org/readdirp/-/readdirp-3.6.0.tgz";
+        sha512 = "hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==";
       };
     };
     "redent-1.0.0" = {
@@ -1210,13 +1210,13 @@ let
         sha512 = "q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==";
       };
     };
-    "typescript-4.3.2" = {
+    "typescript-4.3.3" = {
       name = "typescript";
       packageName = "typescript";
-      version = "4.3.2";
+      version = "4.3.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/typescript/-/typescript-4.3.2.tgz";
-        sha512 = "zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==";
+        url = "https://registry.npmjs.org/typescript/-/typescript-4.3.3.tgz";
+        sha512 = "rUvLW0WtF7PF2b9yenwWUi9Da9euvDRhmH7BLyBG4DCFfOJ850LGNknmRpp8Z8kXNUPObdZQEfKOiHtXuQHHKA==";
       };
     };
     "validate-npm-package-license-3.0.4" = {
@@ -1335,7 +1335,7 @@ let
           sources."supports-color-7.2.0"
         ];
       })
-      sources."chokidar-3.5.1"
+      sources."chokidar-3.5.2"
       sources."cliui-7.0.4"
       sources."color-convert-2.0.1"
       sources."color-name-1.1.4"
@@ -1413,7 +1413,7 @@ let
           sources."read-pkg-1.1.0"
         ];
       })
-      sources."readdirp-3.5.0"
+      sources."readdirp-3.6.0"
       sources."redent-1.0.0"
       sources."repeating-2.0.1"
       sources."require-directory-2.1.1"
@@ -1447,7 +1447,7 @@ let
       sources."tsconfig-7.0.0"
       sources."tslib-1.14.1"
       sources."type-fest-0.6.0"
-      sources."typescript-4.3.2"
+      sources."typescript-4.3.3"
       sources."validate-npm-package-license-3.0.4"
       sources."wrap-ansi-7.0.0"
       sources."wrappy-1.0.2"
