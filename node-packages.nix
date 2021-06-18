@@ -1210,13 +1210,13 @@ let
         sha512 = "q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==";
       };
     };
-    "typescript-4.3.3" = {
+    "typescript-4.3.4" = {
       name = "typescript";
       packageName = "typescript";
-      version = "4.3.3";
+      version = "4.3.4";
       src = fetchurl {
-        url = "https://registry.npmjs.org/typescript/-/typescript-4.3.3.tgz";
-        sha512 = "rUvLW0WtF7PF2b9yenwWUi9Da9euvDRhmH7BLyBG4DCFfOJ850LGNknmRpp8Z8kXNUPObdZQEfKOiHtXuQHHKA==";
+        url = "https://registry.npmjs.org/typescript/-/typescript-4.3.4.tgz";
+        sha512 = "uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew==";
       };
     };
     "validate-npm-package-license-3.0.4" = {
@@ -1447,7 +1447,7 @@ let
       sources."tsconfig-7.0.0"
       sources."tslib-1.14.1"
       sources."type-fest-0.6.0"
-      sources."typescript-4.3.3"
+      sources."typescript-4.3.4"
       sources."validate-npm-package-license-3.0.4"
       sources."wrap-ansi-7.0.0"
       sources."wrappy-1.0.2"
