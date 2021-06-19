@@ -24,10 +24,10 @@
         "homepage": "https://repo.cykerway.com/complete-alias",
         "owner": "cykerway",
         "repo": "complete-alias",
-        "rev": "7525b8f35796afda17ddba620a0c6edf246902b8",
-        "sha256": "1s0prdnmb2qnzc8d7ddldzqa53yc10qq0lbgx2l9dzmz8pdwylyc",
+        "rev": "5fa5cf371e61bb5f2e2fb1dabc2c4c049be57129",
+        "sha256": "093liaw11xqplfnhjyakwx9g9vc62nv2h52qi8046mk84pwam13w",
         "type": "tarball",
-        "url": "https://github.com/cykerway/complete-alias/archive/7525b8f35796afda17ddba620a0c6edf246902b8.tar.gz",
+        "url": "https://github.com/cykerway/complete-alias/archive/5fa5cf371e61bb5f2e2fb1dabc2c4c049be57129.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "context.vim": {
@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "5e6d9090629d730b80d9b57354e9c7ba8e0cf272",
-        "sha256": "0a9xfv3x8r83gqc0mm3cnywcl4h4a6jqs3vvgxbix92c5vdwh8vd",
+        "rev": "b955e499157431c1cef584d994bd266aa6009563",
+        "sha256": "06j9bl07gz5jx658amivkhqzv1363v93dy7pn5cam6w3pvjfqjsz",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/5e6d9090629d730b80d9b57354e9c7ba8e0cf272.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/b955e499157431c1cef584d994bd266aa6009563.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "09phbn777ab5w5q44pcw3jzzgpc9lsmmlz3916kcp8gdsfcb0h0q",
+        "sha256": "0a9hfjs15hc6gscbmqmm235jjjps9db7m0mck7g2rpamwi44xi3b",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4328.34cb7885a61/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4331.686720050c3/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4328.34cb7885a61"
+        "version": "nixos-20.09.4331.686720050c3"
     },
     "nixos-unstable": {
         "sha256": "1yy27r0zlrif0kdaq9nhikja5r4bxx10m6fbd50zjks1mvm0mq5p",
