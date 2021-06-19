@@ -128,7 +128,7 @@ six = ">=1.5"
 
 [[package]]
 name = "quantiphy"
-version = "2.13.0"
+version = "2.14.0"
 description = "physical quantities (numbers with units)"
 category = "main"
 optional = false
@@ -219,8 +219,8 @@ python-dateutil = [
     {file = "python_dateutil-2.8.1-py2.py3-none-any.whl", hash = "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"},
 ]
 quantiphy = [
-    {file = "quantiphy-2.13.0-py3-none-any.whl", hash = "sha256:e7d085f24e17a28cc9528ea68ea5bf7bd6419d03b709a461a03e160eea3c96c9"},
-    {file = "quantiphy-2.13.0.tar.gz", hash = "sha256:c1ff3a03545aa98a765897ca18836590633b9b551eace77e0171d4e5e95d0f8f"},
+    {file = "quantiphy-2.14.0-py3-none-any.whl", hash = "sha256:568ae543c094c095ffcc7a975617617b3c6543de1f3396f3681d0321caa5425e"},
+    {file = "quantiphy-2.14.0.tar.gz", hash = "sha256:ae003e51b6115f21c21ebf4c3dd44db828712733c1e4fac69ff4044680ce6479"},
 ]
 shlib = [
     {file = "shlib-1.2.0.tar.gz", hash = "sha256:359ab9426ffc4baa224906f43d642040d5fbac2ab3700e20ca2d57f799ae2231"},
