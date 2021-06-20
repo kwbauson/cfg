@@ -40,13 +40,13 @@ let
         sha512 = "6XFfSQmMgq0CFLY1MslA/CPUfhIL919M1rMsa5lP2P097N2Wd1sSX0tx1u4olM16fLNhtHZpRhedZJphNJqmZg==";
       };
     };
-    "@tsconfig/node12-1.0.8" = {
+    "@tsconfig/node12-1.0.9" = {
       name = "_at_tsconfig_slash_node12";
       packageName = "@tsconfig/node12";
-      version = "1.0.8";
+      version = "1.0.9";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@tsconfig/node12/-/node12-1.0.8.tgz";
-        sha512 = "LM6XwBhjZRls1qJGpiM/It09SntEwe9M0riXRfQ9s6XlJQG0JPGl92ET18LtGeYh/GuOtafIXqwZeqLOd0FNFQ==";
+        url = "https://registry.npmjs.org/@tsconfig/node12/-/node12-1.0.9.tgz";
+        sha512 = "/yBMcem+fbvhSREH+s14YJi18sp7J9jpuhYByADT2rypfajMZZN4WQ6zBGgBKp53NKmqI36wFYDb3yaMPurITw==";
       };
     };
     "@tsconfig/node14-1.0.1" = {
@@ -1311,7 +1311,7 @@ let
         ];
       })
       sources."@tsconfig/node10-1.0.8"
-      sources."@tsconfig/node12-1.0.8"
+      sources."@tsconfig/node12-1.0.9"
       sources."@tsconfig/node14-1.0.1"
       sources."@tsconfig/node16-1.0.1"
       sources."@types/node-15.12.4"
