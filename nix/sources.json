@@ -24,10 +24,10 @@
         "homepage": "https://repo.cykerway.com/complete-alias",
         "owner": "cykerway",
         "repo": "complete-alias",
-        "rev": "5fa5cf371e61bb5f2e2fb1dabc2c4c049be57129",
-        "sha256": "093liaw11xqplfnhjyakwx9g9vc62nv2h52qi8046mk84pwam13w",
+        "rev": "b16b183f6bf0029b9714b0e0178b6bd28eda52f3",
+        "sha256": "1a3szf0bvj0mk2kcq1052q9xzjqiwgmavfg348dspfz543nigvk2",
         "type": "tarball",
-        "url": "https://github.com/cykerway/complete-alias/archive/5fa5cf371e61bb5f2e2fb1dabc2c4c049be57129.tar.gz",
+        "url": "https://github.com/cykerway/complete-alias/archive/b16b183f6bf0029b9714b0e0178b6bd28eda52f3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "context.vim": {
@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "1kwk2gdz1b012122acsrlgacrlkylzsiaryz3cvs5nbcc42fya8f",
+        "sha256": "0fm9gzjmxwg1kvzp1f0yl7jhcgv7i5r0x8daaa8gady4g083qhpb",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.25.72/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.25.73/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.25.72"
+        "version": "1.25.73"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -57,11 +57,11 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "0z86q1hlwmhfwrddhapwiy8qrn3v03d7nbsnzhnkr3fc9vz58ga3",
+        "sha256": "02pvwsjaz60graha7hz25z3kx24ycvcfgwpzzdv5xpb3cfmlvis9",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/89.0/mac/en-US/Firefox%2089.0.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/89.0.1/mac/en-US/Firefox%2089.0.1.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "89.0"
+        "version": "89.0.1"
     },
     "dmg-signal-desktop": {
         "sha256": "0sm5x31a8b9w9scgj5dybc0ri6y31za4zv884sg3px52ngf76yhl",
@@ -169,18 +169,18 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "0a9hfjs15hc6gscbmqmm235jjjps9db7m0mck7g2rpamwi44xi3b",
+        "sha256": "1c0hpd826vrbx1mjxicba5mh0dwlz3bkvshgy55x589kh9hfy3z8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4331.686720050c3/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4342.69f3a970501/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4331.686720050c3"
+        "version": "nixos-20.09.4342.69f3a970501"
     },
     "nixos-unstable": {
-        "sha256": "1yy27r0zlrif0kdaq9nhikja5r4bxx10m6fbd50zjks1mvm0mq5p",
+        "sha256": "1ikgc6v3g13dbg9bwzxapsrv2cc3hdxdpqksgq87jdmxyv17snn3",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre295280.fa0326ce523/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre296557.33d42ad7cf2/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre295280.fa0326ce523"
+        "version": "nixos-21.11pre296557.33d42ad7cf2"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
