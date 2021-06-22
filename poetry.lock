@@ -19,7 +19,7 @@ python-dateutil = ">=2.7.0"
 
 [[package]]
 name = "botocore"
-version = "1.20.97"
+version = "1.20.98"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -59,7 +59,7 @@ python-versions = "*"
 
 [[package]]
 name = "emborg"
-version = "1.21.0"
+version = "1.22.0"
 description = "Borg front end."
 category = "main"
 optional = false
@@ -170,7 +170,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "13987a8e4460734cd3405c0224eba8e0657d52e76e99e81254c24a8e5d885941"
+content-hash = "cc62b6d2a84f66ae5324c531423a853113ae6a88dae23d321faa6dbe77d33302"
 
 [metadata.files]
 appdirs = [
@@ -182,8 +182,8 @@ arrow = [
     {file = "arrow-1.1.0.tar.gz", hash = "sha256:b8fe13abf3517abab315e09350c903902d1447bd311afbc17547ba1cb3ff5bd8"},
 ]
 botocore = [
-    {file = "botocore-1.20.97-py2.py3-none-any.whl", hash = "sha256:000cf4a3670ab47e14ddb5bd68fe050c6136029a478cf0b18a78779897d4175c"},
-    {file = "botocore-1.20.97.tar.gz", hash = "sha256:f7e119cf3e0f4a36100f0e983583afa91a84fb27c479a1716820aee4f2e190ab"},
+    {file = "botocore-1.20.98-py2.py3-none-any.whl", hash = "sha256:b955b23fe2fbdbbc8e66f37fe2970de6b5d8169f940b200bcf434751709d38f6"},
+    {file = "botocore-1.20.98.tar.gz", hash = "sha256:b2a49de4ee04b690142c8e7240f0f5758e3f7673dd39cf398efe893bf5e11c3f"},
 ]
 braceexpand = [
     {file = "braceexpand-0.1.7-py2.py3-none-any.whl", hash = "sha256:91332d53de7828103dcae5773fb43bc34950b0c8160e35e0f44c4427a3b85014"},
@@ -197,8 +197,8 @@ docopt = [
     {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
 ]
 emborg = [
-    {file = "emborg-1.21.0-py3-none-any.whl", hash = "sha256:ce2f947b9a2291220854ef79cd89a29ce0e08ba97d659ae71b165f0aee7ccaf5"},
-    {file = "emborg-1.21.0.tar.gz", hash = "sha256:eee88987f65eeead9d56cf1f0ac934f081c36ef63ece8eff89d9fcf02837f44d"},
+    {file = "emborg-1.22.0-py3-none-any.whl", hash = "sha256:b84e62e2933c69845c53af4a73d2f4f7817b14ee8f7828d3966bc253854cfaa5"},
+    {file = "emborg-1.22.0.tar.gz", hash = "sha256:d7ad5a4bfd020b4b26751bb4fa2115af4eb046d281945d989cdf41a5123950af"},
 ]
 git-remote-codecommit = [
     {file = "git-remote-codecommit-1.15.1.tar.gz", hash = "sha256:cd99d44a94f9adf8c5f15110d830f62af5fe644030fecc0df68cbda4880a5214"},
