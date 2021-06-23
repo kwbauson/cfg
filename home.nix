@@ -543,7 +543,6 @@ with builtins; with pkgs; with mylib; {
       xsetroot -solid black
       xsetroot -cursor_name left_ptr
       urxvtd -q -o -f
-      ${optionalString (host == "keith-vm") "xrandr --output Virtual-1 --mode 1920x1200"}
     '';
     windowManager = {
       i3 = {
@@ -554,3 +553,4 @@ with builtins; with pkgs; with mylib; {
     };
   };
 }
+
