@@ -12,7 +12,9 @@ with builtins;
 
   services.autorandr.enable = true;
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
   programs.steam.enable = true;
   virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
 }
+
