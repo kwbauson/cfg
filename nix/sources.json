@@ -43,11 +43,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "0fm9gzjmxwg1kvzp1f0yl7jhcgv7i5r0x8daaa8gady4g083qhpb",
+        "sha256": "1dn90k19n6lwni4nslv6fbsl22bghwwlsqpykjbcw5qivzklm7l3",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.25.73/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.26.67/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.25.73"
+        "version": "1.26.67"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -64,11 +64,11 @@
         "version": "89.0.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "0hkrgbdxcwh00lynq6694zhayp17v0psbji9cy9d5mgjf4c9ms8v",
+        "sha256": "15yk4l15p4az6amkrkl0nskgryjsl5zrbsghfp4849zdpb5nq4rz",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.6.1.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.6.2.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.6.1"
+        "version": "5.6.2"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
