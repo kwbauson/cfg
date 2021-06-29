@@ -101,8 +101,8 @@
       "original": {
         "dir": "contrib",
         "owner": "neovim",
-        "ref": "nightly",
         "repo": "neovim",
+        "rev": "bdf3df4027a5389a46b4c9a75b50aff5c0ecb351",
         "type": "github"
       }
     },
