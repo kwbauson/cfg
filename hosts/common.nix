@@ -13,8 +13,6 @@
     tmpOnTmpfs = true;
   };
 
-  boot.blacklistedKernelModules = [ "psmouse" ];
-
   nix.package = pkgs.nix-wrapped;
   nix.nixPath = [ ];
   nix.extraOptions = self.nixConf;
@@ -94,3 +92,4 @@
   system.stateVersion = "21.05";
   programs.command-not-found.dbPath = self.programs-sqlite;
 }
+
