@@ -57,11 +57,11 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "02pvwsjaz60graha7hz25z3kx24ycvcfgwpzzdv5xpb3cfmlvis9",
+        "sha256": "0hwhnmd88ymy0binw10azq81f09qmdz6gmd2jlvh7q234cy168nc",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/89.0.1/mac/en-US/Firefox%2089.0.1.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/89.0.2/mac/en-US/Firefox%2089.0.2.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "89.0.1"
+        "version": "89.0.2"
     },
     "dmg-signal-desktop": {
         "sha256": "15yk4l15p4az6amkrkl0nskgryjsl5zrbsghfp4849zdpb5nq4rz",
@@ -83,10 +83,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "b955e499157431c1cef584d994bd266aa6009563",
-        "sha256": "06j9bl07gz5jx658amivkhqzv1363v93dy7pn5cam6w3pvjfqjsz",
+        "rev": "877f06253b6e0bf26fa7fdb2d1f7570037793b2a",
+        "sha256": "0l0xry4xib64pvih6gfwz9ca4dkw2q44cw8xmb0wqsm69vx7llda",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/b955e499157431c1cef584d994bd266aa6009563.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/877f06253b6e0bf26fa7fdb2d1f7570037793b2a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -107,10 +107,10 @@
         "homepage": "",
         "owner": "bigH",
         "repo": "git-fuzzy",
-        "rev": "c4077ec89c1fa8d74666d8c3c51a483890a6461d",
-        "sha256": "0igiaqv6r5r0m93s7s1pfq7fnz5cswpp7cwwc3dnwh3v6fcjhwvd",
+        "rev": "0b6fd9b39efcb45ab32ef3e95e1c385641bf7e06",
+        "sha256": "0jy88k8izrxv5kgwrhbssf357py3z01ar7ppfp5q9n115lqbamnr",
         "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/c4077ec89c1fa8d74666d8c3c51a483890a6461d.tar.gz",
+        "url": "https://github.com/bigH/git-fuzzy/archive/0b6fd9b39efcb45ab32ef3e95e1c385641bf7e06.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-trim": {
@@ -169,11 +169,11 @@
         "version": "nixos-18.09.2574.a7e559a5504"
     },
     "nixos-20_09": {
-        "sha256": "0209ddwnkp283zi8v61nc35hnriw5h08xcl9xgaqpy0bl25qr6xg",
+        "sha256": "0kr1i95n8p5792wnh6255bva718sdwl7i2d2yk9p81kfhb1np8z2",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4377.1b42ce6bead/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4379.6953332fb7b/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4377.1b42ce6bead"
+        "version": "nixos-20.09.4379.6953332fb7b"
     },
     "nixos-unstable": {
         "sha256": "0lamkplg6ff6i6dqs354lc03dq6g6inafmys202ykg1zlk72mmg1",
