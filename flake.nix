@@ -118,7 +118,6 @@ rec {
       };
 
       homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
-      homeConfigurations.keith-desktop = homeConfigurations.graphical.override { host = "keith-desktop"; };
       homeConfigurations.keith-vm = homeConfigurations.graphical.override { host = "keith-vm"; };
       homeConfigurations.kwbauson = homeConfigurations.non-graphical.override { host = "kwbauson"; };
       homeConfigurations.keith-mac = lib.homeConfiguration {
@@ -155,7 +154,6 @@ rec {
 
 
       keith-xps = homeConfigurations.keith-xps.pkgs.switch;
-      keith-desktop = homeConfigurations.keith-desktop.pkgs.switch;
       keith-vm = homeConfigurations.keith-vm.pkgs.switch;
       kwbauson = homeConfigurations.kwbauson.pkgs.switch;
       keith-mac = homeConfigurations.keith-mac.pkgs.switch;
@@ -165,7 +163,7 @@ rec {
 
       inherit (self.packages.x86_64-linux) self-source;
 
-      outputs = { inherit self-source checks keith-xps keith-vm keith-desktop; };
+      outputs = { inherit self-source checks keith-xps keith-vm; };
       output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
 
       iso = with self.packages.x86_64-linux; (nixos {
@@ -176,7 +174,3 @@ rec {
       defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build" [ checks-mac keith-mac ];
     };
 }
-
-
-
-

@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 with builtins;
 {
   imports = [
@@ -13,9 +13,9 @@ with builtins;
 
   hardware.pulseaudio.enable = true;
   time.hardwareClockInLocalTime = true;
+  time.timeZone = "America/Indianapolis";
 
-  services.autorandr.enable = true;
+  services.localtime.enable = lib.mkForce false;
   services.xserver.enable = true;
 }
-
 
