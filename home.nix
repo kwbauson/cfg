@@ -169,7 +169,7 @@ with builtins; with pkgs; with mylib; {
         }
         PROMPT_COMMAND='_promptcmd'
 
-        source ${sources.complete-alias}/complete_alias
+        source ${complete-alias}/bin/complete_alias
         complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
 
         _completion_loader git
@@ -553,4 +553,5 @@ with builtins; with pkgs; with mylib; {
     };
   };
 }
+
 

@@ -18,18 +18,6 @@
         "url": "https://github.com/pechorin/any-jump.vim/archive/c5c319fdf588c9ed53e6a32eb2608bd1eb2f9c92.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "complete-alias": {
-        "branch": "master",
-        "description": "automagical shell alias completion;",
-        "homepage": "https://repo.cykerway.com/complete-alias",
-        "owner": "cykerway",
-        "repo": "complete-alias",
-        "rev": "b16b183f6bf0029b9714b0e0178b6bd28eda52f3",
-        "sha256": "1a3szf0bvj0mk2kcq1052q9xzjqiwgmavfg348dspfz543nigvk2",
-        "type": "tarball",
-        "url": "https://github.com/cykerway/complete-alias/archive/b16b183f6bf0029b9714b0e0178b6bd28eda52f3.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "context.vim": {
         "branch": "master",
         "description": "Vim plugin that shows the context of the currently visible buffer contents",
