@@ -19,7 +19,7 @@ python-dateutil = ">=2.7.0"
 
 [[package]]
 name = "botocore"
-version = "1.20.103"
+version = "1.20.104"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -42,6 +42,22 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "certifi"
+version = "2021.5.30"
+description = "Python package for providing Mozilla's CA Bundle."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "chardet"
+version = "4.0.0"
+description = "Universal encoding detector for Python 2 and 3"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+
+[[package]]
 name = "click"
 version = "7.1.2"
 description = "Composable command line interface toolkit"
@@ -59,7 +75,7 @@ python-versions = "*"
 
 [[package]]
 name = "emborg"
-version = "1.22.0"
+version = "1.23.0"
 description = "Borg front end."
 category = "main"
 optional = false
@@ -69,8 +85,9 @@ python-versions = ">=3.6"
 appdirs = "*"
 arrow = ">=0.15"
 docopt = "*"
-inform = ">=1.15"
+inform = ">=1.21"
 quantiphy = "*"
+requests = "*"
 shlib = ">=1.0"
 
 [[package]]
@@ -83,6 +100,14 @@ python-versions = "*"
 
 [package.dependencies]
 botocore = ">=1.17.0"
+
+[[package]]
+name = "idna"
+version = "2.10"
+description = "Internationalized Domain Names in Applications (IDNA)"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "inform"
@@ -135,6 +160,24 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "requests"
+version = "2.25.1"
+description = "Python HTTP for Humans."
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+chardet = ">=3.0.2,<5"
+idna = ">=2.5,<3"
+urllib3 = ">=1.21.1,<1.27"
+
+[package.extras]
+security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)"]
+socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
+
+[[package]]
 name = "shlib"
 version = "1.2.0"
 description = "shell library"
@@ -170,7 +213,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "cc62b6d2a84f66ae5324c531423a853113ae6a88dae23d321faa6dbe77d33302"
+content-hash = "d586cf2544e4491f0555b9f0ce5320a3e121ac627b9c50fa65092c353876fbf5"
 
 [metadata.files]
 appdirs = [
@@ -182,12 +225,20 @@ arrow = [
     {file = "arrow-1.1.1.tar.gz", hash = "sha256:dee7602f6c60e3ec510095b5e301441bc56288cb8f51def14dcb3079f623823a"},
 ]
 botocore = [
-    {file = "botocore-1.20.103-py2.py3-none-any.whl", hash = "sha256:5b39773056a94f85e884a658a5126bb4fee957e31d98b69c255b137eb9f11d6b"},
-    {file = "botocore-1.20.103.tar.gz", hash = "sha256:afbfe10fcd580224016d652330db21e7d89099181a437c9ec588b5b7cb3ea644"},
+    {file = "botocore-1.20.104-py2.py3-none-any.whl", hash = "sha256:95ab472c8254b8d2cfa6d719b433e511fbcf80895b4cd18e4219c1efa0b78270"},
+    {file = "botocore-1.20.104.tar.gz", hash = "sha256:23aa3238c004319f78423eb8cbba2813b62ee64d0e3bab04e0a00e067f99542a"},
 ]
 braceexpand = [
     {file = "braceexpand-0.1.7-py2.py3-none-any.whl", hash = "sha256:91332d53de7828103dcae5773fb43bc34950b0c8160e35e0f44c4427a3b85014"},
     {file = "braceexpand-0.1.7.tar.gz", hash = "sha256:e6e539bd20eaea53547472ff94f4fb5c3d3bf9d0a89388c4b56663aba765f705"},
+]
+certifi = [
+    {file = "certifi-2021.5.30-py2.py3-none-any.whl", hash = "sha256:50b1e4f8446b06f41be7dd6338db18e0990601dce795c2b1686458aa7e8fa7d8"},
+    {file = "certifi-2021.5.30.tar.gz", hash = "sha256:2bbf76fd432960138b3ef6dda3dde0544f27cbf8546c458e60baf371917ba9ee"},
+]
+chardet = [
+    {file = "chardet-4.0.0-py2.py3-none-any.whl", hash = "sha256:f864054d66fd9118f2e67044ac8981a54775ec5b67aed0441892edb553d21da5"},
+    {file = "chardet-4.0.0.tar.gz", hash = "sha256:0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa"},
 ]
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
@@ -197,11 +248,15 @@ docopt = [
     {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
 ]
 emborg = [
-    {file = "emborg-1.22.0-py3-none-any.whl", hash = "sha256:b84e62e2933c69845c53af4a73d2f4f7817b14ee8f7828d3966bc253854cfaa5"},
-    {file = "emborg-1.22.0.tar.gz", hash = "sha256:d7ad5a4bfd020b4b26751bb4fa2115af4eb046d281945d989cdf41a5123950af"},
+    {file = "emborg-1.23.0-py3-none-any.whl", hash = "sha256:fa15720c6ed63821fdf3a3afb000018dc9c89e04158d67476149a96c2ed5b02e"},
+    {file = "emborg-1.23.0.tar.gz", hash = "sha256:ce6c3abe6af9290eade98c4d095a78e46385102da5b285239f46744cf7697b18"},
 ]
 git-remote-codecommit = [
     {file = "git-remote-codecommit-1.15.1.tar.gz", hash = "sha256:cd99d44a94f9adf8c5f15110d830f62af5fe644030fecc0df68cbda4880a5214"},
+]
+idna = [
+    {file = "idna-2.10-py2.py3-none-any.whl", hash = "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"},
+    {file = "idna-2.10.tar.gz", hash = "sha256:b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"},
 ]
 inform = [
     {file = "inform-1.24.0-py3-none-any.whl", hash = "sha256:d762907de77796cdff1e8d99c9c6841665002e0caa9bc544aa0398a51f9e21f2"},
@@ -221,6 +276,10 @@ python-dateutil = [
 quantiphy = [
     {file = "quantiphy-2.14.0-py3-none-any.whl", hash = "sha256:568ae543c094c095ffcc7a975617617b3c6543de1f3396f3681d0321caa5425e"},
     {file = "quantiphy-2.14.0.tar.gz", hash = "sha256:ae003e51b6115f21c21ebf4c3dd44db828712733c1e4fac69ff4044680ce6479"},
+]
+requests = [
+    {file = "requests-2.25.1-py2.py3-none-any.whl", hash = "sha256:c210084e36a42ae6b9219e00e48287def368a26d03a048ddad7bfee44f75871e"},
+    {file = "requests-2.25.1.tar.gz", hash = "sha256:27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804"},
 ]
 shlib = [
     {file = "shlib-1.2.0.tar.gz", hash = "sha256:359ab9426ffc4baa224906f43d642040d5fbac2ab3700e20ca2d57f799ae2231"},

@@ -67,13 +67,13 @@ let
         sha512 = "FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==";
       };
     };
-    "@types/node-15.12.5" = {
+    "@types/node-15.14.0" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "15.12.5";
+      version = "15.14.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-15.12.5.tgz";
-        sha512 = "se3yX7UHv5Bscf8f1ERKvQOD6sTyycH3hdaoozvaLxgUiY5lIGEeH37AD0G0Qi9kPqihPn0HOfd2yaIEN9VwEg==";
+        url = "https://registry.npmjs.org/@types/node/-/node-15.14.0.tgz";
+        sha512 = "um/+/ip3QZmwLfIkWZSNtQIJNVAqrJ92OkLMeuZrjZMTAJniI7fh8N8OICyDhAJ2mzgk/fmYFo72jRr5HyZ1EQ==";
       };
     };
     "@types/normalize-package-data-2.4.0" = {
@@ -895,13 +895,13 @@ let
         sha512 = "hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==";
       };
     };
-    "ts-node-dev-1.1.7" = {
+    "ts-node-dev-1.1.8" = {
       name = "ts-node-dev";
       packageName = "ts-node-dev";
-      version = "1.1.7";
+      version = "1.1.8";
       src = fetchurl {
-        url = "https://registry.npmjs.org/ts-node-dev/-/ts-node-dev-1.1.7.tgz";
-        sha512 = "/YvByJdIw/p88RXmaRB3Kkk+PiUP7g/EAbBvQjDIG+kkm0CMvhdHSB21yEiws22Uls4uFAfCiuEZM4929yjWjg==";
+        url = "https://registry.npmjs.org/ts-node-dev/-/ts-node-dev-1.1.8.tgz";
+        sha512 = "Q/m3vEwzYwLZKmV6/0VlFxcZzVV/xcgOt+Tx/VjaaRHyiBcFlV0541yrT09QjzzCxlDZ34OzKjrFAynlmtflEg==";
       };
     };
     "tsconfig-7.0.0" = {
@@ -1035,7 +1035,7 @@ let
       sources."@tsconfig/node12-1.0.9"
       sources."@tsconfig/node14-1.0.1"
       sources."@tsconfig/node16-1.0.1"
-      sources."@types/node-15.12.5"
+      sources."@types/node-15.14.0"
       sources."@types/normalize-package-data-2.4.0"
       sources."@types/strip-bom-3.0.0"
       sources."@types/strip-json-comments-0.0.30"
@@ -1123,7 +1123,7 @@ let
       sources."to-regex-range-5.0.1"
       sources."tree-kill-1.2.2"
       sources."ts-node-10.0.0"
-      (sources."ts-node-dev-1.1.7" // {
+      (sources."ts-node-dev-1.1.8" // {
         dependencies = [
           sources."ts-node-9.1.1"
         ];
