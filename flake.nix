@@ -19,9 +19,6 @@ rec {
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
-    neovim.url = "github:neovim/neovim/bdf3df4027a5389a46b4c9a75b50aff5c0ecb351?dir=contrib";
-    neovim.inputs.nixpkgs.follows = "nixpkgs";
-    neovim.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs =
@@ -174,3 +171,4 @@ rec {
       defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build" [ checks-mac keith-mac ];
     };
 }
+

@@ -83,7 +83,7 @@
     users = {
       keith = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" ];
+        extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" "vboxsf" ];
       };
     };
   };
@@ -92,4 +92,5 @@
   system.stateVersion = "21.05";
   programs.command-not-found.dbPath = self.programs-sqlite;
 }
+
 

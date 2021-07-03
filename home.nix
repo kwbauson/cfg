@@ -258,7 +258,6 @@ with builtins; with pkgs; with mylib; {
     };
     neovim = {
       enable = true;
-      package = neovim-master;
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
       plugins = with rec {

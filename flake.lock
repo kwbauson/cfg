@@ -80,32 +80,6 @@
         "type": "github"
       }
     },
-    "neovim": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "contrib",
-        "lastModified": 1624729398,
-        "narHash": "sha256-XE/hrbbGaqYLlm0/7so5k5TvSi9f42Aq6JCtkmkZHXg=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "bdf3df4027a5389a46b4c9a75b50aff5c0ecb351",
-        "type": "github"
-      },
-      "original": {
-        "dir": "contrib",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "bdf3df4027a5389a46b4c9a75b50aff5c0ecb351",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1625127528,
@@ -183,7 +157,6 @@
         "home-manager": "home-manager",
         "mach-nix": "mach-nix",
         "naersk": "naersk",
-        "neovim": "neovim",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pypi-deps-db": "pypi-deps-db",
