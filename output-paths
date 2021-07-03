@@ -1,4 +1,4 @@
 checks=/nix/store/y471ibpjwifllzq5fzmyv1zrzy2djrwz-checks
-keith-vm=/nix/store/64jx209qzrvjqcsxy8p8wx3fmdbwvfvl-keith-vm-noa
-keith-xps=/nix/store/h7pisykpxz7qm93big8z1fpqxxp5myra-keith-xps-noa
-self-source=/nix/store/b6ffrp818vrdl5fg5g4sjh121l7am74i-source
+keith-vm=/nix/store/6mb23g7iwf0k2j78d8181pbfkw37iqa8-keith-vm-noa
+keith-xps=/nix/store/kmphl4irqknvq84p2fnvifrjd0lfgn5h-keith-xps-noa
+self-source=/nix/store/6mpxxmm563b51gbkjrg4iw5c4glz74n5-source
