@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "253d2f3770d8f717dd61c6a73afbfe07b5b66af1",
-        "sha256": "1rxdxl9h6nvdp210c4vvmq8ni9n0c0lyr1pwqffm9hy2lmcgaifz",
+        "rev": "ed736abb5f0689a5c9cbc83e7044441f1d182087",
+        "sha256": "1wv0rdzl37kynsn2a1didzhnq5mngc71kcr0wp6iz6ps6knvdmgv",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/253d2f3770d8f717dd61c6a73afbfe07b5b66af1.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/ed736abb5f0689a5c9cbc83e7044441f1d182087.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -95,10 +95,10 @@
         "homepage": "",
         "owner": "bigH",
         "repo": "git-fuzzy",
-        "rev": "0b6fd9b39efcb45ab32ef3e95e1c385641bf7e06",
-        "sha256": "0jy88k8izrxv5kgwrhbssf357py3z01ar7ppfp5q9n115lqbamnr",
+        "rev": "8b60b07e753a00e26c9c7c113b8dcb5baa1e6c9b",
+        "sha256": "1gy8mr61dvi9bdxvapskindbsgjv7kfmzjja53x8slp1zwp646mx",
         "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/0b6fd9b39efcb45ab32ef3e95e1c385641bf7e06.tar.gz",
+        "url": "https://github.com/bigH/git-fuzzy/archive/8b60b07e753a00e26c9c7c113b8dcb5baa1e6c9b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-trim": {
