@@ -160,7 +160,7 @@ rec {
 
       inherit (self.packages.x86_64-linux) self-source;
 
-      outputs = { inherit self-source checks keith-xps keith-vm; };
+      outputs = { inherit self-source keith-xps keith-vm; };
       output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
 
       iso = with self.packages.x86_64-linux; (nixos {

@@ -16,6 +16,9 @@ let
           ncu -u
         fi
         rm package-lock.json
+        if [[ -L node_modules ]];then
+          unlink node_modules
+        fi
         npm --package-lock-only i
       fi
     '';
