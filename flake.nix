@@ -167,8 +167,9 @@ rec {
         imports = [ nixosModules.installer.cd-dvd.installation-cd-graphical-gnome ];
       }).config.system.build.isoImage;
 
-      defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues outputs);
-      defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build" [ checks-mac keith-mac ];
+      defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build"
+        (attrValues outputs ++ [ checks ]);
+      defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
+        [ checks-mac keith-mac ];
     };
 }
-
