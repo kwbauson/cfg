@@ -26,14 +26,14 @@
     notFiles = "yarn.lock";
     out =
       let args = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args; in
-      override
-        (nodeEnv.buildNodeDependencies {
-          inherit (args) name packageName version dependencies;
-          src = buildDir (map file (words self.npm.files));
-          dontNpmInstall = true;
-          nativeBuildInputs = [ nodePackages.node-gyp-build ];
-        })
-        { name = "node_modules"; };
+      (nodeEnv.buildNodeDependencies {
+        inherit (args) name packageName version dependencies;
+        src = buildDir (map file (words self.npm.files));
+        bypassCache = true;
+        nativeBuildInputs = [ nodePackages.node-gyp-build ];
+      }).overrideAttrs (attrs: {
+        name = "node_modules";
+      });
   };
   yarn = {
     files = "package.json yarn.lock .enable-nle-yarn";
