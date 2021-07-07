@@ -230,6 +230,12 @@
         "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "waterfox": {
+        "sha256": "1ih12min312jpm0vs8j0ccwsd758a43pcjihvvs7mqwf6yi2dcnp",
+        "type": "tarball",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.3.en-US.linux-x86_64.tar.bz2",
+        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.3.en-US.linux-x86_64.tar.bz2"
+    },
     "yarn-completion": {
         "branch": "master",
         "description": "Bash completion for Yarn",

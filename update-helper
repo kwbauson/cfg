@@ -14,3 +14,5 @@ for pkg in signal-desktop firefox brave;do
   version=$(nix eval --raw ".#$pkg.version")
   niv update dmg-$pkg -v $version
 done
+
+niv update waterfox -t $(curl https://www.waterfox.net/download/ | grep -o '[^"]*linux-x86_64[^"]*' | head -n1)
