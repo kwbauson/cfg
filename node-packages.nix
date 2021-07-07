@@ -67,22 +67,22 @@ let
         sha512 = "FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==";
       };
     };
-    "@types/node-16.0.0" = {
+    "@types/node-16.0.1" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "16.0.0";
+      version = "16.0.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-16.0.0.tgz";
-        sha512 = "TmCW5HoZ2o2/z2EYi109jLqIaPIi9y/lc2LmDCWzuCi35bcaQ+OtUh6nwBiFK7SOu25FAU5+YKdqFZUwtqGSdg==";
+        url = "https://registry.npmjs.org/@types/node/-/node-16.0.1.tgz";
+        sha512 = "hBOx4SUlEPKwRi6PrXuTGw1z6lz0fjsibcWCM378YxsSu/6+C30L6CR49zIBKHiwNWCYIcOLjg4OHKZaFeLAug==";
       };
     };
-    "@types/normalize-package-data-2.4.0" = {
+    "@types/normalize-package-data-2.4.1" = {
       name = "_at_types_slash_normalize-package-data";
       packageName = "@types/normalize-package-data";
-      version = "2.4.0";
+      version = "2.4.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz";
-        sha512 = "f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==";
+        url = "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz";
+        sha512 = "Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==";
       };
     };
     "@types/strip-bom-3.0.0" = {
@@ -1026,8 +1026,8 @@ let
       sources."@tsconfig/node12-1.0.9"
       sources."@tsconfig/node14-1.0.1"
       sources."@tsconfig/node16-1.0.1"
-      sources."@types/node-16.0.0"
-      sources."@types/normalize-package-data-2.4.0"
+      sources."@types/node-16.0.1"
+      sources."@types/normalize-package-data-2.4.1"
       sources."@types/strip-bom-3.0.0"
       sources."@types/strip-json-comments-0.0.30"
       sources."ansi-regex-5.0.0"
