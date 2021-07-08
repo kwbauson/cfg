@@ -111,7 +111,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "inform"
-version = "1.24.0"
+version = "1.25.0"
 description = "print & logging utilities for communicating with user"
 category = "main"
 optional = false
@@ -259,8 +259,8 @@ idna = [
     {file = "idna-2.10.tar.gz", hash = "sha256:b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6"},
 ]
 inform = [
-    {file = "inform-1.24.0-py3-none-any.whl", hash = "sha256:d762907de77796cdff1e8d99c9c6841665002e0caa9bc544aa0398a51f9e21f2"},
-    {file = "inform-1.24.0.tar.gz", hash = "sha256:c68e2153b88bef303577dc3df884efa39ce3acbbd98299bed014cb4df7b95554"},
+    {file = "inform-1.25.0-py3-none-any.whl", hash = "sha256:a38b33d23f2f38f55c90882e17209372a58faefe0557df827398f0f978a146a1"},
+    {file = "inform-1.25.0.tar.gz", hash = "sha256:960d1ddcc5f37dc0db957ee9e1a34850badd984a463cc2103066249ec6b2bfaf"},
 ]
 jmespath = [
     {file = "jmespath-0.10.0-py2.py3-none-any.whl", hash = "sha256:cdf6525904cc597730141d61b36f2e4b8ecc257c420fa2f4549bac2c2d0cb72f"},
