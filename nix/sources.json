@@ -52,11 +52,11 @@
         "version": "89.0.2"
     },
     "dmg-signal-desktop": {
-        "sha256": "11pdizrfn39c9cpnda9ncnndhrpm60iscsllyphyzf6cpzrbng9n",
+        "sha256": "0q1kl50a82f91am1cgqcv4dvfcr6lm4wnpbx227h6fjvacs5gnw7",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.7.1.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.8.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.7.1"
+        "version": "5.8.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -119,10 +119,10 @@
         "homepage": "https://docs.inlets.dev",
         "owner": "inlets",
         "repo": "inlets",
-        "rev": "7b18a394b74390133e511957d954b1ba3b7d01a2",
-        "sha256": "18g1h8v0r6ggrxb4rqabwqakb8ar55g3h238ww1779qv0yrp162r",
+        "rev": "866991a9647c415d1109e8a1f5d68612c9c6bf29",
+        "sha256": "0f2cjiqccl1nmi981sjg2x6ivcv3i9ks7b88spp0j1swj7k8inrg",
         "type": "tarball",
-        "url": "https://github.com/inlets/inlets/archive/7b18a394b74390133e511957d954b1ba3b7d01a2.tar.gz",
+        "url": "https://github.com/inlets/inlets/archive/866991a9647c415d1109e8a1f5d68612c9c6bf29.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
