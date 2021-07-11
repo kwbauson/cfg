@@ -129,7 +129,6 @@ rec {
       mkChecks = pkgs: with pkgs; buildEnv {
         name = "checks";
         paths = flatten [
-          inlets
           juicefs
           saml2aws
           mysql57
@@ -173,3 +172,4 @@ rec {
         [ checks-mac keith-mac ];
     };
 }
+
