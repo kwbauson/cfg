@@ -45,11 +45,11 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "0hwhnmd88ymy0binw10azq81f09qmdz6gmd2jlvh7q234cy168nc",
+        "sha256": "0qw8biv5p7j1gqz0ziadj7hd0kh86nlndwxvc39ifq52w8w81h6v",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/89.0.2/mac/en-US/Firefox%2089.0.2.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/90.0/mac/en-US/Firefox%2090.0.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "89.0.2"
+        "version": "90.0"
     },
     "dmg-signal-desktop": {
         "sha256": "0q1kl50a82f91am1cgqcv4dvfcr6lm4wnpbx227h6fjvacs5gnw7",
@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "2dc232dba49b6fe7828b5d516e27f01ec1f38e5b",
-        "sha256": "0161z5hq70zq002w0z18v28sa1cfl4jdkdi7fgvsnfyivaxs2qvg",
+        "rev": "bb6ba2bfb1c86536822bfc7655a686208046b145",
+        "sha256": "0z0f93nhxr8ap5l41dzgyqzryb9lp6c3siqdrbrmvb2pdny9avx7",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/2dc232dba49b6fe7828b5d516e27f01ec1f38e5b.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/bb6ba2bfb1c86536822bfc7655a686208046b145.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -152,11 +152,11 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-unstable": {
-        "sha256": "0vb3kn5mdw3f4i03faaraab6rcg4nwk1w5r1x2w8aais8lzhfgiy",
+        "sha256": "1068g4mci76yi09mg0izgy0pz027gsl8ysrhqz6i9ykxp9aq73ib",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre301487.8743b115bba/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre301576.d8f8f31af9d/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre301487.8743b115bba"
+        "version": "nixos-21.11pre301576.d8f8f31af9d"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
