@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "bb6ba2bfb1c86536822bfc7655a686208046b145",
-        "sha256": "0z0f93nhxr8ap5l41dzgyqzryb9lp6c3siqdrbrmvb2pdny9avx7",
+        "rev": "a831c9c125bf0685456de0e1954187250ff92bd6",
+        "sha256": "1v2m17r97vhzcxfqxpxf6sx088rbqz0k976gk8z3ggbg4zfpx6h8",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/bb6ba2bfb1c86536822bfc7655a686208046b145.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/a831c9c125bf0685456de0e1954187250ff92bd6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -219,10 +219,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1ih12min312jpm0vs8j0ccwsd758a43pcjihvvs7mqwf6yi2dcnp",
+        "sha256": "1k5n24c40n2qbxpc14h8prllr1jr3gw21vg16zhz9ay4gf6b2gaw",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.3.en-US.linux-x86_64.tar.bz2",
-        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.3.en-US.linux-x86_64.tar.bz2"
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.4.en-US.linux-x86_64.tar.bz2",
+        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.4.en-US.linux-x86_64.tar.bz2"
     },
     "yarn-completion": {
         "branch": "master",
