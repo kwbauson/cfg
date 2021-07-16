@@ -52,11 +52,11 @@
         "version": "90.0"
     },
     "dmg-signal-desktop": {
-        "sha256": "0q1kl50a82f91am1cgqcv4dvfcr6lm4wnpbx227h6fjvacs5gnw7",
+        "sha256": "1qhjpng59rmrvlbz5rp5rsczkci3gkjj9w188a4rrwhy10an8qfh",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.8.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.9.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.8.0"
+        "version": "5.9.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "a831c9c125bf0685456de0e1954187250ff92bd6",
-        "sha256": "1v2m17r97vhzcxfqxpxf6sx088rbqz0k976gk8z3ggbg4zfpx6h8",
+        "rev": "6fa52f4c093f1759df7f41b65610d398e0d8a5a6",
+        "sha256": "14nsvcfs1abk9wv2gnqqh6pxablh5crh4wwxbnl05vpq7lkm20w8",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/a831c9c125bf0685456de0e1954187250ff92bd6.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/6fa52f4c093f1759df7f41b65610d398e0d8a5a6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -152,11 +152,11 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-unstable": {
-        "sha256": "1068g4mci76yi09mg0izgy0pz027gsl8ysrhqz6i9ykxp9aq73ib",
+        "sha256": "1c6qivqjzpz8ipfgzamw2msvisl83r3gi9xrvi8jw16yl830hs53",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre301576.d8f8f31af9d/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre302179.53079ed9131/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre301576.d8f8f31af9d"
+        "version": "nixos-21.11pre302179.53079ed9131"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
