@@ -10,10 +10,10 @@
     device = "/dev/vda";
   };
 
-  nix.extraOptions = ''
-    min-free = ${toString (80 * 1024 * 1024 * 1024)}
-    max-free = ${toString (10 * 1024 * 1024 * 1024)}
-  '';
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 1w";
+  };
 
   boot.tmpOnTmpfs = lib.mkForce false;
 
