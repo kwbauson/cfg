@@ -85,6 +85,7 @@
     inherit (nixos-20_09);
     inherit (self.pinned-if-darwin);
     switch = self.switch-to-configuration.scripts.${builtAsHost}.noa;
+    node2nix = override nixos-unstable.nodePackages.node2nix { meta.mainProgram = "node2nix"; };
     pynixify = let python = python3.override {
       packageOverrides = self: super: {
         pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };

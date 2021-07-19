@@ -163,7 +163,7 @@ case $cmd in
       nr bundix
     if [[ ! -e yarn.lock ]];then
       impure "package.json package-lock.json" node-packages.nix \
-        nr -c node2nix nodePackages.node2nix -c /dev/null -l package-lock.json \
+        nr node2nix -c /dev/null -l package-lock.json \
         --no-copy-node-env --development --strip-optional-dependencies
     fi
     if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
