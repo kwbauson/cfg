@@ -321,6 +321,7 @@ EOF
   if [[ -e .envrc ]];then
     sed -i 's#nle direnv#./nle-pinned.sh direnv#' .envrc
   fi
+  direnv allow
     ;;
   *)
     invalid
