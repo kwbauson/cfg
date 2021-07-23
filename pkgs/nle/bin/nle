@@ -117,9 +117,6 @@ case $cmd in
         echo warning: node_modules already exists, not linking
       fi
     fi
-    if [[ -e .envrc ]];then
-      direnv allow
-    fi
     ;;
   init)
     "$0" activate
