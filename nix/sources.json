@@ -52,11 +52,11 @@
         "version": "90.0.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "1qhjpng59rmrvlbz5rp5rsczkci3gkjj9w188a4rrwhy10an8qfh",
+        "sha256": "1li05pzdam82ggc9rk46yw0r9420s57nlygbrvhfhk29n6nqd7fv",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.9.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.10.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.9.0"
+        "version": "5.10.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
