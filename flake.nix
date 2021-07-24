@@ -1,6 +1,6 @@
 rec {
   nixConfig = {
-    fallback = true;
+    fallback = "true";
     extra-substituters = [ "https://cache.kwbauson.com/" ];
     extra-trusted-public-keys = [ "cache.kwbauson.com:v9VWChI2sZUmlku8aRA9FLUA5OKKVc8IccCJ9flGU5s=" ];
   };
