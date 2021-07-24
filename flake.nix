@@ -134,14 +134,9 @@ rec {
           mysql57
           (nle.build {
             path = writeTextDir "requirements.txt" ''
-              black==20.8b1
-              bpython==0.20.1
-              click==7.1.2
-              ipdb==0.13.4
-              mypy==0.790
-              prospector[with_everything]==1.3.1
-              pytest==6.1.2
-              atlassian-python-api==3.4.1
+              black
+              bpython
+              mypy
             '';
           })
           pynixify
