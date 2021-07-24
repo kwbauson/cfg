@@ -98,6 +98,7 @@ rec {
         keep-going = true
         builders-use-substitutes = true
         extra-experimental-features = nix-command flakes
+        fallback = true
         extra-substituters = ${toString nixConfig.extra-substituters}
         extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
         keep-env-derivations = true
