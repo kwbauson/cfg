@@ -292,13 +292,13 @@ let
         sha512 = "dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==";
       };
     };
-    "date-fns-2.22.1" = {
+    "date-fns-2.23.0" = {
       name = "date-fns";
       packageName = "date-fns";
-      version = "2.22.1";
+      version = "2.23.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/date-fns/-/date-fns-2.22.1.tgz";
-        sha512 = "yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==";
+        url = "https://registry.npmjs.org/date-fns/-/date-fns-2.23.0.tgz";
+        sha512 = "5ycpauovVyAk0kXNZz6ZoB9AYMZB4DObse7P3BPWmyEjXNORTI8EJ6X0uaSAq4sCHzM1uajzrkr6HnsLQpxGXA==";
       };
     };
     "diff-4.0.2" = {
@@ -1051,7 +1051,7 @@ let
       sources."concat-map-0.0.1"
       sources."concurrently-6.2.0"
       sources."create-require-1.1.1"
-      sources."date-fns-2.22.1"
+      sources."date-fns-2.23.0"
       sources."diff-4.0.2"
       sources."dynamic-dedupe-0.3.0"
       sources."emoji-regex-8.0.0"
