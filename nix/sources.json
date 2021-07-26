@@ -230,10 +230,10 @@
         "homepage": "",
         "owner": "dsifford",
         "repo": "yarn-completion",
-        "rev": "5bf2968493a7a76649606595cfca880a77e6ac0e",
-        "sha256": "1w1df1cvf3c1maq60kx927x7x9zmb40n02pfgf3ynaai5n398195",
+        "rev": "2ccee5e6e2f3c3dbf885cd33c361f8dc08cf9741",
+        "sha256": "1888blxrmidc0g9y7b1rb0cy7r3ngm4jllhsqd8aiwjcakrmq5r6",
         "type": "tarball",
-        "url": "https://github.com/dsifford/yarn-completion/archive/5bf2968493a7a76649606595cfca880a77e6ac0e.tar.gz",
+        "url": "https://github.com/dsifford/yarn-completion/archive/2ccee5e6e2f3c3dbf885cd33c361f8dc08cf9741.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
