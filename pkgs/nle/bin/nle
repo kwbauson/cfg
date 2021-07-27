@@ -247,6 +247,8 @@ case $cmd in
       env | grep -v -e '^_=' -e '^DIRENV_IN_ENVRC=' -e '^DIRENV_WATCHES=' | sed "s#$PATH_added:##"
     )
     ;;
+  dump)
+    direnv dump bash
   export)
     "$0" env | sed 's/^/export /'
     ;;
