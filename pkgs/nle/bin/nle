@@ -249,6 +249,7 @@ case $cmd in
     ;;
   dump)
     direnv dump bash
+    ;;
   export)
     "$0" env | sed 's/^/export /'
     ;;
