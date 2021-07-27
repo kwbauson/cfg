@@ -17,5 +17,7 @@ with builtins;
 
   services.localtime.enable = lib.mkForce false;
   services.xserver.enable = true;
+
+  virtualisation.docker.enable = true;
 }
 

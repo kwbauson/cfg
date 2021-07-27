@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl
+# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused
 set -e
 
 if [[ $PINNED != '1' && $cmd != pin && -e nle-pinned.sh ]];then
