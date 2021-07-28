@@ -302,18 +302,18 @@ case $cmd in
   pin)
     rev=$(curl -s https://api.github.com/repos/kwbauson/cfg/branches/main | sed -n -e 's/.*"sha": "//' -e 's/",$//' -e '4p')
     sed "s/^rev=REPLACE$/rev=$rev/" > nle-pinned.sh <<'EOF'
-#!/usr/bin/env bash
+#!/bin/sh
 set -e
 rev=REPLACE
 result=~/.cache/nle/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
 local_nix_conf=$(dirname "$0")/nix/nix.conf
 
-if [[ -e $local_nix_conf ]];then
+if [ -e "$local_nix_conf" ];then
   export NIX_CONFIG=$(< "$local_nix_conf")
 fi
 
-if [[ ! -e $result ]];then
+if [ ! -e "$result" ];then
   mkdir -p "$(dirname "$result")"
   nix build --file "$url" nle.unwrapped --out-link "$result"
 fi
