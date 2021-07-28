@@ -74,4 +74,6 @@
     acceptTerms = true;
     email = "kwbauson@gmail.com";
   };
+
+  virtualisation.docker.enable = true;
 }
