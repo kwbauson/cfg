@@ -76,4 +76,12 @@
   };
 
   virtualisation.docker.enable = true;
+
+  # undoing https://github.com/NixOS/nixpkgs/commit/ac7b8724b59974c0d74f2feacc4a2a787a5cf122
+  systemd.services.nix-serve.serviceConfig.Group = lib.mkForce "nogroup";
+  systemd.services.nix-serve.serviceConfig.DynamicUser = lib.mkForce "false";
+  users.users.nix-serve = {
+    description = "Nix-serve user";
+    uid = 199;
+  };
 }
