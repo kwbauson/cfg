@@ -67,13 +67,13 @@ let
         sha512 = "eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==";
       };
     };
-    "@types/node-16.4.4" = {
+    "@types/node-16.4.6" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "16.4.4";
+      version = "16.4.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-16.4.4.tgz";
-        sha512 = "BH/jX0HjzElFCQdAwaEMwuGBQwm6ViDZ00X6LKdnRRmGWOzkWugEH4+7a0BwfHQ8DfPPCSd/mdsm3Nu8FKFu0w==";
+        url = "https://registry.npmjs.org/@types/node/-/node-16.4.6.tgz";
+        sha512 = "FKyawK3o5KL16AwbeFajen8G4K3mmqUrQsehn5wNKs8IzlKHE8TfnSmILXVMVziAEcnB23u1RCFU1NT6hSyr7Q==";
       };
     };
     "@types/normalize-package-data-2.4.1" = {
@@ -1026,7 +1026,7 @@ let
       sources."@tsconfig/node12-1.0.9"
       sources."@tsconfig/node14-1.0.1"
       sources."@tsconfig/node16-1.0.2"
-      sources."@types/node-16.4.4"
+      sources."@types/node-16.4.6"
       sources."@types/normalize-package-data-2.4.1"
       sources."@types/strip-bom-3.0.0"
       sources."@types/strip-json-comments-0.0.30"
