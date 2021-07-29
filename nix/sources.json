@@ -31,11 +31,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "0w48wxry6dmcks21a78bjvhan8fa4vkylmn2q07w1rnx3qwar2w6",
+        "sha256": "0yhyg96xv1jnw0kxx5nac270c341c2k7wb01y3kfxgcyapyz74nw",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.26.77/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.27.108/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.26.77"
+        "version": "1.27.108"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "a0beb4dbedfc20df5283a6923b53d9c37e79bdf8",
-        "sha256": "1vll196mb28wxd76j3c2447vg9ml0y2jhry6khlx2rgf42py1h2n",
+        "rev": "c1ea4432ff287c00d04e24ccea94f6b9f3ceac47",
+        "sha256": "0qa7q2ri0403xnznfpjm78j11138s03g8c96kiw0qrc08fdvlzaa",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/a0beb4dbedfc20df5283a6923b53d9c37e79bdf8.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/c1ea4432ff287c00d04e24ccea94f6b9f3ceac47.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -83,10 +83,10 @@
         "homepage": null,
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
-        "sha256": "0x2jn3vrawwv9xp15674wjz9pixwjyj3j771izayl962zziivbx2",
+        "rev": "c6f3b635321160c629b74fefc88c807b59a51646",
+        "sha256": "03zrhc1mjmn52cswqs6bc8wflgfjmr2r09wpla62y38wn1pimw2b",
         "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/99f1c2157fba4bfe6211a321fd0ee43199025dbf.tar.gz",
+        "url": "https://github.com/edolstra/flake-compat/archive/c6f3b635321160c629b74fefc88c807b59a51646.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-fuzzy": {
