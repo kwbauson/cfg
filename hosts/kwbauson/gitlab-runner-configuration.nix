@@ -9,11 +9,13 @@
       default = {
         registrationConfigFile = "/etc/nixos/gitlab-runner-secrets";
         dockerImage = "debian:stable";
+        dockerDisableCache = true;
       };
       nix = with pkgs; {
         tagList = [ "nix" ];
         registrationConfigFile = "/etc/nixos/gitlab-runner-secrets";
         dockerImage = "debian:stable";
+        dockerDisableCache = true;
         dockerVolumes = [
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db:ro"
