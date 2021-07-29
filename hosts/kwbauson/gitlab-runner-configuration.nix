@@ -6,7 +6,12 @@
     enable = true;
     concurrent = 4;
     services = {
+      default = {
+        registrationConfigFile = "/etc/nixos/gitlab-runner-secrets";
+        dockerImage = "debian:stable";
+      };
       nix = with pkgs; {
+        tagList = [ "nix" ];
         registrationConfigFile = "/etc/nixos/gitlab-runner-secrets";
         dockerImage = "debian:stable";
         dockerVolumes = [
