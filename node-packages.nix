@@ -67,13 +67,13 @@ let
         sha512 = "eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==";
       };
     };
-    "@types/node-16.4.6" = {
+    "@types/node-16.4.7" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "16.4.6";
+      version = "16.4.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-16.4.6.tgz";
-        sha512 = "FKyawK3o5KL16AwbeFajen8G4K3mmqUrQsehn5wNKs8IzlKHE8TfnSmILXVMVziAEcnB23u1RCFU1NT6hSyr7Q==";
+        url = "https://registry.npmjs.org/@types/node/-/node-16.4.7.tgz";
+        sha512 = "aDDY54sst8sx47CWT6QQqIZp45yURq4dic0+HCYfYNcY5Ejlb/CLmFnRLfy3wQuYafOeh3lB/DAKaqRKBtcZmA==";
       };
     };
     "@types/normalize-package-data-2.4.1" = {
@@ -184,13 +184,13 @@ let
         sha512 = "b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==";
       };
     };
-    "buffer-from-1.1.1" = {
+    "buffer-from-1.1.2" = {
       name = "buffer-from";
       packageName = "buffer-from";
-      version = "1.1.1";
+      version = "1.1.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.1.tgz";
-        sha512 = "MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==";
+        url = "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz";
+        sha512 = "E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==";
       };
     };
     "chalk-2.4.2" = {
@@ -1026,7 +1026,7 @@ let
       sources."@tsconfig/node12-1.0.9"
       sources."@tsconfig/node14-1.0.1"
       sources."@tsconfig/node16-1.0.2"
-      sources."@types/node-16.4.6"
+      sources."@types/node-16.4.7"
       sources."@types/normalize-package-data-2.4.1"
       sources."@types/strip-bom-3.0.0"
       sources."@types/strip-json-comments-0.0.30"
@@ -1038,7 +1038,7 @@ let
       sources."binary-extensions-2.2.0"
       sources."brace-expansion-1.1.11"
       sources."braces-3.0.2"
-      sources."buffer-from-1.1.1"
+      sources."buffer-from-1.1.2"
       (sources."chalk-4.1.1" // {
         dependencies = [
           sources."supports-color-7.2.0"
