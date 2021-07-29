@@ -1,0 +1,25 @@
+diff --git a/react/features/filmstrip/constants.js b/react/features/filmstrip/constants.js
+index 0534b6dc2..8843c256b 100644
+--- a/react/features/filmstrip/constants.js
++++ b/react/features/filmstrip/constants.js
+@@ -30,7 +30,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
+ /**
+  * Breakpoint past which a single column view is enforced in tile view.
+  */
+-export const SINGLE_COLUMN_BREAKPOINT = 300;
++export const SINGLE_COLUMN_BREAKPOINT = 800;
+ 
+ /**
+  * Breakpoint past which a two column view is enforced in tile view.
+diff --git a/react/features/shared-video/components/web/AbstractVideoManager.js b/react/features/shared-video/components/web/AbstractVideoManager.js
+index a69914524..ca27570da 100644
+--- a/react/features/shared-video/components/web/AbstractVideoManager.js
++++ b/react/features/shared-video/components/web/AbstractVideoManager.js
+@@ -306,6 +306,7 @@ class AbstractVideoManager extends Component<Props> {
+      * @returns {void}
+      */
+     smartAudioMute() {
++        return;
+         const { _isLocalAudioMuted, _muteLocal } = this.props;
+ 
+         if (!_isLocalAudioMuted

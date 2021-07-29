@@ -30,7 +30,7 @@
         inherit (args) name packageName version dependencies;
         src = buildDir (map file (words self.npm.files));
         bypassCache = true;
-        nativeBuildInputs = [ nodePackages.node-gyp-build ];
+        nativeBuildInputs = [ nodePackages.node-gyp-build nodePackages.node-pre-gyp ];
       }).overrideAttrs (attrs: {
         name = "node_modules";
       });

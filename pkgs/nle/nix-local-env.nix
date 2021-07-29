@@ -57,7 +57,7 @@ rec {
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
-    result = if isFunction imported then imported (pkgs // { inherit source; }) else imported;
+    result = if isFunction imported then imported (pkgs // mylib // { inherit source; }) else imported;
     out = if pathExists localfile then result else null;
   }.out;
   local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];

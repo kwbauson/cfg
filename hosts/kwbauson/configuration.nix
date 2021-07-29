@@ -11,10 +11,10 @@
     device = "/dev/vda";
   };
 
-  nix.extraOptions = ''
-    min-free = ${toString (80 * 1024 * 1024 * 1024)}
-    max-free = ${toString (10 * 1024 * 1024 * 1024)}
-  '';
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 1w";
+  };
 
   boot.tmpOnTmpfs = lib.mkForce false;
 
@@ -74,5 +74,15 @@
   security.acme = {
     acceptTerms = true;
     email = "kwbauson@gmail.com";
+  };
+
+  virtualisation.docker.enable = true;
+
+  # undoing https://github.com/NixOS/nixpkgs/commit/ac7b8724b59974c0d74f2feacc4a2a787a5cf122
+  systemd.services.nix-serve.serviceConfig.Group = lib.mkForce "nogroup";
+  systemd.services.nix-serve.serviceConfig.DynamicUser = lib.mkForce "false";
+  users.users.nix-serve = {
+    description = "Nix-serve user";
+    uid = 199;
   };
 }

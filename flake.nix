@@ -1,5 +1,6 @@
 rec {
   nixConfig = {
+    fallback = "true";
     extra-substituters = [ "https://cache.kwbauson.com/" ];
     extra-trusted-public-keys = [ "cache.kwbauson.com:v9VWChI2sZUmlku8aRA9FLUA5OKKVc8IccCJ9flGU5s=" ];
   };
@@ -97,6 +98,7 @@ rec {
         keep-going = true
         builders-use-substitutes = true
         extra-experimental-features = nix-command flakes
+        fallback = true
         extra-substituters = ${toString nixConfig.extra-substituters}
         extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
         keep-env-derivations = true
@@ -134,14 +136,9 @@ rec {
           mysql57
           (nle.build {
             path = writeTextDir "requirements.txt" ''
-              black==20.8b1
-              bpython==0.20.1
-              click==7.1.2
-              ipdb==0.13.4
-              mypy==0.790
-              prospector[with_everything]==1.3.1
-              pytest==6.1.2
-              atlassian-python-api==3.4.1
+              black
+              bpython
+              mypy
             '';
           })
           pynixify

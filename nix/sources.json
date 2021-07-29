@@ -31,11 +31,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "0d40cjg1ayvnvr6hgh7xyvm8yb5jwsjqp6z7rlsz3b6w0q5wh80d",
+        "sha256": "0yhyg96xv1jnw0kxx5nac270c341c2k7wb01y3kfxgcyapyz74nw",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.26.74/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.27.108/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.26.74"
+        "version": "1.27.108"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -45,18 +45,18 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "0qw8biv5p7j1gqz0ziadj7hd0kh86nlndwxvc39ifq52w8w81h6v",
+        "sha256": "00yxk43pa2f7s565b4g6cs0nv5wr023xmw1ajq45ksacp2kzp93k",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/90.0/mac/en-US/Firefox%2090.0.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/90.0.2/mac/en-US/Firefox%2090.0.2.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "90.0"
+        "version": "90.0.2"
     },
     "dmg-signal-desktop": {
-        "sha256": "1qhjpng59rmrvlbz5rp5rsczkci3gkjj9w188a4rrwhy10an8qfh",
+        "sha256": "1li05pzdam82ggc9rk46yw0r9420s57nlygbrvhfhk29n6nqd7fv",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.9.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.10.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.9.0"
+        "version": "5.10.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "6fa52f4c093f1759df7f41b65610d398e0d8a5a6",
-        "sha256": "14nsvcfs1abk9wv2gnqqh6pxablh5crh4wwxbnl05vpq7lkm20w8",
+        "rev": "c1ea4432ff287c00d04e24ccea94f6b9f3ceac47",
+        "sha256": "0qa7q2ri0403xnznfpjm78j11138s03g8c96kiw0qrc08fdvlzaa",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/6fa52f4c093f1759df7f41b65610d398e0d8a5a6.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/c1ea4432ff287c00d04e24ccea94f6b9f3ceac47.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -83,10 +83,10 @@
         "homepage": null,
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
-        "sha256": "0x2jn3vrawwv9xp15674wjz9pixwjyj3j771izayl962zziivbx2",
+        "rev": "c6f3b635321160c629b74fefc88c807b59a51646",
+        "sha256": "03zrhc1mjmn52cswqs6bc8wflgfjmr2r09wpla62y38wn1pimw2b",
         "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/99f1c2157fba4bfe6211a321fd0ee43199025dbf.tar.gz",
+        "url": "https://github.com/edolstra/flake-compat/archive/c6f3b635321160c629b74fefc88c807b59a51646.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-fuzzy": {
@@ -152,11 +152,11 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-unstable": {
-        "sha256": "1c6qivqjzpz8ipfgzamw2msvisl83r3gi9xrvi8jw16yl830hs53",
+        "sha256": "1li6skrlrwzrsysbfvfvh5a3jm7134n5qhbfw0df87aw6qp5qx7g",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre302179.53079ed9131/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre304626.8ecc61c91a5/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre302179.53079ed9131"
+        "version": "nixos-21.11pre304626.8ecc61c91a5"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
@@ -219,10 +219,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1k5n24c40n2qbxpc14h8prllr1jr3gw21vg16zhz9ay4gf6b2gaw",
+        "sha256": "1a8s0bnn1skkyff9l83si8lwg2282l9m1lcfyhj5hi4m9hrsjqcj",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.4.en-US.linux-x86_64.tar.bz2",
-        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.4.en-US.linux-x86_64.tar.bz2"
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.4.1.en-US.linux-x86_64.tar.bz2",
+        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.4.1.en-US.linux-x86_64.tar.bz2"
     },
     "yarn-completion": {
         "branch": "master",
@@ -230,10 +230,10 @@
         "homepage": "",
         "owner": "dsifford",
         "repo": "yarn-completion",
-        "rev": "5bf2968493a7a76649606595cfca880a77e6ac0e",
-        "sha256": "1w1df1cvf3c1maq60kx927x7x9zmb40n02pfgf3ynaai5n398195",
+        "rev": "2ccee5e6e2f3c3dbf885cd33c361f8dc08cf9741",
+        "sha256": "1888blxrmidc0g9y7b1rb0cy7r3ngm4jllhsqd8aiwjcakrmq5r6",
         "type": "tarball",
-        "url": "https://github.com/dsifford/yarn-completion/archive/5bf2968493a7a76649606595cfca880a77e6ac0e.tar.gz",
+        "url": "https://github.com/dsifford/yarn-completion/archive/2ccee5e6e2f3c3dbf885cd33c361f8dc08cf9741.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

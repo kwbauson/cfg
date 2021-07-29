@@ -13,13 +13,13 @@ let
         sha512 = "9pzDqyc6OLDaqe+zbACgFkb6fKMNG6CObKpnYXChRsvYGyEdc7CA2BaqeOM+vOtCS5ndmJicPJhKAwYRI6UfFw==";
       };
     };
-    "@babel/helper-validator-identifier-7.14.5" = {
+    "@babel/helper-validator-identifier-7.14.8" = {
       name = "_at_babel_slash_helper-validator-identifier";
       packageName = "@babel/helper-validator-identifier";
-      version = "7.14.5";
+      version = "7.14.8";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.14.5.tgz";
-        sha512 = "5lsetuxCLilmVGyiLEfoHBRX8UCFD+1m2x3Rj97WrW3V7H3u4RWRXA4evMjImCsin2J2YT0QaVDGf+z8ondbAg==";
+        url = "https://registry.npmjs.org/@babel/helper-validator-identifier/-/helper-validator-identifier-7.14.8.tgz";
+        sha512 = "ZGy6/XQjllhYQrNw/3zfWRwZCTVSiBLZ9DHVZxn9n2gip/7ab8mv2TWlKPIBk26RwedCBoWdjLmn+t9na2Gcow==";
       };
     };
     "@babel/highlight-7.14.5" = {
@@ -58,22 +58,22 @@ let
         sha512 = "509r2+yARFfHHE7T6Puu2jjkoycftovhXRqW328PDXTVGKihlb1P8Z9mMZH04ebyajfRY7dedfGynlrFHJUQCg==";
       };
     };
-    "@tsconfig/node16-1.0.1" = {
+    "@tsconfig/node16-1.0.2" = {
       name = "_at_tsconfig_slash_node16";
       packageName = "@tsconfig/node16";
-      version = "1.0.1";
+      version = "1.0.2";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.1.tgz";
-        sha512 = "FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==";
+        url = "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.2.tgz";
+        sha512 = "eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==";
       };
     };
-    "@types/node-16.3.3" = {
+    "@types/node-16.4.6" = {
       name = "_at_types_slash_node";
       packageName = "@types/node";
-      version = "16.3.3";
+      version = "16.4.6";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@types/node/-/node-16.3.3.tgz";
-        sha512 = "8h7k1YgQKxKXWckzFCMfsIwn0Y61UK6tlD6y2lOb3hTOIMlK3t9/QwHOhc81TwU+RMf0As5fj7NPjroERCnejQ==";
+        url = "https://registry.npmjs.org/@types/node/-/node-16.4.6.tgz";
+        sha512 = "FKyawK3o5KL16AwbeFajen8G4K3mmqUrQsehn5wNKs8IzlKHE8TfnSmILXVMVziAEcnB23u1RCFU1NT6hSyr7Q==";
       };
     };
     "@types/normalize-package-data-2.4.1" = {
@@ -292,13 +292,13 @@ let
         sha512 = "dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==";
       };
     };
-    "date-fns-2.22.1" = {
+    "date-fns-2.23.0" = {
       name = "date-fns";
       packageName = "date-fns";
-      version = "2.22.1";
+      version = "2.23.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/date-fns/-/date-fns-2.22.1.tgz";
-        sha512 = "yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==";
+        url = "https://registry.npmjs.org/date-fns/-/date-fns-2.23.0.tgz";
+        sha512 = "5ycpauovVyAk0kXNZz6ZoB9AYMZB4DObse7P3BPWmyEjXNORTI8EJ6X0uaSAq4sCHzM1uajzrkr6HnsLQpxGXA==";
       };
     };
     "diff-4.0.2" = {
@@ -1011,7 +1011,7 @@ let
     src = ./.;
     dependencies = [
       sources."@babel/code-frame-7.14.5"
-      sources."@babel/helper-validator-identifier-7.14.5"
+      sources."@babel/helper-validator-identifier-7.14.8"
       (sources."@babel/highlight-7.14.5" // {
         dependencies = [
           sources."ansi-styles-3.2.1"
@@ -1025,8 +1025,8 @@ let
       sources."@tsconfig/node10-1.0.8"
       sources."@tsconfig/node12-1.0.9"
       sources."@tsconfig/node14-1.0.1"
-      sources."@tsconfig/node16-1.0.1"
-      sources."@types/node-16.3.3"
+      sources."@tsconfig/node16-1.0.2"
+      sources."@types/node-16.4.6"
       sources."@types/normalize-package-data-2.4.1"
       sources."@types/strip-bom-3.0.0"
       sources."@types/strip-json-comments-0.0.30"
@@ -1051,7 +1051,7 @@ let
       sources."concat-map-0.0.1"
       sources."concurrently-6.2.0"
       sources."create-require-1.1.1"
-      sources."date-fns-2.22.1"
+      sources."date-fns-2.23.0"
       sources."diff-4.0.2"
       sources."dynamic-dedupe-0.3.0"
       sources."emoji-regex-8.0.0"

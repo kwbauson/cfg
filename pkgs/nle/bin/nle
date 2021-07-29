@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl
+# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused
 set -e
 
 if [[ $PINNED != '1' && $cmd != pin && -e nle-pinned.sh ]];then
@@ -163,7 +163,7 @@ case $cmd in
       nr bundix
     if [[ ! -e yarn.lock ]];then
       impure "package.json package-lock.json" node-packages.nix \
-        nr -c node2nix nodePackages.node2nix -c /dev/null -l package-lock.json \
+        nr node2nix -c /dev/null -l package-lock.json \
         --no-copy-node-env --development --strip-optional-dependencies
     fi
     if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
@@ -247,6 +247,9 @@ case $cmd in
       env | grep -v -e '^_=' -e '^DIRENV_IN_ENVRC=' -e '^DIRENV_WATCHES=' | sed "s#$PATH_added:##"
     )
     ;;
+  dump)
+    direnv dump bash
+    ;;
   export)
     "$0" env | sed 's/^/export /'
     ;;
@@ -299,18 +302,18 @@ case $cmd in
   pin)
     rev=$(curl -s https://api.github.com/repos/kwbauson/cfg/branches/main | sed -n -e 's/.*"sha": "//' -e 's/",$//' -e '4p')
     sed "s/^rev=REPLACE$/rev=$rev/" > nle-pinned.sh <<'EOF'
-#!/usr/bin/env bash
+#!/bin/sh
 set -e
 rev=REPLACE
 result=~/.cache/nle/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
 local_nix_conf=$(dirname "$0")/nix/nix.conf
 
-if [[ -e $local_nix_conf ]];then
+if [ -e "$local_nix_conf" ];then
   export NIX_CONFIG=$(< "$local_nix_conf")
 fi
 
-if [[ ! -e $result ]];then
+if [ ! -e "$result" ];then
   mkdir -p "$(dirname "$result")"
   nix build --file "$url" nle.unwrapped --out-link "$result"
 fi
@@ -321,6 +324,7 @@ EOF
   if [[ -e .envrc ]];then
     sed -i 's#nle direnv#./nle-pinned.sh direnv#' .envrc
   fi
+  direnv allow
     ;;
   *)
     invalid

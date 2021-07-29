@@ -338,14 +338,14 @@ with builtins; with pkgs; with mylib; {
             -e "s/[:,] (behind [0-9]*)([],])/: $yellow\1$reset\2/g"
           git --no-pager stash list
         '';
-        brf = "!git f --quiet && git br";
-        main = ''! [[ -f $(git rev-parse --show-toplevel)/.git/refs/heads/master ]] && echo master || echo main'';
+        brf = "! git f --quiet && git br";
+        default = "! git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
         branch-name = "rev-parse --abbrev-ref HEAD";
         ca = "! git a && git ci";
         cap = "! git ca && git p";
         ci = "commit -v";
         co = "checkout";
-        com = "! git co $(git main)";
+        cod = "! git co $(git default)";
         df = scriptAlias ''
           ${tmpGitIndex}
           git add -A
@@ -355,9 +355,9 @@ with builtins; with pkgs; with mylib; {
         f = "fetch --all";
         g = "! git f && git mo";
         gr = "! git pull origin $(git branch-name) --rebase --autostash";
-        gm = "! git fetch origin $(git main):$(git main)";
+        gd = "! git fetch origin $(git default):$(git default)";
         gmp = "! git gm && git mp";
-        mm = "! git merge $(git main)";
+        md = "! git merge $(git default)";
         mo = "! git merge origin/$(git branch-name) --ff-only";
         mp = "! git mm && git ";
         hidden = "! git ls-files -v | grep '^S' | cut -c3-";

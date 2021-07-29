@@ -92,5 +92,3 @@
   system.stateVersion = "21.05";
   programs.command-not-found.dbPath = self.programs-sqlite;
 }
-
-
