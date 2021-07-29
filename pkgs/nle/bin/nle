@@ -9,8 +9,7 @@ fi
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-fallbackcache=$HOME/.cache
-cachebase=${XDG_CACHE_HOME:-$fallbackcache}/$name
+cachebase=${XDG_CACHE_HOME:-$HOME/.cache}/$name
 impuredir=$cachebase/.impure
 
 args=$@
@@ -305,7 +304,7 @@ case $cmd in
 #!/bin/sh
 set -e
 rev=REPLACE
-result=~/.cache/nle/.pinned/$rev
+result=${XDG_CACHE_HOME:-$HOME/.cache}/nle/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
 local_nix_conf=$(dirname "$0")/nix/nix.conf
 
