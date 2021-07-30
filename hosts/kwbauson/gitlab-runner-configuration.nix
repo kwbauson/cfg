@@ -4,13 +4,8 @@
   boot.kernel.sysctl."net.ipv4.ip_forward" = true; # 1
   services.gitlab-runner = {
     enable = true;
-    concurrent = 4;
+    concurrent = 8;
     services = {
-      default = {
-        registrationConfigFile = "/etc/nixos/gitlab-runner-secrets";
-        dockerImage = "debian:stable";
-        dockerDisableCache = true;
-      };
       nix = with pkgs; {
         tagList = [ "nix" ];
         registrationConfigFile = "/etc/nixos/gitlab-runner-secrets";
