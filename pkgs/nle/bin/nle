@@ -2,8 +2,8 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused
 set -e
 
-if [[ $PINNED != '1' && $cmd != pin && -e nle-pinned.sh ]];then
-  PINNED=1 exec ./nle-pinned.sh "$@"
+if [[ $PINNED != '1' && $cmd != pin && -e nle.sh ]];then
+  PINNED=1 exec ./nle.sh "$@"
 fi
 
 name=$(basename "$0")
@@ -41,7 +41,7 @@ buildfiles=(
   local.nix
   bin
   pkgs nix
-  nle-pinned.sh
+  nle.sh
 )
 
 hashfiles() {
@@ -300,7 +300,7 @@ case $cmd in
     ;;
   pin)
     rev=$(curl -s https://api.github.com/repos/kwbauson/cfg/branches/main | sed -n -e 's/.*"sha": "//' -e 's/",$//' -e '4p')
-    sed "s/^rev=REPLACE$/rev=$rev/" > nle-pinned.sh <<'EOF'
+    sed "s/^rev=REPLACE$/rev=$rev/" > nle.sh <<'EOF'
 #!/bin/sh
 set -e
 rev=REPLACE
@@ -319,9 +319,9 @@ fi
 
 exec "$result"/bin/nle "$@"
 EOF
-  chmod +x nle-pinned.sh
+  chmod +x nle.sh
   if [[ -e .envrc ]];then
-    sed -i 's#nle direnv#./nle-pinned.sh direnv#' .envrc
+    sed -i 's#nle direnv#./nle.sh direnv#' .envrc
   fi
   direnv allow
     ;;
