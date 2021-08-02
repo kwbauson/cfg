@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "4d223a270eb680674aa05fa2089494362f18f0f4",
-        "sha256": "0ib2xwbhni6nlydid9zwnprjq9mrcczvb37dmkf9cn713sql010k",
+        "rev": "8f859cc845770b2a0626105c2d0604e9eff37e89",
+        "sha256": "0lm8yp2l7ciyma9h42j6vh8a4r0py0szk5k0v2ssm0vdixlq5y2k",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/4d223a270eb680674aa05fa2089494362f18f0f4.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/8f859cc845770b2a0626105c2d0604e9eff37e89.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -83,10 +83,10 @@
         "homepage": null,
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "bef1b74164e238c530aec28335e761372dafe4c4",
-        "sha256": "1qln7qhmv9v6azl861nw5915n7df7536cz9j39rhgm3lw9jlqh1r",
+        "rev": "12c64ca55c1014cdc1b16ed5a804aa8576601ff2",
+        "sha256": "0jm6nzb83wa6ai17ly9fzpqc40wg1viib8klq8lby54agpl213w5",
         "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/bef1b74164e238c530aec28335e761372dafe4c4.tar.gz",
+        "url": "https://github.com/edolstra/flake-compat/archive/12c64ca55c1014cdc1b16ed5a804aa8576601ff2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-fuzzy": {
