@@ -2,21 +2,21 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused
 set -e
 
-if [[ $PINNED != '1' && $cmd != pin && -e nle.sh ]];then
-  PINNED=1 exec ./nle.sh "$@"
-fi
-
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
-
-cachebase=${XDG_CACHE_HOME:-$HOME/.cache}/$name
-impuredir=$cachebase/.impure
 
 args=$@
 [[ $1 = -d ]] && shift && cd "$1" && shift
 
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
+
+if [[ $PINNED != '1' && $cmd != pin && -e nle.sh ]];then
+  PINNED=1 exec ./nle.sh "$@"
+fi
+
+cachebase=${XDG_CACHE_HOME:-$HOME/.cache}/$name
+impuredir=$cachebase/.impure
 
 nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$sourcedir\"; }"
 
