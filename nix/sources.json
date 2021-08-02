@@ -31,11 +31,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "dmg-brave": {
-        "sha256": "0yhyg96xv1jnw0kxx5nac270c341c2k7wb01y3kfxgcyapyz74nw",
+        "sha256": "0w7p0s25smxz8rxva421hjg30123k8zn8b0v1z0338wc0hz4cpjg",
         "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.27.108/Brave-Browser-universal.dmg",
+        "url": "https://github.com/brave/brave-browser/releases/download/v1.27.109/Brave-Browser-universal.dmg",
         "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.27.108"
+        "version": "1.27.109"
     },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
@@ -52,11 +52,11 @@
         "version": "90.0.2"
     },
     "dmg-signal-desktop": {
-        "sha256": "1li05pzdam82ggc9rk46yw0r9420s57nlygbrvhfhk29n6nqd7fv",
+        "sha256": "05pz3kry3jycdfzg0rcbhvbxvjbsaw0xc6cqzqc84cmadwpbwffc",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.10.0.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.11.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.10.0"
+        "version": "5.11.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -71,10 +71,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "a50d83f404d9153f4f606147b66173d178c6c7c3",
-        "sha256": "0c8yw7i29ysm9c0wmxck70c704wnxgwchinm84lxgmmv166ahi0a",
+        "rev": "7ded8d6cd03bce506baad8137d26d9b446621ecc",
+        "sha256": "1kzckqnv53rgh41jxn00apgvgxnrfqsk8qzk0439sjz5fmf9y7l3",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/a50d83f404d9153f4f606147b66173d178c6c7c3.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/7ded8d6cd03bce506baad8137d26d9b446621ecc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -83,10 +83,10 @@
         "homepage": null,
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "c6f3b635321160c629b74fefc88c807b59a51646",
-        "sha256": "03zrhc1mjmn52cswqs6bc8wflgfjmr2r09wpla62y38wn1pimw2b",
+        "rev": "bef1b74164e238c530aec28335e761372dafe4c4",
+        "sha256": "1qln7qhmv9v6azl861nw5915n7df7536cz9j39rhgm3lw9jlqh1r",
         "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/c6f3b635321160c629b74fefc88c807b59a51646.tar.gz",
+        "url": "https://github.com/edolstra/flake-compat/archive/bef1b74164e238c530aec28335e761372dafe4c4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-fuzzy": {
