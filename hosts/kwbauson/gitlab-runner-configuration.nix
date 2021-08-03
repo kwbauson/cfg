@@ -15,7 +15,7 @@
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db:ro"
           "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
-          "/var/lib/gitlab-runner/cache:/cache"
+          "/var/cache/gitlab-runner:/cache"
         ];
         preCloneScript = pkgs.writeScript "setup-container" ''
           mkdir -p -m 0755 /nix/var/log/nix/drvs
