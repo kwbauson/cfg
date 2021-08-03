@@ -62,7 +62,7 @@ rec {
   }.out;
   local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];
   node-modules-paths =
-    ifFilesAndNot "package.json package-lock.json node-packages.nix" "yarn.nix yarn.lock"
+    ifFilesAndNot nle-conf.npm.files nle-conf.npm.notFiles
       (lowPrio nle-conf.npm.out);
 
   yarn-paths = nleFiles "yarn"

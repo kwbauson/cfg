@@ -21,19 +21,11 @@
   };
   npm = {
     files = "package.json package-lock.json";
-    generated = "node-packages.nix";
     extraFiles = ".npmrc";
     notFiles = "yarn.lock";
-    out =
-      let args = (callPackage (file "node-packages.nix") { inherit nodeEnv; }).args; in
-      (nodeEnv.buildNodeDependencies {
-        inherit (args) name packageName version dependencies;
-        src = buildDir (map file (words self.npm.files));
-        bypassCache = true;
-        nativeBuildInputs = [ nodePackages.node-gyp-build nodePackages.node-pre-gyp ];
-      }).overrideAttrs (attrs: {
-        name = "node_modules";
-      });
+    out = npmlock2nix.node_modules {
+      src = buildDir (map file (words self.npm.files));
+    };
   };
   yarn = {
     files = "package.json yarn.lock .enable-nle-yarn";

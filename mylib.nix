@@ -93,7 +93,6 @@ cli // generators // lib // builtins // rec {
       (x: ! any (y: y == x) (toList except))
       (attrNames (readDir path))
   ));
-  nodeEnv = callPackage "${inputs.nixpkgs}/pkgs/development/node-packages/node-env.nix" { };
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
   makeScript = name: script: writeBashBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
   makeScripts = mapAttrs makeScript;

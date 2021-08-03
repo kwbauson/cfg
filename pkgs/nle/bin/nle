@@ -2,18 +2,18 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused
 set -e
 
-if [[ $PINNED != '1' && $1 != pin && -e nle.sh ]];then
-  PINNED=1 exec ./nle.sh "$@"
-fi
-
-name=$(basename "$0")
-[[ -e .disable-$name ]] && exit
-
 args=$@
 [[ $1 = -d ]] && shift && cd "$1" && shift
 
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
+
+if [[ $PINNED != '1' && $cmd != pin && -e nle.sh ]];then
+  PINNED=1 exec ./nle.sh "$@"
+fi
+
+name=$(basename "$0")
+[[ -e .disable-$name ]] && exit
 
 cachebase=${XDG_CACHE_HOME:-$HOME/.cache}/$name
 impuredir=$cachebase/.impure
@@ -160,41 +160,6 @@ case $cmd in
   generate)
     impure "Gemfile Gemfile.lock" gemset.nix \
       nr bundix
-    if [[ ! -e yarn.lock ]];then
-      impure "package.json package-lock.json" node-packages.nix \
-        nr node2nix -c /dev/null -l package-lock.json \
-        --no-copy-node-env --development --strip-optional-dependencies
-    fi
-    if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
-      grep '^  resolved "' yarn.lock | grep -v '#' | sed -e 's/[^"]*"//' -e 's/"$//' | while read url;do
-        name=$(echo $url | sed 's:/:_:g')
-        impure <(echo $url) $name sh -c "nix-prefetch-url --type sha1 $url > $name"
-        sed -i "s^$url^$url#$(< $name)^" yarn.lock
-      done
-      impure 'package.json yarn.lock' yarn.nix \
-        sh -c 'nr yarn2nix --builtin-fetchgit > yarn.nix'
-      if [[ -e .npmrc ]];then
-        token=$(sed -n 1s/.*:_authToken=//p .npmrc)
-        header="Authorization: Bearer $token"
-        curlOpts='"-H @${builtins.toFile "headers.txt" "'$header'"}"'
-      else
-        curlOpts='""'
-      fi
-      sed -i \
-        -e "1acurlOpts = $curlOpts;" \
-        -e "2,$(wc -l yarn.nix | cut -d' ' -f1)s/fetchurl/customFetchurl/" \
-        -e '2acustomFetchurl = args: fetchurl (args // { inherit curlOpts; });' \
-        -e 's,ssh://,,' \
-        -e 's/builtins.fetchGit/fetchgit/' \
-        -e '/^\s\+ref = /d' \
-        yarn.nix
-      sed -n '/repo = fetchgit/,+2s/.*url = "\(.*\)";/\1/p;s/.* rev = "\(.*\)";/\1/p' yarn.nix |
-        paste - - | while read url rev;do
-        name=$(echo $url | sed 's:/:_:g')
-        impure <(echo $url $rev) $name sh -c "nr nix-prefetch-git $url --rev $rev | jq -r .sha256 > $name"
-        sed -i "s^$url\";^\0 sha256 = \"$(< $name)\";^" yarn.nix
-      done
-    fi
     ;;
   update)
     nr nle.scripts.update

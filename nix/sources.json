@@ -170,6 +170,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/96a1dbac972c4f67aea7ee548f4e5531003f8ab0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "npmlock2nix": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "tweag",
+        "repo": "npmlock2nix",
+        "rev": "3820a83f25e56f189158d2d62d71a9d6e003376b",
+        "sha256": "17p0wcr3p40kxnra78fncvgpcgc0syq2mvmpyszavfzr353a8150",
+        "type": "tarball",
+        "url": "https://github.com/tweag/npmlock2nix/archive/3820a83f25e56f189158d2d62d71a9d6e003376b.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "pynixify": {
         "branch": "main",
         "description": "Nix expression generator for Python projects",
