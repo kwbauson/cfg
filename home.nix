@@ -221,11 +221,8 @@ with builtins; with pkgs; with mylib; {
       extraConfig = ''
         Host kwbauson.com
           User keith
-      '' + optionalString isDarwin ''
-        Host vm
-          User hacker
-          Hostname 127.0.0.1
-          Port 24
+        Host gitlab.com
+          UpdateHostKeys no
       '';
     };
     tmux = {
