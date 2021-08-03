@@ -24,6 +24,8 @@
     extraFiles = ".npmrc";
     notFiles = "yarn.lock";
     out = npmlock2nix.node_modules {
+      pname = "node_modules";
+      version = "0.0.0";
       src = buildDir (map file (words self.npm.files));
     };
   };
