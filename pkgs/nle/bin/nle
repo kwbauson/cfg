@@ -15,7 +15,7 @@ cmd=${1:-activate} && [[ -n $1 ]] && shift
 name=$(basename "$0")
 [[ -e .disable-$name ]] && exit
 
-cachebase=${XDG_CACHE_HOME:-$HOME/.cache}/$name
+cachebase=${NLE_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/$name}
 impuredir=$cachebase/.impure
 
 nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$sourcedir\"; }"
@@ -269,7 +269,7 @@ case $cmd in
 #!/bin/sh
 set -e
 rev=REPLACE
-result=${XDG_CACHE_HOME:-$HOME/.cache}/nle/.pinned/$rev
+result=${NLE_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/nle}/.pinned/$rev
 url=https://github.com/kwbauson/cfg/archive/$rev.tar.gz
 local_nix_conf=$(dirname "$0")/nix/nix.conf
 
