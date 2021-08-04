@@ -19,7 +19,7 @@ python-dateutil = ">=2.7.0"
 
 [[package]]
 name = "botocore"
-version = "1.21.12"
+version = "1.21.13"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -156,7 +156,7 @@ six = ">=1.5"
 
 [[package]]
 name = "quantiphy"
-version = "2.14.0"
+version = "2.15.0"
 description = "physical quantities (numbers with units)"
 category = "main"
 optional = false
@@ -228,8 +228,8 @@ arrow = [
     {file = "arrow-1.1.1.tar.gz", hash = "sha256:dee7602f6c60e3ec510095b5e301441bc56288cb8f51def14dcb3079f623823a"},
 ]
 botocore = [
-    {file = "botocore-1.21.12-py3-none-any.whl", hash = "sha256:7b205f96bf0e2e1017301339e4fba9fd6dfdf54680196eb43e60e60581d7d5cb"},
-    {file = "botocore-1.21.12.tar.gz", hash = "sha256:8710d03b9de3e3d94ed410f3e83809ca02050b091100d68c22ff7bf986f29fb6"},
+    {file = "botocore-1.21.13-py3-none-any.whl", hash = "sha256:ce20da2dff6ab36ebee3b2efdf0bcc859ee1a7f8ec0d2ae3eaac5f50f6c729fd"},
+    {file = "botocore-1.21.13.tar.gz", hash = "sha256:37c1c17326f9c81aba73efc6b496ccfe536822e576bc89ceee460dc18108f3a0"},
 ]
 braceexpand = [
     {file = "braceexpand-0.1.7-py2.py3-none-any.whl", hash = "sha256:91332d53de7828103dcae5773fb43bc34950b0c8160e35e0f44c4427a3b85014"},
@@ -278,8 +278,8 @@ python-dateutil = [
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
 quantiphy = [
-    {file = "quantiphy-2.14.0-py3-none-any.whl", hash = "sha256:568ae543c094c095ffcc7a975617617b3c6543de1f3396f3681d0321caa5425e"},
-    {file = "quantiphy-2.14.0.tar.gz", hash = "sha256:ae003e51b6115f21c21ebf4c3dd44db828712733c1e4fac69ff4044680ce6479"},
+    {file = "quantiphy-2.15.0-py3-none-any.whl", hash = "sha256:1157161d273447926b542299fd22b570059b2578e3624a95f3963d30f812a0bd"},
+    {file = "quantiphy-2.15.0.tar.gz", hash = "sha256:56a8d20d34039a41008c6b71e7c9fcd71cea774784ba0f06c4117948f9c02a4a"},
 ]
 requests = [
     {file = "requests-2.26.0-py2.py3-none-any.whl", hash = "sha256:6c1246513ecd5ecd4528a0906f910e8f0f9c6b8ec72030dc9fd154dc1a6efd24"},
