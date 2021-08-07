@@ -328,6 +328,7 @@ with builtins; with pkgs; with mylib; {
         v = "! nvim '+ Git | only'";
         a = "add -A";
         br = scriptAlias ''
+          set -eo pipefail
           esc=$'\e'
           reset=$esc[0m
           red=$esc[31m

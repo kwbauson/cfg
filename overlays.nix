@@ -133,7 +133,7 @@
           fi
         done)
         length=$(echo "$dirs" | awk '{ print length }' | sort -V | tail -n1)
-        if [[ ! -z $1 && $1 != 'clone' ]] && ! git rev-parse --git-dir &> /dev/null;then
+        if [[ ! -z $dirs && ! -z $1 && $1 != 'clone' ]] && ! git rev-parse --git-dir &> /dev/null;then
           for dir in $dirs;do
             first=1
             git -C "$dir" "$@" 2>&1 | while IFS=$'\n' read -r line;do
