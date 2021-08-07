@@ -342,6 +342,14 @@ with builtins; with pkgs; with mylib; {
         brf = "! git f --quiet && git br";
         default = "! git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
         branch-name = "rev-parse --abbrev-ref HEAD";
+        gone = ''! git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
+        rmg = scriptAlias ''
+          gone=$(git gone)
+          echo About to remove branches: $gone
+          read -n1 -p "Continue? [y/n] " continue
+          echo
+          [[ $continue = y ]] && git branch -D $gone
+        '';
         ca = "! git a && git ci";
         cap = "! git ca && git p";
         ci = "commit -v";
