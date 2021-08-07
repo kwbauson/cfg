@@ -30,13 +30,6 @@
         "url": "https://github.com/wellle/context.vim/archive/e38496f1eb5bb52b1022e5c1f694e9be61c3714c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "dmg-brave": {
-        "sha256": "0w7p0s25smxz8rxva421hjg30123k8zn8b0v1z0338wc0hz4cpjg",
-        "type": "file",
-        "url": "https://github.com/brave/brave-browser/releases/download/v1.27.109/Brave-Browser-universal.dmg",
-        "url_template": "https://github.com/brave/brave-browser/releases/download/v<version>/Brave-Browser-universal.dmg",
-        "version": "1.27.109"
-    },
     "dmg-discord": {
         "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
         "type": "file",
