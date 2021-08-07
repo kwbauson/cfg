@@ -217,12 +217,16 @@ with builtins; with pkgs; with mylib; {
     ssh = {
       enable = true;
       compression = true;
-      forwardAgent = true;
       extraConfig = ''
         Host kwbauson.com
           User keith
         Host gitlab.com
           UpdateHostKeys no
+        Host aws-test
+          HostName 18.222.144.31
+        Host aws-*
+          IdentityFile ~/.ssh/keith-test.pem
+          User root
       '';
     };
     tmux = {
