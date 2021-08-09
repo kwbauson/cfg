@@ -131,7 +131,6 @@ rec {
       mkChecks = pkgs: with pkgs; buildEnv {
         name = "checks";
         paths = flatten [
-          juicefs
           saml2aws
           mysql57
           (nle.build {
