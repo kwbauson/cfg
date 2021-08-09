@@ -2,7 +2,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./gitlab-runner-configuration.nix
   ];
 
   boot.loader.grub = {
