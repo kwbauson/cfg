@@ -38,11 +38,11 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "00yxk43pa2f7s565b4g6cs0nv5wr023xmw1ajq45ksacp2kzp93k",
+        "sha256": "1yx647d1aibw3ydjpl8ysgz2smim48x6bykq2lq3y2rjj3s46v6j",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/90.0.2/mac/en-US/Firefox%2090.0.2.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0/mac/en-US/Firefox%2091.0.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "90.0.2"
+        "version": "91.0"
     },
     "dmg-signal-desktop": {
         "sha256": "1zn6rxi25cnqvjzi0w6mwngmyzg2ri3ampy20r52kxdb2z7lfkky",
@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "89ed9d55a8c3daf9a0a6d3a39046bbf419e6d56f",
-        "sha256": "0r5hp8cks8djihv404481ppslxhzh6fxyfvjlqpcxzqhya0spza5",
+        "rev": "4edeb612c82ab87550e33783a4d5fe50ead19cd9",
+        "sha256": "0q6c2npyw17vxxnr3i0b5fh8yn0qmfjr29501dvgcg90la9yn1v7",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/89ed9d55a8c3daf9a0a6d3a39046bbf419e6d56f.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/4edeb612c82ab87550e33783a4d5fe50ead19cd9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
