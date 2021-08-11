@@ -182,7 +182,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<5)"]
 
 [[package]]
 name = "shlib"
-version = "1.2.0"
+version = "1.3.0"
 description = "shell library"
 category = "main"
 optional = false
@@ -286,7 +286,8 @@ requests = [
     {file = "requests-2.26.0.tar.gz", hash = "sha256:b8aa58f8cf793ffd8782d3d8cb19e66ef36f7aba4353eec859e74678b01b07a7"},
 ]
 shlib = [
-    {file = "shlib-1.2.0.tar.gz", hash = "sha256:359ab9426ffc4baa224906f43d642040d5fbac2ab3700e20ca2d57f799ae2231"},
+    {file = "shlib-1.3.0-py3-none-any.whl", hash = "sha256:ee5d8941814fa468b18e406ed8bf195bfd522de6c6073185145bd3782edb5fee"},
+    {file = "shlib-1.3.0.tar.gz", hash = "sha256:d14d69072a4ea63822170db6292002860ef35754eb2a88f989e75f24a82f7067"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
