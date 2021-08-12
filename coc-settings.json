@@ -50,6 +50,11 @@
     "nim": {
       "command": "nimlsp",
       "filetypes": ["nim"]
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform"]
     }
   }
 }
