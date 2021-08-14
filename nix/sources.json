@@ -45,11 +45,11 @@
         "version": "91.0"
     },
     "dmg-signal-desktop": {
-        "sha256": "1zn6rxi25cnqvjzi0w6mwngmyzg2ri3ampy20r52kxdb2z7lfkky",
+        "sha256": "1g6l5wr306ndzbi6ny515carghff8v57arlk8y69jsyd9smy86pd",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.12.2.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.13.1.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.12.2"
+        "version": "5.13.1"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "74b599f46ca9615fff987d48eb03453b15f2239a",
-        "sha256": "10fpz3cml1yga5r6cs61x34q4v6q9i3ays71chxzi3na82rhnsxm",
+        "rev": "5e0f4ee78e504d152b79860194ebd8a398e580a1",
+        "sha256": "10vzwr390mfy904qgz2809wgbqzi98mmsxdzb03rbja6yi2al82j",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/74b599f46ca9615fff987d48eb03453b15f2239a.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/5e0f4ee78e504d152b79860194ebd8a398e580a1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -133,11 +133,11 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-unstable": {
-        "sha256": "02swj0gr3mabvzz7lk3a2nrxw7i1v0yl6gzg0m4h1c61biy1vb8j",
+        "sha256": "18f2v81icbkkcmgnbxfqdbdxd3k2ihw99bprr4mnjai9sgbnvf2p",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre308167.9df2cb074d7/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre308304.4138cbd913f/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre308167.9df2cb074d7"
+        "version": "nixos-21.11pre308304.4138cbd913f"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "c63a75e9e31ea5d7d6f94ee9ced41979908087fb",
-        "sha256": "0gxxkvnsrch5jbw51n9vg4j7jf9zd66b9rym86gpxpaqb9amj6nv",
+        "rev": "bf6515b9614645429e1f1846ce07c31f5879e45f",
+        "sha256": "0y1i80jq0q7y9fpck7kphay27rj9azg6w3r2s2idw553wpjwc53r",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/c63a75e9e31ea5d7d6f94ee9ced41979908087fb.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/bf6515b9614645429e1f1846ce07c31f5879e45f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pynixify": {
