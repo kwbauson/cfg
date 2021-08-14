@@ -7,7 +7,7 @@
   boot.loader.grub = {
     enable = true;
     version = 2;
-    device = "/dev/vda";
+    device = "/dev/sda";
   };
 
   nix.gc = {
@@ -18,6 +18,10 @@
   boot.tmpOnTmpfs = lib.mkForce false;
 
   networking = {
+    networkmanager.enable = lib.mkForce false;
+    interfaces.enp3s0.ipv4.addresses = [{ address = "208.87.134.252"; prefixLength = 24; }];
+    defaultGateway.address = "208.87.134.1";
+    nameservers = [ "8.8.8.8" "8.8.4.4" ];
     domain = "com";
     firewall.allowedTCPPorts = [ 80 443 ];
   };
