@@ -46,7 +46,7 @@
       enable = true;
       hostName = "jitsi.${fqdn}";
       config.enableNoisyMicDetection = false;
-
+      config.p2p.enabled = true;
       interfaceConfig = {
         SHOW_JITSI_WATERMARK = false;
         SHOW_WATERMARK_FOR_GUESTS = false;
