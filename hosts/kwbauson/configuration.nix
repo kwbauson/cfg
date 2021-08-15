@@ -10,13 +10,6 @@
     device = "/dev/sda";
   };
 
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 1w";
-  };
-
-  boot.tmpOnTmpfs = lib.mkForce false;
-
   networking = {
     networkmanager.enable = lib.mkForce false;
     interfaces.enp3s0.ipv4.addresses = [{ address = "208.87.134.252"; prefixLength = 24; }];
