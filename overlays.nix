@@ -4,7 +4,7 @@
     isNixOS = prev.isNixOS or false;
   })
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
-    inherit (sources) nixos-unstable nixos-20_09 nixos-18_09 nixpkgs-bundler1;
+    inherit (sources) nixos-unstable nixos-21_05 nixos-20_09 nixos-18_09 nixpkgs-bundler1;
   })
   (self: super: with super; with mylib; {
     nix-wrapped = let nix = nixUnstable; in
@@ -82,7 +82,7 @@
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
     inherit (nixos-unstable);
-    inherit (nixos-20_09);
+    inherit (nixos-21_05);
     inherit (self.pinned-if-darwin);
     switch = self.switch-to-configuration.scripts.${builtAsHost}.noa;
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
