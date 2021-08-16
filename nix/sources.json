@@ -133,11 +133,11 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-21_05": {
-        "sha256": "1kfjgj8g6z26ql77iavnr9pkc7j93xa8wq00v7qnnqv6hc88k3sz",
+        "sha256": "1chfsnzb30y0sxgvxn8ycv60jvwmnr4wny46xqxddwzj51xqsm3x",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2478.a445f582988/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2486.8ac785da984/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/21.05/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05.2478.a445f582988"
+        "version": "nixos-21.05.2486.8ac785da984"
     },
     "nixos-unstable": {
         "sha256": "0s63blqrpczp9cab43gqqya77ihac363ksv6r1i172h6vr0bnpj1",
@@ -230,10 +230,10 @@
         "homepage": "",
         "owner": "dsifford",
         "repo": "yarn-completion",
-        "rev": "2ccee5e6e2f3c3dbf885cd33c361f8dc08cf9741",
-        "sha256": "1888blxrmidc0g9y7b1rb0cy7r3ngm4jllhsqd8aiwjcakrmq5r6",
+        "rev": "79130427b4f996760077f4d3de4411f1a57a597a",
+        "sha256": "0ryirllmbzhcxncjdyx29rwbynhqanvkmdaxi52cw5vnrfcvm928",
         "type": "tarball",
-        "url": "https://github.com/dsifford/yarn-completion/archive/2ccee5e6e2f3c3dbf885cd33c361f8dc08cf9741.tar.gz",
+        "url": "https://github.com/dsifford/yarn-completion/archive/79130427b4f996760077f4d3de4411f1a57a597a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
