@@ -5,5 +5,6 @@ let
     then builtins.getFlake (toString path)
     else (flake-compat { src = builtins.path { name = "source"; inherit path; }; }).defaultNix;
   cfg = getFlake ./.;
+  pkgs = cfg.packages.${builtins.currentSystem};
 in
-cfg.packages.${builtins.currentSystem} // { inherit getFlake cfg; }
+{ inherit getFlake; } // pkgs.mylib // cfg.outputs // pkgs

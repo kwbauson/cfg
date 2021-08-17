@@ -59,7 +59,7 @@ rec {
     imported = import localfile;
     result =
       if isFunction imported
-      then imported (pkgs // mylib // { inherit source; })
+      then imported (mylib // pkgs // { inherit source; })
       else if imported ? nixpkgs && imported ? build then
         let localPkgs = imported.nixpkgs.pkgs or (import
           (builtins.fetchTarball {
@@ -67,7 +67,7 @@ rec {
             inherit (imported.nixpkgs) sha256;
           })
           { config = import ../../config.nix; overlays = import ../../overlays.nix; });
-        in imported.build (localPkgs // import ../../mylib.nix localPkgs // { inherit source; })
+        in imported.build (import ../../mylib.nix localPkgs // localPkgs // { inherit source; })
       else imported;
     out = if pathExists localfile then result else null;
   }.out;
