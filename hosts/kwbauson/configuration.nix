@@ -56,6 +56,7 @@
     jitsi-videobridge.openFirewall = true;
     github-runner = {
       enable = true;
+      extraLabels = [ "nix" ];
       tokenFile = "/etc/nixos/self-hosted-runner-token";
       url = "https://github.com/kwbauson/cfg";
       extraPackages = with pkgs; [ gh ];
