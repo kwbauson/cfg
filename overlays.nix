@@ -102,7 +102,7 @@
       nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
       nixpkgs-path = "echo ${pkgs.path}";
       nixpkgs-branch = "echo ${nixpkgs-branch}";
-      undup = "tac | awk '!x[$0]++' | tac";
+      undup = ''tac "$@" | awk '!x[$0]++' | tac'';
       hmg = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
       hmp = "git -C ~/cfg cap";
       nou = "hmg && noa";
