@@ -23,149 +23,151 @@ rec {
   };
 
   outputs =
-    { self, nixos-hardware, ... }@inputs: with builtins; with inputs; with nixpkgs.lib; flake-utils.lib.eachDefaultSystem
-      (system: rec {
-        packages = self.lib.pkgsForSystem {
-          inherit system;
-          isNixOS = false;
-          host = "unknown";
-        };
-      }) // rec {
-      lib = builtins // rec {
-        mylib = import ./mylib.nix nixpkgs;
-        pkgsForSystem =
-          { system, isNixOS, host }: import nixpkgs {
+    { self, nixos-hardware, ... }@inputs:
+      with builtins; with inputs; with flake-utils.lib; with nixpkgs.lib;
+      flake-utils.lib.eachSystem flake-utils.lib.allSystems
+        (system: rec {
+          packages = self.lib.pkgsForSystem {
             inherit system;
-            inherit (self) config;
-            overlays = [
-              (_: _: {
-                inherit isNixOS;
-                builtAsHost = host;
-              })
-            ] ++ self.overlays;
+            isNixOS = false;
+            host = "unknown";
           };
-        inherit (mylib) mapAttrValues import';
-        nixosConfiguration = host: module: buildSystem {
-          system = "x86_64-linux";
-          modules = [
-            { networking.hostName = host; }
-            (callModule ./hosts/common.nix)
-            (callModule module)
+        }) // rec {
+        lib = builtins // rec {
+          mylib = import ./mylib.nix nixpkgs;
+          pkgsForSystem =
+            { system, isNixOS, host }: import nixpkgs {
+              inherit system;
+              inherit (self) config;
+              overlays = [
+                (_: _: {
+                  inherit isNixOS;
+                  builtAsHost = host;
+                })
+              ] ++ self.overlays;
+            };
+          inherit (mylib) mapAttrValues import';
+          nixosConfiguration = host: module: buildSystem {
+            system = "x86_64-linux";
+            modules = [
+              { networking.hostName = host; }
+              (callModule ./hosts/common.nix)
+              (callModule module)
+            ];
+          };
+          buildSystem = args:
+            let system = nixosSystem args; in
+            system.config.system.build.toplevel.overrideAttrs (_: { passthru = system; });
+          callModule = module: { pkgs, config, ... }@args:
+            (if isPath module then import module else module) (inputs // args);
+          homeConfiguration = makeOverridable (
+            { system ? "x86_64-linux"
+            , pkgs ? pkgsForSystem { inherit system isNixOS host; }
+            , username ? "keith"
+            , homeDirectory ? "/home/${username}"
+            , isNixOS ? false
+            , host ? "generic"
+            , ...
+            }@args:
+            let conf = (home-manager.lib.homeManagerConfiguration rec {
+              inherit system pkgs username homeDirectory;
+              configuration = {
+                imports = [
+                  { _module.args = { inherit pkgs username homeDirectory self; } // args; }
+                  ./home.nix
+                ];
+              };
+            });
+            in
+            conf.activationPackage.overrideAttrs (_: { passthru = conf // { inherit pkgs; }; })
+          );
+        };
+
+        overlays = [
+          (final: nixpkgs: {
+            cfg = self;
+            self-source = final.mylib.buildDirExcept ./.
+              [ ".git" ".github" "output-paths" "secrets" ];
+            inherit nixpkgs inputs;
+            isNixOS = nixpkgs.isNixOS or false;
+            neovim-master = neovim.defaultPackage.${nixpkgs.system};
+          })
+        ] ++ (import ./overlays.nix);
+        config = import ./config.nix;
+
+        nixConf = ''
+          max-jobs = auto
+          keep-going = true
+          builders-use-substitutes = true
+          extra-experimental-features = nix-command flakes
+          fallback = true
+          extra-substituters = ${toString nixConfig.extra-substituters}
+          extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
+          keep-env-derivations = true
+          keep-outputs = true
+          narinfo-cache-negative-ttl = 10
+        '';
+
+        inherit (self.packages.x86_64-linux) programs-sqlite;
+
+        nixosConfigurations = with lib; mapAttrs (n: x: nixosConfiguration n x.configuration) (import' ./hosts);
+
+        homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
+        homeConfigurations.non-graphical = lib.homeConfiguration {
+          isNixOS = true;
+          isGraphical = false;
+        };
+
+        homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
+        homeConfigurations.keith-vm = homeConfigurations.graphical.override { host = "keith-vm"; };
+        homeConfigurations.kwbauson = homeConfigurations.non-graphical.override { host = "kwbauson"; };
+        homeConfigurations.keith-mac = lib.homeConfiguration {
+          isNixOS = false;
+          isGraphical = true;
+          system = "x86_64-darwin";
+          username = "keithbauson";
+          homeDirectory = "/Users/keithbauson";
+          host = "keith-mac";
+        };
+
+        mkChecks = pkgs: with pkgs; buildEnv {
+          name = "checks";
+          paths = flatten [
+            saml2aws
+            mysql57
+            (nle.build {
+              path = writeTextDir "requirements.txt" ''
+                black
+                bpython
+                mypy
+              '';
+            })
+            pynixify
           ];
         };
-        buildSystem = args:
-          let system = nixosSystem args; in
-          system.config.system.build.toplevel.overrideAttrs (_: { passthru = system; });
-        callModule = module: { pkgs, config, ... }@args:
-          (if isPath module then import module else module) (inputs // args);
-        homeConfiguration = makeOverridable (
-          { system ? "x86_64-linux"
-          , pkgs ? pkgsForSystem { inherit system isNixOS host; }
-          , username ? "keith"
-          , homeDirectory ? "/home/${username}"
-          , isNixOS ? false
-          , host ? "generic"
-          , ...
-          }@args:
-          let conf = (home-manager.lib.homeManagerConfiguration rec {
-            inherit system pkgs username homeDirectory;
-            configuration = {
-              imports = [
-                { _module.args = { inherit pkgs username homeDirectory self; } // args; }
-                ./home.nix
-              ];
-            };
-          });
-          in
-          conf.activationPackage.overrideAttrs (_: { passthru = conf // { inherit pkgs; }; })
-        );
+
+
+        keith-xps = homeConfigurations.keith-xps.pkgs.switch;
+        keith-vm = homeConfigurations.keith-vm.pkgs.switch;
+        kwbauson = homeConfigurations.kwbauson.pkgs.switch;
+        keith-mac = homeConfigurations.keith-mac.pkgs.switch;
+
+        checks = mkChecks self.packages.x86_64-linux;
+        checks-mac = mkChecks self.packages.x86_64-darwin;
+
+        inherit (self.packages.x86_64-linux) self-source;
+
+        outputs = { inherit self-source keith-xps keith-vm; };
+        output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
+
+        iso = with self.packages.x86_64-linux; (nixos {
+          imports = [ nixosModules.installer.cd-dvd.installation-cd-graphical-gnome ];
+        }).config.system.build.isoImage;
+
+        defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build"
+          (attrValues outputs ++ [ checks ]);
+        defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
+          [ checks-mac keith-mac ];
       };
-
-      overlays = [
-        (final: nixpkgs: {
-          cfg = self;
-          self-source = final.mylib.buildDirExcept ./.
-            [ ".git" ".github" "output-paths" "secrets" ];
-          inherit nixpkgs inputs;
-          isNixOS = nixpkgs.isNixOS or false;
-          neovim-master = neovim.defaultPackage.${nixpkgs.system};
-        })
-      ] ++ (import ./overlays.nix);
-      config = import ./config.nix;
-
-      nixConf = ''
-        max-jobs = auto
-        keep-going = true
-        builders-use-substitutes = true
-        extra-experimental-features = nix-command flakes
-        fallback = true
-        extra-substituters = ${toString nixConfig.extra-substituters}
-        extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
-        keep-env-derivations = true
-        keep-outputs = true
-        narinfo-cache-negative-ttl = 10
-      '';
-
-      inherit (self.packages.x86_64-linux) programs-sqlite;
-
-      nixosConfigurations = with lib; mapAttrs (n: x: nixosConfiguration n x.configuration) (import' ./hosts);
-
-      homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
-      homeConfigurations.non-graphical = lib.homeConfiguration {
-        isNixOS = true;
-        isGraphical = false;
-      };
-
-      homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
-      homeConfigurations.keith-vm = homeConfigurations.graphical.override { host = "keith-vm"; };
-      homeConfigurations.kwbauson = homeConfigurations.non-graphical.override { host = "kwbauson"; };
-      homeConfigurations.keith-mac = lib.homeConfiguration {
-        isNixOS = false;
-        isGraphical = true;
-        system = "x86_64-darwin";
-        username = "keithbauson";
-        homeDirectory = "/Users/keithbauson";
-        host = "keith-mac";
-      };
-
-      mkChecks = pkgs: with pkgs; buildEnv {
-        name = "checks";
-        paths = flatten [
-          saml2aws
-          mysql57
-          (nle.build {
-            path = writeTextDir "requirements.txt" ''
-              black
-              bpython
-              mypy
-            '';
-          })
-          pynixify
-        ];
-      };
-
-
-      keith-xps = homeConfigurations.keith-xps.pkgs.switch;
-      keith-vm = homeConfigurations.keith-vm.pkgs.switch;
-      kwbauson = homeConfigurations.kwbauson.pkgs.switch;
-      keith-mac = homeConfigurations.keith-mac.pkgs.switch;
-
-      checks = mkChecks self.packages.x86_64-linux;
-      checks-mac = mkChecks self.packages.x86_64-darwin;
-
-      inherit (self.packages.x86_64-linux) self-source;
-
-      outputs = { inherit self-source keith-xps keith-vm; };
-      output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
-
-      iso = with self.packages.x86_64-linux; (nixos {
-        imports = [ nixosModules.installer.cd-dvd.installation-cd-graphical-gnome ];
-      }).config.system.build.isoImage;
-
-      defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build"
-        (attrValues outputs ++ [ checks ]);
-      defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
-        [ checks-mac keith-mac ];
-    };
 }
 
