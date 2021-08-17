@@ -102,8 +102,7 @@
       nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
       nixpkgs-path = "echo ${pkgs.path}";
       nixpkgs-branch = "echo ${nixpkgs-branch}";
-      lo = "local_ops --no-banner --skip-update";
-      los = ''service=$1 && shift && lo start --always-reseed -s $service "$@" && lo logs -s all; lo stop -s $service'';
+      undup = "tac | awk '!x[$0]++' | tac";
       hmg = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
       hmp = "git -C ~/cfg cap";
       nou = "hmg && noa";
