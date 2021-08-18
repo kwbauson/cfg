@@ -38,11 +38,11 @@
         "version": "0.0.261"
     },
     "dmg-firefox": {
-        "sha256": "1yx647d1aibw3ydjpl8ysgz2smim48x6bykq2lq3y2rjj3s46v6j",
+        "sha256": "0a7snz0qxbzhwbqkwmbivfx9zn4b009qy8xz74wk47an60dschz7",
         "type": "file",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0/mac/en-US/Firefox%2091.0.dmg",
+        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0.1/mac/en-US/Firefox%2091.0.1.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "91.0"
+        "version": "91.0.1"
     },
     "dmg-signal-desktop": {
         "sha256": "1g6l5wr306ndzbi6ny515carghff8v57arlk8y69jsyd9smy86pd",
