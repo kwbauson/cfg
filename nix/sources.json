@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "340d721ec4b90628de26ba088ca708f3cf0b47b2",
-        "sha256": "1f7b14z4amirpwl63xnmks4rq1c45ayjawv4rzj2ms8hdgnd8dcz",
+        "rev": "042b1f9af9e2d8a258320c9f3e1596ff92d2a17d",
+        "sha256": "1ygqnr9d9czhidmfkihs0w3x7csqdlx4mr4ya30fhbpmrqc311cn",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/340d721ec4b90628de26ba088ca708f3cf0b47b2.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/042b1f9af9e2d8a258320c9f3e1596ff92d2a17d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -133,18 +133,18 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-21_05": {
-        "sha256": "1534zaby6nv4kj8sxjpdk8fabx3hz69dxfaailmy8vcv9il4dzcx",
+        "sha256": "1bwv2x2mkmpmmipqmjn9cz3m3k4vkb2lv4a8dpm13bmir92v54xh",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2501.94c989365d5/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2518.97c5d0cbe76/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/21.05/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05.2501.94c989365d5"
+        "version": "nixos-21.05.2518.97c5d0cbe76"
     },
     "nixos-unstable": {
-        "sha256": "0nksdz8d0s6mjz7yggs6r8fs57ag1w33r08gicvrcird9ixnjsd8",
+        "sha256": "1c47kvhldccw2q91069m66aqbgw5lwdfp44vcj2wgj5nn4dwlswg",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre309163.23485f23ff8/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre309388.2435ea48c3b/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre309163.23485f23ff8"
+        "version": "nixos-21.11pre309388.2435ea48c3b"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
@@ -188,10 +188,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "e02b6a3203411b76616a0e4328245bf8b47c5dcc",
-        "sha256": "19b06p3icpb214kpbf7irlyy813ax12i2jhibhxd2nflz9n66pg9",
+        "rev": "f3be2e69993514ec78e210af2efc3759847134c8",
+        "sha256": "16rv7j9p6cx0d1c3gdbn6w4xqn9z7jrwhmcdglis71i0kwqk1x1x",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/e02b6a3203411b76616a0e4328245bf8b47c5dcc.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/f3be2e69993514ec78e210af2efc3759847134c8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
