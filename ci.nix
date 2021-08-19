@@ -1,1 +1,1 @@
-(import ./.).cfg.defaultPackage
+(import ./.).hello
