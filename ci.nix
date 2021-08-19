@@ -1,1 +1,1 @@
-(import ./.).firefox
+(import ./.).defaultPackage.${builtins.currentSystem}
