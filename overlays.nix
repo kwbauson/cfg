@@ -4,7 +4,7 @@
     isNixOS = prev.isNixOS or false;
   })
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
-    inherit (sources) nixos-unstable nixos-21_05 nixos-20_09 nixos-18_09 nixpkgs-bundler1;
+    inherit (sources) nixos-unstable nixos-21_05 nixos-20_09 nixos-18_09;
   })
   (self: super: with super; with mylib; {
     nix-wrapped = let nix = nixUnstable; in

@@ -95,10 +95,6 @@ rec {
 
   bundler-paths = nleFiles "bundler"
     rec {
-      locktext = read "Gemfile.lock";
-      latestBundlerMark = "BUNDLED WITH\n   ${bundler.version}\n";
-      hasLatestBundler = hasSuffix latestBundlerMark locktext;
-      namespace = if hasLatestBundler then { } else nixpkgs-bundler1;
       postBuild = ''
         cd $out/bin
         if [[ $(echo *) != '*' ]];then
@@ -108,7 +104,8 @@ rec {
           done
         fi
       '';
-      env = with namespace; bundlerEnv {
+      env = bundlerEnv {
+        ruby = ruby_3_0;
         name = "bundler-env";
         gemfile = file "Gemfile";
         lockfile = file "Gemfile.lock";
