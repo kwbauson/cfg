@@ -45,11 +45,11 @@
         "version": "91.0.1"
     },
     "dmg-signal-desktop": {
-        "sha256": "1g6l5wr306ndzbi6ny515carghff8v57arlk8y69jsyd9smy86pd",
+        "sha256": "1wsgnl1w63dzjkl5lx754c2hb2w1s2xrb4q3qq0m2am9z5blkyyw",
         "type": "file",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.13.1.dmg",
+        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.14.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.13.1"
+        "version": "5.14.0"
     },
     "dmg-spotify": {
         "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "042b1f9af9e2d8a258320c9f3e1596ff92d2a17d",
-        "sha256": "1ygqnr9d9czhidmfkihs0w3x7csqdlx4mr4ya30fhbpmrqc311cn",
+        "rev": "ff8b0b221420d136b13568dca601fa9142505e12",
+        "sha256": "1jid7dh7x8255dpimync8q3a5sdi8z97pzi1fvlc6dfihs9a9zdi",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/042b1f9af9e2d8a258320c9f3e1596ff92d2a17d.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/ff8b0b221420d136b13568dca601fa9142505e12.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -133,18 +133,18 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-21_05": {
-        "sha256": "1bwv2x2mkmpmmipqmjn9cz3m3k4vkb2lv4a8dpm13bmir92v54xh",
+        "sha256": "1s60vi20mkqz4i4c8w5822dgmv7f35rclapwpbbv80hl944q4ria",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2518.97c5d0cbe76/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2521.7bbca9877ca/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/21.05/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05.2518.97c5d0cbe76"
+        "version": "nixos-21.05.2521.7bbca9877ca"
     },
     "nixos-unstable": {
-        "sha256": "1c47kvhldccw2q91069m66aqbgw5lwdfp44vcj2wgj5nn4dwlswg",
+        "sha256": "1rbvp0392mqpfkw4886012g4l8nafd4wyjhs6gv6my0dhg0m1zii",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre309388.2435ea48c3b/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre309670.253aecf69ed/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre309388.2435ea48c3b"
+        "version": "nixos-21.11pre309670.253aecf69ed"
     },
     "nixpkgs-bundler1": {
         "branch": "96a1dbac972c4f67aea7ee548f4e5531003f8ab0",
