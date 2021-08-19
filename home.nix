@@ -316,7 +316,8 @@ with builtins; with pkgs; with mylib; {
       scriptAlias = text: "! ${writeBash "git-alias-script" text}";
       tmpGitIndex = ''
         export GIT_INDEX_FILE=$(mktemp)
-        cp "$(git rev-parse --show-toplevel)"/.git/index "$GIT_INDEX_FILE"
+        index=$(git rev-parse --show-toplevel)/.git/index
+        [[ -e $index ]] && cp "$index" "$GIT_INDEX_FILE" || rm "$GIT_INDEX_FILE"
         trap 'rm -f "$GIT_INDEX_FILE"' EXIT
       '';
     }; {
@@ -357,7 +358,7 @@ with builtins; with pkgs; with mylib; {
         df = scriptAlias ''
           ${tmpGitIndex}
           git add -A
-          git -c core.pager='${nr delta} --dark' diff "''${@:-HEAD}" || true
+          git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
         '';
         dfo = scriptAlias ''git f && git df "origin/''${1:-$(git branch-name)}"'';
         f = "fetch --all";
