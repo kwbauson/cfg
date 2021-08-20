@@ -105,7 +105,6 @@ rec {
         fi
       '';
       env = bundlerEnv {
-        ruby = ruby_3_0;
         name = "bundler-env";
         gemfile = file "Gemfile";
         lockfile = file "Gemfile.lock";
