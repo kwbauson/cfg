@@ -168,6 +168,8 @@ rec {
           (attrValues outputs ++ [ checks ]);
         defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
           [ checks-mac keith-mac ];
+
+        ci = outputs // { inherit kwbauson checks; };
       };
 }
 

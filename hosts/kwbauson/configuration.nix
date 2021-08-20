@@ -22,7 +22,6 @@
   services = with config; with networking; {
     hercules-ci-agent.enable = true;
     hercules-ci-agent.checkNix = false;
-    hercules-ci-agent.settings.concurrentTasks = 8;
     openssh = {
       enable = true;
       passwordAuthentication = false;

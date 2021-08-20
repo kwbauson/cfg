@@ -1,1 +1,1 @@
-(import ./.).defaultPackage.${builtins.currentSystem}
+(import ./.).ci
