@@ -22,10 +22,12 @@
   services = with config; with networking; {
     hercules-ci-agent.enable = true;
     hercules-ci-agent.checkNix = false;
+    hercules-ci-agent.settings.concurrentTasks = 12;
     openssh = {
       enable = true;
       passwordAuthentication = false;
       permitRootLogin = "no";
+      forwardX11 = true;
     };
     nginx = {
       enable = true;
