@@ -2,11 +2,15 @@ name: Check for updates
 on: { workflow_dispatch, schedule: [cron: '0 0 * * *'] }
 jobs:
   check-for-updates:
-    runs-on: [self-hosted, nix]
+    runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v2.3.4
+      - uses: nixbuild/nix-quick-install-action@v6
+        with:
+          nix_version: 2.4pre20210601_5985b8b
+          nix_conf: experimental-features = nix-command flakes
       - run: nix -vL run .#nle.unwrapped update
       - uses: peter-evans/create-pull-request@v3.10.0
         id: cpr
