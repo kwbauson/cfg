@@ -1,8 +1,4 @@
-rec {
-  nixConfig = {
-    extra-substituters = [ "https://kwbauson.cachix.org" ];
-    extra-trusted-public-keys = [ "kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=" ];
-  };
+{
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
@@ -94,17 +90,20 @@ rec {
         ] ++ (import ./overlays.nix);
         config = import ./config.nix;
 
-        nixConf = ''
+        nixConfBase = ''
           max-jobs = auto
           keep-going = true
           builders-use-substitutes = true
           extra-experimental-features = nix-command flakes
           fallback = true
-          extra-substituters = ${toString nixConfig.extra-substituters}
-          extra-trusted-public-keys = ${toString nixConfig.extra-trusted-public-keys }
           keep-env-derivations = true
           keep-outputs = true
+        '';
+        nixConf = ''
+          ${nixConfBase}
           narinfo-cache-negative-ttl = 10
+          extra-substituters = https://kwbauson.cachix.org
+          extra-trusted-public-keys = kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=
         '';
 
         inherit (self.packages.x86_64-linux) programs-sqlite;

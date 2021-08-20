@@ -11,7 +11,7 @@
       if isNixOS then nix else
       wrapBins nix ''
         mkdir -p ~/.local/share/nix
-        export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConf})$'\n'$NIX_CONFIG
+        export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConfBase})$'\n'$NIX_CONFIG
         exec "$exePath" "$@"
       '';
     imported-nixpkgs = import' inputs.nixpkgs;
