@@ -1,8 +1,8 @@
 rec {
   nixConfig = {
     fallback = "true";
-    extra-substituters = [ "https://cache.kwbauson.com/" ];
-    extra-trusted-public-keys = [ "cache.kwbauson.com:v9VWChI2sZUmlku8aRA9FLUA5OKKVc8IccCJ9flGU5s=" ];
+    extra-substituters = [ "https://kwbauson.cachix.org" ];
+    extra-trusted-public-keys = [ "kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=" ];
   };
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
