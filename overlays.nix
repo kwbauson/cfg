@@ -110,8 +110,8 @@
       nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
       noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
       hme = "nvim ~/cfg/home.nix && hms";
-      nb = "pkg=$1 && shift; nix build ~/cfg#$pkg";
-      ns = "pkg=$1 && shift; nix shell ~/cfg#$pkg";
+      nb = ''pkg=$1 && shift; nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+      ns = ''pkg=$1 && shift; nix shell $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
       reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
       lr = ''find "$@" -print0 | sort -z | xargs -0 ls --color=auto -lhd'';
       delete-old-generations = ''
