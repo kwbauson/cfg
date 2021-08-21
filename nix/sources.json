@@ -164,10 +164,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "2003666c14899e4d88f6122d1c5e9da26b431c04",
-        "sha256": "1506l9715cxp2az143qpn8qcx10azw37a47l3a3a25280y954i8b",
+        "rev": "4ac13bfffcbb76b9e41701e4822808d2061b73b3",
+        "sha256": "155zzq797x8gf0cc20wdxn8pwli5ja7554x9v075fdywzvzb9xn9",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/2003666c14899e4d88f6122d1c5e9da26b431c04.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/4ac13bfffcbb76b9e41701e4822808d2061b73b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "pynixify": {
