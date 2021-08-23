@@ -125,6 +125,7 @@ for_window [instance="^termbar$"] floating enable, border none, resize set 700 2
 for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
 no_focus [window_role="qutebrowser_background"]
-for_window [ workspace="floating" ] floating enable
+for_window [workspace="floating"] floating enable
+for_window [title="^zoom$"] floating enable
 
 # vim:ft=i3config
