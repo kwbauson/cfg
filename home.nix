@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
         ${attrIf isDarwin "darwin"} = {
           inherit
             diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
-            steam strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
+            strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
             acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl
             ;
         };

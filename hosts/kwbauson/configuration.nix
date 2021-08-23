@@ -66,4 +66,5 @@
   };
 
   virtualisation.docker.enable = true;
+  programs.steam.enable = false;
 }
