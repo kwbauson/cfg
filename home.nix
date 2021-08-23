@@ -5,6 +5,7 @@
 , homeDirectory
 , isNixOS
 , isGraphical
+, host
 , ...
 }:
 with builtins; with pkgs; with mylib; {
@@ -352,7 +353,14 @@ with builtins; with pkgs; with mylib; {
         '';
         ca = "! git a && git ci";
         cap = "! git ca && git p";
-        ci = "commit -v";
+        ci = scriptAlias ''
+          if [[ -t 0 && -t 1 ]];then
+            git commit -v
+          else
+            echo unable to run "'git ci'" without a tty
+            exit 1
+          fi
+        '';
         co = "checkout";
         cod = "! git co $(git default)";
         df = scriptAlias ''
@@ -546,7 +554,17 @@ with builtins; with pkgs; with mylib; {
       xmodmap ${toFile "Xmodmap" ''
         remove mod1 = Alt_L
         keycode 64 = Escape
-        keycode 105 = Super_L
+        ${optionalString (host == "keith-xps") "keycode 105 = Super_R"}
+        ${optionalString (host == "keith-desktop") ''
+          keycode 134 = Super_R
+          keycode 105 = Control_R
+        ''}
+      ''}
+      xmodmap ${toFile "Xmodmap-fix-modifiers" ''
+        remove control = Super_R
+        remove mod4 = Control_R
+        add control = Control_R
+        add mod4 = Super_R
       ''}
       xsetroot -solid black
       xsetroot -cursor_name left_ptr
