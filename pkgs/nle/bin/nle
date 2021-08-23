@@ -164,16 +164,14 @@ case $cmd in
   update)
     nr nle.scripts.update
     if [[ -e Gemfile && -e Gemfile.lock ]];then
-      if ! nr bundler outdated;then
-        if [[ -e gemset.nix ]];then
-          hasgemset=1
-        else
-          hasgemset=
-        fi
-        rm Gemfile.lock
-        nr bundix -l
-        [[ -n $hasgemset ]] && rm gemset.nix
+      if [[ -e gemset.nix ]];then
+        hasgemset=1
+      else
+        hasgemset=
       fi
+      rm Gemfile.lock
+      nr bundix -l
+      [[ -n $hasgemset ]] && rm gemset.nix
     fi
     if [[ -e nix/sources.nix && -e nix/sources.json ]];then
       tmpfile=$(mktemp)
