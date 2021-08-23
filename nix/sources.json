@@ -106,18 +106,6 @@
         "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "hercules-ci-agent": {
-        "branch": "master",
-        "description": "https://hercules-ci.com build agent",
-        "homepage": "",
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-agent",
-        "rev": "7f3265cc42d5f364066c145939ee2812938b991c",
-        "sha256": "005s407zllf28mpp7n8dblavbmgfhy0v2wpzggspc07j4ff3h6mc",
-        "type": "tarball",
-        "url": "https://github.com/hercules-ci/hercules-ci-agent/archive/7f3265cc42d5f364066c145939ee2812938b991c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "jsonc.vim": {
         "branch": "master",
         "description": "jsonc syntax support for vim",
