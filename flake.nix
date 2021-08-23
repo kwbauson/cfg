@@ -22,11 +22,12 @@
       with builtins; with inputs; with flake-utils.lib; with nixpkgs.lib;
       flake-utils.lib.eachSystem flake-utils.lib.allSystems
         (system: rec {
-          packages = self.lib.pkgsForSystem {
-            inherit system;
-            isNixOS = false;
-            host = "unknown";
-          };
+          packages = self.lib.pkgsForSystem
+            {
+              inherit system;
+              isNixOS = false;
+              host = "unknown";
+            } // removeAttrs self.output-derivations [ "self-source" ];
         }) // rec {
         lib = builtins // rec {
           mylib = import ./mylib.nix nixpkgs;
@@ -143,7 +144,6 @@
         inherit (self.packages.x86_64-linux) self-source;
 
         switch-scripts = mapAttrs (_: config: config.pkgs.switch) homeConfigurations;
-        inherit (switch-scripts) keith-xps keith-desktop kwbauson keith-mac;
         output-derivations = { inherit self-source; } // removeAttrs switch-scripts [ "keith-mac" ];
         output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) output-derivations);
 
