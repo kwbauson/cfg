@@ -1,3 +1,4 @@
-keith-vm=/nix/store/m0i16vh5kb2fhsamh9zc5w0b903r1lhq-keith-vm-noa
-keith-xps=/nix/store/j5vlvifgrnnl6wqvhwd9r3j9vhqwv0ww-keith-xps-noa
-self-source=/nix/store/ji580anxzbi1dwywpazg4hp4md2bfwvy-source
+keith-desktop=/nix/store/izk1rippk552i21lldk4gxph7likxja3-keith-desktop-noa
+keith-xps=/nix/store/bbdcipb2sahpbsn0lmycyk72j1a342n4-keith-xps-noa
+kwbauson=/nix/store/1ndcch4qfkijw054s023j0aqbnqs85jg-kwbauson-noa
+self-source=/nix/store/j0cx4n0mzd7222r1i56m2f58hkpbmvjm-source
