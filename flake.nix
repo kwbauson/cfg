@@ -50,9 +50,7 @@
               (callModule module)
             ];
           };
-          buildSystem = args:
-            let system = nixosSystem args; in
-            system.config.system.build.toplevel.overrideAttrs (_: { passthru = system; });
+          buildSystem = args: let system = nixosSystem args; in system.config.system.build.toplevel // system;
           callModule = module: { pkgs, config, ... }@args:
             (if isPath module then import module else module) (inputs // args);
           homeConfiguration = makeOverridable (
@@ -60,21 +58,21 @@
             , pkgs ? pkgsForSystem { inherit system isNixOS host; }
             , username ? "keith"
             , homeDirectory ? "/home/${username}"
-            , isNixOS ? false
+            , isNixOS ? true
+            , isGraphical ? true
             , host ? "generic"
-            , ...
-            }@args:
+            }:
             let conf = (home-manager.lib.homeManagerConfiguration rec {
               inherit system pkgs username homeDirectory;
               configuration = {
                 imports = [
-                  { _module.args = { inherit pkgs username homeDirectory self; } // args; }
+                  { _module.args = { inherit self pkgs username homeDirectory isNixOS isGraphical host; }; }
                   ./home.nix
                 ];
               };
             });
             in
-            conf.activationPackage.overrideAttrs (_: { passthru = conf // { inherit pkgs; }; })
+            conf.activationPackage // conf // { inherit pkgs; }
           );
         };
 
@@ -108,24 +106,19 @@
 
         inherit (self.packages.x86_64-linux) programs-sqlite;
 
-        nixosConfigurations = with lib; mapAttrs (n: x: nixosConfiguration n x.configuration) (import' ./hosts);
+        nixosConfigurations = with lib; mapAttrs
+          (n: x: nixosConfiguration n x.configuration)
+          (removeAttrs (import' ./hosts) [ "common" ]);
 
-        homeConfigurations.graphical = lib.homeConfiguration { isNixOS = true; isGraphical = true; };
-        homeConfigurations.non-graphical = lib.homeConfiguration {
-          isNixOS = true;
-          isGraphical = false;
-        };
-
-        homeConfigurations.keith-xps = homeConfigurations.graphical.override { host = "keith-xps"; };
-        homeConfigurations.keith-vm = homeConfigurations.graphical.override { host = "keith-vm"; };
-        homeConfigurations.kwbauson = homeConfigurations.non-graphical.override { host = "kwbauson"; };
-        homeConfigurations.keith-mac = lib.homeConfiguration {
-          isNixOS = false;
-          isGraphical = true;
-          system = "x86_64-darwin";
-          username = "keithbauson";
-          homeDirectory = "/Users/keithbauson";
-          host = "keith-mac";
+        homeConfigurations = mapAttrs (host: _: lib.homeConfiguration { inherit host; }) nixosConfigurations // {
+          kwbauson = lib.homeConfiguration { host = "kwbauson"; isGraphical = false; };
+          keith-mac = lib.homeConfiguration {
+            isNixOS = false;
+            system = "x86_64-darwin";
+            username = "keithbauson";
+            homeDirectory = "/Users/keithbauson";
+            host = "keith-mac";
+          };
         };
 
         mkChecks = pkgs: with pkgs; buildEnv {
@@ -144,30 +137,25 @@
           ];
         };
 
-
-        keith-xps = homeConfigurations.keith-xps.pkgs.switch;
-        keith-vm = homeConfigurations.keith-vm.pkgs.switch;
-        kwbauson = homeConfigurations.kwbauson.pkgs.switch;
-        keith-mac = homeConfigurations.keith-mac.pkgs.switch;
-
         checks = mkChecks self.packages.x86_64-linux;
         checks-mac = mkChecks self.packages.x86_64-darwin;
 
         inherit (self.packages.x86_64-linux) self-source;
 
-        outputs = { inherit self-source keith-xps keith-vm; };
-        output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) outputs);
+        switch-scripts = mapAttrs (_: config: config.pkgs.switch) homeConfigurations;
+        inherit (switch-scripts) keith-xps keith-desktop kwbauson keith-mac;
+        output-derivations = { inherit self-source; } // removeAttrs switch-scripts [ "keith-mac" ];
+        output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) output-derivations);
 
         iso = with self.packages.x86_64-linux; (nixos {
           imports = [ nixosModules.installer.cd-dvd.installation-cd-graphical-gnome ];
         }).config.system.build.isoImage;
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build"
-          (attrValues outputs ++ [ checks ]);
+          (attrValues output-derivations ++ [ checks ]);
         defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
           [ checks-mac keith-mac ];
 
-        ci = outputs // { inherit kwbauson checks; };
+        ci = output-derivations // { inherit checks; };
       };
 }
-
