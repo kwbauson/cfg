@@ -256,6 +256,9 @@ case $cmd in
     echo "$cachedir"
     ;;
   result)
+    if [[ ! -e $result ]];then
+      "$0" cache
+    fi
     realpath "$result"
     ;;
   cachedir)
