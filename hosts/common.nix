@@ -11,6 +11,7 @@
       timeout = 1;
     };
     tmpOnTmpfs = true;
+    supportedFilesystems = [ "ntfs" ];
   };
 
   nix.package = pkgs.nix-wrapped;
