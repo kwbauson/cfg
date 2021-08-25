@@ -22,7 +22,7 @@
       if [[ $LATEST = 1 ]];then
         exec "$exePath" "$@"
       else
-        LATEST=1 exec nix shell github:kwbauson/cfg#${name} -c "$exe" "$@"
+        LATEST=1 exec nix --tarball-ttl 3600 shell github:kwbauson/cfg#${name} -c "$exe" "$@"
       fi
     '';
     programs-sqlite = stdenv.mkDerivation rec {
