@@ -64,7 +64,7 @@ with builtins; with pkgs; with mylib; {
       };
 
   home = {
-    stateVersion = "20.09";
+    stateVersion = "21.11";
     inherit username homeDirectory;
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
@@ -102,8 +102,6 @@ with builtins; with pkgs; with mylib; {
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
-    command-not-found.enable = !isNixOS;
-    command-not-found.dbPath = programs-sqlite;
     firefox.enable = true;
     bash = {
       enable = true;
