@@ -28,7 +28,7 @@
     programs-sqlite = stdenv.mkDerivation rec {
       name = "programs-sqlite";
       buildInputs = [ sqlite ];
-      dontUnpack = true;
+      src = fetchTarball { inherit (sources.nixos-unstable) url sha256; };
       extraPrograms =
         let
           subPackages = name: map (x: "${name}.${x}") (attrNames self.${name});
@@ -49,7 +49,7 @@
           );
       passAsFile = "extraPrograms";
       installPhase = ''
-        cp ${sources.nixos-unstable}/programs.sqlite $out
+        cp $src/programs.sqlite $out
         sqlite3 $out --csv 'select * from Programs' > current
         grep -vFf current $extraProgramsPath > extra
         chmod +w $out
