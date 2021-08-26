@@ -25,6 +25,7 @@
         LATEST=1 exec nix --tarball-ttl 3600 shell github:kwbauson/cfg#${name} -c "$exe" "$@"
       fi
     '';
+    programs-sqlite-path = "${sources.nixos-unstable}/programs.sqlite";
     programs-sqlite = stdenv.mkDerivation rec {
       name = "programs-sqlite";
       buildInputs = [ sqlite ];
