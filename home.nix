@@ -24,7 +24,6 @@ with builtins; with pkgs; with mylib; {
             which xdg_utils xxd xz zip bitwarden-cli libqalculate youtube-dl
             speedtest-cli tldr nix-top nixos-install-tools
             ;
-          better-comma = better-comma.unwrapped;
         };
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
