@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "f2fc1c80fd9351b137115e3017abd9e7d113f4e7",
-        "sha256": "0qndmqvi2b9xvy9y87iv9757gzlpy8gq2wxwb3157qipijiv366q",
+        "rev": "3f6fd99064d6f1e2aeb394318560de42655007a1",
+        "sha256": "13br91k6p0rl7w927hn2ff0y1fqdhrwzk02rcgq11w8993iz4iq4",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/f2fc1c80fd9351b137115e3017abd9e7d113f4e7.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/3f6fd99064d6f1e2aeb394318560de42655007a1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -133,18 +133,18 @@
         "version": "nixos-20.09.4393.068984c00e0"
     },
     "nixos-21_05": {
-        "sha256": "0mri1swzfgm8n7nz6g803wqyi1gkc118yqivpf6ib9plvazprqnk",
+        "sha256": "1b8lpdjj8f9yiqcqq0gmc6d9cc549iidfblipnkqqkm2ag0qm88c",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2693.d5aadbefd65/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2717.bc1a0f56812/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/21.05/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05.2693.d5aadbefd65"
+        "version": "nixos-21.05.2717.bc1a0f56812"
     },
     "nixos-unstable": {
-        "sha256": "1wcg4120sxpwaxxgws0zya50qiffcdzjdpwmvsrg8waayssg1yjz",
+        "sha256": "1nyv8abj7pp84nbjwj435bklnvyyfzdvywz3zd8whfybhq3jvxfg",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre310725.870959c7fb3/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre311000.5bc8b980b91/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre310725.870959c7fb3"
+        "version": "nixos-21.11pre311000.5bc8b980b91"
     },
     "npmlock2nix": {
         "branch": "master",
