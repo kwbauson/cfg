@@ -64,10 +64,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "8c2c06afeae51c9350ec3ce6292697bd1436e6d1",
-        "sha256": "082lja52mlw4pc8ji0wmbyapv8m0wdv9vxhs86awb59w5399x8qg",
+        "rev": "5dfb65342a1f13954093a2f74ecd635f7c132b61",
+        "sha256": "009qlv1vqj19bvxhpqjxdg5w9f0kykwcs4l28hhczd6ihnjv950b",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/8c2c06afeae51c9350ec3ce6292697bd1436e6d1.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/5dfb65342a1f13954093a2f74ecd635f7c132b61.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -218,10 +218,10 @@
         "homepage": "",
         "owner": "dsifford",
         "repo": "yarn-completion",
-        "rev": "79130427b4f996760077f4d3de4411f1a57a597a",
-        "sha256": "0ryirllmbzhcxncjdyx29rwbynhqanvkmdaxi52cw5vnrfcvm928",
+        "rev": "73fe6781037336d210ba25b9dd0e90a335839e58",
+        "sha256": "0fqx2h5kibs7mpk78khxwzmkkfv9hsmmmsa0aiadmsq767qv2wrf",
         "type": "tarball",
-        "url": "https://github.com/dsifford/yarn-completion/archive/79130427b4f996760077f4d3de4411f1a57a597a.tar.gz",
+        "url": "https://github.com/dsifford/yarn-completion/archive/73fe6781037336d210ba25b9dd0e90a335839e58.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
