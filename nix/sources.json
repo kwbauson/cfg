@@ -140,11 +140,11 @@
         "version": "nixos-21.05.2729.9d6766c0f0b"
     },
     "nixos-unstable": {
-        "sha256": "1nyv8abj7pp84nbjwj435bklnvyyfzdvywz3zd8whfybhq3jvxfg",
+        "sha256": "1q61h43vrjqx4k4hll2m1n7damivc6cfy2pawy5zb7y8ly3hfzvj",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre311000.5bc8b980b91/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre311431.88226ea038e/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre311000.5bc8b980b91"
+        "version": "nixos-21.11pre311431.88226ea038e"
     },
     "npmlock2nix": {
         "branch": "master",
