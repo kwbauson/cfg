@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# with-packages ffmpeg slop xclip imagemagick
+dir=/tmp/slopgif
+
+if [[ -e $dir/pid ]];then
+  kill $(< "$dir"/pid)
+  exit 0
+fi
+
+selection=($(slop | sed 's/\+/ /' | sed 's/\+/,/'))
+size=${selection[0]}
+offset=${selection[1]}
+echo "$size $offset"
+mkdir -p "$dir"
+rm -f "$dir"/output.mp4
+ffmpeg -video_size "$size" -framerate 10 -f x11grab -i ":0.0+$offset" "$dir"/output.mp4 &
+echo "$!" > "$dir"/pid
+wait
+rm "$dir"/pid
+convert "$dir"/output.mp4 -layers optimize "$dir"/output.gif
+xclip -selection clipboard -t image/png "$dir"/output.gif

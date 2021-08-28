@@ -3,6 +3,7 @@ exec --no-startup-id togpad off &
 
 # settings
 set $mod Mod4
+set $float_move_pixels 100
 font pango:DejaVuSansMono Nerd Font Mono 11
 floating_modifier $mod
 floating_minimum_size 0 x 10
@@ -44,7 +45,7 @@ bindsym XF86MonBrightnessUp   exec --no-startup-id bl + 5
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id bl - 1
 bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id bl + 1
 bindsym $mod+c exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
-bindsym $mod+Shift+c exec --no-startup-id maim -s screenshot.png
+bindsym $mod+Shift+c exec --no-startup-id slopgif
 bindsym $mod+Control+v exec --no-startup-id xpaste
 
 # windows
@@ -53,10 +54,10 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left $float_move_pixels
+bindsym $mod+Shift+j move down $float_move_pixels
+bindsym $mod+Shift+k move up $float_move_pixels
+bindsym $mod+Shift+l move right $float_move_pixels
 bindsym $mod+apostrophe exec --no-startup-id "xdotool windowfocus $(i3-easyfocus -wa $(echo --color-{urgent,focused,unfocused}-{bg' ffff00',fg' 000000'}))"
 bindsym $mod+Return fullscreen toggle
 bindsym $mod+Tab exec togwin

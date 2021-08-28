@@ -11,6 +11,7 @@ with builtins;
 
   services.localtime.enable = lib.mkForce false;
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   virtualisation.docker.enable = true;
 }

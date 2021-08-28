@@ -36,13 +36,12 @@
 .local/share/nvim/undo
 .m2
 .mozilla
+.pub-cache
 .var
 .wine
 Library/Containers
 Library/Developer
 Library/Python
 mnt
-src/hr
-src/mimir
-src/nixpkgs
 src/jitsi-meet
+src/nixpkgs
