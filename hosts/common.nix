@@ -91,6 +91,6 @@
 
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.11";
-  programs.command-not-found.dbPath = self.programs-sqlite-path;
+  programs.command-not-found.enable = false;
   programs.steam.enable = lib.mkDefault true;
 }

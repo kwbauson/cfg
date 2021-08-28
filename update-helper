@@ -3,7 +3,7 @@
 set -eo pipefail
 
 # nixpkgs channels
-for channel in nixos-unstable nixos-21.05 nixos-20.09 nixos-18.09;do
+for channel in nixos-unstable nixos-21.05 nixos-20.09;do
   url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://nixos.org/channels/$channel")
   version=$(echo "$url" | awk -F/ '{ print $NF }')
   niv update $(echo $channel | tr . _) -v $version
@@ -16,3 +16,5 @@ for pkg in signal-desktop firefox;do
 done
 
 niv update waterfox -t $(curl https://www.waterfox.net/download/ | grep -o '[^"]*linux-x86_64[^"]*' | head -n1)
+db_url=$(curl -LIs -o /dev/null -w '%{url_effective}' https://github.com/Mic92/nix-index-database/releases/latest)
+niv update nix-index-database -v $(echo "$db_url" | sed -n 's#.*/##p')

@@ -4,7 +4,7 @@
     isNixOS = prev.isNixOS or false;
   })
   (self: super: with super; with mylib; mapAttrValues importNixpkgs {
-    inherit (sources) nixos-unstable nixos-21_05 nixos-20_09 nixos-18_09;
+    inherit (sources) nixos-unstable nixos-21_05 nixos-20_09;
   })
   (self: super: with super; with mylib; {
     nix-wrapped = let nix = nixUnstable; in
@@ -25,43 +25,25 @@
         LATEST=1 exec nix --tarball-ttl 3600 shell github:kwbauson/cfg#${name} -c "$exe" "$@"
       fi
     '';
-    programs-sqlite-path = "${sources.nixos-unstable}/programs.sqlite";
-    programs-sqlite = stdenv.mkDerivation rec {
-      name = "programs-sqlite";
-      buildInputs = [ sqlite ];
-      src = fetchTarball { inherit (sources.nixos-unstable) url sha256; };
-      extraPrograms =
-        let
-          subPackages = name: map (x: "${name}.${x}") (attrNames self.${name});
-        in
-        joinLines
-          (x: "${x},x86_64-linux,${x}")
-          (x: y: "${x},x86_64-linux,${y}")
-          (
-            [
-              [ "nix-local-env" "nle" ]
-              [ "termbar" "term" ]
-            ]
-            ++ (attrNames (readDir ./bin))
-            ++ (attrNames self)
-            ++ (subPackages "nodePackages")
-            ++ (subPackages "python3Packages")
-            ++ (subPackages "rubyPackages")
-          );
-      passAsFile = "extraPrograms";
+    nix-index-list = stdenv.mkDerivation {
+      name = "nix-index-list";
+      src = fetchurl { inherit (sources.nix-index-database) url sha256; };
+      dontUnpack = true;
+      buildInputs = [ nix-index ];
       installPhase = ''
-        cp $src/programs.sqlite $out
-        sqlite3 $out --csv 'select * from Programs' > current
-        grep -vFf current $extraProgramsPath > extra
-        chmod +w $out
-        sqlite3 $out <<EOF
-        .mode csv
-        .import extra Programs
-        EOF
+        mkdir db
+        cp $src db/files
+        nix-locate  \
+          --db db \
+          --at-root \
+          --type x \
+          --regex '/bin/[^/]+' |
+          grep -v '^(' |
+          awk '{ print $1, $4 }' |
+          sed -E 's#^(.*)\.\w+ .*/([^/]+)$#\1 \2#' > $out
       '';
     };
     steam-native = self.steam.override { nativeOnly = true; };
-    steam-run-native_18-09 = nixos-18_09.steam-run-native;
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
