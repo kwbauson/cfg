@@ -45,8 +45,8 @@
         nix-locate  \
           --db db \
           --at-root \
-          --type x \
-          --regex '/bin/[^/]+' |
+          --type x --type s \
+          --regex '/bin/[^.][^/]*' |
           grep -v '^(' |
           awk '{ print $1, $4 }' |
           sed -E 's#^(.*)\.\w+ .*/([^/]+)$#\1 \2#' > list
