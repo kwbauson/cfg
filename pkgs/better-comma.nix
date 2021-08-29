@@ -2,7 +2,7 @@ pkgs: with pkgs; with mylib; latestWrapper name (stdenv.mkDerivation {
   inherit name;
   script = ''
     #!/usr/bin/env bash
-    ${pathAdd [ sqlite coreutils fzy nix-wrapped nr ]}
+    ${pathAdd [ gnused coreutils fzy nix-wrapped nr ]}
     set -e
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
@@ -12,8 +12,7 @@ pkgs: with pkgs; with mylib; latestWrapper name (stdenv.mkDerivation {
       exit
     fi
     shift
-    sql="select distinct package from Programs where name = '$cmd'"
-    packages=$(sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)
+    packages=$(sed -En "s/^([^ ]+) $cmd$/\1/p" ${nix-index-list})
 
     if [[ $(echo "$packages" | wc -l) = 1 ]];then
       if [[ -z $packages ]];then
@@ -48,14 +47,16 @@ pkgs: with pkgs; with mylib; latestWrapper name (stdenv.mkDerivation {
   completion = ''
     _${name}()
     {
-        local cur prev opts sql
+        local cur prev opts exes PATH
+        ${pathAdd [ gnused coreutils ]}
         COMPREPLY=()
         cur="''${COMP_WORDS[COMP_CWORD]}"
         prev="''${COMP_WORDS[COMP_CWORD-1]}"
-        sql="select distinct name from Programs where name like '$cur%' order by name"
 
         if [[ $COMP_CWORD = 1 ]] || [[ $prev = -* && $COMP_CWORD = 2 ]];then
-          COMPREPLY=( $(compgen -W "$(${sqlite}/bin/sqlite3 -init /dev/null ${programs-sqlite} "$sql" 2> /dev/null)" -- "$cur") )
+          # sql="select distinct name from Programs where name like '$cur%' order by name"
+          exes=$(sed -En "s/^[^ ]+ ($cur.*)$/\1/p" ${nix-index-list} | sort)
+          COMPREPLY=( $(compgen -W "$exes" -- "$cur") )
         else
           COMPREPLY=( $(compgen -f -- "$cur") )
         fi

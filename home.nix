@@ -102,8 +102,6 @@ with builtins; with pkgs; with mylib; {
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
-    command-not-found.enable = !isNixOS;
-    command-not-found.dbPath = programs-sqlite;
     firefox.enable = true;
     bash = {
       enable = true;
@@ -551,7 +549,7 @@ with builtins; with pkgs; with mylib; {
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
-      xmodmap ${toFile "Xmodmap" ''
+      xmodmap ${writeText "Xmodmap" ''
         remove mod1 = Alt_L
         keycode 64 = Escape
         ${optionalString (host == "keith-xps") "keycode 105 = Super_R"}
@@ -560,7 +558,7 @@ with builtins; with pkgs; with mylib; {
           keycode 105 = Control_R
         ''}
       ''}
-      xmodmap ${toFile "Xmodmap-fix-modifiers" ''
+      xmodmap ${writeText "Xmodmap-fix-modifiers" ''
         remove control = Super_R
         remove mod4 = Control_R
         add control = Control_R

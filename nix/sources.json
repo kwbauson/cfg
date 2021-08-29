@@ -118,12 +118,12 @@
         "url": "https://github.com/neoclide/jsonc.vim/archive/63ffa5199a0e64d5ce0515256407f32dfbd67fc3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nixos-18_09": {
-        "sha256": "0f3y936zqblzvl76gpd9awamfyxxqck3y6z82hsq50d3bmb779zx",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/18.09/nixos-18.09.2574.a7e559a5504/nixexprs.tar.xz",
-        "url_template": "https://releases.nixos.org/nixos/18.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-18.09.2574.a7e559a5504"
+    "nix-index-database": {
+        "sha256": "0hz0c23azq7i8a9g6ix8i6lwypl6m2jv32xp1w9ncc3qnl3wf25n",
+        "type": "file",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-08/files",
+        "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/files",
+        "version": "2021-08-08"
     },
     "nixos-20_09": {
         "sha256": "1qfji1nhvylmk4i9hmx459rxndffccdn05hd8q6650hkl7prfb15",

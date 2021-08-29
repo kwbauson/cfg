@@ -105,8 +105,6 @@
           extra-trusted-public-keys = kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=
         '';
 
-        inherit (self.packages.x86_64-linux) programs-sqlite;
-
         nixosConfigurations = with lib; mapAttrs
           (n: x: nixosConfiguration n x.configuration)
           (removeAttrs (import' ./hosts) [ "common" ]);

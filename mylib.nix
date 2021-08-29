@@ -96,7 +96,7 @@ cli // generators // lib // builtins // rec {
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
   makeScript = name: script: writeBashBin name (if isDerivation script then ''exec ${script} "$@"'' else "set -e\n" + script);
   makeScripts = mapAttrs makeScript;
-  echo = text: writeBash "echo-script" ''echo "$(< ${toFile "text" text})"'';
+  echo = text: writeBash "echo-script" ''echo "$(< ${writeText "text" text})"'';
   attrsToList = mapAttrsToList (name: value: { inherit name value; });
   joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
   joinLines = joinStrings "\n";
