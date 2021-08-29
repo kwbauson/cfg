@@ -119,11 +119,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0hz0c23azq7i8a9g6ix8i6lwypl6m2jv32xp1w9ncc3qnl3wf25n",
+        "sha256": "1ilwaknjxa1qm1jc3v5nvps43rd5jjycw59cyn0c8ppyhvlcrq7k",
         "type": "file",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-08/files",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-29/files",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/files",
-        "version": "2021-08-08"
+        "version": "2021-08-29"
     },
     "nixos-20_09": {
         "sha256": "1qfji1nhvylmk4i9hmx459rxndffccdn05hd8q6650hkl7prfb15",
@@ -140,11 +140,11 @@
         "version": "nixos-21.05.2734.74d017edb67"
     },
     "nixos-unstable": {
-        "sha256": "1q61h43vrjqx4k4hll2m1n7damivc6cfy2pawy5zb7y8ly3hfzvj",
+        "sha256": "0yw034z7p1hp8n3gghxqy05xbgkh8zmqf59wf3zq76kvlqsazvbm",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre311431.88226ea038e/nixexprs.tar.xz",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre312125.21c937f8cb1/nixexprs.tar.xz",
         "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre311431.88226ea038e"
+        "version": "nixos-21.11pre312125.21c937f8cb1"
     },
     "npmlock2nix": {
         "branch": "master",
