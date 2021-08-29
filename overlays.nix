@@ -11,7 +11,7 @@
       if isNixOS then nix else
       wrapBins nix ''
         mkdir -p ~/.local/share/nix
-        export NIX_CONFIG=$(< ${toFile "nix.conf" cfg.nixConfBase})$'\n'$NIX_CONFIG
+        export NIX_CONFIG=$(< ${writeText "nix.conf" cfg.nixConfBase})$'\n'$NIX_CONFIG
         exec "$exePath" "$@"
       '';
     imported-nixpkgs = import' inputs.nixpkgs;
@@ -28,6 +28,15 @@
     nix-index-list = stdenv.mkDerivation {
       name = "nix-index-list";
       src = fetchurl { inherit (sources.nix-index-database) url sha256; };
+      extra =
+        let
+          extraPackages = set: concatMapStringsSep "\n" (n: "${set}.${n} ${n}") (attrNames (pkgs.${set}));
+          extra-set-list = concatMapStringsSep "\n" extraPackages
+            [ "nodePackages" "python3Packages" "rubyPackages" ];
+          base-list = concatMapStringsSep "\n" (n: "${n} ${n}") (attrNames pkgs);
+        in
+        base-list + extra-set-list;
+      passAsFile = "extra";
       dontUnpack = true;
       buildInputs = [ nix-index ];
       installPhase = ''
@@ -40,7 +49,8 @@
           --regex '/bin/[^/]+' |
           grep -v '^(' |
           awk '{ print $1, $4 }' |
-          sed -E 's#^(.*)\.\w+ .*/([^/]+)$#\1 \2#' > $out
+          sed -E 's#^(.*)\.\w+ .*/([^/]+)$#\1 \2#' > list
+        sort list $extraPath | uniq > $out
       '';
     };
     steam-native = self.steam.override { nativeOnly = true; };
