@@ -43,7 +43,7 @@
         "update_type": "nixpkgs-dmg",
         "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0.1/mac/en-US/Firefox%2091.0.1.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "1"
+        "version": "91.0.1"
     },
     "dmg-signal-desktop": {
         "sha256": "0a5fz4xf9rrkinb8rl1z49z4608kn4fha1wk7cfbw36bsjpyics9",
@@ -127,12 +127,12 @@
         "owner": "Mic92",
         "repo": "nix-index-database",
         "rev": "32b1a263cf9c01494c3c7bdc68eafe0489594cf5",
-        "sha256": "0hz0c23azq7i8a9g6ix8i6lwypl6m2jv32xp1w9ncc3qnl3wf25n",
+        "sha256": "1ilwaknjxa1qm1jc3v5nvps43rd5jjycw59cyn0c8ppyhvlcrq7k",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-08/files",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-29/files",
         "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/files",
-        "version": "2021-08-08"
+        "version": "2021-08-29"
     },
     "nixos-20_09": {
         "branch": "nixos-20.09",
