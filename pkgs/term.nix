@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib;
+scope: with scope;
 let
   urxvt-term = ''
     ${pathAdd rxvt-unicode}

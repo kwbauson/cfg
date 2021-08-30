@@ -180,15 +180,14 @@
     };
   })
   (self: super: with super; with mylib;
-  mapAttrs
-    (name: f: callPackage f (pkgs // {
+  let extra-packages = mapAttrs
+    (name: f: callPackage f (mylib // pkgs // {
       inherit name;
-      pname = name;
       src = sources.${name};
       ${name} = super.${name};
     }))
-    (filterAttrs (_: v: !isPath v) (import' ./pkgs))
-  )
+    (filterAttrs (_: v: !isPath v) (import' ./pkgs));
+  in { inherit extra-packages; } // extra-packages)
   (self: super: with super; with mylib;
   mapDirEntries
     (n: value:

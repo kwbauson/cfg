@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; buildGoModule {
+scope: with scope; buildGoModule {
   inherit name src;
   vendorSha256 = null;
 }

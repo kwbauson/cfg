@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib;
+scope: with scope;
 let
   build = let nixpkgs = pkgs; in
     { path, pkgs ? nixpkgs, source ? null }:

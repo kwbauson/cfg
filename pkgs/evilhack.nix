@@ -1,4 +1,4 @@
-pkgs: with pkgs; nethack.overrideAttrs (attrs: {
+scope: with scope; nethack.overrideAttrs (attrs: {
   inherit name src;
   postPatch = ''
     ${attrs.postPatch}

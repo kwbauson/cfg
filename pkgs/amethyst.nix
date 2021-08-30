@@ -1,4 +1,4 @@
-pkgs: with pkgs; stdenv.mkDerivation {
+scope: with scope; stdenv.mkDerivation {
   inherit name src;
   nativeBuildInputs = [ unzip ];
   unpackPhase = "unzip $src";

@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib;
+scope: with scope;
 (writeBashBin name ''
   ${pathAdd nix-wrapped}
   if [[ $1 == -c ]];then

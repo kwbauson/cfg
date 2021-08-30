@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; stdenv.mkDerivation {
+scope: with scope; stdenv.mkDerivation {
   inherit name src;
   nativeBuildInputs = [ autoPatchelfHook ];
   buildInputs = firefox-unwrapped.buildInputs;

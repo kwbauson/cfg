@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib;
+scope: with scope;
 let
   inherit (cfg) nixosConfigurations homeConfigurations;
   hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];

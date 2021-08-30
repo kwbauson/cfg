@@ -1,4 +1,4 @@
-pkgs: with pkgs; with mylib; buildGoPackage {
+scope: with scope; buildGoPackage {
   inherit name src;
   goPackagePath = "github.com/ikruglov/slapper";
 }

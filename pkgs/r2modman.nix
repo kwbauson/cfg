@@ -1,3 +1,3 @@
-pkgs: with pkgs; appimageTools.wrapType2 {
+scope: with scope; appimageTools.wrapType2 {
   inherit name src;
 }
