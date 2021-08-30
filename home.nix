@@ -261,11 +261,11 @@ with builtins; with pkgs; with mylib; {
       plugins = with rec {
         plugins = with vimPlugins; {
           inherit
-            direnv-vim fzf-vim quick-scope tcomment_vim vim-airline
-            vim-better-whitespace vim-bbye vim-easymotion vim-fugitive
-            vim-lastplace vim-multiple-cursors vim-peekaboo vim-polyglot
-            vim-sensible vim-startify vim-vinegar nvim-scrollview vim-code-dark
-            conflict-marker-vim
+            conflict-marker-vim fzf-vim nvim-scrollview quick-scope
+            tcomment_vim vim-airline vim-bbye vim-better-whitespace
+            vim-code-dark vim-easymotion vim-fugitive vim-lastplace
+            vim-multiple-cursors vim-peekaboo vim-polyglot vim-sensible
+            vim-startify vim-vinegar
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver coc-pyright coc-explorer
