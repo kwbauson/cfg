@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused
+# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused jq
 set -e
 
 if [[ $PINNED != '1' && $1 != pin && -e nle.sh ]];then
@@ -177,6 +177,16 @@ case $cmd in
       tmpfile=$(mktemp)
       cp nix/sources.json $tmpfile
       niv update
+      for pkg in $(jq -r 'to_entries[] | select(.value.update_type == "nixpkgs-dmg").key' nix/sources.json | sed 's/^dmg-//');do
+        version=$(nix eval --raw ".#$pkg.version")
+        niv update dmg-$pkg -v $version
+      done
+      for pkg in $(jq -r 'to_entries[] | select(.value.update_type == "github-release").key' nix/sources.json);do
+        read owner repo <<< "$(jq -r ".\"$pkg\" | \"\(.owner) \(.repo)\"" nix/sources.json)"
+        url=$(curl -LIs -o /dev/null -w '%{url_effective}' "https://github.com/$owner/$repo/releases/latest")
+        version=$(echo "$url" | sed -En 's#.*/v?##p')
+        niv update "$pkg" -v "$version"
+      done
       diff -u nix/sources.json $tmpfile || true
       rm -f $tmpfile
     fi

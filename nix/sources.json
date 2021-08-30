@@ -40,13 +40,15 @@
     "dmg-firefox": {
         "sha256": "0a7snz0qxbzhwbqkwmbivfx9zn4b009qy8xz74wk47an60dschz7",
         "type": "file",
+        "update_type": "nixpkgs-dmg",
         "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0.1/mac/en-US/Firefox%2091.0.1.dmg",
         "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "91.0.1"
+        "version": "1"
     },
     "dmg-signal-desktop": {
         "sha256": "0a5fz4xf9rrkinb8rl1z49z4608kn4fha1wk7cfbw36bsjpyics9",
         "type": "file",
+        "update_type": "nixpkgs-dmg",
         "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.15.0.dmg",
         "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
         "version": "5.15.0"
@@ -119,32 +121,54 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "1ilwaknjxa1qm1jc3v5nvps43rd5jjycw59cyn0c8ppyhvlcrq7k",
+        "branch": "main",
+        "description": "Weekly updated nix-index database",
+        "homepage": "",
+        "owner": "Mic92",
+        "repo": "nix-index-database",
+        "rev": "32b1a263cf9c01494c3c7bdc68eafe0489594cf5",
+        "sha256": "0hz0c23azq7i8a9g6ix8i6lwypl6m2jv32xp1w9ncc3qnl3wf25n",
         "type": "file",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-29/files",
-        "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/files",
-        "version": "2021-08-29"
+        "update_type": "github-release",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-08/files",
+        "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/files",
+        "version": "2021-08-08"
     },
     "nixos-20_09": {
-        "sha256": "1qfji1nhvylmk4i9hmx459rxndffccdn05hd8q6650hkl7prfb15",
+        "branch": "nixos-20.09",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "068984c00e0d4e54b6684d98f6ac47c92dcb642e",
+        "sha256": "00j4xv4lhhqwry7jd67brnws4pwb8vn660n43pvxpkalbpxszwfg",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/20.09/nixos-20.09.4393.068984c00e0/nixexprs.tar.xz",
-        "url_template": "https://releases.nixos.org/nixos/20.09/<version>/nixexprs.tar.xz",
-        "version": "nixos-20.09.4393.068984c00e0"
+        "url": "https://github.com/NixOS/nixpkgs/archive/068984c00e0d4e54b6684d98f6ac47c92dcb642e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-21_05": {
-        "sha256": "1yv9lvvg4xdzpn2kvmkin0ljsn0d83vyxl5vyhn4953bjncx2hcm",
+        "branch": "nixos-21.05",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "74d017edb6717ad76d38edc02ad3210d4ad66b96",
+        "sha256": "0wvz41izp4djzzr0a6x54hcm3xjr51nlj8vqghfgyrjpk8plyk4s",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/21.05/nixos-21.05.2734.74d017edb67/nixexprs.tar.xz",
-        "url_template": "https://releases.nixos.org/nixos/21.05/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.05.2734.74d017edb67"
+        "url": "https://github.com/NixOS/nixpkgs/archive/74d017edb6717ad76d38edc02ad3210d4ad66b96.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable": {
-        "sha256": "0yw034z7p1hp8n3gghxqy05xbgkh8zmqf59wf3zq76kvlqsazvbm",
+        "branch": "nixos-unstable",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "21c937f8cb1e6adcfeb36dfd6c90d9d9bfab1d28",
+        "sha256": "059hbdy43m448ccdi8fmglz9b980hv8fhpa695pl9cyi4lx3nlq4",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-21.11pre312125.21c937f8cb1/nixexprs.tar.xz",
-        "url_template": "https://releases.nixos.org/nixos/unstable/<version>/nixexprs.tar.xz",
-        "version": "nixos-21.11pre312125.21c937f8cb1"
+        "url": "https://github.com/NixOS/nixpkgs/archive/21c937f8cb1e6adcfeb36dfd6c90d9d9bfab1d28.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -169,6 +193,20 @@
         "type": "tarball",
         "url": "https://github.com/cript0nauta/pynixify/archive/427efdcd9bedffb5f8ab5caeabc6d9e51453ea3c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "r2modman": {
+        "branch": "master",
+        "description": "A simple and easy to use mod manager for several Unity games using Thunderstore",
+        "homepage": "",
+        "owner": "ebkr",
+        "repo": "r2modmanPlus",
+        "rev": "588be433b5f797355b5af0bee408084c88b799cf",
+        "sha256": "1dkyqhlwbgd4xdb4dc032i7cz11r471fhhsmkyk7n6isk21kxjpr",
+        "type": "file",
+        "update_type": "github-release",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.19/r2modman-3.1.19.AppImage",
+        "url_template": "https://github.com/<owner>/<repo>/releases/download/v<version>/r2modman-<version>.AppImage",
+        "version": "3.1.19"
     },
     "ranger_devicons": {
         "branch": "main",
