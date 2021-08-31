@@ -68,7 +68,6 @@ with builtins; with pkgs; with mylib; {
     inherit username homeDirectory;
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
-      LOCAL_OPS_USE_NIX = "true";
       BROWSER = "firefox";
       BUGSNAG_RELEASE_STAGE = "local";
       DBTUNNELUSER = "keith";
