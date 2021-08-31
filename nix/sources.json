@@ -66,10 +66,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "f5c0ce4533425de6eed200420ef4158926061024",
-        "sha256": "1xl9ld71rchaibsjmzg1icbyafc55nwjwbwlwn54rgi54rfvwl4r",
+        "rev": "9094ce27affaa85f013a3e8c3a1ed54586090f1a",
+        "sha256": "0hsa5bgh9rhwww87q2rlpk94nkpvh2ayb126qz1zy6a9d5fhb0y1",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/f5c0ce4533425de6eed200420ef4158926061024.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/9094ce27affaa85f013a3e8c3a1ed54586090f1a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -164,10 +164,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "21c937f8cb1e6adcfeb36dfd6c90d9d9bfab1d28",
-        "sha256": "059hbdy43m448ccdi8fmglz9b980hv8fhpa695pl9cyi4lx3nlq4",
+        "rev": "8d8a28b47b7c41aeb4ad01a2bd8b7d26986c3512",
+        "sha256": "1s29nc3ppsjdq8kgbh8pc26xislkv01yph58xv2vjklkvsmz5pzm",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/21c937f8cb1e6adcfeb36dfd6c90d9d9bfab1d28.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/8d8a28b47b7c41aeb4ad01a2bd8b7d26986c3512.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "npmlock2nix": {
