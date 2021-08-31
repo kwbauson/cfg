@@ -72,17 +72,6 @@
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
     switch = self.switch-to-configuration.scripts.${builtAsHost}.noa;
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
-    pynixify = let python = python3.override {
-      packageOverrides = self: super: {
-        pynixify = self.callPackage "${sources.pynixify}/nix/packages/pynixify" { };
-      };
-    }; in python.pkgs.toPythonApplication python.pkgs.pynixify;
-    nle-config = (import ./nle).withConfig {
-      nixpkgs = { inherit system; };
-      flake = { inherit inputs; };
-      sources = ./.;
-    };
-    nixosModules = imported-nixpkgs.nixos.modules;
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";
       nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";

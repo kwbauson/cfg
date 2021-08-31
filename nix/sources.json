@@ -85,18 +85,6 @@
         "url": "https://github.com/tweag/npmlock2nix/archive/4ac13bfffcbb76b9e41701e4822808d2061b73b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "pynixify": {
-        "branch": "main",
-        "description": "Nix expression generator for Python projects",
-        "homepage": null,
-        "owner": "cript0nauta",
-        "repo": "pynixify",
-        "rev": "427efdcd9bedffb5f8ab5caeabc6d9e51453ea3c",
-        "sha256": "1v427grqdi96c6i72krn3cibx6dwc58gdwa23knnx8964s4an63f",
-        "type": "tarball",
-        "url": "https://github.com/cript0nauta/pynixify/archive/427efdcd9bedffb5f8ab5caeabc6d9e51453ea3c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "r2modman": {
         "branch": "master",
         "description": "A simple and easy to use mod manager for several Unity games using Thunderstore",
