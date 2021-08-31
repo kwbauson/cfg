@@ -276,7 +276,7 @@ with builtins; with pkgs; with mylib; {
           src = sources.${name};
         });
       }; attrValues plugins
-        ++ makeExtraPlugins [ "jsonc.vim" "any-jump.vim" "context.vim" "vim-anyfold" ]
+        ++ makeExtraPlugins [ "jsonc.vim" "vim-anyfold" ]
         ++ optional (!isDarwin) vimPlugins.vim-devicons;
     };
     htop = {

@@ -1,65 +1,4 @@
 {
-    "amethyst": {
-        "sha256": "16n5vdyjs6m4saqibv3fb420w6x83lsiw182qm3prnilh4q9qld3",
-        "type": "file",
-        "url": "https://github.com/ianyh/Amethyst/releases/download/v0.15.4/Amethyst.zip",
-        "url_template": "https://github.com/ianyh/Amethyst/releases/download/v<version>/Amethyst.zip",
-        "version": "0.15.4"
-    },
-    "any-jump.vim": {
-        "branch": "master",
-        "description": "Jump to any definition and references 👁 IDE madness without overhead 🚀",
-        "homepage": "",
-        "owner": "pechorin",
-        "repo": "any-jump.vim",
-        "rev": "d58aac1fba124fe2322758366af3a62cec03d629",
-        "sha256": "151gvvamb43r4i2q6snmgwc5qddz7zjwyj7ch6lcsdn731gkhnmz",
-        "type": "tarball",
-        "url": "https://github.com/pechorin/any-jump.vim/archive/d58aac1fba124fe2322758366af3a62cec03d629.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "context.vim": {
-        "branch": "master",
-        "description": "Vim plugin that shows the context of the currently visible buffer contents",
-        "homepage": null,
-        "owner": "wellle",
-        "repo": "context.vim",
-        "rev": "e38496f1eb5bb52b1022e5c1f694e9be61c3714c",
-        "sha256": "1iy614py9qz4rwk9p4pr1ci0m1lvxil0xiv3ymqzhqrw5l55n346",
-        "type": "tarball",
-        "url": "https://github.com/wellle/context.vim/archive/e38496f1eb5bb52b1022e5c1f694e9be61c3714c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "dmg-discord": {
-        "sha256": "1afb0qj23hmhsz9jgzwaj5gqsxdwdxi8bcc656s27qhydnbxbgpn",
-        "type": "file",
-        "url": "https://dl.discordapp.net/apps/osx/0.0.261/Discord.dmg",
-        "url_template": "https://dl.discordapp.net/apps/osx/<version>/Discord.dmg",
-        "version": "0.0.261"
-    },
-    "dmg-firefox": {
-        "sha256": "0a7snz0qxbzhwbqkwmbivfx9zn4b009qy8xz74wk47an60dschz7",
-        "type": "file",
-        "update_type": "nixpkgs-dmg",
-        "url": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0.1/mac/en-US/Firefox%2091.0.1.dmg",
-        "url_template": "https://download-installer.cdn.mozilla.net/pub/firefox/releases/<version>/mac/en-US/Firefox%20<version>.dmg",
-        "version": "91.0.1"
-    },
-    "dmg-signal-desktop": {
-        "sha256": "0a5fz4xf9rrkinb8rl1z49z4608kn4fha1wk7cfbw36bsjpyics9",
-        "type": "file",
-        "update_type": "nixpkgs-dmg",
-        "url": "https://updates.signal.org/desktop/signal-desktop-mac-5.15.0.dmg",
-        "url_template": "https://updates.signal.org/desktop/signal-desktop-mac-<version>.dmg",
-        "version": "5.15.0"
-    },
-    "dmg-spotify": {
-        "sha256": "0mixjdsbrn9bymbicm5s1qd5wfzi4qa4qc4jwwx5ifpiqrkjlk3q",
-        "type": "file",
-        "url": "https://download.scdn.co/Spotify-0.8.5.dmg",
-        "url_template": "https://download.scdn.co/Spotify-<version>.dmg",
-        "version": "0.8.5"
-    },
     "evilhack": {
         "branch": "master",
         "description": "A variant of NetHack that is designed to be a much more challenging experience than the original, drawing inspiration and content from various existing variants along with adding unique and never-before-seen custom content.",
@@ -133,42 +72,6 @@
         "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-29/files",
         "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/files",
         "version": "2021-08-29"
-    },
-    "nixos-20_09": {
-        "branch": "nixos-20.09",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "068984c00e0d4e54b6684d98f6ac47c92dcb642e",
-        "sha256": "00j4xv4lhhqwry7jd67brnws4pwb8vn660n43pvxpkalbpxszwfg",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/068984c00e0d4e54b6684d98f6ac47c92dcb642e.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nixos-21_05": {
-        "branch": "nixos-21.05",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "74d017edb6717ad76d38edc02ad3210d4ad66b96",
-        "sha256": "0wvz41izp4djzzr0a6x54hcm3xjr51nlj8vqghfgyrjpk8plyk4s",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/74d017edb6717ad76d38edc02ad3210d4ad66b96.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nixos-unstable": {
-        "branch": "nixos-unstable",
-        "description": "Nix Packages collection",
-        "homepage": "",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "8d8a28b47b7c41aeb4ad01a2bd8b7d26986c3512",
-        "sha256": "1s29nc3ppsjdq8kgbh8pc26xislkv01yph58xv2vjklkvsmz5pzm",
-        "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/8d8a28b47b7c41aeb4ad01a2bd8b7d26986c3512.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "npmlock2nix": {
         "branch": "master",
