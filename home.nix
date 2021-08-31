@@ -35,7 +35,7 @@ with builtins; with pkgs; with mylib; {
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
           inherit
-            ffmpeg mediainfo pavucontrol sox qtbr breeze-icons
+            ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
             signal-desktop discord zoom-us evilhack dejavu_fonts dejavu_fonts_nerd
             ;
         };

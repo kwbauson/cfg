@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# with-packages ffmpeg-full slop xclip
+dir=/tmp/slopcast
+
+if [[ -e $dir/pid ]];then
+  kill $(< "$dir"/pid)
+  exit 0
+fi
+
+read size offset <<< "$(slop | sed 's/\+/ /' | sed 's/\+/,/')"
+echo "$size $offset"
+mkdir -p "$dir"
+rm -f "$dir"/output.webp
+ffmpeg -video_size "$size" -f x11grab -i ":0.0+$offset" "$dir"/output.webp &
+echo "$!" > "$dir"/pid
+wait
+rm "$dir"/pid
+xclip -selection clipboard -t image/png "$dir"/output.webp
