@@ -132,7 +132,6 @@
                 mypy
               '';
             })
-            pynixify
           ];
         };
 
