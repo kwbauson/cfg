@@ -43,7 +43,7 @@ with builtins; with pkgs; with mylib; {
           inherit
             bat colordiff ctags dhall git-trim gron highlight xh icdiff jq nim
             nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt solargraph
-            watchexec yarn yarn-completion nodejs_latest gh git-ignore
+            watchexec yarn yarn-bash-completion nodejs_latest gh git-ignore
             git-fuzzy black terraform-ls cachix
             ;
           inherit (nodePackages) npm-check-updates prettier;

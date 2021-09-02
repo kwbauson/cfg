@@ -140,17 +140,5 @@
         "type": "tarball",
         "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.5.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.5.en-US.linux-x86_64.tar.bz2"
-    },
-    "yarn-completion": {
-        "branch": "master",
-        "description": "Bash completion for Yarn",
-        "homepage": "",
-        "owner": "dsifford",
-        "repo": "yarn-completion",
-        "rev": "73fe6781037336d210ba25b9dd0e90a335839e58",
-        "sha256": "0fqx2h5kibs7mpk78khxwzmkkfv9hsmmmsa0aiadmsq767qv2wrf",
-        "type": "tarball",
-        "url": "https://github.com/dsifford/yarn-completion/archive/73fe6781037336d210ba25b9dd0e90a335839e58.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
