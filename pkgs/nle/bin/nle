@@ -100,6 +100,17 @@ case $cmd in
     [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
+  repl)
+    [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
+    repl_file=$(mktemp -t nle-repl-XXXXXX.nix)
+    cat > "$repl_file" <<EOF
+let
+  env = (import CFG_STORE_PATH).nle.build { path = "$PWD"; source = "$sourcedir"; };
+in env.pkgs // env.passthru // { inherit env; }
+EOF
+    nix repl "$repl_file"
+    rm -f "$repl_file"
+    ;;
   activate)
     "$0" cache
     if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
