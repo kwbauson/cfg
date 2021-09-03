@@ -102,6 +102,7 @@ case $cmd in
     ;;
   repl)
     [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
+    "$0" generate
     repl_file=$(mktemp -t nle-repl-XXXXXX.nix)
     cat > "$repl_file" <<EOF
 let
