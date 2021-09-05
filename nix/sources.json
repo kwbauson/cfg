@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "4e2f188b183cc2e2f09df22a941013bb4fa7a6f4",
-        "sha256": "0hvmkywl0mqxv1chwy6cfgj33gqxl1fjlich808n9b7c3inbz7x0",
+        "rev": "cd9aa1994f2540ece773859ed3459acffb729ef4",
+        "sha256": "0m93akvmcyynjmz6z01jg6p97mwddgnrlawkfcy48h6zbazimlp3",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/4e2f188b183cc2e2f09df22a941013bb4fa7a6f4.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/cd9aa1994f2540ece773859ed3459acffb729ef4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -66,12 +66,12 @@
         "owner": "Mic92",
         "repo": "nix-index-database",
         "rev": "32b1a263cf9c01494c3c7bdc68eafe0489594cf5",
-        "sha256": "1ilwaknjxa1qm1jc3v5nvps43rd5jjycw59cyn0c8ppyhvlcrq7k",
+        "sha256": "0v20gfa42gpjpxilwdf621blxfmv4vm6wyyx28qznwbbdjxlchv6",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-08-29/files",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-09-05/files",
         "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/files",
-        "version": "2021-08-29"
+        "version": "2021-09-05"
     },
     "npmlock2nix": {
         "branch": "master",

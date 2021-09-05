@@ -96,11 +96,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1630736093,
-        "narHash": "sha256-NSLXh0sHFqcX1dLNt9NQcHjCVXAFJaR63yCqPPyHPFI=",
+        "lastModified": 1630828515,
+        "narHash": "sha256-GEF0k7WWRPbX4kKwCFB9ec+svCWycFNPxK8qXiOCPzs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d431839ab4494499714f2b6f001413fe380607eb",
+        "rev": "7a08a9b2fba56b23d4a076727ffa0c1e74f083e5",
         "type": "github"
       },
       "original": {
@@ -112,11 +112,11 @@
     "pypi-deps-db": {
       "flake": false,
       "locked": {
-        "lastModified": 1630785485,
-        "narHash": "sha256-QsEGuQnBHO94gFDSR9DKJ33AiJ2DSn/21hF2e7RIN0I=",
+        "lastModified": 1630828586,
+        "narHash": "sha256-IF9g3/AsEzE4e5SAk/TK3qNzoDVgzaPzb4Xnhm6lHWg=",
         "owner": "DavHau",
         "repo": "pypi-deps-db",
-        "rev": "547baea306f1844f855b17a475f87c5a16f0e20d",
+        "rev": "273c2e94f76458dc69e506a40effe2207c5120fc",
         "type": "github"
       },
       "original": {
