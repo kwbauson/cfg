@@ -41,10 +41,10 @@ with builtins; with pkgs; with mylib; {
         };
         development = {
           inherit
-            bat colordiff ctags dhall git-trim gron highlight xh icdiff jq nim
-            nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt solargraph
-            watchexec yarn yarn-bash-completion nodejs_latest gh git-ignore
-            git-fuzzy black terraform-ls cachix
+            bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
+            crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
+            solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
+            git-ignore git-fuzzy black terraform-ls cachix
             ;
           inherit (nodePackages) npm-check-updates prettier;
           nle = nle.unwrapped;
