@@ -435,6 +435,7 @@ with builtins; with pkgs; with mylib; {
     mpv.enable = isGraphical && isLinux;
     qutebrowser = {
       enable = isGraphical && isLinux;
+      loadAutoconfig = true;
       aliases = {
         h = "help";
         q = "quit";
@@ -452,7 +453,88 @@ with builtins; with pkgs; with mylib; {
         yt = "http://www.youtube.com/results?search_query={}";
         b = "https://www.biblegateway.com/passage/?version=NLT&search={}";
       };
-      extraConfig = readFile ./qutebrowser-config.py;
+      settings = {
+        confirm_quit = [ "downloads" ];
+        new_instance_open_target = "window";
+        session.default_name = "default";
+        auto_save.session = true;
+        content.cache.size = null;
+        content.fullscreen.window = true;
+        content.geolocation = false;
+        content.pdfjs = true;
+        completion.cmd_history_max_items = -1;
+        completion.height = "25%";
+        completion.show = "auto";
+        completion.web_history.exclude = [ "about:blank" ];
+        completion.open_categories = [ "bookmarks" "history" ];
+        downloads.remove_finished = 1000;
+        hints.chars = "asdfghjkl;qwertyuiopzxcvbnm";
+        hints.scatter = false;
+        hints.uppercase = true;
+        input.forward_unbound_keys = "none";
+        spellcheck.languages = [ "en-US" ];
+        statusbar.position = "top";
+        statusbar.widgets = [ "keypress" "url" "scroll" "history" "progress" ];
+        tabs.show = "multiple";
+        tabs.tabs_are_windows = true;
+        url.default_page = "about:blank";
+        url.open_base_url = true;
+        url.start_pages = [ "about:blank" ];
+        window.title_format = "{perc}{current_title}";
+        colors.webpage.preferred_color_scheme = "dark";
+      };
+      keyBindings.normal = {
+        ";d" = "hint all delete";
+        ";e" = "hint inputs";
+        ";f" = "hint all tab-fg";
+        ";r" = "hint --rapid all tab-bg";
+        ";y" = "hint links yank-primary";
+        "<Alt+h>" = "scroll left";
+        "<Alt+j>" = "scroll down";
+        "<Alt+k>" = "scroll up";
+        "<Alt+l>" = "scroll right";
+        "<Ctrl+e>" = "scroll-px 0 40";
+        "<Ctrl+y>" = "scroll-px 0 -40";
+        "<Down>" = "scroll down";
+        "<Shift+Space>" = "scroll-page 0 -1";
+        "<Space>" = "scroll-page 0 1";
+        "<Up>" = "scroll up";
+        F = "hint all tab-bg";
+        O = "set-cmd-text :open {url:pretty}";
+        P = "open -t {primary}";
+        T = "set-cmd-text :open -t {url:pretty}";
+        Y = "yank";
+        b = "set-cmd-text -s :open -b";
+        c = "tab-clone";
+        gb = "open qute:bookmarks";
+        gp = "spawn -u login-fill";
+        gq = "open https://github.com/qutebrowser/qutebrowser/commits/master";
+        gc = "open https://github.com/kwbauson/cfg";
+        gn = "open https://github.com/NixOS/nix/commits/master";
+        gN = "open https://github.com/NixOS/nixpkgs/commits/master";
+        gs = "set";
+        gv = "open qute:version";
+        h = "scroll-px -40 0";
+        j = "scroll-px 0 40";
+        k = "scroll-px 0 -40";
+        l = "scroll-px 40 0";
+        p = "open {primary}";
+        s = "stop";
+        t = "set-cmd-text -s :open -t";
+        w = "open -t";
+        y = "yank --sel";
+        u = "undo --window";
+      };
+      keyBindings.insert = {
+        "<Ctrl+h>" = "fake-key <backspace>";
+        "<Ctrl+j>" = "fake-key <enter>";
+        "<Ctrl+m>" = "fake-key <enter>";
+        "<Ctrl+u>" = "fake-key <shift-home><backspace>";
+        "<Ctrl+w>" = "fake-key <ctrl-backspace>";
+      };
+      extraConfig = ''
+        config.unbind("<Ctrl+w>")
+      '';
     };
   };
   xdg = {
