@@ -41,6 +41,16 @@
     };
     version = "0.10.1";
   };
+  rexml = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "08ximcyfjy94pm1rhcx04ny1vx2sk0x4y185gzn86yfsbzwkng53";
+      type = "gem";
+    };
+    version = "3.2.5";
+  };
   thor = {
     groups = ["default"];
     platforms = [];
@@ -52,13 +62,14 @@
     version = "1.1.0";
   };
   xml-simple = {
+    dependencies = ["rexml"];
     groups = ["default"];
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1flpmghcbil6qbl3f6w67kpjrnjbw86x7h6g5n4m5ff0cg4sylrv";
+      sha256 = "0pb9plyl71mdbjr4kllfy53qx6g68ryxblmnq9dilvy837jk24fj";
       type = "gem";
     };
-    version = "1.1.8";
+    version = "1.1.9";
   };
 }
