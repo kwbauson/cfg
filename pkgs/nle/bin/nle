@@ -101,16 +101,10 @@ case $cmd in
     nix build --impure --expr "$nixexpr" --out-link "$result"
     ;;
   repl)
-    [[ $NOCACHE != 1 ]] && [[ -d $cachedir ]] && cd "$cachedir"
-    "$0" generate
-    repl_file=$(mktemp -t nle-repl-XXXXXX.nix)
-    cat > "$repl_file" <<EOF
-let
-  env = (import CFG_STORE_PATH).nle.build { path = "$PWD"; source = "$sourcedir"; };
-in env.pkgs // env.passthru // { inherit env; }
-EOF
-    nix repl "$repl_file"
-    rm -f "$repl_file"
+    "$0" prepcache
+    cd "$cachedir"
+    echo "let env = $nixexpr; in env.pkgs // env.passthru // { inherit env; }" > repl.nix
+    nix repl --impure repl.nix
     ;;
   activate)
     "$0" cache
@@ -155,7 +149,7 @@ EOF
       done | sort | uniq
     fi
     ;;
-  cache)
+  prepcache)
     [[ -e $result ]] && exit
     mkdir -p "$cachedir"
     echo "$sourcedir" > "$sourcelink"
@@ -167,6 +161,9 @@ EOF
     else
       "$0" generate
     fi
+    ;;
+  cache)
+    "$0" prepcache
     "$0" rebuild
     ;;
   generate)
