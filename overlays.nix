@@ -50,6 +50,7 @@
         sort list $extraPath | uniq > $out
       '';
     };
+    steam = super.steam.override { extraPkgs = pkgs: with pkgs; [ pango libthai harfbuzz ]; };
     steam-native = self.steam.override { nativeOnly = true; };
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
     jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
