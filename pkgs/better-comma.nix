@@ -48,17 +48,18 @@ scope: with scope; latestWrapper name (stdenv.mkDerivation {
     _${name}()
     {
         local cur prev opts exes PATH
+        compopt +o default
         ${pathAdd [ gnused coreutils ]}
         COMPREPLY=()
         cur="''${COMP_WORDS[COMP_CWORD]}"
         prev="''${COMP_WORDS[COMP_CWORD-1]}"
 
         if [[ $COMP_CWORD = 1 ]] || [[ $prev = -* && $COMP_CWORD = 2 ]];then
-          # sql="select distinct name from Programs where name like '$cur%' order by name"
           exes=$(sed -En "s/^[^ ]+ ($cur.*)$/\1/p" ${nix-index-list} | sort)
           COMPREPLY=( $(compgen -W "$exes" -- "$cur") )
         else
-          COMPREPLY=( $(compgen -f -- "$cur") )
+          compopt -o default
+          COMPREPLY=()
         fi
         return 0
     }
