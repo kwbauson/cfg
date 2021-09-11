@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 with builtins;
 {
   imports = [
@@ -13,5 +13,10 @@ with builtins;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   virtualisation.docker.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.package = pkgs.bluezFull;
+  };
+  environment.systemPackages = [ pkgs.xboxdrv ];
 }
 
