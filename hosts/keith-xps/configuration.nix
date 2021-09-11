@@ -10,15 +10,8 @@ with builtins;
 
   boot.blacklistedKernelModules = [ "psmouse" ];
   hardware = {
-    pulseaudio = {
-      enable = true;
-      extraConfig = "load-module module-switch-on-connect";
-    };
-
     bluetooth.enable = true;
     bluetooth.package = pkgs.bluezFull;
-    # FIXME ffmpeg_3 not secure
-    opengl.extraPackages = with pkgs; lib.mkForce [ vaapiIntel vaapiVdpau intel-media-driver ];
   };
   networking.networkmanager.wifi.powersave = false;
   services.xserver.enable = true;

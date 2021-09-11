@@ -54,7 +54,14 @@
 
   fonts.enableDefaultFonts = config.services.xserver.enable;
 
+  security.rtkit.enable = true;
   services = {
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
     dbus.packages = with pkgs; [ gnome3.dconf ];
     localtime.enable = true;
     chrony.enable = true;
