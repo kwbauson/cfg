@@ -65,13 +65,13 @@
         "homepage": "",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "32b1a263cf9c01494c3c7bdc68eafe0489594cf5",
-        "sha256": "0v20gfa42gpjpxilwdf621blxfmv4vm6wyyx28qznwbbdjxlchv6",
+        "rev": "12383a5cd4039b88296f39f4242af06e29723407",
+        "sha256": "07pbwvar7gicbv7hgs6k1ap4i5rz1xzmqs06m102vn8wgfg2vrpb",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-09-05/files",
-        "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/files",
-        "version": "2021-09-05"
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-09-11/index-x86_64-linux",
+        "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/index-x86_64-linux",
+        "version": "2021-09-11"
     },
     "npmlock2nix": {
         "branch": "master",
