@@ -65,7 +65,7 @@
         "homepage": "",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "12383a5cd4039b88296f39f4242af06e29723407",
+        "rev": "43d37b0bea78889fa475fbe680f08d83cc6cb276",
         "sha256": "0m78n56r8x90fy1bh6hprdxvw33mhb9d75hbm5y9l61z1ny9krbd",
         "type": "file",
         "update_type": "github-release",
@@ -79,10 +79,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "fc3e7a257fca27c8f6d4f1b9e7a3f5b738953cdc",
-        "sha256": "13lkw2saa1m8x4l7rbqrh93fhl0py2vciglj93yncnw6jccjr8km",
+        "rev": "a91bc6ccbb1ba35d608cca5ed121d867bd260aaf",
+        "sha256": "0zrir8cri7s4h7sp55zn460z3f04hmy5zz2l1rnf5mdnzv5cpn0l",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/fc3e7a257fca27c8f6d4f1b9e7a3f5b738953cdc.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/a91bc6ccbb1ba35d608cca5ed121d867bd260aaf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "r2modman": {
