@@ -1,5 +1,5 @@
-scope: with scope; latestWrapper name (stdenv.mkDerivation {
-  inherit name;
+scope: with scope; latestWrapper pname (stdenv.mkDerivation {
+  inherit pname version;
   script = ''
     #!/usr/bin/env bash
     ${pathAdd [ gnused coreutils fzy nix-wrapped nr ]}
@@ -21,7 +21,7 @@ scope: with scope; latestWrapper name (stdenv.mkDerivation {
         attr=$packages
       fi
     else
-      cachefile=~/.cache/${name}/$cmd
+      cachefile=~/.cache/${pname}/$cmd
       [[ -n $uncache ]] && rm -f "$cachefile"
       if [[ -e $cachefile ]];then
         attr=$(< "$cachefile")
@@ -45,7 +45,7 @@ scope: with scope; latestWrapper name (stdenv.mkDerivation {
     fi
   '';
   completion = ''
-    _${name}()
+    _${pname}()
     {
         local cur prev opts exes PATH
         compopt +o default
@@ -63,17 +63,17 @@ scope: with scope; latestWrapper name (stdenv.mkDerivation {
         fi
         return 0
     }
-    complete -F _${name} better-comma
-    complete -F _${name} ,
+    complete -F _${pname} better-comma
+    complete -F _${pname} ,
   '';
   passAsFile = [ "script" "completion" ];
   dontUnpack = true;
   nativeBuildInputs = [ installShellFiles ];
   installPhase = ''
     mkdir -p $out/bin
-    cp $scriptPath $out/bin/${name}
-    chmod +x $out/bin/${name}
-    ln -s $out/bin/{${name},","}
+    cp $scriptPath $out/bin/${pname}
+    chmod +x $out/bin/${pname}
+    ln -s $out/bin/{${pname},","}
     installShellCompletion --bash --name better-comma $completionPath
     installShellCompletion --bash --name , $completionPath
   '';

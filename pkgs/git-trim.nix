@@ -1,4 +1,4 @@
 scope: with scope; stdenv.mkDerivation {
-  inherit name src;
-  installPhase = "install -Dt $out/bin $src/${name}";
+  inherit pname version src;
+  installPhase = "install -Dt $out/bin $src/${pname}";
 }

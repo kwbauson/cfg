@@ -1,7 +1,7 @@
 scope: with scope; stdenv.mkDerivation {
-  inherit name src;
+  inherit pname version src;
   nativeBuildInputs = [ autoPatchelfHook ];
-  buildInputs = firefox-unwrapped.buildInputs;
+  buildInputs = firefox-unwrapped.buildInputs ++ [ gtk2 ];
   installPhase = ''
     mkdir -p $out/{share,bin}
     cp -r . $out/share/waterfox

@@ -1,4 +1,4 @@
 scope: with scope; buildGoPackage {
-  inherit name src;
+  inherit pname version src;
   goPackagePath = "github.com/ikruglov/slapper";
 }

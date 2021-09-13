@@ -1,4 +1,4 @@
 scope: with scope; buildGoModule {
-  inherit name src;
+  inherit pname version src;
   vendorSha256 = null;
 }

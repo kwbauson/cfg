@@ -62,7 +62,7 @@ let
   '';
 in
 buildEnv {
-  inherit name;
+  name = pname;
   paths = map makeBin (attrNames scripts.${head (attrNames scripts)});
   passthru = { inherit scripts; };
 }

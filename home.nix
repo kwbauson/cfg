@@ -270,8 +270,9 @@ with builtins; with pkgs; with mylib; {
             coc-solargraph coc-tsserver coc-pyright coc-explorer
             ;
         };
-        makeExtraPlugins = map (name: vimUtils.buildVimPlugin {
-          inherit name;
+        makeExtraPlugins = map (name: vimUtils.buildVimPlugin rec {
+          pname = name;
+          version = src.version or src.rev or "unversioned";
           src = sources.${name};
         });
       }; attrValues plugins

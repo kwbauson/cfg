@@ -164,10 +164,12 @@
   })
   (self: super: with super; with mylib;
   let extra-packages = mapAttrs
-    (name: f: callPackage f (mylib // pkgs // {
-      inherit name;
-      src = sources.${name};
-      ${name} = super.${name};
+    (n: f: callPackage f (mylib // pkgs // rec {
+      name = "${pname}-${version}";
+      pname = n;
+      version = src.version or src.rev or "unversioned";
+      src = sources.${n} or null;
+      ${n} = super.${n};
     }))
     (filterAttrs (_: v: !isPath v) (import' ./pkgs));
   in { inherit extra-packages; } // extra-packages)

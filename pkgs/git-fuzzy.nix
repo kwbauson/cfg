@@ -1,11 +1,11 @@
 scope: with scope; stdenv.mkDerivation {
-  inherit name src;
+  inherit pname version src;
   installPhase = ''
     mkdir -p $out/{bin,share}
-    cp -r $src $out/share/${name}
-    echo '#!/usr/bin/env bash' >> $out/bin/${name}
-    echo '${pathAdd [ fzf bat exa ]}' >> $out/bin/${name}
-    echo $out/'share/${name}/bin/${name} "$@"' >> $out/bin/${name}
+    cp -r $src $out/share/${pname}
+    echo '#!/usr/bin/env bash' >> $out/bin/${pname}
+    echo '${pathAdd [ fzf bat exa ]}' >> $out/bin/${pname}
+    echo $out/'share/${pname}/bin/${pname} "$@"' >> $out/bin/${pname}
     chmod +x $out/bin/*
   '';
 }

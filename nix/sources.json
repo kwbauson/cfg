@@ -139,6 +139,7 @@
         "sha256": "1b05lbjkal6acnnaxd4pxrnliv2w6fla5rcwlryfgmjhngwwhaas",
         "type": "tarball",
         "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.5.en-US.linux-x86_64.tar.bz2",
-        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.5.en-US.linux-x86_64.tar.bz2"
+        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
+        "version": "G3.2.5"
     }
 }

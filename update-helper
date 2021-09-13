@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-niv update waterfox -t $(curl https://www.waterfox.net/download/ | grep -o '[^"]*linux-x86_64[^"]*' | head -n1)
+waterfox_url=$(curl https://www.waterfox.net/download/ | grep -o '[^"]*linux-x86_64[^"]*')
+waterfox_version=$(echo "$waterfox_url" | sed -En '1s#.*/waterfox-(.*)\.en-US\.linux-x86_64.*#\1#p')
+niv update waterfox -v "$waterfox_version"

@@ -1,5 +1,5 @@
 scope: with scope;
-(writeBashBin name ''
+(writeBashBin pname ''
   ${pathAdd nix-wrapped}
   if [[ $1 == -c ]];then
     shift && cmd=$1 && shift

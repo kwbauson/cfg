@@ -8,5 +8,5 @@ scope: with scope; nethack.overrideAttrs (attrs: {
       -e '/GREPPATH=/d' \
       -i sys/unix/sysconf
   '';
-  postInstall = lib.replaceStrings [ "nethack" ] [ name ] attrs.postInstall;
+  postInstall = lib.replaceStrings [ "nethack" ] [ pname ] attrs.postInstall;
 })

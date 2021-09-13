@@ -22,4 +22,4 @@ let
     ${urxvt-term}
   '';
 in
-buildEnv { name = "term"; paths = [ term termbar ]; }
+buildEnv { name = pname; paths = [ term termbar ]; }
