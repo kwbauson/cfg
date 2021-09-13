@@ -60,7 +60,7 @@
     netdata.enable = true;
   };
 
-  # systemd.services.hercules-ci-agent.path = with pkgs; [ bzip2 xz ];
+  systemd.services.hercules-ci-agent.path = with pkgs; [ bzip2 xz ];
 
   security.acme = {
     acceptTerms = true;
