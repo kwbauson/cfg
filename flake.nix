@@ -126,7 +126,6 @@
             saml2aws
             mysql57
             slapper
-            inlets
             (nle.build {
               path = writeTextDir "requirements.txt" ''
                 black
