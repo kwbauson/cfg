@@ -125,8 +125,8 @@
           paths = flatten [
             saml2aws
             mysql57
-            waterfox
             slapper
+            inlets
             (nle.build {
               path = writeTextDir "requirements.txt" ''
                 black
