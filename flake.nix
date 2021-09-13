@@ -126,6 +126,7 @@
             saml2aws
             mysql57
             slapper
+            waterfox
             (nle.build {
               path = writeTextDir "requirements.txt" ''
                 black
