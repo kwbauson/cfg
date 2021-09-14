@@ -127,6 +127,7 @@
             mysql57
             slapper
             waterfox
+            r2modman
             (nle.build {
               path = writeTextDir "requirements.txt" ''
                 black

@@ -2,19 +2,8 @@
   /* "codeLens.enable": true, */
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualText": true,
-  "diagnostic.maxWindowHeight": 20,
   "suggest.removeDuplicateItems": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "jsonc",
-    "json",
-    "yaml",
-    "typescript",
-    "typescriptreact",
-    "javascript",
-    "javascript.jsx",
-    "python",
-    "nix"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "list.insertMappings": {
     "<c-n>": "normal:j",
     "<c-p>": "normal:k",
@@ -55,6 +44,18 @@
       "command": "terraform-ls",
       "args": ["serve"],
       "filetypes": ["terraform"]
+    },
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ],
+      "filetypes": ["haskell", "lhaskell"]
     }
   }
 }
