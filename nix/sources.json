@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "4b81332abfecde85a32df97405759af9345081be",
-        "sha256": "1wsb3qkivq7kv64zpdgzv20ric48hgjb6hwm76h51fskcikc36w9",
+        "rev": "dfe95207d0f4e8232d582732176c254220eb3c5e",
+        "sha256": "0n0dfjmddkk8bxdn1l4wf4ys1i8v8h5cnjy55gsfs23rjlmx86im",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/4b81332abfecde85a32df97405759af9345081be.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/dfe95207d0f4e8232d582732176c254220eb3c5e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -79,10 +79,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "a91bc6ccbb1ba35d608cca5ed121d867bd260aaf",
-        "sha256": "0zrir8cri7s4h7sp55zn460z3f04hmy5zz2l1rnf5mdnzv5cpn0l",
+        "rev": "33eb3300561d724da64a46ab8e9a05a9cfa9264b",
+        "sha256": "07pi4ahyqkap5fhxx9l96502sxh6bx4fh2fflpqp6h68va1ay2y6",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/a91bc6ccbb1ba35d608cca5ed121d867bd260aaf.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/33eb3300561d724da64a46ab8e9a05a9cfa9264b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "r2modman": {
