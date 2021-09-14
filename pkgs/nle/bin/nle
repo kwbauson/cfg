@@ -163,6 +163,7 @@ case $cmd in
     fi
     ;;
   cache)
+    [[ -e $result ]] && exit
     "$0" prepcache
     "$0" rebuild
     ;;
