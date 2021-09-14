@@ -65,7 +65,7 @@
         "homepage": "",
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "rev": "43d37b0bea78889fa475fbe680f08d83cc6cb276",
+        "rev": "71e2ada7bfb8c8139e9b65c805493768269e80ad",
         "sha256": "0m78n56r8x90fy1bh6hprdxvw33mhb9d75hbm5y9l61z1ny9krbd",
         "type": "file",
         "update_type": "github-release",
