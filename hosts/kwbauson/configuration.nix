@@ -37,7 +37,7 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
-        ${fqdn}.locations."/".proxyPass = "http://localhost:8080";
+        ${fqdn}.locations."/".proxyPass = "http://localhost:1337";
         "files.${fqdn}".locations."/" = {
           root = "/srv/files";
           extraConfig = "autoindex on;";
@@ -61,6 +61,11 @@
   };
 
   systemd.services.hercules-ci-agent.path = with pkgs; [ bzip2 xz ];
+
+  systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.jitsi-videobridge2.restartTriggers = [ pkgs.jitsi-meet ];
 
   security.acme = {
     acceptTerms = true;
