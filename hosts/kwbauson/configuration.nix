@@ -37,7 +37,10 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
-        ${fqdn}.locations."/".proxyPass = "http://localhost:1337";
+        ${fqdn} = {
+          basicAuthFile = "/etc/nixos/authfile";
+          locations."/".proxyPass = "http://localhost:1337";
+        };
         "files.${fqdn}".locations."/" = {
           root = "/srv/files";
           extraConfig = "autoindex on;";
