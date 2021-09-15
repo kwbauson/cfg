@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "dfe95207d0f4e8232d582732176c254220eb3c5e",
-        "sha256": "0n0dfjmddkk8bxdn1l4wf4ys1i8v8h5cnjy55gsfs23rjlmx86im",
+        "rev": "b80b806378bf192ae734ee470721b09c42d9c8bf",
+        "sha256": "0pv02v1p159rcv5p8d9650bsdz43c3zvxd2vhczhhpv57yv7ip8a",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/dfe95207d0f4e8232d582732176c254220eb3c5e.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/b80b806378bf192ae734ee470721b09c42d9c8bf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
