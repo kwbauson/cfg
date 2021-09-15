@@ -85,6 +85,14 @@
         "url": "https://github.com/tweag/npmlock2nix/archive/33eb3300561d724da64a46ab8e9a05a9cfa9264b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "olivetin": {
+        "sha256": "1sya38hcm1afmc6zn5dfzb7avrppq94c4vga9nl6mpl6rhpg42ry",
+        "type": "tarball",
+        "update_type": "github-release",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2021-07-19/OliveTin-2021-07-19-linux-amd64.tar.gz",
+        "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-<version>-linux-amd64.tar.gz",
+        "version": "2021-07-19"
+    },
     "r2modman": {
         "branch": "master",
         "description": "A simple and easy to use mod manager for several Unity games using Thunderstore",
