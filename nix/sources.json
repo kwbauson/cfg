@@ -60,17 +60,11 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "branch": "main",
-        "description": "Weekly updated nix-index database",
-        "homepage": "",
-        "owner": "Mic92",
-        "repo": "nix-index-database",
-        "rev": "71e2ada7bfb8c8139e9b65c805493768269e80ad",
         "sha256": "0m78n56r8x90fy1bh6hprdxvw33mhb9d75hbm5y9l61z1ny9krbd",
         "type": "file",
         "update_type": "github-release",
         "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-09-12/index-x86_64-linux",
-        "url_template": "https://github.com/<owner>/<repo>/releases/download/<version>/index-x86_64-linux",
+        "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
         "version": "2021-09-12"
     },
     "npmlock2nix": {
@@ -94,17 +88,11 @@
         "version": "2021-07-19"
     },
     "r2modman": {
-        "branch": "master",
-        "description": "A simple and easy to use mod manager for several Unity games using Thunderstore",
-        "homepage": "",
-        "owner": "ebkr",
-        "repo": "r2modmanPlus",
-        "rev": "588be433b5f797355b5af0bee408084c88b799cf",
         "sha256": "1dkyqhlwbgd4xdb4dc032i7cz11r471fhhsmkyk7n6isk21kxjpr",
         "type": "file",
         "update_type": "github-release",
         "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.19/r2modman-3.1.19.AppImage",
-        "url_template": "https://github.com/<owner>/<repo>/releases/download/v<version>/r2modman-<version>.AppImage",
+        "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
         "version": "3.1.19"
     },
     "ranger_devicons": {
