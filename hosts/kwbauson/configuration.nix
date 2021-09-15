@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./olivetin.nix
   ];
 
   boot.loader.grub = {
@@ -36,11 +37,10 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
-        ${fqdn} = {
-          locations."/" = {
-            root = "/srv/files";
-            extraConfig = "autoindex on;";
-          };
+        ${fqdn}.locations."/".proxyPass = "http://localhost:8080";
+        "files.${fqdn}".locations."/" = {
+          root = "/srv/files";
+          extraConfig = "autoindex on;";
         };
         "netdata.${fqdn}".locations."/".proxyPass = "http://localhost:19999";
       };
