@@ -55,7 +55,13 @@
         "package.yaml",
         "hie.yaml"
       ],
-      "filetypes": ["haskell", "lhaskell"]
+      "filetypes": ["haskell", "lhaskell"],
+
+      "initializationOptions": {
+        "languageServerHaskell": {
+          "formattingProvider": "fourmolu"
+        }
+      }
     }
   }
 }
