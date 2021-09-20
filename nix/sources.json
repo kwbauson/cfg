@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "b80b806378bf192ae734ee470721b09c42d9c8bf",
-        "sha256": "0pv02v1p159rcv5p8d9650bsdz43c3zvxd2vhczhhpv57yv7ip8a",
+        "rev": "99be11990f3f4212aa7d553f523a53a1c86e7d86",
+        "sha256": "0s71y0fdvqzjf9pfwmzgc2ns8va5dhmw36ranh6hrak6ql1gxbai",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/b80b806378bf192ae734ee470721b09c42d9c8bf.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/99be11990f3f4212aa7d553f523a53a1c86e7d86.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -60,12 +60,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0m78n56r8x90fy1bh6hprdxvw33mhb9d75hbm5y9l61z1ny9krbd",
+        "sha256": "0zqrhmj1ci0g6l4rfv5db7948kirnvmm8330i4qcxdcz72abbd49",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-09-12/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2021-09-19/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2021-09-12"
+        "version": "2021-09-19"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "f3be2e69993514ec78e210af2efc3759847134c8",
-        "sha256": "16rv7j9p6cx0d1c3gdbn6w4xqn9z7jrwhmcdglis71i0kwqk1x1x",
+        "rev": "d1109f90cf528e26bbd02056f0700855e99a9864",
+        "sha256": "1n2nnfyhln7cpz960bp35h906pbq3vim4pna7r7pm02dzhx6w80s",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/f3be2e69993514ec78e210af2efc3759847134c8.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/d1109f90cf528e26bbd02056f0700855e99a9864.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
@@ -132,10 +132,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1b05lbjkal6acnnaxd4pxrnliv2w6fla5rcwlryfgmjhngwwhaas",
+        "sha256": "0bc7wdhn5wb89zbygxxcn4hlp7cl1h9g64njf7a5xwwi20s67jfr",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.5.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G3.2.6.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G3.2.5"
+        "version": "G3.2.6"
     }
 }
