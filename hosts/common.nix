@@ -88,12 +88,13 @@
   };
 
   users = {
-    users = {
-      keith = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" "vboxsf" ];
-      };
+    users.keith = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" "vboxsf" ];
     };
+    users.localtimed.group = "localtimed"; # FIXME localtime service requires this now
+    users.localtimed.isSystemUser = true;
+    groups.localtimed = { };
   };
 
   security.sudo.wheelNeedsPassword = false;
