@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "k21971",
         "repo": "EvilHack",
-        "rev": "f23508f67a0181194be51ca901a5a7c2489d9669",
-        "sha256": "0lcj3admidhndrqjxyxh9iz6nvc63am3qbbhk9ih0bggmz4ky4rf",
+        "rev": "d50274031cba08273a42156e5d060a8b03952348",
+        "sha256": "1hnjlb894s9ns9xmrp16q7bvdiqc0jcjrvmv7w873sy4nzq6qw3r",
         "type": "tarball",
-        "url": "https://github.com/k21971/EvilHack/archive/f23508f67a0181194be51ca901a5a7c2489d9669.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/d50274031cba08273a42156e5d060a8b03952348.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "d1109f90cf528e26bbd02056f0700855e99a9864",
-        "sha256": "1n2nnfyhln7cpz960bp35h906pbq3vim4pna7r7pm02dzhx6w80s",
+        "rev": "11941619b853e9608a41028ac8ebde2e6ca7d934",
+        "sha256": "1sfmm5j2hg84j6g82mzxlh03sri8yphj2979wr0zgn62mr38w8zd",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/d1109f90cf528e26bbd02056f0700855e99a9864.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/11941619b853e9608a41028ac8ebde2e6ca7d934.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
