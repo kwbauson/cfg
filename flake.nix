@@ -80,9 +80,7 @@
         overlays = [
           (final: nixpkgs: {
             cfg = self;
-            self-source = final.mylib.buildDirExcept ./.
-              [ ".git" ".github" "output-paths" "secrets" ];
-            inherit nixpkgs inputs;
+            inherit nixpkgs inputs self-source;
             isNixOS = nixpkgs.isNixOS or false;
             neovim-master = neovim.defaultPackage.${nixpkgs.system};
           })
@@ -141,7 +139,12 @@
         checks = mkChecks self.packages.x86_64-linux;
         checks-mac = mkChecks self.packages.x86_64-darwin;
 
-        inherit (self.packages.x86_64-linux) self-source;
+        self-source = builtins.path {
+          path = ./.;
+          name = "source";
+          filter = path: type: !builtins.any (p: p == (baseNameOf path))
+            [ ".git" ".github" "output-paths" "secrets" ];
+        };
 
         switch-scripts = mapAttrs (_: config: config.pkgs.switch) homeConfigurations;
         output-derivations = { inherit self-source; } // removeAttrs switch-scripts [ "keith-mac" ];
