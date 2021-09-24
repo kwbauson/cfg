@@ -1,11 +1,11 @@
 {
     "evilhack": {
-        "sha256": "11j7pwfyc3w1fax80jlsjwi7hw31x64kdk2zvpwjvrqxn74v50wr",
+        "sha256": "0sncv31m8yzxipn41r3s29hs6rsay76y3y0q901bvnvlhgmwckpz",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.6.0.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.7.0.tar.gz",
         "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.6.0"
+        "version": "0.7.0"
     },
     "flake-compat": {
         "branch": "master",
@@ -76,12 +76,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "1xrp3asd9qv77sbqfdyhqxwsplxn9xn2cambjaycjdrc0k62rg98",
+        "sha256": "1sya38hcm1afmc6zn5dfzb7avrppq94c4vga9nl6mpl6rhpg42ry",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2021-07-16/OliveTin-2021-07-16-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2021-07-19/OliveTin-2021-07-19-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-<version>-linux-amd64.tar.gz",
-        "version": "2021-07-16"
+        "version": "2021-07-19"
     },
     "r2modman": {
         "sha256": "1dkyqhlwbgd4xdb4dc032i7cz11r471fhhsmkyk7n6isk21kxjpr",
