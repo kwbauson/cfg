@@ -192,7 +192,7 @@ case $cmd in
         niv update dmg-$pkg -v $version
       done
       for pkg in $(jq -r 'to_entries[] | select(.value.update_type == "github-release").key' nix/sources.json);do
-        latest_url=$(jq -r ".\"$pkg\" | .url" nix/sources.json | sed 's#/releases/download/.*#/releases/latest#')
+        latest_url=$(jq -r ".\"$pkg\" | .url" nix/sources.json | sed 's#/archive/.*\|/releases/.*#/releases/latest#')
         url=$(curl -LIs -o /dev/null -w '%{url_effective}' "$latest_url")
         version=$(echo "$url" | sed -En 's#.*/v?##p')
         niv update "$pkg" -v "$version"
