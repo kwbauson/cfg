@@ -237,7 +237,7 @@ case $cmd in
     echo IN_NIX_SHELL=impure
     echo PATH=\""$(realpath "$result")"/bin\":\$PATH
     for file in $envfiles;do
-      if [[ -e $envfiles ]];then
+      if [[ -e $file ]];then
         echo "$(< "$file")"
       fi
     done
