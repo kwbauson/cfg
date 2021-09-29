@@ -2,9 +2,19 @@
 # with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused jq
 set -e
 
-if [[ $PINNED != '1' && $1 != pin && -e nle.sh ]];then
-  PINNED=1 exec ./nle.sh "$@"
+rundir=$PWD
+if [[ $PINNED != '1' && $1 != pin ]];then
+  while [[ $PWD != / ]];do
+    if [[ -e nle.sh ]];then
+      nle_sh=$PWD/nle.sh
+      cd "$rundir"
+      PINNED=1 exec "$nle_sh" "$@"
+    else
+      cd ..
+    fi
+  done
 fi
+cd "$rundir"
 
 args=$@
 [[ $1 = -d ]] && shift && cd "$1" && shift
@@ -89,7 +99,7 @@ cachedir=$cachebase/$(hashcontent | md5sum | awk '{ print $1 }')
 result=$cachedir/result
 sourcelink=$cachedir/source
 
-envfiles='.env .env.development .development.env'
+envfiles='.env .env.development .development.env .env.local .local.env'
 
 case $cmd in
   build)
@@ -209,7 +219,7 @@ case $cmd in
     echo "$paths" > output-paths
     ;;
   run)
-    eval "$("$0" export)"
+    eval "$("$0" env)"
     cmd=$1 && shift
     exe=$("$0" result)/bin/$cmd
     if [[ ! -e $exe ]];then
@@ -219,37 +229,32 @@ case $cmd in
     exec "$exe" "$@"
     ;;
   env)
-    grep -vFf <(env) <(
-      eval "$(direnv stdlib | grep -v 'log_status "loading $rcfile"')"
-      if [[ -e .envrc ]];then
-        source_env .
-      else
-        eval "$("$0" direnv)"
+    if ! "$0" activate 1>&2;then
+      echo exit 1
+      exit 1
+    fi
+    echo set -o allexport
+    echo IN_NIX_SHELL=impure
+    echo PATH=\""$(realpath "$result")"/bin\":\$PATH
+    for file in $envfiles;do
+      if [[ -e $file ]];then
+        echo "$(< "$file")"
       fi
-      env | grep -v -e '^_=' -e '^DIRENV_IN_ENVRC=' -e '^DIRENV_WATCHES=' | sed "s#$PATH_added:##"
-    )
-    ;;
-  dump)
-    direnv dump bash
-    ;;
-  export)
-    "$0" env | sed 's/^/export /'
+    done
+    if [[ $DIRENV_IN_ENVRC != 1 && -e .envrc ]];then
+      grep -v '^eval.*nle.*direnv' .envrc || true
+    fi
+    echo set +o allexport
     ;;
   direnv)
     echo '[[ -z $IN_NIX_SHELL ]] && source_up || true'
-    echo "NOCACHE=$NOCACHE $0 activate 1>&2 || exit 1"
-    echo 'PATH_add "$('"$0"' result)/bin"'
-    echo export IN_NIX_SHELL=impure
-    echo export PATH
+    echo "$("$0" env)"
     for path in "${buildfiles[@]}";do
       if [[ -d $path ]];then
         echo watch_dir "$path"
       elif [[ -f $path ]];then
         echo watch_file "$path"
       fi
-    done
-    for file in $envfiles;do
-      [[ -e $file ]] && printf 'dotenv %s\n' "$file"
     done
     ;;
   uncache)
