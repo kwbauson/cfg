@@ -229,13 +229,17 @@ case $cmd in
     exec "$exe" "$@"
     ;;
   env)
-    if ! "$0" activate 1>&2;then
-      echo exit 1
-      exit 1
+    if [[ $1 != --skip-activate ]];then
+      if ! "$0" activate 1>&2;then
+        echo exit 1
+        exit 1
+      fi
     fi
     echo set -o allexport
     echo IN_NIX_SHELL=impure
-    echo PATH=\""$(realpath "$result")"/bin\":\$PATH
+    if [[ $1 != --skip-activate ]];then
+      echo PATH=\""$(realpath "$result")"/bin\":\$PATH
+    fi
     for file in $envfiles;do
       if [[ -e $file ]];then
         echo "$(< "$file")"
