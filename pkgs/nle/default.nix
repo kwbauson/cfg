@@ -49,4 +49,4 @@ let
     passthru = { inherit build scripts; };
   };
 in
-latestWrapper name pkg // { inherit scripts; }
+latestWrapper pname pkg // { inherit scripts; }
