@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
       - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: cachix watch-exec kwbauson nix -vL --show-trace build
+      - run: cachix watch-exec kwbauson -- nix -vL --show-trace build
