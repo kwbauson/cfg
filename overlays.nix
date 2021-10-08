@@ -14,10 +14,6 @@
     imported-nixpkgs = import' inputs.nixpkgs;
   })
   (self: super: with super; with mylib; {
-    latestWrapper = name: pkg: wrapBins pkg ''
-      ${pathAdd self.nix-wrapped}
-      exec nix --tarball-ttl 3600 shell github:kwbauson/cfg#${name}.unwrapped -c "$exe" "$@"
-    '';
     nix-index-list = stdenv.mkDerivation {
       name = "nix-index-list";
       src = fetchurl { inherit (sources.nix-index-database) url sha256; };

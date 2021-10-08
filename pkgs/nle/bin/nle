@@ -309,7 +309,7 @@ fi
 
 if [ ! -e "$result" ];then
   mkdir -p "$(dirname "$result")"
-  nix build --file "$url" nle.unwrapped --out-link "$result"
+  nix build --file "$url" nle --out-link "$result"
 fi
 
 exec "$result"/bin/nle "$@"

@@ -22,9 +22,8 @@ with builtins; with pkgs; with mylib; {
             nmap openssh p7zip patch perl pigz procps progress pv ranger
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
             which xdg_utils xxd xz zip bitwarden-cli libqalculate youtube-dl
-            speedtest-cli tldr nix-top nixos-install-tools
+            speedtest-cli tldr nix-top nixos-install-tools better-comma
             ;
-          better-comma = better-comma.unwrapped;
         };
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
@@ -44,10 +43,9 @@ with builtins; with pkgs; with mylib; {
             bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
             crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
-            git-ignore git-fuzzy black terraform-ls cachix
+            git-ignore git-fuzzy black terraform-ls cachix nle
             ;
           inherit (nodePackages) npm-check-updates prettier;
-          nle = nle.unwrapped;
         };
         inherit nr switch-to-configuration;
         inherit nle-cfg;

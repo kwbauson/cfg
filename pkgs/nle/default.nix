@@ -44,9 +44,8 @@ let
   };
   conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
   passthru = rec { inherit build scripts; };
-  pkg = override (build { path = ./.; }) {
-    name = "nle";
-    passthru = { inherit build scripts; };
-  };
 in
-latestWrapper pname pkg // { inherit scripts; }
+override (build { path = ./.; }) {
+  name = "nle";
+  passthru = { inherit build scripts; };
+}

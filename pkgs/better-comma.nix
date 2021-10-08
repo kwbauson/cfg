@@ -1,4 +1,4 @@
-scope: with scope; latestWrapper pname (stdenv.mkDerivation {
+scope: with scope; stdenv.mkDerivation {
   inherit pname version;
   script = ''
     #!/usr/bin/env bash
@@ -77,4 +77,4 @@ scope: with scope; latestWrapper pname (stdenv.mkDerivation {
     installShellCompletion --bash --name better-comma $completionPath
     installShellCompletion --bash --name , $completionPath
   '';
-})
+}
