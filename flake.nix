@@ -126,6 +126,8 @@
             slapper
             waterfox
             r2modman
+            better-comma
+            nle
             (nle.build {
               path = writeTextDir "requirements.txt" ''
                 black
