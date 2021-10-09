@@ -20,50 +20,50 @@
     firewall.allowedTCPPorts = [ 80 443 ];
   };
 
-  services = with config; with networking; {
-    hercules-ci-agent.enable = true;
-    hercules-ci-agent.checkNix = false;
-    hercules-ci-agent.settings.concurrentTasks = 12;
-    openssh = {
-      enable = true;
-      passwordAuthentication = false;
-      permitRootLogin = "no";
-      forwardX11 = true;
-    };
-    nginx = {
-      enable = true;
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
-      virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
-        ${fqdn} = {
-          basicAuthFile = "/etc/nixos/authfile";
-          locations."/".proxyPass = "http://localhost:1337";
-        };
-        "files.${fqdn}".locations."/" = {
-          root = "/srv/files";
-          extraConfig = "autoindex on;";
-        };
-        "netdata.${fqdn}".locations."/".proxyPass = "http://localhost:19999";
-      };
-    };
-    jitsi-meet = {
-      enable = true;
-      hostName = "jitsi.${fqdn}";
-      config.enableNoisyMicDetection = false;
-      config.p2p.enabled = true;
-      interfaceConfig = {
-        SHOW_JITSI_WATERMARK = false;
-        SHOW_WATERMARK_FOR_GUESTS = false;
-        # MOBILE_APP_PROMO = false;
-      };
-    };
-    jitsi-videobridge.openFirewall = true;
-    netdata.enable = true;
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+    forwardX11 = true;
   };
-
-  systemd.services.hercules-ci-agent.path = with pkgs; [ bzip2 xz ];
+  services.nginx = with config.networking; {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
+      ${fqdn} = {
+        basicAuthFile = "/etc/nixos/authfile";
+        locations."/".proxyPass = "http://localhost:1337";
+      };
+      "files.${fqdn}".locations."/" = {
+        root = "/srv/files";
+        extraConfig = "autoindex on;";
+      };
+      "netdata.${fqdn}".locations."/".proxyPass = "http://localhost:19999";
+    };
+  };
+  services.jitsi-meet = with config.networking; {
+    enable = true;
+    hostName = "jitsi.${fqdn}";
+    config.enableNoisyMicDetection = false;
+    config.p2p.enabled = true;
+    interfaceConfig = {
+      SHOW_JITSI_WATERMARK = false;
+      SHOW_WATERMARK_FOR_GUESTS = false;
+      # MOBILE_APP_PROMO = false;
+    };
+  };
+  services.jitsi-videobridge.openFirewall = true;
+  services.netdata.enable = true;
+  services.github-runner = {
+    enable = true;
+    extraLabels = [ "nix" ];
+    extraPackages = with pkgs; [ cachix ];
+    tokenFile = "/etc/nixos/github-runner-token";
+    url = "https://github.com/kwbauson/cfg";
+  };
 
   systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
