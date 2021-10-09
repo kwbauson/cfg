@@ -8,7 +8,7 @@ jobs:
       - run: nix -vL --show-trace build
       - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: cachix push kwbauson result
-  checks-mac:
+  macos-checks:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2.3.4
@@ -20,4 +20,4 @@ jobs:
         with:
           name: kwbauson
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix -vL --show-trace build .#checks-mac
+      - run: nix -vL --show-trace build .#checks
