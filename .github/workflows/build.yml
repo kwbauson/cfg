@@ -1,13 +1,13 @@
 name: Build
 on: { workflow_dispatch, push: { branches: [main] }, pull_request }
 jobs:
-  build:
-    runs-on: [self-hosted, nix]
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - run: nix -vL --show-trace build
-      - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: cachix push kwbauson result
+  # build:
+  #   runs-on: [self-hosted, nix]
+  #   steps:
+  #     - uses: actions/checkout@v2.3.4
+  #     - run: nix -vL --show-trace build
+  #     - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
+  #     - run: cachix push kwbauson result
   checks-mac:
     runs-on: macos-latest
     steps:
@@ -16,4 +16,8 @@ jobs:
         with:
           nix_version: 2.4pre20210908_3c56f62
           nix_conf: experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v10
+        with:
+          name: kwbauson
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: nix -vL --show-trace build .#checks-mac

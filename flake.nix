@@ -121,20 +121,20 @@
         mkChecks = pkgs: with pkgs; buildEnv {
           name = "checks";
           paths = flatten [
-            saml2aws
-            mysql57
-            slapper
-            waterfox
-            r2modman
+            # saml2aws
+            # mysql57
+            # slapper
+            # waterfox
+            # r2modman
             better-comma
-            nle
-            (nle.build {
-              path = writeTextDir "requirements.txt" ''
-                black
-                bpython
-                mypy
-              '';
-            })
+            # nle
+            # (nle.build {
+            #   path = writeTextDir "requirements.txt" ''
+            #     black
+            #     bpython
+            #     mypy
+            #   '';
+            # })
           ];
         };
 
