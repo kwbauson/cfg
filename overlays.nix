@@ -173,4 +173,22 @@
       }
     ) ./pkgs
   )
+  (final: prev: with prev; with mylib; {
+    checks = linkFarmFromDrvs "checks" (flatten [
+      slapper
+      better-comma
+      nle
+      (nle.build {
+        path = writeTextDir "requirements.txt" ''
+          black
+          bpython
+          mypy
+        '';
+      })
+      (optionals stdenv.isLinux [
+        waterfox
+        r2modman
+      ])
+    ]);
+  })
 ]

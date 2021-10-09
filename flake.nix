@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "nixpkgs/nixpkgs-21.05-darwin";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
@@ -118,29 +118,6 @@
           };
         };
 
-        mkChecks = pkgs: with pkgs; buildEnv {
-          name = "checks";
-          paths = flatten [
-            # saml2aws
-            # mysql57
-            # slapper
-            # waterfox
-            # r2modman
-            better-comma
-            # nle
-            # (nle.build {
-            #   path = writeTextDir "requirements.txt" ''
-            #     black
-            #     bpython
-            #     mypy
-            #   '';
-            # })
-          ];
-        };
-
-        checks = mkChecks self.packages.x86_64-linux;
-        checks-mac = mkChecks self.packages.x86_64-darwin;
-
         self-source = builtins.path {
           path = ./.;
           name = "source";
@@ -158,8 +135,8 @@
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues ci);
         defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
-          [ checks-mac keith-mac ];
+          [ self.packages.x86_64-darwin.checks keith-mac ];
 
-        ci = removeAttrs output-derivations [ "self-source" ] // { inherit checks; };
+        ci = removeAttrs output-derivations [ "self-source" ] // { inherit (self.packages.x86_64-linux) checks; };
       };
 }
