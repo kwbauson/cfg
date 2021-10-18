@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: [self-hosted, nix]
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: cachix watch-exec kwbauson -- nix -vL --show-trace build
   macos-checks:
