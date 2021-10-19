@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages direnv niv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused jq
+# with-packages direnv diffutils nix-wrapped nr coreutils findutils gawk curl gnugrep gnused jq
 set -e
 
 rundir=$PWD
@@ -196,16 +196,16 @@ case $cmd in
     if [[ -e nix/sources.nix && -e nix/sources.json ]];then
       tmpfile=$(mktemp)
       cp nix/sources.json $tmpfile
-      niv update
+      nr niv update
       for pkg in $(jq -r 'to_entries[] | select(.value.update_type == "nixpkgs-dmg").key' nix/sources.json | sed 's/^dmg-//');do
         version=$(nix eval --raw ".#$pkg.version")
-        niv update dmg-$pkg -v $version
+        nr niv update dmg-$pkg -v $version
       done
       for pkg in $(jq -r 'to_entries[] | select(.value.update_type == "github-release").key' nix/sources.json);do
         latest_url=$(jq -r ".\"$pkg\" | .url" nix/sources.json | sed 's#/archive/.*\|/releases/.*#/releases/latest#')
         url=$(curl -LIs -o /dev/null -w '%{url_effective}' "$latest_url")
         version=$(echo "$url" | sed -En 's#.*/v?##p')
-        niv update "$pkg" -v "$version"
+        nr niv update "$pkg" -v "$version"
       done
       diff -u nix/sources.json $tmpfile || true
       rm -f $tmpfile
