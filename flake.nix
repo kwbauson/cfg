@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
@@ -18,7 +19,7 @@
   };
 
   outputs =
-    { self, nixos-hardware, ... }@inputs:
+    { self, nixpkgs-unstable, nixos-hardware, ... }@inputs:
       with builtins; with inputs; with flake-utils.lib; with nixpkgs.lib;
       flake-utils.lib.eachSystem flake-utils.lib.allSystems
         (system: rec {
@@ -32,7 +33,7 @@
         lib = builtins // rec {
           mylib = import ./mylib.nix nixpkgs;
           pkgsForSystem =
-            { system, isNixOS, host }: import nixpkgs {
+            { system, isNixOS, host }: import (if hasSuffix "-linux" system then nixpkgs else nixpkgs-unstable) {
               inherit system;
               inherit (self) config;
               overlays = [
@@ -118,27 +119,6 @@
           };
         };
 
-        mkChecks = pkgs: with pkgs; buildEnv {
-          name = "checks";
-          paths = flatten [
-            saml2aws
-            mysql57
-            slapper
-            waterfox
-            r2modman
-            (nle.build {
-              path = writeTextDir "requirements.txt" ''
-                black
-                bpython
-                mypy
-              '';
-            })
-          ];
-        };
-
-        checks = mkChecks self.packages.x86_64-linux;
-        checks-mac = mkChecks self.packages.x86_64-darwin;
-
         self-source = builtins.path {
           path = ./.;
           name = "source";
@@ -156,8 +136,8 @@
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues ci);
         defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
-          [ checks-mac keith-mac ];
+          [ self.packages.x86_64-darwin.checks keith-mac ];
 
-        ci = removeAttrs output-derivations [ "self-source" ] // { inherit checks; };
+        ci = removeAttrs output-derivations [ "self-source" ] // { inherit (self.packages.x86_64-linux) checks; };
       };
 }
