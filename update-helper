@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-# FIXME
-# waterfox_url=$(curl https://www.waterfox.net/download/ | grep -o '[^"]*linux-x86_64[^"]*')
-# waterfox_version=$(echo "$waterfox_url" | sed -En '1s#.*/waterfox-(.*)\.en-US\.linux-x86_64.*#\1#p')
-# niv update waterfox -v "$waterfox_version"
+waterfox_version=$(curl https://cdn.waterfox.net/releases/linux64/installer/ |
+  sed -En 's#.*href="waterfox-(G.*)\.en-US.*".*#\1#p' |
+  sort -V |
+  tail -n1
+)
+niv update waterfox -v "$waterfox_version"
