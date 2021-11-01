@@ -16,6 +16,7 @@ bar {
   position top
   status_command statusline i3
 }
+title_window_icon yes
 
 # programs
 bindsym $mod+p         exec --no-startup-id termbar
