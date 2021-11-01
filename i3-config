@@ -123,7 +123,7 @@ bindsym $mod+Control+r restart
 bindsym $mod+Control+q exit
 
 # rules
-for_window [all] title_window_icon on
+for_window [class="^.*$"] title_window_icon on
 for_window [instance="^termbar$"] floating enable, border none, resize set 700 22, move position 0 0
 for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
