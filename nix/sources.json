@@ -84,12 +84,12 @@
         "version": "2021-07-19"
     },
     "r2modman": {
-        "sha256": "1y7ibjr6sljvp5cqj2fbvr0pmqzai11zq2fbcy4a5lxx9jbvihvx",
+        "sha256": "1wlpiy65zkr4jmjff9nkbwnnz5lgc49rri55ds6qzh59w10jicg6",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.21/r2modman-3.1.21.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.22/r2modman-3.1.22.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.21"
+        "version": "3.1.22"
     },
     "ranger_devicons": {
         "branch": "main",
@@ -128,10 +128,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1x367g5qzy5q10wnw42fzsmxhpli8nwa05maz2360qv9s27cbav9",
+        "sha256": "13kawm3b0v4pkmkglixycb7w5vpl2b3j7aq4qjxpm509h0bgxhz9",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.1.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.2.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.0.1"
+        "version": "G4.0.2"
     }
 }
