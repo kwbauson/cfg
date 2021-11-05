@@ -16,7 +16,7 @@ jobs:
           name: kwbauson
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: nix -vL run .#nle update
-      - uses: peter-evans/create-pull-request@v3.10.1
+      - uses: peter-evans/create-pull-request@v3.11.0
         id: cpr
         with:
           delete-branch: true
