@@ -384,7 +384,12 @@ with builtins; with pkgs; with mylib; {
         fp = scriptAlias ''
           set -e
           git fetch
-          ${nr delta} <(git log origin/$(git branch-name)) <(git log) || true
+          loga=$(mktemp)
+          logb=$(mktemp)
+          git log origin/$(git branch-name) > "$loga"
+          git log > "$logb"
+          ${nr delta} "$loga" "$logb" || true
+          rm "$loga" "$logb"
           read -n1 -p "Continue? [y/n] " continue
           echo
           [[ $continue = y ]] && git put --force-with-lease
