@@ -43,7 +43,7 @@ with builtins; with pkgs; with mylib; {
             bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
             crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
-            git-ignore git-fuzzy black terraform-ls cachix nle
+            git-ignore git-fuzzy black terraform-ls cachix nle concurrently
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };
@@ -661,6 +661,16 @@ with builtins; with pkgs; with mylib; {
         extraConfig = readFile ./i3-config;
       };
     };
+  };
+
+  systemd.user.services.sync-clipboard-to-primary = {
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service.ExecStart = ''${writeBash "sync-clipboard-to-primary" ''
+      ${pathAdd [clipnotify xsel]}
+      while clipnotify -s clipboard;do
+        xsel -b | xsel
+      done
+    ''}'';
   };
 }
 

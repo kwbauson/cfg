@@ -1,4 +1,16 @@
 {
+    "clipnotify": {
+        "branch": "master",
+        "description": "Notify on new X clipboard events",
+        "homepage": null,
+        "owner": "andreblanke",
+        "repo": "clipnotify",
+        "rev": "2aec101d4e87ca0d0d540b4d22ec991c8dbf001a",
+        "sha256": "05s7182rgyli2rqyj76v3j256x6h87jx3pfh9mnfkfpg88mbikzs",
+        "type": "tarball",
+        "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "evilhack": {
         "sha256": "0sncv31m8yzxipn41r3s29hs6rsay76y3y0q901bvnvlhgmwckpz",
         "type": "tarball",
