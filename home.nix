@@ -662,16 +662,4 @@ with builtins; with pkgs; with mylib; {
       };
     };
   };
-
-  systemd.user.services.sync-clipboard-to-primary = {
-    Install.WantedBy = [ "graphical-session.target" ];
-    Service.ExecStart = ''${writeBash "sync-clipboard-to-primary" ''
-      ${pathAdd [clipnotify xsel]}
-      while clipnotify -s clipboard;do
-        xsel -b | xsel
-      done
-    ''}'';
-  };
 }
-
-
