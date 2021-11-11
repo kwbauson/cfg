@@ -14,7 +14,6 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
-  nix.package = pkgs.nix-wrapped;
   nix.nixPath = [ ];
   nix.extraOptions = self.nixConf;
   # nix.distributedBuilds = true;

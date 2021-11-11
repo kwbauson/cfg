@@ -4,7 +4,7 @@
     isNixOS = prev.isNixOS or false;
   })
   (self: super: with super; with mylib; {
-    nix-wrapped = let nix = nixUnstable; in
+    nix-wrapped =
       if isNixOS then nix else
       wrapBins nix ''
         mkdir -p ~/.local/share/nix
@@ -50,9 +50,6 @@
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
-    nix-prefetch-git = nix-prefetch-git.override { nix = nix-wrapped; };
-    bundix = bundix.override { nix = nix-wrapped; };
-    nix-index = nix-index.override { nix = nix-wrapped; };
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
       config = cfg.config // { allowUnsupportedSystem = true; };
