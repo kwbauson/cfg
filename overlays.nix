@@ -4,6 +4,18 @@
     isNixOS = prev.isNixOS or false;
   })
   (self: super: with super; with mylib; {
+    nix-index = super.nix-index.overrideAttrs (
+      _: {
+        version = "0.1.2-patch";
+        src = fetchFromGitHub { inherit (sources.nix-index) owner repo rev sha256; };
+        cargoSha256 = lib.fakeSha256;
+
+        # CONFIGURE_OPTS = "--build aarch64-apple-darwin20";
+        # CARGO_BUILD_TARGET = "aarch64-apple-darwin20";
+      }
+    );
+  })
+  (self: super: with super; with mylib; {
     nix-wrapped =
       if isNixOS then nix else
       wrapBins nix ''
@@ -27,7 +39,7 @@
         base-list + extra-set-list;
       passAsFile = "extra";
       dontUnpack = true;
-      buildInputs = [ nix-index ];
+      buildInputs = [ self.nix-index ];
       installPhase = ''
         mkdir db
         cp $src db/files
