@@ -69,8 +69,8 @@
     },
     "nix-index": {
         "branch": "master",
-        "description": null,
-        "homepage": null,
+        "description": "Quickly locate nix packages with specific files",
+        "homepage": "",
         "owner": "bennofs",
         "repo": "nix-index",
         "rev": "69f458004a95a609108b4c72da95b6c83d239a42",

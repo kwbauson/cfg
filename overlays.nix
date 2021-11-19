@@ -4,18 +4,6 @@
     isNixOS = prev.isNixOS or false;
   })
   (self: super: with super; with mylib; {
-    nix-index = super.nix-index.overrideAttrs (
-      _: {
-        version = "0.1.2-patch";
-        src = fetchFromGitHub { inherit (sources.nix-index) owner repo rev sha256; };
-        cargoSha256 = lib.fakeSha256;
-
-        # CONFIGURE_OPTS = "--build aarch64-apple-darwin20";
-        # CARGO_BUILD_TARGET = "aarch64-apple-darwin20";
-      }
-    );
-  })
-  (self: super: with super; with mylib; {
     nix-wrapped =
       if isNixOS then nix else
       wrapBins nix ''
@@ -26,6 +14,14 @@
     imported-nixpkgs = import' inputs.nixpkgs;
   })
   (self: super: with super; with mylib; {
+    nix-index-unwrapped = nix-index-unwrapped.overrideAttrs (drv: rec {
+      version = "unstable";
+      src = sources.nix-index;
+      cargoDeps = drv.cargoDeps.overrideAttrs (_: {
+        inherit src;
+        outputHash = "jb4qXicu5x/knBIy1yvij7FW7phK6F8Jv/hJOulkDls=";
+      });
+    });
     nix-index-list = stdenv.mkDerivation {
       name = "nix-index-list";
       src = fetchurl { inherit (sources.nix-index-database) url sha256; };
