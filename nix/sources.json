@@ -67,6 +67,18 @@
         "url": "https://github.com/neoclide/jsonc.vim/archive/63ffa5199a0e64d5ce0515256407f32dfbd67fc3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-index": {
+        "branch": "master",
+        "description": "Quickly locate nix packages with specific files",
+        "homepage": "",
+        "owner": "bennofs",
+        "repo": "nix-index",
+        "rev": "69f458004a95a609108b4c72da95b6c83d239a42",
+        "sha256": "0291h8q8kj33d360k4hcxyip2nx7f7x7981ai62p71kfvlqmjk4h",
+        "type": "tarball",
+        "url": "https://github.com/bennofs/nix-index/archive/69f458004a95a609108b4c72da95b6c83d239a42.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix-index-database": {
         "sha256": "07npizjhbbl3q3p28d4cfimjkx2syfxv1iilnh2xan9gq8931mrq",
         "type": "file",
