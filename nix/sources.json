@@ -100,12 +100,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "09yv0fc55yz1zv4ps62916sswck62nyq051jlc2hr7jrl21yqzv9",
+        "sha256": "1ckfqk19flg31b4ys2xaxg8mvv258zpl6h0cdbwmh3r3x35lna40",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2021-11-17-2/OliveTin-2021-11-17-2-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2021-11-19/OliveTin-2021-11-19-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-<version>-linux-amd64.tar.gz",
-        "version": "2021-11-17-2"
+        "version": "2021-11-19"
     },
     "r2modman": {
         "sha256": "1h72vvl4j6ahnrqqkkxswpwk77b2sb00hvbs4cy4dy9xy5xph6ng",
