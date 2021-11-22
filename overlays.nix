@@ -23,7 +23,7 @@
             src = sources.nix-index;
             cargoDeps = drv.cargoDeps.overrideAttrs (_: {
               inherit src;
-              outputHash = "jb4qXicu5x/knBIy1yvij7FW7phK6F8Jv/hJOulkDls=";
+              outputHash = "kwA7yNIdpfOq0k6G7T6BnQfox61Cof7IqWs/SKQ7PEI=";
             });
           })
       else nix-index-unwrapped;
