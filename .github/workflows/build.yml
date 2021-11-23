@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2.4.0
-      - uses: nixbuild/nix-quick-install-action@v8
+      - uses: nixbuild/nix-quick-install-action@v9
         with:
           nix_conf: experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v10
