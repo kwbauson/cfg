@@ -20,7 +20,12 @@
         nix-index-unwrapped.overrideAttrs
           (drv: rec {
             version = "unstable";
-            src = sources.nix-index;
+            src = fetchFromGitHub {
+              owner = "bennofs";
+              repo = "nix-index";
+              rev = "e5db4a232ce598c86c1f01735c03d7a8c49318ca";
+              sha256 = "09m1qqvzn3jcwc0kxd153yc05hbja0k96anw347hwkns30g6h1ps";
+            };
             cargoDeps = drv.cargoDeps.overrideAttrs (_: {
               inherit src;
               outputHash = "kwA7yNIdpfOq0k6G7T6BnQfox61Cof7IqWs/SKQ7PEI=";

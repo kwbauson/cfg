@@ -62,7 +62,6 @@ with builtins; with pkgs; with mylib; {
       };
 
   home = {
-    stateVersion = "20.09";
     inherit username homeDirectory;
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
