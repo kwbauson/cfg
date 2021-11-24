@@ -73,10 +73,10 @@
         "homepage": "",
         "owner": "bennofs",
         "repo": "nix-index",
-        "rev": "e5db4a232ce598c86c1f01735c03d7a8c49318ca",
-        "sha256": "09m1qqvzn3jcwc0kxd153yc05hbja0k96anw347hwkns30g6h1ps",
+        "rev": "2b0773a7bd1252714285c0bcf591747db47e157e",
+        "sha256": "10gj8hm4c1338kcq5avi8ipr7ywjijxx68n1x0220qarcz8fizvq",
         "type": "tarball",
-        "url": "https://github.com/bennofs/nix-index/archive/e5db4a232ce598c86c1f01735c03d7a8c49318ca.tar.gz",
+        "url": "https://github.com/bennofs/nix-index/archive/2b0773a7bd1252714285c0bcf591747db47e157e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
