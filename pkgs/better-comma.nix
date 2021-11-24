@@ -8,7 +8,7 @@ scope: with scope; stdenv.mkDerivation {
     [[ $1 = -d ]] && desc=1 && shift
     cmd=$1
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
-      echo usage: , COMMAND ARGS
+      echo usage: , [-p package] COMMAND [ARGS]
       exit
     fi
     shift
@@ -39,7 +39,7 @@ scope: with scope; stdenv.mkDerivation {
         if [[ -z $packages ]];then
           exec nr "$cmd" "$@"
         else
-          exec nr -c "$cmd" "$attr" "$@"
+          exec nr -p "$attr" "$cmd" "$@"
         fi
       fi
     fi
