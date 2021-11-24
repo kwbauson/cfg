@@ -14,7 +14,7 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
-  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
+  nix.nixPath = [ ];
   nix.extraOptions = self.nixConf;
   # nix.distributedBuilds = true;
   nix.buildMachines = [{
