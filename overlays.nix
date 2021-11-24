@@ -20,7 +20,7 @@
         nix-index-unwrapped.overrideAttrs
           (drv: rec {
             version = "unstable";
-            src = fetchFromGitHuib {
+            src = fetchFromGitHub {
               owner = "bennofs";
               repo = "nix-index";
               rev = "e5db4a232ce598c86c1f01735c03d7a8c49318ca";
