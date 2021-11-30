@@ -8,4 +8,4 @@ authors = []
 python = "^3.8"
 pur = "^5.4.2"
 emborg = "^1.28.0"
-git-remote-codecommit = "^1.15.1"
+git-remote-codecommit = "^1.16"
