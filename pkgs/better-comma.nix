@@ -2,10 +2,40 @@ scope: with scope; stdenv.mkDerivation {
   inherit pname version;
   script = ''
     #!/usr/bin/env bash
-    ${pathAdd [ gnused coreutils fzy nix-wrapped nr ]}
-    set -e
+    ${pathAdd [ gnused coreutils fzy nix-wrapped ]}
+    set -eo pipefail
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
+    overlays=()
+    while [[ $1 = --overlay ]];do
+      shift
+      overlays+=("$1")
+      shift
+    done
+    if [[ ''${#overlays[@]} -eq 0 ]];then
+      source=${self-source}
+    else
+      contents=
+      for file in "''${overlays[@]}";do
+        contents+=$(< "$file")
+      done
+      hash=($(echo "${self-source} $contents" | md5sum))
+      source=~/.cache/${pname}/$hash
+      if [[ ! -e $source ]];then
+        mkdir -p "$source"
+        cp -rT ${self-source} "$source"
+        mkdir -p "$source"/extra-overlays
+        for file in "''${overlays[@]}";do
+          cp "$file" "$source"/extra-overlays
+        done
+      fi
+    fi
+    if [[ $1 = -p ]];then
+      shift
+      pkg=$1 && shift
+      cmd=$1 && shift
+      exec nix shell "$source#$pkg" --command "$cmd" "$@"
+    fi
     cmd=$1
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
       echo usage: , [-p package] COMMAND [ARGS]
@@ -34,12 +64,12 @@ scope: with scope; stdenv.mkDerivation {
     mkdir -p ~/.local/share/nix
     if [[ -n $attr ]];then
       if [[ $desc = 1 ]];then
-        exec nix eval --impure --expr "with import ${self-source}; desc $attr"
+        exec nix eval --impure --expr "with import $source; desc $attr"
       else
         if [[ -z $packages ]];then
-          exec nr "$cmd" "$@"
+          exec nix shell "$source#$cmd" --command "$cmd" "$@"
         else
-          exec nr -p "$attr" "$cmd" "$@"
+          exec nix shell "$source#$attr" --command "$cmd" "$@"
         fi
       fi
     fi

@@ -32,6 +32,10 @@
         }) // rec {
         lib = builtins // rec {
           mylib = import ./mylib.nix nixpkgs;
+          extraOverlays =
+            if pathExists ./extra-overlays
+            then mapAttrsToList (file: _: import (./extra-overlays + "/${file}")) (readDir ./extra-overlays)
+            else [ ];
           pkgsForSystem =
             { system, isNixOS, host }: import (if hasSuffix "-linux" system then nixpkgs else nixpkgs-unstable) {
               inherit system;
@@ -41,7 +45,7 @@
                   inherit isNixOS;
                   builtAsHost = host;
                 })
-              ] ++ self.overlays;
+              ] ++ self.overlays ++ extraOverlays;
             };
           inherit (mylib) mapAttrValues import';
           nixosConfiguration = host: module: buildSystem {
