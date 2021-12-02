@@ -4,14 +4,14 @@ scope: with scope; stdenv.mkDerivation {
     #!/usr/bin/env bash
     ${pathAdd [ gnused coreutils fzy nix-wrapped ]}
     set -eo pipefail
-    [[ $1 = -u ]] && uncache=1 && shift
-    [[ $1 = -d ]] && desc=1 && shift
     overlays=()
     while [[ $1 = --overlay ]];do
       shift
       overlays+=("$1")
       shift
     done
+    [[ $1 = -u ]] && uncache=1 && shift
+    [[ $1 = -d ]] && desc=1 && shift
     if [[ ''${#overlays[@]} -eq 0 ]];then
       source=${self-source}
     else
