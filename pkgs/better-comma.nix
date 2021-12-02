@@ -38,7 +38,7 @@ scope: with scope; stdenv.mkDerivation {
     fi
     cmd=$1
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
-      echo usage: , [-p package] COMMAND [ARGS]
+      echo usage: , [--overlay FILE ...] [-p package] COMMAND [ARGS]
       exit
     fi
     shift
