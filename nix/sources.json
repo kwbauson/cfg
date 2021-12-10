@@ -121,10 +121,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "11941619b853e9608a41028ac8ebde2e6ca7d934",
-        "sha256": "1sfmm5j2hg84j6g82mzxlh03sri8yphj2979wr0zgn62mr38w8zd",
+        "rev": "feb2d7a90fe8aabd7ee3965d4bd67ebedceca817",
+        "sha256": "051b16ag4h2z8xix60l9mqs34dkid90812z1i8ansscgk4xdplm5",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/11941619b853e9608a41028ac8ebde2e6ca7d934.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/feb2d7a90fe8aabd7ee3965d4bd67ebedceca817.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
@@ -152,10 +152,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1szlach2l07z5lwq85d2pkzw9fj2b8wcms4bing1jnlr323zcryy",
+        "sha256": "0mxa2aad7jzj0m2nss9zab52mw3z476c7ih93xy16vsczfabnbav",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.3.1.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.4.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.0.3.1"
+        "version": "G4.0.4"
     }
 }
