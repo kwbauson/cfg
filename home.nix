@@ -310,7 +310,12 @@ with builtins; with pkgs; with mylib; {
       iso14755 = false;
     };
     git = with {
-      scriptAlias = text: "! ${writeBash "git-alias-script" text}";
+      gs = text:
+        let script = writeBash "git-script" ''
+          set -eo pipefail
+          cd -- ''${GIT_PREFIX:-.}
+          ${text}
+        ''; in "! ${script}";
       tmpGitIndex = ''
         export GIT_INDEX_FILE=$(mktemp)
         index=$(git rev-parse --show-toplevel)/.git/index
@@ -321,66 +326,63 @@ with builtins; with pkgs; with mylib; {
       enable = true;
       package = gitFull;
       aliases = {
-        v = "! nvim '+ Git | only'";
+        v = gs "nvim '+ Git | only'";
         a = "add -A";
-        br = scriptAlias ''
-          set -eo pipefail
+        br = gs ''
           esc=$'\e'
           reset=$esc[0m
           red=$esc[31m
           yellow=$esc[33m
           green=$esc[32m
-          git -c color.ui=always branch -vv | sed -E \
+          git -c color.ui=always branch -vv "$@" | sed -E \
             -e "s/: (gone)]/: $red\1$reset]/" \
             -e "s/[:,] (ahead [0-9]*)([],])/: $green\1$reset\2/g" \
             -e "s/[:,] (behind [0-9]*)([],])/: $yellow\1$reset\2/g"
           git --no-pager stash list
         '';
-        brf = "! git f --quiet && git br";
-        default = "! git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
+        brf = gs "git f --quiet && git br";
+        default = gs "git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
         branch-name = "rev-parse --abbrev-ref HEAD";
-        gone = ''! git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
-        rmg = scriptAlias ''
+        gone = gs ''git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
+        rmg = gs ''
           gone=$(git gone)
           echo About to remove branches: $gone
           read -n1 -p "Continue? [y/n] " continue
           echo
           [[ $continue = y ]] && git branch -D $gone
         '';
-        ca = "! git a && git ci";
-        cap = "! git ca && git p";
-        ci = scriptAlias ''
+        ca = gs ''git a && git ci "$@"'';
+        cap = gs ''git ca "$@" && git p'';
+        ci = gs ''
           if [[ -t 0 && -t 1 ]];then
-            git commit -v
+            git commit -v "$@"
           else
             echo unable to run "'git ci'" without a tty
             exit 1
           fi
         '';
         co = "checkout";
-        cod = "! git co $(git default)";
-        df = scriptAlias ''
+        cod = gs ''git co $(git default) "$@"'';
+        df = gs ''
           ${tmpGitIndex}
           git add -A
           git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
         '';
-        dfo = scriptAlias ''git f && git df "origin/''${1:-$(git branch-name)}"'';
+        dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
         f = "fetch --all";
-        g = "! git f && git mo";
-        gr = "! git pull origin $(git branch-name) --rebase --autostash";
-        gd = "! git fetch origin $(git default):$(git default)";
-        gmp = "! git gm && git mp";
-        md = "! git merge $(git default)";
-        mo = "! git merge origin/$(git branch-name) --ff-only";
-        mp = "! git mm && git ";
-        hidden = "! git ls-files -v | grep '^S' | cut -c3-";
-        hide = ''! git add -N "$@" && git update-index --skip-worktree "$@"'';
+        g = gs "git f && git mo";
+        gr = gs "git pull origin $(git branch-name) --rebase --autostash";
+        gd = gs "git fetch origin $(git default):$(git default)";
+        md = gs "git merge $(git default)";
+        mo = gs "git merge origin/$(git branch-name) --ff-only";
+        hidden = gs "git ls-files -v | grep '^S' | cut -c3-";
+        hide = gs ''git add -N "$@" && git update-index --skip-worktree "$@"'';
         unhide = "update-index --no-skip-worktree";
         l = "log";
-        lg = "! git lfo && git mo";
-        lfo = ''! git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
+        lg = gs "git lfo && git mo";
+        lfo = gs ''git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
         p = "put";
-        fp = scriptAlias ''
+        fp = gs ''
           set -e
           git fetch
           loga=$(mktemp)
@@ -393,12 +395,12 @@ with builtins; with pkgs; with mylib; {
           echo
           [[ $continue = y ]] && git put --force-with-lease
         '';
-        put = "! git push --set-upstream origin $(git branch-name)";
-        ro = "! git reset --hard origin/$(git branch-name)";
-        ros = "! git stash && git ro && git stash pop";
-        rt = ''! git reset --hard ''${1:-HEAD} && git clean -d'';
-        s = "! git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
-        sf = "!git f --quiet && git s";
+        put = gs "git push --set-upstream origin $(git branch-name)";
+        ro = gs ''git reset --hard origin/$(git branch-name) "$@"'';
+        ros = gs "git stash && git ro && git stash pop";
+        rt = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
+        s = gs "git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
+        sf = gs ''git f --quiet && git s "$@"'';
       };
       inherit userName userEmail;
       extraConfig = {
