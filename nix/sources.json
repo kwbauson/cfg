@@ -61,10 +61,10 @@
         "homepage": null,
         "owner": "neoclide",
         "repo": "jsonc.vim",
-        "rev": "63ffa5199a0e64d5ce0515256407f32dfbd67fc3",
-        "sha256": "047c2sc8q49axhi9416lzzpv5ykczc63dqd4xy56rfcfrvsi199j",
+        "rev": "b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6",
+        "sha256": "02bgqxi20lmq97s9nnsb1mmjp45fh5a9pbhbs6hl2zmb03spbvpi",
         "type": "tarball",
-        "url": "https://github.com/neoclide/jsonc.vim/archive/63ffa5199a0e64d5ce0515256407f32dfbd67fc3.tar.gz",
+        "url": "https://github.com/neoclide/jsonc.vim/archive/b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index": {
