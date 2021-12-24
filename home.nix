@@ -395,7 +395,7 @@ with builtins; with pkgs; with mylib; {
           echo
           [[ $continue = y ]] && git put --force-with-lease
         '';
-        put = gs "git push --set-upstream origin $(git branch-name)";
+        put = gs ''git push --set-upstream origin $(git branch-name) "$@"'';
         ro = gs ''git reset --hard origin/$(git branch-name) "$@"'';
         ros = gs "git stash && git ro && git stash pop";
         rt = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
