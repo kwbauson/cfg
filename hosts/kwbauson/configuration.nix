@@ -72,7 +72,7 @@
 
   security.acme = {
     acceptTerms = true;
-    email = "kwbauson@gmail.com";
+    defaults.email = "kwbauson@gmail.com";
   };
 
   virtualisation.docker.enable = true;
