@@ -36,6 +36,7 @@ with builtins; with pkgs; with mylib; {
           inherit
             ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
             signal-desktop discord zoom-us evilhack dejavu_fonts dejavu_fonts_nerd
+            zathura
             ;
         };
         development = {
@@ -44,6 +45,7 @@ with builtins; with pkgs; with mylib; {
             crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
             git-ignore git-fuzzy black terraform-ls cachix nle concurrently
+            arduino
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };
