@@ -10,7 +10,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rexml (3.2.5)
-    thor (1.1.0)
+    thor (1.2.1)
     xml-simple (1.1.9)
       rexml
 
