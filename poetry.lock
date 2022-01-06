@@ -19,7 +19,7 @@ python-dateutil = ">=2.7.0"
 
 [[package]]
 name = "botocore"
-version = "1.23.28"
+version = "1.23.29"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -78,7 +78,7 @@ python-versions = "*"
 
 [[package]]
 name = "emborg"
-version = "1.29.0"
+version = "1.30.0"
 description = "Borg front end."
 category = "main"
 optional = false
@@ -156,7 +156,7 @@ six = ">=1.5"
 
 [[package]]
 name = "quantiphy"
-version = "2.16.0"
+version = "2.17.0"
 description = "physical quantities (numbers with units)"
 category = "main"
 optional = false
@@ -164,7 +164,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "requests"
-version = "2.27.0"
+version = "2.27.1"
 description = "Python HTTP for Humans."
 category = "main"
 optional = false
@@ -216,7 +216,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f64d0e7d47c48f3acb4e2f0bdfbfcb283052298e4fffad1992076ee166861df2"
+content-hash = "23cb61176f05950e802177e88493065e6e4c8565dfbc89bac812ef4201146e62"
 
 [metadata.files]
 appdirs = [
@@ -228,8 +228,8 @@ arrow = [
     {file = "arrow-1.2.1.tar.gz", hash = "sha256:c2dde3c382d9f7e6922ce636bf0b318a7a853df40ecb383b29192e6c5cc82840"},
 ]
 botocore = [
-    {file = "botocore-1.23.28-py3-none-any.whl", hash = "sha256:d04b0839de63929d7326e14a4680e7c46e7d32b2870c1031088bae5ba2850896"},
-    {file = "botocore-1.23.28.tar.gz", hash = "sha256:3a6e589486d1a269ea9c970da73f88e82fdfa6cb2ab4bb2a4b3010610adbde46"},
+    {file = "botocore-1.23.29-py3-none-any.whl", hash = "sha256:d6706a8e72df56c5b25291cf5175b790bf1c71c740bdf8cb57f258b97ed39e2c"},
+    {file = "botocore-1.23.29.tar.gz", hash = "sha256:6ba08e8738b38b1c3cb11cd4d4ee1b4aa557511271071bdd7a9c41bc0b212eeb"},
 ]
 braceexpand = [
     {file = "braceexpand-0.1.7-py2.py3-none-any.whl", hash = "sha256:91332d53de7828103dcae5773fb43bc34950b0c8160e35e0f44c4427a3b85014"},
@@ -251,8 +251,8 @@ docopt = [
     {file = "docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"},
 ]
 emborg = [
-    {file = "emborg-1.29.0-py3-none-any.whl", hash = "sha256:6809c67b6363e341a97c3f465a92fce915eae69494ea4415b1894bbe1e93cbcf"},
-    {file = "emborg-1.29.0.tar.gz", hash = "sha256:149549e43bb34be3810531c9a6d2bcd3a23d3a73cd76310d20dd1ef96b0e96e4"},
+    {file = "emborg-1.30.0-py3-none-any.whl", hash = "sha256:1b696cb90b2811b44c86e4728af6d8d1fa00f933a47fa231d58cca8532dc0dcc"},
+    {file = "emborg-1.30.0.tar.gz", hash = "sha256:e05958795b70c518a2d22c1bf32931b29900347067518cdd5015ebb1e8fcf5d7"},
 ]
 git-remote-codecommit = [
     {file = "git-remote-codecommit-1.16.tar.gz", hash = "sha256:f8e10cc5c177486022e4e7c2c08e671ed35ad63f3a2da1309a1f8eae7b6e69da"},
@@ -278,12 +278,12 @@ python-dateutil = [
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
 quantiphy = [
-    {file = "quantiphy-2.16.0-py3-none-any.whl", hash = "sha256:f4fc60e2c9a395039b8bea170dd0ec5cacbe009343b45523c7316870dd4a260a"},
-    {file = "quantiphy-2.16.0.tar.gz", hash = "sha256:28d33ab69bb688b15fcff7dfbd1c95148ba996b5fe960f24fee12290e12f6c0a"},
+    {file = "quantiphy-2.17.0-py3-none-any.whl", hash = "sha256:beb4cb01d31d5abadd70e0a5a0dfcd4f4945400a14febd31e1757e3c61bfbdf7"},
+    {file = "quantiphy-2.17.0.tar.gz", hash = "sha256:9660efae946ab5374c809cb8a771f6092602cc32f0d36c2726de153a0817ff42"},
 ]
 requests = [
-    {file = "requests-2.27.0-py2.py3-none-any.whl", hash = "sha256:f71a09d7feba4a6b64ffd8e9d9bc60f9bf7d7e19fd0e04362acb1cfc2e3d98df"},
-    {file = "requests-2.27.0.tar.gz", hash = "sha256:8e5643905bf20a308e25e4c1dd379117c09000bf8a82ebccc462cfb1b34a16b5"},
+    {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
+    {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
 shlib = [
     {file = "shlib-1.4.0-py3-none-any.whl", hash = "sha256:d724f3c2dc2c2b8b0cc46b15e47d5067137d49dec4743a4943d5ff4d7302b234"},
