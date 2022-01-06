@@ -14,7 +14,8 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
-  nix.nixPath = [ ];
+  environment.etc."nixpkgs-path".source = pkgs.path;
+  nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.extraOptions = self.nixConf;
   # nix.distributedBuilds = true;
   nix.buildMachines = [{
