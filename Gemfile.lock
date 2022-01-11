@@ -6,7 +6,7 @@ GEM
       builder
       thor
       xml-simple
-    ffi (1.15.4)
+    ffi (1.15.5)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rexml (3.2.5)
