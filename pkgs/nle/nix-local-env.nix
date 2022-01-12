@@ -56,19 +56,9 @@ rec {
       (mapAttrs (x: _: wrapScriptWithPackages "bin/${x}" { }) (filterAttrs (n: v: !fileForPlatform "bin/${n}") (readDir (file "bin"))));
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
-    imported = import localfile;
-    result =
-      if isFunction imported
-      then imported (mylib // pkgs // { inherit source; })
-      else if imported ? nixpkgs && imported ? build then
-        let localPkgs = imported.nixpkgs.pkgs or (import
-          (builtins.fetchTarball {
-            url = "https://github.com/NixOS/nixpkgs/archive/${imported.nixpkgs.rev}.tar.gz";
-            inherit (imported.nixpkgs) sha256;
-          })
-          { config = import ../../config.nix; overlays = import ../../overlays.nix; });
-        in imported.build (import ../../mylib.nix localPkgs // localPkgs // { inherit source; })
-      else imported;
+    imported = scopedImport scope localfile;
+    scope = mylib // pkgs // { inherit source; };
+    result = if isFunction imported then imported scope else imported;
     out = if pathExists localfile then result else null;
   }.out;
   local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];

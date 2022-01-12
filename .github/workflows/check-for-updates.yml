@@ -1,5 +1,5 @@
 name: Check for updates
-on: { workflow_dispatch, schedule: [cron: '0 0 * * *'] }
+on: { workflow_dispatch, schedule: [cron: '0 7 * * *'] }
 jobs:
   check-for-updates:
     runs-on: ubuntu-latest
