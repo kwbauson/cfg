@@ -121,10 +121,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "feb2d7a90fe8aabd7ee3965d4bd67ebedceca817",
-        "sha256": "051b16ag4h2z8xix60l9mqs34dkid90812z1i8ansscgk4xdplm5",
+        "rev": "df583d66ed093849248c2cf1631bce15d01b30e1",
+        "sha256": "1xg2lhf5n7cj0qcxrlb9x29ysf5kg0hwskgg9hdmrqh3203n50jw",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/feb2d7a90fe8aabd7ee3965d4bd67ebedceca817.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/df583d66ed093849248c2cf1631bce15d01b30e1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
