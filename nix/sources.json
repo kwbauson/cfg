@@ -152,10 +152,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1v94mgk5yy15fvslla2mhsfzfv1nmmrk86bc51p446jbibl7dypp",
+        "sha256": "1b9sxgj8mzql9n0m75cxaiz3rh48gkvar587f7n7wxv5qw65a85p",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.5.1.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.6.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.0.5.1"
+        "version": "G4.0.6"
     }
 }
