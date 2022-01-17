@@ -93,10 +93,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "7417a391e729593b37bb5a75147e4aea7c0a3df9",
-        "sha256": "1g89nmgjwp6xl4wa05cgaybj27hvw15y0346qrn20nc4wx39d3g1",
+        "rev": "04c98232246316dadd499c50e80e9125b4d84ba6",
+        "sha256": "17mf3r34skc38mp0zssrn4xn4m4nwwm3xsa6bm3zrwcnm855sszi",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/7417a391e729593b37bb5a75147e4aea7c0a3df9.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/04c98232246316dadd499c50e80e9125b4d84ba6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
