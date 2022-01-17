@@ -62,7 +62,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-    dbus.packages = with pkgs; [ gnome3.dconf ];
+    dbus.packages = with pkgs; [ dconf ];
     localtime.enable = true;
     chrony.enable = true;
     tlp.enable = false;
