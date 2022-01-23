@@ -96,7 +96,7 @@
           max-jobs = auto
           keep-going = true
           builders-use-substitutes = true
-          extra-experimental-features = nix-command flakes
+          extra-experimental-features = nix-command flakes recursive-nix
           fallback = true
           keep-env-derivations = true
           keep-outputs = true
