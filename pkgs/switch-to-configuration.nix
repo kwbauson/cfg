@@ -3,13 +3,23 @@ let
   inherit (cfg) nixosConfigurations homeConfigurations;
   hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
-  makeNamedScript = name: text: (writeBashBin name
-    ''
+  makeNamedScript = name: text: stdenv.mkDerivation {
+    inherit name;
+    dontUnpack = true;
+    script = ''
+      #!${bash}/bin/bash
       set -e
       ${pathAdd [ nix-wrapped coreutils git nvd ] }
       ${text}
-    '').overrideAttrs
-    (_: { meta.mainProgram = name; });
+    '';
+    passAsFile = "script";
+    installPhase = ''
+      mkdir -p $out/bin
+      cp $scriptPath $out/bin/${name}
+      chmod +x $out/bin/${name}
+    '';
+    meta.mainProgram = name;
+  };
   makeScript = makeNamedScript "switch";
   scripts = eachHost
     (host: rec {
