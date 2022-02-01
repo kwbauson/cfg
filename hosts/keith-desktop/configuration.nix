@@ -18,4 +18,5 @@ with builtins;
   hardware.bluetooth.package = pkgs.bluezFull;
   environment.systemPackages = [ pkgs.xboxdrv ];
   users.users.keith.extraGroups = [ "dialout" ];
+  services.tailscale.enable = true;
 }
