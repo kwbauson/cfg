@@ -6,4 +6,4 @@ waterfox_version=$(curl https://cdn.waterfox.net/releases/linux64/installer/ |
   sort -V |
   tail -n1
 )
-niv update waterfox -v "$waterfox_version"
+nr niv update waterfox -v "$waterfox_version"
