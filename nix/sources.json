@@ -12,12 +12,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
-        "sha256": "0sncv31m8yzxipn41r3s29hs6rsay76y3y0q901bvnvlhgmwckpz",
+        "sha256": "03jkdxygf1gyhiphvr86sc7w5kr3l6hy3c4486zs3aqpqxmy5dh1",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.7.0.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.7.1.tar.gz",
         "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.7.0"
+        "version": "0.7.1"
     },
     "flake-compat": {
         "branch": "master",
