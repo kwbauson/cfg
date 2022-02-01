@@ -35,7 +35,7 @@ with builtins; with pkgs; with mylib; {
           };
           inherit
             ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
-            signal-desktop discord zoom-us evilhack dejavu_fonts dejavu_fonts_nerd
+            signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
             zathura
             ;
         };
