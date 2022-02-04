@@ -6,7 +6,7 @@ map <silent> <leader>s :set invspell spell?<cr>
 map <silent> <leader>w :set invwrap wrap?<cr>
 map <silent> <leader>n :set invnumber number?<cr>
 map <silent> <leader>N :set invrelativenumber relativenumber?<cr>
-map <silent> <leader>r :up<bar>vs<bar>term %:p<cr>i
+map <silent> <leader>r :up<bar>vs<bar>term %:p:S<cr>i
 map <silent> <leader>, :e ~/cfg/init.vim<cr>
 
 set mouse= title
