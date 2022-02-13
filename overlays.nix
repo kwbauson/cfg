@@ -62,7 +62,6 @@
     };
     steam-native = self.steam.override { nativeOnly = true; };
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
-    jitsi-meet = override jitsi-meet { src = ./jitsi-meet.tar.bz2; };
     rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
     nle-cfg = self.nle.build { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
