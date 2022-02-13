@@ -1,11 +1,18 @@
 scope: with scope;
 let
+  nodedir = runCommand "nodedir" { } ''
+    tar xvf ${nodejs.src}
+    mv node-* $out
+  '';
   yarnModules = yarn2nix-moretea.mkYarnModules {
     pname = "jitsi-meet-modules";
     inherit version;
     packageJSON = "${sources.jitsi-meet}/package.json";
     yarnLock = ./yarn.lock;
     yarnNix = ./yarn.nix;
+    preBuild = "export npm_config_nodedir=${nodedir}";
+    yarnFlags = remove "--ignore-scripts" yarn2nix-moretea.defaultYarnFlags;
+    pkgConfig.default.buildInputs = [ nodePackages.node-pre-gyp python3 pkg-config pango ];
   };
   jitsi-meet-source-package = stdenv.mkDerivation {
     name = "jitsi-meet.tar.bz2";
