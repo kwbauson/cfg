@@ -304,7 +304,6 @@ with builtins; with pkgs; with mylib; {
     };
     urxvt = {
       enable = !isDarwin && isGraphical;
-      package = rxvt-unicode-unwrapped-emoji;
       extraConfig.reverseVideo = true;
       extraConfig.termName = "xterm-256color";
       fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];
