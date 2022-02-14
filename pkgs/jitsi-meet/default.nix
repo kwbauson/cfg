@@ -10,9 +10,12 @@ let
     packageJSON = "${sources.jitsi-meet}/package.json";
     yarnLock = ./yarn.lock;
     yarnNix = ./yarn.nix;
-    preBuild = "export npm_config_nodedir=${nodedir}";
+    preBuild = ''
+      export npm_config_nodedir=${nodedir}
+      export RN_WEBRTC_SKIP_DOWNLOAD=1
+    '';
     yarnFlags = remove "--ignore-scripts" yarn2nix-moretea.defaultYarnFlags;
-    pkgConfig.default.buildInputs = [ nodePackages.node-pre-gyp python3 pkg-config pango ];
+    pkgConfig.default.buildInputs = [ nodePackages.node-pre-gyp python3 pkg-config pango nodePackages.patch-package ];
   };
   jitsi-meet-source-package = stdenv.mkDerivation {
     name = "jitsi-meet.tar.bz2";
