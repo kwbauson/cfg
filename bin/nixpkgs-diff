@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# with-packages git
-set -e
-cd "$(nixpkgs-repo-cache)"
-exec git diff $(nixpkgs-rev)..origin/$(nixpkgs-branch)

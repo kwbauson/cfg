@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-# with-packages git jq
-set -e
-cd ~/cfg
-git fetch -a
-nixpkgs_node=$(git show origin/main:flake.lock | jq -r .nodes.root.inputs.nixpkgs)
-ref=${1:-$(git show origin/main:flake.lock | jq -r .nodes.$nixpkgs_node.locked.rev)}
-cd "$(nixpkgs-repo-cache)"
-exec git log $(nixpkgs-rev)..$ref --reverse --no-merges
