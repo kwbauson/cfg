@@ -63,13 +63,18 @@
     enable = true;
     hostName = "jitsi.${fqdn}";
     config.enableNoisyMicDetection = false;
-    config.p2p.enabled = true;
+    config.p2p.enabled = false;
+    config.disableTileEnlargement = true;
     interfaceConfig = {
       SHOW_JITSI_WATERMARK = false;
       SHOW_WATERMARK_FOR_GUESTS = false;
       # MOBILE_APP_PROMO = false;
     };
   };
+  services.prosody.package = (pkgs.mylib.importNixpkgs {
+    rev = "f85152d72d3bc4676cd4486b578afef8d9fd7f28";
+    sha256 = "cXetzRvPyMHynNmJYAhcMm2cfV6l6Ey+dSAhSnAKdOE=";
+  }).prosody;
   services.jitsi-videobridge.openFirewall = true;
   services.netdata.enable = true;
   services.github-runner = {
