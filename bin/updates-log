@@ -11,7 +11,7 @@ new_flake_lock=$(git show "$upstream":flake.lock)
 current_sources_json=$(git show HEAD:nix/sources.json)
 new_sources_json=$(git show "$upstream":nix/sources.json)
 
-cache=~/.cache/inputs-repo-cache
+cache=~/.cache/updates-log
 mkdir -p "$cache"
 cd "$cache"
 if [[ ! -e .git ]];then
