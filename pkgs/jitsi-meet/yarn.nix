@@ -7234,11 +7234,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1353.0.0+f23372dd_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1357.0.0+61265e3b_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1353.0.0+f23372dd_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1353.0.0+f23372dd/lib-jitsi-meet.tgz";
-        sha1 = "ee53cf19fdad00006b76b49f27e2e2779d7a3b53";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1357.0.0+61265e3b_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1357.0.0+61265e3b/lib-jitsi-meet.tgz";
+        sha1 = "4bb56b0e1d7df574b268f3750a722b3271aba616";
       };
     }
     {
@@ -9354,11 +9354,11 @@
       };
     }
     {
-      name = "react_native_dialog___react_native_dialog_9.2.0.tgz";
+      name = "react_native_dialog___react_native_dialog_9.2.1.tgz";
       path = fetchurl {
-        name = "react_native_dialog___react_native_dialog_9.2.0.tgz";
-        url  = "https://registry.yarnpkg.com/react-native-dialog/-/react-native-dialog-9.2.0.tgz";
-        sha512 = "VXdfo+bAi9ER7+w4aKOWypw8K97C2orvnfnxX4Lup/U8iQB/635V00hgfHEE3s0XScQHftXxm34Fa4iIIjojQA==";
+        name = "react_native_dialog___react_native_dialog_9.2.1.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-dialog/-/react-native-dialog-9.2.1.tgz";
+        sha512 = "UNnGFTpH0cX16cJZLFq9/TAZH1+B2vzJrQL1mUaSqZjV+sFTpUB1WvghJZxPwi52v587kJpfKN7oPfWaXAu+YQ==";
       };
     }
     {
