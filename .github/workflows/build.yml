@@ -5,8 +5,8 @@ jobs:
     runs-on: [self-hosted, nix]
     steps:
       - uses: actions/checkout@v2.4.0
+      - run: nix -vL --show-trace build
       - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: cachix watch-exec kwbauson -- nix -vL --show-trace build
       - run: cachix push kwbauson result
   macos-checks:
     runs-on: macos-latest
