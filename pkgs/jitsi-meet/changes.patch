@@ -1,21 +1,21 @@
 diff --git a/css/filmstrip/_tile_view.scss b/css/filmstrip/_tile_view.scss
-index ed5c689f9..c57df83de 100644
+index ecc651d26..e80ec137b 100644
 --- a/css/filmstrip/_tile_view.scss
 +++ b/css/filmstrip/_tile_view.scss
-@@ -114,7 +114,7 @@
-             /**
-             * Max-width corresponding to the ASPECT_RATIO_BREAKPOINT from features/filmstrip/constants.
-             */
--            @media only screen and (max-width: 500px) {
-+            @media only screen and (max-width: 100px) {
-                 video {
-                     object-fit: cover;
-                 }
+@@ -108,7 +108,7 @@
+      * Max-width corresponding to the ASPECT_RATIO_BREAKPOINT from features/filmstrip/constants,
+      * from which we subtract the chat size.
+      */
+-    @media only screen and (max-width: calc(500px + #{$sidebarWidth})) {
++    @media only screen and (max-width: calc(100px + #{$sidebarWidth})) {
+         video {
+             object-fit: cover;
+         }
 diff --git a/react/features/filmstrip/constants.js b/react/features/filmstrip/constants.js
-index 596e4167f..2341b6aed 100644
+index 66c9ec65c..5355432ce 100644
 --- a/react/features/filmstrip/constants.js
 +++ b/react/features/filmstrip/constants.js
-@@ -30,7 +30,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
+@@ -31,7 +31,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
  /**
   * Breakpoint past which a single column view is enforced in tile view.
   */
@@ -24,7 +24,7 @@ index 596e4167f..2341b6aed 100644
  
  /**
   * Breakpoint past which a two column view is enforced in tile view.
-@@ -43,7 +43,7 @@ export const TWO_COLUMN_BREAKPOINT = 1000;
+@@ -44,7 +44,7 @@ export const TWO_COLUMN_BREAKPOINT = 1000;
   * single column view.
   * If this is to be modified, please also change the related media query from the tile_view scss file.
   */
@@ -32,12 +32,12 @@ index 596e4167f..2341b6aed 100644
 +export const ASPECT_RATIO_BREAKPOINT = 100;
  
  /**
-  * The default number of columns for tile view.
+  * Minimum height of tile for small screens.
 diff --git a/react/features/shared-video/components/web/AbstractVideoManager.js b/react/features/shared-video/components/web/AbstractVideoManager.js
-index a56ec2986..91355ff5c 100644
+index 43f7886b2..e16bf37f8 100644
 --- a/react/features/shared-video/components/web/AbstractVideoManager.js
 +++ b/react/features/shared-video/components/web/AbstractVideoManager.js
-@@ -325,6 +325,7 @@ class AbstractVideoManager extends PureComponent<Props> {
+@@ -326,6 +326,7 @@ class AbstractVideoManager extends PureComponent<Props> {
       * @returns {void}
       */
      smartAudioMute() {
