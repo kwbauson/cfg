@@ -73,10 +73,6 @@
       # MOBILE_APP_PROMO = false;
     };
   };
-  services.prosody.package = (pkgs.mylib.importNixpkgs {
-    rev = "f85152d72d3bc4676cd4486b578afef8d9fd7f28";
-    sha256 = "cXetzRvPyMHynNmJYAhcMm2cfV6l6Ey+dSAhSnAKdOE=";
-  }).prosody;
   services.jitsi-videobridge.openFirewall = true;
   services.netdata.enable = true;
   services.github-runner = {
