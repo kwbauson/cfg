@@ -120,12 +120,12 @@
         "version": "2022-01-06"
     },
     "r2modman": {
-        "sha256": "1kfwdgmjn0b5cg7m3bzh7df25myh8d6v3gnr0zk0gix7rxpnhrmi",
+        "sha256": "06byhwmg38vxpj10pv8hcisan51gvzvk5n4j9rs9xdlanxx1ci0i",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.25/r2modman-3.1.25.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.27/r2modman-3.1.27.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.25"
+        "version": "3.1.27"
     },
     "ranger_devicons": {
         "branch": "main",
