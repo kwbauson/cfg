@@ -6930,9 +6930,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1361.0.0+9e98e989/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1371.0.0+cb3b0db3/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1361.0.0+9e98e989/lib-jitsi-meet.tgz#90bbaf0b655c1cf074920bcf7952c0695ef85233"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1371.0.0+cb3b0db3/lib-jitsi-meet.tgz#c8845530d3c88b41821ebca24602613aede1ded7"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
@@ -9031,15 +9031,14 @@ react-native-watch-connectivity@1.0.4:
   dependencies:
     lodash.sortby "^4.7.0"
 
-react-native-webrtc@1.94.1:
-  version "1.94.1"
-  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.1.tgz#4d2d9e74240b494f7582b5f638bac3a8bfb86a7f"
-  integrity sha512-S+qU2i0PY2QfWzh8choBlVzUF6I6DVKhrUFbGrriuffieMu+/sR40pPTNCCFEXo4USNZAAM8osBgn6E/aZsJbg==
+react-native-webrtc@1.94.2:
+  version "1.94.2"
+  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.2.tgz#91ec5975d2fb923e620f4d339b55e892cf56e5e4"
+  integrity sha512-8wf7CDLYmrxxvta3XxZbmtNrxUblE70fDpoxjYKWfEa48Y4FnFw7MF61g8qYo+V0adoOUNc3j4fIgVnAMghJ9Q==
   dependencies:
     base64-js "1.5.1"
     event-target-shim "6.0.2"
     tar "6.1.11"
-    uuid "3.4.0"
 
 react-native-webview@11.15.1:
   version "11.15.1"
@@ -10706,11 +10705,6 @@ uuid@3.1.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
   integrity sha512-DIWtzUkw04M4k3bf1IcpS2tngXEL26YUD2M0tMDUpnUrz2hgzUBlD55a4FjdLGPvfHxS6uluGWvaVEqgBcVa+g==
 
-uuid@3.4.0, uuid@^3.1.0, uuid@^3.3.2:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
-  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
-
 uuid@8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.1.0.tgz#6f1536eb43249f473abc6bd58ff983da1ca30d8d"
@@ -10720,6 +10714,11 @@ uuid@8.3.2, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@^3.1.0, uuid@^3.3.2:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 v8-compile-cache@^2.0.3, v8-compile-cache@^2.2.0:
   version "2.3.0"
