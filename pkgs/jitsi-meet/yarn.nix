@@ -7234,11 +7234,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1361.0.0+9e98e989_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1371.0.0+cb3b0db3_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1361.0.0+9e98e989_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1361.0.0+9e98e989/lib-jitsi-meet.tgz";
-        sha1 = "90bbaf0b655c1cf074920bcf7952c0695ef85233";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1371.0.0+cb3b0db3_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1371.0.0+cb3b0db3/lib-jitsi-meet.tgz";
+        sha1 = "c8845530d3c88b41821ebca24602613aede1ded7";
       };
     }
     {
@@ -9522,11 +9522,11 @@
       };
     }
     {
-      name = "react_native_webrtc___react_native_webrtc_1.94.1.tgz";
+      name = "react_native_webrtc___react_native_webrtc_1.94.2.tgz";
       path = fetchurl {
-        name = "react_native_webrtc___react_native_webrtc_1.94.1.tgz";
-        url  = "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.1.tgz";
-        sha512 = "S+qU2i0PY2QfWzh8choBlVzUF6I6DVKhrUFbGrriuffieMu+/sR40pPTNCCFEXo4USNZAAM8osBgn6E/aZsJbg==";
+        name = "react_native_webrtc___react_native_webrtc_1.94.2.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.2.tgz";
+        sha512 = "8wf7CDLYmrxxvta3XxZbmtNrxUblE70fDpoxjYKWfEa48Y4FnFw7MF61g8qYo+V0adoOUNc3j4fIgVnAMghJ9Q==";
       };
     }
     {
@@ -11458,14 +11458,6 @@
       };
     }
     {
-      name = "uuid___uuid_3.4.0.tgz";
-      path = fetchurl {
-        name = "uuid___uuid_3.4.0.tgz";
-        url  = "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz";
-        sha512 = "HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==";
-      };
-    }
-    {
       name = "uuid___uuid_8.1.0.tgz";
       path = fetchurl {
         name = "uuid___uuid_8.1.0.tgz";
@@ -11479,6 +11471,14 @@
         name = "uuid___uuid_8.3.2.tgz";
         url  = "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz";
         sha512 = "+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==";
+      };
+    }
+    {
+      name = "uuid___uuid_3.4.0.tgz";
+      path = fetchurl {
+        name = "uuid___uuid_3.4.0.tgz";
+        url  = "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz";
+        sha512 = "HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==";
       };
     }
     {
