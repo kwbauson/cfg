@@ -239,6 +239,7 @@ case $cmd in
     echo IN_NIX_SHELL=impure
     if [[ $1 != --skip-activate ]];then
       echo PATH=\""$(realpath "$result")"/bin\":\$PATH
+      echo XDG_DATA_DIRS=\""$(realpath "$result")"/share\":\$XDG_DATA_DIRS
     fi
     for file in $envfiles;do
       if [[ -e $file ]];then

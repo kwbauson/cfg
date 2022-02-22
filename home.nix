@@ -168,7 +168,6 @@ with builtins; with pkgs; with mylib; {
 
         source ${complete-alias}/bin/complete_alias
         complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
-        complete -C aws_completer aws
 
         _completion_loader git
         ___git_complete g __git_main
