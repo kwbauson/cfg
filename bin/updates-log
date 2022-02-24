@@ -3,7 +3,7 @@
 set -eo pipefail
 inputs_repo=${1:-~/cfg}
 cd "$inputs_repo"
-upstream=origin/$(git rev-parse --abbrev-ref HEAD)
+upstream=${2:-origin/$(git rev-parse --abbrev-ref HEAD)}
 
 current_flake_lock=$(git show HEAD:flake.lock)
 new_flake_lock=$(git show "$upstream":flake.lock)
