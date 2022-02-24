@@ -72,7 +72,7 @@
               inherit system pkgs username homeDirectory;
               configuration = {
                 imports = [
-                  { _module.args = { inherit self pkgs username homeDirectory isNixOS isGraphical host; }; }
+                  ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
                   ./home.nix
                 ];
               };
