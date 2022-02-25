@@ -436,7 +436,7 @@ with builtins; with pkgs; with mylib; {
         scroll-method = 1;
         kb-row-tab = "";
         kb-row-select = "Tab";
-        monitor = -1;
+        monitor = "-1";
       };
     };
     vscode.enable = isGraphical;
