@@ -28,7 +28,7 @@ with builtins; with pkgs; with mylib; {
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
             inherit
-              dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term sxiv
+              dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term nsxiv
               xclip xdotool xsel xterm maim
               ;
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
@@ -57,7 +57,7 @@ with builtins; with pkgs; with mylib; {
         ${attrIf isDarwin "darwin"} = {
           inherit
             diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
-            strace sway sxiv usbutils breeze-icons dzen2 zoom-us maim
+            strace sway nsxiv usbutils breeze-icons dzen2 zoom-us maim
             acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl
             ;
         };
