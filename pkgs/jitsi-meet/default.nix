@@ -34,12 +34,12 @@ let
 in
 jitsi-meet.overrideAttrs (_: {
   src = jitsi-meet-source-package;
-  passthru.update-script = writeBashBin "update-jitsi" ''
+  passthru.updateScript = writeBashBin "update-jitsi" ''
     set -eo pipefail
     dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
     cd "$dir"
     cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
-    yarn import --ignore-scripts
+    yarn import
     ${yarn2nix}/bin/yarn2nix > yarn.nix
     cd -
     cp "$dir"/yarn.{lock,nix} pkgs/jitsi-meet

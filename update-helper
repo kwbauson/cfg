@@ -7,4 +7,4 @@ waterfox_version=$(curl https://cdn.waterfox.net/releases/linux64/installer/ |
   tail -n1
 )
 nr niv update waterfox -v "$waterfox_version"
-nix run .#jitsi-meet.update-script
+nix run .#jitsi-meet.updateScript
