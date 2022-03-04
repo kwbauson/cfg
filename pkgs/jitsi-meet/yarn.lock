@@ -289,12 +289,12 @@
     uuid "^3.1.0"
 
 "@atlaskit/popper@^5.0.0":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@atlaskit/popper/-/popper-5.2.2.tgz#19147db289e1c46b384a56e26c4e8291ca7329f1"
-  integrity sha512-gCP/hVAcIPk5VAQLB9Dm+rUSlUPD9MuA4See6sWo0LVzEq+g0GbKHI0iFeNVRwSTR4ImO2LanqHyWwcrPxqZuw==
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@atlaskit/popper/-/popper-5.0.4.tgz#d2900d5b2ff97ed527448179fc2b1361e0c3c279"
+  integrity sha512-HBZUi8me48JEdfVri95oAZ0dOOfxcJD6pRoV40HGpHvW8cVxxvGrwQILEzTYKjhmfgHxniagz9ry2sD1XlHPcg==
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@popperjs/core" "^2.9.1"
+    "@popperjs/core" "^2.4.2"
     react-popper "^2.2.3"
 
 "@atlaskit/portal@^4.0.0", "@atlaskit/portal@^4.1.0":
@@ -1952,10 +1952,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
-"@popperjs/core@^2.9.1":
-  version "2.11.2"
-  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
-  integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
+"@popperjs/core@^2.4.2":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.6.0.tgz#f022195afdfc942e088ee2101285a1d31c7d727f"
+  integrity sha512-cPqjjzuFWNK3BSKLm0abspP0sp/IGOli4p5I5fKFAzdS8fvjdOwDCfZqAaIiXd9lPkOWi3SUUfZof3hEb7J/uw==
 
 "@react-native-async-storage/async-storage@1.15.14":
   version "1.15.14"
