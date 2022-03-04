@@ -226,11 +226,11 @@
       };
     }
     {
-      name = "_atlaskit_popper___popper_5.2.2.tgz";
+      name = "_atlaskit_popper___popper_5.0.4.tgz";
       path = fetchurl {
-        name = "_atlaskit_popper___popper_5.2.2.tgz";
-        url  = "https://registry.yarnpkg.com/@atlaskit/popper/-/popper-5.2.2.tgz";
-        sha512 = "gCP/hVAcIPk5VAQLB9Dm+rUSlUPD9MuA4See6sWo0LVzEq+g0GbKHI0iFeNVRwSTR4ImO2LanqHyWwcrPxqZuw==";
+        name = "_atlaskit_popper___popper_5.0.4.tgz";
+        url  = "https://registry.yarnpkg.com/@atlaskit/popper/-/popper-5.0.4.tgz";
+        sha512 = "HBZUi8me48JEdfVri95oAZ0dOOfxcJD6pRoV40HGpHvW8cVxxvGrwQILEzTYKjhmfgHxniagz9ry2sD1XlHPcg==";
       };
     }
     {
@@ -1746,11 +1746,11 @@
       };
     }
     {
-      name = "_popperjs_core___core_2.11.2.tgz";
+      name = "_popperjs_core___core_2.6.0.tgz";
       path = fetchurl {
-        name = "_popperjs_core___core_2.11.2.tgz";
-        url  = "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz";
-        sha512 = "92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==";
+        name = "_popperjs_core___core_2.6.0.tgz";
+        url  = "https://registry.yarnpkg.com/@popperjs/core/-/core-2.6.0.tgz";
+        sha512 = "cPqjjzuFWNK3BSKLm0abspP0sp/IGOli4p5I5fKFAzdS8fvjdOwDCfZqAaIiXd9lPkOWi3SUUfZof3hEb7J/uw==";
       };
     }
     {
