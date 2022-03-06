@@ -20,7 +20,7 @@
     files = "nix";
   };
   npm = {
-    files = "package.json package-lock.json";
+    files = "package.json package-lock.json .enable-nle-npm";
     extraFiles = ".npmrc";
     notFiles = "yarn.lock";
     out = npmlock2nix.node_modules {

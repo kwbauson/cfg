@@ -83,7 +83,6 @@ with builtins; with pkgs; with mylib; {
       _JAVA_AWT_WM_NONREPARENTING = 1;
       npm_config_audit = "false";
       npm_config_cache = "$HOME/.cache/npm";
-      npm_config_package_lock_only = "true";
       npm_config_save_prefix = " ";
       NODE_REPL_HISTORY = "$XDG_DATA_HOME/node_repl_history";
       BUNDLE_USER_CONFIG = "$XDG_CONFIG_HOME/bundle";
