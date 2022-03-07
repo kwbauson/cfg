@@ -2202,6 +2202,46 @@
       };
     }
     {
+      name = "_tensorflow_models_blazeface___blazeface_0.0.7.tgz";
+      path = fetchurl {
+        name = "_tensorflow_models_blazeface___blazeface_0.0.7.tgz";
+        url  = "https://registry.yarnpkg.com/@tensorflow-models/blazeface/-/blazeface-0.0.7.tgz";
+        sha512 = "+hInPkvHJoubfiXlmNuF3SCucZvU6W1PMC25IV99NSAftJUpKvLokfF93iX8UkOFQCXkPFbnLKacGfGlbjgvMw==";
+      };
+    }
+    {
+      name = "_tensorflow_tfjs_backend_cpu___tfjs_backend_cpu_3.13.0.tgz";
+      path = fetchurl {
+        name = "_tensorflow_tfjs_backend_cpu___tfjs_backend_cpu_3.13.0.tgz";
+        url  = "https://registry.yarnpkg.com/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-3.13.0.tgz";
+        sha512 = "POmzUoAP8HooYYTZ72O1ZYkpVZB0f+8PeAkbTxIG0oahcJccj6a0Vovp1A6xWKfljUoPlJb3jWVC++S603ZL8w==";
+      };
+    }
+    {
+      name = "_tensorflow_tfjs_backend_wasm___tfjs_backend_wasm_3.13.0.tgz";
+      path = fetchurl {
+        name = "_tensorflow_tfjs_backend_wasm___tfjs_backend_wasm_3.13.0.tgz";
+        url  = "https://registry.yarnpkg.com/@tensorflow/tfjs-backend-wasm/-/tfjs-backend-wasm-3.13.0.tgz";
+        sha512 = "h5kNS4xvljoySzfcFwqbdFB6QZGR06IA9/Xq/PjBeZt18XEoJGqKHbOCYupmUlr5pxo/gnXzPhAC2h4SfZXPXw==";
+      };
+    }
+    {
+      name = "_tensorflow_tfjs_converter___tfjs_converter_3.13.0.tgz";
+      path = fetchurl {
+        name = "_tensorflow_tfjs_converter___tfjs_converter_3.13.0.tgz";
+        url  = "https://registry.yarnpkg.com/@tensorflow/tfjs-converter/-/tfjs-converter-3.13.0.tgz";
+        sha512 = "H2VpDTv9Ve0HBt7ttzz46DmnsPaiT0B+yJjVH3NebGZbgY9C8boBgJIsdyqfiqEWBS3WxF8h4rh58Hv5XXMgaQ==";
+      };
+    }
+    {
+      name = "_tensorflow_tfjs_core___tfjs_core_3.13.0.tgz";
+      path = fetchurl {
+        name = "_tensorflow_tfjs_core___tfjs_core_3.13.0.tgz";
+        url  = "https://registry.yarnpkg.com/@tensorflow/tfjs-core/-/tfjs-core-3.13.0.tgz";
+        sha512 = "18qBEVIB/4u2OUK9nA5P1XT3e3LyarElD1UKNSNDpnMLxhLTUVZaCR71eHJcpl9wP2Q0cciaTJCTpJdPv1tNDQ==";
+      };
+    }
+    {
       name = "_trysound_sax___sax_0.2.0.tgz";
       path = fetchurl {
         name = "_trysound_sax___sax_0.2.0.tgz";
@@ -2239,6 +2279,14 @@
         name = "_types_connect___connect_3.4.35.tgz";
         url  = "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.35.tgz";
         sha512 = "cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==";
+      };
+    }
+    {
+      name = "_types_emscripten___emscripten_0.0.34.tgz";
+      path = fetchurl {
+        name = "_types_emscripten___emscripten_0.0.34.tgz";
+        url  = "https://registry.yarnpkg.com/@types/emscripten/-/emscripten-0.0.34.tgz";
+        sha512 = "QSb9ojDincskc+uKMI0KXp8e1NALFINCrMlp8VGKGcTSxeEyRTTKyjWw75NYrCZHUsVEEEpr1tYHpbtaC++/sQ==";
       };
     }
     {
@@ -2346,6 +2394,14 @@
       };
     }
     {
+      name = "_types_long___long_4.0.1.tgz";
+      path = fetchurl {
+        name = "_types_long___long_4.0.1.tgz";
+        url  = "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz";
+        sha512 = "5tXH6Bx/kNGd3MgffdmP4dy2Z+G4eaXw0SE81Tq3BNadtnMR5/ySMzX4SLEzHJzSmPNn4HIdpQsBvXMUykr58w==";
+      };
+    }
+    {
       name = "_types_mime___mime_1.3.2.tgz";
       path = fetchurl {
         name = "_types_mime___mime_1.3.2.tgz";
@@ -2359,6 +2415,14 @@
         name = "_types_node___node_17.0.19.tgz";
         url  = "https://registry.yarnpkg.com/@types/node/-/node-17.0.19.tgz";
         sha512 = "PfeQhvcMR4cPFVuYfBN4ifG7p9c+Dlh3yUZR6k+5yQK7wX3gDgVxBly4/WkBRs9x4dmcy1TVl08SY67wwtEvmA==";
+      };
+    }
+    {
+      name = "_types_offscreencanvas___offscreencanvas_2019.3.0.tgz";
+      path = fetchurl {
+        name = "_types_offscreencanvas___offscreencanvas_2019.3.0.tgz";
+        url  = "https://registry.yarnpkg.com/@types/offscreencanvas/-/offscreencanvas-2019.3.0.tgz";
+        sha512 = "esIJx9bQg+QYF0ra8GnvfianIY8qWB0GBx54PK5Eps6m+xTj86KLavHv6qDhzKcu5UUOgNfJ2pWaIIV7TRUd9Q==";
       };
     }
     {
@@ -2434,6 +2498,14 @@
       };
     }
     {
+      name = "_types_seedrandom___seedrandom_2.4.27.tgz";
+      path = fetchurl {
+        name = "_types_seedrandom___seedrandom_2.4.27.tgz";
+        url  = "https://registry.yarnpkg.com/@types/seedrandom/-/seedrandom-2.4.27.tgz";
+        sha1 = "nbVjk33YaRX2kJK8QyWdL0hXjkE=";
+      };
+    }
+    {
       name = "_types_serve_index___serve_index_1.9.1.tgz";
       path = fetchurl {
         name = "_types_serve_index___serve_index_1.9.1.tgz";
@@ -2455,6 +2527,14 @@
         name = "_types_sockjs___sockjs_0.3.33.tgz";
         url  = "https://registry.yarnpkg.com/@types/sockjs/-/sockjs-0.3.33.tgz";
         sha512 = "f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==";
+      };
+    }
+    {
+      name = "_types_webgl_ext___webgl_ext_0.0.30.tgz";
+      path = fetchurl {
+        name = "_types_webgl_ext___webgl_ext_0.0.30.tgz";
+        url  = "https://registry.yarnpkg.com/@types/webgl-ext/-/webgl-ext-0.0.30.tgz";
+        sha512 = "LKVgNmBxN0BbljJrVUwkxwRYqzsAEPcZOe6S2T6ZaBDIrFp0qu4FNlpc5sM1tGbXUYFgdVQIoeLk1Y1UoblyEg==";
       };
     }
     {
@@ -7298,6 +7378,14 @@
       };
     }
     {
+      name = "long___long_4.0.0.tgz";
+      path = fetchurl {
+        name = "long___long_4.0.0.tgz";
+        url  = "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz";
+        sha512 = "XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==";
+      };
+    }
+    {
       name = "loose_envify___loose_envify_1.4.0.tgz";
       path = fetchurl {
         name = "loose_envify___loose_envify_1.4.0.tgz";
@@ -10015,6 +10103,14 @@
         name = "sdp___sdp_3.0.3.tgz";
         url  = "https://registry.yarnpkg.com/sdp/-/sdp-3.0.3.tgz";
         sha512 = "8EkfckS+XZQaPLyChu4ey7PghrdcraCVNpJe2Gfdi2ON1ylQ7OasuKX+b37R9slnRChwIAiQgt+oj8xXGD8x+A==";
+      };
+    }
+    {
+      name = "seedrandom___seedrandom_2.4.3.tgz";
+      path = fetchurl {
+        name = "seedrandom___seedrandom_2.4.3.tgz";
+        url  = "https://registry.yarnpkg.com/seedrandom/-/seedrandom-2.4.3.tgz";
+        sha1 = "JDhQTa0zkXMUv/GKxNeU8W1qrsw=";
       };
     }
     {
