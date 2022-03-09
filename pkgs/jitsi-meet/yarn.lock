@@ -8888,10 +8888,10 @@ react-native-watch-connectivity@1.0.4:
   dependencies:
     lodash.sortby "^4.7.0"
 
-react-native-webrtc@1.94.2:
-  version "1.94.2"
-  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.2.tgz#91ec5975d2fb923e620f4d339b55e892cf56e5e4"
-  integrity sha512-8wf7CDLYmrxxvta3XxZbmtNrxUblE70fDpoxjYKWfEa48Y4FnFw7MF61g8qYo+V0adoOUNc3j4fIgVnAMghJ9Q==
+react-native-webrtc@1.98.0:
+  version "1.98.0"
+  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.98.0.tgz#79328e2c1294617487fe256e4393384d2fd46b99"
+  integrity sha512-EAaTybkLg7WXU6m75vck+3FPZcjyzSTz8wjm0qjDXWJEVXFSe8cI5AAzqfMEzWOw49LQagy3RayGZejQozvkeg==
   dependencies:
     base64-js "1.5.1"
     event-target-shim "6.0.2"

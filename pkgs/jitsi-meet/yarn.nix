@@ -9482,11 +9482,11 @@
       };
     }
     {
-      name = "react_native_webrtc___react_native_webrtc_1.94.2.tgz";
+      name = "react_native_webrtc___react_native_webrtc_1.98.0.tgz";
       path = fetchurl {
-        name = "react_native_webrtc___react_native_webrtc_1.94.2.tgz";
-        url  = "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.2.tgz";
-        sha512 = "8wf7CDLYmrxxvta3XxZbmtNrxUblE70fDpoxjYKWfEa48Y4FnFw7MF61g8qYo+V0adoOUNc3j4fIgVnAMghJ9Q==";
+        name = "react_native_webrtc___react_native_webrtc_1.98.0.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.98.0.tgz";
+        sha512 = "EAaTybkLg7WXU6m75vck+3FPZcjyzSTz8wjm0qjDXWJEVXFSe8cI5AAzqfMEzWOw49LQagy3RayGZejQozvkeg==";
       };
     }
     {
