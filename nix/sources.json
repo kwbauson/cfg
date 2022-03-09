@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "9d8ae922a91c30a4ec5a0bd4f799e6c7fd5f4020",
-        "sha256": "0r12lz8kqs6m1ghk2s1aj1lldgr6irrlgy4zsl6cka3an48ysl2d",
+        "rev": "c60a51e671cbb8b7144d042cc843bf7cf310e703",
+        "sha256": "0c6r7wycivzkbg0vx3zj5z4r77xb1nxbqx59vwx3gn0jkbxrf4v2",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/9d8ae922a91c30a4ec5a0bd4f799e6c7fd5f4020.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/c60a51e671cbb8b7144d042cc843bf7cf310e703.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -105,10 +105,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "beca8b49d2dbe9739ca45786b5a5a0f65fcb5350",
-        "sha256": "12k3azdqw875czsliygdsf8vf56vn7d5sqlf1zc5pf7235ddfwp6",
+        "rev": "01f0aea23454b4aa423c0417b54796eb2553a840",
+        "sha256": "0vbjl2mmy6bp148xwzv542ds92ib9dmsmp9bv6h2piwpz33my370",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/beca8b49d2dbe9739ca45786b5a5a0f65fcb5350.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/01f0aea23454b4aa423c0417b54796eb2553a840.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
@@ -164,10 +164,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "1js2z1sbwp1qqw92q3dkmbkfkqd30zr1pss3j25khb0p787knj7p",
+        "sha256": "18jm5hrgv1j5i6gi8igmf01g5wpbl7c6x736w0yklnznamp0arlv",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.7.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.0.8.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.0.7"
+        "version": "G4.0.8"
     }
 }
