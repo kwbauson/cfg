@@ -113,8 +113,7 @@ rec {
           };
         };
       };
-      wrappedRuby = env.wrappedRuby.overrideAttrs (attrs: { buildCommand = "${attrs.buildCommand or ""}\n${postBuild}"; });
-      paths = [ env wrappedRuby ];
+      paths = [ env env.wrappedRuby ];
     }.paths;
 
   mach-nix-paths = with rec {
