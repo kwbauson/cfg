@@ -113,7 +113,7 @@ rec {
           };
         };
       };
-      wrappedRuby = override env.wrappedRuby.overrideAttrs { buildCommand._append = postBuild; };
+      wrappedRuby = env.wrappedRuby.overrideAttrs (attrs: { buildCommand = "${attrs.buildCommand or ""}\n${postBuild}"; });
       paths = [ env wrappedRuby ];
     }.paths;
 
