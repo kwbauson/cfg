@@ -218,9 +218,6 @@ with builtins; with pkgs; with mylib; {
           User keith
         Host gitlab.com
           UpdateHostKeys no
-        Host ec2-*.compute.amazonaws.com
-          IdentityFile ~/.ssh/ec2.pem
-          User root
       '';
     };
     tmux = {
