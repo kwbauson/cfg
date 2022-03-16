@@ -1,8 +1,8 @@
 diff --git a/css/filmstrip/_tile_view.scss b/css/filmstrip/_tile_view.scss
-index ecc651d26..e80ec137b 100644
+index 4bc64ef71..2176c8b89 100644
 --- a/css/filmstrip/_tile_view.scss
 +++ b/css/filmstrip/_tile_view.scss
-@@ -108,7 +108,7 @@
+@@ -110,7 +110,7 @@
       * Max-width corresponding to the ASPECT_RATIO_BREAKPOINT from features/filmstrip/constants,
       * from which we subtract the chat size.
       */
@@ -12,19 +12,10 @@ index ecc651d26..e80ec137b 100644
              object-fit: cover;
          }
 diff --git a/react/features/filmstrip/constants.js b/react/features/filmstrip/constants.js
-index 66c9ec65c..5355432ce 100644
+index dd4923d6d..cc1ad90ff 100644
 --- a/react/features/filmstrip/constants.js
 +++ b/react/features/filmstrip/constants.js
-@@ -31,7 +31,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
- /**
-  * Breakpoint past which a single column view is enforced in tile view.
-  */
--export const SINGLE_COLUMN_BREAKPOINT = 300;
-+export const SINGLE_COLUMN_BREAKPOINT = 800;
- 
- /**
-  * Breakpoint past which a two column view is enforced in tile view.
-@@ -44,7 +44,7 @@ export const TWO_COLUMN_BREAKPOINT = 1000;
+@@ -34,7 +34,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
   * single column view.
   * If this is to be modified, please also change the related media query from the tile_view scss file.
   */
