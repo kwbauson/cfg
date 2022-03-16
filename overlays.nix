@@ -30,6 +30,7 @@
               inherit src;
               outputHash = "VEcyN2yyFB3jHuapWEmljt8p43UIkqz6Ha7MCmeQ9Sw=";
             });
+            doCheck = false;
           })
       else nix-index-unwrapped;
     nix-index-list = stdenv.mkDerivation {
