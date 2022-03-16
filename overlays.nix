@@ -14,25 +14,6 @@
     imported-nixpkgs = import' inputs.nixpkgs;
   })
   (self: super: with super; with mylib; {
-    nix-index-unwrapped =
-      if isDarwin
-      then
-        nix-index-unwrapped.overrideAttrs
-          (drv: rec {
-            version = "unstable";
-            src = fetchFromGitHub {
-              owner = "bennofs";
-              repo = "nix-index";
-              rev = "e5db4a232ce598c86c1f01735c03d7a8c49318ca";
-              sha256 = "09m1qqvzn3jcwc0kxd153yc05hbja0k96anw347hwkns30g6h1ps";
-            };
-            cargoDeps = drv.cargoDeps.overrideAttrs (_: {
-              inherit src;
-              outputHash = "VEcyN2yyFB3jHuapWEmljt8p43UIkqz6Ha7MCmeQ9Sw=";
-            });
-            doCheck = false;
-          })
-      else nix-index-unwrapped;
     nix-index-list = stdenv.mkDerivation {
       name = "nix-index-list";
       src = fetchurl { inherit (sources.nix-index-database) url sha256; };
@@ -46,7 +27,7 @@
         base-list + extra-set-list;
       passAsFile = "extra";
       dontUnpack = true;
-      buildInputs = [ self.nix-index ];
+      buildInputs = [ nix-index ];
       installPhase = ''
         mkdir db
         cp $src db/files
