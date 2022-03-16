@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "14cad060cb8052b416a645720b7fbc0599728993",
-        "sha256": "10lpy4w7v9gxhw3li998dqcix2bgq5bh9d8bqxarc4m9m29lm7mf",
+        "rev": "fbe15aaa47250f5502f16096761c4d1afff6ec74",
+        "sha256": "0m15bm5lrk85nnj1wkmixh61pymnsd0j4rkr500qwl4n77b2blnv",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/14cad060cb8052b416a645720b7fbc0599728993.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/fbe15aaa47250f5502f16096761c4d1afff6ec74.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -105,10 +105,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "01f0aea23454b4aa423c0417b54796eb2553a840",
-        "sha256": "0vbjl2mmy6bp148xwzv542ds92ib9dmsmp9bv6h2piwpz33my370",
+        "rev": "30ae63fe48ae066df1c135801b66f50ee3d1a0f2",
+        "sha256": "02557dp64mh76z65ms4x4wwdhx2ys0q3bgbavj4vpkd3mvnlm0dd",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/01f0aea23454b4aa423c0417b54796eb2553a840.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/30ae63fe48ae066df1c135801b66f50ee3d1a0f2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {

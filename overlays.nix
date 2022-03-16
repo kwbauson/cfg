@@ -28,8 +28,9 @@
             };
             cargoDeps = drv.cargoDeps.overrideAttrs (_: {
               inherit src;
-              outputHash = "kwA7yNIdpfOq0k6G7T6BnQfox61Cof7IqWs/SKQ7PEI=";
+              outputHash = "VEcyN2yyFB3jHuapWEmljt8p43UIkqz6Ha7MCmeQ9Sw=";
             });
+            doCheck = false;
           })
       else nix-index-unwrapped;
     nix-index-list = stdenv.mkDerivation {
