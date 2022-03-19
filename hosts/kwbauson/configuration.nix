@@ -74,7 +74,7 @@
     };
   };
   services.jitsi-videobridge.openFirewall = true;
-  services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
+  # services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
   services.netdata.enable = true;
   services.github-runner = {
     enable = true;
