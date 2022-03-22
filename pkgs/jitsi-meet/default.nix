@@ -41,7 +41,6 @@ jitsi-meet.overrideAttrs (_: {
     cd "$dir"
     cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
     yarn import
-    yarn --ignore-scripts
     yarn2nix > yarn.nix
     cd -
     cp "$dir"/yarn.{lock,nix} pkgs/jitsi-meet
