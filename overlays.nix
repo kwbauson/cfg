@@ -58,7 +58,17 @@
       config = cfg.config // { contentAddressedByDefault = true; };
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
-    switch = self.switch-to-configuration.scripts.${builtAsHost}.noa;
+    switch = stdenv.mkDerivation {
+      name = "switch";
+      dontUnpack = true;
+      installPhase = ''
+        mkdir -p $out/bin
+        ln -s ${self.switch-to-configuration.scripts.${builtAsHost}.noa}/bin/switch $out/bin
+        ${optionalString isNixOS "ln -s ${cfg.nixosConfigurations.${builtAsHost}} $out/nixos-configuration"}
+        ln -s ${cfg.homeConfigurations.${builtAsHost}} $out/home-configuration
+      '';
+    };
+
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";
