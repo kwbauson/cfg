@@ -59,7 +59,7 @@
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
     switch = stdenv.mkDerivation {
-      name = "switch";
+      name = "${builtAsHost}-switch";
       dontUnpack = true;
       installPhase = ''
         mkdir -p $out/bin
@@ -67,6 +67,7 @@
         ${optionalString isNixOS "ln -s ${cfg.nixosConfigurations.${builtAsHost}} $out/nixos-configuration"}
         ln -s ${cfg.homeConfigurations.${builtAsHost}} $out/home-configuration
       '';
+      meta.mainProgram = "switch";
     };
 
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
