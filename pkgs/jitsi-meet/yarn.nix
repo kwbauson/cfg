@@ -7362,11 +7362,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1399.0.0+1a98d919_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1401.0.0+584a8680_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1399.0.0+1a98d919_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1399.0.0+1a98d919/lib-jitsi-meet.tgz";
-        sha1 = "2bdf5506f3b6c6040085c610f49b957baad4567c";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1401.0.0+584a8680_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1401.0.0+584a8680/lib-jitsi-meet.tgz";
+        sha1 = "bc42a7753ee9b8ad7a886e1670f912b0c788b3bc";
       };
     }
     {

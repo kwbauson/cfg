@@ -6950,9 +6950,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1399.0.0+1a98d919/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1401.0.0+584a8680/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1399.0.0+1a98d919/lib-jitsi-meet.tgz#2bdf5506f3b6c6040085c610f49b957baad4567c"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1401.0.0+584a8680/lib-jitsi-meet.tgz#bc42a7753ee9b8ad7a886e1670f912b0c788b3bc"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
