@@ -132,9 +132,9 @@
         output-derivations = { inherit self-source; } // removeAttrs switch-scripts [ "keith-mac" ];
         output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) output-derivations);
 
-        iso = with self.packages.x86_64-linux; (nixos {
-          imports = [ nixosModules.installer.cd-dvd.installation-cd-graphical-gnome ];
-        }).config.system.build.isoImage;
+        iso = with self.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
+          imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix" ];
+        })).config.system.build.isoImage;
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues ci);
         defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
