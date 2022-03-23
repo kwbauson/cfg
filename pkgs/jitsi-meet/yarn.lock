@@ -1898,9 +1898,9 @@
     sdp "^3.0.3"
     uuid "3.1.0"
 
-"@jitsi/sdp-interop@https://git@github.com/jitsi/sdp-interop#3707993863eb6c5b6d66c4a025e9dba193775bfb":
+"@jitsi/sdp-interop@https://git@github.com/jitsi/sdp-interop#dbd765c99e50a7f18bea75d0b6fb07dc58691076":
   version "1.0.5"
-  resolved "git+https://git@github.com/jitsi/sdp-interop.git#3707993863eb6c5b6d66c4a025e9dba193775bfb"
+  resolved "git+https://git@github.com/jitsi/sdp-interop.git#dbd765c99e50a7f18bea75d0b6fb07dc58691076"
   dependencies:
     lodash.clonedeep "4.5.0"
     sdp-transform "2.14.1"
@@ -6950,13 +6950,13 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1401.0.0+584a8680/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1402.0.0+66ff07ce/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1401.0.0+584a8680/lib-jitsi-meet.tgz#bc42a7753ee9b8ad7a886e1670f912b0c788b3bc"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1402.0.0+66ff07ce/lib-jitsi-meet.tgz#73647f049a4c6e850fc9113c1c5ffec4392c4ff2"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
-    "@jitsi/sdp-interop" "https://git@github.com/jitsi/sdp-interop#3707993863eb6c5b6d66c4a025e9dba193775bfb"
+    "@jitsi/sdp-interop" "https://git@github.com/jitsi/sdp-interop#dbd765c99e50a7f18bea75d0b6fb07dc58691076"
     "@jitsi/sdp-simulcast" "0.4.0"
     async "0.9.0"
     base64-js "1.3.1"
