@@ -25,10 +25,10 @@
         "homepage": null,
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "b7547d3eed6f32d06102ead8991ec52ab0a4f1a7",
-        "sha256": "09ln95rvvjxjsnmvzrvyc2ji2l5lz17s671z51f9z8cl4m23ndp2",
+        "rev": "64a525ee38886ab9028e6f61790de0832aa3ef03",
+        "sha256": "1ikgans7zqk7c6lj7p0bmd3lr84g6xn7jgm13dj518cg5mscl0r7",
         "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/b7547d3eed6f32d06102ead8991ec52ab0a4f1a7.tar.gz",
+        "url": "https://github.com/edolstra/flake-compat/archive/64a525ee38886ab9028e6f61790de0832aa3ef03.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "git-fuzzy": {
@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "f8628dfeef64d1adb95b9760d11e8abcbf88a51d",
-        "sha256": "0b2ps7kc7girk21fn25vdrf4zncxabv2w15kvg7v7iwb041cw6gw",
+        "rev": "7208e781b3eb5a0a44fb0cd11fe0e4026ac0d028",
+        "sha256": "13hmwllszsrn0v4cwr6fy5izalk3wzxmli2rg7wa7y161xjwckn2",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/f8628dfeef64d1adb95b9760d11e8abcbf88a51d.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/7208e781b3eb5a0a44fb0cd11fe0e4026ac0d028.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {

@@ -1695,8 +1695,8 @@
       let
         repo = fetchgit {
           url = "https://git@github.com/jitsi/sdp-interop.git";
-          rev = "dbd765c99e50a7f18bea75d0b6fb07dc58691076";
-          sha256 = "0xl8map1bbx4zfdx1vhf3wfqkmn8piq54f33bwix7m734a1zykvp";
+          rev = "3d49eb4aa26863a3f8d32d7581cdb4321244266b";
+          sha256 = "0a1j65aidhba7m5kafkvnm3b1frsqwbrajflssk6vyr66id561pg";
         };
       in
         runCommand "sdp-interop.git" { buildInputs = [gnutar]; } ''
@@ -7362,11 +7362,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1403.0.0+665ab174_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1406.0.0+dcd5f13b_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1403.0.0+665ab174_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1403.0.0+665ab174/lib-jitsi-meet.tgz";
-        sha1 = "976e70111360268445b762ca8842e1d20f67575a";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1406.0.0+dcd5f13b_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1406.0.0+dcd5f13b/lib-jitsi-meet.tgz";
+        sha1 = "19562ed1c27ea3a9dc5daee31b89012e7c406e0d";
       };
     }
     {
