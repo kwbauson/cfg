@@ -1586,6 +1586,14 @@
       };
     }
     {
+      name = "_giphy_react_native_sdk___react_native_sdk_1.7.0.tgz";
+      path = fetchurl {
+        name = "_giphy_react_native_sdk___react_native_sdk_1.7.0.tgz";
+        url  = "https://registry.yarnpkg.com/@giphy/react-native-sdk/-/react-native-sdk-1.7.0.tgz";
+        sha512 = "mCIqtPkDAstL+BDTbC1EQ4SiRkND3zd9uLKUeR4RkK2AhjRTUIheGzfxOZrdR014LVwcwKw5s9qpogoXr66mgw==";
+      };
+    }
+    {
       name = "_hapi_bourne___bourne_2.0.0.tgz";
       path = fetchurl {
         name = "_hapi_bourne___bourne_2.0.0.tgz";
@@ -8170,11 +8178,11 @@
       };
     }
     {
-      name = "node_forge___node_forge_1.2.1.tgz";
+      name = "node_forge___node_forge_1.3.0.tgz";
       path = fetchurl {
-        name = "node_forge___node_forge_1.2.1.tgz";
-        url  = "https://registry.yarnpkg.com/node-forge/-/node-forge-1.2.1.tgz";
-        sha512 = "Fcvtbb+zBcZXbTTVwqGA5W+MKBj56UjVRevvchv5XrcyXbmNdesfZL37nlcWOfpgHhgmxApw3tQbTr4CqNmX4w==";
+        name = "node_forge___node_forge_1.3.0.tgz";
+        url  = "https://registry.yarnpkg.com/node-forge/-/node-forge-1.3.0.tgz";
+        sha512 = "08ARB91bUi6zNKzVmaj3QO7cr397uiDT2nJ63cHjyNtCTWIgvS47j3eT0WfzUwS9+6Z5YshRaoasFkXCKrIYbA==";
       };
     }
     {
@@ -11439,6 +11447,14 @@
         name = "type_fest___type_fest_0.7.1.tgz";
         url  = "https://registry.yarnpkg.com/type-fest/-/type-fest-0.7.1.tgz";
         sha512 = "Ne2YiiGN8bmrmJJEuTWTLJR32nh/JdL1+PSicowtNb0WFpn59GK8/lfD61bVtzguz7b3PBt74nxpv/Pw5po5Rg==";
+      };
+    }
+    {
+      name = "type_fest___type_fest_2.12.1.tgz";
+      path = fetchurl {
+        name = "type_fest___type_fest_2.12.1.tgz";
+        url  = "https://registry.yarnpkg.com/type-fest/-/type-fest-2.12.1.tgz";
+        sha512 = "AiknQSEqKVGDDjtZqeKrUoTlcj7FKhupmnVUgz6KoOKtvMwRGE6hUNJ/nVear+h7fnUPO1q/htSkYKb1pyntkQ==";
       };
     }
     {
