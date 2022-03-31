@@ -1,14 +1,39 @@
 scope: with scope;
-let flakeNix = toFile "tasknix-base-flake" ''
-  {
-    inputs.nixpkgs.url = "path:${pkgs.path}";
-    outputs = { self, nixpkgs }: {
-      packages = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all (system:
-        builtins.mapAttrs nixpkgs.legacyPackages.''${system}.writers.writeBashBin (import ./tasks.nix)
-      );
-    };
-  }
-'';
+let
+  flakeNix = toFile "tasknix-flake-nix" ''
+    {
+      outputs = { self, nixpkgs }: {
+        packages = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all (system:
+          with nixpkgs.legacyPackages.''${system}; with builtins;
+          mapAttrs writers.writeBashBin (scopedImport pkgs ./tasks.nix)
+        );
+      };
+    }
+  '';
+  flakeLock = toFile "tasknix-flake-lock" ''
+    {
+      "nodes": {
+        "nixpkgs": {
+          "locked": {
+            "narHash": "${inputs.nixpkgs.narHash}",
+            "path": "${inputs.nixpkgs.outPath}",
+            "type": "path"
+          },
+          "original": {
+            "id": "nixpkgs",
+            "type": "indirect"
+          }
+        },
+        "root": {
+          "inputs": {
+            "nixpkgs": "nixpkgs"
+          }
+        }
+      },
+      "root": "root",
+      "version": 7
+    }
+  '';
 in
 stdenv.mkDerivation {
   inherit pname version;
@@ -26,12 +51,12 @@ stdenv.mkDerivation {
       echo missing task name
       exit 1
     fi
-    ${pathAdd [ nix coreutils ]}
-    cachedir=''${XDG_CACHE_HOME:-$HOME/.cache}/tasknix
-    [[ -d $cachedir ]] || mkdir -p "$cachedir"
-    echo "$(< ${flakeNix})" > "$cachedir"/flake.nix
-    echo "$(< tasks.nix)" > "$cachedir"/tasks.nix
-    exec nix --extra-experimental-features 'nix-command flakes' run "$cachedir"#"$task" -- "$@"
+    workdir=$(${coreutils}/bin/mktemp --tmpdir -d tasknix.XXXXX)
+    trap '${coreutils}/bin/rm -rf "$workdir"' EXIT
+    echo "$(< ${flakeNix})" > "$workdir"/flake.nix
+    echo "$(< ${flakeLock})" > "$workdir"/flake.lock
+    echo "$(< tasks.nix)" > "$workdir"/tasks.nix
+    ${nix}/bin/nix --extra-experimental-features 'nix-command flakes' run --no-update-lock-file "$workdir"#"$task" -- "$@"
   '';
   installPhase = ''
     mkdir -p $out/bin
