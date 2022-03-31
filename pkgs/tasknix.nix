@@ -37,6 +37,6 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     cp "$scriptPath" $out/bin/tasknix
     chmod +x $out/bin/tasknix
-    ln -s $out/bin/{tasknix,l}
+    ln -s $out/bin/{tasknix,t}
   '';
 }
