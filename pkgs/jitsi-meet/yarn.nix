@@ -3018,11 +3018,11 @@
       };
     }
     {
-      name = "ansi_regex___ansi_regex_4.1.0.tgz";
+      name = "ansi_regex___ansi_regex_4.1.1.tgz";
       path = fetchurl {
-        name = "ansi_regex___ansi_regex_4.1.0.tgz";
-        url  = "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.1.0.tgz";
-        sha512 = "1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==";
+        name = "ansi_regex___ansi_regex_4.1.1.tgz";
+        url  = "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-4.1.1.tgz";
+        sha512 = "ILlv4k/3f6vfQ4OoP2AGvirOktlQ98ZEL1k9FaQjxa3L1abBgbuTDAdPOpvbGncC0BTVQrl+OM8xZGK6tWXt7g==";
       };
     }
     {
@@ -7370,11 +7370,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1408.0.0+7e997fb7_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1409.0.0+88378583_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1408.0.0+7e997fb7_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1408.0.0+7e997fb7/lib-jitsi-meet.tgz";
-        sha1 = "bcd169b95c294dc3e3d2b5ec11ddc1171ee39c46";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1409.0.0+88378583_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1409.0.0+88378583/lib-jitsi-meet.tgz";
+        sha1 = "593b5e68750456faee8d1ef8700bd795fce44429";
       };
     }
     {
@@ -7962,11 +7962,11 @@
       };
     }
     {
-      name = "minimist___minimist_1.2.5.tgz";
+      name = "minimist___minimist_1.2.6.tgz";
       path = fetchurl {
-        name = "minimist___minimist_1.2.5.tgz";
-        url  = "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz";
-        sha512 = "FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==";
+        name = "minimist___minimist_1.2.6.tgz";
+        url  = "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz";
+        sha512 = "Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==";
       };
     }
     {
@@ -8794,11 +8794,11 @@
       };
     }
     {
-      name = "plist___plist_3.0.4.tgz";
+      name = "plist___plist_3.0.5.tgz";
       path = fetchurl {
-        name = "plist___plist_3.0.4.tgz";
-        url  = "https://registry.yarnpkg.com/plist/-/plist-3.0.4.tgz";
-        sha512 = "ksrr8y9+nXOxQB2osVNqrgvX/XQPOXaU4BQMKjYq8PvaY1U18mo+fKgBSwzK+luSyinOuPae956lSVcBwxlAMg==";
+        name = "plist___plist_3.0.5.tgz";
+        url  = "https://registry.yarnpkg.com/plist/-/plist-3.0.5.tgz";
+        sha512 = "83vX4eYdQp3vP9SxuYgEM/G/pJQqLUz/V/xzPrzruLs7fz7jxGQ1msZ/mg1nwZxUSuOp4sb+/bEIbRrbzZRxDA==";
       };
     }
     {
