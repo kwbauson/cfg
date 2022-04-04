@@ -2274,14 +2274,6 @@
       };
     }
     {
-      name = "_tensorflow_models_blazeface___blazeface_0.0.7.tgz";
-      path = fetchurl {
-        name = "_tensorflow_models_blazeface___blazeface_0.0.7.tgz";
-        url  = "https://registry.yarnpkg.com/@tensorflow-models/blazeface/-/blazeface-0.0.7.tgz";
-        sha512 = "+hInPkvHJoubfiXlmNuF3SCucZvU6W1PMC25IV99NSAftJUpKvLokfF93iX8UkOFQCXkPFbnLKacGfGlbjgvMw==";
-      };
-    }
-    {
       name = "_tensorflow_tfjs_backend_cpu___tfjs_backend_cpu_3.13.0.tgz";
       path = fetchurl {
         name = "_tensorflow_tfjs_backend_cpu___tfjs_backend_cpu_3.13.0.tgz";
@@ -2295,14 +2287,6 @@
         name = "_tensorflow_tfjs_backend_wasm___tfjs_backend_wasm_3.13.0.tgz";
         url  = "https://registry.yarnpkg.com/@tensorflow/tfjs-backend-wasm/-/tfjs-backend-wasm-3.13.0.tgz";
         sha512 = "h5kNS4xvljoySzfcFwqbdFB6QZGR06IA9/Xq/PjBeZt18XEoJGqKHbOCYupmUlr5pxo/gnXzPhAC2h4SfZXPXw==";
-      };
-    }
-    {
-      name = "_tensorflow_tfjs_converter___tfjs_converter_3.13.0.tgz";
-      path = fetchurl {
-        name = "_tensorflow_tfjs_converter___tfjs_converter_3.13.0.tgz";
-        url  = "https://registry.yarnpkg.com/@tensorflow/tfjs-converter/-/tfjs-converter-3.13.0.tgz";
-        sha512 = "H2VpDTv9Ve0HBt7ttzz46DmnsPaiT0B+yJjVH3NebGZbgY9C8boBgJIsdyqfiqEWBS3WxF8h4rh58Hv5XXMgaQ==";
       };
     }
     {
@@ -9682,11 +9666,11 @@
       };
     }
     {
-      name = "react_native_webrtc___react_native_webrtc_1.94.2.tgz";
+      name = "react_native_webrtc___react_native_webrtc_1.100.0.tgz";
       path = fetchurl {
-        name = "react_native_webrtc___react_native_webrtc_1.94.2.tgz";
-        url  = "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.2.tgz";
-        sha512 = "8wf7CDLYmrxxvta3XxZbmtNrxUblE70fDpoxjYKWfEa48Y4FnFw7MF61g8qYo+V0adoOUNc3j4fIgVnAMghJ9Q==";
+        name = "react_native_webrtc___react_native_webrtc_1.100.0.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.100.0.tgz";
+        sha512 = "sBLl8Ihj3xfYn0NZJdDxelB/dZ422FWg/kcLdSw6Wk4eM3MeNW3iFwVsqg2dLzeDnuoQ06i7hOdtP7pGAiKsug==";
       };
     }
     {
