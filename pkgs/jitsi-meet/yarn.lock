@@ -2503,11 +2503,6 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@tensorflow-models/blazeface@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@tensorflow-models/blazeface/-/blazeface-0.0.7.tgz#0a16499a0cc97fc87e11ae1f78140731c5f63bf2"
-  integrity sha512-+hInPkvHJoubfiXlmNuF3SCucZvU6W1PMC25IV99NSAftJUpKvLokfF93iX8UkOFQCXkPFbnLKacGfGlbjgvMw==
-
 "@tensorflow/tfjs-backend-cpu@3.13.0":
   version "3.13.0"
   resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-3.13.0.tgz#2a141256fe0a5de0670c31a9ba6990465708dee4"
@@ -2523,11 +2518,6 @@
   dependencies:
     "@tensorflow/tfjs-backend-cpu" "3.13.0"
     "@types/emscripten" "~0.0.34"
-
-"@tensorflow/tfjs-converter@3.13.0":
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/@tensorflow/tfjs-converter/-/tfjs-converter-3.13.0.tgz#3affc86d94c3948b01673a91309a35feb10e5eac"
-  integrity sha512-H2VpDTv9Ve0HBt7ttzz46DmnsPaiT0B+yJjVH3NebGZbgY9C8boBgJIsdyqfiqEWBS3WxF8h4rh58Hv5XXMgaQ==
 
 "@tensorflow/tfjs-core@3.13.0":
   version "3.13.0"
@@ -9083,10 +9073,10 @@ react-native-watch-connectivity@1.0.4:
   dependencies:
     lodash.sortby "^4.7.0"
 
-react-native-webrtc@1.94.2:
-  version "1.94.2"
-  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.94.2.tgz#91ec5975d2fb923e620f4d339b55e892cf56e5e4"
-  integrity sha512-8wf7CDLYmrxxvta3XxZbmtNrxUblE70fDpoxjYKWfEa48Y4FnFw7MF61g8qYo+V0adoOUNc3j4fIgVnAMghJ9Q==
+react-native-webrtc@1.100.0:
+  version "1.100.0"
+  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-1.100.0.tgz#f81562dc46467fe75f9f96e98dbe311222e83abd"
+  integrity sha512-sBLl8Ihj3xfYn0NZJdDxelB/dZ422FWg/kcLdSw6Wk4eM3MeNW3iFwVsqg2dLzeDnuoQ06i7hOdtP7pGAiKsug==
   dependencies:
     base64-js "1.5.1"
     event-target-shim "6.0.2"
