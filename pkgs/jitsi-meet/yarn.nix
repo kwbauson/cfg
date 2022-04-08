@@ -1954,11 +1954,11 @@
       };
     }
     {
-      name = "_react_native_normalize_color___normalize_color_1.0.0.tgz";
+      name = "_react_native_normalize_color___normalize_color_2.0.0.tgz";
       path = fetchurl {
-        name = "_react_native_normalize_color___normalize_color_1.0.0.tgz";
-        url  = "https://registry.yarnpkg.com/@react-native/normalize-color/-/normalize-color-1.0.0.tgz";
-        sha512 = "xUNRvNmCl3UGCPbbHvfyFMnpvLPoOjDCcp5bT9m2k+TF/ZBklEQwhPZlkrxRx2NhgFh1X3a5uL7mJ7ZR+8G7Qg==";
+        name = "_react_native_normalize_color___normalize_color_2.0.0.tgz";
+        url  = "https://registry.yarnpkg.com/@react-native/normalize-color/-/normalize-color-2.0.0.tgz";
+        sha512 = "Wip/xsc5lw8vsBlmY2MO/gFLp3MvuZ2baBZjDeTjjndMgM0h5sxz7AZR62RDPGgstp8Np7JzjvVqVT7tpFZqsw==";
       };
     }
     {
@@ -3554,11 +3554,11 @@
       };
     }
     {
-      name = "bplist_parser___bplist_parser_0.3.0.tgz";
+      name = "bplist_parser___bplist_parser_0.3.1.tgz";
       path = fetchurl {
-        name = "bplist_parser___bplist_parser_0.3.0.tgz";
-        url  = "https://registry.yarnpkg.com/bplist-parser/-/bplist-parser-0.3.0.tgz";
-        sha512 = "zgmaRvT6AN1JpPPV+S0a1/FAtoxSreYDccZGIqEMSvZl9DMe70mJ7MFzpxa1X+gHVdkToE2haRUHHMiW1OdejA==";
+        name = "bplist_parser___bplist_parser_0.3.1.tgz";
+        url  = "https://registry.yarnpkg.com/bplist-parser/-/bplist-parser-0.3.1.tgz";
+        sha512 = "PyJxiNtA5T2PlLIeBot4lbp7rj4OadzjnMZD/G5zuBNt8ei/yCU7+wW0h2bag9vr8c+/WuRWmSxbqAl9hL1rBA==";
       };
     }
     {
@@ -7354,11 +7354,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1411.0.0+6d8060a4_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1412.0.0+832d7d35_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1411.0.0+6d8060a4_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1411.0.0+6d8060a4/lib-jitsi-meet.tgz";
-        sha1 = "25917ee2477419c6370de0871e1db9c3b919a9d4";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1412.0.0+832d7d35_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1412.0.0+832d7d35/lib-jitsi-meet.tgz";
+        sha1 = "2e6b98a7e17f127571e714a6914ec31b58d63a50";
       };
     }
     {
@@ -9338,11 +9338,11 @@
       };
     }
     {
-      name = "react_devtools_core___react_devtools_core_4.23.0.tgz";
+      name = "react_devtools_core___react_devtools_core_4.19.1.tgz";
       path = fetchurl {
-        name = "react_devtools_core___react_devtools_core_4.23.0.tgz";
-        url  = "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-4.23.0.tgz";
-        sha512 = "KkzneT1LczFtebbTJlvRphIRvzuHLhI9ghfrseVv9ktBs+l2cXy8Svw5U16lzQnwU9okVEcURmGPgH79WWrlaw==";
+        name = "react_devtools_core___react_devtools_core_4.19.1.tgz";
+        url  = "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-4.19.1.tgz";
+        sha512 = "2wJiGffPWK0KggBjVwnTaAk+Z3MSxKInHmdzPTrBh1mAarexsa93Kw+WMX88+XjN+TtYgAiLe9xeTqcO5FfJTw==";
       };
     }
     {
@@ -9458,11 +9458,11 @@
       };
     }
     {
-      name = "react_native_codegen___react_native_codegen_0.0.7.tgz";
+      name = "react_native_codegen___react_native_codegen_0.0.8.tgz";
       path = fetchurl {
-        name = "react_native_codegen___react_native_codegen_0.0.7.tgz";
-        url  = "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.0.7.tgz";
-        sha512 = "dwNgR8zJ3ALr480QnAmpTiqvFo+rDtq6V5oCggKhYFlRjzOmVSFn3YD41u8ltvKS5G2nQ8gCs2vReFFnRGLYng==";
+        name = "react_native_codegen___react_native_codegen_0.0.8.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.0.8.tgz";
+        sha512 = "k/944+0XD+8l7zDaiKfYabyEKmAmyZgS1mj+4LcSRPyHnrjgCHKrh/Y6jM6kucQ6xU1+1uyMmF/dSkikxK8i+Q==";
       };
     }
     {
@@ -9570,11 +9570,11 @@
       };
     }
     {
-      name = "react_native_reanimated___react_native_reanimated_1.13.3.tgz";
+      name = "react_native_reanimated___react_native_reanimated_1.13.4.tgz";
       path = fetchurl {
-        name = "react_native_reanimated___react_native_reanimated_1.13.3.tgz";
-        url  = "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.3.tgz";
-        sha512 = "i714H24dv6ncpFO7/SZ0PfAMbvjgVbF8Ow2NPtowoZAz8osS54DmTMrkgJ9Za+uEku/s0AEaxqiXG2Xgntvv2g==";
+        name = "react_native_reanimated___react_native_reanimated_1.13.4.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.4.tgz";
+        sha512 = "sFbZFh0WanKTa0Fz7GXCZUjWpk/u04ytprcIs4Kb+ijfQHChXva3m3yQZfvbrhRbABJNHrdeuyDgJxDM2mcBgw==";
       };
     }
     {
@@ -9690,11 +9690,11 @@
       };
     }
     {
-      name = "react_native___react_native_0.66.4.tgz";
+      name = "react_native___react_native_0.67.4.tgz";
       path = fetchurl {
-        name = "react_native___react_native_0.66.4.tgz";
-        url  = "https://registry.yarnpkg.com/react-native/-/react-native-0.66.4.tgz";
-        sha512 = "9vx5dlSfQlKbbDtr8+xMon6qsmSu7jvjdXWZpEKh3XVKpUidbbODv7048gwVKX8YAel1egeR7hN8vzSeI6ssTw==";
+        name = "react_native___react_native_0.67.4.tgz";
+        url  = "https://registry.yarnpkg.com/react-native/-/react-native-0.67.4.tgz";
+        sha512 = "NA9d9lNJu9TViEJu2uZxWXUP+QNUilGGA5tdMbVFedNroOH1lnQ3n/FAVoGK1gqGarCgNTtheBxUpEa979Cu8w==";
       };
     }
     {
@@ -10570,11 +10570,11 @@
       };
     }
     {
-      name = "simple_plist___simple_plist_1.3.0.tgz";
+      name = "simple_plist___simple_plist_1.3.1.tgz";
       path = fetchurl {
-        name = "simple_plist___simple_plist_1.3.0.tgz";
-        url  = "https://registry.yarnpkg.com/simple-plist/-/simple-plist-1.3.0.tgz";
-        sha512 = "uYWpeGFtZtVt2NhG4AHgpwx323zxD85x42heMJBan1qAiqqozIlaGrwrEt6kRjXWRWIXsuV1VLCvVmZan2B5dg==";
+        name = "simple_plist___simple_plist_1.3.1.tgz";
+        url  = "https://registry.yarnpkg.com/simple-plist/-/simple-plist-1.3.1.tgz";
+        sha512 = "iMSw5i0XseMnrhtIzRb7XpQEXepa9xhWxGUojHBL43SIpQuDQkh3Wpy67ZbDzZVr6EKxvwVChnVpdl8hEVLDiw==";
       };
     }
     {
@@ -11383,6 +11383,14 @@
         name = "ts_easing___ts_easing_0.2.0.tgz";
         url  = "https://registry.yarnpkg.com/ts-easing/-/ts-easing-0.2.0.tgz";
         sha512 = "Z86EW+fFFh/IFB1fqQ3/+7Zpf9t2ebOAxNI/V6Wo7r5gqiqtxmgTlQ1qbqQcjLKYeSHPTsEmvlJUDg/EuL0uHQ==";
+      };
+    }
+    {
+      name = "ts_loader___ts_loader_9.2.6.tgz";
+      path = fetchurl {
+        name = "ts_loader___ts_loader_9.2.6.tgz";
+        url  = "https://registry.yarnpkg.com/ts-loader/-/ts-loader-9.2.6.tgz";
+        sha512 = "QMTC4UFzHmu9wU2VHZEmWWE9cUajjfcdcws+Gh7FhiO+Dy0RnR1bNz0YCHqhI0yRowCE9arVnNxYHqELOy9Hjw==";
       };
     }
     {
