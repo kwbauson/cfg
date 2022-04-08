@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "9325de8cbcb8e72dc7ffb852f41728d4d55f9ce6",
-        "sha256": "18qyqrpchcyd4xcw861kvzs49lb9698vp062p3dmxja6zx7s595c",
+        "rev": "7c523f3250538834eb51e2bba56e3200f7e7f2a7",
+        "sha256": "066vwwfxwg6cd0wa3y63nwr511x4lm02wss68r3d5x9jn43ycwd8",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/9325de8cbcb8e72dc7ffb852f41728d4d55f9ce6.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/7c523f3250538834eb51e2bba56e3200f7e7f2a7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -100,12 +100,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "0kbjwsj94wqzlx55wzyx77ir19m1rl55n3cxc93myfrii1ycfnvj",
+        "sha256": "0j77bqglkdwwxypm5ag6hmq5ipykl5mcl4zqp3wb3di90ayhyjbd",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022-01-06/OliveTin-2022-01-06-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022-04-07/OliveTin-2022-04-07-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-<version>-linux-amd64.tar.gz",
-        "version": "2022-01-06"
+        "version": "2022-04-07"
     },
     "r2modman": {
         "sha256": "06byhwmg38vxpj10pv8hcisan51gvzvk5n4j9rs9xdlanxx1ci0i",
