@@ -9474,21 +9474,13 @@
       };
     }
     {
-    name = "react-native-default-preference.git";
-    path =
-      let
-        repo = fetchgit {
-          url = "https://git@github.com/kevinresol/react-native-default-preference.git";
-          rev = "11bff5eb05cb04fd8d35b5e761eeee80525e8c6c";
-          sha256 = "0sjv1vm5ya102kq7w0whv6s6bzqq3xmc1lbry0x9akx9s3y5xi53";
-        };
-      in
-        runCommand "react-native-default-preference.git" { buildInputs = [gnutar]; } ''
-          # Set u+w because tar-fs can't unpack archives with read-only dirs
-          # https://github.com/mafintosh/tar-fs/issues/79
-          tar cf $out --mode u+w -C ${repo} .
-        '';
-  }
+      name = "react_native_default_preference___react_native_default_preference_1.4.4.tgz";
+      path = fetchurl {
+        name = "react_native_default_preference___react_native_default_preference_1.4.4.tgz";
+        url  = "https://registry.yarnpkg.com/react-native-default-preference/-/react-native-default-preference-1.4.4.tgz";
+        sha512 = "h0vtgiSKws3UmMRJykXAVM4ne1SgfoocUcoBD19ewRpQd6wqurE0HJRQGrSxcHK5LdKE7QPSIB1VX3YGIVS8Jg==";
+      };
+    }
     {
       name = "react_native_device_info___react_native_device_info_8.4.8.tgz";
       path = fetchurl {

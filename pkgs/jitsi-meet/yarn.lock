@@ -8933,9 +8933,10 @@ react-native-collapsible@1.6.0:
   resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-1.6.0.tgz#ca261ffff16914f872059bb0972e3a78c4b37f9c"
   integrity sha512-beZjdgbT9Y/Pg591Xy5XkKG20HffJiVad4n9bfcUF/f783A+tvOVXnqvbS58Lkaym93mi4jcDPMuW9Vc1t6rqg==
 
-"react-native-default-preference@https://git@github.com/kevinresol/react-native-default-preference#11bff5eb05cb04fd8d35b5e761eeee80525e8c6c":
-  version "1.4.3"
-  resolved "git+https://git@github.com/kevinresol/react-native-default-preference.git#11bff5eb05cb04fd8d35b5e761eeee80525e8c6c"
+react-native-default-preference@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-default-preference/-/react-native-default-preference-1.4.4.tgz#0d9f0a44dfc006f62f4479adc5b1fd68a8baf2e4"
+  integrity sha512-h0vtgiSKws3UmMRJykXAVM4ne1SgfoocUcoBD19ewRpQd6wqurE0HJRQGrSxcHK5LdKE7QPSIB1VX3YGIVS8Jg==
 
 react-native-device-info@8.4.8:
   version "8.4.8"
