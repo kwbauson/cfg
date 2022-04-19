@@ -25,6 +25,7 @@ autocmd BufEnter * syntax sync fromstart
 
 autocmd Filetype * AnyFoldActivate
 
+set termguicolors
 colorscheme codedark
 
 let g:startify_session_persistence = 1
@@ -51,8 +52,6 @@ map <leader>t :NERDTreeToggle<cr>
 map <leader>f :NERDTreeFind<cr>
 
 map <silent> <leader>e :CocCommand explorer<cr>
-
-map <silent> <leader>d :Bwipeout<cr>
 
 let g:context_enabled = 0
 
@@ -100,20 +99,26 @@ nmap <leader>l :CocList<cr>
 nmap <leader>c :CocList commands<cr>
 nmap <c-c> :echo<bar>silent CocRestart<cr>
 
-" call nvim_lsp#setup("tsserver", {})
-" set omnifunc=lsp#omnifunc
-" nnoremap <silent> gd :call lsp#text_document_definition()<cr>
-" nnoremap <silent> gh :call lsp#text_document_hover()<cr>
-
 set noshowmode
-nmap <silent> gT :bprevious<cr>
-nmap <silent> gt :bnext<cr>
-nmap <silent> gb :buffer <c-r>=v:count<cr><cr>
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#nvimlsp#enabled = 0
+
+nmap <silent> gT :BufferPrevious<cr>
+nmap <silent> gt :BufferNext<cr>
+nmap <silent> gb :BufferPick<cr>
+nmap <silent> gH :BufferMovePrevious<cr>
+nmap <silent> gL :BufferMoveNext<cr>
+nmap <silent> <leader>d :BufferClose<cr>
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.animation = v:false
+let bufferline.auto_hide = v:false
+let bufferline.tabpages = v:true
+let bufferline.closable = v:false
+let bufferline.maximum_padding = 0
+hi default BufferCurrent guibg=#0A7ACA guifg=white
+hi default BufferCurrentMod guibg=#FFAF00 guifg=black
+hi default BufferCurrentSign guibg=#0A7ACA guifg=white
+hi default BufferCurrentTarget guibg=#0A7ACA guifg=red gui=bold
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6 } }
 function! RipgrepFzf(query, fullscreen)
