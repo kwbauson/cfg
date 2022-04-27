@@ -3274,11 +3274,11 @@
       };
     }
     {
-      name = "async___async_2.6.3.tgz";
+      name = "async___async_2.6.4.tgz";
       path = fetchurl {
-        name = "async___async_2.6.3.tgz";
-        url  = "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz";
-        sha512 = "zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==";
+        name = "async___async_2.6.4.tgz";
+        url  = "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz";
+        sha512 = "mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==";
       };
     }
     {
@@ -7354,11 +7354,11 @@
       };
     }
     {
-      name = "jitsi_lib_jitsi_meet_releases_download_v1422.0.0+cf22aa36_lib_jitsi_meet.tgz";
+      name = "jitsi_lib_jitsi_meet_releases_download_v1425.0.0+6b629a19_lib_jitsi_meet.tgz";
       path = fetchurl {
-        name = "jitsi_lib_jitsi_meet_releases_download_v1422.0.0+cf22aa36_lib_jitsi_meet.tgz";
-        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1422.0.0+cf22aa36/lib-jitsi-meet.tgz";
-        sha1 = "e27fed58c9b8e2692d09759a00db9b80594f4dc5";
+        name = "jitsi_lib_jitsi_meet_releases_download_v1425.0.0+6b629a19_lib_jitsi_meet.tgz";
+        url  = "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1425.0.0+6b629a19/lib-jitsi-meet.tgz";
+        sha1 = "936a8095015de1a8051c51d53e7b980c4841c843";
       };
     }
     {
