@@ -82,12 +82,15 @@ cli // generators // lib // builtins // rec {
     checkVersion = lib.assertMsg (pkg.version == src.version) msg;
   }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
   importNixpkgs = src:
-    let realSource = if isDerivation src then src else
-    fetchFromGitHub {
-      owner = "NixOS";
-      repo = "nixpkgs";
-      inherit (src) rev sha256;
-    };
+    let realSource =
+      if isDerivation src then src
+      else if isString src then fetchTree { type = "github"; owner = "NixOS"; repo = "nixpkgs"; rev = src; }
+      else
+        fetchFromGitHub {
+          owner = "NixOS";
+          repo = "nixpkgs";
+          inherit (src) rev sha256;
+        };
     in import realSource { inherit system; config = import ./config.nix; overlays = [ ]; };
   buildDir = paths:
     let
