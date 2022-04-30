@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # ONLY_LINUX
-# with-packages acpi pamixer pulseaudioFull sysstat
+# with-packages acpi pamixer pulseaudioFull sysstat headsetcontrol
 require 'rb-inotify'
 require 'open-uri'
 require 'json'
@@ -58,6 +58,14 @@ blocks = [
     end
     block.(volume)
     IO.popen('pactl subscribe').each_line.grep(/sink/) { |l| block.(volume) }
+  },
+  interval(10) {
+    status = `headsetcontrol -b 2>&1`
+    if status == "No supported headset found\n"
+      ''
+    else
+      status.lines.grep(/^Battery: /).first.chomp.delete_prefix('Battery: ')
+    end
   },
   interval { Time.now.strftime('%a %b %_d %_I:%M %p') },
 ]
