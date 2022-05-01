@@ -81,17 +81,28 @@ cli // generators // lib // builtins // rec {
     msg = "${name}: src ${src.version} != pkg ${pkg.version}";
     checkVersion = lib.assertMsg (pkg.version == src.version) msg;
   }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
-  importNixpkgs = src:
-    let realSource =
-      if isDerivation src then src
-      else if isString src then fetchTree { type = "github"; owner = "NixOS"; repo = "nixpkgs"; rev = src; }
-      else
-        fetchFromGitHub {
-          owner = "NixOS";
-          repo = "nixpkgs";
-          inherit (src) rev sha256;
-        };
-    in import realSource { inherit system; config = import ./config.nix; overlays = [ ]; };
+  importNixpkgs = args:
+    let
+      helper =
+        { system ? pkgs.system
+        , config ? { }
+        , overlays ? [ ]
+        , rev ? null
+        , sha256 ? null
+        , path ? pkgs.path
+        , owner ? "NixOS"
+        , repo ? "nixpkgs"
+        , src ? if sha256 != null then fetchFromGitHub { inherit owner repo rev sha256; }
+          else if rev != null then fetchTree { type = "github"; inherit owner repo rev; }
+          else path
+        }: import src { inherit system config overlays; };
+    in
+    helper (
+      if isPath args then { path = args; }
+      else if isString args then { rev = args; }
+      else if isDerivation args then { src = args; }
+      else args
+    );
   buildDir = paths:
     let
       copyCommand = p: "cp -r ${builtins.path { name = "source"; path = p; }} $out/${baseNameOf p}";
