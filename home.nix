@@ -100,6 +100,7 @@ with builtins; with pkgs; with mylib; {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
     firefox.enable = true;
+    chromium.enable = true;
     bash = {
       enable = true;
       inherit (config.home) sessionVariables;
