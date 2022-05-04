@@ -192,4 +192,34 @@ cli // generators // lib // builtins // rec {
       passthru = pkg.passthru // { unwrapped = pkg; };
       meta.mainProgram = baseNameOf (exe pkg);
     };
+  mkYarnModulesWithRebuild =
+    { packageJSON
+    , yarnLock
+    , yarnNix ? yarn2nix-moretea.mkYarnNix { inherit yarnLock; }
+    , yarn ? pkgs.yarn
+    , nodejs ? pkgs.nodejs
+    , extraNativeBuildInputs ? [ ]
+    , preRebuild ? ""
+    , attrs ? { }
+    }:
+    let
+      nodedir = runCommand "nodedir" { } ''
+        tar xvf ${nodejs.src}
+        mv node-* $out
+      '';
+    in
+    runCommand "yarn_modules"
+      ({ nativeBuildInputs = [ yarn nodejs python3 pkg-config gcc ] ++ extraNativeBuildInputs; } // attrs) ''
+      cp ${packageJSON} package.json
+      cp ${yarnLock} yarn.lock
+      chmod +w yarn.lock
+      ${yarn2nix-moretea.fixup_yarn_lock}/bin/fixup_yarn_lock yarn.lock
+      export HOME=$PWD/yarn_home
+      yarn config --offline set yarn-offline-mirror ${yarn2nix-moretea.importOfflineCache yarnNix}
+      yarn --offline --ignore-scripts --modules-folder $out
+      cd $out
+      patchShebangs .
+      ${preRebuild}
+      npm rebuild --nodedir=${nodedir}
+    '';
 }
