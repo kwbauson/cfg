@@ -3,6 +3,7 @@ let
   node_modules = mkYarnModulesWithRebuild {
     packageJSON = "${sources.jitsi-meet}/package.json";
     yarnLock = ./yarn.lock;
+    yarnNix = ./yarn.nix;
     extraNativeBuildInputs = [ pango ];
     preRebuild = "export RN_WEBRTC_SKIP_DOWNLOAD=1";
   };
@@ -24,14 +25,15 @@ in
 jitsi-meet.overrideAttrs (_: {
   src = jitsi-meet-source-package;
   passthru.updateScript = writeBashBin "update-jitsi" ''
-    ${ pathAdd [ yarn coreutils ] }
+    ${ pathAdd [ yarn yarn2nix coreutils ] }
     set -eo pipefail
     dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
     cd "$dir"
     cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
     yarn import
+    yarn2nix > yarn.nix
     cd -
-    cp "$dir"/yarn.lock pkgs/jitsi-meet
+    cp "$dir"/yarn.{lock,nix} pkgs/jitsi-meet
     rm -r "$dir"
   '';
 })
