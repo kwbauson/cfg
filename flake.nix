@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs-mach-nix.url = "nixpkgs/d6b996030dd21c6509803267584b9aca3e133a07";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
     rnix-lsp.inputs.nixpkgs.follows = "nixpkgs";
@@ -9,7 +10,7 @@
     rnix-lsp.inputs.naersk.follows = "naersk";
     naersk.url = "github:nix-community/naersk";
     naersk.inputs.nixpkgs.follows = "nixpkgs";
-    mach-nix.inputs.nixpkgs.follows = "nixpkgs";
+    mach-nix.inputs.nixpkgs.follows = "nixpkgs-mach-nix";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
