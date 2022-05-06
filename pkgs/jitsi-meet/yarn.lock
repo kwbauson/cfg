@@ -2825,10 +2825,17 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@vladmandic/face-api@1.6.4":
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/@vladmandic/face-api/-/face-api-1.6.4.tgz#825efb267f8b234c2ca7dca301bf044720094d96"
-  integrity sha512-tVx8lCL1mKb44qeN5EEypJNXqxRYXh+7BcSzfY4iMaZIoF5Y+Jev20UiIn9JvxwGV2caWkdFIjpvw+OxsL/kdg==
+"@vladmandic/human-models@2.5.9":
+  version "2.5.9"
+  resolved "https://registry.yarnpkg.com/@vladmandic/human-models/-/human-models-2.5.9.tgz#de2a2c669ba641c1c1a73b2ec0b6367b57cc3b7e"
+  integrity sha512-WhV0RIeELsA73LGMpemYJvpIEuG0nkh6rP1x7JctKDQkNaARgWolTq9r1RUvWw++rQfzfZ82bYcAauJcaGW6bw==
+  dependencies:
+    "@vladmandic/human" "^2.5.8"
+
+"@vladmandic/human@2.6.5", "@vladmandic/human@^2.5.8":
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/@vladmandic/human/-/human-2.6.5.tgz#d8bc0d88cb57e4e690faca545114860f8d62317c"
+  integrity sha512-5fG5lICkJw17d8fT9ZHtioAPLmOKsQlNN4rbuA1t21HlV7KL3M2EMbYeO+ZE0t6VLSioZZH/KoOFvW5A0JP0Hg==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
