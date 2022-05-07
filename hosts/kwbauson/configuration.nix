@@ -20,7 +20,8 @@
     defaultGateway.address = "208.87.134.1";
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     domain = "com";
-    firewall.allowedTCPPorts = [ 80 443 ];
+    firewall.allowedTCPPorts = [ 80 443 2456 2457 ];
+    firewall.allowedUDPPorts = [ 2456 2457 ];
   };
 
   services.openssh = {
@@ -96,4 +97,11 @@
 
   virtualisation.docker.enable = true;
   programs.steam.enable = false;
+  virtualisation.oci-containers.containers.valheim = {
+    image = "ghcr.io/lloesche/valheim-server";
+    environmentFiles = [ /var/lib/valheim/environment ];
+    extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
+    ports = [ "2456-2457:2456-2457/udp" ];
+    volumes = [ "/var/lib/valheim:/config" ];
+  };
 }
