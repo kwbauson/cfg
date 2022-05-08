@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "084f9116993e814b5ba21dc790599f7ce46d1576",
-        "sha256": "0i91w21x4myjwjxvzysx43gkr9arj08bpj3xzim4kwphq9laz9a4",
+        "rev": "64d44f0ac2d8d7345f48e8810da3c7c85ffaa3ff",
+        "sha256": "1794dv759jnjq9fzp1dbj6z09m3xfkmljkpyn5d3h4li0mfn97hy",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/084f9116993e814b5ba21dc790599f7ce46d1576.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/64d44f0ac2d8d7345f48e8810da3c7c85ffaa3ff.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -80,12 +80,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "08nhi8j2vynfscim2mdaq3dzh5qb91xlk7mp72s6fhvljx54qxwm",
+        "sha256": "0kcq7cg2iwndjkwz0rq990n4gcrrwl7zn1y93yia0zabnh6l5xpj",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-04-10/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-05-08/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-04-10"
+        "version": "2022-05-08"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -108,12 +108,12 @@
         "version": "2022-04-07"
     },
     "r2modman": {
-        "sha256": "06byhwmg38vxpj10pv8hcisan51gvzvk5n4j9rs9xdlanxx1ci0i",
+        "sha256": "05f9bqf5qia5r7iadpr68akl77r6dg6k2b08ffwjzdpd2avwzp1y",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.27/r2modman-3.1.27.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.28/r2modman-3.1.28.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.27"
+        "version": "3.1.28"
     },
     "ranger_devicons": {
         "branch": "main",
