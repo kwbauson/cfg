@@ -94,7 +94,6 @@
         nixConfBase = ''
           max-jobs = auto
           keep-going = true
-          builders-use-substitutes = true
           extra-experimental-features = nix-command flakes recursive-nix
           fallback = true
         '';
