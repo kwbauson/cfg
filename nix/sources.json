@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "39d30ea0b4a8239883f09a42e8a5daea61fe0a50",
-        "sha256": "1kiln6r5pb9yx0xwjy11nivihs6f8im74pddns7a6bdwa831a26b",
+        "rev": "0fe738315485e49f4407c602e850fece4a1028da",
+        "sha256": "0djb3za2kz4a0z5gnmn1p5bfa228blrb3f8r6qvxf6pw9dyj99j5",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/39d30ea0b4a8239883f09a42e8a5daea61fe0a50.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/0fe738315485e49f4407c602e850fece4a1028da.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -152,10 +152,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "0kh02ipbdl0yr3dq5hxy6kysn1s6lkg39bmrhcjgxq6iipspnqm9",
+        "sha256": "03lwzxbigzmvjlh1b7hf6imnzx6g6ns5xrmdk41ap2rljs5dz415",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.1.1.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.2.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.1.1.1"
+        "version": "G4.1.2"
     }
 }
