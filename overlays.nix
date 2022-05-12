@@ -47,7 +47,7 @@
     rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
     nle-cfg = self.nle.build { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
-    inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) pur emborg git-remote-codecommit;
+    inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
     allowUnsupportedSystem = import pkgs.path {
       inherit system;
