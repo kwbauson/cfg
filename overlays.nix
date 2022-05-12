@@ -159,6 +159,37 @@
             -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
       '';
     };
+    self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
+      cp ${self-source}/flake.lock $out
+      chmod +w $out
+      entries=$(jq '.nodes.root.inputs | to_entries' $out)
+      inputs_keys=$(jq -r '.[].key' <<<"$entries")
+      inputs_values=$(jq -r '.[].value' <<<"$entries")
+      if [[ $inputs_keys != $inputs_values ]];then
+        echo invalid input mapping
+        jq '.nodes.root.inputs' $out
+        echo generated flake.lock of self does not support nested inputs
+        exit 1
+      fi
+      self_inputs="${concatStringsSep "\n" (attrNames inputs.self.inputs)}"
+      self_inputs=$(echo "$self_inputs" | sort)
+      lock_inputs=$(jq -r '.nodes | keys | sort[]' $out | grep -vFx root)
+      if [[ $inputs_keys != $lock_inputs ]];then
+        echo self_inputs: $self_inputs
+        echo lock_inputs: $lock_inputs
+        echo inputs of self do not match flake.lock nodes
+        exit 1
+      fi
+      self_inputs="${concatStringsSep "\n" (mapAttrsToList (n: v: "${n} ${v.outPath} ${v.narHash}") inputs.self.inputs)}"
+      echo "$self_inputs" | while read input outPath narHash;do
+        jq ".nodes.\"$input\".locked = { type: \"path\", path: \"$outPath\", narHash: \"$narHash\" }" $out | sponge $out
+      done
+    '';
+    self-flake = runCommand "self-flake" { } ''
+      cp -r ${self-source} $out
+      chmod -R +w $out
+      cp ${self.self-flake-lock} $out/flake.lock
+    '';
   })
   (self: super: with super; with mylib;
   let extra-packages = mapAttrs

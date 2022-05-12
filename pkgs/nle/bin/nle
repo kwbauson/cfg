@@ -28,7 +28,7 @@ name=$(basename "$0")
 cachebase=${NLE_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/$name}
 impuredir=$cachebase/.impure
 
-nixexpr="(import CFG_STORE_PATH).nle.build { path = ./.; source = \"$sourcedir\"; }"
+nixexpr="(import SELF_FLAKE).nle.build { path = ./.; source = \"$sourcedir\"; }"
 
 local_nix_conf=$sourcedir/nix/nix.conf
 
@@ -74,7 +74,7 @@ hashbuildfiles() {
 
 hashcontent() {
   hashbuildfiles | sort | xargs cat
-  echo CFG_STORE_PATH
+  echo SELF_FLAKE
   [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
 

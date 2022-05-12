@@ -15,13 +15,13 @@ let
       "nodes": {
         "nixpkgs": {
           "locked": {
-            "narHash": "${inputs.nixpkgs.narHash}",
-            "path": "${inputs.nixpkgs.outPath}",
             "type": "path"
+            "path": "${inputs.nixpkgs.outPath}",
+            "narHash": "${inputs.nixpkgs.narHash}",
           },
           "original": {
-            "id": "nixpkgs",
             "type": "indirect"
+            "id": "nixpkgs",
           }
         },
         "root": {

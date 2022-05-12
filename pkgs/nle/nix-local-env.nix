@@ -23,7 +23,7 @@ rec {
       (filter (hasInfix pkgsMark) lines);
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
     buildInputs = map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames ++ build-paths;
-    makeScriptText = replaceStrings [ "CFG_STORE_PATH" ] [ "${self-source}" ];
+    makeScriptText = replaceStrings [ "SELF_FLAKE" ] [ "${self-flake}" ];
     isBash = hasSuffix "bash" (head lines);
     script = stdenv.mkDerivation {
       name = "${name}-unwrapped";

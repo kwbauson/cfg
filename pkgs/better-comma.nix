@@ -13,17 +13,17 @@ scope: with scope; stdenv.mkDerivation {
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
     if [[ ''${#overlays[@]} -eq 0 ]];then
-      source=${self-source}
+      source=${self-flake}
     else
       contents=
       for file in "''${overlays[@]}";do
         contents+=$(< "$file")
       done
-      hash=($(echo "${self-source} $contents" | md5sum))
+      hash=($(echo "${self-flake} $contents" | md5sum))
       source=~/.cache/${pname}/$hash
       if [[ ! -e $source ]];then
         mkdir -p "$source"
-        cp -rT ${self-source} "$source"
+        cp -rT ${self-flake} "$source"
         mkdir -p "$source"/extra-overlays
         for file in "''${overlays[@]}";do
           cp "$file" "$source"/extra-overlays

@@ -5,9 +5,9 @@ scope: with scope;
     shift
     pkg=$1 && shift
     cmd=$1 && shift
-    exec nix shell "${self-source}#$pkg" --command "$cmd" "$@"
+    exec nix shell "${self-flake}#$pkg" --command "$cmd" "$@"
   else
     pkg=$1 && shift
-    exec nix run "${self-source}#$pkg" -- "$@"
+    exec nix run "${self-flake}#$pkg" -- "$@"
   fi
 '').overrideAttrs (attrs: { passthru.__functor = _: exe; })
