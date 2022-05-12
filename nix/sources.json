@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "0fe738315485e49f4407c602e850fece4a1028da",
-        "sha256": "0djb3za2kz4a0z5gnmn1p5bfa228blrb3f8r6qvxf6pw9dyj99j5",
+        "rev": "4a350df695bba2e2555fc44a7089c3e0b8c3cfab",
+        "sha256": "10c36gdpfln62fxb7793l699zrhzhs74q6hnr6b263ij5vyyrhmx",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/0fe738315485e49f4407c602e850fece4a1028da.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/4a350df695bba2e2555fc44a7089c3e0b8c3cfab.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
