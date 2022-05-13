@@ -20,8 +20,8 @@ let
             "narHash": "${inputs.nixpkgs.narHash}"
           },
           "original": {
-            "type": "indirect"
-            "id": "nixpkgs",
+            "type": "indirect",
+            "id": "nixpkgs"
           }
         },
         "root": {
