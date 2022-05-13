@@ -15,9 +15,9 @@ let
       "nodes": {
         "nixpkgs": {
           "locked": {
-            "type": "path"
+            "type": "path",
             "path": "${inputs.nixpkgs.outPath}",
-            "narHash": "${inputs.nixpkgs.narHash}",
+            "narHash": "${inputs.nixpkgs.narHash}"
           },
           "original": {
             "type": "indirect"
