@@ -11,6 +11,18 @@
         "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "coc.nvim": {
+        "branch": "master",
+        "description": "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers.",
+        "homepage": "",
+        "owner": "neoclide",
+        "repo": "coc.nvim",
+        "rev": "9760a6d61d9d2dcce29d8f1626c999355c33a3f4",
+        "sha256": "1w8vxpyyaln6ywdlgi3qhgx64rbqaxhm15cvn9r5sbksckrhwgjs",
+        "type": "tarball",
+        "url": "https://github.com/neoclide/coc.nvim/archive/9760a6d61d9d2dcce29d8f1626c999355c33a3f4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "evilhack": {
         "sha256": "03jkdxygf1gyhiphvr86sc7w5kr3l6hy3c4486zs3aqpqxmy5dh1",
         "type": "tarball",
@@ -61,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "ebe81e28352e2a2fa219a4400e3e67759b17e5ff",
-        "sha256": "0d0is7f7xnmzvq78cz39cl1v8xjw0av6vzmglpix6hqiakqnxncb",
+        "rev": "b4febf728dc8a956b76440d3a48e50637d811d32",
+        "sha256": "1r70jlybvjyrrs5gkrqc7iyccgr2g6rcpf5r7wj77ky8k9mmn2h0",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/ebe81e28352e2a2fa219a4400e3e67759b17e5ff.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/b4febf728dc8a956b76440d3a48e50637d811d32.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -80,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0kcq7cg2iwndjkwz0rq990n4gcrrwl7zn1y93yia0zabnh6l5xpj",
+        "sha256": "0k7p1byr92labd6m7pj9ba5z4c63d2nxfny8l1577rx1d0vhqc6n",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-05-08/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-05-15/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-05-08"
+        "version": "2022-05-15"
     },
     "npmlock2nix": {
         "branch": "master",

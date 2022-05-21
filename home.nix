@@ -253,6 +253,8 @@ with builtins; with pkgs; with mylib; {
       enable = true;
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
+      coc.enable = true;
+      coc.package = vimUtils.buildVimPlugin { inherit (sources."coc.nvim") pname version src; };
       plugins = with rec {
         plugins = with vimPlugins; {
           inherit
@@ -262,15 +264,11 @@ with builtins; with pkgs; with mylib; {
             vim-multiple-cursors vim-peekaboo vim-polyglot vim-sensible
             vim-startify vim-vinegar barbar-nvim nvim-web-devicons
 
-            coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
+            coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver coc-pyright coc-explorer
             ;
         };
-        makeExtraPlugins = map (name: vimUtils.buildVimPlugin rec {
-          pname = name;
-          version = src.version or src.rev or "unversioned";
-          src = sources.${name};
-        });
+        makeExtraPlugins = map (n: vimUtils.buildVimPlugin { inherit (sources.${n}) pname version src; });
       }; attrValues plugins
         ++ makeExtraPlugins [ "jsonc.vim" "vim-anyfold" ]
         ++ optional (!isDarwin) vimPlugins.vim-devicons;

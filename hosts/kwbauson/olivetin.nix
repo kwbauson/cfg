@@ -1,8 +1,6 @@
 { pkgs, ... }:
 let olivetin = with pkgs; with mylib; stdenv.mkDerivation {
-  pname = "olivetin";
-  version = sources.olivetin.version;
-  src = sources.olivetin;
+  inherit (sources.olivetin) pname version src;
   nativeBuildInputs = [ autoPatchelfHook ];
   config = ''
     listenAddressSingleHTTPFrontend: localhost:1337
