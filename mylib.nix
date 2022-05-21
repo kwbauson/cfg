@@ -4,7 +4,12 @@ cli // generators // lib // builtins // rec {
   ap = x: f: f x;
   mapAttrValues = f: mapAttrs (n: v: f v);
   inherit (stdenv) isLinux isDarwin;
-  sources = import ./nix/sources.nix { inherit system pkgs; };
+  sources = mapAttrs
+    (pname: src: {
+      inherit pname src;
+      version = src.version or src.rev or "unversioned";
+    } // src)
+    (import ./nix/sources.nix { inherit system pkgs; });
   exe = pkg:
     let b = (pkg.meta or { }).mainProgram or (removePrefix "node_" (pkg.pname or (parseDrvName pkg.name).name));
     in "${pkg}/bin/${b}";
