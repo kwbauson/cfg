@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "neoclide",
         "repo": "coc.nvim",
-        "rev": "29e5cee64d8fba94ead39552ec6c8819876099c1",
-        "sha256": "0x08yjdivz8h42b699c2212yvc6zsc2fqybqig1gbb0m8nx4hrdh",
+        "rev": "032044b1a2b2ad4eb96f79b5a5e63a96d3ff2cc3",
+        "sha256": "1klbmf9zr6xrxmxnfd40ii0b5gwjass3rcxrgi1cdj71rak0w0qw",
         "type": "tarball",
-        "url": "https://github.com/neoclide/coc.nvim/archive/29e5cee64d8fba94ead39552ec6c8819876099c1.tar.gz",
+        "url": "https://github.com/neoclide/coc.nvim/archive/032044b1a2b2ad4eb96f79b5a5e63a96d3ff2cc3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -133,10 +133,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "df583d66ed093849248c2cf1631bce15d01b30e1",
-        "sha256": "1xg2lhf5n7cj0qcxrlb9x29ysf5kg0hwskgg9hdmrqh3203n50jw",
+        "rev": "49fe4753c89615a32f14b2f4c78bbd02ee76be3c",
+        "sha256": "1kgzv9mqsqzbpjrj3qi8vkha7vij2qsmdnjwl547pnf04hbdhgk1",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/df583d66ed093849248c2cf1631bce15d01b30e1.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/49fe4753c89615a32f14b2f4c78bbd02ee76be3c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
