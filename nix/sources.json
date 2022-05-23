@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "neoclide",
         "repo": "coc.nvim",
-        "rev": "032044b1a2b2ad4eb96f79b5a5e63a96d3ff2cc3",
-        "sha256": "1klbmf9zr6xrxmxnfd40ii0b5gwjass3rcxrgi1cdj71rak0w0qw",
+        "rev": "3a6c34aa17b777468e378f396b48ab5ca9d92594",
+        "sha256": "0sp18j69yl9rgjbvmbx7vkix22mnrbz8n35hygnpjgz1vy2mjhnz",
         "type": "tarball",
-        "url": "https://github.com/neoclide/coc.nvim/archive/032044b1a2b2ad4eb96f79b5a5e63a96d3ff2cc3.tar.gz",
+        "url": "https://github.com/neoclide/coc.nvim/archive/3a6c34aa17b777468e378f396b48ab5ca9d92594.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "b4febf728dc8a956b76440d3a48e50637d811d32",
-        "sha256": "1r70jlybvjyrrs5gkrqc7iyccgr2g6rcpf5r7wj77ky8k9mmn2h0",
+        "rev": "543f273792a6e7a0e277db2c017ad8d0c3108635",
+        "sha256": "01zrxgb88p0vv8zyimkpk1cz6h95k8gkw6j2grklz2x4aa48y7y4",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/b4febf728dc8a956b76440d3a48e50637d811d32.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/543f273792a6e7a0e277db2c017ad8d0c3108635.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
