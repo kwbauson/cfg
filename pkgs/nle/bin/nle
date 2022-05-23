@@ -196,6 +196,7 @@ case $cmd in
     if [[ -e nix/sources.nix && -e nix/sources.json ]];then
       tmpfile=$(mktemp)
       cp nix/sources.json $tmpfile
+      nr niv init
       nr niv update
       for pkg in $(jq -r 'to_entries[] | select(.value.update_type == "nixpkgs-dmg").key' nix/sources.json | sed 's/^dmg-//');do
         version=$(nix eval --raw ".#$pkg.version")

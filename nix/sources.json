@@ -12,7 +12,7 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "coc.nvim": {
-        "branch": "master",
+        "branch": "release",
         "description": "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers.",
         "homepage": "",
         "owner": "neoclide",
