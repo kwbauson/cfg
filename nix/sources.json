@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "neoclide",
         "repo": "coc.nvim",
-        "rev": "325fbcec571e00c51546fb743e85be1fca8baf1a",
-        "sha256": "0qpk79493svx6cfyk7gkc7069b8p68s01mlf64r7s1ls9qjcfbq5",
+        "rev": "d6287a8c6c40fb2aafb7c763b9a262d48de48760",
+        "sha256": "0ra8pia1l18y23pby4nmd665lylbxh72s5nsc7x9gv7phj3l7q6g",
         "type": "tarball",
-        "url": "https://github.com/neoclide/coc.nvim/archive/325fbcec571e00c51546fb743e85be1fca8baf1a.tar.gz",
+        "url": "https://github.com/neoclide/coc.nvim/archive/d6287a8c6c40fb2aafb7c763b9a262d48de48760.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0wynydzsib77fr4sh45r71z93db3k855h4qyspl1ds61xwbvsk1z",
+        "sha256": "1dfb6pk1v70bdgj6r9svnpbgi58yiwsxk5xpl2y2gsq0dvw14758",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-05-22/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-05-29/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-05-22"
+        "version": "2022-05-29"
     },
     "npmlock2nix": {
         "branch": "master",
