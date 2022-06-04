@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -7,7 +7,7 @@
 
   fileSystems."/".options = [ "barrier=0" "data=writeback" "commit=60" "noatime" ];
 
-  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;
     version = 2;
@@ -15,7 +15,7 @@
   };
 
   networking = {
-    networkmanager.enable = lib.mkForce false;
+    networkmanager.enable = false;
     interfaces.enp3s0.ipv4.addresses = [{ address = "208.87.134.252"; prefixLength = 24; }];
     defaultGateway.address = "208.87.134.1";
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
