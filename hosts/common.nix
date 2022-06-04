@@ -4,7 +4,7 @@
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot = {
-        enable = true;
+        enable = lib.mkDefault true;
         configurationLimit = 5;
         consoleMode = "auto";
       };
@@ -35,7 +35,7 @@
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
     };
   };
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = lib.mkDefault true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
@@ -63,7 +63,7 @@
       pulse.enable = true;
     };
     dbus.packages = with pkgs; [ dconf ];
-    localtime.enable = true;
+    localtimed.enable = lib.mkDefault true;
     chrony.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
@@ -92,9 +92,6 @@
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" "vboxsf" ];
     };
-    users.localtimed.group = "localtimed"; # FIXME localtime service requires this now
-    users.localtimed.isSystemUser = true;
-    groups.localtimed = { };
   };
 
   security.sudo.wheelNeedsPassword = false;

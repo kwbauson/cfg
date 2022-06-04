@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 with builtins;
 {
   imports = [
@@ -8,7 +8,7 @@ with builtins;
   time.hardwareClockInLocalTime = true;
   time.timeZone = "America/Indianapolis";
 
-  services.localtime.enable = lib.mkForce false;
+  services.localtimed.enable = false;
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.nvidiaSettings = false;
