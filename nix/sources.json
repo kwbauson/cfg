@@ -11,18 +11,6 @@
         "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "coc.nvim": {
-        "branch": "release",
-        "description": "Nodejs extension host for vim & neovim, load extensions like VSCode and host language servers.",
-        "homepage": "",
-        "owner": "neoclide",
-        "repo": "coc.nvim",
-        "rev": "102fe82be44e878d6eefdab2cb2fc4aaa5a346f3",
-        "sha256": "0j5xhs1p14z0x622mxf5dsgj0byic26rc02xs1g3hm1hmy1fj530",
-        "type": "tarball",
-        "url": "https://github.com/neoclide/coc.nvim/archive/102fe82be44e878d6eefdab2cb2fc4aaa5a346f3.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "evilhack": {
         "sha256": "03jkdxygf1gyhiphvr86sc7w5kr3l6hy3c4486zs3aqpqxmy5dh1",
         "type": "tarball",

@@ -39,7 +39,7 @@
           "flake-utils"
         ],
         "nixpkgs": [
-          "nixpkgs-mach-nix"
+          "nixpkgs"
         ],
         "pypi-deps-db": [
           "pypi-deps-db"
@@ -104,21 +104,6 @@
       "original": {
         "id": "nixpkgs",
         "ref": "nixos-unstable-small",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs-mach-nix": {
-      "locked": {
-        "lastModified": 1651031716,
-        "narHash": "sha256-muwdDKZ9uMPkeKa2EY0DxJub9nSa+3DZOSACBG+1VP4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d6b996030dd21c6509803267584b9aca3e133a07",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "rev": "d6b996030dd21c6509803267584b9aca3e133a07",
         "type": "indirect"
       }
     },
@@ -187,7 +172,6 @@
         "naersk": "naersk",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-mach-nix": "nixpkgs-mach-nix",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "pypi-deps-db": "pypi-deps-db",
         "rnix-lsp": "rnix-lsp"

@@ -254,7 +254,6 @@ with builtins; with pkgs; with mylib; {
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
       coc.enable = true;
-      coc.package = vimUtils.buildVimPlugin { inherit (sources."coc.nvim") pname version src; };
       plugins = with rec {
         plugins = with vimPlugins; {
           inherit
