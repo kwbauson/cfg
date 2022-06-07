@@ -1867,16 +1867,7 @@
   resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.0.0.tgz#7c55f1a5484f1ad15ce88a2c5ba5a32b711db212"
   integrity sha512-DGk6HiaYUDWM5YNLuzPZ0oxFzI1BvgbS7ogi1KR6nUB1pdoQY2dFL73J3hm7QgNZbc7+x/xhXwnNk9f2aAaVTQ==
 
-"@jitsi/js-utils@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@jitsi/js-utils/-/js-utils-1.0.0.tgz#cad5d95d14208db40a6ae321b2a444801a347221"
-  integrity sha512-at9GPMP7IL0v6QS1Gs9c5MbbiN2AT0uKzsgKM8qS2wqXxqvpfT3p4U3+LH2IUyXiHlkmvlBMcNM02MltBdyRmQ==
-  dependencies:
-    bowser "2.7.0"
-    js-md5 "0.7.3"
-    postis "2.2.0"
-
-"@jitsi/js-utils@2.0.0":
+"@jitsi/js-utils@2.0.0", "@jitsi/js-utils@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@jitsi/js-utils/-/js-utils-2.0.0.tgz#73acd7ae0010a93c189586c4d3e7aabcc8f329e5"
   integrity sha512-Rk1JFGdXEJ5+eALVRTMohfn3pdMDQqlCJQEkCMLXKlCpEo+JhsOrB4KzlPo1rV9U8PnRfrf0j5N9uf/0C2a8Gw==
@@ -1889,14 +1880,14 @@
   resolved "https://registry.yarnpkg.com/@jitsi/logger/-/logger-2.0.0.tgz#cae22b2071abb489354e1a9784b69143e55792a3"
   integrity sha512-QZE0NpI/GKRdZK0vhuyFYWr4XkCz4slihkSfy6RTszjj/YEHZKIV7yGJo6Hbs3kYI2h5v7apoy+h2WCOMumPJw==
 
-"@jitsi/rtcstats@9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@jitsi/rtcstats/-/rtcstats-9.0.1.tgz#e22a313926378dd93aeb373f6929b8ea9324eb59"
-  integrity sha512-kImbDneVzU3pBDyY0vOruG96iYnMp2aOeHxYvnHgXGCTQfqF4dcPGtWMucSb5Dz7KEY6+U6G77Kay5C9p9lFjw==
+"@jitsi/rtcstats@9.2.0":
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/@jitsi/rtcstats/-/rtcstats-9.2.0.tgz#095a7d75f6ab6f1046a937ccd4f4a49a6e8e2fe7"
+  integrity sha512-bGQRLFio25++bi3s0em0xKD+WIqhDwg8OQ71K4BXZNOVL3eVX3R/bxbSEok6UYjFQxwoVjfdM4J8cHUu7RwrQw==
   dependencies:
-    "@jitsi/js-utils" "1.0.0"
+    "@jitsi/js-utils" "^2.0.0"
     sdp "^3.0.3"
-    uuid "3.1.0"
+    uuid "^8.3.2"
 
 "@jitsi/sdp-interop@https://git@github.com/jitsi/sdp-interop#3d49eb4aa26863a3f8d32d7581cdb4321244266b":
   version "1.0.5"
@@ -7030,9 +7021,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1439.0.0+42f5b4bf/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1448.0.0+3df2abec/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1439.0.0+42f5b4bf/lib-jitsi-meet.tgz#a072645d56d1f9e9432b68762228f84d31ff6e7c"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1448.0.0+3df2abec/lib-jitsi-meet.tgz#46bc81cd9c143688a67a073a2b9dbf7cb4b4fb68"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
@@ -8698,11 +8689,6 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.27, postcss@^7.0.3
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postis@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/postis/-/postis-2.2.0.tgz#dc5e323765985ddfdcbfdafc3141a9569aef75a9"
-  integrity sha512-MKoPQqjjNU6aDr9IN3VFMZk+ND2jXjBGVHdU/Kgyffb8mr11ZQSE7QwmpLw+iYRjF8YIDSgdVoaPLugJ0ycHYg==
-
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -9218,7 +9204,7 @@ react-native@0.68.1:
 react-node-resolver@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-node-resolver/-/react-node-resolver-1.0.1.tgz#1798a729c0e218bf2f0e8ddf79c550d4af61d83a"
-  integrity sha1-F5inKcDiGL8vDo3fecVQ1K9h2Do=
+  integrity sha512-IiSe0h2+IJo4enSlbdYjdwJnY86A7TwNxnfQVG2yApxVkHj9es1jum9Lb2aiBXKkLnwAj7ufBBlAa0ROU0o9nA==
 
 react-popper@^2.2.3:
   version "2.2.5"
@@ -9378,7 +9364,7 @@ readdirp@~3.6.0:
 readline@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/readline/-/readline-1.3.0.tgz#c580d77ef2cfc8752b132498060dc9793a7ac01c"
-  integrity sha1-xYDXfvLPyHUrEySYBg3JeTp6wBw=
+  integrity sha512-k2d6ACCkiNYz222Fs/iNze30rRJ1iIicW7JuX/7/cozvih6YCkFZH+J6mAFDVgv0dRBaAyr4jDqC95R2y4IADg==
 
 recast@^0.20.4:
   version "0.20.5"
@@ -9400,7 +9386,7 @@ rechoir@^0.7.0:
 redux-thunk@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
-  integrity sha1-5hWhbha0ehmlFXZhM9Hj6Zt4UuU=
+  integrity sha512-OOFWh9mt/7i94QPq4IAxhSIUyfIJJRnk6pe1IwgXethQik3kyg1wuxVZZlW9QOmL5rP/MrwzV+Cb+/HBKlvM8Q==
 
 redux@4.0.4:
   version "4.0.4"
@@ -9492,12 +9478,12 @@ repeat-element@^1.1.2:
 repeat-string@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
-  integrity sha1-jcrkcOHIirwtYA//Sndihtp15jc=
+  integrity sha512-PV0dzCYDNfRi1jCDbJzpW7jNNDRuCOG/jI5ctQcGKt/clZD+YcPS3yIlWuTJMmESC8aevCFmWJy5wjAFgNqN6w==
 
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
-  integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
+  integrity sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==
 
 require-from-string@^2.0.2:
   version "2.0.2"
@@ -9512,7 +9498,7 @@ require-main-filename@^2.0.0:
 requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
-  integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+  integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
 resemblejs@4.0.0:
   version "4.0.0"
@@ -9536,7 +9522,7 @@ resolve-cwd@^3.0.0:
 resolve-from@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
-  integrity sha1-six699nWiBvItuZTM17rywoYh0g=
+  integrity sha512-GnlH6vxLymXJNMBo7XP1fJIzBFbdYt49CuTwmB/6N53t+kMPRMFKz783LlQ4tv28XoQfMWinAJX6WCGf2IlaIw==
 
 resolve-from@^4.0.0:
   version "4.0.0"
@@ -9551,7 +9537,7 @@ resolve-from@^5.0.0:
 resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
-  integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
+  integrity sha512-ZuF55hVUQaaczgOIwqWzkEcEidmlD/xl44x1UZnhOXcYuFN2S6+rcxpG+C1N3So0wvNI3DmJICUFfu2SxhBmvg==
 
 resolve@^1.12.0, resolve@^1.14.2, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.9.0:
   version "1.22.0"
@@ -9573,7 +9559,7 @@ resolve@^2.0.0-next.3:
 restore-cursor@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-2.0.0.tgz#9f7ee287f82fd326d4fd162923d62129eee0dfaf"
-  integrity sha1-n37ih/gv0ybU/RYpI9YhKe7g368=
+  integrity sha512-6IzJLuGi4+R14vwagDHX+JrXmPVtPpn4mffDJ1UdR7/Edm87fl6yi8mMBIVvFtJaNTUvjughmW4hwLhRG7gC1Q==
   dependencies:
     onetime "^2.0.0"
     signal-exit "^3.0.2"
@@ -9604,12 +9590,12 @@ reusify@^1.0.4:
 rgb-regex@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/rgb-regex/-/rgb-regex-1.0.1.tgz#c0e0d6882df0e23be254a475e8edd41915feaeb1"
-  integrity sha1-wODWiC3w4jviVKR16O3UGRX+rrE=
+  integrity sha512-gDK5mkALDFER2YLqH6imYvK6g02gpNGM4ILDZ472EwWfXZnC2ZEpoB2ECXTyOVUKuk/bPJZMzwQPBYICzP+D3w==
 
 rgba-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
-  integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
+  integrity sha512-zgn5OjNQXLUTdq8m17KdaicF6w89TZs8ZU8y0AYENIU6wG8GG6LLm0yLSiPY8DmaYmHdgRW8rnApjoT0fQRfMg==
 
 rimraf@^2.5.4, rimraf@^2.6.3:
   version "2.7.1"
@@ -9628,7 +9614,7 @@ rimraf@^3.0.2:
 rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
-  integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
+  integrity sha512-R5KMKHnPAQaZMqLOsyuyUmcIjSeDm+73eoqQpaXA7AZ22BL+6C+1mcUscgOsNd8WVlJuvlgAPsegcx7pjlV0Dg==
 
 rimraf@~2.6.2:
   version "2.6.3"
@@ -9668,7 +9654,7 @@ safe-buffer@5.2.1, safe-buffer@~5.2.0:
 safe-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
-  integrity sha1-QKNmnzsHfR6UPURinhV91IAjvy4=
+  integrity sha512-aJXcif4xnaNUzvUuC5gcb46oTS7zvg4jpMTnuqtrEPlR3vFr4pxtdTwaF1Qs3Enjn9HK+ZlwQui+a7z0SywIzg==
   dependencies:
     ret "~0.1.10"
 
@@ -10930,11 +10916,6 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
-
-uuid@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
-  integrity sha512-DIWtzUkw04M4k3bf1IcpS2tngXEL26YUD2M0tMDUpnUrz2hgzUBlD55a4FjdLGPvfHxS6uluGWvaVEqgBcVa+g==
 
 uuid@8.1.0:
   version "8.1.0"
