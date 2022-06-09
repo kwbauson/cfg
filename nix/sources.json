@@ -19,18 +19,6 @@
         "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
         "version": "0.7.1"
     },
-    "flake-compat": {
-        "branch": "master",
-        "description": null,
-        "homepage": null,
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "b4a34015c698c7793d592d66adbab377907a2be8",
-        "sha256": "1qc703yg0babixi6wshn5wm2kgl5y1drcswgszh4xxzbrwkk9sv7",
-        "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/b4a34015c698c7793d592d66adbab377907a2be8.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "git-fuzzy": {
         "branch": "master",
         "description": "interactive `git` with the help of `fzf`",
@@ -61,10 +49,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "def3c76e10794014c3a4f13adb915e051ffae204",
-        "sha256": "0s9jg1q7zgyw51qnycjpmd8lyj3828yfgnfg845c1vis0kac421l",
+        "rev": "aee94ad6fb78a02ae0ec4c5ca18e98c8450bc5cb",
+        "sha256": "1as8im3xb5ylvnp0wi0hf8yv4q2vs4sjww5bm7d4hvbxsjbb2xj8",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/def3c76e10794014c3a4f13adb915e051ffae204.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/aee94ad6fb78a02ae0ec4c5ca18e98c8450bc5cb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {

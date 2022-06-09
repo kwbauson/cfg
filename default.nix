@@ -1,9 +1,10 @@
 let
-  flake-compat = import (import ./nix/sources.nix).flake-compat;
-  getFlake = path:
-    if builtins ? getFlake
-    then builtins.getFlake (toString path)
-    else (flake-compat { src = builtins.path { name = "source"; inherit path; }; }).defaultNix;
+  lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+  flake-compat = with lock.nodes.flake-compat.locked; import (fetchTarball {
+    url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+    sha256 = narHash;
+  });
+  getFlake = path: (flake-compat { src = builtins.path { name = "source"; inherit path; }; }).defaultNix;
   cfg = getFlake ./.;
   pkgs = cfg.packages.${builtins.currentSystem};
 in
