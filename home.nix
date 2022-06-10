@@ -363,6 +363,7 @@ with builtins; with pkgs; with mylib; {
           git add -A
           git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
         '';
+        dfd = gs ''git df $(git merge-base origin/$(git default) HEAD)'';
         dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
         f = "fetch --all";
         g = gs "git f && git mo";
