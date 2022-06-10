@@ -4,7 +4,7 @@ let
     url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
     sha256 = narHash;
   });
-  getFlake = path: (flake-compat { src = builtins.path { name = "source"; inherit path; }; }).defaultNix;
+  getFlake = src: (flake-compat { inherit src; }).defaultNix;
   cfg = getFlake ./.;
   pkgs = cfg.packages.${builtins.currentSystem};
 in
