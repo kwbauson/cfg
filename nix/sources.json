@@ -49,10 +49,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "aee94ad6fb78a02ae0ec4c5ca18e98c8450bc5cb",
-        "sha256": "1as8im3xb5ylvnp0wi0hf8yv4q2vs4sjww5bm7d4hvbxsjbb2xj8",
+        "rev": "066dd71afbd55fb9285844f8a5e14dbdcf571bd3",
+        "sha256": "0y43djd79vszj7wzm9xla7navqdkrng1kw2xqnjx71x88igrxgds",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/aee94ad6fb78a02ae0ec4c5ca18e98c8450bc5cb.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/066dd71afbd55fb9285844f8a5e14dbdcf571bd3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -68,12 +68,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0zz47as14lsj930jm9gplsngxr5d92fsg7fw1qxk0lgq7phawj5m",
+        "sha256": "1p51z1c9w2p1xd45zbda4yipk0h4l29vjxxkk4s4gmp8kvk1nghy",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-06-05/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-06-15/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-06-05"
+        "version": "2022-06-15"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -81,10 +81,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "dd2897c3a6e404446704a63f40b9a29fa0acf752",
-        "sha256": "1qim1466qi8a4cz6qh3cwrdkxrrwvrkvrn2gxjlqa5jxvc39cv8v",
+        "rev": "5c4f247688fc91d665df65f71c81e0726621aaa8",
+        "sha256": "1zkrcph1vqgl0q7yi9cg0ghq1mmvhy8rlc6xvyww56i3j87cg5gn",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/dd2897c3a6e404446704a63f40b9a29fa0acf752.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/5c4f247688fc91d665df65f71c81e0726621aaa8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
