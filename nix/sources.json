@@ -49,10 +49,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "ccc1157df5404104e3c157470ae4f8e2f266d359",
-        "sha256": "0bns8a8r8drjrzz302nkh7ds1b2ll15a2g9xmx06nq1ssfj548dz",
+        "rev": "0e98f902058a48e2287648340e44056cacea0486",
+        "sha256": "1lv6n7ab26pq2wg47d9gkvy0a2qhr8wfqkch2j3wr6lybpg48zpm",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/ccc1157df5404104e3c157470ae4f8e2f266d359.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/0e98f902058a48e2287648340e44056cacea0486.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -96,12 +96,12 @@
         "version": "2022-04-07"
     },
     "r2modman": {
-        "sha256": "05f9bqf5qia5r7iadpr68akl77r6dg6k2b08ffwjzdpd2avwzp1y",
+        "sha256": "0ljmrfw1rm3cpgn6mbb6ankqr7hwg2fz4wq9j7av5mm3lz13bkvf",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.28/r2modman-3.1.28.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.29/r2modman-3.1.29.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.28"
+        "version": "3.1.29"
     },
     "ranger_devicons": {
         "branch": "main",
