@@ -68,12 +68,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "1p51z1c9w2p1xd45zbda4yipk0h4l29vjxxkk4s4gmp8kvk1nghy",
+        "sha256": "03jbkw8lr43nhqhd3y1s0kzmjm8qnil6nxdasmhc0y9y4hsgk71d",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-06-15/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-06-19/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-06-15"
+        "version": "2022-06-19"
     },
     "npmlock2nix": {
         "branch": "master",
