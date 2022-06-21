@@ -6726,6 +6726,11 @@ js-md5@0.7.3:
   resolved "https://registry.yarnpkg.com/js-md5/-/js-md5-0.7.3.tgz#b4f2fbb0b327455f598d6727e38ec272cd09c3f2"
   integrity sha512-ZC41vPSTLKGwIRjqDh8DfXoCrdQIyBgspJVPXHBGu4nZlAEvG3nf+jO9avM9RmLiGakg7vz974ms99nEV0tmTQ==
 
+js-sha512@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/js-sha512/-/js-sha512-0.8.0.tgz#dd22db8d02756faccf19f218e3ed61ec8249f7d4"
+  integrity sha512-PWsmefG6Jkodqt+ePTvBZCSMFgN7Clckjd0O7su3I0+BW2QWUTJNzjktHsztGLhncP2h8mcF9V9Y2Ha59pAViQ==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -9008,10 +9013,9 @@ react-native-device-info@8.4.8:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-8.4.8.tgz#fc92ae423e47db6cfbf30c30012e09cee63727fa"
   integrity sha512-92676ZWHZHsPM/EW1ulgb2MuVfjYfMWRTWMbLcrCsipkcMaZ9Traz5mpsnCS7KZpsOksnvUinzDIjsct2XGc6Q==
 
-react-native-dialog@9.2.1:
-  version "9.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-dialog/-/react-native-dialog-9.2.1.tgz#21e12c8bf70df390963c1c4e697ce8d16055d4a4"
-  integrity sha512-UNnGFTpH0cX16cJZLFq9/TAZH1+B2vzJrQL1mUaSqZjV+sFTpUB1WvghJZxPwi52v587kJpfKN7oPfWaXAu+YQ==
+"react-native-dialog@https://github.com/jitsi/react-native-dialog/releases/download/v9.2.2-jitsi.1/react-native-dialog-9.2.2.tgz":
+  version "9.2.2"
+  resolved "https://github.com/jitsi/react-native-dialog/releases/download/v9.2.2-jitsi.1/react-native-dialog-9.2.2.tgz#d29c81e339a354f707ffe7f11da386f4d65cebcf"
 
 react-native-gesture-handler@2.1.0:
   version "2.1.0"
