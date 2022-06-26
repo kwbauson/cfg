@@ -41,6 +41,7 @@
     notFiles = self.poetry.files;
     out = override
       (inputs.mach-nix.lib.${system}.mkPython {
+        python = "python39";
         ignoreDataOutdated = true;
         ignoreCollisions = true;
         requirements = excludeLines (hasPrefix "itomate") ''

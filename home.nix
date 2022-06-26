@@ -64,7 +64,7 @@ with builtins; with pkgs; with mylib; {
       };
 
   home = {
-    inherit username homeDirectory;
+    stateVersion = "22.11";
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
       BROWSER = "firefox";

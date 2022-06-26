@@ -77,13 +77,16 @@
             , host ? "generic"
             }:
             let conf = (home-manager.lib.homeManagerConfiguration rec {
-              inherit system pkgs username homeDirectory;
-              configuration = {
-                imports = [
-                  ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
-                  ./home.nix
-                ];
-              };
+              inherit pkgs;
+              modules = [
+                { home = { inherit username homeDirectory; }; }
+                {
+                  imports = [
+                    ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
+                    ./home.nix
+                  ];
+                }
+              ];
             });
             in
             conf.activationPackage // conf // { inherit pkgs; }
