@@ -49,10 +49,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "c29e8bbdd195a6e68d7b02723a0952156b1cdbed",
-        "sha256": "10xbmysclaxhlyi9jsywa58q8130gb5m6lh75d8zp8wh4afh0sv6",
+        "rev": "d5146aaf2e3733f2c170dc732857e277aa288bbc",
+        "sha256": "17y6psycrw9vyh80hmwrs60y3wrn8xq3k4spfw1y7rd00l006cpz",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/c29e8bbdd195a6e68d7b02723a0952156b1cdbed.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/d5146aaf2e3733f2c170dc732857e277aa288bbc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -68,12 +68,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "03jbkw8lr43nhqhd3y1s0kzmjm8qnil6nxdasmhc0y9y4hsgk71d",
+        "sha256": "0xwvfv7xjri0v06swqqfx7hrj6g7506h91x8qybg94rpfka3brm8",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-06-19/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-06-26/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-06-19"
+        "version": "2022-06-26"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -140,10 +140,10 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
-        "sha256": "0sps1xlx3iwfli7dprxxgz4mp8zwg5nyisafiwk89pz8k0g1psv9",
+        "sha256": "1k80f2sihnfax20z2pd84g18y1bqpf7dgfnq7iivmfl13wlm1wfd",
         "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.2.1.en-US.linux-x86_64.tar.bz2",
+        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.3.1.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.1.2.1"
+        "version": "G4.1.3.1"
     }
 }
