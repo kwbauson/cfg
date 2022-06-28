@@ -21,7 +21,7 @@ with builtins; with pkgs; with mylib; {
             man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree
             nmap openssh p7zip patch perl pigz procps progress pv ranger
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
-            which xdg_utils xxd xz zip bitwarden-cli libqalculate youtube-dl
+            which xdg_utils xxd xz zip bitwarden-cli libqalculate yt-dlp
             speedtest-cli tldr nix-top nixos-install-tools better-comma dogdns
             ;
         };
@@ -58,7 +58,7 @@ with builtins; with pkgs; with mylib; {
           inherit
             diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
             strace sway nsxiv usbutils breeze-icons dzen2 zoom-us maim
-            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl
+            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg
             ;
         };
       };
