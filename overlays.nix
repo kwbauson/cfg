@@ -220,10 +220,10 @@
         waterfox
         r2modman
         (nle.build {
-          path = writeTextDir "requirements.txt" ''
-            black
-            bpython
-            mypy
+          path = with python39.pkgs; writeTextDir "requirements.txt" ''
+            black==22.3.0
+            bpython==${bpython.version}
+            mypy==${mypy.version}
           '';
         })
       ])
