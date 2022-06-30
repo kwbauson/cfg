@@ -248,7 +248,15 @@ case $cmd in
     echo set +o allexport
     ;;
   direnv)
-    echo '[[ -z $IN_NIX_SHELL ]] && source_up_if_exists || true'
+    echo '
+    if [[ -z $IN_NIX_SHELL ]];then
+      if type -t source_up_if_exists &> /dev/null;then
+        source_up_if_exists
+      else
+        source_up
+      fi
+    fi
+    '
     echo "$("$0" env)"
     for path in "${buildfiles[@]}";do
       if [[ -d $path ]];then
