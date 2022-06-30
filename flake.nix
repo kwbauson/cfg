@@ -135,12 +135,11 @@
           path = ./.;
           name = "source";
           filter = path: type: !builtins.any (p: p == (baseNameOf path))
-            [ ".git" ".github" "output-paths" "secrets" ];
+            [ ".git" ".github" "secrets" ];
         };
 
         switch-scripts = mapAttrs (_: config: config.pkgs.switch) homeConfigurations;
         output-derivations = { inherit self-source; } // removeAttrs switch-scripts [ "keith-mac" ];
-        output-paths = generators.toKeyValue { } (mapAttrs (n: v: toString v) output-derivations);
 
         iso = with self.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
           imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix" ];

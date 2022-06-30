@@ -213,11 +213,6 @@ case $cmd in
     fi
     [[ -x update-helper ]] && ./update-helper
     "$0" generate
-    [[ -e output-paths ]] && "$0" dump-output-paths || true
-    ;;
-  dump-output-paths)
-    paths=$(nix eval --raw '.#output-paths')
-    echo "$paths" > output-paths
     ;;
   run)
     eval "$("$0" env)"
