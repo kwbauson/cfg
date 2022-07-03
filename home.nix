@@ -370,7 +370,7 @@ with builtins; with pkgs; with mylib; {
         gr = gs "git pull origin $(git branch-name) --rebase --autostash";
         gd = gs "git fetch origin $(git default):$(git default)";
         md = gs "git merge $(git default)";
-        mo = gs "git merge origin/$(git branch-name) --ff-only";
+        mo = gs "git merge --ff-only";
         gmd = gs "git gd && g md";
         rmo = gs "git branch -D $1 && git push origin --delete $1";
         hidden = gs "git ls-files -v | grep '^S' | cut -c3-";
