@@ -4,7 +4,9 @@
 **/*~
 **/.Trash
 **/.cache
+**/.parcel-cache
 **/.sass-cache
+**/.terraform
 **/Application Cache
 **/Battle.net
 **/Cache
