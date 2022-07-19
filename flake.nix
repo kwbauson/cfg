@@ -6,12 +6,6 @@
     flake-compat.flake = false;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.inputs.flake-compat.follows = "flake-compat";
-    rnix-lsp.url = "github:nix-community/rnix-lsp";
-    rnix-lsp.inputs.nixpkgs.follows = "nixpkgs";
-    rnix-lsp.inputs.utils.follows = "flake-utils";
-    rnix-lsp.inputs.naersk.follows = "naersk";
-    naersk.url = "github:nix-community/naersk";
-    naersk.inputs.nixpkgs.follows = "nixpkgs";
     mach-nix.inputs.nixpkgs.follows = "nixpkgs";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";

@@ -77,26 +77,6 @@
         "type": "indirect"
       }
     },
-    "naersk": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1655042882,
-        "narHash": "sha256-9BX8Fuez5YJlN7cdPO63InoyBy7dm3VlJkkmTt6fS1A=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "cddffb5aa211f50c4b8750adbec0bbbdfb26bb9f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "naersk",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1657781616,
@@ -189,46 +169,18 @@
         "type": "github"
       }
     },
-    "rnix-lsp": {
-      "inputs": {
-        "naersk": [
-          "naersk"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1657475948,
-        "narHash": "sha256-iOMjTTW2hQbBU3u4pFP5i4Hp4l+r1gkU86YzVfBCx6w=",
-        "owner": "nix-community",
-        "repo": "rnix-lsp",
-        "rev": "0449f49a0468624128dd4f5e2d27d1a0e6f894f4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "rnix-lsp",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "mach-nix": "mach-nix",
-        "naersk": "naersk",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nmd": "nmd",
         "nmt": "nmt",
-        "pypi-deps-db": "pypi-deps-db",
-        "rnix-lsp": "rnix-lsp"
+        "pypi-deps-db": "pypi-deps-db"
       }
     }
   },

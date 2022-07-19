@@ -42,7 +42,7 @@ with builtins; with pkgs; with mylib; {
         development = {
           inherit
             bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
-            crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
+            crystal nim nimlsp nixpkgs-fmt rnix-lsp shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
             git-ignore git-fuzzy black terraform-ls cachix nle concurrently
             arduino tasknix

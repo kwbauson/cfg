@@ -44,7 +44,6 @@
     };
     steam-native = self.steam.override { nativeOnly = true; };
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
-    rnix-lsp-unstable = inputs.rnix-lsp.defaultPackage.${system};
     nle-cfg = self.nle.build { path = ./.; };
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) emborg git-remote-codecommit;
