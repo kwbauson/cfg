@@ -189,6 +189,7 @@
       chmod -R +w $out
       cp ${self.self-flake-lock} $out/flake.lock
     '';
+    maim = maim.overrideAttrs (attrs: { buildInputs = attrs.buildInputs ++ [ xorg.libSM ]; });
   })
   (self: super: with super; with mylib;
   let extra-packages = mapAttrs
