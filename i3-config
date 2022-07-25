@@ -131,6 +131,6 @@ no_focus [window_role="qutebrowser_background"]
 for_window [workspace="floating"] floating enable
 for_window [title="^[Zz]oom$"] floating enable
 for_window [title="^Zoom .* Meetings?$"] floating enable
-for_window [title="^.*action=start.confno=.*$"] floating enable
+for_window [title="^.*action=start.*confno=.*$"] floating enable
 
 # vim:ft=i3config
