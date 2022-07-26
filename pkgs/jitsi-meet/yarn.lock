@@ -1867,10 +1867,18 @@
   resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.0.0.tgz#7c55f1a5484f1ad15ce88a2c5ba5a32b711db212"
   integrity sha512-DGk6HiaYUDWM5YNLuzPZ0oxFzI1BvgbS7ogi1KR6nUB1pdoQY2dFL73J3hm7QgNZbc7+x/xhXwnNk9f2aAaVTQ==
 
-"@jitsi/js-utils@2.0.0", "@jitsi/js-utils@^2.0.0":
+"@jitsi/js-utils@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@jitsi/js-utils/-/js-utils-2.0.0.tgz#73acd7ae0010a93c189586c4d3e7aabcc8f329e5"
   integrity sha512-Rk1JFGdXEJ5+eALVRTMohfn3pdMDQqlCJQEkCMLXKlCpEo+JhsOrB4KzlPo1rV9U8PnRfrf0j5N9uf/0C2a8Gw==
+  dependencies:
+    bowser "2.7.0"
+    js-md5 "0.7.3"
+
+"@jitsi/js-utils@2.0.3", "@jitsi/js-utils@^2.0.0":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@jitsi/js-utils/-/js-utils-2.0.3.tgz#bbfd39d2e4f1abe45ce9650964209e6e97b36d01"
+  integrity sha512-yEojQxrbDcx6VngnjVex7y3ypxMxUpZ/DSpP6uhbC53xmw9W/xcNwGspTjZD0cAKAcTjT7e8OQc0ptYyMi8WbA==
   dependencies:
     bowser "2.7.0"
     js-md5 "0.7.3"
