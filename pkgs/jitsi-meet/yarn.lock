@@ -7313,9 +7313,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1468.0.0+634885b9/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1474.0.0+5ae3b47c/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1468.0.0+634885b9/lib-jitsi-meet.tgz#0cdca2587d4253781969e06e96106702e283c860"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1474.0.0+5ae3b47c/lib-jitsi-meet.tgz#f84a6a16dcb979a7e755cb21bc5dfa0addbbd8a3"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
@@ -7333,7 +7333,7 @@ levn@^0.4.1:
     strophejs-plugin-disco "0.0.2"
     strophejs-plugin-stream-management "https://git@github.com/jitsi/strophejs-plugin-stream-management#001cf02bef2357234e1ac5d163611b4d60bf2b6a"
     uuid "8.1.0"
-    webrtc-adapter "8.0.0"
+    webrtc-adapter "8.1.1"
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -11470,10 +11470,10 @@ webpack@5.57.1:
     watchpack "^2.2.0"
     webpack-sources "^3.2.0"
 
-webrtc-adapter@8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-8.0.0.tgz#b1bd88c02ad647d064dc20f29fb311dca01c2b15"
-  integrity sha512-1U73dJB7xdXC3UmCHK3VuWU/bD1MBfYGgEPCXlBB/5QVQOzbi80UxBGvAvRt4Oocuwo5bzAD272kpkBd6f0HwA==
+webrtc-adapter@8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-8.1.1.tgz#e4a4dfd1b5085d119da40c4efc0147f7d0961cba"
+  integrity sha512-1yXevP7TeZGmklEXkvQVrZp3fOSJlLeXNGCA7NovQokxgP3/e2T3EVGL0eKU87S9vKppWjvRWqnJeSANEspOBg==
   dependencies:
     sdp "^3.0.2"
 
