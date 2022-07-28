@@ -12,12 +12,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
-        "sha256": "03jkdxygf1gyhiphvr86sc7w5kr3l6hy3c4486zs3aqpqxmy5dh1",
+        "sha256": "16nmi9vbf8bjsg8h46l5l32xnwmai8zs94swlld1y7a62jqr1wql",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.7.1.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.8.0.tar.gz",
         "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.7.1"
+        "version": "0.8.0"
     },
     "git-fuzzy": {
         "branch": "master",
@@ -49,10 +49,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "8b4c7ebc03fb1cdff662cb8e6fe462a9d0139b21",
-        "sha256": "1w684in4msaf6mjlrg2irzmi706dall1vr2wga21qwq28cffxs52",
+        "rev": "e139c6d32dea325b813768faaf624ffefea0644e",
+        "sha256": "1j5pb1m057c4lcn2i7yxzv635mg36ais20q9d4yd99ky1vil19aw",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/8b4c7ebc03fb1cdff662cb8e6fe462a9d0139b21.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/e139c6d32dea325b813768faaf624ffefea0644e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
