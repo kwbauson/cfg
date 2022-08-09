@@ -49,10 +49,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "083b009eba677f8ca304b522b0175916eda66fb1",
-        "sha256": "13szsihadla3mfigp5ajvffdnfk5jz21mih7xdndwjhc6mqp31l0",
+        "rev": "5c52ee97edfd0beee1ee53815bf90da5ad948e96",
+        "sha256": "01rnf1gx7prysh8yj27r83qc1jnxn5azipj04vazfv3v6p42hi42",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/083b009eba677f8ca304b522b0175916eda66fb1.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/5c52ee97edfd0beee1ee53815bf90da5ad948e96.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -68,12 +68,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "15bh2p15h358f9dz4c8ncd6bh3q2fi0bgg030njd6i8wwiximvf0",
+        "sha256": "1j9i0ghlqc2sjblay3hm85i051bb4k7kkqsbbqjsd7r2z7gfkfvj",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-07-31/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-08-07/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-07-31"
+        "version": "2022-08-07"
     },
     "npmlock2nix": {
         "branch": "master",

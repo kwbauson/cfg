@@ -190,6 +190,7 @@
       cp ${self.self-flake-lock} $out/flake.lock
     '';
     maim = maim.overrideAttrs (attrs: { buildInputs = attrs.buildInputs ++ [ xorg.libSM ]; });
+    localtime = (importNixpkgs "1d86e567527d433ef8b9e4829d61d3a0fcb19ec7").localtime;
   })
   (self: super: with super; with mylib;
   let extra-packages = mapAttrs
