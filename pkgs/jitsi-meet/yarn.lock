@@ -130,16 +130,6 @@
     "@atlaskit/theme" "^11.0.0"
     "@babel/runtime" "^7.0.0"
 
-"@atlaskit/field-text@11.0.4":
-  version "11.0.4"
-  resolved "https://registry.yarnpkg.com/@atlaskit/field-text/-/field-text-11.0.4.tgz#cfd79c9428efdfdb817af81a8e96a585d2aff6d3"
-  integrity sha512-unm6oVzrzejXnbv0gH3j/oaV4UeA+j+bT2MmsOw0hmUMy3hjd4AChqB/ob604F+iuU5ETd/I7DzoEm+brpOg2Q==
-  dependencies:
-    "@atlaskit/analytics-next" "^8.0.0"
-    "@atlaskit/field-base" "^15.0.0"
-    "@atlaskit/theme" "^11.0.0"
-    "@babel/runtime" "^7.0.0"
-
 "@atlaskit/flag@14.1.0":
   version "14.1.0"
   resolved "https://registry.yarnpkg.com/@atlaskit/flag/-/flag-14.1.0.tgz#5c2759d0ebaa896413ccf9947b75a2d490473e10"
@@ -7046,9 +7036,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1484.0.0+6d5ca18b/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1487.0.0+f3f922a8/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1484.0.0+6d5ca18b/lib-jitsi-meet.tgz#5cecac17ef5170f719a03cf9ad04891d1142fd03"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1487.0.0+f3f922a8/lib-jitsi-meet.tgz#fa61ab0dcb635b7213ca923af6881e22a80b92c3"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
