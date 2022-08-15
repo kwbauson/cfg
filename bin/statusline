@@ -60,7 +60,12 @@ blocks = [
     IO.popen('pactl subscribe').each_line.grep(/sink/) { |l| block.(volume) }
   },
   interval(10) {
-    status = `headsetcontrol -b 2>&1`.lines.grep(/^Battery: /).first&.chomp&.delete_prefix('Battery: ') || ''
+    output = `headsetcontrol -b 2>&1`
+    if output.include?('100')
+      '100%'
+    else
+      output.lines.grep(/^Battery: /).first&.chomp&.delete_prefix('Battery: ') || ''
+    end
   },
   interval { Time.now.strftime('%a %b %_d %_I:%M %p') },
 ]
