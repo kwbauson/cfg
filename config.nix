@@ -10,4 +10,5 @@
     # enablePepperFlash = true;
   };
   # contentAddressedByDefault = true;
+  zathura.useMupdf = false;
 }
