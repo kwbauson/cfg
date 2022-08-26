@@ -29,7 +29,7 @@ jitsi-meet.overrideAttrs (_: {
     dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
     cd "$dir"
     cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
-    yarn import
+    yarn import --ignore-engines
     cd -
     cp "$dir"/yarn.lock pkgs/jitsi-meet
     rm -r "$dir"
