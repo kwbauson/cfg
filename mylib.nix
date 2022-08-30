@@ -221,7 +221,7 @@ cli // generators // lib // builtins // rec {
       ${yarn2nix-moretea.fixup_yarn_lock}/bin/fixup_yarn_lock yarn.lock
       export HOME=$PWD/yarn_home
       yarn config --offline set yarn-offline-mirror ${yarn2nix-moretea.importOfflineCache yarnNix}
-      yarn --offline --ignore-scripts --modules-folder $out
+      yarn --offline --ignore-scripts --ignore-engines --modules-folder $out
       cd $out
       patchShebangs .
       ${preRebuild}

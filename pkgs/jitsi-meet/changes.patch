@@ -1,8 +1,8 @@
 diff --git a/css/filmstrip/_tile_view.scss b/css/filmstrip/_tile_view.scss
-index 4bc64ef71..2176c8b89 100644
+index 083b4c083..7fee90ba6 100644
 --- a/css/filmstrip/_tile_view.scss
 +++ b/css/filmstrip/_tile_view.scss
-@@ -110,7 +110,7 @@
+@@ -97,7 +97,7 @@
       * Max-width corresponding to the ASPECT_RATIO_BREAKPOINT from features/filmstrip/constants,
       * from which we subtract the chat size.
       */
@@ -11,11 +11,11 @@ index 4bc64ef71..2176c8b89 100644
          video {
              object-fit: cover;
          }
-diff --git a/react/features/filmstrip/constants.js b/react/features/filmstrip/constants.js
-index dd4923d6d..cc1ad90ff 100644
---- a/react/features/filmstrip/constants.js
-+++ b/react/features/filmstrip/constants.js
-@@ -34,7 +34,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
+diff --git a/react/features/filmstrip/constants.ts b/react/features/filmstrip/constants.ts
+index cbe134765..0c5f9ce94 100644
+--- a/react/features/filmstrip/constants.ts
++++ b/react/features/filmstrip/constants.ts
+@@ -32,7 +32,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
   * single column view.
   * If this is to be modified, please also change the related media query from the tile_view scss file.
   */
@@ -25,7 +25,7 @@ index dd4923d6d..cc1ad90ff 100644
  /**
   * Minimum height of tile for small screens.
 diff --git a/react/features/shared-video/components/web/AbstractVideoManager.js b/react/features/shared-video/components/web/AbstractVideoManager.js
-index 43f7886b2..e16bf37f8 100644
+index bd4d7d5e6..caff94c4b 100644
 --- a/react/features/shared-video/components/web/AbstractVideoManager.js
 +++ b/react/features/shared-video/components/web/AbstractVideoManager.js
 @@ -326,6 +326,7 @@ class AbstractVideoManager extends PureComponent<Props> {
