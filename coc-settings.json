@@ -3,6 +3,7 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualText": true,
   "suggest.removeDuplicateItems": true,
+  "suggest.noselect": true,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "list.insertMappings": {
     "<c-n>": "normal:j",
@@ -17,7 +18,6 @@
   "prettier.arrowParens": "avoid",
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
-  "prettier.disableSuccessMessage": true,
   "typescript.preferences.quoteStyle": "single",
   "tsserver.disableAutomaticTypeAcquisition": true,
   "tsserver.ignoreLocalTsserver": true,
