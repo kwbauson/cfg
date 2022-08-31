@@ -5,18 +5,11 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.inputs.flake-compat.follows = "flake-compat";
     mach-nix.inputs.nixpkgs.follows = "nixpkgs";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
     pypi-deps-db.flake = false;
-    nmd.url = "gitlab:rycee/nmd";
-    nmd.flake = false;
-    nmt.url = "gitlab:rycee/nmt";
-    nmt.flake = false;
-    home-manager.inputs.nmd.follows = "nmd";
-    home-manager.inputs.nmt.follows = "nmt";
     home-manager.inputs.utils.follows = "flake-utils";
   };
 
