@@ -43,6 +43,18 @@
         "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "haskell-nix": {
+        "branch": "master",
+        "description": "Alternative Haskell Infrastructure for Nixpkgs",
+        "homepage": "https://input-output-hk.github.io/haskell.nix",
+        "owner": "input-output-hk",
+        "repo": "haskell.nix",
+        "rev": "de81c31829c5f00ab59d0800d852fb6afe208043",
+        "sha256": "1bp9cab1vaj51j070akppfn45llngrhmj8nxjk4s7ahfwa87kfw2",
+        "type": "tarball",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/de81c31829c5f00ab59d0800d852fb6afe208043.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "jitsi-meet": {
         "branch": "master",
         "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
@@ -125,6 +137,18 @@
         "sha256": "0zaz30mkmnahvv79j59bx1c6d6l9i0729qqfbmijpr44h8q5gxvk",
         "type": "tarball",
         "url": "https://github.com/ikruglov/slapper/archive/552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "swarm": {
+        "branch": "main",
+        "description": "Resource gathering + programming game",
+        "homepage": null,
+        "owner": "swarm-game",
+        "repo": "swarm",
+        "rev": "68333dd70a289584207c65105caff655f4a354f7",
+        "sha256": "0gc74aaa0gilm3dpbaqxrb1qbkpxcimjqr0j8xgrjl6v6j6ffrpv",
+        "type": "tarball",
+        "url": "https://github.com/swarm-game/swarm/archive/68333dd70a289584207c65105caff655f4a354f7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
