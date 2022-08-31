@@ -81,11 +81,6 @@ endfunction
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=0 F :call CocAction('format')
 command! -nargs=0 Diagnostics :CocList --normal --auto-preview diagnostics
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 imap <silent><expr> <c-space> coc#refresh()
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
