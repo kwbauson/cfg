@@ -19,7 +19,7 @@ python-dateutil = ">=2.7.0"
 
 [[package]]
 name = "botocore"
-version = "1.27.62"
+version = "1.27.63"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -209,8 +209,8 @@ arrow = [
     {file = "arrow-1.2.2.tar.gz", hash = "sha256:05caf1fd3d9a11a1135b2b6f09887421153b94558e5ef4d090b567b47173ac2b"},
 ]
 botocore = [
-    {file = "botocore-1.27.62-py3-none-any.whl", hash = "sha256:69682c874dc8ed1856bffd203786c9591fb76a1946d3dcc516bda1ee6a6989f3"},
-    {file = "botocore-1.27.62.tar.gz", hash = "sha256:8563c7d8b80e8041667cf35b397f1c399537f6c887e1c501f0064bfd7ae541ba"},
+    {file = "botocore-1.27.63-py3-none-any.whl", hash = "sha256:8567dee549430a53210c6b898dea3a8fc8ee9d7934ec1df7545c547cacbb2b8f"},
+    {file = "botocore-1.27.63.tar.gz", hash = "sha256:b97e17c930a7f45b50f94956a4474c1cd7b828e3dcd8a84dd0e3306ca6189335"},
 ]
 braceexpand = [
     {file = "braceexpand-0.1.7-py2.py3-none-any.whl", hash = "sha256:91332d53de7828103dcae5773fb43bc34950b0c8160e35e0f44c4427a3b85014"},
