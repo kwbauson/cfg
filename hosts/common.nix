@@ -36,6 +36,7 @@
     };
   };
   networking.networkmanager.enable = lib.mkDefault true;
+  networking.networkmanager.unmanaged = [ config.services.tailscale.interfaceName ];
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
