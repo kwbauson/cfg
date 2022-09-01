@@ -157,6 +157,7 @@
             -e "s/(\[Built\])$/$green\1$reset/" \
             -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
       '';
+      batwhich = ''bat "$(which "$@")"'';
     };
     self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
       cp ${self-source}/flake.lock $out
