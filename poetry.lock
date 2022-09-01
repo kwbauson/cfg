@@ -19,7 +19,7 @@ python-dateutil = ">=2.7.0"
 
 [[package]]
 name = "botocore"
-version = "1.27.63"
+version = "1.27.64"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -137,11 +137,11 @@ six = ">=1.5"
 
 [[package]]
 name = "quantiphy"
-version = "2.17.0"
+version = "2.18.0"
 description = "physical quantities (numbers with units)"
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [[package]]
 name = "requests"
@@ -209,8 +209,8 @@ arrow = [
     {file = "arrow-1.2.2.tar.gz", hash = "sha256:05caf1fd3d9a11a1135b2b6f09887421153b94558e5ef4d090b567b47173ac2b"},
 ]
 botocore = [
-    {file = "botocore-1.27.63-py3-none-any.whl", hash = "sha256:8567dee549430a53210c6b898dea3a8fc8ee9d7934ec1df7545c547cacbb2b8f"},
-    {file = "botocore-1.27.63.tar.gz", hash = "sha256:b97e17c930a7f45b50f94956a4474c1cd7b828e3dcd8a84dd0e3306ca6189335"},
+    {file = "botocore-1.27.64-py3-none-any.whl", hash = "sha256:670aec1c6f201a06ad7fbf252485629f4cd17e63e31dea5b67accb4d08b5f2fa"},
+    {file = "botocore-1.27.64.tar.gz", hash = "sha256:25793c7e13d989ba27bbca83ea5e19a4ee1cf7ddbab2c0ab3d63461e64e9be50"},
 ]
 braceexpand = [
     {file = "braceexpand-0.1.7-py2.py3-none-any.whl", hash = "sha256:91332d53de7828103dcae5773fb43bc34950b0c8160e35e0f44c4427a3b85014"},
@@ -251,8 +251,8 @@ python-dateutil = [
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
 quantiphy = [
-    {file = "quantiphy-2.17.0-py3-none-any.whl", hash = "sha256:beb4cb01d31d5abadd70e0a5a0dfcd4f4945400a14febd31e1757e3c61bfbdf7"},
-    {file = "quantiphy-2.17.0.tar.gz", hash = "sha256:9660efae946ab5374c809cb8a771f6092602cc32f0d36c2726de153a0817ff42"},
+    {file = "quantiphy-2.18.0-py3-none-any.whl", hash = "sha256:a3d367884f33877367a49bb95f5cdd52e04506102ce54d2eeb8ba067a5797263"},
+    {file = "quantiphy-2.18.0.tar.gz", hash = "sha256:eca14abfa83c3171cea7212a1a11fd6e004d029e5500b342b260b48c72f50d66"},
 ]
 requests = [
     {file = "requests-2.28.1-py3-none-any.whl", hash = "sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349"},
