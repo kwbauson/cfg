@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+dir=/tmp/runner
+if [[ -x ~/.runner ]];then
+  if [[ -e $dir/pid ]];then
+    kill $(< "$dir"/pid)
+  else
+    mkdir -p "$dir"
+    ~/.runner &
+    echo "$!" > "$dir"/pid
+    wait
+    rm "$dir"/pid
+  fi
+fi
