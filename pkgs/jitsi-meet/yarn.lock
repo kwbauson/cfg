@@ -1792,10 +1792,10 @@
   resolved "https://registry.yarnpkg.com/@jitsi/rnnoise-wasm/-/rnnoise-wasm-0.1.0.tgz#95c389de5cd86e8cc3bb585837474a57e968056e"
   integrity sha512-JujivPbOUvdRYa2xqByHYKfKGNGa7ZPyNLaNuh8hEp9XsiNfjaJAHdboq6M1VY9TP+765nyxC0LjpAw1VkikOQ==
 
-"@jitsi/rtcstats@9.2.0":
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/@jitsi/rtcstats/-/rtcstats-9.2.0.tgz#095a7d75f6ab6f1046a937ccd4f4a49a6e8e2fe7"
-  integrity sha512-bGQRLFio25++bi3s0em0xKD+WIqhDwg8OQ71K4BXZNOVL3eVX3R/bxbSEok6UYjFQxwoVjfdM4J8cHUu7RwrQw==
+"@jitsi/rtcstats@9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@jitsi/rtcstats/-/rtcstats-9.3.0.tgz#75d210e2ff65d47078b9c6cde7774abd01177825"
+  integrity sha512-aipr1Tt/vfouMmgISCSu64Np3pD1u51y/2SztYNDt5bd6f79Qrieceu0JFqZWxC9KQRsamoJL7Mb9qxo2KkULg==
   dependencies:
     "@jitsi/js-utils" "^2.0.0"
     sdp "^3.0.3"
