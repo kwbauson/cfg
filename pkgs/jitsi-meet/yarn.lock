@@ -1761,10 +1761,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@jitsi/eslint-config@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.0.0.tgz#7c55f1a5484f1ad15ce88a2c5ba5a32b711db212"
-  integrity sha512-DGk6HiaYUDWM5YNLuzPZ0oxFzI1BvgbS7ogi1KR6nUB1pdoQY2dFL73J3hm7QgNZbc7+x/xhXwnNk9f2aAaVTQ==
+"@jitsi/eslint-config@4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.1.2.tgz#36425ff516dde84dce597d3b567ae713889b1977"
+  integrity sha512-kAkCLEKSWdwqj8L026T/5+FttvPLmNkPPETfgzG4SxWdkIVsW8wqFN/RypUZp2H7NmL5AgVL+QkXQXoEoQgW8A==
 
 "@jitsi/js-utils@2.0.0":
   version "2.0.0"
