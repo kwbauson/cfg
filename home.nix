@@ -653,6 +653,8 @@ with builtins; with pkgs; with mylib; {
   qt.style.name = "adwaita-dark";
   dconf.enable = false;
 
+  services.picom.enable = isGraphical && isLinux;
+
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
