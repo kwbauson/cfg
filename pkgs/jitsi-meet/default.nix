@@ -10,7 +10,7 @@ let
     name = "jitsi-meet.tar.bz2";
     inherit src;
     patches = [ ./changes.patch ];
-    nativeBuildInputs = [ nodejs ];
+    NODE_OPTIONS = [ "--openssl-legacy-provider" "--max_old_space_size=8192" ];
     buildPhase = ''
       cp -r ${node_modules} node_modules
       ./node_modules/.bin/webpack
