@@ -23,6 +23,7 @@ with builtins; with pkgs; with mylib; {
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
             which xdg_utils xxd xz zip bitwarden-cli libqalculate yt-dlp
             speedtest-cli tldr nix-top nixos-install-tools better-comma dogdns
+            dasel
             ;
         };
         ${attrIf isGraphical "graphical"} = {
@@ -673,7 +674,7 @@ with builtins; with pkgs; with mylib; {
         add control = Control_R
         add mod4 = Super_R
       ''}
-      xsetroot -solid black
+      ${exe hsetroot} -solid black
       xsetroot -cursor_name left_ptr
       urxvtd -q -o -f
     '';
