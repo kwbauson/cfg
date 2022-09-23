@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "e922b0a7302f19e5c5349b9418087dfbebd30217",
-        "sha256": "0r7m5fhx2a1fhg1mkmsh12smggx4wpjfqccvkilxr67yj4hrhayr",
+        "rev": "267cd3f659e0c379f3c88840c8ccebb2cc317564",
+        "sha256": "1gn50bckmlamn2i8n2dn24kb3s1j24r8n1gb3ia16fh65y1cc0s6",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/e922b0a7302f19e5c5349b9418087dfbebd30217.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/267cd3f659e0c379f3c88840c8ccebb2cc317564.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "d9bbf35466cef6178e42c7ee100c95fc385a88b9",
-        "sha256": "1drigk3xnmfpb0qhbm30igq8svmy3k88hc8wkii8dm1193yl66kn",
+        "rev": "ffe005ba0abfd4e37ecd038a8e6b8adb5d9728f6",
+        "sha256": "0x4rq0fxpp44ylg5jc6pw9xip1w879vvmqrgdqq5plvgcfzjh8ys",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/d9bbf35466cef6178e42c7ee100c95fc385a88b9.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/ffe005ba0abfd4e37ecd038a8e6b8adb5d9728f6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -80,12 +80,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "1s10gnak29ksrxfa11lpi7w4bg7fkb3l7jmwhd3y5jnw53vc6yb1",
+        "sha256": "0038dp1b10y2pa2d220nmj6rj0816fa67jp15mx9mgyzqanbn3x9",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-09-11/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-09-18/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-09-11"
+        "version": "2022-09-18"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "91a186e3547ce16c59f2e4434796b495e1dd2d1d",
-        "sha256": "1262sn5s58zvvkk0iilrgs4sfaiv7grdv5avd5d8qdwc61ibr8zc",
+        "rev": "4801d1797889318d8e4d9b9cfcfd0b138ca0fd2e",
+        "sha256": "0gvkyfi70hi57d949fz86bnym9nqkw6by6im8d54bxacxly6s01q",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/91a186e3547ce16c59f2e4434796b495e1dd2d1d.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/4801d1797889318d8e4d9b9cfcfd0b138ca0fd2e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
