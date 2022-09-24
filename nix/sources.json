@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "7a81744da25545cfdc3979194e9a2676b80cea16",
-        "sha256": "1vvm8jxir9idr4i3sgjbp5f7268qzd6igi3v5x1yqmy3jqibscph",
+        "rev": "5990fee152c54a325665659cdcc51cb833e69960",
+        "sha256": "181bx98anx11vglxlwvjs5zh82x0ppxaj42vx1xf4sd8fbyyz73v",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/7a81744da25545cfdc3979194e9a2676b80cea16.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/5990fee152c54a325665659cdcc51cb833e69960.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -176,10 +176,10 @@
         "homepage": null,
         "owner": "openai",
         "repo": "whisper",
-        "rev": "15ab54826343c27cfaf44ce31e9c8fb63d0aa775",
-        "sha256": "11wdxk7gwnhvnj8f9l3s9yr9b3dwnh03y9brxx3hz3jc5mayvf4h",
+        "rev": "8cf36f3508c9acd341a45eb2364239a3d81458b9",
+        "sha256": "1x2jqi29dsxvwwpcvxz6lnk0c0cd83z9cpjv4s2klyyjrxwgq4fr",
         "type": "tarball",
-        "url": "https://github.com/openai/whisper/archive/15ab54826343c27cfaf44ce31e9c8fb63d0aa775.tar.gz",
+        "url": "https://github.com/openai/whisper/archive/8cf36f3508c9acd341a45eb2364239a3d81458b9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
