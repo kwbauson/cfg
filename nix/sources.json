@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "7a81744da25545cfdc3979194e9a2676b80cea16",
-        "sha256": "1vvm8jxir9idr4i3sgjbp5f7268qzd6igi3v5x1yqmy3jqibscph",
+        "rev": "92e314dc8fe20438d0871ce3bad349e9a7d95ace",
+        "sha256": "0vqkvjj9my2syvypx1fjay5qwflpipm5ylmwcpfd8wlgmw0d1rwa",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/7a81744da25545cfdc3979194e9a2676b80cea16.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/92e314dc8fe20438d0871ce3bad349e9a7d95ace.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -80,12 +80,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0038dp1b10y2pa2d220nmj6rj0816fa67jp15mx9mgyzqanbn3x9",
+        "sha256": "13gyp6c65zp58bb9067hnbi1fx0q98h0k66n5hhxbf8gn6fnrgkz",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-09-18/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-09-25/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-09-18"
+        "version": "2022-09-25"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "4801d1797889318d8e4d9b9cfcfd0b138ca0fd2e",
-        "sha256": "0gvkyfi70hi57d949fz86bnym9nqkw6by6im8d54bxacxly6s01q",
+        "rev": "4c8a5c7dbb0195287a08cfa1022f3ddab9bc3c45",
+        "sha256": "0p90vm15j9vmzqiqky97s7z2a9ncfhxgbnzrhif5hfgdci7ki1pz",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/4801d1797889318d8e4d9b9cfcfd0b138ca0fd2e.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/4c8a5c7dbb0195287a08cfa1022f3ddab9bc3c45.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
@@ -176,10 +176,10 @@
         "homepage": null,
         "owner": "openai",
         "repo": "whisper",
-        "rev": "15ab54826343c27cfaf44ce31e9c8fb63d0aa775",
-        "sha256": "11wdxk7gwnhvnj8f9l3s9yr9b3dwnh03y9brxx3hz3jc5mayvf4h",
+        "rev": "8cf36f3508c9acd341a45eb2364239a3d81458b9",
+        "sha256": "1x2jqi29dsxvwwpcvxz6lnk0c0cd83z9cpjv4s2klyyjrxwgq4fr",
         "type": "tarball",
-        "url": "https://github.com/openai/whisper/archive/15ab54826343c27cfaf44ce31e9c8fb63d0aa775.tar.gz",
+        "url": "https://github.com/openai/whisper/archive/8cf36f3508c9acd341a45eb2364239a3d81458b9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
