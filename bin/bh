@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages bluezFull
+# with-packages bluez
 device=$(bluetoothctl devices | cut -d' ' -f2)
 bluetoothctl info &> /dev/null
 if [[ $? -ne 0 ]];then

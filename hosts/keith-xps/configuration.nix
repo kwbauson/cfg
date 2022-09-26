@@ -9,10 +9,7 @@ with builtins;
   ];
 
   boot.blacklistedKernelModules = [ "psmouse" ];
-  hardware = {
-    bluetooth.enable = true;
-    bluetooth.package = pkgs.bluezFull;
-  };
+  hardware.bluetooth.enable = true;
   networking.networkmanager.wifi.powersave = false;
   services.xserver.enable = true;
 
