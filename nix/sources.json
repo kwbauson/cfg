@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "92e314dc8fe20438d0871ce3bad349e9a7d95ace",
-        "sha256": "0vqkvjj9my2syvypx1fjay5qwflpipm5ylmwcpfd8wlgmw0d1rwa",
+        "rev": "ff7fee4616bf2cc980fac9407526023e00b3927f",
+        "sha256": "0bg3pwqq28m3d35dbggqq4diap2irxamn203g6r6bp7cd2gvz6rs",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/92e314dc8fe20438d0871ce3bad349e9a7d95ace.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/ff7fee4616bf2cc980fac9407526023e00b3927f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "4c8a5c7dbb0195287a08cfa1022f3ddab9bc3c45",
-        "sha256": "0p90vm15j9vmzqiqky97s7z2a9ncfhxgbnzrhif5hfgdci7ki1pz",
+        "rev": "f003c6773e50260983d37bb59541714b2d9bd399",
+        "sha256": "08faq5by12ginlpbd4w7zysxs8m9c317rjdbnzp7f8dav8a3qiwi",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/4c8a5c7dbb0195287a08cfa1022f3ddab9bc3c45.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/f003c6773e50260983d37bb59541714b2d9bd399.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
@@ -176,10 +176,10 @@
         "homepage": null,
         "owner": "openai",
         "repo": "whisper",
-        "rev": "8cf36f3508c9acd341a45eb2364239a3d81458b9",
-        "sha256": "1x2jqi29dsxvwwpcvxz6lnk0c0cd83z9cpjv4s2klyyjrxwgq4fr",
+        "rev": "5d8d3e75a4826fe5f01205d81c3017a805fc2bf9",
+        "sha256": "17km295pm767j2vgdirncl3hqll9cfly33qfdn0021xa1bic1fw3",
         "type": "tarball",
-        "url": "https://github.com/openai/whisper/archive/8cf36f3508c9acd341a45eb2364239a3d81458b9.tar.gz",
+        "url": "https://github.com/openai/whisper/archive/5d8d3e75a4826fe5f01205d81c3017a805fc2bf9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
