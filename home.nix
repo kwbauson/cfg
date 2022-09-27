@@ -21,7 +21,7 @@ with builtins; with pkgs; with mylib; {
             man-pages moreutils nano ncdu_1 netcat-gnu niv nix-wrapped nix-tree
             nmap openssh p7zip patch perl pigz procps progress pv ranger
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
-            which xdg_utils xxd xz zip bitwarden-cli libqalculate yt-dlp
+            which xdg-utils xxd xz zip bitwarden-cli libqalculate yt-dlp
             speedtest-cli tldr nix-top nixos-install-tools better-comma dogdns
             dasel
             ;
@@ -29,7 +29,7 @@ with builtins; with pkgs; with mylib; {
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
             inherit
-              dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term nsxiv
+              dzen2 graphviz i3-easyfocus i3lock imagemagick sway term nsxiv
               xclip xdotool xsel xterm maim
               ;
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
@@ -297,6 +297,7 @@ with builtins; with pkgs; with mylib; {
     };
     urxvt = {
       enable = !isDarwin && isGraphical;
+      package = rxvt-unicode-unwrapped;
       extraConfig.reverseVideo = true;
       extraConfig.termName = "xterm-256color";
       fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];
