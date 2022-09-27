@@ -43,7 +43,7 @@ with builtins; with pkgs; with mylib; {
         development = {
           inherit
             bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
-            crystal nim nimlsp nixpkgs-fmt rnix-lsp shellcheck shfmt
+            crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
             git-ignore git-fuzzy black terraform-ls cachix nle concurrently
             arduino tasknix
@@ -254,7 +254,7 @@ with builtins; with pkgs; with mylib; {
       withNodeJs = true;
       extraConfig = readFile ./init.vim;
       coc.enable = true;
-      plugins = with rec {
+      plugins = with {
         plugins = with vimPlugins; {
           inherit
             conflict-marker-vim fzf-vim nvim-scrollview quick-scope
@@ -307,11 +307,14 @@ with builtins; with pkgs; with mylib; {
     };
     git = with {
       gs = text:
-        let script = writeBash "git-script" ''
-          set -eo pipefail
-          cd -- ''${GIT_PREFIX:-.}
-          ${text}
-        ''; in "! ${script}";
+        let
+          script = writeBash "git-script" ''
+            set -eo pipefail
+            cd -- ''${GIT_PREFIX:-.}
+            ${text}
+          '';
+        in
+        "! ${script}";
       tmpGitIndex = ''
         export GIT_INDEX_FILE=$(mktemp)
         index=$(git rev-parse --show-toplevel)/.git/index
