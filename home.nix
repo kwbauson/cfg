@@ -70,7 +70,6 @@ with builtins; with pkgs; with mylib; {
     sessionVariables = {
       BROWSER = "firefox";
       BUGSNAG_RELEASE_STAGE = "local";
-      DBTUNNELUSER = "keith";
       EDITOR = "nvim";
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
