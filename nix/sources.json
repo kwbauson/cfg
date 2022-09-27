@@ -181,17 +181,5 @@
         "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.5.en-US.linux-x86_64.tar.bz2",
         "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
         "version": "G4.1.5"
-    },
-    "whisper": {
-        "branch": "main",
-        "description": null,
-        "homepage": null,
-        "owner": "openai",
-        "repo": "whisper",
-        "rev": "b4308c478217f00436c387694e5e848cc87c7fb5",
-        "sha256": "01s3c3ki4gxjbmvbdrqgzdzfr7zw2lwz7hnfml36jppyzws2frgf",
-        "type": "tarball",
-        "url": "https://github.com/openai/whisper/archive/b4308c478217f00436c387694e5e848cc87c7fb5.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
