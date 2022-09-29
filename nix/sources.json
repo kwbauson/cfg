@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "e0b91552cd380c99b066aa3d0df08dd9905df2a9",
-        "sha256": "19qd5giv8qgmqxwh4c0z1d2873ryvh0n77x61lyg2nqxkl1dm9hw",
+        "rev": "112669d1ba96fa2a1c75478d12d6f38ee2bd3ee6",
+        "sha256": "0kli8437w8rk790px6zcda271qg6mb3jza2aaxa6ldlh0q5jhvg6",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/e0b91552cd380c99b066aa3d0df08dd9905df2a9.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/112669d1ba96fa2a1c75478d12d6f38ee2bd3ee6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -85,10 +85,10 @@
         "homepage": "",
         "owner": "oxalica",
         "repo": "nil",
-        "rev": "ac840143603db3839c17d7e95cc271506d9942da",
-        "sha256": "1i84v0qg3vx2ljqpi2q1bybkyrfsaz5975s8vdnixwcl6qbmwi1i",
+        "rev": "d2a22b8460279a001bf070bcd6da660bda9c8bd7",
+        "sha256": "14ih7bjx33244bw88g74dmbvdc005p40zyna362rp0lqlivz6xa1",
         "type": "tarball",
-        "url": "https://github.com/oxalica/nil/archive/ac840143603db3839c17d7e95cc271506d9942da.tar.gz",
+        "url": "https://github.com/oxalica/nil/archive/d2a22b8460279a001bf070bcd6da660bda9c8bd7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
