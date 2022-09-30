@@ -54,6 +54,7 @@
   };
 
   fonts.enableDefaultFonts = config.services.xserver.enable;
+  location.provider = "geoclue2";
 
   security.rtkit.enable = true;
   services = {
