@@ -2,10 +2,11 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs-pre-setuptools.url = "nixpkgs/f56d319e680852bea73504b3e001eefb1e837c50";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    mach-nix.inputs.nixpkgs.follows = "nixpkgs";
+    mach-nix.inputs.nixpkgs.follows = "nixpkgs-pre-setuptools";
     mach-nix.inputs.flake-utils.follows = "flake-utils";
     mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
     pypi-deps-db.url = "github:DavHau/pypi-deps-db";
@@ -17,7 +18,7 @@
     inputs@{ self, nixpkgs-unstable, nixos-hardware, flake-utils, ... }:
       with builtins; with inputs; with flake-utils.lib; with nixpkgs.lib;
       flake-utils.lib.eachSystem flake-utils.lib.allSystems
-        (system: rec {
+        (system: {
           packages = self.lib.pkgsForSystem
             {
               inherit system;
@@ -63,18 +64,19 @@
             , isGraphical ? true
             , host ? "generic"
             }:
-            let conf = (home-manager.lib.homeManagerConfiguration rec {
-              inherit pkgs;
-              modules = [
-                { home = { inherit username homeDirectory; }; }
-                {
-                  imports = [
-                    ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
-                    ./home.nix
-                  ];
-                }
-              ];
-            });
+            let
+              conf = (home-manager.lib.homeManagerConfiguration rec {
+                inherit pkgs;
+                modules = [
+                  { home = { inherit username homeDirectory; }; }
+                  {
+                    imports = [
+                      ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
+                      ./home.nix
+                    ];
+                  }
+                ];
+              });
             in
             conf.activationPackage // conf // { inherit pkgs; }
           );

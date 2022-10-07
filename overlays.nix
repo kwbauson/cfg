@@ -191,18 +191,22 @@
       cp ${self.self-flake-lock} $out/flake.lock
     '';
     maim = maim.overrideAttrs (attrs: { buildInputs = attrs.buildInputs ++ [ xorg.libSM ]; });
+    # FIXME
+    inherit (inputs.nixpkgs-pre-setuptools.legacyPackages.${system}) poetry2nix i3 neovim-unwrapped neovimUtils;
   })
   (self: super: with super; with mylib;
-  let extra-packages = mapAttrs
-    (n: f: callPackage f (mylib // pkgs // rec {
-      name = "${pname}-${version}";
-      pname = n;
-      version = src.version or src.rev or "unversioned";
-      src = sources.${n} or null;
-      ${n} = super.${n};
-    }))
-    (filterAttrs (_: v: !isPath v) (import' ./pkgs));
-  in { inherit extra-packages; } // extra-packages)
+  let
+    extra-packages = mapAttrs
+      (n: f: callPackage f (mylib // pkgs // rec {
+        name = "${pname}-${version}";
+        pname = n;
+        version = src.version or src.rev or "unversioned";
+        src = sources.${n} or null;
+        ${n} = super.${n};
+      }))
+      (filterAttrs (_: v: !isPath v) (import' ./pkgs));
+  in
+  { inherit extra-packages; } // extra-packages)
   (self: super: with super; with mylib;
   mapDirEntries
     (n: value:
