@@ -79,18 +79,6 @@
         "url": "https://github.com/neoclide/jsonc.vim/archive/b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "nil": {
-        "branch": "main",
-        "description": "Yet another language server for Nix",
-        "homepage": "",
-        "owner": "oxalica",
-        "repo": "nil",
-        "rev": "756be130c8cda1d02c3681299ce372c97cc7d0bd",
-        "sha256": "1yg0bkpfn6ni2nzlpzcan6mvpb2ijhl4761pyyb2fqzpgpzk539s",
-        "type": "tarball",
-        "url": "https://github.com/oxalica/nil/archive/756be130c8cda1d02c3681299ce372c97cc7d0bd.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nix-index-database": {
         "sha256": "0dxkkhn3ww28dzkrz0gv0f41xcbib8viwnk78bavq1559yr127ih",
         "type": "file",
