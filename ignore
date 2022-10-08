@@ -36,6 +36,7 @@
 **/vendor/bundle
 .local/share/flatpak
 .local/share/nvim/undo
+.config/unity3d
 .m2
 .mozilla
 .pub-cache

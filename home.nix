@@ -23,7 +23,7 @@ with builtins; with pkgs; with mylib; {
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
             which xdg-utils xxd xz zip bitwarden-cli libqalculate yt-dlp
             speedtest-cli tldr nix-top nixos-install-tools better-comma dogdns
-            dasel
+            dasel emborg
             ;
         };
         ${attrIf isGraphical "graphical"} = {
@@ -297,7 +297,6 @@ with builtins; with pkgs; with mylib; {
     };
     urxvt = {
       enable = !isDarwin && isGraphical;
-      package = rxvt-unicode-unwrapped;
       extraConfig.reverseVideo = true;
       extraConfig.termName = "xterm-256color";
       fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];
