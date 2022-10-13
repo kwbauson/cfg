@@ -8870,7 +8870,7 @@ react-native-keep-awake@4.0.0:
   resolved "https://registry.yarnpkg.com/react-native-keep-awake/-/react-native-keep-awake-4.0.0.tgz#d89fdc3fb60b3cffa979ef37dc5816196df998a2"
   integrity sha512-0Fotox+eLXQooeibVs3P60yASYUWjtRw9MZNmbuHt5UZQrgUrAKsE4jm7gTr4tPU1m1RkwGzcgUFpcOkh/ec7g==
 
-react-native-orientation-locker@^1.5.0:
+react-native-orientation-locker@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-native-orientation-locker/-/react-native-orientation-locker-1.5.0.tgz#324853937eed4835ecd1c8613ab2206135d908ac"
   integrity sha512-4XOCGmNN4BXg5JUFjUuXpsfhPJmbA3LkQilJO1ed+6vL97teTdG2w5IEevKiqL9/hPjeWE8YYtX/YW+yp53hkg==
@@ -10986,7 +10986,7 @@ wildcard@^2.0.0:
   resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.0.tgz#a77d20e5200c6faaac979e4b3aadc7b3dd7f8fec"
   integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
 
-windows-iana@^3.1.0:
+windows-iana@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/windows-iana/-/windows-iana-3.1.0.tgz#156b1d7faef085068383827ac2884f1656cff217"
   integrity sha512-rCPf3AakAAgvapnbYVvG2bQyI3g6EDbPpjDJ72fdAu+XTzB1qvX4ZC6OnZ0I2+thaspjTb+8KwdyhdBl8Lt/QA==
