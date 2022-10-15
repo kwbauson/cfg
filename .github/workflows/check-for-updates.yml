@@ -7,7 +7,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v17
+      - uses: cachix/install-nix-action@v18
         with: { extra_nix_config: experimental-features = nix-command flakes }
       - uses: cachix/cachix-action@v10
         with:
