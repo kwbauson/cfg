@@ -9,13 +9,14 @@ waterfox_version=$(curl https://cdn.waterfox.net/releases/linux64/installer/ |
 nr niv update waterfox -v "$waterfox_version"
 nix run .#jitsi-meet.updateScript
 
-cd pkgs
-mv emborg{,~}
-mkdir emborg
-cd emborg
-nix run -f https://github.com/jpetrucciani/nix/archive/main.tar.gz pynix -- emborg
-mv pynixify/packages/* .
-rm -rf pynixify
-cd ..
-mv emborg~/default.nix emborg
-rm -rf emborg~
+# FIXME
+# cd pkgs
+# mv emborg{,~}
+# mkdir emborg
+# cd emborg
+# nix run -f https://github.com/jpetrucciani/nix/archive/main.tar.gz pynix -- emborg
+# mv pynixify/packages/* .
+# rm -rf pynixify
+# cd ..
+# mv emborg~/default.nix emborg
+# rm -rf emborg~
