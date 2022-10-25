@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "c40d3a35893a9df4ddf57282ceed10e075a14bc1",
-        "sha256": "1q8d8d3ska4xicma2zxjmsyks3xj5rsd9xchyyxjd011hn4ylb08",
+        "rev": "d54e2821c69b830cfa03dc47d18891797647b6da",
+        "sha256": "0cywwsb76510pqf5wvwbhal7yharrmafb36hgvkylzq4b0pb37r4",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/c40d3a35893a9df4ddf57282ceed10e075a14bc1.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/d54e2821c69b830cfa03dc47d18891797647b6da.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "b558d7936c6a6802ed88d5df1a8ebd91b3f80868",
-        "sha256": "0sjpj10ks0ll7jqyz4isqrm8zydb8zzqyvfm8f9di4pfgdhddpkx",
+        "rev": "7f879d21542d8fa5a67ee9c4b9c10f39e8179bc0",
+        "sha256": "04s90886dkfsf778sqrk9xacmmp5lsnnh2hcqq9mwnrdr1h7ig6g",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/b558d7936c6a6802ed88d5df1a8ebd91b3f80868.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/7f879d21542d8fa5a67ee9c4b9c10f39e8179bc0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -80,12 +80,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0f3pk1b1vy3djyk20gdy0s8la1iyqm5rfjybnv7kcv1z004ybiqf",
+        "sha256": "1svv9fgz7hjss8xdv8h93fsxgvjwlwzc211rm1pp4faq50zx3znp",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-10-09/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-10-25/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-10-09"
+        "version": "2022-10-25"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -93,19 +93,19 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "5c4f247688fc91d665df65f71c81e0726621aaa8",
-        "sha256": "1zkrcph1vqgl0q7yi9cg0ghq1mmvhy8rlc6xvyww56i3j87cg5gn",
+        "rev": "eeed152290ec2425f96c5e74e469c40b621e1468",
+        "sha256": "00p9m7hldpm1qbv00bhswg0nda0rhcsh9zniaqa2rg5cgjp3mh8w",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/5c4f247688fc91d665df65f71c81e0726621aaa8.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/eeed152290ec2425f96c5e74e469c40b621e1468.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "0j77bqglkdwwxypm5ag6hmq5ipykl5mcl4zqp3wb3di90ayhyjbd",
+        "sha256": "1c87gvbbba1m5jl24jlgzm2fgsxsip55iddc865w40pc253hjybm",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022-04-07/OliveTin-2022-04-07-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022-10-19/OliveTin-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
-        "version": "2022-04-07"
+        "version": "2022-10-19"
     },
     "r2modman": {
         "sha256": "0ab2v84r3rgplghjnj0w0rfys62wwlc390ygvhmyr2fkl7dbhwbs",
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "683508f36e11471b8b6a4d2d650772ed757b07a2",
-        "sha256": "1cwr9qa91b3liks13jpyj5mq9wv3pyj6bmidfikvqbyz9r8kfq2r",
+        "rev": "ad096d5000e52b47e592802ad9581ae10ccf4764",
+        "sha256": "00vxcyh4x7qkfc5z0ykgdsbvdbndkg2nkj262c3m4zl06453kn9b",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/683508f36e11471b8b6a4d2d650772ed757b07a2.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/ad096d5000e52b47e592802ad9581ae10ccf4764.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
