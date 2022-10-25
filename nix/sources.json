@@ -104,7 +104,7 @@
         "type": "tarball",
         "update_type": "github-release",
         "url": "https://github.com/OliveTin/OliveTin/releases/download/2022-04-07/OliveTin-2022-04-07-linux-amd64.tar.gz",
-        "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-<version>-linux-amd64.tar.gz",
+        "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
         "version": "2022-04-07"
     },
     "r2modman": {
