@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "ba83b332624eb606ea5c862b12ccbdfe1bfe2026",
-        "sha256": "0kf2mmgfffz2a1s6hpgngcizvxdqiqh6157ff9b7brrhmfhh9z67",
+        "rev": "bd6e4e835380f6ac54af2b57ccd90edda669fd97",
+        "sha256": "1ypdxvd1z70rx1kz05i7wqryyqqx6k0ssr2hmbjk32j092i3mwrx",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/ba83b332624eb606ea5c862b12ccbdfe1bfe2026.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/bd6e4e835380f6ac54af2b57ccd90edda669fd97.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "5f4205e950a23b4ef58e05be88b298153dd3ae07",
-        "sha256": "081d3d9mc82j8v2gq40j858cs0jqdbwz8jfqdbvb6rhi6jya8pfs",
+        "rev": "a4d0d230cd8324e799e1523773d667f4c7e75ccb",
+        "sha256": "19mwjqnyyl8c8skca9g84ma06xz6sb49cd3sa75n0mck19zzhpci",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/5f4205e950a23b4ef58e05be88b298153dd3ae07.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/a4d0d230cd8324e799e1523773d667f4c7e75ccb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
