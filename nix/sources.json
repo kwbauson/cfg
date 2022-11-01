@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "bd6e4e835380f6ac54af2b57ccd90edda669fd97",
-        "sha256": "1ypdxvd1z70rx1kz05i7wqryyqqx6k0ssr2hmbjk32j092i3mwrx",
+        "rev": "2e57ac299d00fe8068196fa11ba1df7f64717d25",
+        "sha256": "001vn0jviwp5fins461zgpmpchg032jswipfrlh41ghman7sn066",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/bd6e4e835380f6ac54af2b57ccd90edda669fd97.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/2e57ac299d00fe8068196fa11ba1df7f64717d25.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "8e54a691603dad05b7e0be4149c991a667e6b6c5",
-        "sha256": "08c4i4jizkai3zkm0zwd4s43aqv47l7b0cczwqjdhiz05n0gqkcy",
+        "rev": "c276c204acb5c25296c0ab98889c1def68e220cf",
+        "sha256": "1y07am0mjhnc4hnamipv0yvms0sckc8kaq1ffsmmv3xwhbjg9rnl",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/8e54a691603dad05b7e0be4149c991a667e6b6c5.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/c276c204acb5c25296c0ab98889c1def68e220cf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -73,10 +73,10 @@
         "homepage": null,
         "owner": "neoclide",
         "repo": "jsonc.vim",
-        "rev": "b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6",
-        "sha256": "02bgqxi20lmq97s9nnsb1mmjp45fh5a9pbhbs6hl2zmb03spbvpi",
+        "rev": "6fb92460f9e50505c9b93181a00f27d10c9b383f",
+        "sha256": "1z2zi951xgssq1d343b0rhcj1xn4qwvv1b2wzvy8jg7ak9pgrl1a",
         "type": "tarball",
-        "url": "https://github.com/neoclide/jsonc.vim/archive/b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6.tar.gz",
+        "url": "https://github.com/neoclide/jsonc.vim/archive/6fb92460f9e50505c9b93181a00f27d10c9b383f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "a4d0d230cd8324e799e1523773d667f4c7e75ccb",
-        "sha256": "19mwjqnyyl8c8skca9g84ma06xz6sb49cd3sa75n0mck19zzhpci",
+        "rev": "1d9288104a50df55cda5e6479c5f9d25aa6cb87d",
+        "sha256": "1n5bzac4wsw58mn9xkgz4ln96bds65yxrmhnknmlxda2j09dkn7x",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/a4d0d230cd8324e799e1523773d667f4c7e75ccb.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/1d9288104a50df55cda5e6479c5f9d25aa6cb87d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
