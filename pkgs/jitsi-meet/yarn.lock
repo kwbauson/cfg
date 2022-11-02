@@ -1990,10 +1990,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@jitsi/eslint-config@4.1.4":
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.1.4.tgz#ea2ab3993833d96c9598eda3aa1e590ee1430bc9"
-  integrity sha512-7ea1H2mpU5Z0azjcAsu0dx2T0fGzpcAfMmk2pEJ1xTQMp5YCwLYRu7ify9nupEbZUwnvJqyXoSeJQwwBQoX6Wg==
+"@jitsi/eslint-config@4.1.5":
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.1.5.tgz#c1287f2b65fc104c162d395b3f707ab1e49f215f"
+  integrity sha512-UgyXdk1n9lSEQu9QeS09dEb3nnAoh/2wyqwxYlswlvB3f/AK83DoXx5SZtSBOH6di3DJJ3qcqhTE4t4pw9OjVQ==
 
 "@jitsi/excalidraw@https://github.com/jitsi/excalidraw/releases/download/v0.0.11/jitsi-excalidraw-0.0.11.tgz":
   version "0.0.11"
@@ -7172,9 +7172,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1522.0.0+28436e57/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1528.0.0+23644901/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1522.0.0+28436e57/lib-jitsi-meet.tgz#96ecdfa041fa0d988324c43d69e945a1d6889c5e"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1528.0.0+23644901/lib-jitsi-meet.tgz#5229051a7124bda087973a017d40bf5debd9bfa8"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
