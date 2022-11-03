@@ -76,9 +76,9 @@
       nixpkgs-path = "echo ${pkgs.path}";
       nixpkgs-branch = "echo ${nixpkgs-branch}";
       undup = ''tac "$@" | awk '!x[$0]++' | tac'';
-      hmg = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
-      hmp = "git -C ~/cfg cap";
-      nou = "hmg && noa";
+      cfgu = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
+      cfgp = "git -C ~/cfg cap";
+      nou = "cfgu && noa";
       noc = "cd ~/cfg && gh workflow run check-for-updates.yml";
       nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
       noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";

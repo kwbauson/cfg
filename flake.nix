@@ -50,6 +50,10 @@
               { networking.hostName = host; }
               (callModule ./hosts/common.nix)
               (callModule module)
+              home-manager.nixosModule
+              {
+                home-manager.users.keith = { imports = homeConfigurations.${host}.user-config.modules; };
+              }
             ];
           };
           buildSystem = args: let system = nixosSystem args; in system.config.system.build.toplevel // system;
@@ -65,20 +69,21 @@
             , host ? "generic"
             }:
             let
-              conf = (home-manager.lib.homeManagerConfiguration rec {
+              user-config = {
                 inherit pkgs;
                 modules = [
-                  { home = { inherit username homeDirectory; }; }
                   {
                     imports = [
+                      { home = { inherit username homeDirectory; }; }
                       ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
                       ./home.nix
                     ];
                   }
                 ];
-              });
+              };
+              conf = home-manager.lib.homeManagerConfiguration user-config;
             in
-            conf.activationPackage // conf // { inherit pkgs; }
+            conf.activationPackage // conf // { inherit pkgs user-config; }
           );
         };
 

@@ -36,7 +36,7 @@
     };
   };
   networking.networkmanager.enable = lib.mkDefault true;
-  networking.networkmanager.unmanaged = [ config.services.tailscale.interfaceName ];
+  systemd.services.NetworkManager-wait-online.enable = lib.mkDefault false;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
