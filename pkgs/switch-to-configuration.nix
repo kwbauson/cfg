@@ -46,10 +46,7 @@ let
             ${conf}/activate
           fi
         '';
-      noa = (makeScript ''
-        ${optionalString isNixOS "${exe nos} || true"}
-        ${exe hms}
-      '').overrideAttrs (_: { name = "${host}-noa"; });
+      noa = (makeScript (if isNixOS then exe nos else exe hms)).overrideAttrs (_: { name = "${host}-noa"; });
     }) // { unknown.noa = null; };
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
