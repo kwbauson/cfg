@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "cebbb6d232b7cb4f7be4cddbc641f0a242f26f8e",
-        "sha256": "1jadmdf6cq05014gsvnp7my6jync05lmksyxxzc03nj20cw9s9rq",
+        "rev": "6c86f5254b33b4d2cb055309336351b1c536505b",
+        "sha256": "05kfccy0pl69rrc5vwgqrfl1a6y0hnfxr3i85dk3hn2pcn9gj5aq",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/cebbb6d232b7cb4f7be4cddbc641f0a242f26f8e.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/6c86f5254b33b4d2cb055309336351b1c536505b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "ee544d25f8c13c4d017a52ca3a80bf47b0f8d3fd",
-        "sha256": "16rjgajk3gway4z5pm2pisa8z700xj3rnvr9f1kkbvzaaz7vfxks",
+        "rev": "f3e4c570362ba59779b5b74aaf9b710eb603aba7",
+        "sha256": "0r0wa7c0lgam63lsi5cdn0w4pb0v6v70crk6d5fkf035b41jn18w",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/ee544d25f8c13c4d017a52ca3a80bf47b0f8d3fd.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/f3e4c570362ba59779b5b74aaf9b710eb603aba7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "1930fe6a30e4fdefb8cf89b2c93a58b91f0beb04",
-        "sha256": "0yyv5z84rd5a69bhn2fkcdp1jjlqb9dvrlv2hf6qy3h6ldz4wx90",
+        "rev": "3dd2be52a94aa4eb94b616a9c365bb18a6b804e9",
+        "sha256": "0vn015z897vw9fxf88mdb3krv3a82mnv2ywfnisld841imwz5qjk",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/1930fe6a30e4fdefb8cf89b2c93a58b91f0beb04.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/3dd2be52a94aa4eb94b616a9c365bb18a6b804e9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
