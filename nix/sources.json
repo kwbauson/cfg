@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "507cded15052759c8cbda17aa254c5e6af929557",
-        "sha256": "071sbn44i35rk6lm4kbjsff3lr5rp93gk4l25jcnh971dvzkvdp6",
+        "rev": "cbf1e918b6e278a81c385155605b8504e498efef",
+        "sha256": "1dc9h10ads7krj4izp79d1nilyli9z34hdxayqrs82dfdv7fqyqp",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/507cded15052759c8cbda17aa254c5e6af929557.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/cbf1e918b6e278a81c385155605b8504e498efef.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -100,12 +100,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "0z2285wca9d39r7g6fcfx1gg4844b5nalwjfx7lic9dgns0gm6nl",
+        "sha256": "0d252mlwa6yyvy6a41zx9q9dzr0d3fyqlsny3v3163mr4i6w28az",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022.11.11/OliveTin-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022.11.14/OliveTin-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
-        "version": "2022.11.11"
+        "version": "2022.11.14"
     },
     "r2modman": {
         "sha256": "0ab2v84r3rgplghjnj0w0rfys62wwlc390ygvhmyr2fkl7dbhwbs",
