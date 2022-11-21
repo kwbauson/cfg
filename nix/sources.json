@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "fdafe464273557b66a69b8aae9a570cda054450e",
-        "sha256": "0m87822balk0avcd0wyxi1d1m59zgw4zx5jcydp0z7v5lsxbf9z1",
+        "rev": "d4fe7e323f76f3615caa605c7c32ec375c87ec29",
+        "sha256": "0l5h5hzh0sihq03996b3ypl1k2rmprd6xj9l4j5pq485fqm8smi0",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/fdafe464273557b66a69b8aae9a570cda054450e.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/d4fe7e323f76f3615caa605c7c32ec375c87ec29.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -93,10 +93,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "eeed152290ec2425f96c5e74e469c40b621e1468",
-        "sha256": "00p9m7hldpm1qbv00bhswg0nda0rhcsh9zniaqa2rg5cgjp3mh8w",
+        "rev": "0ba0746d62974403daf717cded3f24c617622bc7",
+        "sha256": "1dy2smajmyk7hkjgmj3vznfbha0zvxwjw3jizms27a92815mv37w",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/eeed152290ec2425f96c5e74e469c40b621e1468.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/0ba0746d62974403daf717cded3f24c617622bc7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
