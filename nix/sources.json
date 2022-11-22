@@ -49,10 +49,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "d4fe7e323f76f3615caa605c7c32ec375c87ec29",
-        "sha256": "0l5h5hzh0sihq03996b3ypl1k2rmprd6xj9l4j5pq485fqm8smi0",
+        "rev": "a2565036cebacb074dcb5399b16ae4aba8537ab5",
+        "sha256": "14d0vva3v97kir11zvwihp7zpxp7mmxsxwad0ssr63fpjy0dfncd",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/d4fe7e323f76f3615caa605c7c32ec375c87ec29.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/a2565036cebacb074dcb5399b16ae4aba8537ab5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -61,10 +61,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "98bc87ea188c5710f412e763f59092104caa22e4",
-        "sha256": "1iz6r0xssbdhfpn1f884lch0l4zl2aja1ivikqha5l2bdfl0im2h",
+        "rev": "e93c480e7cd601b681155ff49ca895dec369069c",
+        "sha256": "1gxdpvzhbb8ixzjmfvy8vv3vklkzvph99f0fgxj0s9ixxwpjz27v",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/98bc87ea188c5710f412e763f59092104caa22e4.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/e93c480e7cd601b681155ff49ca895dec369069c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
