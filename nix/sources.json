@@ -11,6 +11,18 @@
         "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "devenv": {
+        "branch": "main",
+        "description": "Fast, Declarative, Reproducible, and Composable Developer Environments",
+        "homepage": "https://devenv.sh",
+        "owner": "cachix",
+        "repo": "devenv",
+        "rev": "0d66a8871cd9cc6d1706609dfb14248d35d60344",
+        "sha256": "1l5556na6b6d16c23qgm1f3lmlch970czq8vz9g5n11r1jjzsqi1",
+        "type": "tarball",
+        "url": "https://github.com/cachix/devenv/archive/0d66a8871cd9cc6d1706609dfb14248d35d60344.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "evilhack": {
         "sha256": "16nmi9vbf8bjsg8h46l5l32xnwmai8zs94swlld1y7a62jqr1wql",
         "type": "tarball",

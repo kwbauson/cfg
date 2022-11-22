@@ -46,7 +46,7 @@ with builtins; with pkgs; with mylib; {
             crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
             git-ignore git-fuzzy black terraform-ls cachix nle concurrently
-            arduino tasknix
+            arduino tasknix devenv
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };

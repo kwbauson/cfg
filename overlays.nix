@@ -70,6 +70,7 @@
     };
 
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
+    devenv = (import sources.devenv).defaultPackage.${system};
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";
       nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
@@ -192,7 +193,7 @@
     '';
     maim = maim.overrideAttrs (attrs: { buildInputs = attrs.buildInputs ++ [ xorg.libSM ]; });
     # FIXME
-    inherit (inputs.nixpkgs-pre-setuptools.legacyPackages.${system}) poetry poetry2nix i3 neovim-unwrapped neovimUtils;
+    inherit (inputs.nixpkgs-pre-setuptools.legacyPackages.${system}) poetry2nix neovim-unwrapped neovimUtils;
   })
   (self: super: with super; with mylib;
   let
