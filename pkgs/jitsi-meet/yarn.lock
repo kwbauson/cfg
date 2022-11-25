@@ -1995,9 +1995,9 @@
   resolved "https://registry.yarnpkg.com/@jitsi/eslint-config/-/eslint-config-4.1.5.tgz#c1287f2b65fc104c162d395b3f707ab1e49f215f"
   integrity sha512-UgyXdk1n9lSEQu9QeS09dEb3nnAoh/2wyqwxYlswlvB3f/AK83DoXx5SZtSBOH6di3DJJ3qcqhTE4t4pw9OjVQ==
 
-"@jitsi/excalidraw@https://github.com/jitsi/excalidraw/releases/download/v0.0.11/jitsi-excalidraw-0.0.11.tgz":
-  version "0.0.11"
-  resolved "https://github.com/jitsi/excalidraw/releases/download/v0.0.11/jitsi-excalidraw-0.0.11.tgz#b1940b3df301d3e34a44077d01a204198f5e26f9"
+"@jitsi/excalidraw@https://github.com/jitsi/excalidraw/releases/download/v0.0.12/jitsi-excalidraw-0.0.12.tgz":
+  version "0.0.12"
+  resolved "https://github.com/jitsi/excalidraw/releases/download/v0.0.12/jitsi-excalidraw-0.0.12.tgz#970608b58cca61efd78507e68f0f216444f385bd"
 
 "@jitsi/js-utils@2.0.0":
   version "2.0.0"
@@ -3359,10 +3359,10 @@
   resolved "https://registry.yarnpkg.com/@webpack-cli/serve/-/serve-1.6.1.tgz#0de2875ac31b46b6c5bb1ae0a7d7f0ba5678dffe"
   integrity sha512-gNGTiTrjEVQ0OcVnzsRSqTxaBSr+dmTfm+qJsCDluky8uhdLWep7Gcr62QsAKHTMxjCS/8nEITsmFAhfIx+QSw==
 
-"@xmldom/xmldom@0.7.6":
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.6.tgz#6f55073fa73e65776bd85826958b98c8cd1457b5"
-  integrity sha512-HHXP9hskkFQHy8QxxUXkS7946FFIhYVfGqsk0WLwllmexN9x/+R4UBLvurHEuyXRfVEObVR8APuQehykLviwSQ==
+"@xmldom/xmldom@0.7.9":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.9.tgz#7f9278a50e737920e21b297b8a35286e9942c056"
+  integrity sha512-yceMpm/xd4W2a85iqZyO09gTnHvXF6pyiWjD2jcOJs7hRoZtNNOO1eJlhHj1ixA+xip2hOyGn+LgcvLCMo5zXA==
 
 "@xobotyi/scrollbar-width@^1.9.5":
   version "1.9.5"
@@ -7172,9 +7172,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1538.0.0+871968af/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1539.0.0+eb4873d2/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1538.0.0+871968af/lib-jitsi-meet.tgz#6c01026a7e4ff862a732ff21351c37c2e07ad17d"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1539.0.0+eb4873d2/lib-jitsi-meet.tgz#e1a37c1696912a1cd1f0fa0183bd12ca32f4fdf8"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
