@@ -193,7 +193,7 @@
     '';
     maim = maim.overrideAttrs (attrs: { buildInputs = attrs.buildInputs ++ [ xorg.libSM ]; });
     # FIXME
-    inherit (inputs.nixpkgs-pre-setuptools.legacyPackages.${system}) poetry2nix neovim-unwrapped neovimUtils;
+    inherit (inputs.nixpkgs-pre-setuptools.legacyPackages.${system}) poetry poetry2nix neovim-unwrapped neovimUtils;
   })
   (self: super: with super; with mylib;
   let
