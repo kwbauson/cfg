@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "51b34e6cdee510dde784ba6da418a16b2bfbc125",
-        "sha256": "1smslgry6x9r63f1956389dj9h86r1cv8bs8bzgbx3dfvdins9ax",
+        "rev": "d04d8af13b196b0ff96d032ac5392b0a8f970fd4",
+        "sha256": "05s60igz30v6swv2f96b6sm1xdmah1krkid29gm022a18vlxib79",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/51b34e6cdee510dde784ba6da418a16b2bfbc125.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/d04d8af13b196b0ff96d032ac5392b0a8f970fd4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "7f8ccbda20e5ab12780162f045656061334b531a",
-        "sha256": "0yi0r7l2kfabbiqb52jk0yjl3ws0xg6zby9gj11zl6jphlipy1lg",
+        "rev": "bf469ed05a2bb7dce8d491e12cb6816465406057",
+        "sha256": "0z8xzn126rcp7cqg2hb99yssxk3g7sz5z4xhlfnsncv7m84mzkg4",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/7f8ccbda20e5ab12780162f045656061334b531a.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/bf469ed05a2bb7dce8d491e12cb6816465406057.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "6e36340a83d2624525a4ea26e931be087911e75b",
-        "sha256": "1sk15kzs3rawcvw924bkh36f7x12mmsi4b8r7x5isr8r0644vbsn",
+        "rev": "48a6472b3bbb1879ea9941db4d43a2a39eeb5dc1",
+        "sha256": "1s10rmh81932xrshi4plx9mi7v50jq1ixi1iw95iw09liwhjnay3",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/6e36340a83d2624525a4ea26e931be087911e75b.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/48a6472b3bbb1879ea9941db4d43a2a39eeb5dc1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0a7sn64hlriah7br4lyjwf3l3n5rnwc9hb79lk870czl2rhdr706",
+        "sha256": "1943ncvigpqyqb4nqd1sq8bp4mk5djqs307l53pvlbaahwfvvlcd",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-11-06/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-11-27/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-11-06"
+        "version": "2022-11-27"
     },
     "npmlock2nix": {
         "branch": "master",
