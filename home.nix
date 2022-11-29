@@ -101,6 +101,7 @@ with builtins; with pkgs; with mylib; {
     home-manager.path = inputs.home-manager.outPath;
     firefox.enable = true;
     chromium.enable = true;
+    autorandr.enable = isLinux && isGraphical;
     bash = {
       enable = true;
       inherit (config.home) sessionVariables;

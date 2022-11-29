@@ -1,5 +1,6 @@
 # startup
 exec --no-startup-id togpad off &
+exec --no-startup-id autorandr --change &
 
 # settings
 set $mod Mod4
