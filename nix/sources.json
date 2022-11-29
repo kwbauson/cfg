@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "ebf62dbf70687298c0b6c6f70bd03fbc90a44de8",
-        "sha256": "03xw3s32vmf1pv8y67b04grs6kl7g7cbl2h5kik5js635srw69s8",
+        "rev": "2316585d14b256a77044ebef5d3e61a14339eecd",
+        "sha256": "0n4ka9kal30zhdd1wr4wq96hyld4riapwnby668hbdbw260vmfvz",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/ebf62dbf70687298c0b6c6f70bd03fbc90a44de8.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/2316585d14b256a77044ebef5d3e61a14339eecd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "a788a7ed2ae60cd7cd0746702b2c14f3243c04ad",
-        "sha256": "0djhqgv3r7mbgvg231bk03yz0z5fp3xr9qm1c9vjmclv2m7s8916",
+        "rev": "506208fc9226e207a7beb1b4a26bbd9504a0f680",
+        "sha256": "1x6fyc3ar9vl0bc3xfs68ndxw5s876gpacqwjalan44cb4yqvvxi",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/a788a7ed2ae60cd7cd0746702b2c14f3243c04ad.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/506208fc9226e207a7beb1b4a26bbd9504a0f680.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "48a6472b3bbb1879ea9941db4d43a2a39eeb5dc1",
-        "sha256": "1s10rmh81932xrshi4plx9mi7v50jq1ixi1iw95iw09liwhjnay3",
+        "rev": "744960bb1a1a5bfd4931126634b4a904d038c8b7",
+        "sha256": "1n5jp15f59j7m1lal16iflyilydj6i245k9i3f56l0fvw5lv5qip",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/48a6472b3bbb1879ea9941db4d43a2a39eeb5dc1.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/744960bb1a1a5bfd4931126634b4a904d038c8b7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -120,12 +120,12 @@
         "version": "2022.11.14"
     },
     "r2modman": {
-        "sha256": "05v2laah6y8gphjbfckg0zp27cbyir6jj1f5gbdhlz5hnr2llx4i",
+        "sha256": "0g5n9l7naf1hkf38xbjkmrf515anpbayh5581slmrz6p2zlgfgc6",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.33/r2modman-3.1.33.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.34/r2modman-3.1.34.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.33"
+        "version": "3.1.34"
     },
     "ranger_devicons": {
         "branch": "main",
