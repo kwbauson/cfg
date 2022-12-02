@@ -1,6 +1,6 @@
 [[package]]
 name = "botocore"
-version = "1.29.20"
+version = "1.29.21"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -72,8 +72,8 @@ content-hash = "9f7595a93b2e7e7f2167264a0197d7470394f090171c0b9c9837b1c1f8c71247
 
 [metadata.files]
 botocore = [
-    {file = "botocore-1.29.20-py3-none-any.whl", hash = "sha256:7c26cb870d0cae26349df2926a7bf6277c1326db6d42c650807a519d50a83786"},
-    {file = "botocore-1.29.20.tar.gz", hash = "sha256:806dab6358b0b44d7b283f133aadd26846f31fab12c97d348a1849b3b5a36c74"},
+    {file = "botocore-1.29.21-py3-none-any.whl", hash = "sha256:ac620727f7b8c81e7c0c841d30be4a01a898e0b6aeed1ddf1ba653742d8f6319"},
+    {file = "botocore-1.29.21.tar.gz", hash = "sha256:02d1f864e13d219887cc35a3f6e197e9f52c47b0e8f568b3fbbf5f69e667c7f5"},
 ]
 git-remote-codecommit = [
     {file = "git-remote-codecommit-1.16.tar.gz", hash = "sha256:f8e10cc5c177486022e4e7c2c08e671ed35ad63f3a2da1309a1f8eae7b6e69da"},
