@@ -5,12 +5,12 @@ with builtins;
     ./hardware-configuration.nix
   ];
 
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   time.hardwareClockInLocalTime = true;
   time.timeZone = "America/Indianapolis";
 
   services.localtimed.enable = false;
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.nvidiaSettings = false;
   virtualisation.docker.enable = true;
   hardware.bluetooth.enable = true;
