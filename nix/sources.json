@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "bd36f71570c8cec11f43dfcc76619f3642e2725d",
-        "sha256": "11is6yhdw4z9k5xp1fs5wr2f1px5lzk7g67idrgsb9nr346al7sl",
+        "rev": "d9bf4e60c6b75798a4a2a5fbc78ee337b47a1ef9",
+        "sha256": "1x94hgflxcpxrj2k37qyyzxcnf7mdc8n60mfs149w3inbnzzmdcm",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/bd36f71570c8cec11f43dfcc76619f3642e2725d.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/d9bf4e60c6b75798a4a2a5fbc78ee337b47a1ef9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "1943ncvigpqyqb4nqd1sq8bp4mk5djqs307l53pvlbaahwfvvlcd",
+        "sha256": "00fi9p00ldqf5dxynv1a8xkqffz2iavqdk427xj17q6mzjwqnxhf",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-11-27/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-04/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-11-27"
+        "version": "2022-12-04"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -105,10 +105,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "12ce9223a9ae8ed5830710d5897e4d08e1cb9ac1",
-        "sha256": "1x078yj7r7086czbm2ph50104k3r4clqmvrgd6vp6db82pd5xgan",
+        "rev": "45faec611d6bfd5c63f3aaaeabe0b65f5a069407",
+        "sha256": "01y876mzd3dcmw2bmvwp720fz23yzla9f42mglyr27hjg5489rb5",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/12ce9223a9ae8ed5830710d5897e4d08e1cb9ac1.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/45faec611d6bfd5c63f3aaaeabe0b65f5a069407.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
