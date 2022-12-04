@@ -674,10 +674,13 @@ with builtins; with pkgs; with mylib; {
         remove mod4 = Control_R
         add control = Control_R
         add mod4 = Super_R
-      ''}
-      ${exe hsetroot} -solid black
-      xsetroot -cursor_name left_ptr
-      urxvtd -q -o -f
+      ''} &
+      ${exe hsetroot} -solid black &
+      xsetroot -cursor_name left_ptr &
+      urxvtd -q -o -f &
+      togpad off &
+      autorandr --change &
+      ${optionalString (host == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
     '';
     windowManager = {
       i3 = {

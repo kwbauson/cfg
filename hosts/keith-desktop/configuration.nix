@@ -17,4 +17,8 @@ with builtins;
   environment.systemPackages = [ pkgs.xboxdrv ];
   users.users.keith.extraGroups = [ "dialout" ];
   services.tailscale.enable = true;
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
 }
