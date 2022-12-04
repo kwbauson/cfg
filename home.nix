@@ -685,7 +685,12 @@ with builtins; with pkgs; with mylib; {
       i3 = {
         enable = isNixOS && isGraphical;
         config = null;
-        extraConfig = readFile ./i3-config;
+        extraConfig = readFile ./i3-config + {
+          keith-desktop = ''
+            workspace 1 output HDMI-A-0
+            workspace 2 output DisplayPort-1
+          '';
+        }.${host} or "";
       };
     };
   };
