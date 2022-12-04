@@ -99,20 +99,8 @@
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = lib.mkDefault true;
-  security.wrappers =
-    let
-      rootWrapper = source: {
-        setuid = true;
-        owner = "root";
-        group = "root";
-        inherit source;
-      };
-    in
-    {
-      pmount = rootWrapper "${pkgs.pmount}/bin/pmount";
-      pumount = rootWrapper "${pkgs.pmount}/bin/pumount";
-    };
-  systemd.tmpfiles.rules = [ "d /media" ];
+  imports = [ ./pmount.nix ];
+  programs.pmount.enable = true;
 
   services.udev.packages = with pkgs; [ headsetcontrol ];
 }

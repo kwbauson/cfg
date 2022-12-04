@@ -433,8 +433,6 @@ with builtins; with pkgs; with mylib; {
       extraConfig = {
         show-icons = true;
         scroll-method = 1;
-        kb-row-tab = "";
-        kb-row-select = "Tab";
         monitor = "-1";
       };
     };
