@@ -99,7 +99,7 @@
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = lib.mkDefault true;
-  imports = [ ./pmount.nix ];
+  imports = [ ../modules/pmount.nix ];
   programs.pmount.enable = true;
 
   services.udev.packages = with pkgs; [ headsetcontrol ];

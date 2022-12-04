@@ -48,7 +48,7 @@
             system = "x86_64-linux";
             modules = [
               { networking.hostName = host; }
-              (callModule ./hosts/common.nix)
+              (callModule ./modules/common.nix)
               (callModule module)
               home-manager.nixosModule
               {

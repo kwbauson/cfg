@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./olivetin.nix
+    ../../modules/olivetin.nix
   ];
 
   fileSystems."/".options = [ "barrier=0" "data=writeback" "commit=60" "noatime" ];
