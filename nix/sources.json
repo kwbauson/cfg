@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "d9bf4e60c6b75798a4a2a5fbc78ee337b47a1ef9",
-        "sha256": "1x94hgflxcpxrj2k37qyyzxcnf7mdc8n60mfs149w3inbnzzmdcm",
+        "rev": "f574b0640ec60c729bb92fe4693956317a65ba6e",
+        "sha256": "1vnbdnbgj3msn6hq7aqcpq2k9k0bsqdpzj7iff8lqvkmnvdm5bl4",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/d9bf4e60c6b75798a4a2a5fbc78ee337b47a1ef9.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/f574b0640ec60c729bb92fe4693956317a65ba6e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "46cc2e37ae812fb1fdebb9b3d80613e25271133f",
-        "sha256": "12ms0mc3l3xarbna3bikqcx0phq4j2l5idgq8fj1vrc0446ppvnc",
+        "rev": "2ad2e6ff0e0e4813969ee54e64ae0b315e15ea68",
+        "sha256": "1x7g7dd2f5ib5d6nj1j72ayzrg3691z6ahaw4fzj1vfiqaycnpdw",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/46cc2e37ae812fb1fdebb9b3d80613e25271133f.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/2ad2e6ff0e0e4813969ee54e64ae0b315e15ea68.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
