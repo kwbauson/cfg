@@ -2007,10 +2007,10 @@
     bowser "2.7.0"
     js-md5 "0.7.3"
 
-"@jitsi/js-utils@2.0.4", "@jitsi/js-utils@^2.0.0":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@jitsi/js-utils/-/js-utils-2.0.4.tgz#461bfe2ad8b1f74fa2a21974a9d4a4705c016795"
-  integrity sha512-voXa8Y8srv/q3gD9wWOGMPVqOWT4s0n4B/ApkPDAIN8EG/6mpzAfHNMi4BIOQeeo2P0srIdcD6Y/1S/ftjuhYQ==
+"@jitsi/js-utils@2.0.5", "@jitsi/js-utils@^2.0.0":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@jitsi/js-utils/-/js-utils-2.0.5.tgz#b60ffde5e2b97a7d5469b20739bd4ddeb30bc5de"
+  integrity sha512-Aa7lt/sGsDymWnKJtM1RePmR2b2J5TwY3QLv5iOmzMDYR+5RE0NyYc/vKW51JeatDVSkj+LT7kpUDvtJua0rmQ==
   dependencies:
     bowser "2.7.0"
     js-md5 "0.7.3"
@@ -7172,9 +7172,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1543.0.0+c57ac97e/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1549.0.0+877c4546/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1543.0.0+c57ac97e/lib-jitsi-meet.tgz#063ab2c590993b4d8548385cc01f9d4bb6e31970"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1549.0.0+877c4546/lib-jitsi-meet.tgz#1a01a16b1fc99acafdd48da2d3c8e80c0bb92f20"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
