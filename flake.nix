@@ -137,6 +137,9 @@
 
         iso = with self.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
           imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix" ];
+          nixpkgs.config.allowUnfree = true;
+          hardware.enableRedistributableFirmware = true;
+          hardware.enableAllFirmware = true;
         })).config.system.build.isoImage;
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues ci);

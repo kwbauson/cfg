@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, self, ... }:
 with builtins;
 {
-  imports = [
+  imports = with self.inputs.nixos-hardware.nixosModules; [
     ./hardware-configuration.nix
+    common-cpu-amd
+    common-gpu-amd
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
