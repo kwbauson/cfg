@@ -5,7 +5,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot = {
         enable = lib.mkDefault true;
-        configurationLimit = 5;
+        configurationLimit = lib.mkDefault 5;
         consoleMode = "auto";
       };
       timeout = 1;

@@ -8,6 +8,8 @@ with builtins;
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.systemd-boot.configurationLimit = 2;
+
   time.hardwareClockInLocalTime = true;
   time.timeZone = "America/Indianapolis";
 
