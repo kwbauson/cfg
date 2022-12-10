@@ -2025,10 +2025,10 @@
   resolved "https://registry.yarnpkg.com/@jitsi/rnnoise-wasm/-/rnnoise-wasm-0.1.0.tgz#95c389de5cd86e8cc3bb585837474a57e968056e"
   integrity sha512-JujivPbOUvdRYa2xqByHYKfKGNGa7ZPyNLaNuh8hEp9XsiNfjaJAHdboq6M1VY9TP+765nyxC0LjpAw1VkikOQ==
 
-"@jitsi/rtcstats@9.5.0":
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/@jitsi/rtcstats/-/rtcstats-9.5.0.tgz#4554833baeb2b811bdb2513e9bd4d05ae7884855"
-  integrity sha512-jKB+1IzKuqynA2etmWAA4uDFF0oAFUZWxRq+m+rOt8FfBp6pXojWbWA7xblcjxerj/3njGc8nEQbcK9qck1How==
+"@jitsi/rtcstats@9.5.1":
+  version "9.5.1"
+  resolved "https://registry.yarnpkg.com/@jitsi/rtcstats/-/rtcstats-9.5.1.tgz#c2db84d5a91caf35c5ebe5bdcc525379c0fa7d3e"
+  integrity sha512-UDcsNwPvweQ6owV/chwabd6DsQd2aB4qjqrOB+BlJnETZ+zssGYAey3ezaiNK6nxevwBkbHj980/S9v+2y4btg==
   dependencies:
     "@jitsi/js-utils" "^2.0.0"
     sdp "^3.0.3"
