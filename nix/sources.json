@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "12ee6282ffc76078a49f7e0f90b067c81ee9b9c1",
-        "sha256": "0493myzwb06b4bp9j52nrscdk9ampkj4hwlp8wdgk69kj6m56vvb",
+        "rev": "1785b8de99a3e0c1077c70e93085f0e8a0c03cd8",
+        "sha256": "0s6a6bxb280w5ch235ip69b8rqmlb8r7iqxgf6iplv3aijidyiki",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/12ee6282ffc76078a49f7e0f90b067c81ee9b9c1.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/1785b8de99a3e0c1077c70e93085f0e8a0c03cd8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "6ee618af75dbc0de21bfcba7d56d9e4895816c58",
-        "sha256": "1194k73qbvxakx9ycjk6y6bamb46p65mf0ilika5f7zlwqqlv8rm",
+        "rev": "1a2bea5d67a211620da2460f1e19e3f6e9018935",
+        "sha256": "1l34bq8v5lp5ji7cx06l3rw03zlis151g5apqyyfm5xanc0q160z",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/6ee618af75dbc0de21bfcba7d56d9e4895816c58.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/1a2bea5d67a211620da2460f1e19e3f6e9018935.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "00fi9p00ldqf5dxynv1a8xkqffz2iavqdk427xj17q6mzjwqnxhf",
+        "sha256": "0h8vivjg8bc6gj2dj9z3wqdff4cgv1p7mmw9hjbh2ca6dikmggyb",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-04/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-11/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-12-04"
+        "version": "2022-12-11"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -105,10 +105,10 @@
         "homepage": null,
         "owner": "tweag",
         "repo": "npmlock2nix",
-        "rev": "03490ec4d22abf4e077745803456b8fc740bdbea",
-        "sha256": "12q2gmcgadildn8pi95m29h98f4gz3hhfqhcml1w4hmy53jdbnpg",
+        "rev": "cc11d791fdc3afb2ae7c2f11e10abf7c33b40763",
+        "sha256": "1iyd7pc9x7jnbb04kjp6f0qly5di29rgh8g85w6fcplzkvlsd046",
         "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/03490ec4d22abf4e077745803456b8fc740bdbea.tar.gz",
+        "url": "https://github.com/tweag/npmlock2nix/archive/cc11d791fdc3afb2ae7c2f11e10abf7c33b40763.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
