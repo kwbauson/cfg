@@ -259,7 +259,8 @@ with builtins; with pkgs; with mylib; {
         plugins = with vimPlugins; {
           inherit
             conflict-marker-vim fzf-vim nvim-scrollview quick-scope
-            tcomment_vim vim-airline vim-better-whitespace
+            tcomment_vim vim-airline
+            # vim-better-whitespace
             vim-code-dark vim-easymotion vim-fugitive vim-lastplace
             vim-multiple-cursors vim-peekaboo vim-polyglot vim-sensible
             vim-startify vim-vinegar barbar-nvim nvim-web-devicons
