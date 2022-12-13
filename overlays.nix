@@ -191,8 +191,6 @@
       chmod -R +w $out
       cp ${self.self-flake-lock} $out/flake.lock
     '';
-    # FIXME
-    inherit (inputs.nixpkgs-pre-setuptools.legacyPackages.${system}) poetry poetry2nix;
   })
   (self: super: with super; with mylib;
   let
