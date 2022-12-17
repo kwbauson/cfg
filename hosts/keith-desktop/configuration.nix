@@ -5,10 +5,12 @@ with builtins;
     ./hardware-configuration.nix
     common-cpu-amd
     common-gpu-amd
+    common-cpu-amd-pstate
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.systemd-boot.configurationLimit = 2;
+  boot.loader.systemd-boot.configurationLimit = 3;
+  hardware.amdgpu.loadInInitrd = false;
 
   time.hardwareClockInLocalTime = true;
   time.timeZone = "America/Indianapolis";
