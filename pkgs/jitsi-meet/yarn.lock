@@ -7172,9 +7172,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1557.0.0+8df33524/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1560.0.0+92a5738b/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1557.0.0+8df33524/lib-jitsi-meet.tgz#42d083ba818d0614b90facddf64d4536e5a810aa"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1560.0.0+92a5738b/lib-jitsi-meet.tgz#90f0dcc248d6de14fc8306955fa46552df71aeaa"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
@@ -8969,10 +8969,10 @@ react-native-watch-connectivity@1.0.11:
   dependencies:
     lodash.sortby "^4.7.0"
 
-react-native-webrtc@106.0.0:
-  version "106.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-106.0.0.tgz#dff0b341a250bf808aa322ae054874e6b6d9a940"
-  integrity sha512-nFl8WSNGMNxuIiaNAiJvILRcEC65yRxPOWTexLrM+vo44syt/4chEvzN9eOqXiPsOmsECQmwZupCUGR5XABUNg==
+react-native-webrtc@106.0.1:
+  version "106.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-106.0.1.tgz#d858b96129a27e9866346948ca0379fcc3b040b1"
+  integrity sha512-0l911lDIqj7jKMvxwQEF6mQt6CMnmOZjgwyifNT28w3XY4p+0Tm/mg5S0UqjbFzcUWeI5w2q/Xk7zn0mcbEhPg==
   dependencies:
     adm-zip "0.5.9"
     base64-js "1.5.1"
