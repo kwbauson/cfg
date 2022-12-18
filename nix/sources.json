@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "61c6fc9660325404cda99197a00a29a0e1d3c2f4",
-        "sha256": "1ask0hll5ycmfnwpi4wqs4rfx19zy4kk9644snpiidgxpa1xvisj",
+        "rev": "1666cf2cba376ce47f08caf7f3a6da4bf1a56c55",
+        "sha256": "05hyl93vn4xd1q88h432axi9fyj8wz7fh1r35z3cm83fgrj5qai0",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/61c6fc9660325404cda99197a00a29a0e1d3c2f4.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/1666cf2cba376ce47f08caf7f3a6da4bf1a56c55.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0h8vivjg8bc6gj2dj9z3wqdff4cgv1p7mmw9hjbh2ca6dikmggyb",
+        "sha256": "1dd8b8zy6899pr3sdcvfg5k31dpfjmbqp1in3xhaw1aq2yjnla57",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-11/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-18/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-12-11"
+        "version": "2022-12-18"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "a9ebebc4caa70ca2f74738dc7f59d105b474bef7",
-        "sha256": "1smdplzimyzm8ndsw2xwfdc7hd0yrn8z8ikinzxk0m3p95j0kg3f",
+        "rev": "29253f499f148bd90ef9eec8a2254e91c757cb4c",
+        "sha256": "0cdi2mg29zplwq88j73lh4naskyx4wl084nqy1q853iy8psdb88z",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/a9ebebc4caa70ca2f74738dc7f59d105b474bef7.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/29253f499f148bd90ef9eec8a2254e91c757cb4c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
