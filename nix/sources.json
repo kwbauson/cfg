@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "b7f2889c4fa3c737ea2df3c49291dd41be77c14f",
-        "sha256": "0h99zkm9sikcsjx429diihcyc5hz3dgfcpj34ll27l4x23rc29i7",
+        "rev": "f48bba7a3d705c8d3a7989c8f1dabc7191cb3b42",
+        "sha256": "1i7j8qy240xjhg200br2r4b5dmns28g0bkccy151akys1z3apx4r",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/b7f2889c4fa3c737ea2df3c49291dd41be77c14f.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/f48bba7a3d705c8d3a7989c8f1dabc7191cb3b42.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "ed4489716a29ff670e2305bf1ed57a7380157e73",
-        "sha256": "11jr1fdfpdjcbwj84hmkda2c9lxsck7i8ddp2h4bfgngzixhwx99",
+        "rev": "2f3ec7bbf2e790122ca276a4ab038bf2749c6c93",
+        "sha256": "0hdsxgib294rhdxcg0v3mlkrfimc4w81d7ycylbcxymhs4512phb",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/ed4489716a29ff670e2305bf1ed57a7380157e73.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/2f3ec7bbf2e790122ca276a4ab038bf2749c6c93.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "32dbdf2e5c9807cb3073ebc0a1a2ff158ad114d4",
-        "sha256": "1gci3fqzkf49h0gscx0xqhbcqzypjdbmyqkypf4d59gnhf11sp20",
+        "rev": "27754c88746b33c3fa99322a42a1ea49820e824b",
+        "sha256": "1nyprxhlkkfqpi37nk6psryql8c8wq96693iazm6r40q4arkjkap",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/32dbdf2e5c9807cb3073ebc0a1a2ff158ad114d4.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/27754c88746b33c3fa99322a42a1ea49820e824b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
