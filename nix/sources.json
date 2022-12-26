@@ -92,7 +92,7 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "03j32c2k3q1ffn78c8v4nrvcfbgnw2cj0p0d18kyyma3c6388xmp",
+        "sha256": "05abgc23dkhjrzyc6s0dzplp7iplsyzwii6mp6q51mziahwrrxnm",
         "type": "file",
         "update_type": "github-release",
         "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-25/index-x86_64-linux",
