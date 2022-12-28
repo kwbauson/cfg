@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "6b867ba6ec614a5c040c1e0ee774e13be56c638c",
-        "sha256": "1p1sqpn14v1znl0p5k6cp3zbgqxy6q7b97hrhz1rm3z11xw0jz49",
+        "rev": "d0318f2186515c98c28c8bc9d6d0f17d8f1e8e12",
+        "sha256": "0x81s2dnyiahvv2896l7fg4h6k26b4lr08zgrikan5f383rhrw0k",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/6b867ba6ec614a5c040c1e0ee774e13be56c638c.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/d0318f2186515c98c28c8bc9d6d0f17d8f1e8e12.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "b39c012199df203c3394417f5ff344b9b32a866d",
-        "sha256": "16vx4kzy2idjfbfsriwwsk384ihywqs16fhycmhcb061733mqhyk",
+        "rev": "4d6485481acf2c55162ddf2c043679d895f2f6e1",
+        "sha256": "054p4hwj3qrrp45dv83p0yp6pkks5xba6wg9rljh68v5bmz7qafl",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/b39c012199df203c3394417f5ff344b9b32a866d.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/4d6485481acf2c55162ddf2c043679d895f2f6e1.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "05abgc23dkhjrzyc6s0dzplp7iplsyzwii6mp6q51mziahwrrxnm",
+        "sha256": "0zjga23yzvclz7zl22kdw1zbp95i5gjpaqylg3wahhlbl6vgvl3m",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-25/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-12-26-191143/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-12-25"
+        "version": "2022-12-26-191143"
     },
     "npmlock2nix": {
         "branch": "master",
