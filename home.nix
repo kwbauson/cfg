@@ -78,7 +78,7 @@ with builtins; with pkgs; with mylib; {
       PAGER = "less";
       RANGER_LOAD_DEFAULT_RC = "FALSE";
       RXVT_SOCKET = "$XDG_RUNTIME_DIR/urxvtd";
-      SSH_ASKPASS = null;
+      SSH_ASKPASS = "";
       VISUAL = config.home.sessionVariables.EDITOR;
       _JAVA_AWT_WM_NONREPARENTING = 1;
       npm_config_audit = "false";
