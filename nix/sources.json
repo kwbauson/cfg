@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "493738c368612aec1f63ad9f28aa7726e057f411",
-        "sha256": "03ji1gi6rajbiz9j812dvn1rc8calcxa7jyasszlvwnr811v1fwp",
+        "rev": "09b0058bc750de6075dc0ebd9c72c7b8e23f4f32",
+        "sha256": "19yg64l8abgd6cjrniaqda8ial7nlr59s7y31ngvf6s8y2r0v9f1",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/493738c368612aec1f63ad9f28aa7726e057f411.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/09b0058bc750de6075dc0ebd9c72c7b8e23f4f32.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -133,10 +133,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "49fe4753c89615a32f14b2f4c78bbd02ee76be3c",
-        "sha256": "1kgzv9mqsqzbpjrj3qi8vkha7vij2qsmdnjwl547pnf04hbdhgk1",
+        "rev": "500d8762ef9a2c0f94ab4c7a49f14733f9171941",
+        "sha256": "12g4v8z3cs0zazaaqdd25qml9qq9cwc7ha1qk4vzgbb5zc41vva7",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/49fe4753c89615a32f14b2f4c78bbd02ee76be3c.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/500d8762ef9a2c0f94ab4c7a49f14733f9171941.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
