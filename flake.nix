@@ -140,7 +140,7 @@
         };
 
         switch-scripts = mapAttrs (_: config: config.pkgs.switch) homeConfigurations;
-        output-derivations = { inherit self-source; } // removeAttrs;
+        output-derivations = { inherit self-source; } // switch-scripts;
 
         iso = with self.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
           imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
