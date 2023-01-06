@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages git nix niv jq bat
 set -eo pipefail
 inputs_repo=${1:-~/cfg}

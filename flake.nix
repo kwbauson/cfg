@@ -116,12 +116,12 @@
 
         homeConfigurations = mapAttrs (host: _: lib.homeConfiguration { inherit host; }) nixosConfigurations // {
           kwbauson = lib.homeConfiguration { host = "kwbauson"; isGraphical = false; };
-          keith-mac = lib.homeConfiguration {
+          readlee-mac-m1 = lib.homeConfiguration {
             isNixOS = false;
-            system = "x86_64-darwin";
-            username = "keithbauson";
-            homeDirectory = "/Users/keithbauson";
-            host = "keith-mac";
+            system = "aarch64-darwin";
+            username = "benjamin";
+            homeDirectory = "/Users/benjamin";
+            host = "readlee-mac-m1";
           };
         };
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# ONLY_LINUX
 # with-packages ffmpeg-full slop xclip
 dir=/tmp/slopcast
 
