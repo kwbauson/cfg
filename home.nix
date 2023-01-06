@@ -94,6 +94,7 @@ with builtins; with pkgs; with mylib; {
       RLWRAP_HOME = "$XDG_DATA_HOME/rlwrap";
       SOLARGRAPH_CACHE = "$XDG_CACHE_HOME/solargraph";
       PBGOPY_SERVER = "http://kwbauson.com:9090/";
+      ${attrIf isDarwin "LANG"} = "en_US.UTF-8";
     };
   };
 
@@ -126,26 +127,9 @@ with builtins; with pkgs; with mylib; {
         }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
         qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
       };
-      initExtra = prefixIf (!isNixOS) ''
-        if command -v nix &> /dev/null;then
-          NIX_LINK=$HOME/.nix-profile/bin
-          export PATH=$(echo "$PATH" | sed "s#:$NIX_LINK##; s#\(/usr/local/bin\)#$NIX_LINK:\1#")
-          unset NIX_LINK
-        else
-          source ~/.nix-profile/etc/profile.d/nix.sh
-          export XDG_DATA_DIRS="$HOME/.nix-profile/share:''${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-        fi
-        source ~/.nix-profile/etc/profile.d/bash_completion.sh
-        if [[ -d ~/.nix-profile/etc/bash_completion.d ]];then
-          for script in ~/.nix-profile/etc/bash_completion.d/*;do
-            source $script
-          done
-        fi
-        source ~/.nix-profile/share/bash-completion/bash_completion
-        export GPG_TTY=$(tty)
-      '' ''
+      initExtra = ''
         [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-        [[ -n $SSH_CLIENT ]] && _host="$(hostname --fqdn) " || _host=
+        [[ -n $SSH_CLIENT ]] && _host="${host} " || _host=
         PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
         set -o vi
@@ -176,6 +160,26 @@ with builtins; with pkgs; with mylib; {
 
         _completion_loader git
         ___git_complete g __git_main
+      '' + optionalString (!isNixOS) ''
+        export GPG_TTY=$(tty)
+
+        # there are often duplicate path entries on non-nixos; remove them
+        NEWPATH=
+        OLDIFS=$IFS
+        IFS=:
+        for entry in $PATH;do
+          if [[ ! :$NEWPATH: == *:$entry:* ]];then
+            if [[ -z $NEWPATH ]];then
+              NEWPATH=$entry
+            else
+              NEWPATH=$NEWPATH:$entry
+            fi
+          fi
+        done
+
+        IFS=$OLDIFS
+        export PATH="$NEWPATH"
+        unset OLDIFS NEWPATH
       '';
       profileExtra = ''
         [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
