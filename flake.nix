@@ -150,8 +150,8 @@
         })).config.system.build.isoImage;
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues ci);
-        defaultPackage.aarch64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
-          [ self.packages.aarch64-darwin.checks self.packages.x86_64-darwin.checks keith-mac readlee-mac-m1 ];
+        defaultPackage.aarch64-darwin = with self; packages.aarch64-darwin.linkFarmFromDrvs "build"
+          [ packages.aarch64-darwin.checks packages.x86_64-darwin.checks keith-mac readlee-mac-m1 ];
 
         ci = removeAttrs output-derivations [ "self-source" "keith-mac" "readlee-mac-m1" ] // { inherit (self.packages.x86_64-linux) checks; };
       };
