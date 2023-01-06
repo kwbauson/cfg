@@ -140,7 +140,7 @@
         };
 
         switch-scripts = mapAttrs (_: config: config.pkgs.switch) homeConfigurations;
-        output-derivations = { inherit self-source; } // removeAttrs switch-scripts [ "keith-mac" ];
+        output-derivations = { inherit self-source; } // removeAttrs;
 
         iso = with self.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
           imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
@@ -151,8 +151,8 @@
 
         defaultPackage.x86_64-linux = self.packages.x86_64-linux.linkFarmFromDrvs "build" (attrValues ci);
         defaultPackage.x86_64-darwin = self.packages.x86_64-darwin.linkFarmFromDrvs "build"
-          [ self.packages.x86_64-darwin.checks keith-mac ];
+          [ self.packages.x86_64-darwin.checks keith-mac readlee-mac-m1 ];
 
-        ci = removeAttrs output-derivations [ "self-source" ] // { inherit (self.packages.x86_64-linux) checks; };
+        ci = removeAttrs output-derivations [ "self-source" "keith-mac" "readlee-mac-m1" ] // { inherit (self.packages.x86_64-linux) checks; };
       };
 }
