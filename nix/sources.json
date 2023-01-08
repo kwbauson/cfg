@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "6c9f137af8b40c8aed177bd628cab313b09d92fb",
-        "sha256": "102snxmz862sbr6yc1ng0yi5459x76afm95ggjpxwrzfjy0697zr",
+        "rev": "86154918c9bc3eb5a161696322a71f6c678d4194",
+        "sha256": "0dj2ky76h0qcp7g04wzlblhp52jxymargh6jcq3xi2bswdnvgqj9",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/6c9f137af8b40c8aed177bd628cab313b09d92fb.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/86154918c9bc3eb5a161696322a71f6c678d4194.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "0fbd1db32ba3ee704fe8259e1af00f8ec5d2db45",
-        "sha256": "0dp5zq2ryv9lz9skl20i6rcyc4j779qb6rbddy35vrvrf4i6yqp2",
+        "rev": "f5da0a34b5dbbeb57e6d7595f46a930cd62bcd77",
+        "sha256": "1kw0039r78d0ih6nw2nwwc5q0kjljxc2ij2i63dq2ppid73hhcqk",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/0fbd1db32ba3ee704fe8259e1af00f8ec5d2db45.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/f5da0a34b5dbbeb57e6d7595f46a930cd62bcd77.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -120,12 +120,12 @@
         "version": "2022.11.14"
     },
     "r2modman": {
-        "sha256": "0g5n9l7naf1hkf38xbjkmrf515anpbayh5581slmrz6p2zlgfgc6",
+        "sha256": "12bwzsprqrf16jkp436yvqyy7457kirli89kyx1wjx620dcd6xb4",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.34/r2modman-3.1.34.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.35/r2modman-3.1.35.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.34"
+        "version": "3.1.35"
     },
     "ranger_devicons": {
         "branch": "main",
@@ -133,10 +133,10 @@
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "500d8762ef9a2c0f94ab4c7a49f14733f9171941",
-        "sha256": "12g4v8z3cs0zazaaqdd25qml9qq9cwc7ha1qk4vzgbb5zc41vva7",
+        "rev": "5bb1c32f649055c2d9143c8371c2bf06d5e574f7",
+        "sha256": "03mab5v57s9vwnxfsqijspfyhjbs0nlbwh42pzdxndwzvk4brfzp",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/500d8762ef9a2c0f94ab4c7a49f14733f9171941.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/5bb1c32f649055c2d9143c8371c2bf06d5e574f7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "46d7c968cc69e5c6057c495659c7e2b23fab1c27",
-        "sha256": "0ym4sxf73pa0q29ahfhxxqm2rf5xrk6ji15irr1608dvr0qhgznr",
+        "rev": "4c2f1e6a419cf4902d36c472c0e428b100af74e3",
+        "sha256": "115pjpvlfmhb9gi3alc397m83xc5ryq7qc3ild9n4w613s7sa78q",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/46d7c968cc69e5c6057c495659c7e2b23fab1c27.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/4c2f1e6a419cf4902d36c472c0e428b100af74e3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
