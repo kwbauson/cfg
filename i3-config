@@ -18,11 +18,11 @@ bar {
 bindsym $mod+p         exec --no-startup-id termbar
 bindsym $mod+t         exec --no-startup-id term tmux
 bindsym $mod+Shift+t   exec --no-startup-id term
-bindsym $mod+Control+t exec --no-startup-id term tmux attach
+bindsym $mod+Control+t exec --no-startup-id term tmux new ssh keith-mac
 bindsym $mod+e         exec --no-startup-id term tmux new nvim
 bindsym $mod+Shift+e   exec --no-startup-id term nvim
+bindsym $mod+Control+e exec --no-startup-id term tmux new ssh keith-mac -t .nix-profile/bin/bash -ilc nvim
 bindsym $mod+f         exec --no-startup-id term tmux new ranger
-bindsym $mod+Shift+f   exec --no-startup-id term tmux new ranger
 bindsym $mod+w exec --no-startup-id qtbr
 bindsym $mod+u exec --no-startup-id qutebrowser ':undo --window'
 bindsym $mod+space exec --no-startup-id "sleep .5; xset dpms force off"

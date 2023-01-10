@@ -223,12 +223,18 @@ with builtins; with pkgs; with mylib; {
     ssh = {
       enable = true;
       compression = true;
-      extraConfig = ''
-        Host kwbauson.com
-          User keith
-        Host gitlab.com
-          UpdateHostKeys no
-      '';
+      controlMaster = "auto";
+      matchBlocks = {
+        "kwbauson.com".user = "keith";
+        "gitlab.com".extraOptions.UpdateHostKeys = "no";
+        keith-mac = {
+          user = "keithbauson";
+          port = 2022;
+          localForwards = map
+            (port: { bind.port = port; host.address = "localhost"; host.port = port; })
+            [ 1234 3000 5432 8000 8025 ];
+        };
+      };
     };
     tmux = {
       enable = true;
