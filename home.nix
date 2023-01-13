@@ -229,7 +229,6 @@ with builtins; with pkgs; with mylib; {
         "gitlab.com".extraOptions.UpdateHostKeys = "no";
         keith-mac = {
           user = "keithbauson";
-          port = 2022;
           localForwards = map
             (port: { bind.port = port; host.address = "localhost"; host.port = port; })
             [ 1234 3000 5432 8000 8025 ];
