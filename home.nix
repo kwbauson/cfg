@@ -59,7 +59,7 @@ with builtins; with pkgs; with mylib; {
           inherit
             diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
             strace sway nsxiv usbutils breeze-icons dzen2 zoom-us maim
-            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg
+            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg nim nimlsp
             ;
           inherit
             nixos-install-tools arduino signal-desktop ffmpeg-full crystal discord yt-dlp watchexec sox niv ncdu
