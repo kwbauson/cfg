@@ -22,7 +22,7 @@ with builtins; with pkgs; with mylib; {
             nmap openssh p7zip patch perl pigz procps progress pv ranger
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
             which xdg-utils xxd xz zip bitwarden-cli libqalculate yt-dlp
-            speedtest-cli tldr nix-top nixos-install-tools better-comma dogdns
+            speedtest-cli tldr nix-top nixos-install-tools better-comma q
             dasel emborg
             ;
         };
