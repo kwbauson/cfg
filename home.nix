@@ -231,7 +231,7 @@ with builtins; with pkgs; with mylib; {
           user = "keithbauson";
           localForwards = map
             (port: { bind.port = port; host.address = "localhost"; host.port = port; })
-            [ 1234 3000 5432 8000 8025 ];
+            [ 1234 3000 5432 8000 8025 4306 ];
         };
       };
     };
