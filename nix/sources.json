@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "818abeae2dd2f4911839a079e5c8934fee160a60",
-        "sha256": "1g151mc2hm5yr72rq0rbcp7ajbxnyfcsrqvp5gygm77kgf2harny",
+        "rev": "c5519d64b6bbf59be0d37a26a801a2e9430bcb3f",
+        "sha256": "1l6h3p2ax4cf5lvaj81wxj492kcs1dwvj9bc422nnahjawjb38rm",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/818abeae2dd2f4911839a079e5c8934fee160a60.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/c5519d64b6bbf59be0d37a26a801a2e9430bcb3f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "146a785e3d4a28e33bf1dc285f80caa39bc8d127",
-        "sha256": "0j1ln4w9nnlzd6029f3aznbmdd2agx0p579k9wq8jf3anxvqc7k9",
+        "rev": "7573eb34f6bd8f767f18728d08249cdc1fcfe000",
+        "sha256": "0y2dmfwx6pgsy0m3k80bdjal0yz3a1428ik57iglndsd7bif62rj",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/146a785e3d4a28e33bf1dc285f80caa39bc8d127.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/7573eb34f6bd8f767f18728d08249cdc1fcfe000.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "6048279eb27f5c205c85e3d920f1b672abb01a00",
-        "sha256": "1wj27rqnh1xx82hb0srwqnjqqjazs4gh4fnwwphjm790rb10wk4x",
+        "rev": "9775ad25ca85087fdce0e62e4bd73f47bf33f3ed",
+        "sha256": "1jl1kjwicvvkiin49jp2yv5m4ah4w7dkmcbqbhdpmxx2vd5sr408",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/6048279eb27f5c205c85e3d920f1b672abb01a00.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/9775ad25ca85087fdce0e62e4bd73f47bf33f3ed.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0ir6ls5a49rrzykani4ygl3lk42dy3v81hpgynpfl0hwcvjb2y0q",
+        "sha256": "0j2y3kfjzsnsqj4z57818qk82q6j26qzf67q0igvina42f3y05cz",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-01-15-031259/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-01-22-031529/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2023-01-15-031259"
+        "version": "2023-01-22-031529"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "b8bc2869ba15fe7842aa520ffab05616d1fdbdd5",
-        "sha256": "1aaqbk9hfb4412r0xcpy6yl1x8dld60p9vjy7p9j6412p28i10k8",
+        "rev": "7fd2a1cc1a164af25292e7b80ff94e250034bf83",
+        "sha256": "057hll66pnbs5jsljvw2fblm80sncpln2518xbd1911pxihks1h7",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/b8bc2869ba15fe7842aa520ffab05616d1fdbdd5.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/7fd2a1cc1a164af25292e7b80ff94e250034bf83.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
