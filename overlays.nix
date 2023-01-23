@@ -226,8 +226,8 @@
         (nle.build {
           path = with python39.pkgs; writeTextDir "requirements.txt" ''
             black==22.3.0
-            bpython==${bpython.version}
-            mypy==${mypy.version}
+            bpython==0.23
+            mypy==0.991
           '';
         })
       ])
