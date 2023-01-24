@@ -109,12 +109,12 @@ with builtins; with pkgs; with mylib; {
     // optionalAttrs (host == "keith-desktop")
       {
         builders-use-substitutes = "true";
-        builders = [ "ssh://keith-mac aarch64-darwin,x86_64-darwin - 10" ];
+        builders = [ "ssh-ng://keith-mac aarch64-darwin,x86_64-darwin - 10 - benchmark,big-parallel,nixos-test" ];
       }
     // optionalAttrs (host == "keith-mac")
       {
         builders-use-substitutes = "true";
-        builders = [ "ssh://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24" ];
+        builders = [ "ssh-ng://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
       };
 
   fonts.fontconfig.enable = true;
