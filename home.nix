@@ -98,6 +98,24 @@ with builtins; with pkgs; with mylib; {
     };
   };
 
+  nix.package = nix;
+  nix.settings =
+    optionalAttrs isDarwin
+      {
+        max-jobs = "auto";
+        extra-experimental-features = [ "nix-command" "flakes" ];
+        extra-platforms = [ "x86_64-darwin" ];
+      }
+    // optionalAttrs (host == "keith-desktop")
+      {
+        builders-use-substitudes = "true";
+      }
+    // optionalAttrs (host == "keith-mac")
+      {
+        builders-use-substitutes = "true";
+        builders = [ "ssh://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
+      };
+
   fonts.fontconfig.enable = true;
 
   programs = {
