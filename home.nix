@@ -176,6 +176,14 @@ with builtins; with pkgs; with mylib; {
         source ${complete-alias}/bin/complete_alias
         complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
 
+        if [[ $(type -p ___git_complete) != function ]];then
+          source ~/.nix-profile/share/bash-completion/bash_completion
+          if [[ -d ~/.nix-profile/etc/bash_completion.d ]];then
+            for script in ~/.nix-profile/etc/bash_completion.d/*;do
+              source "$script"
+            done
+          fi
+        fi
         _completion_loader git
         ___git_complete g __git_main
       '' + optionalString (!isNixOS) ''
