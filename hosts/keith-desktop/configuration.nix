@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ lib, pkgs, self, ... }:
 with builtins;
 {
   imports = with self.inputs.nixos-hardware.nixosModules; [
@@ -8,6 +8,7 @@ with builtins;
     common-cpu-amd-pstate
   ];
 
+  nix.settings.trusted-users = [ "@wheel" ];
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
@@ -27,4 +28,6 @@ with builtins;
     enable = true;
     motherboard = "amd";
   };
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
 }

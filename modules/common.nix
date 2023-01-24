@@ -17,24 +17,6 @@
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.extraOptions = self.nixConf;
-  # nix.distributedBuilds = true;
-  nix.buildMachines = [{
-    hostName = "eu.nixbuild.net";
-    system = "x86_64-linux";
-    maxJobs = 100;
-    supportedFeatures = [ "benchmark" "big-parallel" ];
-  }];
-  programs.ssh.extraConfig = ''
-    Host eu.nixbuild.net
-      PubkeyAcceptedKeyTypes ssh-ed25519
-      IdentityFile /home/keith/.ssh/id_ed25519
-  '';
-  programs.ssh.knownHosts = {
-    nixbuild = {
-      extraHostNames = [ "eu.nixbuild.net" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
-    };
-  };
   networking.networkmanager.enable = lib.mkDefault true;
   systemd.services.NetworkManager-wait-online.enable = lib.mkDefault false;
 
@@ -103,4 +85,23 @@
   programs.pmount.enable = true;
 
   services.udev.packages = with pkgs; [ headsetcontrol ];
+  services.openssh = {
+    settings.PasswordAuthentication = false;
+    settings.PermitRootLogin = "no";
+    forwardX11 = true;
+    kexAlgorithms = [
+      "curve25519-sha256"
+      "curve25519-sha256@libssh.org"
+    ];
+    ciphers = [
+      "chacha20-poly1305@openssh.com"
+      "aes256-gcm@openssh.com"
+      "aes256-ctr"
+    ];
+    macs = [
+      "hmac-sha2-512-etm@openssh.com"
+      "hmac-sha2-256-etm@openssh.com"
+      "umac-128-etm@openssh.com"
+    ];
+  };
 }

@@ -98,7 +98,7 @@ with builtins; with pkgs; with mylib; {
     };
   };
 
-  nix.package = nix;
+  nix.package = lib.mkForce nix;
   nix.settings =
     optionalAttrs isDarwin
       {
@@ -108,12 +108,13 @@ with builtins; with pkgs; with mylib; {
       }
     // optionalAttrs (host == "keith-desktop")
       {
-        builders-use-substitudes = "true";
+        builders-use-substitutes = "true";
+        builders = [ "ssh://keith-mac aarch64-darwin,x86_64-darwin - 10" ];
       }
     // optionalAttrs (host == "keith-mac")
       {
         builders-use-substitutes = "true";
-        builders = [ "ssh://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
+        builders = [ "ssh://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24" ];
       };
 
   fonts.fontconfig.enable = true;
@@ -257,8 +258,9 @@ with builtins; with pkgs; with mylib; {
           user = "keithbauson";
           localForwards = map
             (port: { bind.port = port; host.address = "localhost"; host.port = port; })
-            [ 1234 3000 5432 8000 8025 4306 ];
+            [ 1234 3000 5432 8000 8025 4306 4000 ];
         };
+        keith-desktop.user = "keith";
       };
     };
     tmux = {

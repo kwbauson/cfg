@@ -24,26 +24,7 @@
     firewall.allowedUDPPorts = [ 2456 2457 ];
   };
 
-  services.openssh = {
-    enable = true;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
-    forwardX11 = true;
-    kexAlgorithms = [
-      "curve25519-sha256"
-      "curve25519-sha256@libssh.org"
-    ];
-    ciphers = [
-      "chacha20-poly1305@openssh.com"
-      "aes256-gcm@openssh.com"
-      "aes256-ctr"
-    ];
-    macs = [
-      "hmac-sha2-512-etm@openssh.com"
-      "hmac-sha2-256-etm@openssh.com"
-      "umac-128-etm@openssh.com"
-    ];
-  };
+  services.openssh.enable = true;
   services.nginx = with config.networking; {
     enable = true;
     recommendedGzipSettings = true;
