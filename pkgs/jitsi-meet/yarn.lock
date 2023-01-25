@@ -2904,6 +2904,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-linkify@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-linkify/-/react-linkify-1.0.1.tgz#4ece351faef22bfde1280b6d9ace5e88683a74d4"
+  integrity sha512-qPxYwjB41ezoKdLXs0MrQ1FnhF3apyyxf3J7WVQQCBu/GyZQAW7Y3TY4317jdh0450QJ4fLqj0rnhIJvFZOamQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@0.68.9":
   version "0.68.9"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.9.tgz#8ec2ef12c3d65222c06cf0e6d62a85cf82b34691"
@@ -7169,9 +7176,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1574.0.0+4d6873c2/lib-jitsi-meet.tgz":
+"lib-jitsi-meet@https://github.com/jitsi/lib-jitsi-meet/releases/download/v1578.0.0+5855ca72/lib-jitsi-meet.tgz":
   version "0.0.0"
-  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1574.0.0+4d6873c2/lib-jitsi-meet.tgz#0585231f879edaf221da9ba62c00224e84bfeecb"
+  resolved "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1578.0.0+5855ca72/lib-jitsi-meet.tgz#4922066ec80328a2976d7f09666ca9abd23eee18"
   dependencies:
     "@jitsi/js-utils" "2.0.0"
     "@jitsi/logger" "2.0.0"
