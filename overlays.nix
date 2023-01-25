@@ -12,7 +12,6 @@
         exec "$exePath" "$@"
       '';
     imported-nixpkgs = import' inputs.nixpkgs;
-    nix-index = if isDarwin then cfg.inputs.nixpkgs-pre-setuptools.legacyPackages.${system}.nix-index else nix-index;
   })
   (self: super: with super; with mylib; {
     nix-index-list = stdenv.mkDerivation {
