@@ -56,14 +56,10 @@ with builtins; with pkgs; with mylib; {
       }
       {
         ${attrIf isDarwin "darwin"} = {
-          inherit
-            diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
-            strace sway nsxiv usbutils breeze-icons dzen2 zoom-us maim
-            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg nim nimlsp
-            ;
-          inherit
-            nixos-install-tools arduino signal-desktop ffmpeg-full crystal discord yt-dlp watchexec sox niv ncdu
-            ;
+          inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
+            maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
+          inherit breeze-icons nixos-install-tools arduino;
+          inherit progress nim nimlsp niv ffmpeg-full yt-dlp;
         };
       };
 
