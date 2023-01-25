@@ -116,14 +116,6 @@ rec {
       paths = [ env env.wrappedRuby ];
     }.paths;
 
-  mach-nix-paths = with rec {
-    hasRequirements = pathExists (file "requirements.txt");
-    hasRequirementsDev = pathExists (file "requirements.dev.txt");
-  };
-    optional
-      ((hasRequirements || hasRequirementsDev) && !hasFiles "poetry.lock")
-      nle-conf.pip.out;
-
   poetry-paths =
     nleFiles "poetry" (override nle-conf.poetry.out { name = "poetry-env"; });
 
@@ -132,7 +124,6 @@ rec {
     bundler-paths
     node-modules-paths
     yarn-paths
-    mach-nix-paths
     poetry-paths
   ];
 

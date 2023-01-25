@@ -34,24 +34,6 @@
     generated = "yarn.nix";
     extraFiles = ".npmrc";
   };
-  pip = {
-    enable = true;
-    files = "requirements.txt";
-    extraFiles = "requirements.dev.txt";
-    notFiles = self.poetry.files;
-    out = override
-      (inputs.mach-nix.lib.${system}.mkPython {
-        python = "python39";
-        ignoreDataOutdated = true;
-        ignoreCollisions = true;
-        requirements = excludeLines (hasPrefix "itomate") ''
-          ${read "requirements.txt"}
-          ${read "requirements.dev.txt"}
-        '';
-        _.curtsies.patches = [ ];
-      })
-      { name = "pip-env"; };
-  };
   poetry = {
     enable = true;
     files = "pyproject.toml poetry.lock";

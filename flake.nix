@@ -2,15 +2,9 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
-    nixpkgs-pre-setuptools.url = "nixpkgs/f56d319e680852bea73504b3e001eefb1e837c50";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    mach-nix.inputs.nixpkgs.follows = "nixpkgs-pre-setuptools";
-    mach-nix.inputs.flake-utils.follows = "flake-utils";
-    mach-nix.inputs.pypi-deps-db.follows = "pypi-deps-db";
-    pypi-deps-db.url = "github:DavHau/pypi-deps-db/e9571cac25d2f509e44fec9dc94a3703a40126ff";
-    pypi-deps-db.flake = false;
     home-manager.inputs.utils.follows = "flake-utils";
   };
 
