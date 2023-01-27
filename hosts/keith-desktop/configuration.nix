@@ -30,4 +30,5 @@ with builtins;
   };
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
+  networking.extraHosts = "127.0.0.1 api";
 }
