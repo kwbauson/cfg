@@ -61,7 +61,6 @@
   services.github-runner = {
     enable = true;
     extraLabels = [ "nix" ];
-    extraPackages = with pkgs; [ cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
   };
