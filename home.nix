@@ -30,7 +30,7 @@ with builtins; with pkgs; with mylib; {
           graphical-core = {
             inherit
               dzen2 graphviz i3-easyfocus i3lock imagemagick sway term nsxiv
-              xclip xdotool xsel xterm maim
+              xclip xdotool xsel xterm maim imgloc
               ;
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
