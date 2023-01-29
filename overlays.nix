@@ -80,7 +80,7 @@
       cfgu = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
       cfgp = "git -C ~/cfg cap";
       nou = "cfgu && noa";
-      noc = "cd ~/cfg && gh workflow run check-for-updates.yml";
+      noc = "cd ~/cfg && gh workflow run updates.yml";
       nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
       noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
       hme = "nvim ~/cfg/home.nix && hms";
