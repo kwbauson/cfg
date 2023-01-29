@@ -1,7 +1,7 @@
-name: Check for updates
+name: check for updates
 on: { workflow_dispatch, schedule: [cron: '0 7 * * *'] }
 jobs:
-  check-for-updates:
+  check:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

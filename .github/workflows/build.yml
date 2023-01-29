@@ -1,9 +1,11 @@
+name: build
 on: { workflow_dispatch, push: { branches: [main] }, pull_request }
 jobs:
   build:
     strategy:
       matrix:
         system: [{ os: Linux, arch: X64 }, { os: macOS, arch: ARM64 }]
+    name: '${{ matrix.system.os }} ${{ matrix.system.arch }}'
     runs-on: [nix, '${{ matrix.system.os }}', '${{ matrix.system.arch }}']
     steps:
       - uses: actions/checkout@v3
