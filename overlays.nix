@@ -222,6 +222,10 @@
       (optionals stdenv.isLinux [
         waterfox
         r2modman
+        bundix
+        poetry
+        dasel
+        pur
         (nle.build {
           path = with python39.pkgs; writeTextDir "requirements.txt" ''
             black==22.3.0
