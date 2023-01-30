@@ -46,6 +46,8 @@
               (callModule module)
               home-manager.nixosModule
               {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
                 home-manager.users.keith = { imports = homeConfigurations.${host}.user-config.modules; };
               }
             ];
