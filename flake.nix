@@ -47,7 +47,7 @@
               home-manager.nixosModule
               {
                 home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
+                home-manager.useUserPackages = false;
                 home-manager.users.keith = { imports = homeConfigurations.${host}.user-config.modules; };
               }
             ];
