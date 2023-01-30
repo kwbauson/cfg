@@ -81,29 +81,13 @@
         "type": "indirect"
       }
     },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1674990008,
-        "narHash": "sha256-4zOyp+hFW2Y7imxIpZqZGT8CEqKmDjwgfD6BzRUE0mQ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d2bbcbe6c626d339b25a4995711f07625b508214",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixpkgs-unstable",
-        "type": "indirect"
-      }
-    },
     "root": {
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

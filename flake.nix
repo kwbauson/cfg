@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -9,7 +8,7 @@
   };
 
   outputs =
-    inputs@{ self, nixpkgs-unstable, nixos-hardware, flake-utils, ... }:
+    inputs@{ self, nixos-hardware, flake-utils, ... }:
       with builtins; with inputs; with flake-utils.lib; with nixpkgs.lib;
       flake-utils.lib.eachSystem flake-utils.lib.allSystems
         (system: {
@@ -27,7 +26,7 @@
             then mapAttrsToList (file: _: import (./extra-overlays + "/${file}")) (readDir ./extra-overlays)
             else [ ];
           pkgsForSystem =
-            { system, isNixOS, host }: import (if hasSuffix "-linux" system then nixpkgs else nixpkgs-unstable) {
+            { system, isNixOS, host }: import nixpkgs {
               inherit system;
               inherit (self) config;
               overlays = [
