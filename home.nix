@@ -276,6 +276,7 @@ with builtins; with pkgs; with mylib; {
       baseIndex = 1;
       extraConfig = ''
         bind -n M-C-k send-keys -R \; clear-history
+        bind r source-file ~/.config/tmux/tmux.conf
         set -g set-titles on
         set -ga terminal-overrides ",*-256color:RGB"
         set -g status off
@@ -288,6 +289,7 @@ with builtins; with pkgs; with mylib; {
         set -g status-left ""
         set -g status-right ""
         set -g default-command "''${SHELL}"
+        ${optionalString (isLinux && isGraphical) ''bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel"''}
       '';
       plugins = with tmuxPlugins; [ jump ];
     };
