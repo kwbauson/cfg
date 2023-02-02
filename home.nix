@@ -310,6 +310,7 @@ with builtins; with pkgs; with mylib; {
 
             coc-eslint coc-git coc-json coc-lists coc-prettier
             coc-solargraph coc-tsserver coc-pyright coc-explorer
+            coc-vetur
             ;
         };
         makeExtraPlugins = map (n: vimUtils.buildVimPlugin { inherit (sources.${n}) pname version src; });
