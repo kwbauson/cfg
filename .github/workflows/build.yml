@@ -3,6 +3,7 @@ on: { workflow_dispatch, push: { branches: [main] }, pull_request }
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         system: [{ os: Linux, arch: X64 }, { os: macOS, arch: ARM64 }]
     name: '${{ matrix.system.os }} ${{ matrix.system.arch }}'
