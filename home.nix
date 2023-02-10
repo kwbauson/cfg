@@ -35,10 +35,11 @@ with builtins; with pkgs; with mylib; {
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
           inherit
-            ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
+            ffmpeg-full mediainfo pavucontrol qtbr breeze-icons
             signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
             zathura
             ;
+          sox = sox.override { enableLame = true; };
         };
         development = {
           inherit
