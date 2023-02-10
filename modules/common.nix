@@ -91,20 +91,20 @@
   programs.pmount.enable = true;
 
   services.udev.packages = with pkgs; [ headsetcontrol ];
-  services.openssh = {
-    settings.PasswordAuthentication = false;
-    settings.PermitRootLogin = "no";
-    forwardX11 = true;
-    kexAlgorithms = [
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    PermitRootLogin = "no";
+    X11Forwarding = true;
+    KexAlgorithms = [
       "curve25519-sha256"
       "curve25519-sha256@libssh.org"
     ];
-    ciphers = [
+    Ciphers = [
       "chacha20-poly1305@openssh.com"
       "aes256-gcm@openssh.com"
       "aes256-ctr"
     ];
-    macs = [
+    Macs = [
       "hmac-sha2-512-etm@openssh.com"
       "hmac-sha2-256-etm@openssh.com"
       "umac-128-etm@openssh.com"

@@ -35,10 +35,11 @@ with builtins; with pkgs; with mylib; {
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
           inherit
-            ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
+            ffmpeg-full mediainfo pavucontrol qtbr breeze-icons
             signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
             zathura
             ;
+          sox = sox.override { enableLame = true; };
         };
         development = {
           inherit
@@ -59,7 +60,7 @@ with builtins; with pkgs; with mylib; {
           inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
             maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
           inherit breeze-icons nixos-install-tools arduino;
-          inherit progress niv ffmpeg-full yt-dlp;
+          inherit progress niv ffmpeg-full yt-dlp ncdu;
         };
       };
 
