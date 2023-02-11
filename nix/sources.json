@@ -24,12 +24,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
-        "sha256": "16nmi9vbf8bjsg8h46l5l32xnwmai8zs94swlld1y7a62jqr1wql",
+        "sha256": "07k3kvq5ard4vrqbgzq3788vdz0zh037aksiniymbd7530jzcnjh",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.8.0.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.8.1.tar.gz",
         "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.8.0"
+        "version": "0.8.1"
     },
     "git-fuzzy": {
         "branch": "master",
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "834a120d3607fbb5fd9151f6881c77f489e9e94b",
-        "sha256": "1j4lqxdfn4328jsiyf36205wyg2lhy9y8m86balfdbxjl6y67svr",
+        "rev": "e09ff1e83d9d1c938f5ac42bd385d5ea41049e66",
+        "sha256": "1g5qwq6nwb72k0hkja61j5wvvz3118mnawf0lmv7598gvqa99zcs",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/834a120d3607fbb5fd9151f6881c77f489e9e94b.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/e09ff1e83d9d1c938f5ac42bd385d5ea41049e66.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
