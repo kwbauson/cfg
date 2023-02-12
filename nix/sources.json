@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "e09ff1e83d9d1c938f5ac42bd385d5ea41049e66",
-        "sha256": "1g5qwq6nwb72k0hkja61j5wvvz3118mnawf0lmv7598gvqa99zcs",
+        "rev": "6c1037a56185bb9a1cc0fa8011581cd7ee8950d5",
+        "sha256": "1nfaiapvvbf452pj68b8zq4lsjk1whr5rfymiddnarq6r7zlaksf",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/e09ff1e83d9d1c938f5ac42bd385d5ea41049e66.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/6c1037a56185bb9a1cc0fa8011581cd7ee8950d5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "1is38ddnnr0s3zcn2wkj23l8ajss9m33rzrhf8c4yr4v8dwcgmw9",
+        "sha256": "0l2311jz1acxg1mzrxf6maxzk9gvg68i5jpxlgc3vglg78havkzs",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-02-05-032754/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-02-12-032305/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2023-02-05-032754"
+        "version": "2023-02-12-032305"
     },
     "npmlock2nix": {
         "branch": "master",
