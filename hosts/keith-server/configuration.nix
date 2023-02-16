@@ -22,4 +22,11 @@ with builtins;
   users.users.keith.extraGroups = [ "dialout" ];
   services.tailscale.enable = true;
   services.openssh.enable = true;
+
+  services.github-runner = {
+    enable = true;
+    extraLabels = [ "nix" ];
+    tokenFile = "/etc/nixos/github-runner-token";
+    url = "https://github.com/kwbauson/cfg";
+  };
 }

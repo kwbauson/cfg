@@ -58,12 +58,6 @@
   services.jitsi-videobridge.openFirewall = true;
   # services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
   services.netdata.enable = true;
-  services.github-runner = {
-    enable = true;
-    extraLabels = [ "nix" ];
-    tokenFile = "/etc/nixos/github-runner-token";
-    url = "https://github.com/kwbauson/cfg";
-  };
 
   systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
