@@ -700,6 +700,7 @@ with builtins; with pkgs; with mylib; {
     IRB.conf[:SAVE_HISTORY] = 2_000_000
     IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
   '';
+  home.file.".ssh/authorized_keys".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/cfg/authorized_keys";
 
   gtk.enable = isLinux;
   gtk.theme.name = "Adwaita-dark";
