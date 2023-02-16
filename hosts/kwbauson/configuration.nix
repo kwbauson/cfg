@@ -72,11 +72,18 @@
   virtualisation.docker.enable = true;
   programs.steam.enable = false;
   virtualisation.oci-containers.containers.valheim = {
-    autoStart = false;
+    autoStart = true;
     image = "ghcr.io/lloesche/valheim-server";
     environmentFiles = [ /var/lib/valheim/environment ];
     extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
     ports = [ "2456-2457:2456-2457/udp" ];
     volumes = [ "/var/lib/valheim:/config" ];
   };
+  fileSystems."/var/lib/docker" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=10G" "mode=755" ];
+  };
+  systemd.services.docker.after = [ "var-lib-docker.mount" ];
+  services.n8n.enable = true;
 }
