@@ -36,6 +36,8 @@ with builtins;
     url = "https://github.com/kwbauson/cfg";
   };
 
+  services.netdata.enable = true;
+
   virtualisation.oci-containers.containers.valheim = {
     autoStart = true;
     image = "ghcr.io/lloesche/valheim-server";
