@@ -71,15 +71,27 @@ with builtins;
     nginx.enable = false;
     caddy.enable = true;
     hostName = "jitsi.kwbauson.com";
-    config.enableNoisyMicDetection = false;
-    config.p2p.enabled = false;
-    config.disableTileEnlargement = true;
+    config = {
+      analytics.disabled = true;
+      desktopSharingFrameRate = { min = 5; max = 30; };
+      disableSimulcast = true;
+      disableTileEnlargement = true;
+      enableNoAudioDetection = false;
+      enableNoisyMicDetection = false;
+      enableUnifiedOnChrome = false;
+      maxFullResolutionParticipants = -1;
+      p2p.enabled = false;
+    };
     interfaceConfig = {
       SHOW_JITSI_WATERMARK = false;
       SHOW_WATERMARK_FOR_GUESTS = false;
     };
   };
   services.jitsi-videobridge.openFirewall = true;
+  services.jitsi-videobridge.nat = {
+    localAddress = "100.107.6.112";
+    publicAddress = "208.87.134.252";
+  };
   systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
