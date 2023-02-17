@@ -4,8 +4,6 @@
     ./hardware-configuration.nix
   ];
 
-  fileSystems."/".options = [ "barrier=0" "data=writeback" "commit=60" "noatime" ];
-
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;
@@ -19,35 +17,13 @@
     defaultGateway.address = "208.87.134.1";
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     domain = "com";
-    firewall.allowedTCPPorts = [ 2456 2457 2458 80 443 ];
-    firewall.allowedUDPPorts = [ 2456 2457 2458 ];
+    firewall.allowedTCPPorts = [ 2456 2457 2458 4443 80 443 ];
+    firewall.allowedUDPPorts = [ 2456 2457 2458 10000 ];
   };
 
   services.openssh.enable = true;
   services.tailscale.enable = true;
   programs.steam.enable = false;
-
-  services.jitsi-meet = {
-    enable = true;
-    nginx.enable = false;
-    caddy.enable = true;
-    hostName = "jitsi.${config.networking.fqdn}";
-    config.enableNoisyMicDetection = false;
-    config.p2p.enabled = false;
-    config.disableTileEnlargement = true;
-    interfaceConfig = {
-      SHOW_JITSI_WATERMARK = false;
-      SHOW_WATERMARK_FOR_GUESTS = false;
-      # MOBILE_APP_PROMO = false;
-    };
-  };
-  services.jitsi-videobridge.openFirewall = true;
-  # services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
-
-  systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jitsi-videobridge2.restartTriggers = [ pkgs.jitsi-meet ];
 
   services.caddy.enable = true;
   services.caddy.email = "kwbauson@gmail.com";
@@ -55,17 +31,22 @@
     ${fqdn}.extraConfig = "reverse_proxy keith-server:11337";
     "files.${fqdn}".extraConfig = "reverse_proxy keith-server:18080";
     "netdata.${fqdn}".extraConfig = "reverse_proxy keith-server:19999";
+    "jitsi.${fqdn}".extraConfig = "reverse_proxy keith-server:15280";
   };
 
-  systemd.services.forward-valheim = {
+  systemd.services.forward-ports = {
     wantedBy = [ "multi-user.target" ];
     path = [ pkgs.socat ];
     script = ''
+      # valheim
       for port in 2456 2457 2458;do
         for proto in TCP UDP;do
           socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
         done
       done
+      # jitsi
+      socat TCP-LISTEN:4443,fork,reuseaddr TCP:keith-server:4443 &
+      socat UDP-LISTEN:10000,fork,reuseaddr UDP:keith-server:10000 &
       sleep inf
     '';
   };

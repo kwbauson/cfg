@@ -48,6 +48,7 @@ with builtins;
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
 
   services.caddy.enable = true;
+  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
   services.caddy.virtualHosts = {
     ":11337".extraConfig = ''
       basicauth /* {
@@ -60,6 +61,25 @@ with builtins;
         root /srv/files
       }
     '';
+    ":15280".extraConfig = with config.services; caddy.virtualHosts.${jitsi-meet.hostName}.extraConfig;
   };
-  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
+
+  services.jitsi-meet = {
+    enable = true;
+    nginx.enable = false;
+    caddy.enable = true;
+    hostName = "jitsi.kwbauson.com";
+    config.enableNoisyMicDetection = false;
+    config.p2p.enabled = false;
+    config.disableTileEnlargement = true;
+    interfaceConfig = {
+      SHOW_JITSI_WATERMARK = false;
+      SHOW_WATERMARK_FOR_GUESTS = false;
+    };
+  };
+  services.jitsi-videobridge.openFirewall = true;
+  systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.jitsi-videobridge2.restartTriggers = [ pkgs.jitsi-meet ];
 }
