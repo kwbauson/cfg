@@ -2,7 +2,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/olivetin.nix
   ];
 
   fileSystems."/".options = [ "barrier=0" "data=writeback" "commit=60" "noatime" ];
@@ -20,32 +19,19 @@
     defaultGateway.address = "208.87.134.1";
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     domain = "com";
-    firewall.allowedTCPPorts = [ 80 443 2456 2457 ];
-    firewall.allowedUDPPorts = [ 2456 2457 ];
+    firewall.allowedTCPPorts = [ 2456 2457 2458 80 443 ];
+    firewall.allowedUDPPorts = [ 2456 2457 2458 ];
   };
 
   services.openssh.enable = true;
-  services.nginx = with config.networking; {
+  services.tailscale.enable = true;
+  programs.steam.enable = false;
+
+  services.jitsi-meet = {
     enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-    virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
-      ${fqdn} = {
-        basicAuthFile = "/etc/nixos/authfile";
-        locations."/".proxyPass = "http://localhost:1337";
-      };
-      "files.${fqdn}".locations."/" = {
-        root = "/srv/files";
-        extraConfig = "autoindex on;";
-      };
-      "netdata.${fqdn}".locations."/".proxyPass = "http://localhost:19999";
-    };
-  };
-  services.jitsi-meet = with config.networking; {
-    enable = true;
-    hostName = "jitsi.${fqdn}";
+    nginx.enable = false;
+    caddy.enable = true;
+    hostName = "jitsi.${config.networking.fqdn}";
     config.enableNoisyMicDetection = false;
     config.p2p.enabled = false;
     config.disableTileEnlargement = true;
@@ -57,33 +43,30 @@
   };
   services.jitsi-videobridge.openFirewall = true;
   # services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
-  services.netdata.enable = true;
 
   systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
   systemd.services.jitsi-videobridge2.restartTriggers = [ pkgs.jitsi-meet ];
 
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "kwbauson@gmail.com";
+  services.caddy.enable = true;
+  services.caddy.email = "kwbauson@gmail.com";
+  services.caddy.virtualHosts = with config.networking; {
+    ${fqdn}.extraConfig = "reverse_proxy keith-server:11337";
+    "files.${fqdn}".extraConfig = "reverse_proxy keith-server:18080";
+    "netdata.${fqdn}".extraConfig = "reverse_proxy keith-server:19999";
   };
 
-  virtualisation.docker.enable = true;
-  programs.steam.enable = false;
-  virtualisation.oci-containers.containers.valheim = {
-    autoStart = true;
-    image = "ghcr.io/lloesche/valheim-server";
-    environmentFiles = [ /var/lib/valheim/environment ];
-    extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
-    ports = [ "2456-2457:2456-2457/udp" ];
-    volumes = [ "/var/lib/valheim:/config" ];
+  systemd.services.forward-valheim = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.socat ];
+    script = ''
+      for port in 2456 2457 2458;do
+        for proto in TCP UDP;do
+          socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
+        done
+      done
+      sleep inf
+    '';
   };
-  fileSystems."/var/lib/docker" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "defaults" "size=10G" "mode=755" ];
-  };
-  systemd.services.docker.after = [ "var-lib-docker.mount" ];
-  services.n8n.enable = true;
 }
