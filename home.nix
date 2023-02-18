@@ -103,12 +103,12 @@ with builtins; with pkgs; with mylib; {
         extra-experimental-features = [ "nix-command" "flakes" ];
         extra-platforms = [ "x86_64-darwin" ];
       }
-    // optionalAttrs (host == "keith-desktop")
+    // optionalAttrs (machine-name == "keith-desktop")
       {
         builders-use-substitutes = "true";
         builders = [ "ssh-ng://keith-mac aarch64-darwin,x86_64-darwin - 10 - benchmark,big-parallel,nixos-test" ];
       }
-    // optionalAttrs (host == "keith-mac")
+    // optionalAttrs (machine-name == "keith-mac")
       {
         builders-use-substitutes = "true";
         builders = [ "ssh-ng://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
@@ -145,7 +145,7 @@ with builtins; with pkgs; with mylib; {
       };
       initExtra = ''
         [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-        [[ -n $SSH_CLIENT ]] && _host="${host} " || _host=
+        [[ -n $SSH_CLIENT ]] && _host="${machine-name} " || _host=
         PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
         set -o vi
