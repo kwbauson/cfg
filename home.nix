@@ -411,7 +411,7 @@ with builtins; with pkgs; with mylib; {
         df = gs ''
           ${tmpGitIndex}
           git add -A
-          git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
+          git -c core.pager='${exe delta} --dark' diff --staged "$@" || true
         '';
         dfd = gs ''git df $(git merge-base origin/$(git default) HEAD)'';
         dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
@@ -437,7 +437,7 @@ with builtins; with pkgs; with mylib; {
           logb=$(mktemp)
           git log origin/$(git branch-name) > "$loga"
           git log > "$logb"
-          ${nr delta} "$loga" "$logb" || true
+          ${exe delta} "$loga" "$logb" || true
           rm "$loga" "$logb"
           read -n1 -p "Continue? [y/n] " continue
           echo
