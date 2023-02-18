@@ -1,11 +1,17 @@
-{ pkgs, lib, config, self, ... }:
+{ config, scope, machine-name, ... }: with scope;
 {
+  imports = [
+    machines.${machine-name}.configuration
+    inputs.home-manager.nixosModule
+    modules.pmount
+  ];
+
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot = {
-        enable = lib.mkDefault true;
-        configurationLimit = lib.mkDefault 5;
+        enable = mkDefault true;
+        configurationLimit = mkDefault 5;
         consoleMode = "auto";
       };
       timeout = 1;
@@ -16,14 +22,13 @@
 
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
-  nix.extraOptions = self.nixConf;
-  networking.networkmanager.enable = lib.mkDefault true;
-  systemd.services.NetworkManager-wait-online.enable = lib.mkDefault false;
+  nix.settings.trusted-users = [ "@wheel" ];
+  nixpkgs = { inherit pkgs; inherit (pkgs) config; };
+  networking.networkmanager.enable = mkDefault true;
+  systemd.services.NetworkManager-wait-online.enable = mkDefault false;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-
-  nixpkgs = { inherit (self) config overlays; };
 
   zramSwap = {
     enable = true;
@@ -46,8 +51,8 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-    dbus.packages = with pkgs; [ dconf ];
-    localtimed.enable = lib.mkDefault true;
+    dbus.packages = [ dconf ];
+    localtimed.enable = mkDefault true;
     chrony.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
@@ -77,14 +82,19 @@
     };
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    extraSpecialArgs = { inherit machine-name pkgs; inherit (pkgs) scope; };
+    users.keith.imports = [ modules.common.home ];
+  };
+
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
-  programs.steam.enable = lib.mkDefault true;
-  imports = [ ../modules/pmount.nix ];
+  programs.steam.enable = mkDefault true;
   programs.pmount.enable = true;
 
-  services.udev.packages = with pkgs; [ headsetcontrol ];
+  services.udev.packages = [ headsetcontrol ];
   services.openssh = {
     settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "no";

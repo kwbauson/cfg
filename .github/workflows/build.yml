@@ -1,5 +1,5 @@
 name: build
-on: { workflow_dispatch, push: { branches: [main] }, pull_request }
+on: { workflow_dispatch, push }
 jobs:
   build:
     strategy:
@@ -10,6 +10,7 @@ jobs:
     runs-on: [nix, '${{ matrix.system.os }}', '${{ matrix.system.arch }}']
     steps:
       - uses: actions/checkout@v3
-      - run: nix -vL --show-trace build
+      - run: nix -vL --show-trace build .#ci-checks
+      - run: ./result/bin/ci-checks
       - run: nix run .#cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix run .#cachix push kwbauson result
+      - run: nix run .#cachix push kwbauson ./result

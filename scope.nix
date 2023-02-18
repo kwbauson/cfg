@@ -1,15 +1,41 @@
-prev: with prev; with lib; with builtins;
-cli // generators // lib // builtins // rec {
-  inherit (writers) writeBash writeBashBin;
-  ap = x: f: f x;
-  mapAttrValues = f: mapAttrs (n: v: f v);
+pkgs: pkgs.lib.fix (scope: with scope;
+pkgs.flake.inputs // pkgs.flake //
+pkgs.lib.generators // pkgs.formats or { } //
+pkgs.writers or { } // pkgs //
+pkgs.lib // builtins // {
+  inherit (import ./.) getFlake;
   inherit (stdenv) isLinux isDarwin;
+  inherit (flake) modules;
   sources = mapAttrs
     (pname: src: {
       inherit pname src;
       version = src.version or src.rev or "unversioned";
     } // src)
     (import ./nix/sources.nix { inherit system pkgs; });
+  mapAttrNames = f: mapAttrs (n: _: f n);
+  mapAttrValues = f: mapAttrs (_: v: f v);
+  forAttrs = flip mapAttrs;
+  forAttrNames = flip mapAttrNames;
+  forAttrValues = flip mapAttrValues;
+  forAttrNamesHaving = attrs: attr: forAttrNames (filterAttrs (_: hasAttr attr) attrs);
+  mergeAttrsList = foldl' mergeAttrs { };
+  recursiveUpdateList = foldl' recursiveUpdate { };
+  readDirPaths = dir: mapAttrNames (n: dir + "/${n}") (readDir dir);
+  filterDirPaths = p: dir: filterAttrs p (readDirPaths dir);
+  forDirPaths = dir: f: mapAttrs f (readDirPaths dir);
+  forDirPathsWith = dir: name: f:
+    mapAttrs
+      (n: p: f n (p + "/${name}"))
+      (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
+  importDir = dir: listToAttrs (
+    mapAttrsToList
+      (n: v: nameValuePair (removeSuffix ".nix" n) v)
+      (forDirPaths dir (_: p: (if pathIsDirectory p then importDir else import) p))
+  );
+
+
+  inherit (writers) writeBash writeBashBin;
+  ap = x: f: f x;
   exe = pkg:
     let b = (pkg.meta or { }).mainProgram or (removePrefix "node_" (pkg.pname or (parseDrvName pkg.name).name));
     in "${pkg}/bin/${b}";
@@ -230,4 +256,5 @@ cli // generators // lib // builtins // rec {
       ${preRebuild}
       npm rebuild --nodedir=${nodedir}
     '';
-}
+})
+

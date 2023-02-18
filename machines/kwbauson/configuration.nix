@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ config, scope, ... }: with scope;
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/olivetin.nix
+    modules.olivetin
   ];
 
   fileSystems."/".options = [ "barrier=0" "data=writeback" "commit=60" "noatime" ];
@@ -31,7 +31,7 @@
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    virtualHosts = builtins.mapAttrs (_: x: x // { enableACME = true; forceSSL = true; }) {
+    virtualHosts = mapAttrValues (x: x // { enableACME = true; forceSSL = true; }) {
       ${fqdn} = {
         basicAuthFile = "/etc/nixos/authfile";
         locations."/".proxyPass = "http://localhost:1337";
@@ -65,10 +65,10 @@
     url = "https://github.com/kwbauson/cfg";
   };
 
-  systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jitsi-videobridge2.restartTriggers = [ pkgs.jitsi-meet ];
+  systemd.services.prosody.restartTriggers = [ jitsi-meet ];
+  systemd.services.jicofo.restartTriggers = [ jitsi-meet ];
+  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ jitsi-meet ];
+  systemd.services.jitsi-videobridge2.restartTriggers = [ jitsi-meet ];
 
   security.acme = {
     acceptTerms = true;

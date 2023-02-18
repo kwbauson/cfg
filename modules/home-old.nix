@@ -1,14 +1,10 @@
-{ pkgs
-, config
-, self
-, username
-, homeDirectory
-, isNixOS
-, isGraphical
-, host
-, ...
-}:
-with builtins; with pkgs; with mylib; {
+{ config, scope, machine-name, ... }: with scope;
+let
+  isNixOS = elem machine-name [ "keith-desktop" "kwbauson" "keith-xps" ];
+  isGraphical = elem machine-name [ "keith-desktop" "keith-xps" "keith-mac" ];
+  inherit (config.home) homeDirectory;
+in
+{
   home.packages = with pkgs;
     drvsExcept
       {
@@ -18,26 +14,29 @@ with builtins; with pkgs; with mylib; {
             borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
             dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip
             inetutils iproute2 iputils ldns less libarchive libnotify loop lsof
-            man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree
+            man-pages moreutils nano ncdu netcat-gnu niv nix-tree
             nmap openssh p7zip patch perl pigz procps progress pv ranger
             ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
             which xdg-utils xxd xz zip bitwarden-cli libqalculate yt-dlp
-            speedtest-cli tldr nix-top nixos-install-tools better-comma q
+            speedtest-cli tldr nix-top nixos-install-tools q
             dasel emborg
+            # nix-wrapped better-comma
             ;
         };
         ${attrIf isGraphical "graphical"} = {
           graphical-core = {
             inherit
-              dzen2 graphviz i3-easyfocus i3lock imagemagick sway term nsxiv
-              xclip xdotool xsel xterm maim imgloc
+              dzen2 graphviz i3-easyfocus i3lock imagemagick sway nsxiv
+              xclip xdotool xsel xterm maim
+              # term imgloc
               ;
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
           inherit
-            ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
-            signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
+            ffmpeg-full mediainfo pavucontrol sox breeze-icons
+            signal-desktop discord zoom-us dejavu_fonts
             zathura
+            # qtbr dejavu_fonts_nerd
             ;
         };
         development = {
@@ -45,21 +44,24 @@ with builtins; with pkgs; with mylib; {
             bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
             crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
-            git-ignore git-fuzzy black terraform-ls cachix nle concurrently
-            arduino tasknix devenv
+            git-ignore black terraform-ls cachix concurrently
+            arduino
+            # git-fuzzy nle tasknix devenv
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };
-        inherit nr switch-to-configuration;
-        inherit nle-cfg;
-        bin-aliases = attrValues bin-aliases;
+        # inherit nr switch-to-configuration;
+        # inherit nle-cfg;
+        # bin-aliases = attrValues bin-aliases;
       }
       {
         ${attrIf isDarwin "darwin"} = {
           inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
-            maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
+            maim zoom-us acpi usbutils xdotool signal-desktop discord;
           inherit breeze-icons nixos-install-tools arduino;
           inherit progress niv ffmpeg-full yt-dlp;
+          inherit emborg;
+          # qtbr
         };
       };
 
@@ -102,12 +104,12 @@ with builtins; with pkgs; with mylib; {
         extra-experimental-features = [ "nix-command" "flakes" ];
         extra-platforms = [ "x86_64-darwin" ];
       }
-    // optionalAttrs (host == "keith-desktop")
+    // optionalAttrs (machine-name == "keith-desktop")
       {
         builders-use-substitutes = "true";
         builders = [ "ssh-ng://keith-mac aarch64-darwin,x86_64-darwin - 10 - benchmark,big-parallel,nixos-test" ];
       }
-    // optionalAttrs (host == "keith-mac")
+    // optionalAttrs (machine-name == "keith-mac")
       {
         builders-use-substitutes = "true";
         builders = [ "ssh-ng://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
@@ -144,7 +146,7 @@ with builtins; with pkgs; with mylib; {
       };
       initExtra = ''
         [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-        [[ -n $SSH_CLIENT ]] && _host="${host} " || _host=
+        [[ -n $SSH_CLIENT ]] && _host="${machine-name} " || _host=
         PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
         set -o vi
@@ -296,7 +298,7 @@ with builtins; with pkgs; with mylib; {
     neovim = {
       enable = true;
       withNodeJs = true;
-      extraConfig = readFile ./init.vim;
+      extraConfig = readFile ./../init.vim;
       coc.enable = true;
       plugins = with {
         plugins = with vimPlugins; {
@@ -410,7 +412,7 @@ with builtins; with pkgs; with mylib; {
         df = gs ''
           ${tmpGitIndex}
           git add -A
-          git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
+          git -c core.pager='${exe delta} --dark' diff --staged "$@" || true
         '';
         dfd = gs ''git df $(git merge-base origin/$(git default) HEAD)'';
         dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
@@ -436,7 +438,7 @@ with builtins; with pkgs; with mylib; {
           logb=$(mktemp)
           git log origin/$(git branch-name) > "$loga"
           git log > "$logb"
-          ${nr delta} "$loga" "$logb" || true
+          ${exe delta} "$loga" "$logb" || true
           rm "$loga" "$logb"
           read -n1 -p "Continue? [y/n] " continue
           echo
@@ -474,7 +476,7 @@ with builtins; with pkgs; with mylib; {
     fzf = {
       enable = true;
       enableBashIntegration = false;
-      defaultCommand = "fd -tf -c always -H --ignore-file ${./ignore} -E .git";
+      defaultCommand = "fd -tf -c always -H --ignore-file ${../ignore} -E .git";
       defaultOptions = words "--ansi --reverse --multi --filepath-word";
     };
     lesspipe.enable = true;
@@ -658,7 +660,7 @@ with builtins; with pkgs; with mylib; {
       "emborg/default".text = ''
         src_dirs = "${optionalString isNixOS "/etc/nixos"} ~".split()
         excludes = """
-        ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ./ignore)}
+        ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ../ignore)}
         """
       '';
     };
@@ -715,8 +717,8 @@ with builtins; with pkgs; with mylib; {
       xmodmap ${writeText "Xmodmap" ''
         remove mod1 = Alt_L
         keycode 64 = Escape
-        ${optionalString (host == "keith-xps") "keycode 105 = Super_R"}
-        ${optionalString (host == "keith-desktop") ''
+        ${optionalString (machine-name == "keith-xps") "keycode 105 = Super_R"}
+        ${optionalString (machine-name == "keith-desktop") ''
           keycode 134 = Super_R
           keycode 105 = Control_R
         ''}
@@ -732,18 +734,18 @@ with builtins; with pkgs; with mylib; {
       urxvtd -q -o -f &
       togpad off &
       autorandr --change &
-      ${optionalString (host == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
+      ${optionalString (machine-name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
     '';
     windowManager = {
       i3 = {
         enable = isNixOS && isGraphical;
         config = null;
-        extraConfig = readFile ./i3-config + {
+        extraConfig = readFile ./../i3-config + {
           keith-desktop = ''
             workspace 1 output HDMI-A-0
             workspace 2 output DisplayPort-1
           '';
-        }.${host} or "";
+        }.${machine-name} or "";
       };
     };
   };

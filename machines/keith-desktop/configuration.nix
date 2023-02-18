@@ -1,14 +1,12 @@
-{ lib, pkgs, self, ... }:
-with builtins;
+{ scope, ... }: with scope;
 {
-  imports = with self.inputs.nixos-hardware.nixosModules; [
+  imports = with inputs.nixos-hardware.nixosModules; [
     ./hardware-configuration.nix
     common-cpu-amd
     common-gpu-amd
     common-cpu-amd-pstate
   ];
 
-  nix.settings.trusted-users = [ "@wheel" ];
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
@@ -21,7 +19,7 @@ with builtins;
   hardware.nvidia.nvidiaSettings = false;
   virtualisation.docker.enable = true;
   hardware.bluetooth.enable = true;
-  environment.systemPackages = [ pkgs.xboxdrv ];
+  environment.systemPackages = [ xboxdrv ];
   users.users.keith.extraGroups = [ "dialout" ];
   services.tailscale.enable = true;
   services.hardware.openrgb = {
@@ -29,6 +27,6 @@ with builtins;
     motherboard = "amd";
   };
   services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
+  services.openssh.settings.PermitRootLogin = mkForce "yes";
   networking.extraHosts = "127.0.0.1 api";
 }
