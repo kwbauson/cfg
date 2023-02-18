@@ -1,6 +1,6 @@
-{ config, lib, pkgs, self, ... }:
+{ config, scope, ... }: with scope;
 {
-  imports = with self.inputs.nixos-hardware.nixosModules; [
+  imports = with inputs.nixos-hardware.nixosModules; [
     ./hardware-configuration.nix
     common-cpu-amd
     common-gpu-amd
@@ -14,8 +14,8 @@
   hardware.amdgpu.loadInInitrd = false;
 
   networking = {
-    firewall.allowedTCPPorts = [ 2456 2457 2458 11337 19999 18080 15280 ];
-    firewall.allowedUDPPorts = [ 2456 2457 2458 ];
+    firewall.allowedTCPPorts = [ 2456 2457 11337 19999 18080 15280 ];
+    firewall.allowedUDPPorts = [ 2456 2457 ];
   };
 
   time.hardwareClockInLocalTime = true;
@@ -93,7 +93,7 @@
 
   systemd.services = {
     caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
-  } // lib.genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
+  } // genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
     restartTriggers = [ config.systemd.units."caddy.service".unit ];
   });
 }

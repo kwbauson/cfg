@@ -1,5 +1,5 @@
-let
-  lock = builtins.fromJSON (builtins.readFile ./flake.lock);
+with builtins; let
+  lock = fromJSON (readFile ./flake.lock);
   flake-compat = with lock.nodes.flake-compat.locked; import (fetchTarball {
     url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
     sha256 = narHash;
@@ -8,7 +8,5 @@ let
     if builtins ? getFlake
     then builtins.getFlake (toString src)
     else (flake-compat { inherit src; }).defaultNix;
-  cfg = getFlake ./.;
-  pkgs = cfg.packages.${builtins.currentSystem};
 in
-{ inherit getFlake; } // pkgs.mylib // cfg.outputs // pkgs
+(getFlake ./.).packages.${builtins.currentSystem}.scope // { inherit getFlake; }

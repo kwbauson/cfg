@@ -5,7 +5,7 @@
 , homeDirectory
 , isNixOS
 , isGraphical
-, host
+, machine-name
 , ...
 }:
 with builtins; with pkgs; with mylib; {
@@ -103,12 +103,12 @@ with builtins; with pkgs; with mylib; {
         extra-experimental-features = [ "nix-command" "flakes" ];
         extra-platforms = [ "x86_64-darwin" ];
       }
-    // optionalAttrs (host == "keith-desktop")
+    // optionalAttrs (machine-name == "keith-desktop")
       {
         builders-use-substitutes = "true";
         builders = [ "ssh-ng://keith-mac aarch64-darwin,x86_64-darwin - 10 - benchmark,big-parallel,nixos-test" ];
       }
-    // optionalAttrs (host == "keith-mac")
+    // optionalAttrs (machine-name == "keith-mac")
       {
         builders-use-substitutes = "true";
         builders = [ "ssh-ng://keith-desktop x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
@@ -145,7 +145,7 @@ with builtins; with pkgs; with mylib; {
       };
       initExtra = ''
         [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-        [[ -n $SSH_CLIENT ]] && _host="${host} " || _host=
+        [[ -n $SSH_CLIENT ]] && _host="${machine-name} " || _host=
         PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
         set -o vi
@@ -411,7 +411,7 @@ with builtins; with pkgs; with mylib; {
         df = gs ''
           ${tmpGitIndex}
           git add -A
-          git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
+          git -c core.pager='${exe delta} --dark' diff --staged "$@" || true
         '';
         dfd = gs ''git df $(git merge-base origin/$(git default) HEAD)'';
         dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
@@ -437,7 +437,7 @@ with builtins; with pkgs; with mylib; {
           logb=$(mktemp)
           git log origin/$(git branch-name) > "$loga"
           git log > "$logb"
-          ${nr delta} "$loga" "$logb" || true
+          ${exe delta} "$loga" "$logb" || true
           rm "$loga" "$logb"
           read -n1 -p "Continue? [y/n] " continue
           echo
@@ -716,8 +716,8 @@ with builtins; with pkgs; with mylib; {
       xmodmap ${writeText "Xmodmap" ''
         remove mod1 = Alt_L
         keycode 64 = Escape
-        ${optionalString (host == "keith-xps") "keycode 105 = Super_R"}
-        ${optionalString (host == "keith-desktop") ''
+        ${optionalString (machine-name == "keith-xps") "keycode 105 = Super_R"}
+        ${optionalString (machine-name == "keith-desktop") ''
           keycode 134 = Super_R
           keycode 105 = Control_R
         ''}
@@ -733,7 +733,7 @@ with builtins; with pkgs; with mylib; {
       urxvtd -q -o -f &
       togpad off &
       autorandr --change &
-      ${optionalString (host == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
+      ${optionalString (machine-name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
     '';
     windowManager = {
       i3 = {
@@ -744,7 +744,7 @@ with builtins; with pkgs; with mylib; {
             workspace 1 output HDMI-A-0
             workspace 2 output DisplayPort-1
           '';
-        }.${host} or "";
+        }.${machine-name} or "";
       };
     };
   };

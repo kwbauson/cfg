@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, scope, ... }: with scope;
 {
   imports = [
     ./hardware-configuration.nix
@@ -17,8 +17,8 @@
     defaultGateway.address = "208.87.134.1";
     nameservers = [ "1.1.1.1" "1.0.0.1" ];
     domain = "com";
-    firewall.allowedTCPPorts = [ 2456 2457 2458 4443 80 443 ];
-    firewall.allowedUDPPorts = [ 2456 2457 2458 10000 ];
+    firewall.allowedTCPPorts = [ 2456 2457 4443 80 443 ];
+    firewall.allowedUDPPorts = [ 2456 2457 10000 ];
   };
 
   services.openssh.enable = true;
@@ -36,10 +36,10 @@
 
   systemd.services.forward-ports = {
     wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.socat ];
+    path = [ socat ];
     script = ''
       # valheim
-      for port in 2456 2457 2458;do
+      for port in 2456 2457;do
         for proto in TCP UDP;do
           socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
         done
