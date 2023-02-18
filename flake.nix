@@ -1,10 +1,13 @@
 {
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
-    flake-compat.url = "github:edolstra/flake-compat";
-    flake-compat.flake = false;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.inputs.utils.follows = "flake-utils";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+    flake-utils.flake = true;
+    nixos-hardware.flake = true;
   };
 
   outputs =
