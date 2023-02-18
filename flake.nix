@@ -38,15 +38,21 @@
             };
           inherit (mylib) mapAttrValues import';
           nixosConfiguration = host: module: buildSystem {
-            system = "x86_64-linux";
+            specialArgs = {
+              inherit (pkgsForSystem {
+                system = "x86_64-linux";
+                isNixOS = true;
+                inherit host;
+              }) scope;
+            };
             modules = [
               { networking.hostName = host; }
               (callModule ./modules/common.nix)
               (callModule module)
               home-manager.nixosModule
               {
+                home-manager.extraSpecialArgs = { inherit (pkgs) scope; };
                 home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = false;
                 home-manager.users.keith = { imports = homeConfigurations.${host}.user-config.modules; };
               }
             ];
@@ -66,11 +72,12 @@
             let
               user-config = {
                 inherit pkgs;
+                extraSpecialArgs = { inherit (pkgs) scope; };
                 modules = [
                   {
                     imports = [
                       { home = { inherit username homeDirectory; }; }
-                      ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; } // { pkgs = lib.mkForce pkgs; }; })
+                      ({ lib, ... }: { _module.args = { inherit self username homeDirectory isNixOS isGraphical host; machine-name = host; } // { pkgs = lib.mkForce pkgs; }; })
                       ./home.nix
                     ];
                   }

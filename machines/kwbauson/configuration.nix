@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, scope, ... }: with scope;
 {
   imports = [
     ./hardware-configuration.nix
@@ -36,7 +36,7 @@
 
   systemd.services.forward-ports = {
     wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.socat ];
+    path = [ socat ];
     script = ''
       # valheim
       for port in 2456 2457 2458;do
