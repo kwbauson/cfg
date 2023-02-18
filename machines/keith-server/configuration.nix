@@ -14,8 +14,8 @@
   hardware.amdgpu.loadInInitrd = false;
 
   networking = {
-    firewall.allowedTCPPorts = [ 2456 2457 2458 11337 19999 18080 15280 ];
-    firewall.allowedUDPPorts = [ 2456 2457 2458 ];
+    firewall.allowedTCPPorts = [ 2456 2457 11337 19999 18080 15280 ];
+    firewall.allowedUDPPorts = [ 2456 2457 ];
   };
 
   time.hardwareClockInLocalTime = true;
