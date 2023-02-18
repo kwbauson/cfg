@@ -1,5 +1,4 @@
-{ config, pkgs, self, ... }:
-with builtins;
+{ config, lib, pkgs, self, ... }:
 {
   imports = with self.inputs.nixos-hardware.nixosModules; [
     ./hardware-configuration.nix
@@ -50,7 +49,6 @@ with builtins;
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
 
   services.caddy.enable = true;
-  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
   services.caddy.virtualHosts = {
     ":11337".extraConfig = ''
       basicauth /* {
@@ -92,8 +90,10 @@ with builtins;
     localAddress = "100.107.6.112";
     publicAddress = "208.87.134.252";
   };
-  systemd.services.prosody.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jicofo.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ pkgs.jitsi-meet ];
-  systemd.services.jitsi-videobridge2.restartTriggers = [ pkgs.jitsi-meet ];
+
+  systemd.services = {
+    caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
+  } // lib.genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
+    restartTriggers = [ config.systemd.units."caddy.service".unit ];
+  });
 }
