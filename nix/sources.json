@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "f623bbc43665fef680bdb9efd1abf26d57a8a00e",
-        "sha256": "14yjwmfvjknrc3rzv312qj1wjsv5zyjw5s1vfi75x5p3iq16kwwk",
+        "rev": "532f581a29590f785a6561525154c4789aefc0cb",
+        "sha256": "0w5rmkshbz5c8m8flbd9x9jq3cmf01nk8m77vq8qnymlfzlgj2sg",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/f623bbc43665fef680bdb9efd1abf26d57a8a00e.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/532f581a29590f785a6561525154c4789aefc0cb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "6c1037a56185bb9a1cc0fa8011581cd7ee8950d5",
-        "sha256": "1nfaiapvvbf452pj68b8zq4lsjk1whr5rfymiddnarq6r7zlaksf",
+        "rev": "6ab8690263005c263c63dfb57cdccfc681db28c4",
+        "sha256": "12z1mw6z3km9k74l41ynmxsyp4zw0kcpdaz4g50c7978ysiwm8p1",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/6c1037a56185bb9a1cc0fa8011581cd7ee8950d5.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/6ab8690263005c263c63dfb57cdccfc681db28c4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
-        "sha256": "14wflv513vjrs3rhdykl4m5a63mp3ivy08kgw5r16axsi58sj0pg",
+        "rev": "00ed794c50b24a909b965c1e597687fd8b8b820b",
+        "sha256": "18s43x9iyziwwzkd6fyknwh4kxx0lkx2q8mc4mls8hhbrn4b94r5",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/00ed794c50b24a909b965c1e597687fd8b8b820b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -112,12 +112,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "0d252mlwa6yyvy6a41zx9q9dzr0d3fyqlsny3v3163mr4i6w28az",
+        "sha256": "0qj0jgmripswsizp3dc7wijm2pjf5fmwiw7h9fdyik6b620j73bc",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022.11.14/OliveTin-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2023.02.16/OliveTin-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
-        "version": "2022.11.14"
+        "version": "2023.02.16"
     },
     "r2modman": {
         "sha256": "1azyhy7ffgbiv5b9jz62kf5d4x1r5d6gvnd4r75k76d2pwpxbyr4",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "4c5b7f841307ce5b1328b427cd01896279811960",
-        "sha256": "16b0kr5688s5zznvxm19hzdixgk2kxksc6j7zm6jf1xmql43s8rf",
+        "rev": "91e7e782cba8479015741a0392ebfbf8cf58b263",
+        "sha256": "111kx426jgvwp4irkd9fyxmk78ya1k3akvjykxmc24l4hfgv64aq",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/4c5b7f841307ce5b1328b427cd01896279811960.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/91e7e782cba8479015741a0392ebfbf8cf58b263.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
