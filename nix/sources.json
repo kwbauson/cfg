@@ -17,19 +17,19 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "2e20275b01464345c35d2aa42f8405fd8685a6e4",
-        "sha256": "1by2s84js48wn54d9fkig8rnr2paw7m6xkdsi21i9dfzdiinaqxx",
+        "rev": "f623bbc43665fef680bdb9efd1abf26d57a8a00e",
+        "sha256": "14yjwmfvjknrc3rzv312qj1wjsv5zyjw5s1vfi75x5p3iq16kwwk",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/2e20275b01464345c35d2aa42f8405fd8685a6e4.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/f623bbc43665fef680bdb9efd1abf26d57a8a00e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
-        "sha256": "16nmi9vbf8bjsg8h46l5l32xnwmai8zs94swlld1y7a62jqr1wql",
+        "sha256": "07k3kvq5ard4vrqbgzq3788vdz0zh037aksiniymbd7530jzcnjh",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.8.0.tar.gz",
+        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.8.1.tar.gz",
         "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.8.0"
+        "version": "0.8.1"
     },
     "git-fuzzy": {
         "branch": "master",
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "85590b3046eb42f415e71cfe8d7dea2bbbacdd17",
-        "sha256": "005xwr67xw9vydd2ij6pg1r714cxnvyrvfa2w33mx7i41qsivk4y",
+        "rev": "6c1037a56185bb9a1cc0fa8011581cd7ee8950d5",
+        "sha256": "1nfaiapvvbf452pj68b8zq4lsjk1whr5rfymiddnarq6r7zlaksf",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/85590b3046eb42f415e71cfe8d7dea2bbbacdd17.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/6c1037a56185bb9a1cc0fa8011581cd7ee8950d5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "0d5dae7ab9557b3fffbad995cfd980e80f63ac07",
-        "sha256": "0z7na7sy225nx7ca35hla7jd1kdpccagy65acn0kzzf9gxzfjf50",
+        "rev": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
+        "sha256": "14wflv513vjrs3rhdykl4m5a63mp3ivy08kgw5r16axsi58sj0pg",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/0d5dae7ab9557b3fffbad995cfd980e80f63ac07.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -92,12 +92,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "1l8c9d6hj8k24nd2w40lkp6npxpaks9hy74p8pbpw2l5fbybhig8",
+        "sha256": "0l2311jz1acxg1mzrxf6maxzk9gvg68i5jpxlgc3vglg78havkzs",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-01-29-032002/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-02-12-032305/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2023-01-29-032002"
+        "version": "2023-02-12-032305"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "61a3d43de5aa8d1305ccf8abf3977db3d92bb534",
-        "sha256": "00l9v25xyi7msz66rh9c52xlkv3zaqd32mrv2ap6bdvg2qzgh6w6",
+        "rev": "4c5b7f841307ce5b1328b427cd01896279811960",
+        "sha256": "16b0kr5688s5zznvxm19hzdixgk2kxksc6j7zm6jf1xmql43s8rf",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/61a3d43de5aa8d1305ccf8abf3977db3d92bb534.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/4c5b7f841307ce5b1328b427cd01896279811960.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {

@@ -2459,11 +2459,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-7.0.4.tgz#b557be28dac0af8fd020010b8a9670ae65bedba8"
   integrity sha512-N5uVDlTp/mgpa5gFr6VIr8pldt68jlmHOlqcTSnSwBuZXusXMiK53DCIOWuYk4OJ1rlb8Esa9J4FJwUB0psU9Q==
 
-"@react-native-masked-view/masked-view@0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.6.tgz#b26c52d5db3ad0926b13deea79c69620966a9221"
-  integrity sha512-303CxmetUmgiX9NSUxatZkNh9qTYYdiM8xkGf9I3Uj20U3eGY3M78ljeNQ4UVCJA+FNGS5nC1dtS9GjIqvB4dg==
-
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
@@ -2547,9 +2542,9 @@
     "@hapi/hoek" "^9.0.0"
 
 "@sideway/formula@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@sideway/formula/-/formula-3.0.0.tgz#fe158aee32e6bd5de85044be615bc08478a0a13c"
-  integrity sha512-vHe7wZ4NOXVfkoRb8T5otiENVlT7a3IAiw7H5M2+GO+9CDgcVUUsX1zalAztCmwyOr2RUTGJdgB+ZvSVqmdHmg==
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@sideway/formula/-/formula-3.0.1.tgz#80fcbcbaf7ce031e0ef2dd29b1bfc7c3f583611f"
+  integrity sha512-/poHZJJVjx3L+zVD6g9KgHfYnb443oi7wLu/XKojDviHy6HOEOA6z1Trk5aR1dGcmPenJEgb2sK2I80LeS3MIg==
 
 "@sideway/pinpoint@^2.0.0":
   version "2.0.0"
@@ -8825,11 +8820,6 @@ react-native-codegen@^0.0.18:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-collapsible@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-1.6.0.tgz#ca261ffff16914f872059bb0972e3a78c4b37f9c"
-  integrity sha512-beZjdgbT9Y/Pg591Xy5XkKG20HffJiVad4n9bfcUF/f783A+tvOVXnqvbS58Lkaym93mi4jcDPMuW9Vc1t6rqg==
-
 react-native-default-preference@1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/react-native-default-preference/-/react-native-default-preference-1.4.4.tgz#0d9f0a44dfc006f62f4479adc5b1fd68a8baf2e4"
@@ -8968,10 +8958,10 @@ react-native-watch-connectivity@1.0.11:
   dependencies:
     lodash.sortby "^4.7.0"
 
-react-native-webrtc@106.0.4:
-  version "106.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-106.0.4.tgz#a21aeb6dbb604a976d4ffa5f013aed135805761b"
-  integrity sha512-mIdXstKkua5fRqPaCCxQuZmO7amVFnCUYibXP+cXLMSKIsHwilpvbMQRby0jcBftTGN6rjGyIr+CXffFrtztQg==
+react-native-webrtc@106.0.5:
+  version "106.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-webrtc/-/react-native-webrtc-106.0.5.tgz#428f461c9073ae628cee65a204a0419027a9277b"
+  integrity sha512-EINzYpTZh6zXb2lcGH13Ieli1ur3M1FaT8R8WMqfUZEW8/y0WV6yBeQQVz55OA4LtWnBUX0RZyaYQ4aZN4e1Sw==
   dependencies:
     adm-zip "0.5.9"
     base64-js "1.5.1"

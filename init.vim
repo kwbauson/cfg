@@ -137,6 +137,6 @@ nmap <silent> <leader>g :RG<cr>
 nmap <expr> <leader>G ':Rg \b'.expand('<cword>').'\b<cr>'
 vmap <silent> <leader>G y:Rg \b<c-r>"\b<cr>
 
-autocmd TextYankPost * wshada
+autocmd TextYankPost * wshada!
 nmap <silent> p :rshada<bar>normal! p<cr>
 nmap <silent> P :rshada<bar>normal! P<cr>
