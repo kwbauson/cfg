@@ -32,6 +32,7 @@
     "files.${fqdn}".extraConfig = "reverse_proxy keith-server:18080";
     "netdata.${fqdn}".extraConfig = "reverse_proxy keith-server:19999";
     "jitsi.${fqdn}".extraConfig = "reverse_proxy keith-server:15280";
+    "attic.${fqdn}".extraConfig = "reverse_proxy keith-server:8020";
   };
 
   systemd.services.forward-ports = {

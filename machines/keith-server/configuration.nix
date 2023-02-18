@@ -6,6 +6,7 @@
     common-gpu-amd
     common-cpu-amd-pstate
     ../../modules/olivetin.nix
+    "${scope.sources.attic}/nixos/atticd.nix"
   ];
 
   nix.settings.trusted-users = [ "@wheel" ];
@@ -14,7 +15,7 @@
   hardware.amdgpu.loadInInitrd = false;
 
   networking = {
-    firewall.allowedTCPPorts = [ 2456 2457 2458 11337 19999 18080 15280 ];
+    firewall.allowedTCPPorts = [ 2456 2457 2458 11337 19999 18080 15280 8020 ];
     firewall.allowedUDPPorts = [ 2456 2457 2458 ];
   };
 
@@ -96,4 +97,16 @@
   } // genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
     restartTriggers = [ config.systemd.units."caddy.service".unit ];
   });
+
+  services.atticd = {
+    enable = true;
+    credentialsFile = "/etc/nixos/attic-environment";
+    settings.listen = "[::]:8020";
+    settings.chunking = {
+      nar-size-threshold = 0; # disable
+      min-size = 0;
+      avg-size = 0;
+      max-size = 0;
+    };
+  };
 }
