@@ -107,7 +107,7 @@
 
         nixosConfigurations = with lib; mapAttrs
           (n: x: nixosConfiguration n x.configuration)
-          (removeAttrs (import' ./hosts) [ "common" ]);
+          (removeAttrs (import' ./machines) [ "common" ]);
 
         homeConfigurations = mapAttrs (host: _: lib.homeConfiguration { inherit host; }) nixosConfigurations // {
           kwbauson = lib.homeConfiguration { host = "kwbauson"; isGraphical = false; };
