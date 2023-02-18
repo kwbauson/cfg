@@ -1,4 +1,16 @@
 {
+    "attic": {
+        "branch": "main",
+        "description": "Multi-tenant Nix Binary Cache",
+        "homepage": "https://docs.attic.rs",
+        "owner": "zhaofengli",
+        "repo": "attic",
+        "rev": "0bb3d001365a5d75947a7a713dfd06307b3934d4",
+        "sha256": "0rx2vfg6bchcwpg3cc35s9928h4s6sp5ix5wl17rwfair2aq5zkb",
+        "type": "tarball",
+        "url": "https://github.com/zhaofengli/attic/archive/0bb3d001365a5d75947a7a713dfd06307b3934d4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "clipnotify": {
         "branch": "master",
         "description": "Notify on new X clipboard events",

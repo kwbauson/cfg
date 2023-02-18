@@ -74,6 +74,7 @@
 
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
     devenv = (import sources.devenv).defaultPackage.${system};
+    inherit ((import cfg.inputs.flake-compat { src = sources.attic; }).defaultNix.packages.${system}) attic;
     bin-aliases = alias {
       built-as-host = "echo ${builtAsHost}";
       nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
