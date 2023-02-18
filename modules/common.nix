@@ -16,6 +16,7 @@
 
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
+  nix.settings.trusted-users = [ "@wheel" ];
   nix.extraOptions = nixConf;
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.insertNameservers = [

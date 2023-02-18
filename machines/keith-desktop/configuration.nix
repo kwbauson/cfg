@@ -7,7 +7,6 @@
     common-cpu-amd-pstate
   ];
 
-  nix.settings.trusted-users = [ "@wheel" ];
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
