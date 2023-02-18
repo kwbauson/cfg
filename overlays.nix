@@ -214,6 +214,16 @@
       }
     ) ./pkgs
   )
+  (final: prev: {
+    ci-checks =
+      let
+        mkCheck = drv: prev.writers.writeBashBin "ci-checks" "echo ${drv}";
+      in
+      {
+        x86_64-linux = mkCheck prev.cfg.defaultPackage.x86_64-linux;
+        aarch64-darwin = mkCheck prev.cfg.defaultPackage.aarch64-darwin;
+      }.${final.system};
+  })
   (final: prev: with prev; with mylib; {
     checks = linkFarmFromDrvs "checks" (flatten [
       slapper
