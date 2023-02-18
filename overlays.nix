@@ -3,6 +3,9 @@
     mylib = import ./mylib.nix prev;
     isNixOS = prev.isNixOS or false;
   })
+  (_: prev: {
+    scope = prev.cfg.inputs // prev.cfg // prev.lib.generators // prev.formats or { } // prev.writers or { } // prev // prev.lib // prev.mylib;
+  })
   (self: super: with super; with mylib; {
     nix-wrapped =
       if isNixOS then nix else

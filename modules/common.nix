@@ -1,11 +1,11 @@
-{ pkgs, lib, config, self, ... }:
+{ config, scope, ... }: with scope;
 {
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot = {
-        enable = lib.mkDefault true;
-        configurationLimit = lib.mkDefault 5;
+        enable = mkDefault true;
+        configurationLimit = mkDefault 5;
         consoleMode = "auto";
       };
       timeout = 1;
@@ -16,20 +16,20 @@
 
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
-  nix.extraOptions = self.nixConf;
-  networking.networkmanager.enable = lib.mkDefault true;
+  nix.extraOptions = nixConf;
+  networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.insertNameservers = [
     "1.1.1.1"
     "1.0.0.1"
     "2606:4700:4700::1111"
     "2606:4700:4700::1001"
   ];
-  systemd.services.NetworkManager-wait-online.enable = lib.mkDefault false;
+  systemd.services.NetworkManager-wait-online.enable = mkDefault false;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
 
-  nixpkgs = { inherit (self) config overlays; };
+  nixpkgs = { inherit pkgs; inherit (pkgs) config; };
 
   zramSwap = {
     enable = true;
@@ -52,8 +52,8 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-    dbus.packages = with pkgs; [ dconf ];
-    localtimed.enable = lib.mkDefault true;
+    dbus.packages = [ dconf ];
+    localtimed.enable = mkDefault true;
     chrony.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
@@ -86,11 +86,11 @@
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
-  programs.steam.enable = lib.mkDefault true;
+  programs.steam.enable = mkDefault true;
   imports = [ ../modules/pmount.nix ];
   programs.pmount.enable = true;
 
-  services.udev.packages = with pkgs; [ headsetcontrol ];
+  services.udev.packages = [ headsetcontrol ];
   services.openssh.settings = {
     PasswordAuthentication = false;
     PermitRootLogin = "no";

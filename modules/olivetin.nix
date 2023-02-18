@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ scope, ... }: with scope;
 let
-  olivetin = with pkgs; with mylib; stdenv.mkDerivation {
+  olivetin = stdenv.mkDerivation {
     inherit (sources.olivetin) pname version src;
     nativeBuildInputs = [ autoPatchelfHook ];
     config = ''

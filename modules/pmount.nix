@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-with lib;
+{ config, scope, ... }: with scope;
 let cfg = config.programs.pmount; in
 {
   options = {
@@ -18,7 +17,7 @@ let cfg = config.programs.pmount; in
   };
   config = mkIf cfg.enable {
     environment.etc."pmount.allow".text = cfg.allow;
-    environment.systemPackages = [ pkgs.pmount ];
+    environment.systemPackages = [ pmount ];
     security.wrappers =
       let
         rootWrapper = source: {
@@ -29,8 +28,8 @@ let cfg = config.programs.pmount; in
         };
       in
       {
-        pmount = rootWrapper "${pkgs.pmount}/bin/pmount";
-        pumount = rootWrapper "${pkgs.pmount}/bin/pumount";
+        pmount = rootWrapper "${pmount}/bin/pmount";
+        pumount = rootWrapper "${pmount}/bin/pumount";
       };
     systemd.tmpfiles.rules = [ "d /media" ];
   };

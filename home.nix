@@ -5,7 +5,7 @@
 , homeDirectory
 , isNixOS
 , isGraphical
-, host
+, machine-name
 , ...
 }:
 with builtins; with pkgs; with mylib; {
@@ -716,8 +716,8 @@ with builtins; with pkgs; with mylib; {
       xmodmap ${writeText "Xmodmap" ''
         remove mod1 = Alt_L
         keycode 64 = Escape
-        ${optionalString (host == "keith-xps") "keycode 105 = Super_R"}
-        ${optionalString (host == "keith-desktop") ''
+        ${optionalString (machine-name == "keith-xps") "keycode 105 = Super_R"}
+        ${optionalString (machine-name == "keith-desktop") ''
           keycode 134 = Super_R
           keycode 105 = Control_R
         ''}
@@ -733,7 +733,7 @@ with builtins; with pkgs; with mylib; {
       urxvtd -q -o -f &
       togpad off &
       autorandr --change &
-      ${optionalString (host == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
+      ${optionalString (machine-name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
     '';
     windowManager = {
       i3 = {
@@ -744,7 +744,7 @@ with builtins; with pkgs; with mylib; {
             workspace 1 output HDMI-A-0
             workspace 2 output DisplayPort-1
           '';
-        }.${host} or "";
+        }.${machine-name} or "";
       };
     };
   };
