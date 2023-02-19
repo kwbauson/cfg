@@ -49,8 +49,9 @@ in
         };
         inherit nr switch-to-configuration;
         inherit nle-cfg;
-        bin-aliases = attrValues bin-aliases;
-        built-as-host = alias "built-as-host" "echo ${machine-name}";
+        bin-aliases = attrValues (bin-aliases // alias {
+          built-as-host = "echo ${machine-name}";
+        });
       }
       {
         ${attrIf isDarwin "darwin"} = {

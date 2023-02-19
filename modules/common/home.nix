@@ -6,5 +6,4 @@
   ];
   home.username = mkDefault "keith";
   home.homeDirectory = mkDefault "/home/keith";
-  home.packages = [ awscli2 ];
 }

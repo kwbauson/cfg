@@ -22,41 +22,39 @@ let
   };
   makeScript = makeNamedScript "switch";
   scripts = eachHost
-    (host: rec {
-      nixos-toplevel = nixosConfigurations.${host}.config.system.build.toplevel;
-      home-conf = homeConfigurations.${host};
-      nob = makeScript ''
-        sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
-        sudo ${conf}/bin/switch-to-configuration boot
-      '';
-      nos = makeScript ''
-        if [[ $(realpath /run/current-system) != ${nixos-toplevel} ]];then
-          nvd diff /run/current-system ${nixos-toplevel}
+    (host:
+      let
+        isNixOS = elem host [ "keith-desktop" "kwbauson" "keith-xps" ];
+        nixos-toplevel = nixosConfigurations.${host}.config.system.build.toplevel;
+        home-conf = homeConfigurations.${host};
+      in
+      rec {
+        nob = makeScript ''
           sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
-          sudo ${nixos-toplevel}/bin/switch-to-configuration switch
-        fi
-      '';
-      hms = makeScript ''
-        hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
-        if [[ $hm_path != ${home-conf.config.home.path} ]];then
-          if [[ -n $hm_path ]];then
-            nvd diff $hm_path ${home-conf.config.home.path}
+          sudo ${conf}/bin/switch-to-configuration boot
+        '';
+        nos = makeScript ''
+          if [[ $(realpath /run/current-system) != ${nixos-toplevel} ]];then
+            nvd diff /run/current-system ${nixos-toplevel}
+            sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
+            sudo ${nixos-toplevel}/bin/switch-to-configuration switch
           fi
-          ${home-conf.activationPackage}/activate
-        fi
-      '';
-      noa = (makeScript (if isNixOS then exe nos else exe hms)).overrideAttrs (_: { name = "${host}-noa"; });
-    }) // { unknown.noa = null; };
+        '';
+        hms = makeScript ''
+          hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
+          if [[ $hm_path != ${home-conf.config.home.path} ]];then
+            if [[ -n $hm_path ]];then
+              nvd diff $hm_path ${home-conf.config.home.path}
+            fi
+            ${home-conf.activationPackage}/activate
+          fi
+        '';
+        noa = (makeScript (if isNixOS then exe nos else exe hms)).overrideAttrs (_: { name = "${host}-noa"; });
+      }) // { unknown.noa = null; };
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
     git add --all
-    ${if name == "noa" then ''
-    source_path=$(nix eval --raw .#self-source --no-warn-dirty)
-    host=$(built-as-host)
-    exec nix run .#$host "$@"
-    '' else ''
     exec nix run .#switch-to-configuration.scripts.$(built-as-host).${name} "$@"
-    ''}
   '';
 in
 buildEnv {

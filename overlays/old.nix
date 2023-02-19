@@ -58,18 +58,6 @@
       config = cfg.config // { contentAddressedByDefault = true; };
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
-    switch = stdenv.mkDerivation {
-      name = "${builtAsHost}-switch";
-      dontUnpack = true;
-      installPhase = ''
-        mkdir -p $out/bin
-        ln -s ${scope.switch-to-configuration.scripts.${builtAsHost}.noa}/bin/switch $out/bin
-        ${optionalString isNixOS "ln -s ${cfg.nixosConfigurations.${builtAsHost}} $out/nixos-configuration"}
-        ln -s ${cfg.homeConfigurations.${builtAsHost}} $out/home-configuration
-      '';
-      meta.mainProgram = "switch";
-    };
-
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
     devenv = (import sources.devenv).defaultPackage.${system};
     bin-aliases = alias {
@@ -187,9 +175,9 @@
       done
     '';
     self-flake = runCommand "self-flake" { } ''
-      cp -r ${self-source} $out
+      cp -r ${scope.self-source} $out
       chmod -R +w $out
-      cp ${self.self-flake-lock} $out/flake.lock
+      cp ${scope.self-flake-lock} $out/flake.lock
     '';
     iso = with scope.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
       imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
