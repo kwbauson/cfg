@@ -1,7 +1,7 @@
 { config, scope, machine-name, ... }: with scope;
 let
   isNixOS = elem machine-name [ "keith-desktop" "kwbauson" "keith-xps" ];
-  isGraphical = elem machine-name [ "keith-desktop" "keith-xps" "keith-mac" ];
+  isGraphical = !elem machine-name [ "kwbauson" ];
   inherit (config.home) homeDirectory;
 in
 {
