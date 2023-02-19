@@ -4,6 +4,6 @@
     (machines.${machine-name}.home or { })
     modules.home-old
   ];
-  home.username = mkDefault "keith";
-  home.homeDirectory = mkDefault "/${if isDarwin then "Users" else "home"}/${config.home.username}";
+  home.username = mkDefault (if !isDarwin then "keith" else "keithbauson");
+  home.homeDirectory = mkDefault "/${if !isDarwin then "home" else "Users"}/${config.home.username}";
 }

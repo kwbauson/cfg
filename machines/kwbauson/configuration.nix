@@ -1,9 +1,5 @@
 { config, scope, ... }: with scope;
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;
@@ -22,11 +18,9 @@
   };
 
   services.openssh.enable = true;
-  services.tailscale.enable = true;
-  programs.steam.enable = false;
+  services.xserver.enable = false;
 
   services.caddy.enable = true;
-  services.caddy.email = "kwbauson@gmail.com";
   services.caddy.virtualHosts = with config.networking; {
     ${fqdn}.extraConfig = "reverse_proxy keith-server:11337";
     "files.${fqdn}".extraConfig = "reverse_proxy keith-server:18080";

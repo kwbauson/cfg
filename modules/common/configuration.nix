@@ -2,6 +2,7 @@
 {
   imports = [
     machines.${machine-name}.configuration
+    machines.${machine-name}.hardware-configuration
     inputs.home-manager.nixosModule
     modules.pmount
   ];
@@ -26,6 +27,7 @@
   nix.settings.trusted-users = [ "@wheel" ];
   nix.extraOptions = nixConf;
   networking.networkmanager.enable = mkDefault true;
+  networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
   systemd.services.NetworkManager-wait-online.enable = mkDefault false;
 
@@ -45,6 +47,8 @@
   fonts.enableDefaultFonts = config.services.xserver.enable;
   location.provider = "geoclue2";
 
+  time.timeZone = if config.time.hardwareClockInLocalTime then "America/Indianapolis" else null;
+
   security.rtkit.enable = true;
   services = {
     pipewire = {
@@ -54,12 +58,13 @@
       pulse.enable = true;
     };
     dbus.packages = [ dconf ];
-    localtimed.enable = mkDefault true;
+    localtimed.enable = mkDefault (!config.time.hardwareClockInLocalTime);
     chrony.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
-    xserver.displayManager = if !config.services.xserver.enable then { } else {
+    xserver.enable = mkDefault true;
+    xserver.displayManager = optionalAttrs config.services.xserver.enable {
       defaultSession = "none+xsession";
       autoLogin = {
         enable = true;
@@ -77,11 +82,9 @@
     earlyoom.enable = true;
   };
 
-  users = {
-    users.keith = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" "vboxsf" ];
-    };
+  users.users.keith = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "docker" "video" "dialout" ];
   };
 
   home-manager = {
@@ -93,10 +96,12 @@
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
-  programs.steam.enable = mkDefault true;
+  programs.steam.enable = mkDefault config.services.xserver.enable;
   programs.pmount.enable = true;
+  services.tailscale.enable = mkDefault config.services.openssh.enable;
+  hardware.bluetooth.enable = mkDefault config.services.xserver.enable;
 
-  services.udev.packages = [ headsetcontrol ];
+  services.udev.packages = optionals config.services.xserver.enable [ headsetcontrol ];
   services.openssh.settings = {
     PasswordAuthentication = false;
     PermitRootLogin = "no";
@@ -116,4 +121,6 @@
       "umac-128-etm@openssh.com"
     ];
   };
+
+  services.caddy.email = "kwbauson@gmail.com";
 }

@@ -1,14 +1,12 @@
 { config, scope, ... }: with scope;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
-    ./hardware-configuration.nix
     common-cpu-amd
     common-gpu-amd
     common-cpu-amd-pstate
-    ../../modules/olivetin.nix
+    modules.olivetin
   ];
 
-  nix.settings.trusted-users = [ "@wheel" ];
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
@@ -17,15 +15,7 @@
     firewall.allowedTCPPorts = [ 2456 2457 11337 19999 18080 15280 ];
     firewall.allowedUDPPorts = [ 2456 2457 ];
   };
-
   time.hardwareClockInLocalTime = true;
-  time.timeZone = "America/Indianapolis";
-
-  services.localtimed.enable = false;
-  services.xserver.enable = true;
-  virtualisation.docker.enable = true;
-  users.users.keith.extraGroups = [ "dialout" ];
-  services.tailscale.enable = true;
   services.openssh.enable = true;
 
   services.github-runner = {
@@ -38,6 +28,7 @@
 
   services.netdata.enable = true;
 
+  virtualisation.docker.enable = true;
   virtualisation.oci-containers.containers.valheim = {
     autoStart = true;
     image = "ghcr.io/lloesche/valheim-server";
@@ -48,7 +39,6 @@
   };
 
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
-
   services.caddy.enable = true;
   services.caddy.virtualHosts = {
     ":11337".extraConfig = ''
