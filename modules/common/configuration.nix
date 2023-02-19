@@ -26,6 +26,7 @@
   nix.settings.trusted-users = [ "@wheel" ];
   nix.extraOptions = nixConf;
   networking.networkmanager.enable = mkDefault true;
+  networking.hostName = mkDefault machine-name;
   systemd.services.NetworkManager-wait-online.enable = mkDefault false;
 
   hardware.enableRedistributableFirmware = true;
