@@ -51,7 +51,6 @@ in
         inherit nle-cfg;
         bin-aliases = attrValues bin-aliases;
         built-as-host = alias "built-as-host" "echo ${machine-name}";
-        # switch = mkSwitchScript machine-name;
       }
       {
         ${attrIf isDarwin "darwin"} = {

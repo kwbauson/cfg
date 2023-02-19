@@ -1,6 +1,6 @@
 scope: with scope;
 let
-  inherit (cfg) nixosConfigurations homeConfigurations;
+  inherit (flake) nixosConfigurations homeConfigurations;
   hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeNamedScript = name: text: stdenv.mkDerivation {
@@ -23,29 +23,28 @@ let
   makeScript = makeNamedScript "switch";
   scripts = eachHost
     (host: rec {
-      nob = let conf = nixosConfigurations.${host}; in
-        makeScript ''
-          sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
-          sudo ${conf}/bin/switch-to-configuration boot
-        '';
-      nos = let conf = nixosConfigurations.${host}; in
-        makeScript ''
-          if [[ $(realpath /run/current-system) != ${conf} ]];then
-            nvd diff /run/current-system ${conf}
-            sudo nix-env -p /nix/var/nix/profiles/system --set ${conf}
-            sudo ${conf}/bin/switch-to-configuration switch
+      nixos-toplevel = nixosConfigurations.${host}.config.system.build.toplevel;
+      home-conf = homeConfigurations.${host};
+      nob = makeScript ''
+        sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
+        sudo ${conf}/bin/switch-to-configuration boot
+      '';
+      nos = makeScript ''
+        if [[ $(realpath /run/current-system) != ${nixos-toplevel} ]];then
+          nvd diff /run/current-system ${nixos-toplevel}
+          sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
+          sudo ${nixos-toplevel}/bin/switch-to-configuration switch
+        fi
+      '';
+      hms = makeScript ''
+        hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
+        if [[ $hm_path != ${home-conf.config.home.path} ]];then
+          if [[ -n $hm_path ]];then
+            nvd diff $hm_path ${home-conf.config.home.path}
           fi
-        '';
-      hms = let conf = homeConfigurations.${host}; in
-        makeScript ''
-          hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
-          if [[ $hm_path != ${conf.config.home.path} ]];then
-            if [[ -n $hm_path ]];then
-              nvd diff $hm_path ${conf.config.home.path}
-            fi
-            ${conf}/activate
-          fi
-        '';
+          ${home-conf.activationPackage}/activate
+        fi
+      '';
       noa = (makeScript (if isNixOS then exe nos else exe hms)).overrideAttrs (_: { name = "${host}-noa"; });
     }) // { unknown.noa = null; };
   makeBin = name: makeNamedScript name ''

@@ -58,7 +58,7 @@
       config = cfg.config // { contentAddressedByDefault = true; };
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
-    mkSwitchScript = builtAsHost: stdenv.mkDerivation {
+    switch = stdenv.mkDerivation {
       name = "${builtAsHost}-switch";
       dontUnpack = true;
       installPhase = ''
@@ -191,6 +191,12 @@
       chmod -R +w $out
       cp ${self.self-flake-lock} $out/flake.lock
     '';
+    iso = with scope.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
+      imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
+      nixpkgs.config.allowUnfree = true;
+      hardware.enableRedistributableFirmware = true;
+      hardware.enableAllFirmware = true;
+    })).config.system.build.isoImage;
   })
   (final: prev: with prev.scope-lib; {
     extra-packages = mapAttrs

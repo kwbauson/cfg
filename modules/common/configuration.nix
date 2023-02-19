@@ -20,6 +20,7 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  nixpkgs = { inherit (pkgs) pkgs config; };
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings.trusted-users = [ "@wheel" ];
@@ -29,8 +30,6 @@
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
-
-  nixpkgs = { inherit (pkgs) pkgs config; };
 
   zramSwap = {
     enable = true;
