@@ -202,6 +202,8 @@ in
         IFS=$OLDIFS
         export PATH="$NEWPATH"
         unset OLDIFS NEWPATH
+      '' + optionalString isDarwin ''
+        export PATH="$PATH":/opt/homebrew/bin
       '';
       profileExtra = ''
         [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)

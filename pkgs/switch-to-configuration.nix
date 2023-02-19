@@ -25,7 +25,9 @@ let
     (host:
       let
         isNixOS = hasAttr host nixosConfigurations;
+        isNixDarwin = hasAttr host darwinConfigurations;
         nixos-toplevel = nixosConfigurations.${host}.config.system.build.toplevel;
+        nix-darwin-system = darwinConfigurations.${host}.system;
         home-conf = homeConfigurations.${host};
       in
       rec {
@@ -34,10 +36,20 @@ let
           sudo ${conf}/bin/switch-to-configuration boot
         '';
         nos = makeScript ''
-          if [[ $(realpath /run/current-system) != ${nixos-toplevel} ]];then
-            nvd diff /run/current-system ${nixos-toplevel}
-            sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
+          profile=/nix/var/nix/profiles/system
+          if [[ $(realpath "$profile") != ${nixos-toplevel} ]];then
+            nvd diff "$profile" ${nixos-toplevel}
             sudo ${nixos-toplevel}/bin/switch-to-configuration switch
+            sudo -H nix-env -p "$profile" --set ${nixos-toplevel}
+          fi
+        '';
+        nds = makeScript ''
+          profile=/nix/var/nix/profiles/system
+          if [[ $(realpath "$profile") != ${nix-darwin-system} ]];then
+            nvd diff "$profile" ${nix-darwin-system}
+            ${nix-darwin-system}/activate-user
+            sudo ${nix-darwin-system}/activate
+            sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
           fi
         '';
         hms = makeScript ''
@@ -49,7 +61,7 @@ let
             ${home-conf.activationPackage}/activate
           fi
         '';
-        noa = (makeScript (if isNixOS then exe nos else exe hms)).overrideAttrs (_: { name = "${host}-noa"; });
+        noa = (makeScript (exe (if isNixOS then nos else if isNixDarwin then nds else hms))).overrideAttrs (_: { name = "${host}-noa"; });
       }) // { unknown.noa = null; };
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
