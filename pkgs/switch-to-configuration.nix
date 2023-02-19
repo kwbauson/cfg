@@ -24,7 +24,7 @@ let
   scripts = eachHost
     (host:
       let
-        isNixOS = elem host [ "keith-desktop" "kwbauson" "keith-xps" ];
+        isNixOS = hasAttr host nixosConfigurations;
         nixos-toplevel = nixosConfigurations.${host}.config.system.build.toplevel;
         home-conf = homeConfigurations.${host};
       in
