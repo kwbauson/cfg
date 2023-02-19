@@ -54,7 +54,9 @@ let
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
     git add --all
-    exec nix run .#switch-to-configuration.scripts.$(built-as-host).${name} "$@"
+    drvPath=$(nix eval --raw .#switch-to-configuration.scripts.$(built-as-host).${name}.drvPath)
+    outPath=$(nix build --no-link --print-out-paths "$drvPath")
+    exec "$outPath"/bin/switch "$@"
   '';
 in
 buildEnv {
