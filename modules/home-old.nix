@@ -1,14 +1,10 @@
-{ pkgs
-, config
-, self
-, username
-, homeDirectory
-, isNixOS
-, isGraphical
-, machine-name
-, ...
-}:
-with builtins; with pkgs; with mylib; {
+{ config, scope, machine-name, ... }: with scope;
+let
+  isNixOS = elem machine-name [ "keith-desktop" "kwbauson" "keith-xps" ];
+  isGraphical = elem machine-name [ "keith-desktop" "keith-xps" "keith-mac" ];
+  inherit (config.home) homeDirectory;
+in
+{
   home.packages = with pkgs;
     drvsExcept
       {
@@ -54,6 +50,8 @@ with builtins; with pkgs; with mylib; {
         inherit nr switch-to-configuration;
         inherit nle-cfg;
         bin-aliases = attrValues bin-aliases;
+        built-as-host = alias "built-as-host" "echo ${machine-name}";
+        # switch = mkSwitchScript machine-name;
       }
       {
         ${attrIf isDarwin "darwin"} = {
@@ -297,7 +295,7 @@ with builtins; with pkgs; with mylib; {
     neovim = {
       enable = true;
       withNodeJs = true;
-      extraConfig = readFile ./init.vim;
+      extraConfig = readFile ./../init.vim;
       coc.enable = true;
       plugins = with {
         plugins = with vimPlugins; {
@@ -475,7 +473,7 @@ with builtins; with pkgs; with mylib; {
     fzf = {
       enable = true;
       enableBashIntegration = false;
-      defaultCommand = "fd -tf -c always -H --ignore-file ${./ignore} -E .git";
+      defaultCommand = "fd -tf -c always -H --ignore-file ${../ignore} -E .git";
       defaultOptions = words "--ansi --reverse --multi --filepath-word";
     };
     lesspipe.enable = true;
@@ -659,7 +657,7 @@ with builtins; with pkgs; with mylib; {
       "emborg/default".text = ''
         src_dirs = "${optionalString isNixOS "/etc/nixos"} ~".split()
         excludes = """
-        ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ./ignore)}
+        ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ../ignore)}
         """
       '';
     };
@@ -739,7 +737,7 @@ with builtins; with pkgs; with mylib; {
       i3 = {
         enable = isNixOS && isGraphical;
         config = null;
-        extraConfig = readFile ./i3-config + {
+        extraConfig = readFile ./../i3-config + {
           keith-desktop = ''
             workspace 1 output HDMI-A-0
             workspace 2 output DisplayPort-1

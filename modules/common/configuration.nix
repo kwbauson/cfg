@@ -1,5 +1,11 @@
-{ config, scope, ... }: with scope;
+{ config, scope, machine-name, ... }: with scope;
 {
+  imports = [
+    machines.${machine-name}.configuration
+    inputs.home-manager.nixosModule
+    modules.pmount
+  ];
+
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
@@ -17,14 +23,14 @@
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings.trusted-users = [ "@wheel" ];
-  nix.extraOptions = nixConf;
+  # nix.extraOptions = nixConf;
   networking.networkmanager.enable = mkDefault true;
   systemd.services.NetworkManager-wait-online.enable = mkDefault false;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
 
-  nixpkgs = { inherit pkgs; inherit (pkgs) config; };
+  nixpkgs = { inherit (pkgs) pkgs config; };
 
   zramSwap = {
     enable = true;
@@ -78,11 +84,16 @@
     };
   };
 
+  home-manager = {
+    useGlobalPkgs = true;
+    extraSpecialArgs = { inherit scope machine-name; };
+    users.keith.imports = [ modules.common.home ];
+  };
+
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = mkDefault true;
-  imports = [ ../modules/pmount.nix ];
   programs.pmount.enable = true;
 
   services.udev.packages = [ headsetcontrol ];
