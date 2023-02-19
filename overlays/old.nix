@@ -1,10 +1,9 @@
 [
-  (_: prev: {
-    mylib = import ./mylib.nix prev;
+  (final: prev: {
+    mylib = import ../scope.nix final;
+    scope-lib = import ../scope.nix { inherit (prev) lib; };
     isNixOS = prev.isNixOS or false;
-  })
-  (_: prev: {
-    scope = prev.cfg.inputs // prev.cfg // prev.lib.generators // prev.formats or { } // prev.writers or { } // prev // prev.lib // prev.mylib;
+    cfg = final.scope.flake;
   })
   (self: super: with super; with mylib; {
     nix-wrapped =
@@ -14,7 +13,6 @@
         export NIX_CONFIG=$(< ${writeText "nix.conf" cfg.nixConfBase})$'\n'$NIX_CONFIG
         exec "$exePath" "$@"
       '';
-    imported-nixpkgs = import' inputs.nixpkgs;
   })
   (self: super: with super; with mylib; {
     nix-index-list = stdenv.mkDerivation {
@@ -47,7 +45,7 @@
     };
     steam-native = self.steam.override { nativeOnly = true; };
     dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
-    nle-cfg = self.nle.build { path = ./.; };
+    nle-cfg = self.nle.build { path = ../.; };
     inherit (self.nle-cfg.pkgs) fordir;
     inherit (self.nle-cfg.pkgs.poetry-env.python.pkgs) emborg git-remote-codecommit;
     inherit (self.nle-cfg.pkgs.bundler-env.gems) fakes3;
@@ -60,23 +58,10 @@
       config = cfg.config // { contentAddressedByDefault = true; };
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
-    switch = stdenv.mkDerivation {
-      name = "${builtAsHost}-switch";
-      dontUnpack = true;
-      installPhase = ''
-        mkdir -p $out/bin
-        ln -s ${self.switch-to-configuration.scripts.${builtAsHost}.noa}/bin/switch $out/bin
-        ${optionalString isNixOS "ln -s ${cfg.nixosConfigurations.${builtAsHost}} $out/nixos-configuration"}
-        ln -s ${cfg.homeConfigurations.${builtAsHost}} $out/home-configuration
-      '';
-      meta.mainProgram = "switch";
-    };
-
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
     devenv = (import sources.devenv).defaultPackage.${system};
     bin-aliases = alias {
-      built-as-host = "echo ${builtAsHost}";
-      nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
+      nixpkgs-rev = "echo ${scope.inputs.nixpkgs.rev}";
       nixpkgs-path = "echo ${pkgs.path}";
       nixpkgs-branch = "echo ${nixpkgs-branch}";
       undup = ''tac "$@" | awk '!x[$0]++' | tac'';
@@ -164,7 +149,7 @@
       batwhich = ''bat "$(which "$@")"'';
     };
     self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
-      cp ${self-source}/flake.lock $out
+      cp ${scope.self-source}/flake.lock $out
       chmod +w $out
       entries=$(jq '.nodes.root.inputs | to_entries' $out)
       inputs_keys=$(jq -r '.[].key' <<<"$entries")
@@ -175,7 +160,7 @@
         echo generated flake.lock of self does not support nested inputs
         exit 1
       fi
-      self_inputs="${concatStringsSep "\n" (attrNames inputs.self.inputs)}"
+      self_inputs="${concatStringsSep "\n" (attrNames scope.inputs)}"
       self_inputs=$(echo "$self_inputs" | sort)
       lock_inputs=$(jq -r '.nodes | keys | sort[]' $out | grep -vFx root)
       if [[ $inputs_keys != $lock_inputs ]];then
@@ -184,49 +169,43 @@
         echo inputs of self do not match flake.lock nodes
         exit 1
       fi
-      self_inputs="${concatStringsSep "\n" (mapAttrsToList (n: v: "${n} ${v.outPath} ${v.narHash}") inputs.self.inputs)}"
+      self_inputs="${concatStringsSep "\n" (mapAttrsToList (n: v: "${n} ${v.outPath} ${v.narHash}") scope.inputs)}"
       echo "$self_inputs" | while read input outPath narHash;do
         jq ".nodes.\"$input\".locked = { type: \"path\", path: \"$outPath\", narHash: \"$narHash\" }" $out | sponge $out
       done
     '';
     self-flake = runCommand "self-flake" { } ''
-      cp -r ${self-source} $out
+      cp -r ${scope.self-source} $out
       chmod -R +w $out
-      cp ${self.self-flake-lock} $out/flake.lock
+      cp ${scope.self-flake-lock} $out/flake.lock
     '';
+    iso = with scope.packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
+      imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
+      nixpkgs.config.allowUnfree = true;
+      hardware.enableRedistributableFirmware = true;
+      hardware.enableAllFirmware = true;
+    })).config.system.build.isoImage;
   })
-  (self: super: with super; with mylib;
-  let
+  (final: prev: with prev.scope-lib; {
     extra-packages = mapAttrs
-      (n: f: callPackage f (mylib // pkgs // rec {
+      (n: f: prev.scope.callPackage f (prev.scope // rec {
         name = "${pname}-${version}";
         pname = n;
         version = src.version or src.rev or "unversioned";
-        src = sources.${n} or null;
-        ${n} = super.${n};
+        src = prev.scope.sources.${n} or null;
+        ${n} = prev.${n};
       }))
-      (filterAttrs (_: v: !isPath v) (import' ./pkgs));
-  in
-  { inherit extra-packages; } // extra-packages)
-  (self: super: with super; with mylib;
-  mapDirEntries
+      (filterAttrs (_: v: !isPath v) (import' ../pkgs));
+  })
+  (final: prev: prev.extra-packages)
+  (final: prev: with prev.scope-lib; mapDirEntries
     (n: value:
       optionalAttrs (hasSuffix ".patch" n) rec {
         name = removeSuffix ".patch" n;
-        value = override super.${name} { patches = [ (./pkgs + ("/" + n)) ]; };
+        value = override prev.${name} { patches = [ (../pkgs + ("/" + n)) ]; };
       }
-    ) ./pkgs
+    ) ../pkgs
   )
-  (final: prev: {
-    ci-checks =
-      let
-        mkCheck = drv: prev.writers.writeBashBin "ci-checks" "echo ${drv}";
-      in
-      {
-        x86_64-linux = mkCheck prev.cfg.defaultPackage.x86_64-linux;
-        aarch64-darwin = mkCheck prev.cfg.defaultPackage.aarch64-darwin;
-      }.${final.system};
-  })
   (final: prev: with prev; with mylib; {
     checks = linkFarmFromDrvs "checks" (flatten [
       slapper
