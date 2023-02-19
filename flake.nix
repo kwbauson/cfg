@@ -24,21 +24,21 @@
 
     nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
       nixpkgs.lib.nixosSystem rec {
-        pkgs = packages.x86_64-linux;
+        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ scope.modules.common.configuration ];
       });
 
     darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
       nix-darwin.lib.darwinSystem rec {
-        pkgs = packages.aarch64-darwin;
+        pkgs = packages.${machines.${machine-name}.system or "aarch64-darwin"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ scope.modules.common.darwin-configuration ];
       });
 
     homeConfigurations = forAttrNames machines (machine-name:
       home-manager.lib.homeManagerConfiguration rec {
-        pkgs = packages.x86_64-linux;
+        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
         extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ scope.modules.common.home ];
       });
