@@ -10,11 +10,8 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
-  networking = {
-    firewall.allowedTCPPorts = [ 2456 2457 11337 19999 18080 15280 ];
-    firewall.allowedUDPPorts = [ 2456 2457 ];
-  };
   time.hardwareClockInLocalTime = true;
   services.openssh.enable = true;
 
@@ -40,26 +37,26 @@
 
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
   services.caddy.enable = true;
-  services.caddy.virtualHosts = {
-    ":11337".extraConfig = ''
+  services.caddy.virtualHosts = with constants; {
+    ":${toString olivetin.authed-port}".extraConfig = ''
       basicauth /* {
         {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
       }
-      reverse_proxy localhost:1337
+      reverse_proxy localhost:${toString olivetin.port}
     '';
-    ":18080".extraConfig = ''
+    ":${toString file-server.port}".extraConfig = ''
       file_server browse {
         root /srv/files
       }
     '';
-    ":15280".extraConfig = with config.services; caddy.virtualHosts.${jitsi-meet.hostName}.extraConfig;
+    ":${toString jitsi.caddy-port}".extraConfig = with config.services; caddy.virtualHosts.${jitsi-meet.hostName}.extraConfig;
   };
 
   services.jitsi-meet = {
     enable = true;
     nginx.enable = false;
     caddy.enable = true;
-    hostName = "jitsi.kwbauson.com";
+    hostName = "jitsi.${constants.kwbauson.fqdn}";
     config = {
       analytics.disabled = true;
       desktopSharingFrameRate = { min = 5; max = 30; };
@@ -76,10 +73,9 @@
       SHOW_WATERMARK_FOR_GUESTS = false;
     };
   };
-  services.jitsi-videobridge.openFirewall = true;
-  services.jitsi-videobridge.nat = {
-    localAddress = "100.107.6.112";
-    publicAddress = "208.87.134.252";
+  services.jitsi-videobridge.nat = with constants; {
+    localAddress = keith-server.ip;
+    publicAddress = kwbauson.ip;
   };
 
   systemd.services = {

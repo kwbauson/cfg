@@ -4,7 +4,7 @@ let
     inherit (sources.olivetin) pname version src;
     nativeBuildInputs = [ autoPatchelfHook ];
     config = ''
-      listenAddressSingleHTTPFrontend: localhost:1337
+      listenAddressSingleHTTPFrontend: localhost:${toString constants.olivetin.port}
       actions:
         - title: Restart Jitsi
           icon: "&#128577;"

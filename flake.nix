@@ -11,7 +11,7 @@
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
-    inherit (importDir ./.) overlays modules machines;
+    inherit (importDir ./.) overlays modules machines constants;
 
     packages = genAttrs platforms.all (system: import nixpkgs {
       inherit system;
