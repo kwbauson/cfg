@@ -9,4 +9,5 @@ with builtins; let
     then builtins.getFlake (toString src)
     else (flake-compat { inherit src; }).defaultNix;
 in
-(getFlake ./.).packages.${builtins.currentSystem}.scope // { inherit getFlake; }
+{ system ? currentSystem }:
+(getFlake ./.).packages.${currentSystem}.scope // { inherit getFlake; }

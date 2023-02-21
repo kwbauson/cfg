@@ -3,7 +3,7 @@ pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
 pkgs.lib // builtins // {
-  inherit (import ./.) getFlake;
+  inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (flake) modules;
   sources = mapAttrs
