@@ -7,4 +7,4 @@ with builtins; let
   getFlake = src: (flake-compat { inherit src; }).defaultNix;
 in
 { system ? currentSystem }:
-(getFlake ./.).packages.${currentSystem}.scope // { inherit getFlake; }
+(getFlake ./.).packages.${system}.scope // { inherit getFlake; }
