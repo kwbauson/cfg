@@ -15,35 +15,22 @@
     inherit (kwbauson) domain;
     firewall.allowedTCPPorts = [ http.port https.port jitsi.tcp-port ] ++ valheim.ports;
     firewall.allowedUDPPorts = [ jitsi.udp-port ] ++ valheim.ports;
-    firewall.checkReversePath = false;
     firewall.trustedInterfaces = [ "tailscale0" ];
     firewall.extraCommands = concatMapStringsSep "\n"
       ({ port, proto }: "iptables -t nat -A POSTROUTING -d ${keith-server.ip} -p ${proto} -m ${proto} --dport ${toString port} -j MASQUERADE")
       (
-        (map (port: { proto = "tcp"; inherit port; }) valheim.ports) ++
-        (map (port: { proto = "udp"; inherit port; }) valheim.ports) ++
-        [{ proto = "tcp"; port = jitsi.tcp-port; } { proto = "udp"; port = jitsi.udp-port; }]
+        (map (port: { proto = "tcp"; inherit port; }) (remove ssh.port config.networking.firewall.allowedTCPPorts)) ++
+        (map (port: { proto = "udp"; inherit port; }) config.networking.firewall.allowedUDPPorts)
       );
     nat.enable = true;
-    nat.externalIP = kwbauson.ip;
-    nat.internalIPs = [ keith-server.ip ];
     nat.externalInterface = "enp3s0";
-    nat.internalInterfaces = [ "tailscale0" ];
     nat.forwardPorts =
       map (port: { proto = "tcp"; sourcePort = port; destination = "${keith-server.ip}:${toString port}"; })
-        ([ jitsi.tcp-port ] ++ valheim.ports) ++
+        (remove ssh.port config.networking.firewall.allowedTCPPorts) ++
       map (port: { proto = "udp"; sourcePort = port; destination = "${keith-server.ip}:${toString port}"; })
-        ([ jitsi.udp-port ] ++ valheim.ports);
+        config.networking.firewall.allowedUDPPorts;
   };
 
   services.openssh.enable = true;
   services.xserver.enable = false;
-
-  services.caddy.enable = true;
-  services.caddy.virtualHosts = with constants; with config.networking; {
-    ${fqdn}.extraConfig = "reverse_proxy keith-server:${toString olivetin.authed-port}";
-    "files.${fqdn}".extraConfig = "reverse_proxy keith-server:${toString file-server.port}";
-    "netdata.${fqdn}".extraConfig = "reverse_proxy keith-server:${toString netdata.port}";
-    "jitsi.${fqdn}".extraConfig = "reverse_proxy keith-server:${toString jitsi.caddy-port}";
-  };
 }
