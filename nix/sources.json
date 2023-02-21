@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "7e2e1a60e33301fa340cd1e12b65859038af2e0b",
-        "sha256": "11y9qc9blpnd06wkjjlcsppl8m9190piiv5m4zjrmiifawg9xva2",
+        "rev": "ddfd2714040015fd9862fb0b92f35e4522bf75df",
+        "sha256": "1hh06wx6q9fdxrmzj8w0jivmg3xq4w35a19dady49y23857xjnwf",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/7e2e1a60e33301fa340cd1e12b65859038af2e0b.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/ddfd2714040015fd9862fb0b92f35e4522bf75df.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -73,10 +73,10 @@
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
-        "sha256": "14wflv513vjrs3rhdykl4m5a63mp3ivy08kgw5r16axsi58sj0pg",
+        "rev": "e3c95e376a7a08f9d1cba98f9697f38c33bad021",
+        "sha256": "0jz2q2vz0fk7s63ilqwnkw6pcgc3xc8vqwvbql9ziki6irw20488",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/e3c95e376a7a08f9d1cba98f9697f38c33bad021.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
@@ -120,12 +120,12 @@
         "version": "2023.02.16"
     },
     "r2modman": {
-        "sha256": "1azyhy7ffgbiv5b9jz62kf5d4x1r5d6gvnd4r75k76d2pwpxbyr4",
+        "sha256": "035vrcffckl9n0xlmagqxmism3ri34k809j9wbf62df364017bc9",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.36/r2modman-3.1.36.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.37/r2modman-3.1.37.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.36"
+        "version": "3.1.37"
     },
     "ranger_devicons": {
         "branch": "main",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "22af444df07535c68a2525a3f067f9f5887b0fb2",
-        "sha256": "1mzm52przw795lzwpz9prx5dfjzl5ldxyqjm8qrhz1831rx7giwh",
+        "rev": "624b5a2b1b0bc2d5e8117e2676e8c3eca2ac5685",
+        "sha256": "0dy1hz6wz8gsvvw90j5hsa5aw03a6qjfl0imc2y50a83x75hkhc9",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/22af444df07535c68a2525a3f067f9f5887b0fb2.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/624b5a2b1b0bc2d5e8117e2676e8c3eca2ac5685.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
