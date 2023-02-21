@@ -68,15 +68,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
-        "branch": "master",
+        "branch": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
         "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "e3c95e376a7a08f9d1cba98f9697f38c33bad021",
-        "sha256": "0jz2q2vz0fk7s63ilqwnkw6pcgc3xc8vqwvbql9ziki6irw20488",
+        "rev": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
+        "sha256": "14wflv513vjrs3rhdykl4m5a63mp3ivy08kgw5r16axsi58sj0pg",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/e3c95e376a7a08f9d1cba98f9697f38c33bad021.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jsonc.vim": {
