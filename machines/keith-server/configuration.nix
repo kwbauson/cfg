@@ -68,6 +68,7 @@
     localAddress = keith-server.ip;
     publicAddress = kwbauson.ip;
   };
+  services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
 
   systemd.services = {
     caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";

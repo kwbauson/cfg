@@ -33,7 +33,7 @@ let
       rec {
         nob = makeScript ''
           sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
-          sudo ${conf}/bin/switch-to-configuration boot
+          sudo ${nixos-toplevel}/bin/switch-to-configuration boot
         '';
         nos = makeScript ''
           profile=/nix/var/nix/profiles/system

@@ -17,17 +17,6 @@
     firewall.allowedTCPPorts = [ http.port https.port jitsi.tcp-port ] ++ valheim.ports;
     firewall.allowedUDPPorts = [ jitsi.udp-port ] ++ valheim.ports;
     firewall.trustedInterfaces = [ "tailscale0" ];
-    firewall.extraCommands = concatMapStringsSep "\n"
-      (x: "iptables -t nat -A POSTROUTING -d ${x.destination} -p ${x.proto} -m ${x.proto} --dport ${toString x.sourcePort} -j MASQUERADE")
-      config.networking.nat.forwardPorts;
-    nat.enable = true;
-    nat.enableIPv6 = true;
-    nat.externalInterface = "enp3s0";
-    nat.forwardPorts =
-      map (port: { proto = "tcp"; sourcePort = port; destination = keith-server.ip; })
-        ([ jitsi.tcp-port ] ++ valheim.ports) ++
-      map (port: { proto = "udp"; sourcePort = port; destination = keith-server.ip; })
-        ([ jitsi.udp-port ] ++ valheim.ports);
   };
 
   services.openssh.enable = true;
@@ -39,5 +28,22 @@
     "files.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString file-server.port}";
     "netdata.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString netdata.port}";
     "jitsi.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString jitsi.caddy-port}";
+  };
+
+  systemd.services.forward-ports = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ socat ];
+    script = with constants; ''
+      # valheim
+      for port in ${toString valheim.ports};do
+        for proto in TCP UDP;do
+          socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
+        done
+      done
+      # jitsi
+      socat TCP-LISTEN:${toString jitsi.tcp-port},fork,reuseaddr TCP:keith-server:${toString jitsi.tcp-port} &
+      socat UDP-LISTEN:${toString jitsi.udp-port},fork,reuseaddr UDP:keith-server:${toString jitsi.udp-port} &
+      sleep inf
+    '';
   };
 }
