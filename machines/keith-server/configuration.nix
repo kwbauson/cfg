@@ -17,18 +17,18 @@
 
   services.caddy.enable = true;
   services.caddy.virtualHosts = with constants; {
-    ${kwbauson.fqdn}.extraConfig = ''
+    ":${toString olivetin.authed-port}".extraConfig = ''
       basicauth /* {
         {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
       }
       reverse_proxy localhost:${toString olivetin.port}
     '';
-    "netdata.${kwbauson.fqdn}".extraConfig = "reverse_proxy localhost:${toString netdata.port}";
-    "files.${kwbauson.fqdn}".extraConfig = ''
+    ":${toString file-server.port}".extraConfig = ''
       file_server browse {
         root /srv/files
       }
     '';
+    ":${toString jitsi.caddy-port}".extraConfig = with config.services; caddy.virtualHosts.${jitsi-meet.hostName}.extraConfig;
   };
 
   services.netdata.enable = true;
