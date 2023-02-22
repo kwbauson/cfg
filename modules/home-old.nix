@@ -47,7 +47,7 @@ in
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };
-        inherit nr switch-to-configuration;
+        inherit nr switch;
         inherit nle-cfg;
         bin-aliases = attrValues (bin-aliases // alias {
           built-as-host = "echo ${machine-name}";
