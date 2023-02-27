@@ -16,7 +16,6 @@
     inherit (kwbauson) domain;
     firewall.allowedTCPPorts = [ http.port https.port jitsi.tcp-port ] ++ valheim.ports;
     firewall.allowedUDPPorts = [ jitsi.udp-port ] ++ valheim.ports;
-    firewall.trustedInterfaces = [ "tailscale0" ];
   };
 
   services.openssh.enable = true;

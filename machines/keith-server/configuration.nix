@@ -12,7 +12,6 @@
   hardware.amdgpu.loadInInitrd = false;
   time.hardwareClockInLocalTime = true;
 
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
   services.openssh.enable = true;
 
   services.caddy.enable = true;
