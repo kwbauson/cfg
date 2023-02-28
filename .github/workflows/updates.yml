@@ -2,20 +2,11 @@ name: updates
 on: { workflow_dispatch, schedule: [cron: '0 7 * * *'] }
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: [nix, Linux, X64]
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v19
-        with:
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-      - uses: cachix/cachix-action@v12
-        with:
-          name: kwbauson
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: nix -vL run .#nle update
       - uses: peter-evans/create-pull-request@v4
         id: cpr
