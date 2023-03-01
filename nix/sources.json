@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "ecbbfd135c3a9220278239b541ae057fe77916f2",
-        "sha256": "08s0iy39097znjrx4q403c7dfar1m5f879hn6nln3y5v6lh96iis",
+        "rev": "252f996df81de38d2824adfb246949682f6d0530",
+        "sha256": "1zww33jfqi8mzbhlh1d6y7cvgr6cyargshy4h2y7b32k40sdyrgd",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/ecbbfd135c3a9220278239b541ae057fe77916f2.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/252f996df81de38d2824adfb246949682f6d0530.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
