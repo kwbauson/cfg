@@ -29,7 +29,7 @@
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
-  networking.firewall.trustedInterfaces = mkDefault [ "tailscale0" ];
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
   systemd.services.NetworkManager-wait-online.enable = mkDefault false;
 
   hardware.enableRedistributableFirmware = true;
