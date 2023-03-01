@@ -38,17 +38,17 @@ let
             profile=/nix/var/nix/profiles/system
             if [[ $(realpath "$profile") != ${nixos-toplevel} ]];then
               nvd diff "$profile" ${nixos-toplevel}
-              sudo ${nixos-toplevel}/bin/switch-to-configuration switch
               sudo -H nix-env -p "$profile" --set ${nixos-toplevel}
+              sudo ${nixos-toplevel}/bin/switch-to-configuration switch
             fi
           '';
           nds = makeScript ''
             profile=/nix/var/nix/profiles/system
             if [[ $(realpath "$profile") != ${nix-darwin-system} ]];then
               nvd diff "$profile" ${nix-darwin-system}
+              sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
               ${nix-darwin-system}/activate-user
               sudo ${nix-darwin-system}/activate
-              sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
             fi
           '';
           hms = makeScript ''
