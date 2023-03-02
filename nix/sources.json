@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "252f996df81de38d2824adfb246949682f6d0530",
-        "sha256": "1zww33jfqi8mzbhlh1d6y7cvgr6cyargshy4h2y7b32k40sdyrgd",
+        "rev": "8454b85158482d93dcc3f20b77fef5272313d127",
+        "sha256": "1c3cn5f001hl3akil34mqxm73hnqzdipv2yhrywnn5vwdz1cv1dw",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/252f996df81de38d2824adfb246949682f6d0530.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/8454b85158482d93dcc3f20b77fef5272313d127.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "affc8668b77b7e85d3d23c182a5159df36d17306",
-        "sha256": "1zw8n86vkk9gccw7xx7acgn8yh3ksdsh5qwarmav048gqvap27ad",
+        "rev": "4dba124bd6fa1cd703258ebf6587a628ef02c52f",
+        "sha256": "1gwl2zy35a1jyarx11fry2rkl71y1kxcs6j79zvni215nym20k5d",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/affc8668b77b7e85d3d23c182a5159df36d17306.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/4dba124bd6fa1cd703258ebf6587a628ef02c52f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
