@@ -54,7 +54,6 @@
       disableTileEnlargement = true;
       enableNoAudioDetection = false;
       enableNoisyMicDetection = false;
-      enableUnifiedOnChrome = false;
       maxFullResolutionParticipants = -1;
       p2p.enabled = false;
     };
