@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "93796e5dbfd77bcc05eb133879c3a80643b8769c",
-        "sha256": "0ggqbq2bl5z6bh34jdpaf5xcksn0fy9hv86ik0bp8hl8k1l7dq8s",
+        "rev": "4d4ceb1563a354dc8eed5a1b5ced389ca9e5e111",
+        "sha256": "0axxzx72kk048i4iapnlnzdx56678aw0gllpvjqvazdllzg5pmgv",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/93796e5dbfd77bcc05eb133879c3a80643b8769c.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/4d4ceb1563a354dc8eed5a1b5ced389ca9e5e111.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "02a5acdfc937129e51e41de0eafd0c44f29896b4",
-        "sha256": "17h2n4f7r3sa0v7mh092na7ildp0fd7dyhaygyngzwygybvsya25",
+        "rev": "8d21196826dac2f92ec43d30fd183452621af379",
+        "sha256": "04bii8h3rs6zkqx6wq6011ys1606wlbmja2xry3cam31h2parfnb",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/02a5acdfc937129e51e41de0eafd0c44f29896b4.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/8d21196826dac2f92ec43d30fd183452621af379.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -120,12 +120,12 @@
         "version": "2023.02.16"
     },
     "r2modman": {
-        "sha256": "03xp9n90n7cv1xpfwkf3w7jn2qpgd44g33zqf2jvmnl8q5fmrk7h",
+        "sha256": "0a1lvg8l3x1cswlmc227x8z0xb96vw3mks27mwr8f1ap2fyvdszf",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.38/r2modman-3.1.38.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.39/r2modman-3.1.39.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.38"
+        "version": "3.1.39"
     },
     "ranger_devicons": {
         "branch": "main",
