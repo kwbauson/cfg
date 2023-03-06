@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "4dba124bd6fa1cd703258ebf6587a628ef02c52f",
-        "sha256": "1gwl2zy35a1jyarx11fry2rkl71y1kxcs6j79zvni215nym20k5d",
+        "rev": "8556d543336182d734ee5a3a7238c0b73ba71241",
+        "sha256": "1rprbbwvqr24ms4bqnpzhz5i7jwc8qysichxs4xfkjrb0ivjl3mh",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/4dba124bd6fa1cd703258ebf6587a628ef02c52f.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/8556d543336182d734ee5a3a7238c0b73ba71241.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
