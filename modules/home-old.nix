@@ -43,7 +43,7 @@ in
             crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
             git-ignore git-fuzzy black terraform-ls cachix nle concurrently
-            arduino tasknix devenv
+            arduino tasknix devenv google-cloud-sdk
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };
