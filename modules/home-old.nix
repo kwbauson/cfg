@@ -256,7 +256,7 @@ in
           localForwards =
             map
               (port: { bind.port = port; host.address = "localhost"; host.port = port; })
-              [ 1234 3000 3001 3306 4000 4306 5432 8000 8025 ]
+              [ 1234 3000 3001 3306 4000 4306 5432 8000 8025 4002 ]
             ++ [
               { bind.port = 8080; host.address = "api"; host.port = 8080; }
             ];
