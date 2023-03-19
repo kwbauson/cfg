@@ -38,6 +38,7 @@
     enable = true;
     extraLabels = [ "nix" ];
     extraPackages = [ cachix gh ];
+    extraEnvironment.LD_LIBRARY_PATH = "";
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
   };
