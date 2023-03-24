@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "8bef8f3bd740b9b8b1bdd873e0ea1ad791339916",
-        "sha256": "07m6895lhvmw6pk69g8sk6dsry3i8lc6x7bgkhd5rmv01b8mdwqb",
+        "rev": "a02418232d775e99ca349e1c8f71400aa1dd903c",
+        "sha256": "1hhninv76akrv8msxg8qxq4nad32jachmnqhlsv9a95f4g50mb67",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/8bef8f3bd740b9b8b1bdd873e0ea1ad791339916.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/a02418232d775e99ca349e1c8f71400aa1dd903c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "06510758a70cba8220d1c9c5f9f828643ac8101e",
-        "sha256": "0nclqa8d58q5rwymriwavf18crijak61qph0y70g1dwhyb09lq9w",
+        "rev": "5d7ed34181fe38339cd39fb847b4431a1337572f",
+        "sha256": "1mw4dizz3mm7rbz61kxs1jj4sjbsgq4imvja7gr5xwfy7s1yl08b",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/06510758a70cba8220d1c9c5f9f828643ac8101e.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/5d7ed34181fe38339cd39fb847b4431a1337572f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -112,12 +112,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "olivetin": {
-        "sha256": "0qj0jgmripswsizp3dc7wijm2pjf5fmwiw7h9fdyik6b620j73bc",
+        "sha256": "126kddnzj36b3cq47jh1f5jq5p4z8967qjhag2bhyxw0p287p4fa",
         "type": "tarball",
         "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2023.02.16/OliveTin-linux-amd64.tar.gz",
+        "url": "https://github.com/OliveTin/OliveTin/releases/download/2023.03.22/OliveTin-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
-        "version": "2023.02.16"
+        "version": "2023.03.22"
     },
     "r2modman": {
         "sha256": "0a1lvg8l3x1cswlmc227x8z0xb96vw3mks27mwr8f1ap2fyvdszf",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "8d6a2b8004dd4fd6bc168e1d93c908b0fdad7ee2",
-        "sha256": "0bn23p3nxiylj8nalg6b10d23hg4kdyy03vd7nvalb6sh03a0xfb",
+        "rev": "51b4bcd0e09c782ffd0d2d861626e102cc9701ff",
+        "sha256": "0891pr56n84r77zi4wpw5m652cnkd01q187llqmsigbyahxww5ap",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/8d6a2b8004dd4fd6bc168e1d93c908b0fdad7ee2.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/51b4bcd0e09c782ffd0d2d861626e102cc9701ff.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
