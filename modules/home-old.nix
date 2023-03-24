@@ -739,12 +739,7 @@ in
       i3 = {
         enable = isNixOS && isGraphical;
         config = null;
-        extraConfig = readFile ./../i3-config + {
-          keith-desktop = ''
-            workspace 1 output HDMI-A-0
-            workspace 2 output DisplayPort-1
-          '';
-        }.${machine-name} or "";
+        extraConfig = readFile ./../i3-config + { }.${machine-name} or "";
       };
     };
   };
