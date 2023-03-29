@@ -218,13 +218,7 @@
         poetry
         dasel
         pur
-        (nle.build {
-          path = with python39.pkgs; writeTextDir "requirements.txt" ''
-            black==22.3.0
-            bpython==0.23
-            mypy==0.991
-          '';
-        })
+        (nle.build { path = writeTextDir "meme" ''meme''; })
       ])
     ]);
   })

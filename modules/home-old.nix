@@ -31,7 +31,7 @@ in
             inherit (xorg) xdpyinfo xev xfontsel xmodmap;
           };
           inherit
-            ffmpeg-full mediainfo pavucontrol qtbr breeze-icons
+            ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons
             signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
             zathura
             ;
@@ -58,7 +58,7 @@ in
           inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
             maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
           inherit breeze-icons nixos-install-tools arduino;
-          inherit progress niv ffmpeg-full yt-dlp ncdu nim nimlsp;
+          inherit nim nimlsp;
         };
       };
 
@@ -100,11 +100,6 @@ in
         max-jobs = "auto";
         extra-experimental-features = [ "nix-command" "flakes" ];
         extra-platforms = [ "x86_64-darwin" ];
-      }
-    // optionalAttrs (machine-name == "keith-desktop")
-      {
-        builders-use-substitutes = "true";
-        builders = [ "ssh-ng://keith-mac aarch64-darwin,x86_64-darwin - 10 - benchmark,big-parallel,nixos-test" ];
       }
     // optionalAttrs (machine-name == "keith-mac")
       {
