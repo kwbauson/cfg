@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "ed34a697fe5762284ebe13389fa6f49566037c65",
-        "sha256": "1694pz4wjbv579ydcxg5bl98rzwffrdpg7ykbw80v3c9casfglzl",
+        "rev": "a63bde08b2a2099d955288e6dcec3aae8ebf732b",
+        "sha256": "07z4j4fb6sh4dvps2b1h4p1mrjv2mm1igfwxqflpw17xyc9362qh",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/ed34a697fe5762284ebe13389fa6f49566037c65.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/a63bde08b2a2099d955288e6dcec3aae8ebf732b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
