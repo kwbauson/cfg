@@ -59,7 +59,7 @@
     };
     contentAddressed = mapAttrs (_: pkg: if pkg ? overrideAttrs then pkg.overrideAttrs (_: { __contentAddressed = true; }) else pkg) pkgs;
     npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
-    devenv = (import sources.devenv).defaultPackage.${system};
+    devenv = (import sources.devenv).packages.${system}.default;
     bin-aliases = alias {
       nixpkgs-rev = "echo ${scope.inputs.nixpkgs.rev}";
       nixpkgs-path = "echo ${pkgs.path}";
