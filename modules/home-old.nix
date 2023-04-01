@@ -177,6 +177,18 @@ in
         fi
         _completion_loader git
         ___git_complete g __git_main
+
+        new_line_ps1() {
+          local _ y x _
+          local LIGHT_YELLOW="\001\033[1;93m\002"
+          local     RESET="\001\e[0m\002"
+
+          IFS='[;' read -p $'\e[6n' -d R -rs _ y x _
+          if [[ "$x" != 1 ]]; then
+            printf "\n''${LIGHT_YELLOW}^^ no newline at end of output ^^\n''${RESET}"
+          fi
+        }
+        PS1="\$(new_line_ps1)$PS1"
       '' + optionalString (!isNixOS) ''
         export GPG_TTY=$(tty)
 
