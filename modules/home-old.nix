@@ -33,7 +33,7 @@ in
           inherit
             ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons
             signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
-            zathura flameshot
+            zathura
             ;
           sox = sox.override { enableLame = true; };
         };
@@ -704,6 +704,13 @@ in
   dconf.enable = false;
 
   services.picom.enable = isGraphical && isLinux;
+  services.flameshot = {
+    enable = isLinux && isGraphical;
+    settings.General = {
+      disabledTrayIcon = true;
+      showStartupLaunchMessage = false;
+    };
+  };
 
   xsession = {
     enable = isNixOS && isGraphical;
