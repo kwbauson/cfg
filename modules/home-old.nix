@@ -33,7 +33,7 @@ in
           inherit
             ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons
             signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
-            zathura
+            zathura flameshot
             ;
           sox = sox.override { enableLame = true; };
         };
