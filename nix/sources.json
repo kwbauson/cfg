@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "5317be8428f7721f077054b804a02bcad210de04",
-        "sha256": "16x18cgd5r7pzx7s03ia96a4vi0fbbzx26v4acrdcdqmnfxiz6mm",
+        "rev": "32015f30c3df9f8fad4289a9474dfb1794095803",
+        "sha256": "1frrnhf8v7n2hz94df8yxlgd4qxgi0bin851w6xa2fsa6c9sifx6",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/5317be8428f7721f077054b804a02bcad210de04.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/32015f30c3df9f8fad4289a9474dfb1794095803.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -120,12 +120,12 @@
         "version": "2023.03.25"
     },
     "r2modman": {
-        "sha256": "0a1lvg8l3x1cswlmc227x8z0xb96vw3mks27mwr8f1ap2fyvdszf",
+        "sha256": "0kc8f506da3qarvqy7mjlnckr43dfqack7n3279529dnj2xvmwr4",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.39/r2modman-3.1.39.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.40/r2modman-3.1.40.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.39"
+        "version": "3.1.40"
     },
     "ranger_devicons": {
         "branch": "main",
@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "9e2f8b29613223b7eaded5690257abbc6553ac93",
-        "sha256": "18cj35wcm1cj2i8756n4zqhaq2lwiklakpl6zc6h8cd52hzmfv0s",
+        "rev": "e17d97c5377332e66f32212b61dc8190020fb1bf",
+        "sha256": "0g372jmsjl7377xpdkj2lzz12fvp8jsiqsbfrjwjch1s2kh5b7nx",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/9e2f8b29613223b7eaded5690257abbc6553ac93.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/e17d97c5377332e66f32212b61dc8190020fb1bf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-anyfold": {
