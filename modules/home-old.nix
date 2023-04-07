@@ -139,7 +139,7 @@ in
       initExtra = ''
         [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
         [[ -n $SSH_CLIENT ]] && _host="${machine-name} " || _host=
-        PS1="\[\e[1;32m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
+        PS1="\[\e[1;''${_color}m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
         set -o vi
         set +h
