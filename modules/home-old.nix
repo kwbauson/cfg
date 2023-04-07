@@ -125,7 +125,7 @@ in
         ll = "l -a";
         ls = "ls --color=auto --group-directories-first";
         file = "file -s";
-        sudo = "sudo ";
+        sudo = "sudo --preserve-env=SSH_CLIENT";
         su = "sudo su";
         grep = "grep --color -I";
         rg = "rg --color=always -S --hidden --no-require-git --glob '!/.git/'";
