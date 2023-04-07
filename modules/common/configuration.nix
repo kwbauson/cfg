@@ -48,7 +48,9 @@
   fonts.enableDefaultFonts = config.services.xserver.enable;
   location.provider = "geoclue2";
 
-  time.timeZone = if config.time.hardwareClockInLocalTime then "America/Indianapolis" else null;
+  time = mkIf config.time.hardwareClockInLocalTime {
+    timeZone = "America/Indianapolis";
+  };
 
   security.rtkit.enable = true;
   services = {
@@ -65,7 +67,7 @@
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
     xserver.enable = mkDefault true;
-    xserver.displayManager = optionalAttrs config.services.xserver.enable {
+    xserver.displayManager = mkIf config.services.xserver.enable {
       defaultSession = "none+xsession";
       autoLogin = {
         enable = true;
