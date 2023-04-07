@@ -18,7 +18,7 @@
   system.defaults.finder.AppleShowAllExtensions = true;
   homebrew.enable = true;
   homebrew.taps = [ "homebrew/cask" ];
-  homebrew.global.autoUpdate = false;
+  homebrew.global.autoUpdate = true;
   homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.upgrade = true;
   homebrew.onActivation.cleanup = "zap";
