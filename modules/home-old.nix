@@ -43,7 +43,7 @@ in
             crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
             solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
             git-ignore git-fuzzy black terraform-ls cachix nle concurrently
-            arduino tasknix devenv google-cloud-sdk
+            arduino tasknix devenv google-cloud-sdk nix-index
             ;
           inherit (nodePackages) npm-check-updates prettier;
         };
@@ -707,6 +707,7 @@ in
     IRB.conf[:SAVE_HISTORY] = 2_000_000
     IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
   '';
+  home.file.".cache/nix-index".source = nix-index-database;
 
   gtk.enable = isLinux;
   gtk.theme.name = "Adwaita-dark";

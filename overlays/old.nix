@@ -15,9 +15,17 @@
       '';
   })
   (self: super: with super; with mylib; {
+    nix-index-database = stdenv.mkDerivation {
+      name = "nix-index-database";
+      src = fetchurl { inherit (sources.nix-index-database) url sha256; };
+      dontUnpack = true;
+      installPhase = ''
+        mkdir $out
+        cp $src $out/files
+      '';
+    };
     nix-index-list = stdenv.mkDerivation {
       name = "nix-index-list";
-      src = fetchurl { inherit (sources.nix-index-database) url sha256; };
       extra =
         let
           extraPackages = set: concatMapStringsSep "\n" (n: "${set}.${n} ${n}") (attrNames (pkgs.${set}));
@@ -30,10 +38,8 @@
       dontUnpack = true;
       buildInputs = [ nix-index ];
       installPhase = ''
-        mkdir db
-        cp $src db/files
         nix-locate  \
-          --db db \
+          --db ${nix-index-database} \
           --at-root \
           --type x --type s \
           --regex '/bin/[^.][^/]*' |
