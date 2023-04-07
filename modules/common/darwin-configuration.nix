@@ -18,9 +18,9 @@
   system.defaults.finder.AppleShowAllExtensions = true;
   homebrew.enable = true;
   homebrew.taps = [ "homebrew/cask" ];
-  homebrew.global.autoUpdate = true;
+  homebrew.global.autoUpdate = false;
   homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.upgrade = true;
   homebrew.onActivation.cleanup = "zap";
-  homebrew.casks = [ "tailscale" "firefox" "chromium" "google-chrome" "docker" ];
+  homebrew.casks = map (name: { inherit name; greedy = true; }) [ "tailscale" "firefox" "chromium" "google-chrome" "docker" ];
 }
