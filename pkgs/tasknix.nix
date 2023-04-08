@@ -5,7 +5,7 @@ let
       outputs = { self, nixpkgs }: {
         packages = nixpkgs.lib.genAttrs nixpkgs.lib.platforms.all (system:
           with nixpkgs.legacyPackages.''${system}; with builtins;
-          mapAttrs writers.writeBashBin (scopedImport pkgs ./tasks.nix)
+          mapAttrs writers.writeBashBin (let tasks = import ./tasks.nix; in if isFunction tasks then tasks pkgs else tasks)
         );
       };
     }

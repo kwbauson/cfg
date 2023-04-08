@@ -64,7 +64,7 @@ scope: with scope; stdenv.mkDerivation {
     mkdir -p ~/.local/share/nix
     if [[ -n $attr ]];then
       if [[ $desc = 1 ]];then
-        exec nix eval --impure --expr "with import $source; desc $attr"
+        exec nix eval --impure --expr "with import $source { forceFlakeCompat = false; }; desc $attr"
       else
         if [[ -z $packages ]];then
           exec nix shell "$source#$cmd" --command "$cmd" "$@"

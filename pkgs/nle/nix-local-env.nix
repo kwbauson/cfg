@@ -56,7 +56,7 @@ rec {
       (mapAttrs (x: _: wrapScriptWithPackages "bin/${x}" { }) (filterAttrs (n: v: !fileForPlatform "bin/${n}") (readDir (file "bin"))));
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
-    imported = scopedImport scope localfile;
+    imported = import localfile;
     scope = mylib // pkgs // { inherit source; };
     result = if isFunction imported then imported scope else imported;
     out = if pathExists localfile then result else null;
