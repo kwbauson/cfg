@@ -108,14 +108,6 @@ nmap <silent> gb :BufferPick<cr>
 nmap <silent> gH :BufferMovePrevious<cr>
 nmap <silent> gL :BufferMoveNext<cr>
 nmap <silent> <leader>d :BufferClose<cr>
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.animation = v:false
-let bufferline.auto_hide = v:false
-let bufferline.tabpages = v:true
-let bufferline.closable = v:false
-let bufferline.icon_custom_colors = v:true
-let bufferline.insert_at_end = v:true
-let bufferline.maximum_padding = 0
 hi default BufferCurrent guibg=#0A7ACA guifg=white
 hi default BufferCurrentMod guibg=#FFAF00 guifg=black
 hi default BufferCurrentSign guibg=#0A7ACA guifg=white
