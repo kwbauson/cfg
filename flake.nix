@@ -7,6 +7,8 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     flake-utils.flake = true;
+    flake-utils.inputs.systems.follows = "systems";
+    systems.url = "github:nix-systems/default";
     nixos-hardware.flake = true;
   };
   outputs = { self, ... }: with self.scope; {
