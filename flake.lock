@@ -18,7 +18,9 @@
     },
     "flake-utils": {
       "inputs": {
-        "systems": "systems"
+        "systems": [
+          "systems"
+        ]
       },
       "locked": {
         "lastModified": 1681037374,
@@ -110,7 +112,8 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "systems": "systems"
       }
     },
     "systems": {
