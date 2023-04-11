@@ -20,8 +20,9 @@
       config = import ./config.nix;
       overlays = [
         (final: prev: { scope = import ./scope.nix (final // { inherit flake; }); })
+        overlays.aliases
         overlays.ci-checks
-      ] ++ overlays.old;
+      ] ++ overlays.misc;
     });
 
     nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
