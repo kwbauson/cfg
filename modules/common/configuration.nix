@@ -17,7 +17,7 @@
       };
       timeout = 1;
     };
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
     supportedFilesystems = [ "ntfs" ];
   };
 
