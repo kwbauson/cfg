@@ -27,14 +27,15 @@ pkgs.lib // builtins // {
     mapAttrs
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
-  importDir = dir: listToAttrs (
-    map (x: nameValuePair (removeSuffix ".nix" x.name) x.value) (
-      filter (x: hasSuffix ".nix" x.name || pathIsDirectory (dir + "/${x.name}")) (
-        attrsToList
-          (forDirPaths dir (_: p: (if pathIsDirectory p then importDir else import) p))
-      )
-    )
-  );
+
+  importDir = dir: pipe dir [
+    readDirPaths
+    attrsToList
+    (filter (x: pathIsDirectory x.value || hasSuffix ".nix" x.name))
+    (map (x: nameValuePair (removeSuffix ".nix" x.name) x.value))
+    listToAttrs
+    (mapAttrValues (p: if pathExists (p + "/default.nix") || !pathIsDirectory p then import p else importDir p))
+  ];
 
 
   inherit (writers) writeBash writeBashBin;
