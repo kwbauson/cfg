@@ -4,7 +4,7 @@
     machines.${machine-name}.configuration
     machines.${machine-name}.hardware-configuration
     inputs.home-manager.nixosModule
-  ] ++ attrValues modules.nixos;
+  ] ++ attrValues (importDir ./.);
 
   boot = {
     loader = {
@@ -92,7 +92,7 @@
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit scope machine-name; };
-    users.keith.imports = [ modules.common.home-manager ];
+    users.keith.imports = [ modules.home-manager ];
   };
 
   security.sudo.wheelNeedsPassword = false;

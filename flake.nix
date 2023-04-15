@@ -29,21 +29,21 @@
       nixpkgs.lib.nixosSystem rec {
         pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ scope.modules.common.nixos ];
+        modules = [ scope.modules.nixos ];
       });
 
     darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
       nix-darwin.lib.darwinSystem rec {
         pkgs = packages.${machines.${machine-name}.system or "aarch64-darwin"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ scope.modules.common.nix-darwin ];
+        modules = [ scope.modules.nix-darwin ];
       });
 
     homeConfigurations = forAttrNames machines (machine-name:
       home-manager.lib.homeManagerConfiguration rec {
         pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
         extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ scope.modules.common.home-manager ];
+        modules = [ scope.modules.home-manager ];
       });
 
     nixConfBase = ''

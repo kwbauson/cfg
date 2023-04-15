@@ -8,7 +8,7 @@
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit scope machine-name; };
-    users.keithbauson.imports = [ modules.common.home-manager ];
+    users.keithbauson.imports = [ modules.home-manager ];
   };
   services.nix-daemon.enable = true;
   environment.etc."nixpkgs-path".source = pkgs.path;

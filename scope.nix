@@ -32,6 +32,7 @@ pkgs.lib // builtins // {
     readDirPaths
     attrsToList
     (filter (x: pathIsDirectory x.value || hasSuffix ".nix" x.name))
+    (filter (x: x.name != "default.nix"))
     (map (x: nameValuePair (removeSuffix ".nix" x.name) x.value))
     listToAttrs
     (mapAttrValues (p: if pathExists (p + "/default.nix") || !pathIsDirectory p then import p else importDir p))
