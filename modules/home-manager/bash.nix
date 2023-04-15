@@ -1,5 +1,39 @@
 { config, scope, machine-name, ... }: with scope;
 {
+  programs.readline = {
+    enable = true;
+    variables = {
+      editing-mode = "vi";
+      completion-query-items = -1;
+      expand-tilde = false;
+      match-hidden-files = false;
+      mark-symlinked-directories = true;
+      page-completions = false;
+      skip-completed-text = true;
+      colored-stats = true;
+      keyseq-timeout = 0;
+      bell-style = false;
+      show-mode-in-prompt = true;
+      revert-all-at-newline = true;
+      vi-ins-mode-string = "\\1\\e[6 q\\2";
+      vi-cmd-mode-string = "\\1\\e[2 q\\2";
+    };
+    bindings = {
+      "\\C-p" = "history-search-backward";
+      "\\C-n" = "history-search-forward";
+      "\\e[A" = "history-search-backward";
+      "\\e[B" = "history-search-forward";
+      "\\C-d" = "possible-completions";
+      "\\C-l" = "complete";
+      "\\C-f" = "complete-filename";
+      "\\C-e" = "complete-command";
+      "\\C-a" = "insert-completions";
+      "\\C-k" = "kill-whole-line";
+      "\\C-w" = ''" \edba\b"'';
+      "\\t" = "menu-complete";
+      "\\e[Z" = "menu-complete-backward";
+    };
+  };
   programs.bash = {
     enable = true;
     inherit (config.home) sessionVariables;

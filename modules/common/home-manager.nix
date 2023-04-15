@@ -2,11 +2,7 @@
 {
   imports = [
     (machines.${machine-name}.home or { })
-    modules.home.misc
-    modules.home.git
-    modules.home.bash
-    modules.home.packages
-  ];
+  ] ++ attrValues modules.home-manager;
   _module.args = {
     isNixOS = hasAttr machine-name nixosConfigurations;
     isGraphical = !elem machine-name [ "kwbauson" ];
