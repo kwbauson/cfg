@@ -370,13 +370,16 @@
     };
     configFile = {
       "ranger/rc.conf".text = ''
-        source ${config.home.homeDirectory}/.nix-profile/share/doc/ranger/config/rc.conf
+        ${readFile "${ranger}/share/doc/ranger/config/rc.conf"}
         set vcs_aware true
-        set preview_images_method urxvt
         map D delete
         map Q quit!
         map ! shell bash
       '';
+      "ranger/rifle.conf".text = replaceStrings
+        [ "xdg-open --" "has sxiv" "sxiv --" ]
+        [ "xdg-open" "has nsxiv" "nsxiv -a --" ]
+        (readFile "${ranger}/share/doc/ranger/config/rifle.conf");
       "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
       "emborg/settings".text = ''
         configurations = "default"
