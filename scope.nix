@@ -28,9 +28,12 @@ pkgs.lib // builtins // {
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
   importDir = dir: listToAttrs (
-    mapAttrsToList
-      (n: v: nameValuePair (removeSuffix ".nix" n) v)
-      (forDirPaths dir (_: p: (if pathIsDirectory p then importDir else import) p))
+    map (x: nameValuePair (removeSuffix ".nix" x.name) x.value) (
+      filter (x: hasSuffix ".nix" x.name || pathIsDirectory (dir + "/${x.name}")) (
+        attrsToList
+          (forDirPaths dir (_: p: (if pathIsDirectory p then importDir else import) p))
+      )
+    )
   );
 
 
