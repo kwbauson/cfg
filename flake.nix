@@ -2,20 +2,16 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.inputs.utils.follows = "flake-utils";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
-    flake-utils.flake = true;
-    flake-utils.inputs.systems.follows = "systems";
-    systems.url = "github:nix-systems/default";
     nixos-hardware.flake = true;
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
     inherit (importDir ./.) overlays modules machines constants;
 
-    packages = genAttrs platforms.all (system: import nixpkgs {
+    packages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
       config = import ./config.nix;
       overlays = [
