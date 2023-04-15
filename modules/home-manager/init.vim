@@ -8,7 +8,6 @@ map <silent> <leader>n :set invnumber number?<cr>
 map <silent> <leader>N :set invrelativenumber relativenumber?<cr>
 map <silent> <leader>r :up<bar>vs<bar>term %:p:S<cr>i
 map <silent> <leader>, :e ~/cfg/init.vim<cr>
-map <silent> - <nop>
 
 set mouse= title
 set nojoinspaces smartindent
@@ -23,8 +22,6 @@ set diffopt+=iwhiteall,iwhiteeol,vertical,algorithm:patience
 set foldlevelstart=1000
 set shada+='1000
 autocmd BufEnter * syntax sync fromstart
-
-autocmd Filetype * AnyFoldActivate
 
 set termguicolors
 colorscheme codedark

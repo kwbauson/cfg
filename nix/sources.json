@@ -79,18 +79,6 @@
         "url": "https://github.com/jitsi/jitsi-meet/archive/1a22b7d0ddecd7be0319c6495eda1c46bc751f88.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "jsonc.vim": {
-        "branch": "master",
-        "description": "jsonc syntax support for vim",
-        "homepage": null,
-        "owner": "neoclide",
-        "repo": "jsonc.vim",
-        "rev": "6fb92460f9e50505c9b93181a00f27d10c9b383f",
-        "sha256": "1z2zi951xgssq1d343b0rhcj1xn4qwvv1b2wzvy8jg7ak9pgrl1a",
-        "type": "tarball",
-        "url": "https://github.com/neoclide/jsonc.vim/archive/6fb92460f9e50505c9b93181a00f27d10c9b383f.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "nix-index-database": {
         "sha256": "06ycch6gsjk9pqjca2rfw2km217h3zyx88cnjin2dmcc7s16l4xb",
         "type": "file",
@@ -161,18 +149,6 @@
         "sha256": "1x56lhxzmkr08vhcyd6mz6jg0mah062fywd6ay49cck5rkhqb5mw",
         "type": "tarball",
         "url": "https://github.com/swarm-game/swarm/archive/ffbb303b946ae19a253edd1e7cc2602006238abe.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "vim-anyfold": {
-        "branch": "master",
-        "description": "Language agnostic vim plugin for folding and motion based on indentation.",
-        "homepage": "",
-        "owner": "pseewald",
-        "repo": "vim-anyfold",
-        "rev": "3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c",
-        "sha256": "14grfm5vra2lrnilsf6gbfmvn6v4pbi1l94ac713qac592fjq5kv",
-        "type": "tarball",
-        "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
