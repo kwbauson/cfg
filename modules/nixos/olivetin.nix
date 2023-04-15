@@ -3,7 +3,7 @@ let cfg = config.services.olivetin; in
 {
   options.services.olivetin = {
     enable = mkEnableOption "olivetin";
-    config = types.lines;
+    config = mkOption { type = types.lines; };
   };
   config = mkIf cfg.enable {
     systemd.services.olivetin = {
