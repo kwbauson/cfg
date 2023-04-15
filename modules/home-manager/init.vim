@@ -21,7 +21,6 @@ set splitbelow splitright
 set diffopt+=iwhiteall,iwhiteeol,vertical,algorithm:patience
 set foldlevelstart=1000
 set shada+='1000
-autocmd BufEnter * syntax sync fromstart
 
 set termguicolors
 colorscheme codedark
@@ -60,7 +59,6 @@ command! GD Gdiff
 
 autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
 autocmd BufNewFile,BufRead *.flow setlocal filetype=javascript.jsx
-let g:polyglot_disabled = ['csv']
 let g:javascript_plugin_flow = 1
 let g:coc_config_home = getenv('HOME') . '/cfg'
 
@@ -94,6 +92,7 @@ nmap <leader>i :CocInfo<cr>
 nmap <leader>l :CocList<cr>
 nmap <leader>c :CocList commands<cr>
 nmap <c-c> :echo<bar>silent CocRestart<cr>
+nmap <silent> gl :FeMaco<cr>
 
 set noshowmode
 let g:airline#extensions#whitespace#enabled = 0
