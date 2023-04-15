@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "ba3e1925230be4d4986a90e1e2775decad2ace07",
-        "sha256": "0ls36blwkk3vg10b2ac6nw848yqrgkjggrx7zndfc0bignjcn3cw",
+        "rev": "793ba4b217f8ee73efe46a36e778e02962fcbd9a",
+        "sha256": "050a0f33q38rvi8g6qli6rmfjca6wmkjq9y52rhkf6nyzfl4bsc6",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/ba3e1925230be4d4986a90e1e2775decad2ace07.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/793ba4b217f8ee73efe46a36e778e02962fcbd9a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -108,12 +108,12 @@
         "version": "2023.03.25"
     },
     "r2modman": {
-        "sha256": "0kc8f506da3qarvqy7mjlnckr43dfqack7n3279529dnj2xvmwr4",
+        "sha256": "0zzshb4nn82dciphan94d4kw56hkg73rp28dhd9jqp6lya9fabig",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.40/r2modman-3.1.40.AppImage",
+        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.41/r2modman-3.1.41.AppImage",
         "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.40"
+        "version": "3.1.41"
     },
     "ranger_devicons": {
         "branch": "main",

@@ -10063,7 +10063,7 @@ strophejs-plugin-disco@0.0.2:
 
 "strophejs-plugin-stream-management@git+https://github.com/jitsi/strophejs-plugin-stream-management#679be5902097ed612fb5062b5549f3f32b6f5f47":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/jitsi/strophejs-plugin-stream-management.git#679be5902097ed612fb5062b5549f3f32b6f5f47"
+  resolved "git+https://github.com/jitsi/strophejs-plugin-stream-management#679be5902097ed612fb5062b5549f3f32b6f5f47"
 
 style-loader@3.3.1:
   version "3.3.1"
