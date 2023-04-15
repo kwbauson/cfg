@@ -4,6 +4,6 @@
     benjamin.home = "/Users/benjamin";
   };
   home-manager.users = mkForce {
-    benjamin.imports = [ modules.common.home ];
+    benjamin.imports = [ modules.common.home-manager ];
   };
 }
