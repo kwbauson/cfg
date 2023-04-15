@@ -4,7 +4,6 @@
     common-cpu-amd
     common-gpu-amd
     common-cpu-amd-pstate
-    modules.olivetin
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -29,6 +28,20 @@
     '';
     ":${toString jitsi.caddy-port}".extraConfig = with config.services; caddy.virtualHosts.${jitsi-meet.hostName}.extraConfig;
   };
+
+  services.olivetin.enable = true;
+  services.olivetin.config = ''
+    listenAddressSingleHTTPFrontend: localhost:${toString constants.olivetin.port}
+    actions:
+      - title: Restart Jitsi
+        icon: "&#128577;"
+        shell: systemctl restart prosody jitsi-meet-init-secrets jicofo jitsi-videobridge2
+        timeout: 10
+
+      - title: Reboot Server
+        icon: "&#128683;"
+        shell: reboot
+  '';
 
   services.netdata.enable = true;
 
