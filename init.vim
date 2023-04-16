@@ -44,10 +44,6 @@ map ;w <Plug>(easymotion-bd-w)
 map ;l <Plug>(easymotion-bd-jk)
 map ;j <Plug>(easymotion-jumptoanywhere)
 
-let NERDTreeWinSize=50
-map <leader>t :NERDTreeToggle<cr>
-map <leader>f :NERDTreeFind<cr>
-
 map <silent> <leader>e :CocCommand explorer<cr>
 
 let g:context_enabled = 0
@@ -57,9 +53,6 @@ let g:qs_second_hightlight = 0
 
 command! GD Gdiff
 
-autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
-autocmd BufNewFile,BufRead *.flow setlocal filetype=javascript.jsx
-let g:javascript_plugin_flow = 1
 let g:coc_config_home = getenv('HOME') . '/cfg'
 
 set hidden nobackup nowritebackup updatetime=300 shortmess+=c signcolumn=yes:1
@@ -74,29 +67,14 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=0 F :call CocAction('format')
-command! -nargs=0 Diagnostics :CocList --normal --auto-preview diagnostics
-imap <silent><expr> <c-space> coc#refresh()
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ge <Plug>(coc-rename)
 nmap <silent> g. <Plug>(coc-codeaction)
 nmap <silent> g/ <Plug>(coc-codelens-action)
-nmap <silent> gs :CocList -I symbols<cr>
 nmap <silent> gh :call CocAction('doHover')<cr>
-nmap <silent> g, :CocConfig<CR>
-nmap <leader>i :CocInfo<cr>
-nmap <leader>l :CocList<cr>
-nmap <leader>c :CocList commands<cr>
-nmap <c-c> :echo<bar>silent CocRestart<cr>
-nmap <silent> gl :FeMaco<cr>
-
-set noshowmode
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#nvimlsp#enabled = 0
 
 nmap <silent> gT :BufferPrevious<cr>
 nmap <silent> gt :BufferNext<cr>
@@ -104,6 +82,9 @@ nmap <silent> gb :BufferPick<cr>
 nmap <silent> gH :BufferMovePrevious<cr>
 nmap <silent> gL :BufferMoveNext<cr>
 nmap <silent> <leader>d :BufferClose<cr>
+set noshowmode
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#nvimlsp#enabled = 0
 hi default BufferCurrent guibg=#0A7ACA guifg=white
 hi default BufferCurrentMod guibg=#FFAF00 guifg=black
 hi default BufferCurrentSign guibg=#0A7ACA guifg=white
@@ -124,7 +105,3 @@ nmap <silent> <leader>b :Buffers<cr>
 nmap <silent> <leader>g :RG<cr>
 nmap <expr> <leader>G ':Rg \b'.expand('<cword>').'\b<cr>'
 vmap <silent> <leader>G y:Rg \b<c-r>"\b<cr>
-
-autocmd TextYankPost * wshada!
-nmap <silent> p :rshada<bar>normal! p<cr>
-nmap <silent> P :rshada<bar>normal! P<cr>
