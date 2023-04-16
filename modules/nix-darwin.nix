@@ -22,5 +22,6 @@
   homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.upgrade = true;
   homebrew.onActivation.cleanup = "zap";
+  homebrew.caskArgs.no_quarantine = true;
   homebrew.casks = map (name: { inherit name; greedy = true; }) [ "tailscale" "firefox" "chromium" "google-chrome" "docker" ];
 }
