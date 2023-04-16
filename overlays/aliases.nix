@@ -8,7 +8,6 @@ final: prev: with final.scope; {
     cfgp = "git -C ~/cfg cap";
     nou = "cfgu && noa";
     noc = "cd ~/cfg && gh workflow run updates.yml";
-    nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
     noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
     hme = "nvim ~/cfg/home.nix && hms";
     nb = ''pkg=$1 && shift; nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';

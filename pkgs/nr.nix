@@ -1,6 +1,5 @@
 scope: with scope;
 (writeBashBin pname ''
-  ${pathAdd nix-wrapped}
   if [[ $1 = -p ]];then
     shift
     pkg=$1 && shift

@@ -1,4 +1,4 @@
-{ self, source, pkgs }: with pkgs; with mylib; with self.lib; {
+{ self, source, pkgs }: with pkgs.scope; with self.lib; {
   lib = {
     file = f: source + ("/" + f);
     fileExistBools = fs: map pathExists (words fs);
