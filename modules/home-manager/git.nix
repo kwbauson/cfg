@@ -1,5 +1,6 @@
 { scope, ... }: with scope;
 {
+  included-packages = { inherit git-trim gh git-ignore git-fuzzy; };
   programs.git = with {
     gs = text:
       let

@@ -1,5 +1,11 @@
 { scope, ... }: with scope;
 {
+  included-packages = {
+    inherit
+      ctags dhall crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
+      solargraph yarn-bash-completion black terraform-ls
+      ;
+  };
   programs.neovim = {
     enable = true;
     package = neovim-unwrapped.overrideAttrs (old: {
