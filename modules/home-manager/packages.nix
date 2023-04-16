@@ -32,9 +32,9 @@
     };
     development = {
       inherit
-        bat colordiff gron highlight xh icdiff jq watchexec yarn nodejs_latest
-        cachix nle concurrently arduino tasknix devenv google-cloud-sdk
-        nix-index
+        bat colordiff gron highlight xh icdiff jq watchexec yarn
+        yarn-bash-completion nodejs_latest cachix nle concurrently arduino
+        tasknix devenv google-cloud-sdk nix-index
         ;
       inherit (nodePackages) npm-check-updates prettier;
     };

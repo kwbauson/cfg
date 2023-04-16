@@ -42,6 +42,10 @@
         }
       }
     },
+    "lua": {
+      "command": "lua-language-server",
+      "filetypes": ["lua"]
+    },
     "nim": {
       "command": "nimlsp",
       "filetypes": ["nim"]

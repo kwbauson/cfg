@@ -1,13 +1,11 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
 {
   included-packages = {
-    inherit
-      ctags dhall crystal nim nimlsp nixpkgs-fmt nil shellcheck shfmt
-      solargraph yarn-bash-completion black terraform-ls
-      ;
+    inherit ctags dhall crystal nim nixpkgs-fmt shellcheck shfmt black;
   };
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
     package = neovim-unwrapped.overrideAttrs (old: {
       patches = old.patches or [ ] ++ [
         (fetchpatch {
@@ -17,6 +15,7 @@
         })
       ];
     });
+    extraPackages = attrValues { inherit nimlsp nil solargraph terraform-ls lua-language-server; };
     withNodeJs = true;
     coc.enable = true;
     plugins = with vimPlugins; attrValues {
@@ -24,11 +23,11 @@
         conflict-marker-vim fzf-vim nvim-scrollview quick-scope tcomment_vim
         vim-airline vim-better-whitespace vim-code-dark vim-easymotion
         vim-fugitive vim-lastplace vim-multiple-cursors vim-sensible
-        vim-startify barbar-nvim nvim-web-devicons nvim-FeMaco-lua vim-peekaboo
+        vim-startify barbar-nvim nvim-web-devicons vim-peekaboo
 
         coc-eslint coc-git coc-json coc-lists coc-prettier
         coc-solargraph coc-tsserver coc-pyright coc-explorer
-        coc-vetur;
+        coc-vetur coc-vimlsp;
       nvim-treesitter = nvim-treesitter.withAllGrammars.overrideAttrs (old: {
         patches = old.patches or [ ] ++ [
           (fetchpatch {
@@ -39,27 +38,9 @@
         ];
       });
     };
-    extraLuaConfig = /* lua */ ''
-      require'barbar'.setup {
-        animation = false,
-        auto_hide = false,
-        tabpages = true,
-        icons = {
-          filetype = {custom_colors = true},
-          button = false,
-          modified = {button = false},
-        },
-        insert_at_end = true,
-        maximum_padding = 0,
-      }
-      require'nvim-treesitter.configs'.setup {
-        auto_install = false,
-        highlight = {enable = true},
-        incremental_selection = {enable = true},
-        indent = {enable = true},
-      }
-      require'femaco'.setup {}
-    '';
-    extraConfig = readFile ./init.vim;
+    extraConfig = "
+      source ${config.home.homeDirectory}/cfg/init.vim
+      source ${config.home.homeDirectory}/cfg/init.lua
+    ";
   };
 }

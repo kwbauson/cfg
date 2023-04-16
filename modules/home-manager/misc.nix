@@ -6,7 +6,6 @@
     sessionVariables = {
       BROWSER = "firefox";
       BUGSNAG_RELEASE_STAGE = "local";
-      EDITOR = "nvim";
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
       LESS = "-iR";
