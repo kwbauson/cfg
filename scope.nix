@@ -56,10 +56,6 @@ pkgs.lib // builtins // {
     (splitString "\n" s);
   words = string: filter (x: isString x && x != "") (split "[[:space:]]+" string);
   attrIf = check: name: if check then name else null;
-  drvs = x: if isDerivation x || isList x then flatten x else flatten (mapAttrsToList (_: v: drvs v) x);
-  drvsExcept = x: e: with {
-    excludeNames = concatMap attrNames (attrValues e);
-  }; flatten (drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x));
   userName = "Keith Bauson";
   userEmail = "kwbauson@gmail.com";
   nixpkgs-branch = let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url; in
