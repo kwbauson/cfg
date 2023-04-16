@@ -6,9 +6,7 @@ let
     (types.attrsOf pkgs-type)
   ];
   drvs = x: if isDerivation x || isList x then flatten x else flatten (mapAttrsToList (_: v: drvs v) x);
-  drvsExcept = x: e: with {
-    excludeNames = concatMap attrNames (attrValues e);
-  }; flatten (drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x));
+  drvsExcept = x: e: flatten (drvs (filterAttrsRecursive (n: _: !elem n (attrNames e)) x));
 in
 {
   options = {
