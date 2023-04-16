@@ -4,6 +4,5 @@
   ./misc.nix
   ./extra-packages.nix
   ./patched-packages.nix
-  ./aliases.nix
   ./ci-checks.nix
 ]

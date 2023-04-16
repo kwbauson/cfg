@@ -1,4 +1,4 @@
-{ scope, machine-name, isGraphical, isNixOS, ... }: with scope;
+{ scope, isGraphical, ... }: with scope;
 {
   included-packages = with pkgs; {
     core = {
@@ -39,10 +39,6 @@
     };
     inherit nr switch;
     inherit nle-cfg;
-    bin-aliases = attrValues (bin-aliases // alias {
-      built-as-host = "echo ${machine-name}";
-      nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
-    });
   };
   excluded-packages = optionalAttrs isDarwin {
     inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2

@@ -1,12 +1,15 @@
-final: prev: with final.scope; {
-  bin-aliases = alias {
+{ scope, machine-name, isNixOS, ... }: with scope;
+{
+  included-packages = alias {
     nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
     nixpkgs-path = "echo ${pkgs.path}";
     nixpkgs-branch = "echo ${nixpkgs-branch}";
     undup = ''tac "$@" | awk '!x[$0]++' | tac'';
     cfgu = "cd ~/cfg && git dfo && git rebase --autostash origin/$(git branch-name)";
     cfgp = "git -C ~/cfg cap";
+    built-as-host = "echo ${machine-name}";
     nou = "cfgu && noa";
+    nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
     noc = "cd ~/cfg && gh workflow run updates.yml";
     noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
     hme = "nvim ~/cfg/home.nix && hms";
