@@ -1,18 +1,17 @@
-{ scope, machine-name, isGraphical, ... }: with scope;
+{ scope, machine-name, isGraphical, isNixOS, ... }: with scope;
 {
   included-packages = with pkgs; {
     core = {
       inherit
         acpi atool banner bash-completion bashInteractive bc binutils
         borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
-        dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip
-        inetutils iproute2 iputils ldns less libarchive libnotify loop lsof
-        man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree
-        nmap openssh p7zip patch perl pigz procps progress pv ranger
-        ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
-        which xdg-utils xxd xz zip bitwarden-cli libqalculate yt-dlp
-        speedtest-cli tldr nix-top nixos-install-tools better-comma q
-        dasel emborg
+        dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip inetutils
+        iproute2 iputils ldns less libarchive libnotify loop lsof man-pages
+        moreutils nano ncdu netcat-gnu niv nix-tree nmap openssh p7zip patch
+        perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
+        strace time unzip usbutils watch wget which xdg-utils xxd xz zip
+        bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top
+        nixos-install-tools better-comma q dasel emborg
         ;
     };
     ${attrIf isGraphical "graphical"} = {
@@ -42,6 +41,7 @@
     inherit nle-cfg;
     bin-aliases = attrValues (bin-aliases // alias {
       built-as-host = "echo ${machine-name}";
+      nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
     });
   };
   excluded-packages = optionalAttrs isDarwin {

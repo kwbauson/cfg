@@ -1,6 +1,4 @@
-{ path, pkgs, source }:
-with builtins; with pkgs; with mylib;
-rec {
+{ path, pkgs, source }: with pkgs.scope; rec {
   hasFiles = fs: words fs != [ ] && all (f: pathExists (file f)) (words fs);
   ifFiles = fs: optional (hasFiles fs);
   ifFilesAndNot = fs: fs2: optional (hasFiles fs && !hasFiles fs2);
@@ -57,7 +55,7 @@ rec {
   local-bin-paths = attrValues local-bin-pkgs;
   local-nix = rec {
     imported = import localfile;
-    scope = mylib // pkgs // { inherit source; };
+    scope = pkgs.scope // { inherit source; };
     result = if isFunction imported then imported scope else imported;
     out = if pathExists localfile then result else null;
   }.out;
