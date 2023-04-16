@@ -17,7 +17,7 @@ in
       default = { };
     };
     excluded-packages = mkOption {
-      type = types.attrsOf (types.attrsOf types.package);
+      type = types.attrsOf types.package;
       default = { };
     };
   };
