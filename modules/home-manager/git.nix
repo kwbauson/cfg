@@ -74,8 +74,8 @@
       gmd = gs "git gd && g md";
       rmo = gs "git branch -D $1 && git push origin --delete $1";
       hidden = gs "git ls-files -v | grep '^S' | cut -c3-";
-      hide = gs ''git add -N "$@" && git update-index --skip-worktree "$@"'';
-      unhide = "update-index --no-skip-worktree";
+      hide = gs ''touch "$@" && git add -N "$@" && git update-index --skip-worktree --assume-unchanged "$@"'';
+      unhide = "update-index --no-skip-worktree --no-assume-unchanged";
       l = "log";
       lg = gs "git lfo && git mo";
       lfo = gs ''git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
