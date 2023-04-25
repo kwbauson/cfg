@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "dc1c08f1751798102f938a5e963c6030f1d607f4",
-        "sha256": "1da049gdir06165bw8and956skfw7pharjdrvp1rc38mmcmg3sqv",
+        "rev": "b454e31b73e1ce987e721e0a7a43044253d6b91a",
+        "sha256": "1b9za2xx5rj82m442sr0db6aisyc0x17b4s8yh7n55fikqlzng55",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/dc1c08f1751798102f938a5e963c6030f1d607f4.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/b454e31b73e1ce987e721e0a7a43044253d6b91a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "56a471cfce2c61031e193bdef527bbd6e646454e",
-        "sha256": "13z4fi3w0n29b5iqcw2dcjm6wl6nx1gwryvnvx3rx6832wycnznv",
+        "rev": "c6a8bba2cba911b1ea6647242af8c956d66a0d61",
+        "sha256": "0gmwfs3is3pyyda6p5h9x5l9vh2cpfc21ybxzl1z7sk5fsyhc0pk",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/56a471cfce2c61031e193bdef527bbd6e646454e.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/c6a8bba2cba911b1ea6647242af8c956d66a0d61.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
