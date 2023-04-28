@@ -75,6 +75,7 @@ hashbuildfiles() {
 hashcontent() {
   hashbuildfiles | sort | xargs cat
   echo SELF_FLAKE
+  echo "$sourcedir"
   type -p nix
   [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
