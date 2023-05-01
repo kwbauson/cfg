@@ -56,6 +56,7 @@
       enable = true;
       compression = true;
       controlMaster = "auto";
+      controlPersist = "1m";
       matchBlocks = {
         "kwbauson.com".user = "keith";
         "gitlab.com".extraOptions.UpdateHostKeys = "no";
