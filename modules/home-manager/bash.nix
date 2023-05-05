@@ -136,4 +136,5 @@
       [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
     '';
   };
+  programs.zoxide.enable = true;
 }
