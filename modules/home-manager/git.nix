@@ -95,10 +95,12 @@
       '';
       tracking = gs "git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null";
       put = gs ''
-        if [[ -z $(git tracking) ]];then
+        tracking=$(git tracking)
+        if [[ -z $tracking ]];then
           git push --set-upstream origin $(git branch-name) "$@"
         else
-          git push
+          read remote branch < <(echo "$tracking" | tr / ' ')
+          git push "$remote" HEAD:"$branch" "$@"
         fi
       '';
       ro = gs ''git reset --hard origin/$(git branch-name) "$@"'';
