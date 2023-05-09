@@ -100,7 +100,7 @@
       enable = !isDarwin && isGraphical;
       extraConfig.reverseVideo = true;
       extraConfig.termName = "xterm-256color";
-      fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];
+      fonts = [ "xft:DejaVuSansMNerdFontMono:size=12" ];
       scroll.bar.enable = false;
       scroll.lines = 0;
       iso14755 = false;

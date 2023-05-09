@@ -1,7 +1,7 @@
 # settings
 set $mod Mod4
 set $float_move_pixels 100
-font pango:DejaVuSansMono Nerd Font Mono 11
+font pango:DejaVuSansMNerdFontMono 11
 floating_modifier $mod
 floating_minimum_size 0 x 10
 workspace_layout tabbed
