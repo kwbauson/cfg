@@ -95,7 +95,7 @@
       '';
       tracking = gs "git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null";
       put = gs ''
-        tracking=$(git tracking)
+        tracking=$(git tracking || true)
         if [[ -z $tracking ]];then
           git push --set-upstream origin $(git branch-name) "$@"
         else
