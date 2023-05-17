@@ -17,10 +17,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "1344383a60ac5d18eb0f85555023004755bc2d11",
+        "rev": "957e4eb5ce74541f63af5e221a7917107c0c1d22",
         "sha256": "1kzvm6c7idf5dnkh6whl1ndb4xfg9xsgz54s36b741ayqxf65s3k",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/1344383a60ac5d18eb0f85555023004755bc2d11.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/957e4eb5ce74541f63af5e221a7917107c0c1d22.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -61,10 +61,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "17abfa0ceeb6384600ec91d641b41fbad7b3887b",
-        "sha256": "1kxw42y3k2aj6r0426b7824bglkxgyyd7yjh93v31snvwklqk3dx",
+        "rev": "ec345f667f9f1596e3849b530fe4f1573fc07653",
+        "sha256": "1fq4s1jmi40094yai180dg60rz7jidaz7w64hwb7ka0pzib645jn",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/17abfa0ceeb6384600ec91d641b41fbad7b3887b.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/ec345f667f9f1596e3849b530fe4f1573fc07653.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -145,10 +145,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "0e286c013323a54e2741acf9820af9ca4b02c7b6",
-        "sha256": "0xs0aj3xxvi28raamkj0z9x1wmdl3wh9mp4nvphqp3airgb4ds87",
+        "rev": "4ec9770d6f96b1b553aea5f3fcf18429a6a88f13",
+        "sha256": "17a6p04z0rqq46hrdjqrmyh4264z2xb7f9yh9gjxlfy5vbnmb9lp",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/0e286c013323a54e2741acf9820af9ca4b02c7b6.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/4ec9770d6f96b1b553aea5f3fcf18429a6a88f13.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
