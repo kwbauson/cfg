@@ -42,7 +42,7 @@ final: prev: with final.scope; {
   dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
   nle-cfg = nle.build { path = ../.; };
   inherit (nle-cfg.pkgs) fordir;
-  inherit (nle-cfg.pkgs.poetry-env.python.pkgs) emborg git-remote-codecommit;
+  inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
   inherit (nle-cfg.pkgs.bundler-env.gems) fakes3;
   npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
   devenv = (import sources.devenv).packages.${system}.default;

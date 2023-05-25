@@ -10,4 +10,7 @@
   };
   # contentAddressedByDefault = true;
   zathura.useMupdf = false;
+  permittedInsecurePackages = [
+    "nodejs-16.20.0"
+  ];
 }
