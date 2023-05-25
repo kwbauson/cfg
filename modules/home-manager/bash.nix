@@ -54,7 +54,7 @@
         paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
       }; "sudo ln -sft /root ${config.home.homeDirectory}/{${concatStringsSep "," paths}}";
       qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
-      zn = ''_dir=~/$(cd ~ && FZF_DEFAULT_COMMAND="fd -c always -H --ignore-file ${../../ignore} -E .git -td" fzf) && cd "$_dir"'';
+      zn = ''_dir=~/$(cd ~ && FZF_DEFAULT_COMMAND="fd -c always -H --ignore-file ${../../ignore} -E .git -td | sort -V" fzf) && cd "$_dir"'';
     };
     initExtra = ''
       [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
