@@ -58,6 +58,7 @@
       '';
       co = "checkout";
       cod = gs ''git co $(git default) "$@"'';
+      cof = gs ''br=$(git branch --color=always -av | fzf | sed -e 's/^..//' -e 's@remotes/origin/@@' | awk '{ print $1 }') && git switch "$br"'';
       df = gs ''
         ${tmpGitIndex}
         git add -A
@@ -91,7 +92,7 @@
         rm "$loga" "$logb"
         read -n1 -p "Continue? [y/n] " continue
         echo
-        [[ $continue = y ]] && git put --force-with-lease
+        [[ $continue = y ]] && git put --force
       '';
       tracking = gs "git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null";
       put = gs ''
