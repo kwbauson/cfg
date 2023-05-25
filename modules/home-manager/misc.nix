@@ -109,7 +109,7 @@
     fzf = {
       enable = true;
       enableBashIntegration = false;
-      defaultCommand = "fd -tf -c always -H --ignore-file ${../../ignore} -E .git";
+      defaultCommand = "fd -c always -H --ignore-file ${../../ignore} -E .git -tf";
       defaultOptions = words "--ansi --reverse --multi --filepath-word";
     };
     lesspipe.enable = true;
