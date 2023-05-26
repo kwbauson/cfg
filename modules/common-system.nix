@@ -11,4 +11,10 @@
     extraSpecialArgs = { inherit scope machine-name; };
     users.${username}.imports = [ modules.home-manager ];
   };
+
+  users.users.${username}.openssh.authorizedKeys.keys = pipe ../authorized_keys [
+    readFile
+    (splitString "\n")
+    (filter (x: x != ""))
+  ];
 }
