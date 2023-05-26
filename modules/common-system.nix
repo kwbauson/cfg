@@ -1,4 +1,4 @@
-{ scope, username, ... }: with scope;
+{ scope, machine-name, username, ... }: with scope;
 {
   _module.args.username = lib.mkDefault "keith";
   environment.etc."nixpkgs-path".source = pkgs.path;
