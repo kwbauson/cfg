@@ -20,7 +20,6 @@
   "prettier.trailingComma": "all",
   "typescript.preferences.quoteStyle": "single",
   "tsserver.disableAutomaticTypeAcquisition": true,
-  "tsserver.ignoreLocalTsserver": true,
   "git.addGBlameToVirtualText": true,
   "git.addGBlameToBufferVar": true,
   "solargraph.definitions": true,

@@ -1,9 +1,3 @@
-{ scope, ... }: with scope;
 {
-  users.users = mkForce {
-    benjamin.home = "/Users/benjamin";
-  };
-  home-manager.users = mkForce {
-    benjamin.imports = [ modules.home-manager ];
-  };
+  _module.args.darwin-username = "benjamin";
 }

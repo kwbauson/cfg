@@ -1,14 +1,14 @@
-{ scope, machine-name, ... }: with scope;
+{ scope, machine-name, darwin-username, ... }: with scope;
 {
   imports = [
     machines.${machine-name}.darwin-configuration
     inputs.home-manager.darwinModule
   ];
-  users.users.keithbauson.home = "/Users/keithbauson";
+  users.users.${darwin-username}.home = "/Users/${darwin-username}";
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit scope machine-name; };
-    users.keithbauson.imports = [ modules.home-manager ];
+    users.${darwin-username}.imports = [ modules.home-manager ];
   };
   services.nix-daemon.enable = true;
   environment.etc."nixpkgs-path".source = pkgs.path;
