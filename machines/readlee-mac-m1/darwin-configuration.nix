@@ -1,3 +1,3 @@
 {
-  _module.args.darwin-username = "benjamin";
+  _module.args.username = "benjamin";
 }

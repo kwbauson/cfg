@@ -1,6 +1,7 @@
-{ config, scope, machine-name, ... }: with scope;
+{ config, scope, machine-name, username, ... }: with scope;
 {
   imports = [
+    modules.common-system
     machines.${machine-name}.configuration
     machines.${machine-name}.hardware-configuration
     inputs.home-manager.nixosModule
@@ -21,10 +22,6 @@
   };
 
   nixpkgs = { inherit (pkgs) pkgs config; };
-  environment.etc."nixpkgs-path".source = pkgs.path;
-  nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
-  nix.settings.trusted-users = [ "@wheel" ];
-  nix.extraOptions = nixConf;
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
@@ -70,7 +67,7 @@
       defaultSession = "none+xsession";
       autoLogin = {
         enable = true;
-        user = "keith";
+        user = username;
       };
       session = [
         {
@@ -84,15 +81,9 @@
     earlyoom.enable = true;
   };
 
-  users.users.keith = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" "dialout" ];
-  };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    extraSpecialArgs = { inherit scope machine-name; };
-    users.keith.imports = [ modules.home-manager ];
   };
 
   security.sudo.wheelNeedsPassword = false;

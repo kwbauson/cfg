@@ -1,20 +1,12 @@
-{ scope, machine-name, darwin-username, ... }: with scope;
+{ scope, machine-name, username, ... }: with scope;
 {
   imports = [
+    modules.common-system
     machines.${machine-name}.darwin-configuration
     inputs.home-manager.darwinModule
   ];
-  users.users.${darwin-username}.home = "/Users/${darwin-username}";
-  home-manager = {
-    useGlobalPkgs = true;
-    extraSpecialArgs = { inherit scope machine-name; };
-    users.${darwin-username}.imports = [ modules.home-manager ];
-  };
+  users.users.${username}.home = "/Users/${username}";
   services.nix-daemon.enable = true;
-  environment.etc."nixpkgs-path".source = pkgs.path;
-  nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
-  nix.settings.trusted-users = [ "@wheel" ];
-  nix.extraOptions = nixConf;
   system.defaults.finder.AppleShowAllExtensions = true;
   homebrew.enable = true;
   homebrew.taps = [ "homebrew/cask" ];
