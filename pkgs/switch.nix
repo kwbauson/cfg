@@ -67,7 +67,9 @@ let
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
     git add --all
-    exec nix run .#switch.$(built-as-host).${name} -- "$@"
+    buildArg=.#switch.$(built-as-host).${name}
+    builtPath=$(nix build --no-link --print-out-paths "$buildArg")
+    exec "$builtPath"/bin/switch "$@"
   '';
 in
 buildEnv {

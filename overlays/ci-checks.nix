@@ -27,8 +27,8 @@ in
 {
   ci-checks = (forAttrValues
     {
-      x86_64-linux = mapAttrValues (conf: conf.config.system.build.toplevel) nixosConfigurations;
-      aarch64-darwin = mapAttrValues (conf: conf.system) darwinConfigurations;
+      x86_64-linux = mapAttrNames (name: switch.scripts.${name}) nixosConfigurations;
+      aarch64-darwin = mapAttrNames (name: switch.scripts.${name}) darwinConfigurations;
     }
     (drvs: runCommand "ci-checks-env" { meta.mainProgram = "ci-checks"; } ''
       mkdir -p $out/bin
