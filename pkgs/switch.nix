@@ -67,9 +67,18 @@ let
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
     git add --all
-    buildArg=.#switch.$(built-as-host).${name}
+    host=$(built-as-host)
+    buildArg=.#switch.$host.${name}
+    if [[ -z $(git status -s) ]];then
+      pinName=$(git rev-parse HEAD)-$host
+      storePath=$(curl -s https://app.cachix.org/api/v1/cache/kwbauson/pin | jq -r ".[] | select(.name == \"$pinName\") | .lastRevision.storePath")
+      if [[ -z $storePath ]];then
+        buildArg=$storePath
+      fi
+    fi
     builtPath=$(nix build --no-link --print-out-paths "$buildArg")
     exec "$builtPath"/bin/switch "$@"
+
   '';
 in
 buildEnv {
