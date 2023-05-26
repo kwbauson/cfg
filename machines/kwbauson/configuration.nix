@@ -1,9 +1,8 @@
-{ config, scope, ... }: with scope;
+{ scope, ... }: with scope;
 {
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;
-    version = 2;
     device = "/dev/sda";
   };
 
