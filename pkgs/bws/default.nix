@@ -5,7 +5,7 @@ scope: with scope; rustPlatform.buildRustPackage {
   cargoHash = (fromJSON (readFile ./cargo.json)).hash;
   buildAndTestSubdir = "crates/bws";
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ openssl ];
+  buildInputs = [ openssl ] ++ optionals isDarwin [ darwin.Security ];
 
   passthru.updateScript = writeBashBin "update-bws" ''
     cd pkgs/bws
