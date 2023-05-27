@@ -1,7 +1,7 @@
 { config, scope, ... }: with scope;
 let cfg = config.secrets-manager; in
 {
-  options.secrets-manager = mkOption {
+  options.secrets-management = mkOption {
     type = with types; attrsOf (submodule {
       options = {
         enable = mkEnableOption "secret";
@@ -22,7 +22,7 @@ let cfg = config.secrets-manager; in
     let
       beforeUnit = "${name}${options.unitSuffix}.service";
     in
-    nameValuePair "secrets-manager-${name}" {
+    nameValuePair "secrets-management-${name}" {
       serviceConfig.Type = "oneshot";
       requiredBy = [ beforeUnit ];
       before = [ beforeUnit ];
@@ -36,7 +36,7 @@ let cfg = config.secrets-manager; in
     }
   );
 
-  config.secrets-manager.github-runner = {
+  config.secrets-management.github-runner = {
     enable = true;
     unitSuffix = "-${config.networking.hostName}";
   };
