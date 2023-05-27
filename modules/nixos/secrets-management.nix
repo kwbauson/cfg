@@ -1,5 +1,5 @@
 { config, scope, ... }: with scope;
-let cfg = config.secrets-manager; in
+let cfg = config.secrets-management; in
 {
   options.secrets-management = mkOption {
     type = with types; attrsOf (submodule {
