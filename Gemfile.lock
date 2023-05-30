@@ -11,6 +11,7 @@ GEM
       ffi (~> 1.0)
     rexml (3.2.5)
     thor (1.2.2)
+    webrick (1.8.1)
     xml-simple (1.1.9)
       rexml
 
@@ -20,6 +21,7 @@ PLATFORMS
 DEPENDENCIES
   fakes3
   rb-inotify
+  webrick
 
 BUNDLED WITH
    2.4.13
