@@ -34,6 +34,7 @@ in
       mkdir -p $out/bin
       ln -s ${ci-checks} $out/bin/ci-checks
       ln -s ${linkFarm "builds" drvs} $out/builds
+      ${exe fakes3}/fakes3 --help
     '')
   ).${system};
 }
