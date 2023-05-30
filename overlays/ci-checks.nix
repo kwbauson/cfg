@@ -22,6 +22,7 @@ let
     ${exe nle} init
     echo "scope: with scope; [ hello ]" > local.nix
     ${exe nle}
+    ${exe fakes3} --help
   '';
 in
 {
@@ -34,7 +35,6 @@ in
       mkdir -p $out/bin
       ln -s ${ci-checks} $out/bin/ci-checks
       ln -s ${linkFarm "builds" drvs} $out/builds
-      ${exe fakes3} --help
     '')
   ).${system};
 }
