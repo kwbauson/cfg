@@ -5,10 +5,10 @@
         "homepage": null,
         "owner": "bitwarden",
         "repo": "sdk",
-        "rev": "729266454f48f9773802f714404892a614765269",
-        "sha256": "1pzmagygz53rrlpic8kygqjcgxzxynai1ay4vfm4xaxqdzqziic0",
+        "rev": "d3d95e3c5a4d4cd9aa7bed38aa93e19c4df00d3c",
+        "sha256": "15hm00c4cij5l0rzd09cagfvnj5kzk6cvilrc74i9z2m9kx4xrar",
         "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/729266454f48f9773802f714404892a614765269.tar.gz",
+        "url": "https://github.com/bitwarden/sdk/archive/d3d95e3c5a4d4cd9aa7bed38aa93e19c4df00d3c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "clipnotify": {
@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "e206d8f2e3e8d6aa943656052f15bdfea8146b8d",
-        "sha256": "0pliqvc3lz0iany6hqnmsjgnixphsr5ar5zls04vqj00j8zlbxyi",
+        "rev": "ad13f084f80128a68220ebdb15156cd67a5a8cb7",
+        "sha256": "00psmz7lgwh06qavx82laykkjnx78magssdk6in7q6gkz8hf9bga",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/e206d8f2e3e8d6aa943656052f15bdfea8146b8d.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/ad13f084f80128a68220ebdb15156cd67a5a8cb7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "4835f2bd3c244436ce1140151936ea1b7c7f13e1",
-        "sha256": "1nhb84wxdgwbwzz3hdn8llmsqyhm9w4dq7rgr928n9hmx6xg9sjs",
+        "rev": "de083d4ab995d4ced438c26b73ee275a663022ba",
+        "sha256": "04d0p5vbw6qkn1dwwn2pvkxjpmbza7xhgv9zjw1xf5vhmydzaa26",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/4835f2bd3c244436ce1140151936ea1b7c7f13e1.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/de083d4ab995d4ced438c26b73ee275a663022ba.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {

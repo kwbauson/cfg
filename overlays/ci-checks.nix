@@ -22,6 +22,7 @@ let
     ${exe nle} init
     echo "scope: with scope; [ hello ]" > local.nix
     ${exe nle}
+    ${exe fakes3} --help
   '';
 in
 {
