@@ -61,16 +61,6 @@
     };
     version = "1.2.2";
   };
-  webrick = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "13qm7s0gr2pmfcl7dxrmq38asaza4w0i2n9my4yzs499j731wh8r";
-      type = "gem";
-    };
-    version = "1.8.1";
-  };
   xml-simple = {
     dependencies = ["rexml"];
     groups = ["default"];
