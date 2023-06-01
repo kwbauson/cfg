@@ -115,7 +115,7 @@
           -e '^Your branch is' \
           -e '^\s+\(use "git' \
           -e '^no changes added to commit' \
-          -e '^nothing to commit'
+          -e '^nothing to commit' || true
       '';
       sf = gs ''git f --quiet && git s "$@"'';
     };
