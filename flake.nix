@@ -6,6 +6,7 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     nixos-hardware.flake = true;
+    nix.url = "nix/2.16-maintenance";
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
@@ -16,6 +17,7 @@
       config = import ./config.nix;
       overlays = [
         (final: prev: { scope = import ./scope.nix (final // { inherit flake; }); })
+        nix.overlays.default
       ] ++ overlays;
     });
 
