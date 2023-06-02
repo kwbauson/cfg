@@ -5,10 +5,10 @@
         "homepage": null,
         "owner": "bitwarden",
         "repo": "sdk",
-        "rev": "d3d95e3c5a4d4cd9aa7bed38aa93e19c4df00d3c",
-        "sha256": "15hm00c4cij5l0rzd09cagfvnj5kzk6cvilrc74i9z2m9kx4xrar",
+        "rev": "744e6d2daa15225709f578c238f0690d05be6ad0",
+        "sha256": "0jpfm05x0mjqjbh0pd77wmdy38d5fp2hds5w2cdrmjd1n21hlrv2",
         "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/d3d95e3c5a4d4cd9aa7bed38aa93e19c4df00d3c.tar.gz",
+        "url": "https://github.com/bitwarden/sdk/archive/744e6d2daa15225709f578c238f0690d05be6ad0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "clipnotify": {
@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "ad13f084f80128a68220ebdb15156cd67a5a8cb7",
-        "sha256": "00psmz7lgwh06qavx82laykkjnx78magssdk6in7q6gkz8hf9bga",
+        "rev": "1626c87d9aead022165ffcced3bd892eb16cc3f9",
+        "sha256": "1pli2sar9yzyqnh8vx0xvfnh0dy2b7v5dzzrjdchxrby7bnb3za7",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/ad13f084f80128a68220ebdb15156cd67a5a8cb7.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/1626c87d9aead022165ffcced3bd892eb16cc3f9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
