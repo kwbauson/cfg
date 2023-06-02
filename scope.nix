@@ -6,6 +6,7 @@ pkgs.lib // builtins // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (importDir ./.) machines constants;
+  inherit (flake) modules overlays;
   sources = mapAttrs
     (pname: src: {
       inherit pname src;
