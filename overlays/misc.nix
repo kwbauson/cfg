@@ -1,4 +1,5 @@
 final: prev: with final.scope; {
+  nix = nixUnstable;
   nix-wrapped = wrapBins nix ''
     mkdir -p ~/.local/share/nix
     export NIX_CONFIG=$(< ${writeText "nix.conf" nixConfBase})$'\n'$NIX_CONFIG
