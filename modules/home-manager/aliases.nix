@@ -18,7 +18,7 @@
     reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
     lr = ''find "$@" -print0 | sort -z | xargs -0 ls --color=auto -lhd'';
     delete-old-generations = ''
-      find /nix/var/nix/profiles -not -type d |
+      find {/nix/var,~/.local/state}/nix/profiles -not -type d |
         sed -E 's/-[0-9]+-link$//' |
         sort |
         uniq -c |
