@@ -9,7 +9,7 @@
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
-    inherit (importDir ./.) overlays modules machines constants;
+    inherit (importDir ./.) overlays modules;
 
     packages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
@@ -39,18 +39,5 @@
         extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ scope.modules.home-manager ];
       });
-
-    nixConfBase = ''
-      max-jobs = auto
-      keep-going = true
-      extra-experimental-features = nix-command flakes recursive-nix
-      fallback = true
-    '';
-    nixConf = ''
-      ${nixConfBase}
-      narinfo-cache-negative-ttl = 10
-      extra-substituters = https://kwbauson.cachix.org
-      extra-trusted-public-keys = kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=
-    '';
   };
 }
