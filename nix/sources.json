@@ -157,10 +157,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "b382494f7b3ce899647f6a482e14ea69bbee9f73",
-        "sha256": "075001g5c0dak4lfvd01yacvgy38h7g5gyd27k6wkkx3r4skgz66",
+        "rev": "987ddd6c04f4fbdd9e32af3118bb6865ebcb0760",
+        "sha256": "0cj82li3rz7hwq5krd8wbcx44kkxxifsqahd1k84lgmgplkkpaml",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/b382494f7b3ce899647f6a482e14ea69bbee9f73.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/987ddd6c04f4fbdd9e32af3118bb6865ebcb0760.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
