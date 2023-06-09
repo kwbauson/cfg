@@ -81,11 +81,14 @@
   };
   services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
 
-  systemd.services = {
-    caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
-  } // genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
-    restartTriggers = [ config.systemd.units."caddy.service".unit ];
-  });
+  systemd.services = recursiveUpdate
+    {
+      caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
+      jitsi-meet-init-secrets.requiredBy = splitString " " config.systemd.services.jitsi-meet-init-secrets.unitConfig.Before;
+    }
+    (genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
+      restartTriggers = [ config.systemd.units."caddy.service".unit ];
+    }));
 
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.containers.valheim = {
