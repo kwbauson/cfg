@@ -33,11 +33,11 @@
     path = [ socat ];
     script = with constants; ''
       # valheim
-      for port in ${toString valheim.ports};do
-        for proto in TCP UDP;do
-          socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
-        done
-      done
+      # for port in ${toString valheim.ports};do
+      #   for proto in TCP UDP;do
+      #     socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
+      #   done
+      # done
       # jitsi
       socat TCP-LISTEN:${toString jitsi.tcp-port},fork,reuseaddr TCP:keith-server:${toString jitsi.tcp-port} &
       socat UDP-LISTEN:${toString jitsi.udp-port},fork,reuseaddr UDP:keith-server:${toString jitsi.udp-port} &

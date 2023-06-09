@@ -89,7 +89,7 @@
 
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.containers.valheim = {
-    autoStart = true;
+    autoStart = false;
     image = "ghcr.io/lloesche/valheim-server";
     environmentFiles = [ /var/lib/valheim/environment ];
     extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
