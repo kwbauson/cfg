@@ -80,15 +80,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
-        "branch": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
+        "branch": "master",
         "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
         "homepage": "https://jitsi.org/meet",
         "owner": "jitsi",
         "repo": "jitsi-meet",
-        "rev": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
-        "sha256": "14wflv513vjrs3rhdykl4m5a63mp3ivy08kgw5r16axsi58sj0pg",
+        "rev": "acb91990bfca95d878dd4e4583cb34b6206a7850",
+        "sha256": "10vz15aiah3cbjhvd3rzzj0x21c3w5v67sdsm0hjfhrl055q4lmh",
         "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
+        "url": "https://github.com/jitsi/jitsi-meet/archive/acb91990bfca95d878dd4e4583cb34b6206a7850.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
