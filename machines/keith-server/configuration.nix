@@ -50,7 +50,7 @@
   services.github-runner = {
     enable = true;
     extraLabels = [ "nix" ];
-    extraPackages = [ cachix gh ];
+    extraPackages = [ gh cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
   };
