@@ -44,4 +44,6 @@
       sleep inf
     '';
   };
+
+  services.auto-update.enable = true;
 }
