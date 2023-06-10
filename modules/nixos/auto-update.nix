@@ -6,11 +6,11 @@ let cfg = config.services.auto-update; in
   };
   config = mkIf cfg.enable {
     systemd.services.auto-update = {
-      startAt = "*-*-* 05:00:00";
+      startAt = "minutely";
       serviceConfig.User = username;
       path = [ git ];
       script = ''
-        export PATH="$HOME"/.nix-profile/bin:/run/wrappers/bin
+        export PATH="$HOME"/.nix-profile/bin:/run/wrappers/bin:${makeBinPath [ nix ]}
         cd $HOME
         cd cfg
         if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
