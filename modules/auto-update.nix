@@ -2,18 +2,13 @@
 let
   cfg = config.services.auto-update;
   script = ''
-    echo hello
-    echo $USER
-    echo $PWD
-    echo $PATH
     export PATH="$HOME"/.nix-profile/bin:/run/wrappers/bin:/usr/bin:${makeBinPath [ nix ]}
-    date
     cd $HOME
     cd cfg
     if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
       if [[ -z $(git status -s) ]];then
-        echo nou
-        echo nod
+        nou
+        nod
       else
         echo working branch dirty, skipping
       fi
