@@ -10,7 +10,7 @@ let cfg = config.services.auto-update; in
       serviceConfig.User = username;
       path = [ git ];
       script = ''
-        export PATH="$HOME"/.nix-profile/bin
+        export PATH="$HOME"/.nix-profile/bin:/run/wrappers/bin
         cd $HOME
         cd cfg
         if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
