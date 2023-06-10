@@ -6,7 +6,7 @@ let cfg = config.services.auto-update; in
   };
   config = mkIf cfg.enable {
     systemd.services.auto-update = {
-      startAt = "minutely";
+      startAt = "*-*-* 05:00:00";
       serviceConfig.User = username;
       path = [ git ];
       script = ''
