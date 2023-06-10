@@ -34,7 +34,7 @@ in
           UserName = username;
           StartCalendarInterval = [{ Hour = 5; Minute = 0; }];
           StandardOutPath = "/tmp/auto-update-logs.txt";
-          StandardErrorPath = "/tmp/auto-update-stderr-logs.txt";
+          StandardErrorPath = "/tmp/auto-update-logs.txt";
         };
         inherit script;
       };
