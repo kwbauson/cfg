@@ -17,8 +17,17 @@ in
       url = "https://github.com/kwbauson/cfg";
       tokenFile = "/etc/github-runner.token";
       extraLabels = [ "nix" ];
-      extraPackages = [ nix gh ];
+      extraPackages = [ gh cachix ];
     };
   };
-  launchd.daemons = forAttrValues config.services.github-runners (const { path = [ coreutils ]; });
+  launchd.daemons = forAttrValues config.services.github-runners (cfg: {
+    # fixes copied from the nixos module
+    path = [
+      bash
+      coreutils
+      git
+      gnutar
+      gzip
+    ] ++ [ config.nix.package ] ++ cfg.extraPackages;
+  });
 }
