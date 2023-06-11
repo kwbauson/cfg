@@ -2,7 +2,7 @@
 let
   cfg = config.services.auto-update;
   script = ''
-    export PATH="$HOME"/.nix-profile/bin:/run/wrappers/bin:/usr/bin:${makeBinPath [ nix ]}
+    export PATH=/run/wrappers/bin:"$HOME"/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/usr/sbin:/bin:/sbin
     cd $HOME
     cd cfg
     if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
