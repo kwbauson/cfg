@@ -46,7 +46,6 @@ final: prev: with final.scope; {
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
   fakes3 = nle-cfg.pkgs.bundler-env.gems.fakes3.override { ruby = ruby_2_7; };
   npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
-  devenv = (import sources.devenv).packages.${system}.default;
   self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
     cp ${self-source}/flake.lock $out
     chmod +w $out
