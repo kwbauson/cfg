@@ -9,7 +9,18 @@ require('barbar').setup {
   },
   insert_at_end = true,
   maximum_padding = 0,
+  always_show_parent = {
+    "default.nix",
+    "configuration.nix",
+    "home.nix",
+    "main.tf",
+    "vars.tf",
+    "variables.tf",
+    "outputs.tf",
+    "terragrunt.hcl",
+  }
 }
+
 require('nvim-treesitter.configs').setup {
   auto_install = false,
   highlight = { enable = true },
