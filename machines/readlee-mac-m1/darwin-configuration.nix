@@ -29,10 +29,10 @@ in
       extraLabels = [ "nix" ];
       extraPackages = [ gh cachix ];
     };
-    # benaduggan-nix = {
-    #   url = "https://github.com/benaduggan/nix";
-    #   tokenFile = "/etc/github-runner-benaduggan-nix.token";
-    # };
+    benaduggan-nix = {
+      url = "https://github.com/benaduggan/nix";
+      tokenFile = "/etc/github-runner-benaduggan-nix.token";
+    };
     readlee-arm64 = readlee-runner-defaults // {
       tokenFile = "/etc/github-runner-readlee-arm64.token";
     };
