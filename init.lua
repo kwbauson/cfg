@@ -17,6 +17,7 @@ require('barbar').setup {
     "vars.tf",
     "variables.tf",
     "outputs.tf",
+    "output.tf",
     "terragrunt.hcl",
   }
 }
