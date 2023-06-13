@@ -2,9 +2,9 @@
 let
   cfg = config.services.auto-update;
   script = ''
+    set -x
     export PATH=/run/wrappers/bin:"$HOME"/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin:/usr/sbin:/bin:/sbin
-    cd $HOME
-    cd cfg
+    cd $HOME/cfg
     if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
       if [[ -z $(git status -s) ]];then
         nou
@@ -24,6 +24,7 @@ in
   config = mkIf cfg.enable (
     if !isDarwin then {
       systemd.services.auto-update = {
+        restartIfChanged = false;
         startAt = "*-*-* 05:00:00";
         serviceConfig.User = username;
         inherit script;
