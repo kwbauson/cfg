@@ -16,4 +16,5 @@
   homebrew.onActivation.cleanup = "zap";
   homebrew.casks = map (name: { inherit name; }) [ "tailscale" "firefox" "google-chrome" "docker" ];
   services.auto-update.enable = true;
+  home-manager.users.${username}.manual.manpages.enable = false;
 }
