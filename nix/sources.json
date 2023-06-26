@@ -5,10 +5,10 @@
         "homepage": null,
         "owner": "bitwarden",
         "repo": "sdk",
-        "rev": "32b968ec4439dfbd702337bef04ef401332513fd",
-        "sha256": "09yln38pxyynf9hzcgm6lv9qyy5h2sawyfiz2xa2waqmz958y0ca",
+        "rev": "4d03abdb587eec0d5c7223630336e6f95fb363fb",
+        "sha256": "11n5qkwaczxpcrxywsnrvrzg29r3gqqv93cpjn1aw9pjhdf7r7sn",
         "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/32b968ec4439dfbd702337bef04ef401332513fd.tar.gz",
+        "url": "https://github.com/bitwarden/sdk/archive/4d03abdb587eec0d5c7223630336e6f95fb363fb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "clipnotify": {
@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "4f08665cdcde7e44a40edb39bdbfe8fc0b750932",
-        "sha256": "0v3yhync7b43j1l565b6q28lwi25l2y1f59y0vxnxdyynq20zf4c",
+        "rev": "d02ba1bf61ecb584a94a03bb54f51b78ce08fda4",
+        "sha256": "03fsfqapz6k9vk0mphi7wlzva9hd5kswpw6wv3z9blbapa5rf982",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/4f08665cdcde7e44a40edb39bdbfe8fc0b750932.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/d02ba1bf61ecb584a94a03bb54f51b78ce08fda4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "02ffd200d023021be3a044d62615ce13787f9363",
-        "sha256": "19q2ls6a8q697yb8j1mlzhzqqlmd2jqipq2kcwx572rcj5c0iv60",
+        "rev": "f02f3d959189124f34b02912ac97a73cdc6a36bb",
+        "sha256": "0rh0qgkp5y98fp27ahacglfiszm6knw1xssixr0irlncgfkrgp6x",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/02ffd200d023021be3a044d62615ce13787f9363.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/f02f3d959189124f34b02912ac97a73cdc6a36bb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -149,10 +149,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "8bc105b13db214b4b6a74405f021b5bf72015dfc",
-        "sha256": "1xfglf6iwf9c43zm2w069ws43kvjcb0b3zbk9m3z5fpqah7znbr9",
+        "rev": "f1b0b09f14026ce2bc00d76b83fbfea9e8d4500a",
+        "sha256": "18kkf3kzv0livjghxy37gnnlx0vdxbwic22pr71jf9dprdi6kyzz",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/8bc105b13db214b4b6a74405f021b5bf72015dfc.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/f1b0b09f14026ce2bc00d76b83fbfea9e8d4500a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
