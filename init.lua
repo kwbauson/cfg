@@ -19,6 +19,7 @@ require('barbar').setup {
     "outputs.tf",
     "output.tf",
     "terragrunt.hcl",
+    "local.nix",
   }
 }
 
