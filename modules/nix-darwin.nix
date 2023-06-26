@@ -5,7 +5,6 @@
     machines.${machine-name}.darwin-configuration
     inputs.home-manager.darwinModule
   ];
-  documentation.enable = false;
   users.users.${username}.home = "/Users/${username}";
   services.nix-daemon.enable = true;
   system.defaults.finder.AppleShowAllExtensions = true;
@@ -17,5 +16,4 @@
   homebrew.onActivation.cleanup = "zap";
   homebrew.casks = map (name: { inherit name; }) [ "tailscale" "firefox" "google-chrome" "docker" ];
   services.auto-update.enable = true;
-  home-manager.users.${username}.manual.manpages.enable = false;
 }
