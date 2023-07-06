@@ -88,5 +88,28 @@
           -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
     '';
     batwhich = ''bat "$(which "$@")"'';
+    tge = ''
+      set -euo pipefail
+      env=$1
+      shift
+      modules=infra-terraform-modules
+      envs=infra-terragrunt-envs
+      ref=$(echo $PWD | sed -E "s@.*($modules)/@@")
+      cd "$(echo $PWD | sed "s@$modules.*@$envs@")"
+      file=$(rg -lg terragrunt.hcl "$modules//$ref" | grep "/$env/" | sed 's@^/@@p')
+      if [[ $(echo "$file" | wc -l) != 1 ]];then
+        echo need exactly one match
+        exit 1
+      fi
+      cd "$(dirname "$file")"
+      original=$(mktemp)
+      cp terragrunt.hcl "$original"
+      on_exit() {
+        mv "$original" terragrunt.hcl
+      }
+      trap on_exit EXIT
+      sed -i -e "\@$modules//$ref@s/^.*#//" -e "\@$modules.git//$ref@s/^/#/" terragrunt.hcl
+      terragrunt "$@"
+    '';
   };
 }
