@@ -24,12 +24,13 @@ let
     ${exe nle}
     ${exe fakes3} --help
   '';
+  getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}-${name}" switch.${machine}.${name}) names));
 in
 {
   ci-checks = (forAttrValues
     {
-      x86_64-linux = mapAttrNames (name: switch.scripts.${name}) nixosConfigurations;
-      aarch64-darwin = mapAttrNames (name: switch.scripts.${name}) darwinConfigurations;
+      x86_64-linux = getSwitchScripts [ "noa" "nos" "nob" ] nixosConfigurations;
+      aarch64-darwin = getSwitchScripts [ "noa" "nds" ] darwinConfigurations;
     }
     (drvs: runCommand "ci-checks-env" { meta.mainProgram = "ci-checks"; } ''
       mkdir -p $out/bin

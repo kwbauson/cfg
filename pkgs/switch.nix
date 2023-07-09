@@ -70,7 +70,7 @@ let
     host=$(built-as-host)
     buildArg=.#switch.$host.${name}
     if [[ -z $(git status -s) ]];then
-      pinName=$(git rev-parse HEAD)-$host
+      pinName=$(git rev-parse HEAD)-$host-${name}
       storePath=$(curl -s https://app.cachix.org/api/v1/cache/kwbauson/pin | jq -r ".[] | select(.name == \"$pinName\") | .lastRevision.storePath")
       if [[ -n $storePath ]];then
         buildArg=$storePath
