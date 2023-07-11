@@ -27,10 +27,14 @@ pog {
       description = "Comma separated list of hosts to send clipboard to.";
       default = "";
     };
+    poll_time = {
+      description = "Polling time to check for clipboard changes on MacOS.";
+      default = "5s";
+    };
   };
   script = h: ''
     set -euo pipefail
-    ${pathAdd [ xsel clipnotify netcat-gnu ]}
+    ${pathAdd [ xsel clipnotify netcat-gnu coreutils util-linux ]}
     isDarwin=${boolToString isDarwin}
     IFS=, read -ra hosts_array < <(echo "$hosts")
     send_to_hosts() {
@@ -45,9 +49,12 @@ pog {
       done < <(clipnotify -s clipboard -l)
     elif ${h.flag "server"};then
       echo Listening on "$port" and sending "$selection" contents to "$hosts"
+      state=$(mktemp --tempdir clip-server-XXXXX)
+      touch "$state"/{clip,port}
       listen_port() {
         while :;do
           contents=$(nc -lp "$port")
+          uuidgen > "$state"/port
           if [[ $isDarwin = true ]];then
             printf %s "$contents" | pbcopy
           else
@@ -57,15 +64,29 @@ pog {
       }
       listen_clip() {
         if [[ $isDarwin = true ]];then
-          echo darwin tbd
+          prev_contents=$(pbpaste)
+          while sleep "$poll_time";do
+            contents=$(pbpaste)
+            if [[ "$prev_contents" != "$contents" ]];then
+              if [[ "$(< "$state"/clip)" != "$(< "$state"/port)" ]];then
+                uuidgen > "$state"/clip
+                send_to_hosts "$contents"
+                prev_contents=$contents
+              fi
+            fi
+          done
         else
           while read -r;do
-            contents=$(xsel --output --"$selection")
-            send_to_hosts "$contents"
+            if [[ "$(< "$state"/clip)" != "$(< "$state"/port)" ]];then
+              contents=$(xsel --output --"$selection")
+              uuidgen > "$state"/clip
+              send_to_hosts "$contents"
+            fi
           done < <(clipnotify -s "$selection" -l)
         fi
       }
       on_exit() {
+        rm -rf "$state"
         kill -- -"$port_pid" -"$clip_pid" 2> /dev/null
       }
       trap on_exit EXIT
@@ -85,5 +106,3 @@ pog {
     fi
   '';
 }
-
-
