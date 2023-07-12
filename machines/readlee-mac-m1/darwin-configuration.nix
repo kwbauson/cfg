@@ -22,7 +22,7 @@ in
   imports = [ "${github-runners-fork}/modules/services/github-runners" ];
   _module.args.username = "benjamin";
 
-  services.github-runners = mapAttrs' (n: nameValuePair "runner-${n}") {
+  services.github-runners = mapAttrs' (n: value: nameValuePair "runner-${n}" (value // { replace = true; })) {
     kwbauson-cfg = {
       url = "https://github.com/kwbauson/cfg";
       tokenFile = "/etc/github-runner.token";
