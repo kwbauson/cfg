@@ -15,12 +15,12 @@
         "branch": "master",
         "description": "Notify on new X clipboard events",
         "homepage": null,
-        "owner": "andreblanke",
+        "owner": "cdown",
         "repo": "clipnotify",
-        "rev": "2aec101d4e87ca0d0d540b4d22ec991c8dbf001a",
-        "sha256": "05s7182rgyli2rqyj76v3j256x6h87jx3pfh9mnfkfpg88mbikzs",
+        "rev": "25ba143c7da8ae0f196cb0db2797d30e6d04e15c",
+        "sha256": "0f2c7ckxngybl868llcfglmh71agscajm3bphjpqk9qiqzin4hlv",
         "type": "tarball",
-        "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
+        "url": "https://github.com/cdown/clipnotify/archive/25ba143c7da8ae0f196cb0db2797d30e6d04e15c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "devenv": {
