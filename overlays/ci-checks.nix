@@ -3,7 +3,7 @@ let
   checks = linkFarmFromDrvs "checks" (flatten [
     (attrValues (removeAttrs extra-packages (flatten [
       "swarm"
-      (optionals isDarwin [ "scanmem" ])
+      (optionals isDarwin [ "gameconqueror" "waterfox" ])
     ])))
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
