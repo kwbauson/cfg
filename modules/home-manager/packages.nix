@@ -37,7 +37,7 @@
         ;
       inherit (nodePackages) npm-check-updates prettier;
     };
-    inherit nr switch;
+    inherit nrs switch;
     inherit nle-cfg;
   };
   excluded-packages = optionalAttrs isDarwin {

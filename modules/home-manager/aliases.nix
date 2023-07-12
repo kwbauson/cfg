@@ -13,8 +13,9 @@
     noc = "cd ~/cfg && gh workflow run updates.yml";
     noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
     hme = "nvim ~/cfg/home.nix && hms";
-    nb = ''pkg=$1 && shift; nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
-    ns = ''pkg=$1 && shift; nix shell $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+    nb = ''pkg=$1 && shift; git -C ~/cfg add --all && nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+    ns = ''pkg=$1 && shift; git -C ~/cfg add --all && nix shell $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+    nr = ''pkg=$1 && shift; git -C ~/cfg add --all && nix run $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g") --'';
     reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
     lr = ''find "$@" -print0 | sort -z | xargs -0 ls --color=auto -lhd'';
     delete-old-generations = ''
