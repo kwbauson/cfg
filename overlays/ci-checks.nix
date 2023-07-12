@@ -1,7 +1,9 @@
 final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
-    (attrValues extra-packages)
+    (attrValues
+      (removeAttrs extra-packages [ "swarm" ])
+    )
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
   ]);
