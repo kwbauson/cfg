@@ -91,6 +91,18 @@
         "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-editor": {
+        "branch": "main",
+        "description": "A simple rust program to edit NixOS configuration files with just a command",
+        "homepage": "",
+        "owner": "vlinkz",
+        "repo": "nix-editor",
+        "rev": "ab2a7e94ca176589c1e8236ce31cd89044e4818f",
+        "sha256": "0b7xy2v6q2pxmpd5ajffcxh2v1852awcgj8hk5pm9vkdiavcy8kv",
+        "type": "tarball",
+        "url": "https://github.com/vlinkz/nix-editor/archive/ab2a7e94ca176589c1e8236ce31cd89044e4818f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix-index-database": {
         "sha256": "0ylz563v4g106fpml2jwigv6m0jwim67gwn7q49k4szq4xxbydxd",
         "type": "file",

@@ -12,6 +12,7 @@ let
       dasel
       pur
       (nle.build { path = writeTextDir "meme" ''meme''; })
+      nix-editor
     ])
   ]);
   ci-checks = writeBash "ci-checks" ''
