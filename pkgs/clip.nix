@@ -45,7 +45,7 @@ pog {
     }
     if ${h.flag "sync_primary"};then
       while read -r;do
-        xsel --clipboard | xsel --primary
+        xsel --output --clipboard | xsel --input --primary
       done < <(clipnotify -s clipboard -l)
     elif ${h.flag "server"};then
       echo Listening on "$port" and sending "$selection" contents to "$hosts"
@@ -58,7 +58,7 @@ pog {
           if [[ $isDarwin = true ]];then
             printf %s "$contents" | pbcopy
           else
-            printf %s "$contents" | xsel --"$selection"
+            printf %s "$contents" | xsel --input --"$selection"
           fi
         done
       }

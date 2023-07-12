@@ -225,6 +225,8 @@
     };
   };
 
+  services.clip.sync-primary.enable = isLinux && isGraphical;
+
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
