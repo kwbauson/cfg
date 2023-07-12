@@ -226,8 +226,8 @@
   };
 
   services.clip = {
-    enable = true;
-    hosts = remove machine-name [ "keith-server" "keith-desktop" "keith-mac" ];
+    # enable = true;
+    # hosts = remove machine-name [ "keith-server" "keith-desktop" "keith-mac" ];
     sync-primary.enable = isLinux && isGraphical;
   };
 
