@@ -36,6 +36,10 @@ pog {
     set -euo pipefail
     ${pathAdd [ xsel clipnotify netcat-gnu coreutils util-linux ]}
     isDarwin=${boolToString isDarwin}
+    isLinux=${boolToString isLinux}
+    if [[ $isLinux = true ]];then
+      export DISPLAY=:0
+    fi
     IFS=, read -ra hosts_array < <(echo "$hosts")
     send_to_hosts() {
       contents=$1
@@ -49,7 +53,7 @@ pog {
       done < <(clipnotify -s clipboard -l)
     elif ${h.flag "server"};then
       echo Listening on "$port" and sending "$selection" contents to "$hosts"
-      state=$(mktemp --tempdir clip-server-XXXXX)
+      state=$(mktemp -d --tmpdir clip-server-XXXXX)
       touch "$state"/{clip,port}
       listen_port() {
         while :;do
