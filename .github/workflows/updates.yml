@@ -7,7 +7,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - run: nix -vL run .#nle update
+      - run: nix -L run .#nle update
       - uses: peter-evans/create-pull-request@v5
         id: cpr
         with:
