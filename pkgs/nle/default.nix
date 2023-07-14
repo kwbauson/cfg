@@ -7,7 +7,7 @@ let
   scripts = makeScripts {
     update = ''
       set -e
-      ${joinMapAttrValuesIf nr (hasPrefix "update-") scripts}
+      ${joinMapAttrValuesIf nrs (hasPrefix "update-") scripts}
     '';
     update-npm = ''
       ${pathAdd [ nodejs_latest nodePackages.npm-check-updates ]}

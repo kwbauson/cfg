@@ -11,7 +11,7 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli bws libqalculate yt-dlp speedtest-cli tldr nix-top
-        nixos-install-tools better-comma q dasel emborg
+        nixos-install-tools better-comma q dasel emborg clip
         ;
     };
     ${attrIf isGraphical "graphical"} = {
@@ -37,7 +37,7 @@
         ;
       inherit (nodePackages) npm-check-updates prettier;
     };
-    inherit nr switch;
+    inherit nrs switch;
     inherit nle-cfg;
   };
   excluded-packages = optionalAttrs isDarwin {

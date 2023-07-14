@@ -1,19 +1,19 @@
 final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
-    slapper
-    better-comma
-    nle
-    (optionals stdenv.isLinux [
-      waterfox
-      r2modman
-      bundix
-      poetry
-      dasel
-      pur
-      (nle.build { path = writeTextDir "meme" ''meme''; })
-      thrive
-    ])
+    (attrValues (removeAttrs extra-packages (flatten [
+      "swarm" # too big
+      "evilhack" # broken
+      (optionals isDarwin [
+        "gameconqueror"
+        "waterfox"
+        "qutebrowser"
+        "qtbr"
+        "jitsi-meet"
+      ])
+    ])))
+    (nle.build { path = writeTextDir "meme" ''meme''; })
+    (attrValues nle.scripts)
   ]);
   ci-checks = writeBash "ci-checks" ''
     echo ${checks}

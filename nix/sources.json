@@ -5,22 +5,22 @@
         "homepage": null,
         "owner": "bitwarden",
         "repo": "sdk",
-        "rev": "4f5aeaa4c433306141390ee5cf2c99dfc0baeb11",
-        "sha256": "0d87vbyw0znxai59a504f9krl1f0zi9g4j49cpgk5my6fz716lsz",
+        "rev": "d3a4cad761fa328dbccbce09e64501dd391e9b54",
+        "sha256": "1c7dgnww12ycphjzmyjk73im3lzycs07rg1rcjpzhzl9h5vhr4vb",
         "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/4f5aeaa4c433306141390ee5cf2c99dfc0baeb11.tar.gz",
+        "url": "https://github.com/bitwarden/sdk/archive/d3a4cad761fa328dbccbce09e64501dd391e9b54.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "clipnotify": {
         "branch": "master",
         "description": "Notify on new X clipboard events",
         "homepage": null,
-        "owner": "andreblanke",
+        "owner": "cdown",
         "repo": "clipnotify",
-        "rev": "2aec101d4e87ca0d0d540b4d22ec991c8dbf001a",
-        "sha256": "05s7182rgyli2rqyj76v3j256x6h87jx3pfh9mnfkfpg88mbikzs",
+        "rev": "25ba143c7da8ae0f196cb0db2797d30e6d04e15c",
+        "sha256": "0f2c7ckxngybl868llcfglmh71agscajm3bphjpqk9qiqzin4hlv",
         "type": "tarball",
-        "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
+        "url": "https://github.com/cdown/clipnotify/archive/25ba143c7da8ae0f196cb0db2797d30e6d04e15c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "devenv": {
@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "c8d0dd774e8fd0e9dc63e5f7c821a41659f10d78",
-        "sha256": "1gw6dcxks5p1n5lrpbmcr6yypzcjpp7vzp4dl13k58x666gqm6pd",
+        "rev": "36a7bb53b31a7fd40c026559005e10d824c88b5c",
+        "sha256": "10pf1p9r9zp27g5xzgpdszgqcmj51m4jjkm7i8qmal00pxrjcbrw",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/c8d0dd774e8fd0e9dc63e5f7c821a41659f10d78.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/36a7bb53b31a7fd40c026559005e10d824c88b5c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "069e6eaba35afe5322d5f6e717a5537b4d1584cd",
-        "sha256": "0krc46gsnwfh9ld6yx7rwkphq4bygm580p7dm25x2hj2ndmr76d4",
+        "rev": "7d6927dc521852ea6250aa3f94a1ec9019f8d7b5",
+        "sha256": "1xdv0llfrs7iqj90q4pxlgxlzv96d298hn75ky25rcwrsa1k1spj",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/069e6eaba35afe5322d5f6e717a5537b4d1584cd.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/7d6927dc521852ea6250aa3f94a1ec9019f8d7b5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -89,6 +89,18 @@
         "sha256": "14wflv513vjrs3rhdykl4m5a63mp3ivy08kgw5r16axsi58sj0pg",
         "type": "tarball",
         "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-editor": {
+        "branch": "main",
+        "description": "A simple rust program to edit NixOS configuration files with just a command",
+        "homepage": "",
+        "owner": "vlinkz",
+        "repo": "nix-editor",
+        "rev": "ab2a7e94ca176589c1e8236ce31cd89044e4818f",
+        "sha256": "0b7xy2v6q2pxmpd5ajffcxh2v1852awcgj8hk5pm9vkdiavcy8kv",
+        "type": "tarball",
+        "url": "https://github.com/vlinkz/nix-editor/archive/ab2a7e94ca176589c1e8236ce31cd89044e4818f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
@@ -149,10 +161,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "6a7063bec058ab08df87b70713f4a406eb8b65d6",
-        "sha256": "14b5n86d00chjgfz7a9c9yp9i4xxghcyf5bxgjs6lm0pf9hzjmkj",
+        "rev": "cfb1e92666a902f7eccf5ec9f6c8723308977d51",
+        "sha256": "1gcq6dxfrm0rsyxm9inaw1y7f08va16q3da6qbxsr7fmpn53yd6x",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/6a7063bec058ab08df87b70713f4a406eb8b65d6.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/cfb1e92666a902f7eccf5ec9f6c8723308977d51.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
