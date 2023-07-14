@@ -90,7 +90,7 @@
     '';
     batwhich = ''bat "$(which "$@")"'';
     tge = ''
-      set -euo pipefail
+      set -eu
       env=$1
       shift
       modules=infra-terraform-modules
@@ -98,7 +98,7 @@
       ref=$(echo $PWD | sed -E "s@.*($modules)/@@")
       cd "$(echo $PWD | sed "s@$modules.*@$envs@")"
       file=$(rg -lg terragrunt.hcl "$modules//$ref" | grep "/$env/" | sed 's@^/@@p')
-      if [[ $(echo "$file" | wc -l) != 1 ]];then
+      if [[ -z $file || $(echo "$file" | wc -l) != 1 ]];then
         echo need exactly one match
         exit 1
       fi
@@ -110,6 +110,7 @@
       }
       trap on_exit EXIT
       sed -i -e "\@$modules//$ref@s/^.*#//" -e "\@$modules.git//$ref@s/^/#/" terragrunt.hcl
+      echo "$envs/$(dirname "$file"): terragrunt $@"
       terragrunt "$@"
     '';
   };
