@@ -44,7 +44,7 @@
         "version": "0.8.1"
     },
     "git-fuzzy": {
-        "branch": "master",
+        "branch": "main",
         "description": "interactive `git` with the help of `fzf`",
         "homepage": "",
         "owner": "bigH",
