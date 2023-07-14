@@ -5,7 +5,8 @@ pkgs.flake.inputs or { } // pkgs.flake or { } //
 pkgs.lib // builtins // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
-  inherit (flake) modules;
+  inherit (importDir ./.) machines constants;
+  inherit (flake) modules overlays;
   sources = mapAttrs
     (pname: src: {
       inherit pname src;
@@ -264,5 +265,17 @@ pkgs.lib // builtins // {
     filter = path: type: !builtins.any (p: p == (baseNameOf path))
       [ ".git" ".github" "secrets" ];
   };
-})
 
+  nixConfBase = ''
+    max-jobs = auto
+    keep-going = true
+    extra-experimental-features = nix-command flakes recursive-nix
+    fallback = true
+  '';
+  nixConf = ''
+    ${nixConfBase}
+    narinfo-cache-negative-ttl = 10
+    extra-substituters = https://kwbauson.cachix.org
+    extra-trusted-public-keys = kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=
+  '';
+})

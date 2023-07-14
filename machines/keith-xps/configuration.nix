@@ -1,10 +1,7 @@
 { scope, ... }: with scope;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
-    common-cpu-intel
-    common-pc-laptop
-    common-pc-laptop-ssd
+    dell-xps-13-9350
   ];
-
-  boot.blacklistedKernelModules = [ "psmouse" ];
+  services.tailscale.enable = true;
 }

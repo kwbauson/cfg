@@ -5,22 +5,22 @@
         "homepage": null,
         "owner": "bitwarden",
         "repo": "sdk",
-        "rev": "729266454f48f9773802f714404892a614765269",
-        "sha256": "1pzmagygz53rrlpic8kygqjcgxzxynai1ay4vfm4xaxqdzqziic0",
+        "rev": "d3a4cad761fa328dbccbce09e64501dd391e9b54",
+        "sha256": "1c7dgnww12ycphjzmyjk73im3lzycs07rg1rcjpzhzl9h5vhr4vb",
         "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/729266454f48f9773802f714404892a614765269.tar.gz",
+        "url": "https://github.com/bitwarden/sdk/archive/d3a4cad761fa328dbccbce09e64501dd391e9b54.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "clipnotify": {
         "branch": "master",
         "description": "Notify on new X clipboard events",
         "homepage": null,
-        "owner": "andreblanke",
+        "owner": "cdown",
         "repo": "clipnotify",
-        "rev": "2aec101d4e87ca0d0d540b4d22ec991c8dbf001a",
-        "sha256": "05s7182rgyli2rqyj76v3j256x6h87jx3pfh9mnfkfpg88mbikzs",
+        "rev": "25ba143c7da8ae0f196cb0db2797d30e6d04e15c",
+        "sha256": "0f2c7ckxngybl868llcfglmh71agscajm3bphjpqk9qiqzin4hlv",
         "type": "tarball",
-        "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
+        "url": "https://github.com/cdown/clipnotify/archive/25ba143c7da8ae0f196cb0db2797d30e6d04e15c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "devenv": {
@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "5ff14a8f2828a2e607a65e2b16650a8cf950515b",
-        "sha256": "1qdg1rcz465pdhrhr0mva1yqv1h8xd7w5wa9zbngbjaz5wznvksh",
+        "rev": "36a7bb53b31a7fd40c026559005e10d824c88b5c",
+        "sha256": "10pf1p9r9zp27g5xzgpdszgqcmj51m4jjkm7i8qmal00pxrjcbrw",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/5ff14a8f2828a2e607a65e2b16650a8cf950515b.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/36a7bb53b31a7fd40c026559005e10d824c88b5c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "5a7b70ee45f5ca5d3d915cc7333f0c33c8311362",
-        "sha256": "1j5v2vnyvk1xlvdpbzjyrp10lg8zrzqwgy258d0hgrhd3ipjiknh",
+        "rev": "7d6927dc521852ea6250aa3f94a1ec9019f8d7b5",
+        "sha256": "1xdv0llfrs7iqj90q4pxlgxlzv96d298hn75ky25rcwrsa1k1spj",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/5a7b70ee45f5ca5d3d915cc7333f0c33c8311362.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/7d6927dc521852ea6250aa3f94a1ec9019f8d7b5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -91,13 +91,25 @@
         "url": "https://github.com/jitsi/jitsi-meet/archive/e1ac000cd1f15642218e80ded98ee19188cf2b17.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-editor": {
+        "branch": "main",
+        "description": "A simple rust program to edit NixOS configuration files with just a command",
+        "homepage": "",
+        "owner": "vlinkz",
+        "repo": "nix-editor",
+        "rev": "ab2a7e94ca176589c1e8236ce31cd89044e4818f",
+        "sha256": "0b7xy2v6q2pxmpd5ajffcxh2v1852awcgj8hk5pm9vkdiavcy8kv",
+        "type": "tarball",
+        "url": "https://github.com/vlinkz/nix-editor/archive/ab2a7e94ca176589c1e8236ce31cd89044e4818f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix-index-database": {
-        "sha256": "06ycch6gsjk9pqjca2rfw2km217h3zyx88cnjin2dmcc7s16l4xb",
+        "sha256": "0ylz563v4g106fpml2jwigv6m0jwim67gwn7q49k4szq4xxbydxd",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-04-13-132626/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-07-09-034646/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2023-04-13-132626"
+        "version": "2023-07-09-034646"
     },
     "npmlock2nix": {
         "branch": "master",
@@ -119,24 +131,16 @@
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
         "version": "2023.03.25"
     },
-    "r2modman": {
-        "sha256": "03q6s1wh2s1chjxrqpvll2ypi6ak3i3d4aj2z9hgvyb9lfgmb553",
-        "type": "file",
-        "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.42/r2modman-3.1.42.AppImage",
-        "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.42"
-    },
     "ranger_devicons": {
         "branch": "main",
         "description": "Ranger plugin that adds file glyphs / icon support to Ranger",
         "homepage": "",
         "owner": "alexanderjeurissen",
         "repo": "ranger_devicons",
-        "rev": "5bb1c32f649055c2d9143c8371c2bf06d5e574f7",
-        "sha256": "03mab5v57s9vwnxfsqijspfyhjbs0nlbwh42pzdxndwzvk4brfzp",
+        "rev": "1b5780117eeebdfcd221ce45823a1ddef8399848",
+        "sha256": "0k6z9742mng7j3fz8bgwr5kqlabdk2mf1qpjgw102bsjg5hxphrh",
         "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/5bb1c32f649055c2d9143c8371c2bf06d5e574f7.tar.gz",
+        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/1b5780117eeebdfcd221ce45823a1ddef8399848.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "slapper": {
@@ -157,10 +161,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "a2cd731c8330d68c103580a58946f34a17aa78d5",
-        "sha256": "1pmz8wcxhcfhnar5jwf7gqpby4qb3d0bg3lnfp0whyvwnwi0n27n",
+        "rev": "cfb1e92666a902f7eccf5ec9f6c8723308977d51",
+        "sha256": "1gcq6dxfrm0rsyxm9inaw1y7f08va16q3da6qbxsr7fmpn53yd6x",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/a2cd731c8330d68c103580a58946f34a17aa78d5.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/cfb1e92666a902f7eccf5ec9f6c8723308977d51.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {

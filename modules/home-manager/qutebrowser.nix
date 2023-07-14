@@ -2,6 +2,7 @@
 {
   programs.qutebrowser = {
     enable = isGraphical && isLinux;
+    package = qutebrowser-qt6;
     loadAutoconfig = true;
     aliases = {
       h = "help";

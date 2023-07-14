@@ -14,12 +14,13 @@
         conflict-marker-vim fzf-vim nvim-scrollview quick-scope tcomment_vim
         vim-airline vim-better-whitespace vim-code-dark vim-easymotion
         vim-fugitive vim-lastplace vim-multiple-cursors vim-sensible
-        vim-startify barbar-nvim nvim-web-devicons vim-peekaboo
+        vim-startify nvim-web-devicons vim-peekaboo
 
         coc-eslint coc-git coc-json coc-lists coc-prettier
         coc-solargraph coc-tsserver coc-pyright coc-explorer
         coc-vetur coc-vimlsp;
       nvim-treesitter = nvim-treesitter.withAllGrammars;
+      barbar-nvim = barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
     };
     extraConfig = "
       source ${config.home.homeDirectory}/cfg/init.vim

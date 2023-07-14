@@ -56,7 +56,7 @@
       enable = true;
       compression = true;
       controlMaster = "auto";
-      controlPersist = "1m";
+      controlPersist = "1s";
       matchBlocks = {
         "kwbauson.com".user = "keith";
         "gitlab.com".extraOptions.UpdateHostKeys = "no";
@@ -225,6 +225,12 @@
     };
   };
 
+  services.clip = {
+    # enable = true;
+    # hosts = remove machine-name [ "keith-server" "keith-desktop" "keith-mac" ];
+    sync-primary.enable = isLinux && isGraphical;
+  };
+
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
@@ -258,4 +264,6 @@
       };
     };
   };
+
+  systemd.user.startServices = "sd-switch";
 }

@@ -107,7 +107,16 @@
       ro = gs ''git reset --hard origin/$(git branch-name) "$@"'';
       ros = gs "git stash && git ro && git stash pop";
       rt = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
-      s = gs "git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
+      s = gs ''
+        git br
+        git -c color.status=always status | grep --color=never -Ev \
+          -e '^$' \
+          -e '^On branch' \
+          -e '^Your branch is' \
+          -e '^\s+\(use "git' \
+          -e '^no changes added to commit' \
+          -e '^nothing to commit' || true
+      '';
       sf = gs ''git f --quiet && git s "$@"'';
     };
     inherit userName userEmail;

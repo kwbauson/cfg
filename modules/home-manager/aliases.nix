@@ -13,12 +13,13 @@
     noc = "cd ~/cfg && gh workflow run updates.yml";
     noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
     hme = "nvim ~/cfg/home.nix && hms";
-    nb = ''pkg=$1 && shift; nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
-    ns = ''pkg=$1 && shift; nix shell $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+    nb = ''pkg=$1 && shift; git -C ~/cfg add --all && nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+    ns = ''pkg=$1 && shift; git -C ~/cfg add --all && nix shell $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
+    nr = ''pkg=$1 && shift; git -C ~/cfg add --all && nix run $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g") --'';
     reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
     lr = ''find "$@" -print0 | sort -z | xargs -0 ls --color=auto -lhd'';
     delete-old-generations = ''
-      find /nix/var/nix/profiles -not -type d |
+      find {/nix/var,~/.local/state}/nix/profiles -not -type d |
         sed -E 's/-[0-9]+-link$//' |
         sort |
         uniq -c |
@@ -88,5 +89,28 @@
           -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
     '';
     batwhich = ''bat "$(which "$@")"'';
+    tge = ''
+      set -euo pipefail
+      env=$1
+      shift
+      modules=infra-terraform-modules
+      envs=infra-terragrunt-envs
+      ref=$(echo $PWD | sed -E "s@.*($modules)/@@")
+      cd "$(echo $PWD | sed "s@$modules.*@$envs@")"
+      file=$(rg -lg terragrunt.hcl "$modules//$ref" | grep "/$env/" | sed 's@^/@@p')
+      if [[ $(echo "$file" | wc -l) != 1 ]];then
+        echo need exactly one match
+        exit 1
+      fi
+      cd "$(dirname "$file")"
+      original=$(mktemp)
+      cp terragrunt.hcl "$original"
+      on_exit() {
+        mv "$original" terragrunt.hcl
+      }
+      trap on_exit EXIT
+      sed -i -e "\@$modules//$ref@s/^.*#//" -e "\@$modules.git//$ref@s/^/#/" terragrunt.hcl
+      terragrunt "$@"
+    '';
   };
 }

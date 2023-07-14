@@ -1,0 +1,38 @@
+diff --git a/lua/barbar/buffer.lua b/lua/barbar/buffer.lua
+index 7ca1f13..59d7ccd 100644
+--- a/lua/barbar/buffer.lua
++++ b/lua/barbar/buffer.lua
+@@ -22,6 +22,7 @@ local strwidth = vim.api.nvim_strwidth --- @type function
+ local basename = require('barbar.fs').basename
+ local config = require('barbar.config')
+ local slice_from_end = require('barbar.utils.list').slice_from_end
++local index_of = require('barbar.utils.list').index_of
+ 
+ local ELLIPSIS = '…'
+ local ELLIPSIS_LEN = strwidth(ELLIPSIS)
+@@ -137,8 +138,10 @@ function buffer.get_unique_name(first, second)
+   local first_result  = table_concat(slice_from_end(first_parts, length),  separator)
+   local second_result = table_concat(slice_from_end(second_parts, length), separator)
+ 
+-  while first_result == second_result and
+-        length < max(#first_parts, #second_parts)
++  local first_part = first_result
++  while (first_result == second_result and
++        length < max(#first_parts, #second_parts)) or
++        (index_of(config.options.always_show_parent, first_part) ~= nil and length < 2)
+   do
+     length = length + 1
+     first_result  = table_concat(slice_from_end(first_parts,  min(#first_parts, length)),  separator)
+diff --git a/lua/barbar/state.lua b/lua/barbar/state.lua
+index 6dbcb5d..2197e30 100644
+--- a/lua/barbar/state.lua
++++ b/lua/barbar/state.lua
+@@ -280,7 +280,7 @@ function state.update_names()
+ 
+     if buffer_index_by_name[name] == nil then
+       buffer_index_by_name[name] = i
+-      state.get_buffer_data(buffer_n).name = name
++      state.get_buffer_data(buffer_n).name = buffer.get_unique_name(buf_get_name(buffer_n), '')
+     else
+       local other_i = buffer_index_by_name[name]
+       local other_n = state.buffers[other_i]

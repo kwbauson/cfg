@@ -50,7 +50,7 @@
   services.github-runner = {
     enable = true;
     extraLabels = [ "nix" ];
-    extraPackages = [ cachix gh ];
+    extraPackages = [ gh cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
   };
@@ -81,19 +81,24 @@
   };
   services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
 
-  systemd.services = {
-    caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
-  } // genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
-    restartTriggers = [ config.systemd.units."caddy.service".unit ];
-  });
+  systemd.services = recursiveUpdate
+    {
+      caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
+      jitsi-meet-init-secrets.requiredBy = splitString " " config.systemd.services.jitsi-meet-init-secrets.unitConfig.Before;
+    }
+    (genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
+      restartTriggers = [ config.systemd.units."caddy.service".unit ];
+    }));
 
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.containers.valheim = {
-    autoStart = true;
+    autoStart = false;
     image = "ghcr.io/lloesche/valheim-server";
     environmentFiles = [ /var/lib/valheim/environment ];
     extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
     ports = [ "2456-2457:2456-2457/udp" ];
     volumes = [ "/var/lib/valheim:/config" ];
   };
+
+  services.auto-update.enable = true;
 }
