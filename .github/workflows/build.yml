@@ -10,7 +10,7 @@ jobs:
     runs-on: [nix, '${{ matrix.system.os }}', '${{ matrix.system.arch }}']
     steps:
       - uses: actions/checkout@v3
-      - run: nix -vL --show-trace build .#ci-checks
+      - run: nix -L build .#ci-checks
       - run: ./result/bin/ci-checks
       - run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
