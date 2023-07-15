@@ -268,13 +268,14 @@ pkgs.lib // builtins // {
   patchModules = src: patches:
     let
       patched-input = applyPatches { name = "source"; inherit src patches; };
-      patch-paths = splitString "\n" (
-        readFile (
-          runCommand "patch-paths" { } ''
-            ${patchutils}/bin/lsdiff --strip 1 ${patch} > $out
-          ''
-        )
-      );
+      patch-paths = pipe patches [
+        (map (patch: "${patchutils}/bin/lsdiff --strip 1 ${patch} > $out"))
+        (concatStringsSep "\n")
+        (runCommand "patch-paths" { })
+        readFile
+        (splitString "\n")
+        (filter (x: x != ""))
+      ];
     in
     {
       imports = map (path: "${patched-input}/${path}") patch-paths;
