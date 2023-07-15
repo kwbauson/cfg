@@ -11,7 +11,7 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli bws libqalculate yt-dlp speedtest-cli tldr nix-top
-        nixos-install-tools better-comma q dasel emborg clip
+        better-comma q dasel emborg clip
         ;
     };
     ${attrIf isGraphical "graphical"} = {
@@ -43,7 +43,7 @@
   excluded-packages = optionalAttrs isDarwin {
     inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
-    inherit breeze-icons nixos-install-tools arduino;
+    inherit breeze-icons arduino;
     inherit nim nimlsp crystal emborg;
   };
 }
