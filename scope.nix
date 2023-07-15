@@ -265,6 +265,23 @@ pkgs.lib // builtins // {
       [ ".git" ".github" "secrets" ];
   };
 
+  patchModules = src: patches:
+    let
+      patched = applyPatches { name = "source"; inherit src patches; };
+      paths = pipe patches [
+        (map (patch: "${patchutils}/bin/lsdiff --strip 1 ${patch} > $out"))
+        (concatStringsSep "\n")
+        (runCommand "patch-paths" { })
+        readFile
+        (splitString "\n")
+        (filter (x: x != ""))
+      ];
+    in
+    {
+      imports = map (path: "${patched}/${path}") paths;
+      disabledModules = map (path: "${src}/${path}") paths;
+    };
+
   nixConfBase = ''
     max-jobs = auto
     keep-going = true
