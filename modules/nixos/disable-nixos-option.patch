@@ -1,0 +1,27 @@
+diff --git a/nixos/modules/installer/tools/tools.nix b/nixos/modules/installer/tools/tools.nix
+index 54b0f81ee78..be2f1f982e6 100644
+--- a/nixos/modules/installer/tools/tools.nix
++++ b/nixos/modules/installer/tools/tools.nix
+@@ -92,7 +92,7 @@ in
+     desktopConfiguration = mkOption {
+       internal = true;
+       type = types.listOf types.lines;
+-      default = [];
++      default = [ ];
+       description = lib.mdDoc ''
+         Text to preseed the desktop configuration that `nixos-generate-config`
+         saves to `/etc/nixos/configuration.nix`.
+@@ -225,11 +225,11 @@ in
+     '';
+ 
+     environment.systemPackages =
+-      [ nixos-build-vms
++      [
++        nixos-build-vms
+         nixos-install
+         nixos-rebuild
+         nixos-generate-config
+-        nixos-option
+         nixos-version
+         nixos-enter
+       ];

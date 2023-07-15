@@ -5,6 +5,7 @@
     machines.${machine-name}.configuration
     machines.${machine-name}.hardware-configuration
     inputs.home-manager.nixosModule
+    (patchModules inputs.nixpkgs [ ./disable-nixos-option.patch ])
   ] ++ attrValues (importDir ./.);
 
   boot = {
