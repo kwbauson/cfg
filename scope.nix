@@ -267,7 +267,7 @@ pkgs.lib // builtins // {
 
   patchModules = src: patches:
     let
-      patched-input = applyPatches { inherit src patches; };
+      patched-input = applyPatches { name = "source"; inherit src patches; };
       patch-paths = splitString "\n" (
         readFile (
           runCommand "patch-paths" { } ''
