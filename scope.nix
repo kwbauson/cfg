@@ -267,8 +267,8 @@ pkgs.lib // builtins // {
 
   patchModules = src: patches:
     let
-      patched-input = applyPatches { name = "source"; inherit src patches; };
-      patch-paths = pipe patches [
+      patched = applyPatches { name = "source"; inherit src patches; };
+      paths = pipe patches [
         (map (patch: "${patchutils}/bin/lsdiff --strip 1 ${patch} > $out"))
         (concatStringsSep "\n")
         (runCommand "patch-paths" { })
@@ -278,8 +278,8 @@ pkgs.lib // builtins // {
       ];
     in
     {
-      imports = map (path: "${patched-input}/${path}") patch-paths;
-      disabledModules = patch-paths;
+      imports = map (path: "${patched}/${path}") paths;
+      disabledModules = map (path: "${src}/${path}") paths;
     };
 
   nixConfBase = ''
