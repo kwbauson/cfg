@@ -34,7 +34,7 @@ pog {
   };
   script = h: ''
     set -euo pipefail
-    ${pathAdd [ xsel clipnotify netcat-gnu coreutils util-linux ]}
+    ${pathAdd ([ xsel clipnotify netcat-gnu coreutils ] ++ optionals isLinux [ util-linux ])}
     isDarwin=${boolToString isDarwin}
     isLinux=${boolToString isLinux}
     if [[ $isLinux = true ]];then
