@@ -5,10 +5,10 @@
         "homepage": null,
         "owner": "bitwarden",
         "repo": "sdk",
-        "rev": "80d62ca0b158cd1f57c6d48b02c5e387618bc08e",
-        "sha256": "1p9rbcpayk7ci8kh65vjs1dqwq13b1i798nf5v92hdirig7lph1n",
+        "rev": "8392d38d28e479ca581336f8d249e97ca5872662",
+        "sha256": "0rajjqar6mxd2gh9x9wd8k0nwm46w7h41nr08z66msbl9wwmyhdz",
         "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/80d62ca0b158cd1f57c6d48b02c5e387618bc08e.tar.gz",
+        "url": "https://github.com/bitwarden/sdk/archive/8392d38d28e479ca581336f8d249e97ca5872662.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "clipnotify": {
@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "78e6c9f49d224c50f7e5c19b953be995cc94495c",
-        "sha256": "1xp6nsrh0xx70r1j1shva5g0cfxg5vlk6islclflffyqfpcbbrgl",
+        "rev": "892ddef1fba6a956c172e6c1bb7c830795c713a2",
+        "sha256": "0d2gjby8c8pp6flb10c8sirnmygfhhahvqxikq65z5zfvydvdnlz",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/78e6c9f49d224c50f7e5c19b953be995cc94495c.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/892ddef1fba6a956c172e6c1bb7c830795c713a2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "8cb7c5ca732e64d840c652f084506ab9ba6372e1",
-        "sha256": "1xjlq9f0fkqj142185bf7l08mfz3ixqzj6vkrr11k81swyh2pfyx",
+        "rev": "4dd2c1109d5c3e3e1325a18757439aa4167d9c6e",
+        "sha256": "13bsvi1rnf5881kgxzss0in2b1g9f6spfxsv4hbcd5przr8k0fl3",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/8cb7c5ca732e64d840c652f084506ab9ba6372e1.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/4dd2c1109d5c3e3e1325a18757439aa4167d9c6e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -104,12 +104,12 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nix-index-database": {
-        "sha256": "0ylz563v4g106fpml2jwigv6m0jwim67gwn7q49k4szq4xxbydxd",
+        "sha256": "095sym46l53rbvlmark76y32zjzl5v8v9fixhmcqqqrdvw4bd820",
         "type": "file",
         "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-07-09-034646/index-x86_64-linux",
+        "url": "https://github.com/Mic92/nix-index-database/releases/download/2023-07-16-035005/index-x86_64-linux",
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2023-07-09-034646"
+        "version": "2023-07-16-035005"
     },
     "npmlock2nix": {
         "branch": "master",
