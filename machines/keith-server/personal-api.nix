@@ -26,9 +26,12 @@ let
 
 
     if __name__ == "__main__":
-        uvicorn.run("main:app", port=${toString constants.personal-api.port}, log_level="info")
+        uvicorn.run("main:app", host="0.0.0.0", port=${toString constants.personal-api.port}, log_level="info")
   '';
 in
 {
-  systemd.services.personal-api.script = getExe app;
+  systemd.services.personal-api = {
+    wantedBy = [ "multi-user.target" ];
+    script = getExe app;
+  };
 }
