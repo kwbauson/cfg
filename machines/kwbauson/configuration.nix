@@ -26,6 +26,7 @@
     "files.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString file-server.port}";
     "netdata.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString netdata.port}";
     "jitsi.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString jitsi.caddy-port}";
+    "api.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString personal-api.port}";
   };
 
   systemd.services.forward-ports = {
