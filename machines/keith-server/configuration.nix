@@ -4,6 +4,7 @@
     common-cpu-amd
     common-gpu-amd
     common-cpu-amd-pstate
+    ./personal-api.nix
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
