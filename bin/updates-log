@@ -21,7 +21,7 @@ fi
 
 updates=()
 
-ignore='root pypi-deps-db nixpkgs-unstable'
+ignore='root git-fuzzy'
 
 logs=$(
   (
