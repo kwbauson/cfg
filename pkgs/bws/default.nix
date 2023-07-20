@@ -2,7 +2,7 @@ scope: with scope; rustPlatform.buildRustPackage {
   inherit pname;
   version = sources.bitwarden-sdk.rev;
   src = sources.bitwarden-sdk;
-  cargoHash = "sha256-xRxhQ5UZZjTJHIwHEoQbXRqLeyM2bXOfuiDePGPLDTs=";
+  cargoHash = "sha256-FhUb8LlIyAHnvS/2Vmqiw/YvE6u5x92F4w0GZaTH1ro=";
   buildAndTestSubdir = "crates/bws";
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl ] ++ optionals isDarwin [ darwin.Security ];

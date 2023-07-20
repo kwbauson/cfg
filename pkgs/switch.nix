@@ -36,20 +36,16 @@ let
           '';
           nos = makeScript ''
             profile=/nix/var/nix/profiles/system
-            if [[ $(realpath "$profile") != ${nixos-toplevel} ]];then
-              nvd diff "$profile" ${nixos-toplevel}
-              sudo -H nix-env -p "$profile" --set ${nixos-toplevel}
-              sudo ${nixos-toplevel}/bin/switch-to-configuration switch
-            fi
+            nvd diff "$profile" ${nixos-toplevel}
+            sudo -H nix-env -p "$profile" --set ${nixos-toplevel}
+            sudo ${nixos-toplevel}/bin/switch-to-configuration switch
           '';
           nds = makeScript ''
             profile=/nix/var/nix/profiles/system
-            if [[ $(realpath "$profile") != ${nix-darwin-system} ]];then
-              nvd diff "$profile" ${nix-darwin-system}
-              sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
-              ${nix-darwin-system}/activate-user
-              sudo ${nix-darwin-system}/activate
-            fi
+            nvd diff "$profile" ${nix-darwin-system}
+            sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
+            ${nix-darwin-system}/activate-user
+            sudo ${nix-darwin-system}/activate
           '';
           hms = makeScript ''
             hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
