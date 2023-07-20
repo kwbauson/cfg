@@ -21,6 +21,7 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  nix.channel.enable = false;
   nixpkgs = { inherit (pkgs) pkgs config; };
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
