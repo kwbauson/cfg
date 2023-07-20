@@ -29,10 +29,10 @@
         "homepage": "https://devenv.sh",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "6f8add968bc12bf81d845eb7dc684a0733bb1518",
-        "sha256": "1ylxr8aabjs4hk0dh6bmmivhfi9xi2a3c84c1ysmablg2hqnicxl",
+        "rev": "e207a8ef9911eba7f9a5e7761e47dc532931d482",
+        "sha256": "1923ycj47brlspmpm800mswjwn45q89fwi0hv60ahd0l6hhz7x51",
         "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/6f8add968bc12bf81d845eb7dc684a0733bb1518.tar.gz",
+        "url": "https://github.com/cachix/devenv/archive/e207a8ef9911eba7f9a5e7761e47dc532931d482.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "evilhack": {
@@ -73,10 +73,10 @@
         "homepage": "https://input-output-hk.github.io/haskell.nix",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "71c5a44089f20093c34b3ed1de5fd08e282658df",
-        "sha256": "0cszkdypi1vqrqfyndhc4fyh8nlhkx17j6i5d4rvwqbpmfq04czz",
+        "rev": "7a5b657404536768ef9e3c658f987a613a2a1e50",
+        "sha256": "1qj690h0h7xa6lyckh86sh82gbxxk949x76hwhfb993gwzjhb189",
         "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/71c5a44089f20093c34b3ed1de5fd08e282658df.tar.gz",
+        "url": "https://github.com/input-output-hk/haskell.nix/archive/7a5b657404536768ef9e3c658f987a613a2a1e50.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "jitsi-meet": {
@@ -161,10 +161,10 @@
         "homepage": null,
         "owner": "swarm-game",
         "repo": "swarm",
-        "rev": "4491f10764255e3c4cef95a007569588d4aed5e2",
-        "sha256": "168jp3ikzm1kz62jms7yk168frxqjsm0das761ncl1b7wl53i9za",
+        "rev": "720387501f48dbc2cc9041a62c7f06877733b714",
+        "sha256": "15imkr6iqgkpn1vrgcfbcjgwpcacf8znn52nqln8ijn76q6vgg5v",
         "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/4491f10764255e3c4cef95a007569588d4aed5e2.tar.gz",
+        "url": "https://github.com/swarm-game/swarm/archive/720387501f48dbc2cc9041a62c7f06877733b714.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "waterfox": {
