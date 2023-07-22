@@ -37,7 +37,8 @@
       "filetypes": ["nix"],
       "settings": {
         "nil": {
-          "formatting": { "command": ["nixpkgs-fmt"] }
+          "formatting": { "command": ["nixpkgs-fmt"] },
+          "nix": { "autoArchive": true, "autoEvalInputs": true }
         }
       }
     },
