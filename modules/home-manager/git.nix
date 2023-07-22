@@ -48,6 +48,7 @@
       '';
       ca = gs ''git a && git ci "$@"'';
       cap = gs ''git ca "$@" && git p'';
+      capr = gs ''git ca "$@" && git pr'';
       ci = gs ''
         if [[ -t 0 && -t 1 ]];then
           git commit -v "$@"
@@ -81,6 +82,7 @@
       lg = gs "git lfo && git mo";
       lfo = gs ''git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
       p = "put";
+      pr = gs "git put && gh pr create";
       fp = gs ''
         set -e
         git fetch
