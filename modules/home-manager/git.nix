@@ -82,7 +82,7 @@
       lg = gs "git lfo && git mo";
       lfo = gs ''git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
       p = "put";
-      pr = gs "git put && gh pr create";
+      pr = gs "git put && gh pr create --body ''";
       fp = gs ''
         set -e
         git fetch
