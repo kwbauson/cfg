@@ -13,7 +13,7 @@ scope: with scope; rustPlatform.buildRustPackage {
     rev=$(< cargo-hash-rev)
     newRev=${sources.bitwarden-sdk.rev}
     if [[ $rev != $newRev ]];then
-      hash=$(NIX_PATH=nixpkgs=${pkgs.path} ${exe nix-prefetch} '{ sha256 }: (import ${flake} {}).${pname}.cargoDeps.overrideAttrs (_: { cargoSha256 = sha256; })')
+      hash=$(${getExe nix-prefetch} -I nixpkgs=${pkgs.path} '{ sha256 }: (import ${flake} {}).${pname}.cargoDeps.overrideAttrs (_: { cargoSha256 = sha256; })')
       echo "$newRev" > cargo-hash-rev
       ${getExe nix-editor} default.nix cargoHash -iv "\"$hash\""
     fi
