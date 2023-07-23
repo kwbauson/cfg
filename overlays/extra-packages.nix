@@ -21,7 +21,7 @@ let
           src = prev.scope.sources.${pname} or null;
           ${pname} = prev.${pname};
         }))
-      // {
+      // optionalAttrs (hasAttr pname prev) {
         meta = prev.${pname}.meta or { } // {
           position = "${toString path}:1";
         };
