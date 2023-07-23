@@ -38,17 +38,5 @@
         "url": "https://github.com/OliveTin/OliveTin/releases/download/2023.03.25/OliveTin-linux-amd64.tar.gz",
         "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-linux-amd64.tar.gz",
         "version": "2023.03.25"
-    },
-    "ranger_devicons": {
-        "branch": "main",
-        "description": "Ranger plugin that adds file glyphs / icon support to Ranger",
-        "homepage": "",
-        "owner": "alexanderjeurissen",
-        "repo": "ranger_devicons",
-        "rev": "1b5780117eeebdfcd221ce45823a1ddef8399848",
-        "sha256": "0k6z9742mng7j3fz8bgwr5kqlabdk2mf1qpjgw102bsjg5hxphrh",
-        "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/1b5780117eeebdfcd221ce45823a1ddef8399848.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
