@@ -23,15 +23,16 @@ let
 in
 jitsi-meet.overrideAttrs (_: {
   src = jitsi-meet-source-package;
-  passthru.updateScript = writeBashBin "update-jitsi" ''
-    ${ pathAdd [ yarn coreutils ] }
-    set -eo pipefail
-    dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
-    cd "$dir"
-    cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
-    yarn import --ignore-engines
-    cd -
-    cp "$dir"/yarn.lock pkgs/jitsi-meet
-    rm -r "$dir"
-  '';
+  passthru.updateScript = [ ];
+  # passthru.updateScript = writeBashBin "update-jitsi" ''
+  #   ${ pathAdd [ yarn coreutils ] }
+  #   set -eo pipefail
+  #   dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
+  #   cd "$dir"
+  #   cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
+  #   yarn import --ignore-engines
+  #   cd -
+  #   cp "$dir"/yarn.lock pkgs/jitsi-meet
+  #   rm -r "$dir"
+  # '';
 })
