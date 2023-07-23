@@ -6,8 +6,8 @@ repo=${2:-~/cfg}
 cd "$repo"
 updateRepo=${1:-github:kwbauson/cfg/$(git rev-parse --abbrev-ref HEAD)}
 
-sourcesInfo=$(nix eval "$repo#sourcesInfo" --json)
-updateSourcesInfo=$(nix eval "$updateRepo#sourcesInfo" --json)
+sourcesInfo=$(nix --refresh eval "$repo#sourcesInfo" --json)
+updateSourcesInfo=$(nix --refresh eval "$updateRepo#sourcesInfo" --json)
 
 cache=~/.cache/updates-log
 mkdir -p "$cache"
