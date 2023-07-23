@@ -1,16 +1,4 @@
 {
-    "devenv": {
-        "branch": "main",
-        "description": "Fast, Declarative, Reproducible, and Composable Developer Environments",
-        "homepage": "https://devenv.sh",
-        "owner": "cachix",
-        "repo": "devenv",
-        "rev": "def76d0ba0d3743bdfa3a8fdb3903e0928b3c6f0",
-        "sha256": "0rb9sjjx0y78nas01zf4650609p1fb1pbiv4afbndl44dr480bp8",
-        "type": "tarball",
-        "url": "https://github.com/cachix/devenv/archive/def76d0ba0d3743bdfa3a8fdb3903e0928b3c6f0.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "jitsi-meet": {
         "branch": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
         "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
