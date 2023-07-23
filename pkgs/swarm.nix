@@ -7,4 +7,4 @@ let
     projectFileName = "stack.yaml";
   };
 in
-project.swarm.components.exes.swarm
+{ updateScript = [ ]; }

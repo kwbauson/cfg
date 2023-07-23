@@ -1,21 +1,17 @@
-scope: with scope; rustPlatform.buildRustPackage {
+scope: with scope; rustPlatform.buildRustPackage rec {
   inherit pname;
-  version = sources.bitwarden-sdk.rev;
-  src = sources.bitwarden-sdk;
-  cargoHash = "sha256-euqcVAN+HSM1u9n9CVI2HRQwnB7KdK274Y/2/qKLNLs=";
+  version = "master";
+  # src = sources.bitwarden-sdk;
+  src = fetchFromGitHub {
+    owner = "bitwarden";
+    repo = "sdk";
+    rev = version;
+    sha256 = "";
+  };
+  cargoHash = "sha256-NgwJSPL5N8/QlaS6LDGLjtr5HeHRGBUCOc21EHN5nGM=";
   buildAndTestSubdir = "crates/bws";
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl ] ++ optionals isDarwin [ darwin.Security ];
 
-  passthru.updateScript = writeBashBin "update-bws" ''
-    set -euo pipefail
-    cd pkgs/bws
-    rev=$(< cargo-hash-rev)
-    newRev=${sources.bitwarden-sdk.rev}
-    if [[ $rev != $newRev ]];then
-      hash=$(${getExe nix-prefetch} -I nixpkgs=${pkgs.path} '{ sha256 }: (import ${flake} {}).${pname}.cargoDeps.overrideAttrs (_: { cargoSha256 = sha256; })')
-      echo "$newRev" > cargo-hash-rev
-      ${getExe nix-editor} default.nix cargoHash -iv "\"$hash\""
-    fi
-  '';
+  passthru.updateScript = nix-update-script { extraArgs = [ "--flake" "--version" "master" ]; };
 }
