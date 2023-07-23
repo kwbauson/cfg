@@ -11,14 +11,6 @@
         "url": "https://github.com/cachix/devenv/archive/def76d0ba0d3743bdfa3a8fdb3903e0928b3c6f0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "evilhack": {
-        "sha256": "15r2as9xsqshv68qwmni9id72m8yw4kn4lx242xhz714kxrsigk3",
-        "type": "tarball",
-        "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.8.2.tar.gz",
-        "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.8.2"
-    },
     "git-fuzzy": {
         "branch": "main",
         "description": "interactive `git` with the help of `fzf`",
