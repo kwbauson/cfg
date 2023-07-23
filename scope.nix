@@ -2,7 +2,7 @@ pkgs: pkgs.lib.fix (scope: with scope;
 pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
-pkgs.lib // builtins // {
+builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (importDir ./.) machines constants;
