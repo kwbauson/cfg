@@ -1,7 +1,7 @@
 scope: with scope;
 nethack.overrideAttrs (attrs: {
   inherit pname;
-  version = "unstable-2023-07-18";
+  version = "unstable-TODO";
   src = fetchFromGitHub {
     owner = "k21971";
     repo = "EvilHack";
