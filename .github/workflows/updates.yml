@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: nix -L run .#nle update
-      - run: nix -L run .#update-extra-packages
+      - run: echo | nix -L run .#update-extra-packages
       - uses: peter-evans/create-pull-request@v5
         id: cpr
         with:
