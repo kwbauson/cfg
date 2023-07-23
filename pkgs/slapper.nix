@@ -1,12 +1,13 @@
-{ buildGoPackage, fetchFromGitHub, nix-update-script }: buildGoPackage {
-  pname = "slapper";
-  version = "master";
+scope: with scope;
+buildGoPackage {
+  inherit pname;
+  version = "unstable-2019-08-28";
   src = fetchFromGitHub {
     owner = "ikruglov";
-    repo = "slapper";
-    rev = "8f4421b4adaa8e5ac40a48a010feb7e57020febe";
-    hash = "sha256-81x3Rshey43OoWzaVfmfBDSLnpM8FvtnrPTUM6qZ+Bs="; # why not updating
+    repo = pname;
+    rev = "552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29";
+    hash = "sha256-c/dXMIKE5CtjXQ7jJA6IiZpmWOgrFZnO3lDZOisYX30=";
   };
   goPackagePath = "github.com/ikruglov/slapper";
-  passthru.updateScript = nix-update-script { extraArgs = [ "--flake" "--version" "master" ]; };
+  passthru.updateScript = unstableGitUpdater { };
 }
