@@ -5,8 +5,8 @@ nethack.overrideAttrs (attrs: {
   src = fetchFromGitHub {
     owner = "k21971";
     repo = "EvilHack";
-    rev = "bf482bb1020d2edc0e837f41f1c53fc8bf3cd675";
-    hash = "sha256-dfmXTesLDCUfUe/4Ms7Bho1pNr7W42Dt03VfNgbxR60=";
+    rev = "3beb033895fbff91b8cd07775764d779305f7625";
+    hash = "sha256-0g9gWKmbia2kHAd8VlGYoHjyuiZ9jqNfySk0gBuzyCU=";
   };
   postPatch = ''
     ${attrs.postPatch}

@@ -7,7 +7,7 @@ cd "$repo"
 updateRepo=${1:-github:kwbauson/cfg/$(git rev-parse --abbrev-ref HEAD)}
 
 sourcesInfo=$(nix eval "$repo#sourcesInfo" --json)
-updateSourcesInfo=$(nix eval "$repo#sourcesInfo" --json)
+updateSourcesInfo=$(nix eval "$updateRepo#sourcesInfo" --json)
 
 cache=~/.cache/updates-log
 mkdir -p "$cache"
@@ -16,25 +16,33 @@ if [[ ! -e .git ]];then
   git init
 fi
 
-ignore='root git-fuzzy'
+ignore=''
+
+git remote show | while read source;do
+  if [[ $(echo "$sourcesInfo" | jq ".\"$source\"") = null ]];then
+    echo removing unused source "$source"
+    git remote remove "$source"
+  fi
+done
 
 logs=$(
   (
     echo "$sourcesInfo" | jq -r 'keys[]' | while read source;do
       if echo "$source" | grep -qFxf <(echo "$ignore" | tr ' ' '\n');then continue; fi
       read owner repo current_rev < <(echo "$sourcesInfo" | jq -r "[.\"$source\"[\"owner\",\"repo\",\"rev\"]] | @tsv")
-      new_rev=$(echo "$updateSourcesInfo" |  jq -r ".nodes.\"$source\".locked.rev")
+      url=https://github.com/$owner/$repo
+      if ! git remote show | grep -qFx "$source";then
+        git remote add "$source" "$url"
+      fi
+      new_rev=$(echo "$updateSourcesInfo" |  jq -r ".\"$source\".rev")
       if [[ $current_rev != $new_rev ]];then
-        echo "$input https://github.com/$owner/$repo $current_rev $new_rev"
+        echo "$source $url $current_rev $new_rev"
       fi
     done
-  ) | while read input url current_rev new_rev;do
-    if ! git remote show | grep -qFx "$input";then
-      git remote add "$input" "$url"
-    fi
-    echo Fetching "$input" 1>&2
-    git fetch "$input"
-    echo "----- $input -----"
+  ) | while read source url current_rev new_rev;do
+    echo Fetching "$source" 1>&2
+    git fetch "$source"
+    echo "----- $source -----"
     git -c color.ui=always log --pretty=oneline --abbrev-commit --reverse --no-merges "$current_rev".."$new_rev"
     echo
   done
