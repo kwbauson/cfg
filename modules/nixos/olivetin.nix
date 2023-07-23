@@ -8,24 +8,10 @@ let cfg = config.services.olivetin; in
   config = mkIf cfg.enable {
     systemd.services.olivetin = {
       wantedBy = [ "multi-user.target" ];
-      script =
-        let
-          olivetin = stdenv.mkDerivation {
-            inherit (sources.olivetin) pname version src;
-            nativeBuildInputs = [ autoPatchelfHook ];
-            inherit (cfg) config;
-            passAsFile = "config";
-            installPhase = ''
-              cp -r . $out
-              cp $configPath $out/config.yaml
-            '';
-          };
-        in
-        ''
-          export "PATH=/run/current-system/sw/bin:$PATH"
-          cd ${olivetin}
-          exec ./OliveTin
-        '';
+      script = ''
+        export "PATH=/run/current-system/sw/bin:$PATH"
+        exec ${olivetin}/OliveTin --configdir ${writeTextDir "config.yaml" cfg.config}
+      '';
     };
   };
 }
