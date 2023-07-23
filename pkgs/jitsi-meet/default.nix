@@ -31,7 +31,7 @@ jitsi-meet.overrideAttrs (_: {
   src = jitsi-meet-source-package;
   passthru = { inherit jitsi-meet-source-package; };
   passthru.jitsi-src = src;
-  passthru.updateScript = null;
+  passthru.updateScript = [ ];
   # passthru.updateScript = writeBashBin "update-jitsi" ''
   #   ${ pathAdd [ yarn coreutils ] }
   #   set -eo pipefail
