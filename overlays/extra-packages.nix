@@ -36,6 +36,11 @@ in
     cp ${pkgs.path}/maintainers/scripts/update.nix $out
     patch $out ${./update-nix.patch}
   '';
+  importPackage = arg:
+    (attrs: {
+      name = "${attrs.pname}-${attrs.version}";
+      inherit (attrs.package) type drvPath outPath;
+    } // attrs // attrs.passthru or { }) ((if isFunction arg then fix else id) arg);
   update-extra-packages = (import patched-update-nix {
     inherit pkgs;
     path = "extra-packages";
