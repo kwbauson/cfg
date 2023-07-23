@@ -1,28 +1,4 @@
 {
-    "bitwarden-sdk": {
-        "branch": "master",
-        "description": "Secrets Manager SDK",
-        "homepage": null,
-        "owner": "bitwarden",
-        "repo": "sdk",
-        "rev": "0654e2727c238aef3728ca86cca7427d4a8dd4f2",
-        "sha256": "0qwwg5ri1dfd7411a66iw4fzknlficqjrfm4jp8cydzry940j31n",
-        "type": "tarball",
-        "url": "https://github.com/bitwarden/sdk/archive/0654e2727c238aef3728ca86cca7427d4a8dd4f2.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "clipnotify": {
-        "branch": "master",
-        "description": "Notify on new X clipboard events",
-        "homepage": null,
-        "owner": "cdown",
-        "repo": "clipnotify",
-        "rev": "25ba143c7da8ae0f196cb0db2797d30e6d04e15c",
-        "sha256": "0f2c7ckxngybl868llcfglmh71agscajm3bphjpqk9qiqzin4hlv",
-        "type": "tarball",
-        "url": "https://github.com/cdown/clipnotify/archive/25ba143c7da8ae0f196cb0db2797d30e6d04e15c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "devenv": {
         "branch": "main",
         "description": "Fast, Declarative, Reproducible, and Composable Developer Environments",
@@ -141,18 +117,6 @@
         "sha256": "0k6z9742mng7j3fz8bgwr5kqlabdk2mf1qpjgw102bsjg5hxphrh",
         "type": "tarball",
         "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/1b5780117eeebdfcd221ce45823a1ddef8399848.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "slapper": {
-        "branch": "master",
-        "description": "Simple load testing tool with real-time updated histogram of request timings",
-        "homepage": "",
-        "owner": "ikruglov",
-        "repo": "slapper",
-        "rev": "552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29",
-        "sha256": "0zaz30mkmnahvv79j59bx1c6d6l9i0729qqfbmijpr44h8q5gxvk",
-        "type": "tarball",
-        "url": "https://github.com/ikruglov/slapper/archive/552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "swarm": {
