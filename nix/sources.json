@@ -75,18 +75,6 @@
         "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/1b5780117eeebdfcd221ce45823a1ddef8399848.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "swarm": {
-        "branch": "main",
-        "description": "Resource gathering + programming game",
-        "homepage": null,
-        "owner": "swarm-game",
-        "repo": "swarm",
-        "rev": "f9c22635b5160c0610683d55b387f7157f6ee8f5",
-        "sha256": "1qxdjgqm1rdk4356sm3jwlgccmgndlgfm7pyplnj4ga9v9v30hcz",
-        "type": "tarball",
-        "url": "https://github.com/swarm-game/swarm/archive/f9c22635b5160c0610683d55b387f7157f6ee8f5.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "waterfox": {
         "sha256": "14r6cfdpgidi3bnz1hirf2r2vjmazvdb9fvb0l7q92x9wbfyrg3q",
         "type": "tarball",
