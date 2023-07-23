@@ -23,18 +23,6 @@
         "url": "https://github.com/bigH/git-fuzzy/archive/0d20681d67b0270c2eab3cffc0cd792224d4833e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "git-trim": {
-        "branch": "master",
-        "description": "Utility to delete git branches interactively",
-        "homepage": null,
-        "owner": "dstnbrkr",
-        "repo": "git-trim",
-        "rev": "68322f146a443937e8f59aab4fa3dd0eb976a4db",
-        "sha256": "1y1z6hzfhs42pwkhwfa8qh1508rhx23idnnq1zmaabxyjkh42v01",
-        "type": "tarball",
-        "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "haskell-nix": {
         "branch": "master",
         "description": "Alternative Haskell Infrastructure for Nixpkgs",
