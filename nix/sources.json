@@ -50,12 +50,5 @@
         "type": "tarball",
         "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/1b5780117eeebdfcd221ce45823a1ddef8399848.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "waterfox": {
-        "sha256": "14r6cfdpgidi3bnz1hirf2r2vjmazvdb9fvb0l7q92x9wbfyrg3q",
-        "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.5.en-US.linux-x86_64.tar.bz2",
-        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.1.5"
     }
 }
