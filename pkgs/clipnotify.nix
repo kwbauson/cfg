@@ -1,11 +1,11 @@
 scope: with scope;
 clipnotify.overrideAttrs (_: {
-  version = "unstable-2022-11-08";
+  version = "unstable-TODO";
   src = fetchFromGitHub {
     owner = "cdown";
     repo = pname;
-    rev = "18a36bc57c77e88b684da0485510fd69ae47b593";
-    hash = "sha256-dQzoH4+SHv1+RRWtfqNARp9qiQvg+54bY4HSw423mFk=";
+    rev = "22f7cb09d0b99af0aae7109aaff73760ef2dd5e3";
+    hash = "sha256-b3EQmZJr4XGzA4j/PAIodRV1upe5t7qVDh95SUttfuw=";
   };
   passthru.updateScript = unstableGitUpdater { };
 })
