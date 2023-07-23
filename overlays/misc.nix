@@ -75,4 +75,15 @@ final: prev: with final.scope; {
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
+  sourcesInfo = pipe ../flake.lock [
+    readFile
+    unsafeDiscardStringContext
+    fromJSON
+    (x: x.nodes)
+    (filterAttrs (name: _: name != "root"))
+    (mapAttrValues (x: { inherit (x.locked) owner repo rev; }))
+  ] // pipe extra-packages [
+    (filterAttrs (_: pkg: pkg ? src.rev))
+    (mapAttrValues (pkg: { inherit (pkg.src) owner repo rev; }))
+  ];
 }
