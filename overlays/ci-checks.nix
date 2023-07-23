@@ -7,6 +7,7 @@ let
       (optionals isDarwin [
         "gameconqueror"
         "waterfox"
+        "olivetin"
         "qutebrowser"
         "qtbr"
         "jitsi-meet"
