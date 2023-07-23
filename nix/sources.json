@@ -11,18 +11,6 @@
         "url": "https://github.com/cachix/devenv/archive/def76d0ba0d3743bdfa3a8fdb3903e0928b3c6f0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "git-fuzzy": {
-        "branch": "main",
-        "description": "interactive `git` with the help of `fzf`",
-        "homepage": "",
-        "owner": "bigH",
-        "repo": "git-fuzzy",
-        "rev": "0d20681d67b0270c2eab3cffc0cd792224d4833e",
-        "sha256": "0f92qdgj5pbqyhhs20hj8ax4jnh1rgbd9nzzq12a92pbq3z2r8v2",
-        "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/0d20681d67b0270c2eab3cffc0cd792224d4833e.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "haskell-nix": {
         "branch": "master",
         "description": "Alternative Haskell Infrastructure for Nixpkgs",
