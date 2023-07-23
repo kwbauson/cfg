@@ -10,7 +10,7 @@ importPackage (attrs: {
   };
   package =
     let
-      haskell-nix-flake = (import inputs.flake-compat { src = sources.haskell-nix; }).defaultNix;
+      haskell-nix-flake = (import inputs.flake-compat { inherit (pkgs.haskell-nix) src; }).defaultNix;
       haskell-nix = haskell-nix-flake.legacyPackages.${system}.haskell-nix;
       project = haskell-nix.project { src = attrs.src // { name = "swarm"; }; projectFileName = "stack.yaml"; };
     in
