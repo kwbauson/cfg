@@ -19,18 +19,6 @@
         "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
         "version": "2023-07-23-033400"
     },
-    "npmlock2nix": {
-        "branch": "master",
-        "description": null,
-        "homepage": null,
-        "owner": "tweag",
-        "repo": "npmlock2nix",
-        "rev": "9197bbf397d76059a76310523d45df10d2e4ca81",
-        "sha256": "1ddfby72fsnpn4yw43g4zxvg6jzlk5hi5cfnnccg9jgw53ckr4xh",
-        "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/9197bbf397d76059a76310523d45df10d2e4ca81.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "olivetin": {
         "sha256": "0bi9ab6yc2q7hqd3sg529vxyh3sjd66rls12fh5sh47dxpm4lg4a",
         "type": "tarball",
