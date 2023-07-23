@@ -1,12 +1,13 @@
 final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
-    (attrValues (removeAttrs extra-packages (flatten [
+    (attrValues (removeAttrs (filterAttrs (_: isDerivation) extra-packages) (flatten [
       "swarm" # too big
       "evilhack" # broken
       (optionals isDarwin [
         "gameconqueror"
         "waterfox"
+        "olivetin"
         "qutebrowser"
         "qtbr"
         "jitsi-meet"

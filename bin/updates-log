@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages git nix niv jq bat
-set -eo pipefail
-inputs_repo=${1:-~/cfg}
-cd "$inputs_repo"
-upstream=${2:-origin/$(git rev-parse --abbrev-ref HEAD)}
+# with-packages git nix jq bat
+set -euo pipefail
+repo=${2:-~/cfg}
+cd "$repo"
+updateRepo=${1:-github:kwbauson/cfg/$(git rev-parse --abbrev-ref HEAD)}
 
-current_flake_lock=$(git show HEAD:flake.lock)
-new_flake_lock=$(git show "$upstream":flake.lock)
-
-current_sources_json=$(git show HEAD:nix/sources.json)
-new_sources_json=$(git show "$upstream":nix/sources.json)
+sourcesInfo=$(nix --refresh eval "$repo#sourcesInfo" --json)
+updateSourcesInfo=$(nix --refresh eval "$updateRepo#sourcesInfo" --json)
 
 cache=~/.cache/updates-log
 mkdir -p "$cache"
@@ -19,37 +16,33 @@ if [[ ! -e .git ]];then
   git init
 fi
 
-updates=()
+ignore=''
 
-ignore='root git-fuzzy'
+git remote show | while read source;do
+  if [[ $(echo "$sourcesInfo" | jq ".\"$source\"") = null ]];then
+    echo removing unused source "$source"
+    git remote remove "$source"
+  fi
+done
 
 logs=$(
   (
-    echo "$current_flake_lock" | jq -r '.nodes | keys[]' | while read input;do
-      if echo "$input" | grep -qFxf <(echo "$ignore" | tr ' ' '\n');then continue; fi
-      read current_rev owner repo repoType < <(echo "$current_flake_lock" | jq -r "[.nodes.\"$input\".locked[\"rev\",\"owner\",\"repo\",\"type\"]] | @tsv")
-      if [[ $repoType != github ]];then continue; fi
-      new_rev=$(echo "$new_flake_lock" | jq -r ".nodes.\"$input\".locked.rev")
+    echo "$sourcesInfo" | jq -r 'keys[]' | while read source;do
+      if echo "$source" | grep -qFxf <(echo "$ignore" | tr ' ' '\n');then continue; fi
+      read owner repo current_rev < <(echo "$sourcesInfo" | jq -r "[.\"$source\"[\"owner\",\"repo\",\"rev\"]] | @tsv")
+      url=https://github.com/$owner/$repo
+      if ! git remote show | grep -qFx "$source";then
+        git remote add "$source" "$url"
+      fi
+      new_rev=$(echo "$updateSourcesInfo" |  jq -r ".\"$source\".rev")
       if [[ $current_rev != $new_rev ]];then
-        echo "$input https://github.com/$owner/$repo $current_rev $new_rev"
+        echo "$source $url $current_rev $new_rev"
       fi
     done
-    echo "$current_sources_json" | jq -r 'keys[]' | while read input;do
-      if echo "$input" | grep -qFxf <(echo "$ignore" | tr ' ' '\n');then continue; fi
-      read current_rev owner repo < <(echo "$current_sources_json" | jq -r "[.\"$input\"[\"rev\",\"owner\",\"repo\"]] | @tsv")
-      if [[ -z $current_rev ]];then continue; fi
-      new_rev=$(echo "$new_sources_json" | jq -r ".\"$input\".rev")
-      if [[ $current_rev != $new_rev ]];then
-        echo "$input https://github.com/$owner/$repo $current_rev $new_rev"
-      fi
-    done
-  ) | while read input url current_rev new_rev;do
-    if ! git remote show | grep -qFx "$input";then
-      git remote add "$input" "$url"
-    fi
-    echo Fetching "$input" 1>&2
-    git fetch "$input"
-    echo "----- $input -----"
+  ) | while read source url current_rev new_rev;do
+    echo Fetching "$source" 1>&2
+    git fetch "$source"
+    echo "----- $source -----"
     git -c color.ui=always log --pretty=oneline --abbrev-commit --reverse --no-merges "$current_rev".."$new_rev"
     echo
   done
