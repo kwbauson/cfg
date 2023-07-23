@@ -43,13 +43,15 @@ in
       attrs
       (attrs.passthru or { })
     ]) ((if isFunction arg then fix else id) arg);
-  update-extra-packages = (import patched-update-nix {
-    inherit pkgs;
+  package-updater = args: writeBashBin "updater" ''
+    ${pathAdd [ curl ]}
+    echo | ${getExe (import patched-update-nix ({ inherit pkgs; } // args))}
+  '';
+  update-extra-packages = (package-updater {
     path = "extra-packages";
   }).overrideAttrs (_: {
     passthru = forAttrNames extra-packages (name:
-      import patched-update-nix {
-        inherit pkgs;
+      package-updater {
         package = "extra-packages.${name}";
       }
     );
