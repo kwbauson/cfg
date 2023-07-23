@@ -11,18 +11,6 @@
         "url": "https://github.com/cachix/devenv/archive/def76d0ba0d3743bdfa3a8fdb3903e0928b3c6f0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "haskell-nix": {
-        "branch": "master",
-        "description": "Alternative Haskell Infrastructure for Nixpkgs",
-        "homepage": "https://input-output-hk.github.io/haskell.nix",
-        "owner": "input-output-hk",
-        "repo": "haskell.nix",
-        "rev": "c7e8f3e506549575166898aec318a04442973f03",
-        "sha256": "0kr7jyxsxq5pzv82ny9s9k6n2ci5anshbvimpxxybjj4rh9ifaip",
-        "type": "tarball",
-        "url": "https://github.com/input-output-hk/haskell.nix/archive/c7e8f3e506549575166898aec318a04442973f03.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "jitsi-meet": {
         "branch": "e1ac000cd1f15642218e80ded98ee19188cf2b17",
         "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
