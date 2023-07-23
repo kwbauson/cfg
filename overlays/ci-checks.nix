@@ -1,7 +1,7 @@
 final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
-    (attrValues (removeAttrs extraPackages (flatten [
+    (attrValues (removeAttrs extra-packages (flatten [
       "swarm" # too big
       "evilhack" # broken
       (optionals isDarwin [

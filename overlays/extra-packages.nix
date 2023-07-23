@@ -1,5 +1,5 @@
 final: prev: with prev.scope-lib; let
-  extraPackages = mapAttrs
+  extra-packages = mapAttrs
     (n: f: prev.scope.callPackage f (prev.scope // rec {
       name = "${pname}-${version}";
       pname = n;
@@ -9,4 +9,4 @@ final: prev: with prev.scope-lib; let
     }))
     (filterAttrs (_: v: !isPath v) (import' ../pkgs));
 in
-{ inherit extraPackages; } // extraPackages
+{ inherit extra-packages; } // extra-packages
