@@ -12,16 +12,21 @@ let
     )
     (filter (x: x.name != null))
     listToAttrs
-    (mapAttrs (pname: path: prev.callPackage path
-      (
-        optionalAttrs (functionArgs (import path) == { }) (final.scope // rec {
+    (mapAttrs (pname: path:
+      prev.callPackage path
+        (optionalAttrs (functionArgs (import path) == { }) (final.scope // rec {
           inherit pname;
           version = src.version or src.rev or "unversioned";
           name = "${pname}-${version}";
           src = prev.scope.sources.${pname} or null;
           ${pname} = prev.${pname};
-        })
-      ) // { meta = prev.${pname}.meta or { } // { position = "${toString path}:1"; }; }))
+        }))
+      // {
+        meta = prev.${pname}.meta or { } // {
+          position = "${toString path}:1";
+        };
+      }
+    ))
   ];
 in
 {
