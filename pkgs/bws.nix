@@ -6,7 +6,7 @@ rustPlatform.buildRustPackage {
     owner = "bitwarden";
     repo = "sdk";
     rev = "0654e2727c238aef3728ca86cca7427d4a8dd4f2";
-    sha256 = "sha256-NgwJSPL5N8/QlaS6LDGLjtr5HeHRGBUCOc21EHN5nGM=";
+    hash = "sha256-NgwJSPL5N8/QlaS6LDGLjtr5HeHRGBUCOc21EHN5nGM=";
   };
   cargoHash = "sha256-EYlfaMPPIlX2n9YgmZKOz6zqLjEy3e/x92OtMmPpqtc=";
   buildAndTestSubdir = "crates/bws";

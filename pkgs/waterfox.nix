@@ -4,7 +4,7 @@ stdenv.mkDerivation (attrs: {
   version = "G4.1.5";
   src = fetchurl {
     url = "https://cdn.waterfox.net/releases/linux64/installer/${attrs.pname}-${attrs.version}.en-US.linux-x86_64.tar.bz2";
-    sha256 = "E/PFhKkMUK0P6QBtH+CQbt/aoCztmfDwJwkNIm7Q+UI=";
+    hash = "sha256-TODO";
   };
   nativeBuildInputs = [ autoPatchelfHook ];
   buildInputs = firefox-unwrapped.buildInputs ++ [ gtk2 ];

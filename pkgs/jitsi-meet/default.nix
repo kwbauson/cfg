@@ -4,7 +4,7 @@ let
     owner = "jitsi";
     repo = pname;
     rev = "e1ac000cd1f15642218e80ded98ee19188cf2b17";
-    sha256 = "sha256-7wKpUYm6KxNy4W8i4Hcctw6jSiV0+gbz0FnuEcqmjpM=";
+    hash = "sha256-7wKpUYm6KxNy4W8i4Hcctw6jSiV0+gbz0FnuEcqmjpM=";
   };
   node_modules = mkYarnModulesWithRebuild {
     packageJSON = "${src}/package.json";
