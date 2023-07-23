@@ -8,12 +8,6 @@ builtins // pkgs.lib // {
   inherit (importDir ./.) machines constants;
   inherit (flake) modules overlays;
   inherit (pkgs) fetchurl;
-  sources = mapAttrs
-    (pname: src: {
-      inherit pname src;
-      version = src.version or src.rev or "unversioned";
-    } // src)
-    (import ./nix/sources.nix { inherit system pkgs; });
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
@@ -110,11 +104,6 @@ builtins // pkgs.lib // {
       chmod +x $out/bin/${pname}
     '';
   };
-  dmgOverride = name: pkg: with rec {
-    src = sources."dmg-${name}";
-    msg = "${name}: src ${src.version} != pkg ${pkg.version}";
-    checkVersion = lib.assertMsg (pkg.version == src.version) msg;
-  }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
   importNixpkgs = args:
     let
       helper =
