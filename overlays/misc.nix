@@ -7,15 +7,6 @@ final: prev: with final.scope; {
     export NIX_CONFIG=$(< ${writeText "nix.conf" nixConfBase})$'\n'$NIX_CONFIG
     exec "$exePath" "$@"
   '';
-  nix-index-database = stdenv.mkDerivation {
-    name = "nix-index-database";
-    src = fetchurl { inherit (sources.nix-index-database) url sha256; };
-    dontUnpack = true;
-    installPhase = ''
-      mkdir $out
-      cp $src $out/files
-    '';
-  };
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =
