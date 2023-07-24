@@ -2,16 +2,13 @@ final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
     (pipe extra-packages [
-      (filterAttrs (_: pkg: all id [
+      attrValues
+      (filter (pkg: all id [
         (isDerivation pkg)
         (!pkg.meta.broken or true)
         (!pkg.meta.skipCi or true)
         (meta.availableOn system pkg)
       ]))
-      (ps: removeAttrs ps (flatten [
-        "swarm" # too big
-      ]))
-      attrValues
     ])
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
