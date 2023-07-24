@@ -4,21 +4,31 @@ let
     (pipe extra-packages [
       (filterAttrs (_: pkg: all id [
         (isDerivation pkg)
-        (elem system (pkg.meta.platforms or [ ]))
+        (!pkg.meta.broken or true)
+        (elem system pkg.meta.platforms or [ system ])
       ]))
-      (ps: removeAttrs ps (flatten [
+      (ps: attrValues (removeAttrs ps (flatten [
         "swarm" # too big
-        "evilhack" # broken
         (optionals isDarwin [
-          # "gameconqueror"
           "waterfox"
-          # "olivetin"
           "qutebrowser"
           "qtbr"
           "jitsi-meet"
         ])
-      ]))
+      ])))
     ])
+    # (attrValues (removeAttrs (filterAttrs (_: isDerivation) extra-packages) (flatten [
+    #   "swarm" # too big
+    #   "evilhack" # broken
+    #   (optionals isDarwin [
+    #     "gameconqueror"
+    #     "waterfox"
+    #     "olivetin"
+    #     "qutebrowser"
+    #     "qtbr"
+    #     "jitsi-meet"
+    #   ])
+    # ])))
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
   ]);

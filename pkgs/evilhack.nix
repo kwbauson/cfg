@@ -17,5 +17,6 @@ nethack.overrideAttrs (attrs: {
       -i sys/unix/sysconf
   '';
   postInstall = lib.replaceStrings [ "nethack" ] [ pname ] attrs.postInstall;
+  meta.broken = true;
   passthru.updateScript = unstableGitUpdater { };
 })
