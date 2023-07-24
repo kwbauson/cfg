@@ -5,7 +5,8 @@ let
       (filterAttrs (_: pkg: all id [
         (isDerivation pkg)
         (!pkg.meta.broken or true)
-        (meta.availableOn pkg system)
+        (!pkg.meta.skipCi or true)
+        (meta.availableOn system pkg)
       ]))
       (ps: removeAttrs ps (flatten [
         "swarm" # too big
