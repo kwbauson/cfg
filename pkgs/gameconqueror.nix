@@ -19,4 +19,5 @@ scanmem.overrideAttrs (old: {
       --prefix GI_TYPELIB_PATH : "$GI_TYPELIB_PATH" \
       --prefix XDG_DATA_DIRS : "$XDG_DATA_DIRS"
   '';
+  meta.platforms = platforms.linux;
 })
