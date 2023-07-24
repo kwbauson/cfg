@@ -9,12 +9,6 @@ let
       ]))
       (ps: attrValues (removeAttrs ps (flatten [
         "swarm" # too big
-        (optionals isDarwin [
-          "waterfox"
-          "qutebrowser"
-          "qtbr"
-          "jitsi-meet"
-        ])
       ])))
     ])
     # (attrValues (removeAttrs (filterAttrs (_: isDerivation) extra-packages) (flatten [

@@ -13,6 +13,7 @@ stdenv.mkDerivation (attrs: {
     cp -r . $out/share/waterfox
     ln -s $out/share/waterfox/waterfox $out/bin
   '';
+  meta.platforms = platforms.linux;
   passthru.updateScript = writeShellScript "update-waterfox" ''
     ${common-updater-scripts}/bin/update-source-version waterfox "$(
       curl https://cdn.waterfox.net/releases/linux64/installer/ |
