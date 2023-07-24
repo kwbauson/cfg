@@ -6,7 +6,7 @@ let
         (isDerivation pkg)
         (elem system (pkg.meta.platforms or [ ]))
       ]))
-      (ps: removeAttrs (ps (flatten [
+      (ps: removeAttrs ps (flatten [
         "swarm" # too big
         "evilhack" # broken
         (optionals isDarwin [
@@ -17,7 +17,7 @@ let
           "qtbr"
           "jitsi-meet"
         ])
-      ])))
+      ]))
     ])
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
