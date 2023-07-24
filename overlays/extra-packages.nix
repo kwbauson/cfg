@@ -22,11 +22,7 @@ let
               ${pname} = prev.${pname};
             }));
       in
-      pkg // {
-        meta = pkg.meta or { } // {
-          position = "${toString path}:1";
-        };
-      }
+      addMetaAttrs { position = "${toString path}:1"; } pkg
     ))
   ];
 in

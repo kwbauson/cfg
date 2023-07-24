@@ -5,24 +5,13 @@ let
       (filterAttrs (_: pkg: all id [
         (isDerivation pkg)
         (!pkg.meta.broken or true)
-        (elem system pkg.meta.platforms or [ system ])
+        (meta.availabeOn pkg system)
       ]))
-      (ps: attrValues (removeAttrs ps (flatten [
+      (ps: removeAttrs ps (flatten [
         "swarm" # too big
-      ])))
+      ]))
+      attrValues
     ])
-    # (attrValues (removeAttrs (filterAttrs (_: isDerivation) extra-packages) (flatten [
-    #   "swarm" # too big
-    #   "evilhack" # broken
-    #   (optionals isDarwin [
-    #     "gameconqueror"
-    #     "waterfox"
-    #     "olivetin"
-    #     "qutebrowser"
-    #     "qtbr"
-    #     "jitsi-meet"
-    #   ])
-    # ])))
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
   ]);
