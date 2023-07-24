@@ -20,9 +20,6 @@ logs=$(
       if echo "$source" | grep -qFxf <(echo "$ignore" | tr ' ' '\n');then continue; fi
       read owner repo current_rev < <(echo "$sourcesInfo" | jq -r "[.\"$source\"[\"owner\",\"repo\",\"rev\"]] | @tsv")
       url=https://github.com/$owner/$repo
-      if ! git remote show | grep -qFx "$source";then
-        git remote add "$source" "$url"
-      fi
       new_rev=$(echo "$updateSourcesInfo" |  jq -r ".\"$source\".rev")
       if [[ $current_rev != $new_rev ]];then
         echo "$source $url $current_rev $new_rev"
@@ -36,7 +33,7 @@ logs=$(
       git init -q
       git remote add origin "$url"
     fi
-    git fetch origin "$new_rev"
+    git fetch origin
     echo "----- $source -----"
     git -c color.ui=always log --pretty=oneline --abbrev-commit --reverse --no-merges "$current_rev".."$new_rev"
     echo
