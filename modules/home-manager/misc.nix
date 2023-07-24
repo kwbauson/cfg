@@ -174,7 +174,7 @@
         [ "xdg-open --" "has sxiv" "sxiv --" ]
         [ "xdg-open" "has nsxiv" "nsxiv -a --" ]
         (readFile "${ranger}/share/doc/ranger/config/rifle.conf");
-      "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
+      "ranger/plugins/ranger_devicons".source = ranger_devicons;
       "emborg/settings".text = ''
         configurations = "default"
         encryption = "none"
