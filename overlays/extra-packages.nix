@@ -12,18 +12,12 @@ let
     )
     (filter (x: x.name != null))
     listToAttrs
-    (mapAttrs (pname: path:
-      let
-        pkg = prev.callPackage path
-          (optionalAttrs
-            (functionArgs (import path) == { })
-            (final.scope // rec {
-              inherit pname;
-              ${pname} = prev.${pname};
-            }));
-      in
-      addMetaAttrs { position = "${toString path}:1"; } pkg
-    ))
+    (mapAttrs (pname: path: pipeValue [
+      (final.scope // { inherit pname; ${pname} = prev.${pname}; })
+      (optionalAttrs (functionArgs (import path) == { }))
+      (prev.callPackage path)
+      (addMetaAttrs { position = "${toString path}:1"; })
+    ]))
   ];
 in
 {

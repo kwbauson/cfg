@@ -23,6 +23,7 @@ builtins // pkgs.lib // {
     mapAttrs
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
+  pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
 
   importDir = dir: pipe dir [
     readDirPaths
