@@ -7,15 +7,6 @@ final: prev: with final.scope; {
     export NIX_CONFIG=$(< ${writeText "nix.conf" nixConfBase})$'\n'$NIX_CONFIG
     exec "$exePath" "$@"
   '';
-  nix-index-database = stdenv.mkDerivation {
-    name = "nix-index-database";
-    src = fetchurl { inherit (sources.nix-index-database) url sha256; };
-    dontUnpack = true;
-    installPhase = ''
-      mkdir $out
-      cp $src $out/files
-    '';
-  };
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =
@@ -47,7 +38,6 @@ final: prev: with final.scope; {
   inherit (nle-cfg.pkgs) fordir;
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
   fakes3 = nle-cfg.pkgs.bundler-env.gems.fakes3.override { ruby = ruby_2_7; };
-  npmlock2nix = import sources.npmlock2nix { inherit pkgs; };
   self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
     cp ${self-source}/flake.lock $out
     chmod +w $out
@@ -85,4 +75,15 @@ final: prev: with final.scope; {
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
+  sourcesInfo = pipe ../flake.lock [
+    readFile
+    unsafeDiscardStringContext
+    fromJSON
+    (x: x.nodes)
+    (filterAttrs (name: _: name != "root"))
+    (mapAttrValues (x: { inherit (x.locked) owner repo rev; }))
+  ] // pipe extra-packages [
+    (filterAttrs (_: pkg: pkg ? src.rev))
+    (mapAttrValues (pkg: { inherit (pkg.src) owner repo rev; }))
+  ];
 }

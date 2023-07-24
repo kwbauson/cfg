@@ -2,17 +2,12 @@ pkgs: pkgs.lib.fix (scope: with scope;
 pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
-pkgs.lib // builtins // {
+builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (importDir ./.) machines constants;
   inherit (flake) modules overlays;
-  sources = mapAttrs
-    (pname: src: {
-      inherit pname src;
-      version = src.version or src.rev or "unversioned";
-    } // src)
-    (import ./nix/sources.nix { inherit system pkgs; });
+  inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
@@ -28,6 +23,7 @@ pkgs.lib // builtins // {
     mapAttrs
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
+  pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
 
   importDir = dir: pipe dir [
     readDirPaths
@@ -109,11 +105,6 @@ pkgs.lib // builtins // {
       chmod +x $out/bin/${pname}
     '';
   };
-  dmgOverride = name: pkg: with rec {
-    src = sources."dmg-${name}";
-    msg = "${name}: src ${src.version} != pkg ${pkg.version}";
-    checkVersion = lib.assertMsg (pkg.version == src.version) msg;
-  }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
   importNixpkgs = args:
     let
       helper =

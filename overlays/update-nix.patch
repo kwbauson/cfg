@@ -1,0 +1,51 @@
+diff --git a/maintainers/scripts/update.nix b/maintainers/scripts/update.nix
+index 3aff32caf58..7673b717f13 100755
+--- a/maintainers/scripts/update.nix
++++ b/maintainers/scripts/update.nix
+@@ -10,20 +10,12 @@
+ , predicate ? null
+ , path ? null
+ , max-workers ? null
+-, include-overlays ? false
+ , keep-going ? null
+ , commit ? null
++, pkgs
+ }:
+ 
+ let
+-  pkgs = import ./../../default.nix (
+-    if include-overlays == false then
+-      { overlays = []; }
+-    else if include-overlays == true then
+-      { } # Let Nixpkgs include overlays impurely.
+-    else { overlays = include-overlays; }
+-  );
+-
+   inherit (pkgs) lib;
+ 
+   /* Remove duplicate elements from the list based on some extracted value. O(n^2) complexity.
+@@ -208,20 +200,7 @@ let
+ 
+   args = [ packagesJson ] ++ optionalArgs;
+ 
+-in pkgs.stdenv.mkDerivation {
+-  name = "nixpkgs-update-script";
+-  buildCommand = ''
+-    echo ""
+-    echo "----------------------------------------------------------------"
+-    echo ""
+-    echo "Not possible to update packages using \`nix-build\`"
+-    echo ""
+-    echo "${helpText}"
+-    echo "----------------------------------------------------------------"
+-    exit 1
+-  '';
+-  shellHook = ''
+-    unset shellHook # do not contaminate nested shells
+-    exec ${pkgs.python3.interpreter} ${./update.py} ${builtins.concatStringsSep " " args}
+-  '';
+-}
++in pkgs.writeShellScriptBin "nixpkgs-update-script" ''
++  unset shellHook # do not contaminate nested shells
++  exec ${pkgs.python3.interpreter} ${pkgs.path}/maintainers/scripts/update.py ${builtins.concatStringsSep " " args}
++''
