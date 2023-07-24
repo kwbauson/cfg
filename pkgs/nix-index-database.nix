@@ -11,5 +11,5 @@ stdenv.mkDerivation (attrs: {
     mkdir $out
     cp $src $out/files
   '';
-  updateScript = nix-update-script { extraArgs = [ "--flake" ]; };
+  passthru.updateScript = nix-update-script { extraArgs = [ "--flake" ]; };
 })

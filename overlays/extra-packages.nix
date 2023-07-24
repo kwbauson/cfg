@@ -13,16 +13,16 @@ let
     (filter (x: x.name != null))
     listToAttrs
     (mapAttrs (pname: path:
-      prev.callPackage path
-        (optionalAttrs (functionArgs (import path) == { }) (final.scope // rec {
-          inherit pname;
-          ${pname} = prev.${pname};
-        }))
-      // {
-        meta = prev.${pname}.meta or { } // {
-          position = "${toString path}:1";
-        };
-      }
+      let
+        pkg = prev.callPackage path
+          (optionalAttrs
+            (functionArgs (import path) == { })
+            (final.scope // rec {
+              inherit pname;
+              ${pname} = prev.${pname};
+            }));
+      in
+      addMetaAttrs { position = "${toString path}:1"; } pkg
     ))
   ];
 in

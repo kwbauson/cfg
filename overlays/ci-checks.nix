@@ -1,18 +1,15 @@
 final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
-    (attrValues (removeAttrs (filterAttrs (_: isDerivation) extra-packages) (flatten [
-      "swarm" # too big
-      "evilhack" # broken
-      (optionals isDarwin [
-        "gameconqueror"
-        "waterfox"
-        "olivetin"
-        "qutebrowser"
-        "qtbr"
-        "jitsi-meet"
-      ])
-    ])))
+    (pipe extra-packages [
+      attrValues
+      (filter (pkg: all id [
+        (isDerivation pkg)
+        (!pkg.meta.broken or true)
+        (!pkg.meta.skipCi or true)
+        (meta.availableOn system pkg)
+      ]))
+    ])
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
   ]);
