@@ -15,6 +15,6 @@ importPackage (attrs: {
       project = haskell-nix.project { src = attrs.src // { name = "swarm"; }; projectFileName = "stack.yaml"; };
     in
     project.swarm.components.exes.swarm;
-  meta.skipCi = true;
+  meta.skipBuild = true;
   passthru.updateScript = unstableGitUpdater { };
 })
