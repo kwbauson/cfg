@@ -5,7 +5,6 @@
     keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
       BROWSER = "firefox";
-      BUGSNAG_RELEASE_STAGE = "local";
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
       LESS = "-iR";
@@ -25,7 +24,6 @@
       BUNDLE_USER_PLUGIN = "$XDG_DATA_HOME/bundle";
       RLWRAP_HOME = "$XDG_DATA_HOME/rlwrap";
       SOLARGRAPH_CACHE = "$XDG_CACHE_HOME/solargraph";
-      PBGOPY_SERVER = "http://kwbauson.com:9090/";
       ${attrIf isDarwin "LANG"} = "en_US.UTF-8";
     };
   };
