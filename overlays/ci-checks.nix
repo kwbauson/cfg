@@ -2,8 +2,7 @@ final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
     (attrValues checked-extra-packages)
-    (nle.build { path = writeTextDir "meme" ''meme''; })
-    (attrValues nle.scripts)
+    (attrValues (forAttrValues checked-extra-packages (pkg: attrValues (pkg.tests or { }))))
   ]);
   checks-script = writeBash "checks" ''
     echo ${checks}
@@ -13,11 +12,17 @@ let
     ${exe nle} init
     echo "scope: with scope; [ hello ]" > local.nix
     ${exe nle}
-    ${exe fakes3} --help
   '';
   getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}-${name}" switch.${machine}.${name}) names));
 in
 {
+  makeTest = commands: runCommand "test" { } ''
+    ${writeShellScript "commands" ''
+      set -xeuo pipefail
+      ${commands}
+    ''} > $out
+    echo OK >> $out
+  '';
   checked-extra-packages = filterAttrs
     (_: pkg: all id [
       (isDerivation pkg)

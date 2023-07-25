@@ -13,7 +13,7 @@ let
     (filter (x: x.name != null))
     listToAttrs
     (mapAttrs (pname: path: pipeValue [
-      (final.scope // { inherit pname; ${pname} = prev.${pname}; })
+      (final.scope // { inherit pname; prev = prev.${pname}; })
       (optionalAttrs (functionArgs (import path) == { }))
       (prev.callPackage path)
       (addMetaAttrs { position = "${toString path}:1"; })
@@ -23,7 +23,7 @@ in
 {
   inherit extra-packages;
   # make this not assume you're working from nixpkgs root
-  patched-update-nix = with prev.scope; runCommand "patched" { } ''
+  patched-update-nix = runCommand "patched" { } ''
     cp ${pkgs.path}/maintainers/scripts/update.nix $out
     patch $out ${./update-nix.patch}
   '';
