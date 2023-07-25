@@ -37,4 +37,5 @@ in
       ln -s ${linkFarm "builds" drvs} $out/builds
     '')
   ).${system};
+  checks.default = ci-checks;
 }
