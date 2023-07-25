@@ -18,7 +18,7 @@
         overlays.default
       ];
     });
-    # packages = forAttrValues legacyPackages (pkgs: filterAttrs (_: isDerivation) pkgs.extra-packages);
+    packages = forAttrValues legacyPackages (getAttr "checked-extra-packages");
     overlays = import ./overlays scope;
     nixosModules = modules;
     checks = forAttrValues legacyPackages (getAttr "checks");

@@ -21,9 +21,9 @@ in
   checked-extra-packages = filterAttrs
     (_: pkg: all id [
       (isDerivation pkg)
-      (!(pkg.meta.broken or false))
+      (!pkg.meta.broken or false)
       (!pkg.meta.skipBuild or false)
-      # (meta.availableOn system pkg)
+      (elem system pkg.meta.platforms or [ system ])
     ])
     extra-packages;
   ci-checks = (forAttrValues
