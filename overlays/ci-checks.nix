@@ -1,15 +1,7 @@
 final: prev: with final.scope;
 let
   checks = linkFarmFromDrvs "checks" (flatten [
-    (pipe extra-packages [
-      attrValues
-      (filter (pkg: all id [
-        (isDerivation pkg)
-        (!pkg.meta.broken or true)
-        (!pkg.meta.skipCi or true)
-        (meta.availableOn system pkg)
-      ]))
-    ])
+    (attrValues checked-extra-packages)
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
   ]);
@@ -26,6 +18,14 @@ let
   getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}-${name}" switch.${machine}.${name}) names));
 in
 {
+  checked-extra-packages = filterAttrs
+    (_: pkg: all id [
+      (isDerivation pkg)
+      (!pkg.meta.broken or false)
+      (!pkg.meta.skipBuild or false)
+      (elem system pkg.meta.platforms or [ system ])
+    ])
+    extra-packages;
   ci-checks = (forAttrValues
     {
       x86_64-linux = getSwitchScripts [ "noa" "nos" "nob" ] nixosConfigurations;
