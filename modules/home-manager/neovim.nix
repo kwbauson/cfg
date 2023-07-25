@@ -6,7 +6,7 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    extraPackages = attrValues { inherit nimlsp nil solargraph terraform-ls; } ++ optionals isLinux [ lua-language-server ];
+    extraPackages = attrValues { inherit nimlsp nil solargraph terraform-ls lua-language-server; };
     withNodeJs = true;
     coc.enable = true;
     plugins = with vimPlugins; attrValues {
