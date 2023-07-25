@@ -5,8 +5,8 @@ pkgs.flake.inputs or { } // pkgs.flake or { } //
 builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
-  inherit (importDir ./.) machines constants;
-  inherit (flake) modules overlays;
+  inherit (importDir ./.) machines constants modules;
+  inherit (flake) overlays;
   inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
