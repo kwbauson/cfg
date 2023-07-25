@@ -1,7 +1,7 @@
 scope: with scope;
 bundlerApp {
   inherit pname;
-  # ruby = ruby_2_7;
+  ruby = ruby_2_7;
   gemdir = ./.;
   exes = [ pname ];
   passthru.tests.default = makeTest ''
