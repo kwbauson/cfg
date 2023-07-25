@@ -28,6 +28,7 @@
         zathura
         ;
       sox = sox.override { enableLame = true; };
+      ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
     };
     development = {
       inherit
