@@ -1,5 +1,5 @@
 scope: with scope;
-clipnotify.overrideAttrs (_: {
+prev.overrideAttrs (_: {
   version = "unstable-2022-11-08";
   src = fetchFromGitHub {
     owner = "cdown";

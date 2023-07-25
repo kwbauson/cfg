@@ -42,11 +42,14 @@ let
       fi
     '';
   };
-  conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
-  passthru = rec { inherit build scripts; };
   pkg = override (build { path = ./.; }) {
     name = "nle";
-    passthru = { inherit build scripts; };
+    passthru = { inherit build; };
   };
 in
-pkg // { inherit scripts; }
+pkg // {
+  inherit scripts;
+  tests = {
+    default = nle.build { path = writeTextDir "meme" ''meme''; };
+  } // scripts;
+}

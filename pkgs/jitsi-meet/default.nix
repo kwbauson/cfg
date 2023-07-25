@@ -27,7 +27,7 @@ let
     '';
   };
 in
-jitsi-meet.overrideAttrs (_: {
+prev.overrideAttrs (_: {
   src = jitsi-meet-source-package;
   meta.platforms = platforms.linux;
   passthru = { inherit jitsi-meet-source-package; };
