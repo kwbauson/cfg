@@ -13,7 +13,7 @@ let
     (nle.build { path = writeTextDir "meme" ''meme''; })
     (attrValues nle.scripts)
   ]);
-  ci-checks = writeBash "ci-checks" ''
+  checks-script = writeBash "checks" ''
     echo ${checks}
     ${exe better-comma} -p hello hello
     mkdir -p /tmp/nle-test
@@ -31,10 +31,11 @@ in
       x86_64-linux = getSwitchScripts [ "noa" "nos" "nob" ] nixosConfigurations;
       aarch64-darwin = getSwitchScripts [ "noa" "nds" ] darwinConfigurations;
     }
-    (drvs: runCommand "ci-checks-env" { meta.mainProgram = "ci-checks"; } ''
+    (drvs: runCommand "ci-checks-env" { meta.mainProgram = "checks"; } ''
       mkdir -p $out/bin
-      ln -s ${ci-checks} $out/bin/ci-checks
+      ln -s ${checks-script} $out/bin/checks
       ln -s ${linkFarm "builds" drvs} $out/builds
     '')
   ).${system};
+  checks.default = final.ci-checks;
 }

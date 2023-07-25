@@ -68,7 +68,7 @@ final: prev: with final.scope; {
     chmod -R +w $out
     cp ${self-flake-lock} $out/flake.lock
   '';
-  iso = with packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
+  iso = with legacyPackages.x86_64-linux; (nixos ({ modulesPath, ... }: {
     imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
     nixpkgs.config.allowUnfree = true;
     hardware.enableRedistributableFirmware = true;

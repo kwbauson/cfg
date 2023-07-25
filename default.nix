@@ -11,4 +11,4 @@ let
     then builtins.getFlake (toString src)
     else (flake-compat { inherit src; }).defaultNix;
 in
-(getFlake ./.).packages.${system}.scope // { inherit getFlake; }
+(getFlake ./.).legacyPackages.${system}.scope // { inherit getFlake; }

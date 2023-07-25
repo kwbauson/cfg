@@ -9,35 +9,39 @@
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
-    inherit (importDir ./.) overlays modules;
 
-    packages = genAttrs systems.flakeExposed (system: import nixpkgs {
+    legacyPackages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
       config = import ./config.nix;
       overlays = [
         (final: prev: { scope = import ./scope.nix (final // { inherit flake; }); })
-      ] ++ overlays;
+        overlays.default
+      ];
     });
+    packages = forAttrValues legacyPackages (pkgs: filterAttrs (_: isDerivation) pkgs.extra-packages);
+    overlays = import ./overlays scope;
+    nixosModules = modules;
+    checks = forAttrValues legacyPackages (getAttr "checks");
 
     nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
       nixpkgs.lib.nixosSystem rec {
-        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
+        pkgs = legacyPackages.${machines.${machine-name}.system or "x86_64-linux"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ scope.modules.nixos ];
+        modules = [ nixosModules.nixos ];
       });
 
     darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
       nix-darwin.lib.darwinSystem rec {
-        pkgs = packages.${machines.${machine-name}.system or "aarch64-darwin"};
+        pkgs = legacyPackages.${machines.${machine-name}.system or "aarch64-darwin"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ scope.modules.nix-darwin ];
+        modules = [ nixosModules.nix-darwin ];
       });
 
     homeConfigurations = forAttrNames machines (machine-name:
       home-manager.lib.homeManagerConfiguration rec {
-        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
+        pkgs = legacyPackages.${machines.${machine-name}.system or "x86_64-linux"};
         extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ scope.modules.home-manager ];
+        modules = [ nixosModules.home-manager ];
       });
   };
 }
