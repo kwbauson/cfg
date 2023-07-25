@@ -6,7 +6,7 @@ bundlerApp {
   exes = [ pname ];
   passthru.updateScript = writeShellScript "update" ''
     ${pathAdd [ bundler bundix ]}
-    cd ~/cfg/pkgs/fakes3
+    cd pkgs/fakes3
     bundler lock --update
     bundix
   '';
