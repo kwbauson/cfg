@@ -26,12 +26,13 @@ let
       ${pathAdd [ pur coreutils dasel poetry ]}
       [[ -e requirements.txt ]] && pur -zfr requirements.txt || true
       [[ -e requirements.dev.txt ]] && pur -zfr requirements.dev.txt || true
-      [[ -e pyproject.toml && -e poetry.lock ]] &&
+      if [[ -e pyproject.toml && -e poetry.lock ]];then
         dasel -f pyproject.toml .tool.poetry.dependencies |
         cut -d' ' -f1 |
         grep -v python |
         sed 's/$/:latest/' |
         xargs poetry add --lock
+      fi
     '';
     update-flake = ''
       ${pathAdd [ git nix-wrapped ]}
@@ -42,11 +43,14 @@ let
       fi
     '';
   };
-  conf = mapAttrs (n: v: v // { enable = true; }) (fixSelfWith (import ./nle.nix) { source = ./.; inherit pkgs; });
-  passthru = rec { inherit build scripts; };
   pkg = override (build { path = ./.; }) {
     name = "nle";
-    passthru = { inherit build scripts; };
+    passthru = { inherit build; };
   };
 in
-pkg // { inherit scripts; }
+pkg // {
+  inherit scripts;
+  tests = {
+    default = nle.build { path = writeTextDir "meme" ''meme''; };
+  } // scripts;
+}

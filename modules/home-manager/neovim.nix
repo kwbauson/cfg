@@ -23,8 +23,8 @@
       barbar-nvim = barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
     };
     extraConfig = "
-      source ${config.home.homeDirectory}/cfg/init.vim
-      source ${config.home.homeDirectory}/cfg/init.lua
+      source ${config.home.homeDirectory}/cfg/modules/home-manager/init.vim
+      source ${config.home.homeDirectory}/cfg/modules/home-manager/init.lua
     ";
   };
 }
