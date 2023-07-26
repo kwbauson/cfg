@@ -7,5 +7,5 @@ in
 (build { path = ./.; }).overrideAttrs (_: {
   name = "nle";
   passthru = { inherit build; };
-  passthru.test.default = nle.build { path = writeTextDir "meme" ''meme''; };
+  passthru.tests.default = nle.build { path = writeTextDir "meme" ''meme''; };
 })
