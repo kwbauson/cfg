@@ -10,7 +10,7 @@
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
 
-    legacyPackages = genAttrs systems.flakeExposed (system: import nixpkgs {
+    packages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
       config = import ./config.nix;
       overlays = [
@@ -18,28 +18,27 @@
         overlays.default
       ];
     });
-    packages = forAttrValues legacyPackages (getAttr "checked-extra-packages");
     overlays = import ./overlays scope;
     nixosModules = modules;
-    checks = forAttrValues legacyPackages (getAttr "checks");
+    checks = forAttrValues packages (getAttr "checks");
 
     nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
       nixpkgs.lib.nixosSystem rec {
-        pkgs = legacyPackages.${machines.${machine-name}.system or "x86_64-linux"};
+        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.nixos ];
       });
 
     darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
       nix-darwin.lib.darwinSystem rec {
-        pkgs = legacyPackages.${machines.${machine-name}.system or "aarch64-darwin"};
+        pkgs = packages.${machines.${machine-name}.system or "aarch64-darwin"};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.nix-darwin ];
       });
 
     homeConfigurations = forAttrNames machines (machine-name:
       home-manager.lib.homeManagerConfiguration rec {
-        pkgs = legacyPackages.${machines.${machine-name}.system or "x86_64-linux"};
+        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
         extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.home-manager ];
       });
