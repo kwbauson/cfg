@@ -26,12 +26,13 @@ let
       ${pathAdd [ pur coreutils dasel poetry ]}
       [[ -e requirements.txt ]] && pur -zfr requirements.txt || true
       [[ -e requirements.dev.txt ]] && pur -zfr requirements.dev.txt || true
-      [[ -e pyproject.toml && -e poetry.lock ]] &&
+      if [[ -e pyproject.toml && -e poetry.lock ]];then
         dasel -f pyproject.toml .tool.poetry.dependencies |
         cut -d' ' -f1 |
         grep -v python |
         sed 's/$/:latest/' |
         xargs poetry add --lock
+      fi
     '';
     update-flake = ''
       ${pathAdd [ git nix-wrapped ]}
