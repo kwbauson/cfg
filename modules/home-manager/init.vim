@@ -53,7 +53,7 @@ let g:qs_second_hightlight = 0
 
 command! GD Gdiff
 
-let g:coc_config_home = getenv('HOME') . '/cfg'
+let g:coc_config_home = getenv('HOME') . '/cfg/modules/home-manager'
 
 set hidden nobackup nowritebackup updatetime=300 shortmess+=c signcolumn=yes:1
 highlight link CocHighlightText Search

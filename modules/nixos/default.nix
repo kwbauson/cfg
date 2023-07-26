@@ -21,6 +21,7 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  nix.channel.enable = false;
   nixpkgs = { inherit (pkgs) pkgs config; };
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
@@ -41,7 +42,7 @@
     font = "default8x16";
   };
 
-  fonts.enableDefaultFonts = config.services.xserver.enable;
+  fonts.enableDefaultPackages = config.services.xserver.enable;
   location.provider = "geoclue2";
 
   time = mkIf config.time.hardwareClockInLocalTime {

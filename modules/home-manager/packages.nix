@@ -7,11 +7,11 @@
         borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
         dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip inetutils
         iproute2 iputils ldns less libarchive libnotify loop lsof man-pages
-        moreutils nano ncdu netcat-gnu niv nix-tree nmap openssh p7zip patch
+        moreutils nano ncdu netcat-gnu nix-tree nmap openssh p7zip patch
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli bws libqalculate yt-dlp speedtest-cli tldr nix-top
-        nixos-install-tools better-comma q dasel emborg clip
+        nixos-install-tools better-comma dogdns dasel emborg clip
         ;
     };
     ${attrIf isGraphical "graphical"} = {
@@ -28,12 +28,13 @@
         zathura
         ;
       sox = sox.override { enableLame = true; };
+      ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
     };
     development = {
       inherit
         bat colordiff gron highlight xh icdiff jq watchexec yarn
         yarn-bash-completion nodejs_latest cachix nle concurrently arduino
-        tasknix devenv google-cloud-sdk nix-index
+        tasknix devenv google-cloud-sdk nix-index python3
         ;
       inherit (nodePackages) npm-check-updates prettier;
     };
@@ -43,7 +44,7 @@
   excluded-packages = optionalAttrs isDarwin {
     inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
-    inherit breeze-icons nixos-install-tools arduino;
+    inherit breeze-icons nixos-install-tools arduino util-linux;
     inherit nim nimlsp crystal emborg;
   };
 }

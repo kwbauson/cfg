@@ -20,6 +20,8 @@
       w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
       yt = "http://www.youtube.com/results?search_query={}";
       b = "https://www.biblegateway.com/passage/?version=NLT&search={}";
+      tf = "https://api.kwbauson.com/search/tf/{}";
+      tfd = "https://api.kwbauson.com/search/tfd/{}";
     };
     settings = {
       confirm_quit = [ "downloads" ];

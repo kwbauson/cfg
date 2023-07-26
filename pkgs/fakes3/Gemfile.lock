@@ -6,20 +6,17 @@ GEM
       builder
       thor
       xml-simple
-    ffi (1.15.5)
-    rb-inotify (0.10.1)
-      ffi (~> 1.0)
     rexml (3.2.5)
     thor (1.2.2)
     xml-simple (1.1.9)
       rexml
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
   fakes3
-  rb-inotify
 
 BUNDLED WITH
-   2.4.14
+   2.4.17

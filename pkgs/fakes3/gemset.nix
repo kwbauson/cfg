@@ -20,27 +20,6 @@
     };
     version = "2.0.0";
   };
-  ffi = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "1862ydmclzy1a0cjbvm8dz7847d9rch495ib0zb64y84d3xd4bkg";
-      type = "gem";
-    };
-    version = "1.15.5";
-  };
-  rb-inotify = {
-    dependencies = ["ffi"];
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "1jm76h8f8hji38z3ggf4bzi8vps6p7sagxn3ab57qc0xyga64005";
-      type = "gem";
-    };
-    version = "0.10.1";
-  };
   rexml = {
     groups = ["default"];
     platforms = [];

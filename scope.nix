@@ -2,17 +2,12 @@ pkgs: pkgs.lib.fix (scope: with scope;
 pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
-pkgs.lib // builtins // {
+builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
-  inherit (importDir ./.) machines constants;
-  inherit (flake) modules overlays;
-  sources = mapAttrs
-    (pname: src: {
-      inherit pname src;
-      version = src.version or src.rev or "unversioned";
-    } // src)
-    (import ./nix/sources.nix { inherit system pkgs; });
+  inherit (importDir ./.) machines constants modules;
+  inherit (flake) overlays;
+  inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
@@ -28,6 +23,7 @@ pkgs.lib // builtins // {
     mapAttrs
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
+  pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
 
   importDir = dir: pipe dir [
     readDirPaths
@@ -109,11 +105,6 @@ pkgs.lib // builtins // {
       chmod +x $out/bin/${pname}
     '';
   };
-  dmgOverride = name: pkg: with rec {
-    src = sources."dmg-${name}";
-    msg = "${name}: src ${src.version} != pkg ${pkg.version}";
-    checkVersion = lib.assertMsg (pkg.version == src.version) msg;
-  }; if isDarwin then assert checkVersion; (mkDmgPackage name src) // { originalPackage = pkg; } else pkg;
   importNixpkgs = args:
     let
       helper =
@@ -264,6 +255,23 @@ pkgs.lib // builtins // {
     filter = path: type: !builtins.any (p: p == (baseNameOf path))
       [ ".git" ".github" "secrets" ];
   };
+
+  patchModules = src: patches:
+    let
+      patched = applyPatches { name = "source"; inherit src patches; };
+      paths = pipe patches [
+        (map (patch: "${patchutils}/bin/lsdiff --strip 1 ${patch} > $out"))
+        (concatStringsSep "\n")
+        (runCommand "patch-paths" { })
+        readFile
+        (splitString "\n")
+        (filter (x: x != ""))
+      ];
+    in
+    {
+      imports = map (path: "${patched}/${path}") paths;
+      disabledModules = map (path: "${src}/${path}") paths;
+    };
 
   nixConfBase = ''
     max-jobs = auto

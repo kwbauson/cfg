@@ -1,7 +1,13 @@
 scope: with scope;
 let
+  src = fetchFromGitHub {
+    owner = "jitsi";
+    repo = pname;
+    rev = "e1ac000cd1f15642218e80ded98ee19188cf2b17";
+    hash = "sha256-7wKpUYm6KxNy4W8i4Hcctw6jSiV0+gbz0FnuEcqmjpM=";
+  };
   node_modules = mkYarnModulesWithRebuild {
-    packageJSON = "${sources.jitsi-meet}/package.json";
+    packageJSON = "${src}/package.json";
     yarnLock = ./yarn.lock;
     extraNativeBuildInputs = [ pango ];
     preRebuild = "export RN_WEBRTC_SKIP_DOWNLOAD=1";
@@ -21,17 +27,21 @@ let
     '';
   };
 in
-jitsi-meet.overrideAttrs (_: {
+prev.overrideAttrs (_: {
   src = jitsi-meet-source-package;
-  passthru.updateScript = writeBashBin "update-jitsi" ''
-    ${ pathAdd [ yarn coreutils ] }
-    set -eo pipefail
-    dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
-    cd "$dir"
-    cp --no-preserve=mode ${sources.jitsi-meet}/package{,-lock}.json .
-    yarn import --ignore-engines
-    cd -
-    cp "$dir"/yarn.lock pkgs/jitsi-meet
-    rm -r "$dir"
-  '';
+  meta.platforms = platforms.linux;
+  passthru = { inherit jitsi-meet-source-package; };
+  passthru.jitsi-src = src;
+  passthru.updateScript = [ ];
+  # passthru.updateScript = writeBashBin "update-jitsi" ''
+  #   ${ pathAdd [ yarn coreutils ] }
+  #   set -eo pipefail
+  #   dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
+  #   cd "$dir"
+  #   cp --no-preserve=mode ${src.jitsi-meet}/package{,-lock}.json .
+  #   yarn import --ignore-engines
+  #   cd -
+  #   cp "$dir"/yarn.lock pkgs/jitsi-meet
+  #   rm -r "$dir"
+  # '';
 })
