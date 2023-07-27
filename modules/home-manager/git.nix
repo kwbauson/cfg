@@ -17,6 +17,7 @@
       [[ -e $index ]] && cp "$index" "$GIT_INDEX_FILE" || rm "$GIT_INDEX_FILE"
       trap 'rm -f "$GIT_INDEX_FILE"' EXIT
     '';
+    gitDf = "git -c core.pager='${exe delta} --dark' diff";
   }; {
     enable = true;
     package = gitFull;
@@ -63,10 +64,25 @@
       df = gs ''
         ${tmpGitIndex}
         git add -A
-        git -c core.pager='${exe delta} --dark' diff --staged "$@" || true
+        ${gitDf} --staged "$@" || true
       '';
-      dfd = gs ''git df $(git merge-base origin/$(git default) HEAD)'';
-      dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
+      dfb = gs ''git df $(git merge-base ''${1:-origin/$(git default)} HEAD)'';
+      dfo = gs ''
+        old=$PWD
+        current=$(git rev-parse HEAD)
+        branch="origin/''${1:-$(git branch-name)}"
+        dir=$(mktemp -d)
+        patch=$(mktemp)
+        git add -A
+        git diff --staged > "$patch"
+        git worktree add --quiet --detach "$dir"
+        cd "$dir"
+        trap 'cd "$old" && git worktree remove "$dir" && rm "$patch"' EXIT
+        git apply "$patch"
+        git ca --message tmp --quiet --allow-empty
+        git merge --quiet --no-edit "$branch"
+        ${gitDf} "$current.."
+      '';
       f = "fetch --all";
       g = gs "git f && git mo";
       gr = gs "git pull origin $(git branch-name) --rebase --autostash";
