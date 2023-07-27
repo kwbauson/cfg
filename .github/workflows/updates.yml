@@ -18,3 +18,4 @@ jobs:
           branch: automatic-update
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
+        if: ${{ steps.cpr.outputs.pull-request-number }}
