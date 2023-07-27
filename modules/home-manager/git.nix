@@ -71,14 +71,14 @@
         old=$PWD
         current=$(git rev-parse HEAD)
         branch="origin/''${1:-$(git branch-name)}"
-        dir=$(mktemp -d)
-        patch=$(mktemp)
+        dir=$(mktemp --tmpdir -d dfo-XXXXX)
+        patch=$(mktemp --tmpdir dfo-XXXXX)
         git add -A
         git diff --staged > "$patch"
         git worktree add --quiet --detach "$dir"
         cd "$dir"
         trap 'cd "$old" && git worktree remove "$dir" && rm "$patch"' EXIT
-        git apply "$patch"
+        git apply --allow-empty "$patch"
         git ca --message tmp --quiet --allow-empty
         git merge --quiet --no-edit "$branch"
         ${gitDf} "$current.."
