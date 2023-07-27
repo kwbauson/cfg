@@ -2,6 +2,7 @@ final: prev: with final.scope; {
   nix = nixUnstable;
   nixOld = prev.nix;
   nixos-option = prev.nixos-option.override { nix = nixOld; };
+  nil = prev.nixos-option.override { nix = nixOld; };
   nix-wrapped = wrapBins nix ''
     mkdir -p ~/.local/share/nix
     export NIX_CONFIG=$(< ${writeText "nix.conf" nixConfBase})$'\n'$NIX_CONFIG
