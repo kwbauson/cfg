@@ -37,18 +37,26 @@ in
       attrs
       (attrs.passthru or { })
     ]) ((if isFunction arg then fix else id) arg);
-  package-updater = args: writeBashBin "updater" ''
+  package-updater = name: args: writeBashBin "update-${name}" ''
     ${pathAdd [ curl ]}
     echo | ${getExe (import patched-update-nix ({ inherit pkgs; } // args))}
   '';
-  update-extra-packages = (package-updater {
+  update-extra-packages = (package-updater "extra-packages" {
     path = "extra-packages";
   }).overrideAttrs (_: {
     passthru = forAttrNames extra-packages (name:
-      package-updater {
+      package-updater name {
         package = "extra-packages.${name}";
       }
     );
   });
+  updates = (writeBashBin "updates" ''
+    nix flake update
+    nix run .#update-extra-packages
+  '').overrideAttrs (_: {
+    passthru = update-extra-packages.passthru // forAttrNames inputs
+      (input: writeBashBin "update-${input}" ''
+        nix flake lock --update-input ${input}
+      '');
+  });
 } // extra-packages
-

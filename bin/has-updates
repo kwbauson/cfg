@@ -4,7 +4,7 @@ branch=${1:-main}
 set -e
 cd ~/cfg
 git fetch --quiet
-pending=$(git branch --list --remote origin/automatic-update)
+pending=$(git branch --list --remote origin/updates)
 if [[ $(git rev-parse $branch) != $(git rev-parse origin/$branch) ]];then
   if [[ -n $pending ]];then
     echo updates and pending
