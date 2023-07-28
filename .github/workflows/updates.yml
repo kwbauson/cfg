@@ -5,7 +5,8 @@ on:
       source: { type: string, default: all, required: true }
   schedule: [cron: '0 7 * * *']
 jobs:
-  check:
+  updates:
+    name: updates-${{ inputs.source }}
     runs-on: [nix, Linux, X64]
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
