@@ -54,9 +54,15 @@ in
     nix flake update
     nix run .#update-extra-packages
   '').overrideAttrs (_: {
-    passthru = update-extra-packages.passthru // forAttrNames inputs
-      (input: writeBashBin "update-${input}" ''
-        nix flake lock --update-input ${input}
-      '');
+    passthru = mergeAttrsList [
+      update-extra-packages.passthru
+      (forAttrNames
+        inputs
+        (input: writeBashBin "update-${input}" ''
+          nix flake lock --update-input ${input}
+        '')
+      )
+      { all = updates; }
+    ];
   });
 } // extra-packages
