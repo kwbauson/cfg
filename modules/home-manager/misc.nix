@@ -39,7 +39,7 @@
     // optionalAttrs (machine-name == "keith-mac")
       {
         builders-use-substitutes = "true";
-        builders = [ "ssh-ng://keith-desktop.tail6a226.ts.net x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
+        builders = [ "ssh-ng://keith@keith-desktop.tail6a226.ts.net x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
       };
 
   fonts.fontconfig.enable = true;
