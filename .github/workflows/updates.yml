@@ -16,9 +16,9 @@ jobs:
         id: cpr
         with:
           delete-branch: true
-          title: updates
-          commit-message: updates
-          branch: updates
+          title: '${{ inputs.source }}: update'
+          commit-message: '${{ inputs.source }}: update'
+          branch: updates-${{ inputs.source }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
         if: ${{ steps.cpr.outputs.pull-request-number }}
