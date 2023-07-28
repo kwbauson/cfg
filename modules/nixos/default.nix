@@ -93,6 +93,7 @@
   programs.steam.enable = mkDefault config.services.xserver.enable;
   programs.pmount.enable = true;
   services.tailscale.enable = mkDefault config.services.openssh.enable;
+  services.tailscale.useRoutingFeatures = mkDefault "client";
   hardware.bluetooth.enable = mkDefault config.services.xserver.enable;
 
   services.udev.packages = optionals config.services.xserver.enable [ headsetcontrol ];
