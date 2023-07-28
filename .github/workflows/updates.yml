@@ -1,5 +1,9 @@
 name: updates
-on: { workflow_dispatch, schedule: [cron: '0 7 * * *'] }
+on:
+  workflow_dispatch:
+    inputs:
+      source: { type: string, default: all, required: true }
+  schedule: [cron: '0 7 * * *']
 jobs:
   check:
     runs-on: [nix, Linux, X64]
@@ -7,7 +11,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - run: nix run .#updates
+      - run: nix run .#updates.${{ inputs.source }}
       - uses: peter-evans/create-pull-request@v5
         id: cpr
         with:
