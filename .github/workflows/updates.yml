@@ -17,10 +17,11 @@ jobs:
       - uses: peter-evans/create-pull-request@v5
         id: cpr
         with:
-          delete-branch: true
+          author: Keith Bauson <kwbauson@gmail.com>
           title: '${{ inputs.source }}: update'
           commit-message: '${{ inputs.source }}: update'
           branch: updates-${{ inputs.source }}
+          delete-branch: true
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      - run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
-        if: ${{ steps.cpr.outputs.pull-request-number }}
+      - if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
