@@ -1,4 +1,5 @@
-name: updates-${{ inputs.source }}
+name: updates
+run-name: updates-${{ inputs.source }}
 on:
   workflow_dispatch:
     inputs:
