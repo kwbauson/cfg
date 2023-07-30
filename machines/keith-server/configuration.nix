@@ -102,4 +102,6 @@
   };
 
   services.auto-update.enable = true;
+
+  services.tailscale.useRoutingFeatures = "both";
 }
