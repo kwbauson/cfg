@@ -1,21 +1,27 @@
 name: updates
-on: { workflow_dispatch, schedule: [cron: '0 7 * * *'] }
+run-name: updates-${{ inputs.source || 'all' }}
+on:
+  workflow_dispatch:
+    inputs:
+      source: { type: string }
+  schedule: [cron: '0 7 * * *']
 jobs:
-  check:
+  updates:
+    name: updates-${{ inputs.source || 'all' }}
     runs-on: [nix, Linux, X64]
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - run: nix flake update
-      - run: nix -L run .#update-extra-packages
+      - run: nix run .#updates.${{ inputs.source || 'all' }}
       - uses: peter-evans/create-pull-request@v5
         id: cpr
         with:
+          author: Keith Bauson <kwbauson@gmail.com>
+          title: "${{ inputs.source || 'all' }}: update"
+          commit-message: "${{ inputs.source || 'all' }}: update"
+          branch: updates-${{ inputs.source || 'all' }}
           delete-branch: true
-          title: Automatic update
-          commit-message: Automatic update
-          branch: automatic-update
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-      - run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
-        if: ${{ steps.cpr.outputs.pull-request-number }}
+      - if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
