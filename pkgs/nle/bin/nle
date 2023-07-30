@@ -17,7 +17,7 @@ fi
 cd "$rundir"
 
 args=$@
-[[ $1 = -d ]] && shift && cd "$1" && shift
+[[ $1 = '-d' ]] && shift && cd "$1" && shift
 
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
@@ -64,7 +64,6 @@ hashcontent() {
   echo SELF_FLAKE
   echo "$sourcedir"
   type -p nix
-  [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
 
 impure() {
@@ -151,10 +150,6 @@ case $cmd in
     [[ -e $result ]] && exit
     "$0" prepcache
     "$0" rebuild
-    ;;
-  generate)
-    impure "Gemfile Gemfile.lock" gemset.nix \
-      nrs bundix
     ;;
   run)
     eval "$("$0" env)"
