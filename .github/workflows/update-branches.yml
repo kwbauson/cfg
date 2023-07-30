@@ -2,7 +2,7 @@ name: update-branches
 on:
   push:
     branches: [main]
-    # paths: [flake.lock]
+    paths: [flake.lock]
 jobs:
   job:
     runs-on: ubuntu-latest
