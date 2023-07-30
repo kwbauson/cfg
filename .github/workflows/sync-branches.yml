@@ -1,4 +1,4 @@
-name: update-branches
+name: sync-branches
 on:
   push:
     branches: [main]
