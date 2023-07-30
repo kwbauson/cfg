@@ -12,6 +12,7 @@ rustPlatform.buildRustPackage {
   buildAndTestSubdir = "crates/bws";
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl ] ++ optionals isDarwin [ darwin.Security ];
+  OPENSSL_NO_VENDOR = true;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { })
     (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
