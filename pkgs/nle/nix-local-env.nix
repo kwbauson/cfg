@@ -20,7 +20,7 @@
       (x: splitString pkgsMark x)
       (filter (hasInfix pkgsMark) lines);
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
-    buildInputs = map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames ++ build-paths;
+    buildInputs = map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames ++ local-nix-paths;
     makeScriptText = replaceStrings [ "SELF_FLAKE" ] [ "${self-flake}" ];
     isBash = hasSuffix "bash" (head lines);
     script = stdenv.mkDerivation {
@@ -60,74 +60,10 @@
     out = if pathExists localfile then result else null;
   }.out;
   local-nix-paths = ifFiles "local.nix" [ local-nix.paths or local-nix ];
-  node-modules-paths =
-    ifFilesAndNot nle-conf.npm.files nle-conf.npm.notFiles
-      (lowPrio nle-conf.npm.out);
 
-  yarn-paths = nleFiles "yarn"
-    rec {
-      package = (yarn2nix-moretea.override { nodejs = nodejs_latest; }).mkYarnModules rec {
-        name = pname;
-        pname = "yarn-modules";
-        version = "";
-        packageJSON = file "package.json";
-        yarnLock = file "yarn.lock";
-        yarnNix = file "yarn.nix";
-      };
-      out = runCommand "yarn-env" { passthru = { inherit package; }; } ''
-        mkdir $out
-        [[ -e ${package}/node_modules/.bin ]] && ln -s ${package}/node_modules/.bin $out/bin
-        ln -s ${package}/node_modules $out/node_modules
-      '';
-    }.out;
+  paths = flatten [ local-bin-paths local-nix-paths ];
 
-  bundler-paths = nleFiles "bundler"
-    rec {
-      postBuild = ''
-        cd $out/bin
-        if [[ $(echo *) != '*' ]];then
-          for exe in *;do
-            sed -i /BUNDLE_GEMFILE/d "$exe"
-            sed -i /BUNDLE_FROZEN/d "$exe"
-          done
-        fi
-      '';
-      env = bundlerEnv {
-        name = "bundler-env";
-        gemfile = file "Gemfile";
-        lockfile = file "Gemfile.lock";
-        gemset = file "gemset.nix";
-        groups = null;
-        inherit postBuild;
-        gemConfig = defaultGemConfig // {
-          zipruby = _: { buildInputs = [ zlib ]; };
-          grpc = attrs: override (defaultGemConfig.grpc attrs) {
-            AROPTS = "-r";
-          };
-          plivo = _: { nativeBuildInputs = [ rake ]; };
-          mimemagic = _: {
-            FREEDESKTOP_MIME_TYPES_PATH = "${mime-types}/etc/mime.types";
-            nativeBuildInputs = [ rake ];
-          };
-        };
-      };
-      paths = [ env env.wrappedRuby ];
-    }.paths;
-
-  poetry-paths =
-    nleFiles "poetry" (override nle-conf.poetry.out { name = "poetry-env"; });
-
-  build-paths = flatten [
-    local-nix-paths
-    bundler-paths
-    node-modules-paths
-    yarn-paths
-    poetry-paths
-  ];
-
-  paths = flatten [ local-bin-paths build-paths ];
-
-  packages = listToAttrs (map (x: { name = x.name; value = x; }) build-paths) // local-bin-pkgs;
+  packages = listToAttrs (map (x: { name = x.pname or name; value = x; }) local-nix-paths) // local-bin-pkgs;
 
   out = buildEnv {
     name = "local-env";

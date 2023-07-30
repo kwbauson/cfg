@@ -16,48 +16,7 @@
   bin = {
     files = "bin";
   };
-  niv = {
-    files = "nix";
-  };
-  npm = {
-    files = "package.json package-lock.json .enable-nle-npm";
-    extraFiles = ".npmrc";
-    notFiles = "yarn.lock";
-    out = npmlock2nix.node_modules {
-      pname = "node_modules";
-      version = "0.0.0";
-      src = buildDir (map file (words self.npm.files));
-    };
-  };
-  yarn = {
-    files = "package.json yarn.lock .enable-nle-yarn";
-    generated = "yarn.nix";
-    extraFiles = ".npmrc";
-  };
-  poetry = {
-    enable = true;
-    files = "pyproject.toml poetry.lock";
-    out = poetry2nix.mkPoetryEnv {
-      projectDir = buildDir (map file (words self.poetry.files));
-      overrides = poetry2nix.overrides.withDefaults (self: super: {
-        git-remote-codecommit = super.git-remote-codecommit.overridePythonAttrs (old: {
-          buildInputs = old.buildInputs ++ [ self.setuptools ];
-        });
-      });
-    };
-  };
-  bundler = {
-    enable = true;
-    files = "Gemfile Gemfile.lock";
-    generated = "gemset.nix";
-  };
   nix = {
-    extraFiles = "default.nix flake.nix flake.lock local.nix";
-  };
-  nixpkgs = {
-    extraFiles = "config.nix overlays.nix";
-  };
-  pkgs = {
-    files = "pkgs";
+    extraFiles = "local.nix";
   };
 }
