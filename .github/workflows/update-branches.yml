@@ -4,9 +4,11 @@ on:
     branches: [main]
     # paths: [flake.lock]
 jobs:
-  update-branches:
+  job:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - run: |
           gh pr list --json autoMergeRequest,headRefName --jq '.[] | select(.autoMergeRequest != null) | .headRefName' |
-             xargs -I% gh api --method POST /repos/kwbauson/cfg/merges -f head=main -f base=%
+             xargs -I% gh api --method POST '/repos/${{ github.repository }}/merges' -f head=main -f base=%
