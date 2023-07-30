@@ -1,0 +1,12 @@
+name: update-branches
+on:
+  push:
+    branches: [main]
+    # paths: [flake.lock]
+jobs:
+  update-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          gh pr list --json autoMergeRequest,headRefName --jq '.[] | select(.autoMergeRequest != null) | .headRefName' |
+             xargs -I% gh api --method POST /repos/kwbauson/cfg/merges -f head=main -f base=%
