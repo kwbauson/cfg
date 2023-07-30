@@ -17,7 +17,7 @@ fi
 cd "$rundir"
 
 args=$@
-[[ $1 = -d ]] && shift && cd "$1" && shift
+[[ $1 = '-d' ]] && shift && cd "$1" && shift
 
 sourcedir=$PWD
 cmd=${1:-activate} && [[ -n $1 ]] && shift
@@ -30,27 +30,14 @@ impuredir=$cachebase/.impure
 
 nixexpr="(import SELF_FLAKE { forceFlakeCompat = false; }).nle.build { path = ./.; source = \"$sourcedir\"; }"
 
-local_nix_conf=$sourcedir/nix/nix.conf
-
-if [[ -e $local_nix_conf ]];then
-  export NIX_CONFIG=$(< "$local_nix_conf")
-fi
-
 invalid() {
   echo invalid command: "$args"
   exit 1
 }
 
 buildfiles=(
-  package{,-lock}.json
-  yarn.lock npm-{package,deps}.nix .disable-nle-yarn .npmrc
-  Gemfile{,.lock}
-  gemset.nix
-  requirements{,.dev}.txt
-  pyproject.toml poetry.lock
   local.nix
   bin
-  pkgs nix
   nle.sh
 )
 
@@ -77,7 +64,6 @@ hashcontent() {
   echo SELF_FLAKE
   echo "$sourcedir"
   type -p nix
-  [[ -e .disable-nle-yarn ]] && echo disable-yarn-env
 }
 
 impure() {
@@ -120,20 +106,6 @@ case $cmd in
     ;;
   activate)
     "$0" cache
-    if [[ -e package.json && -e yarn.lock && -e .enable-nle-yarn && ! -e .disable-nle-yarn ]];then
-      if [[ ! -e node_modules || -L node_modules ]];then
-        ln -sft . "$("$0" result)"/node_modules
-      else
-        echo warning: node_modules already exists, not linking
-      fi
-    fi
-    if [[ -e package.json && -e package-lock.json ]];then
-      if [[ ! -e node_modules || -L node_modules ]];then
-        ln -sft . "$("$0" result)"/node_modules
-      else
-        echo warning: node_modules already exists, not linking
-      fi
-    fi
     ;;
   init)
     "$0" activate
@@ -168,20 +140,11 @@ case $cmd in
     for file in ${buildfiles[@]} $NLE_EXTRA_FILES;do
       [[ -e $sourcedir/$file ]] && cp -rt "$cachedir" --parents "$file"
     done
-    if [[ $NOCACHE != 1 ]];then
-      "$0" -d "$cachedir" generate
-    else
-      "$0" generate
-    fi
     ;;
   cache)
     [[ -e $result ]] && exit
     "$0" prepcache
     "$0" rebuild
-    ;;
-  generate)
-    impure "Gemfile Gemfile.lock" gemset.nix \
-      nrs bundix
     ;;
   run)
     eval "$("$0" env)"
