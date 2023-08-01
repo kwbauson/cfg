@@ -272,6 +272,7 @@ builtins // pkgs.lib // {
       imports = map (path: "${patched}/${path}") paths;
       disabledModules = map (path: "${src}/${path}") paths;
     };
+  flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
 
   nixConfBase = ''
     max-jobs = auto
