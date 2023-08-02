@@ -98,8 +98,13 @@
       ref=$(echo $PWD | sed -E "s@.*($modules)/@@")
       cd "$(echo $PWD | sed "s@$modules.*@$envs@")"
       file=$(rg -lg terragrunt.hcl "$modules//$ref" | grep "/$env/" | sed 's@^/@@p')
-      if [[ -z $file || $(echo "$file" | wc -l) != 1 ]];then
-        echo need exactly one match
+      if [[ -z $file ]];then
+        count=0
+      else
+        count=$(echo "$file" | wc -l)
+      fi
+      if [[ $count -ne 1 ]];then
+        echo "need exactly one match, found $count"
         exit 1
       fi
       cd "$(dirname "$file")"
