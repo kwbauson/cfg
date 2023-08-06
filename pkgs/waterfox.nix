@@ -16,7 +16,7 @@ stdenv.mkDerivation (attrs: {
   meta.platforms = platforms.linux;
   passthru.updateScript = writeShellScript "update-waterfox" ''
     ${common-updater-scripts}/bin/update-source-version waterfox "$(
-      curl https://www.waterfox.net/download/ |
+      ${getExe curl} https://www.waterfox.net/download/ |
       ${getExe pup} a |
       grep 'Linux.*\.tar\.bz2' |
       sed -E 's@.*waterfox-([^/]*)\.tar\.bz2.*@\1@'
