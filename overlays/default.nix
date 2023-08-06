@@ -7,5 +7,6 @@ overlays // {
     overlays.extra-packages
     overlays.patched-packages
     overlays.ci-checks
+    overlays.updates
   ];
 }
