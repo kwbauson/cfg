@@ -46,7 +46,7 @@ in
   }).overrideAttrs (_: {
     passthru = forAttrNames extra-packages (name:
       package-updater name {
-        package = "extra-packages.${name}";
+        package = name;
       }
     );
   });
