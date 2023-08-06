@@ -17,10 +17,10 @@ stdenv.mkDerivation (attrs: {
   passthru.updateScript = writeShellScript "update-waterfox" ''
     ${common-updater-scripts}/bin/update-source-version waterfox "$(
       ${getExe curl} https://www.waterfox.net/download/ |
-      ${pup}/bin/pup a |
+      ${getExe pup} a |
       grep 'Linux.*\.tar\.bz2' |
       sed -E 's@.*waterfox-([^/]*)\.tar\.bz2.*@\1@'
     )"
-    ${nix-update}/bin/nix-update --flake --version skip waterfox
+    ${getExe nix-update} --flake --version skip waterfox
   '';
 })
