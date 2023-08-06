@@ -27,21 +27,34 @@ let
     '';
   };
 in
-prev.overrideAttrs (_: {
-  src = jitsi-meet-source-package;
+# prev.overrideAttrs
+  # (_: {
+  #   src = jitsi-meet-source-package;
+  #   meta.platforms = platforms.linux;
+  #   passthru = { inherit jitsi-meet-source-package; };
+  #   passthru.jitsi-src = src;
+  #   passthru.updateScript = [ ];
+  #   # passthru.updateScript = writeBashBin "update-jitsi" ''
+  #   #   ${ pathAdd [ yarn coreutils ] }
+  #   #   set -eo pipefail
+  #   #   dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
+  #   #   cd "$dir"
+  #   #   cp --no-preserve=mode ${src.jitsi-meet}/package{,-lock}.json .
+  #   #   yarn import --ignore-engines
+  #   #   cd -
+  #   #   cp "$dir"/yarn.lock pkgs/jitsi-meet
+  #   #   rm -r "$dir"
+  #   # '';
+  # })
+buildNpmPackage {
+  inherit pname;
+  version = "unstable-2023-08-03";
+  src = fetchFromGitHub {
+    owner = "jitsi";
+    repo = pname;
+    rev = "4461196ba3ab17afbec56131e2c4d0fae1f8cf09";
+    hash = "sha256-mutqWcD3RboKhAM2pk7Grh5tWCMuY5bGU+INyloR/s8=";
+  };
   meta.platforms = platforms.linux;
-  passthru = { inherit jitsi-meet-source-package; };
-  passthru.jitsi-src = src;
-  passthru.updateScript = [ ];
-  # passthru.updateScript = writeBashBin "update-jitsi" ''
-  #   ${ pathAdd [ yarn coreutils ] }
-  #   set -eo pipefail
-  #   dir=$(mktemp -d /tmp/update-jitsi.XXXXX)
-  #   cd "$dir"
-  #   cp --no-preserve=mode ${src.jitsi-meet}/package{,-lock}.json .
-  #   yarn import --ignore-engines
-  #   cd -
-  #   cp "$dir"/yarn.lock pkgs/jitsi-meet
-  #   rm -r "$dir"
-  # '';
-})
+  passthru.updateScript = unstableGitUpdater { };
+}
