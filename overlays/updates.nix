@@ -14,7 +14,7 @@ final: prev: with final.scope; {
       jsonFile = writeText "packageData.json" (toJSON (map packageData packages));
     in
     writeBashBin "updater" ''
-      exec ${getExe python3} ${pkgs.path}/maintainers/scripts/update.py ${jsonFile}
+      echo | ${getExe python3} ${pkgs.path}/maintainers/scripts/update.py ${jsonFile}
     '';
   update-extra-packages =
     let updatable = attrNames (filterAttrs (_: hasAttr "updateScript") extra-packages);
