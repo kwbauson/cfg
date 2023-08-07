@@ -64,7 +64,6 @@
     config = {
       analytics.disabled = true;
       desktopSharingFrameRate = { min = 5; max = 30; };
-      disableSimulcast = true;
       disableTileEnlargement = true;
       enableNoAudioDetection = false;
       enableNoisyMicDetection = false;
