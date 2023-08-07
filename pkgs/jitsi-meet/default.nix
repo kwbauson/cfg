@@ -1,9 +1,12 @@
 scope: with scope;
 let
-  patched-nixpkgs = applyPatches { src = pkgs.path; patches = [ ./prefetch-npm-deps-ignore-bad.patch ]; };
-  patched-pkgs = import patched-nixpkgs { inherit system; config = { }; overlays = [ ]; };
+  patched = applyPatches { src = pkgs.path; patches = [ ./prefetch-npm-deps-ignore-bad.patch ]; };
+  inherit (callPackage "${patched}/pkgs/build-support/node/fetch-npm-deps" { }) fetchNpmDeps prefetch-npm-deps;
+  npmHooks = callPackage "${patched}/pkgs/build-support/node/build-npm-package/hooks" {
+    buildPackages = buildPackages // { inherit prefetch-npm-deps; };
+  };
 in
-patched-pkgs.buildNpmPackage {
+(buildNpmPackage.override { inherit fetchNpmDeps npmHooks; }) {
   inherit pname;
   version = "unstable-2023-02-10";
   src = fetchFromGitHub {
