@@ -5,12 +5,12 @@ let
 in
 patched-pkgs.buildNpmPackage {
   inherit pname;
-  version = "unstable-2023-02-10";
+  version = "unstable-2023-08-07";
   src = fetchFromGitHub {
     owner = "jitsi";
     repo = pname;
-    rev = "e1ac000cd1f15642218e80ded98ee19188cf2b17";
-    hash = "sha256-7wKpUYm6KxNy4W8i4Hcctw6jSiV0+gbz0FnuEcqmjpM=";
+    rev = "faea112f5e190459fe1032a0c754f50feb919a80";
+    hash = "sha256-t7/7Wpp7EIKSFmmBPTSvcEjZLLJe8EfwYBCv/Eue8Jo=";
   };
   npmDepsHash = "sha256-vMTShIpGjubcEgGqMZM9zqoUaAhV/dB8Xh9EH+gB2b8=";
   makeCacheWritable = true;
