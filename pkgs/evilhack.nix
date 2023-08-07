@@ -1,12 +1,12 @@
 scope: with scope;
 nethack.overrideAttrs (attrs: {
   inherit pname;
-  version = "unstable-2023-08-02";
+  version = "unstable-2023-08-07";
   src = fetchFromGitHub {
     owner = "k21971";
     repo = "EvilHack";
-    rev = "9bf0cf437a6447d4fb46e2e541f484366a41362d";
-    hash = "sha256-QgJzmdiWtD15OL1ZmnOfeTSoiB7pYFZWCMJJtQj5628=";
+    rev = "8a65ef4aab311867645b9e798941b8f032954f5f";
+    hash = "sha256-Rl/9KxbnUf6HwhTNvyU6DO8/j4hgSATvCHaj0VFKU9M=";
   };
   postPatch = ''
     ${attrs.postPatch}
