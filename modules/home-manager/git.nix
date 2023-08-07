@@ -79,7 +79,8 @@
         cd "$dir"
         trap 'cd "$old" && git worktree remove "$dir" && rm "$patch"' EXIT
         git apply --allow-empty "$patch"
-        git ca --message tmp --quiet --allow-empty
+        git add -A
+        git commit --message tmp --quiet --allow-empty
         git merge --quiet --no-edit "$branch"
         ${gitDf} "$current.."
       '';

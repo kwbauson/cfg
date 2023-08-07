@@ -17,6 +17,7 @@ let
       (optionalAttrs (functionArgs (import path) == { }))
       (prev.callPackage path)
       (addMetaAttrs { position = "${toString path}:1"; })
+      (attrs: attrs // optionalAttrs (hasAttr pname prev) { prev = prev.${pname}; })
     ]))
   ];
 in
