@@ -2,17 +2,24 @@
 # with-packages git
 branch=${1:-main}
 set -e
+join_by() {
+  local d=${1-} f=${2-}
+  if shift 2; then
+    printf %s "$f" "${@/#/$d}"
+  fi
+}
 cd ~/cfg
+status=()
 git fetch --quiet
-pending=$(git branch --list --remote | grep origin/updates- || true)
 if [[ $(git rev-parse $branch) != $(git rev-parse origin/$branch) ]];then
-  if [[ -n $pending ]];then
-    echo updates and pending
-  else
-    echo updates
-  fi
-else
-  if [[ -n $pending ]];then
-    echo pending
-  fi
+  status+=(updates)
 fi
+pending=$(git branch --list --remote | grep origin/updates- || true)
+if [[ -n $pending ]];then
+  status+=(pending)
+fi
+check_conclusion=$(gh run list --workflow updates.yml --limit 1 --json conclusion --jq '.[0].conclusion')
+if [[ $check_conclusion = failure ]];then
+  status+=(error)
+fi
+join_by ' and ' "${status[@]}"
