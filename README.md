@@ -14,10 +14,3 @@ nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA better-comma
 , asciiquarium # watch fish swim in your terminal :)
 , opentyrian # play a retro arcade shooter
 ```
-
-## nle
-
-```bash
-# install
-nix-env -f https://github.com/kwbauson/cfg/archive/main.tar.gz -iA nle
-```
