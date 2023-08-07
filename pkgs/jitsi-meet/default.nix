@@ -1,11 +1,11 @@
 scope: with scope;
 let
-  patched-nixpkgs = applyPatches { src = pkgs.path; patches = [ ./prefetch-npm-deps.patch ]; };
+  patched-nixpkgs = applyPatches { src = pkgs.path; patches = [ ./prefetch-npm-deps-ignore-bad.patch ]; };
   patched-pkgs = import patched-nixpkgs { inherit system; config = { }; overlays = [ ]; };
 in
 patched-pkgs.buildNpmPackage {
   inherit pname;
-  version = "FIXME";
+  version = "unstable-2023-02-10";
   src = fetchFromGitHub {
     owner = "jitsi";
     repo = pname;
@@ -14,7 +14,7 @@ patched-pkgs.buildNpmPackage {
   };
   npmDepsHash = "sha256-vMTShIpGjubcEgGqMZM9zqoUaAhV/dB8Xh9EH+gB2b8=";
   makeCacheWritable = true;
-  patches = [ ./jitsi-changes.patch ];
+  patches = [ ./jitsi-meet-changes.patch ];
   nativeBuildInputs = [ python3 pkg-config ];
   buildInputs = [ pango ];
   RN_WEBRTC_SKIP_DOWNLOAD = "1";
