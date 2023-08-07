@@ -26,5 +26,8 @@ patched-pkgs.buildNpmPackage {
     mv jitsi-meet $out
   '';
   meta.platforms = platforms.linux;
-  passthru.updateScript = unstableGitUpdater { };
+  passthru.updateScript = _experimental-update-script-combinators.sequence [
+    (unstableGitUpdater { })
+    (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
+  ];
 }
