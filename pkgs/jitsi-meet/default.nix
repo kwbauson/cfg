@@ -1,7 +1,7 @@
 scope: with scope;
 let
   patched = applyPatches { src = pkgs.path; patches = [ ./prefetch-npm-deps-ignore-bad.patch ]; };
-  inherit (callPackage "${patched}/pkgs/build-support/node/fetch-npm-deps" { }) fetchNpmDeps prefetch-npm-deps;
+  inherit (callPackage "${patched}/pkgs/build-support/node/fetch-npm-deps" { inherit prefetch-npm-deps; }) fetchNpmDeps prefetch-npm-deps;
   npmHooks = callPackage "${patched}/pkgs/build-support/node/build-npm-package/hooks" {
     buildPackages = buildPackages // { inherit prefetch-npm-deps; };
   };
