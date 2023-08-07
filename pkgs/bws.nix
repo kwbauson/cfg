@@ -1,14 +1,14 @@
 scope: with scope;
 rustPlatform.buildRustPackage {
   inherit pname;
-  version = "unstable-2023-08-02";
+  version = "unstable-2023-08-07";
   src = fetchFromGitHub {
     owner = "bitwarden";
     repo = "sdk";
-    rev = "1f6856aaec505c6a62350746c828f12d39c436af";
-    hash = "sha256-mrpSmWc2fttnr33zVuo7ugWXyegZaolUnEVXEWIEKt4=";
+    rev = "ba21624e25e85e89dd1868dee17cdb04f89ebe5c";
+    hash = "sha256-HqR3me+aOwvdncnLVf02TKpUM1z+YXUrTj/ZeoblEMg=";
   };
-  cargoHash = "sha256-0BzfMaT7CqgEBXTBFlQrv53hBI9iUktjB+kJn4SMk9U=";
+  cargoHash = "sha256-EKE30jxCpaueDjQeRtSJlvKIfoC7x6RE7zG7emQUpTs=";
   buildAndTestSubdir = "crates/bws";
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl ] ++ optionals isDarwin [ darwin.Security ];
