@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage {
   inherit pname;
-  version = "unstable-2023-08-06";
+  version = "unstable-2023-08-07";
   src = fetchFromGitHub {
     owner = "input-output-hk";
     repo = "haskell.nix";
-    rev = "d6b6cec286e754869ad9767dbc8db686ed2b770f";
-    hash = "sha256-9iHzyWIvBsGN55LbzjUgTMCAPH19cF5C9eCJk/sdprc=";
+    rev = "565db16a34a0e83305a2cfa48b8b5c50edbecff1";
+    hash = "sha256-89Jn8jtlCSFxEyGTBD3rFQA2gAeTKMe9EnW+wJdvHfs=";
   };
   passthru.updateScript = unstableGitUpdater { };
 }
