@@ -8,14 +8,14 @@ let
 in
 (buildNpmPackage.override { inherit fetchNpmDeps npmHooks; }) {
   inherit pname;
-  version = "unstable-2023-02-10";
+  version = "unstable-2023-08-07";
   src = fetchFromGitHub {
     owner = "jitsi";
     repo = pname;
-    rev = "e1ac000cd1f15642218e80ded98ee19188cf2b17";
-    hash = "sha256-7wKpUYm6KxNy4W8i4Hcctw6jSiV0+gbz0FnuEcqmjpM=";
+    rev = "faea112f5e190459fe1032a0c754f50feb919a80";
+    hash = "sha256-t7/7Wpp7EIKSFmmBPTSvcEjZLLJe8EfwYBCv/Eue8Jo=";
   };
-  npmDepsHash = "sha256-vMTShIpGjubcEgGqMZM9zqoUaAhV/dB8Xh9EH+gB2b8=";
+  npmDepsHash = "sha256-yt4LCGqMLpTJA3rh4KyOGvc9rGQW6WCNy71MQdbYOkM=";
   makeCacheWritable = true;
   patches = [ ./jitsi-meet-changes.patch ];
   nativeBuildInputs = [ python3 pkg-config ];
@@ -29,8 +29,8 @@ in
     mv jitsi-meet $out
   '';
   meta.platforms = platforms.linux;
-  # passthru.updateScript = _experimental-update-script-combinators.sequence [
-  #   (unstableGitUpdater { })
-  #   (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
-  # ];
+  passthru.updateScript = _experimental-update-script-combinators.sequence [
+    (unstableGitUpdater { })
+    (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
+  ];
 }

@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index 040f8c977..ec7dc29fe 100644
+index 08072762a..7b7b61866 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -27,7 +27,7 @@ endif
@@ -25,7 +25,7 @@ index 083b4c083..7fee90ba6 100644
              object-fit: cover;
          }
 diff --git a/react/features/filmstrip/constants.ts b/react/features/filmstrip/constants.ts
-index a40834626..e1d96548f 100644
+index 77484b998..a2e7e87a8 100644
 --- a/react/features/filmstrip/constants.ts
 +++ b/react/features/filmstrip/constants.ts
 @@ -31,7 +31,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
@@ -37,11 +37,11 @@ index a40834626..e1d96548f 100644
  
  /**
   * Minimum height of tile for small screens.
-diff --git a/react/features/shared-video/components/web/AbstractVideoManager.js b/react/features/shared-video/components/web/AbstractVideoManager.js
-index 74f6528ee..c84e560f3 100644
---- a/react/features/shared-video/components/web/AbstractVideoManager.js
-+++ b/react/features/shared-video/components/web/AbstractVideoManager.js
-@@ -328,6 +328,7 @@ class AbstractVideoManager extends PureComponent<Props> {
+diff --git a/react/features/shared-video/components/web/AbstractVideoManager.ts b/react/features/shared-video/components/web/AbstractVideoManager.ts
+index 5406d6c4d..1ac562f05 100644
+--- a/react/features/shared-video/components/web/AbstractVideoManager.ts
++++ b/react/features/shared-video/components/web/AbstractVideoManager.ts
+@@ -331,6 +331,7 @@ class AbstractVideoManager extends PureComponent<IProps> {
       * @returns {void}
       */
      smartAudioMute() {
