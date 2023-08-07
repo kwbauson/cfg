@@ -1,0 +1,33 @@
+diff --git a/pkgs/build-support/node/fetch-npm-deps/src/main.rs b/pkgs/build-support/node/fetch-npm-deps/src/main.rs
+index 62e5752c74c..3f54d1c73ef 100644
+--- a/pkgs/build-support/node/fetch-npm-deps/src/main.rs
++++ b/pkgs/build-support/node/fetch-npm-deps/src/main.rs
+@@ -74,6 +74,7 @@ fn fixup_lockfile(
+                                 .ok_or_else(|| anyhow!("package isn't a map"))?
+                                 .remove("integrity");
+                         } else if let Some(cache_hashes) = cache {
++                            if (cache_hashes.get(resolved).is_some()) {
+                             let cache_hash = cache_hashes
+                                 .get(resolved)
+                                 .expect("dependency should have a hash");
+@@ -87,6 +88,7 @@ fn fixup_lockfile(
+                                     .get_mut("integrity")
+                                     .unwrap() = Value::String(cache_hash.clone());
+                             }
++                            }
+                         }
+                     }
+                 }
+diff --git a/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs b/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs
+index f50a31651d0..f6cad6b6f61 100644
+--- a/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs
++++ b/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs
+@@ -34,7 +34,7 @@ pub(super) fn packages(content: &str) -> anyhow::Result<Vec<Package>> {
+             lockfile.version
+         ),
+     }
+-    .expect("lockfile should have packages");
++    .unwrap_or_default();
+ 
+     packages.par_sort_by(|x, y| {
+         x.resolved
