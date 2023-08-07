@@ -1,14 +1,16 @@
 diff --git a/Makefile b/Makefile
-index 040f8c977..17d73a9fd 100644
+index 040f8c977..ec7dc29fe 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -133,5 +133,4 @@ source-package:
- 	mkdir -p source_package/jitsi-meet/css && \
- 	cp -r *.js *.html resources/*.txt connection_optimization favicon.ico fonts images libs static sounds LICENSE lang source_package/jitsi-meet && \
- 	cp css/all.css source_package/jitsi-meet/css && \
--	(cd source_package ; tar cjf ../jitsi-meet.tar.bz2 jitsi-meet) && \
--	rm -rf source_package
-+	(cd source_package ; tar cjf ../jitsi-meet.tar.bz2 jitsi-meet)
+@@ -27,7 +27,7 @@ endif
+ all: compile deploy clean
+ 
+ compile:
+-	NODE_OPTIONS=--max-old-space-size=8192 \
++	NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=8192' \
+ 	$(WEBPACK)
+ 
+ clean:
 diff --git a/css/filmstrip/_tile_view.scss b/css/filmstrip/_tile_view.scss
 index 083b4c083..7fee90ba6 100644
 --- a/css/filmstrip/_tile_view.scss
@@ -23,10 +25,10 @@ index 083b4c083..7fee90ba6 100644
              object-fit: cover;
          }
 diff --git a/react/features/filmstrip/constants.ts b/react/features/filmstrip/constants.ts
-index cbe134765..0c5f9ce94 100644
+index a40834626..e1d96548f 100644
 --- a/react/features/filmstrip/constants.ts
 +++ b/react/features/filmstrip/constants.ts
-@@ -32,7 +32,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
+@@ -31,7 +31,7 @@ export const DISPLAY_DRAWER_THRESHOLD = 512;
   * single column view.
   * If this is to be modified, please also change the related media query from the tile_view scss file.
   */
@@ -36,10 +38,10 @@ index cbe134765..0c5f9ce94 100644
  /**
   * Minimum height of tile for small screens.
 diff --git a/react/features/shared-video/components/web/AbstractVideoManager.js b/react/features/shared-video/components/web/AbstractVideoManager.js
-index 1ecc23fe1..444f9c91b 100644
+index 74f6528ee..c84e560f3 100644
 --- a/react/features/shared-video/components/web/AbstractVideoManager.js
 +++ b/react/features/shared-video/components/web/AbstractVideoManager.js
-@@ -326,6 +326,7 @@ class AbstractVideoManager extends PureComponent<Props> {
+@@ -328,6 +328,7 @@ class AbstractVideoManager extends PureComponent<Props> {
       * @returns {void}
       */
      smartAudioMute() {
