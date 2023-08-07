@@ -22,7 +22,8 @@ patched-pkgs.buildNpmPackage {
     make compile deploy source-package
   '';
   installPhase = ''
-    cp jitsi-meet.tar.bz2 $out
+    tar xf jitsi-meet.tar.bz2
+    mv jitsi-meet $out
   '';
   meta.platforms = platforms.linux;
   passthru.updateScript = unstableGitUpdater { };
