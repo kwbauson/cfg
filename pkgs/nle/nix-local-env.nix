@@ -6,11 +6,6 @@
   read = f: optionalString (hasFiles f) (readFile (file f));
   hasSource = source != null;
 
-  nle-conf = fixSelfWith (import ./nle.nix) { source = path; inherit pkgs; };
-  nleFiles = name: ifFilesAndNot
-    "${nle-conf.${name}.files or ""} ${nle-conf.${name}.generated or ""}"
-    (nle-conf.notFiles or "");
-
   wrapScriptWithPackages = src: env: rec {
     text = read src;
     name = baseNameOf src;

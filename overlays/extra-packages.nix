@@ -30,6 +30,7 @@ in
         type = "derivation";
         inherit (attrs.package) drvPath outPath;
       })
+      (filterAttrs (n: _: elem n [ "package" "__functor" ]) attrs)
       attrs
       (attrs.passthru or { })
     ]) ((if isFunction arg then fix else id) arg);
