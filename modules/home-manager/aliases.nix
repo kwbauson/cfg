@@ -31,6 +31,12 @@
         done
     '';
     g = ''
+      if [[ $1 = -k ]];then
+        shift
+        keep_going=true
+      else
+        keep_going=false
+      fi
       dirs=$(for dir in *;do
         if [[ -d $dir/.git ]];then
           echo "$dir"
@@ -49,7 +55,7 @@
             fi
           done
           git_exit=''${PIPESTATUS[0]}
-          if [[ $git_exit != '0' ]];then
+          if [[ $git_exit != '0' && $keep_going = false ]];then
             exit "$git_exit"
           fi
         done

@@ -82,7 +82,7 @@
         git add -A
         git commit --message tmp --quiet --allow-empty
         git merge --quiet --no-edit "$branch"
-        ${gitDf} "$current.."
+        ${gitDf} "$current.." || true
       '';
       f = "fetch --all";
       g = gs "git f && git mo";
