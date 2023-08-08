@@ -1,8 +1,4 @@
 scope: with scope;
-let
-  cobi-nix = fetchTree { type = "github"; owner = "jpetrucciani"; repo = "nix"; rev = "541d8f7c774159310ec53b2e1de4cc639c134f95"; };
-  pog = (import cobi-nix { inherit nixpkgs system; }).pog;
-in
 pog {
   name = "clip";
   description = "Utility to sync clipboards across hosts.";
