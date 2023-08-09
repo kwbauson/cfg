@@ -9,7 +9,7 @@ let
     script = ''
       #!${bash}/bin/bash
       set -e
-      ${pathAdd [ nix-wrapped coreutils git nvd ] }
+      ${pathAdd [ nix coreutils git nvd ] }
       ${text}
     '';
     passAsFile = "script";
