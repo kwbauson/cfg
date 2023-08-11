@@ -1,12 +1,6 @@
 final: prev: with final.scope; {
   nix = nixUnstable;
   nixOld = prev.nix;
-  nil = prev.nil.override { nix = nixOld; };
-  nix-wrapped = wrapBins nix ''
-    mkdir -p ~/.local/share/nix
-    export NIX_CONFIG=$(< ${writeText "nix.conf" nixConfBase})$'\n'$NIX_CONFIG
-    exec "$exePath" "$@"
-  '';
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =

@@ -101,7 +101,11 @@ pog {
           pbcopy
         fi
       else
-        xsel --"$selection"
+        if [[ -t 0 ]];then
+          xsel --output --"$selection"
+        else
+          xsel --input --"$selection"
+        fi
       fi
     fi
   '';
