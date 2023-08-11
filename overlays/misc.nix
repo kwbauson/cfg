@@ -2,7 +2,6 @@ final: prev: with final.scope; {
   nix = nixUnstable;
   nixOld = prev.nix;
   nixos-option = prev.nixos-option.override { nix = nixOld; };
-  nil = prev.nil.override { nix = nixOld; };
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =
