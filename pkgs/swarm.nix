@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage (attrs: {
   inherit pname;
-  version = "unstable-2023-08-08";
+  version = "unstable-2023-08-12";
   src = fetchFromGitHub {
     owner = "swarm-game";
     repo = pname;
-    rev = "feb426a2260e407fc3a2875e3d0d47019bc1b6d2";
-    hash = "sha256-VKH1FzsYwh28eKa2i/4+hyv2UWRTffKArbEmol8vU44=";
+    rev = "f743c90027e75b0ed8424395c896d63460d242b5";
+    hash = "sha256-km36dhgPNWGsEzcSboomo9Mp1ZZZFlWX2WLoo2BigbQ=";
   };
   package =
     let
