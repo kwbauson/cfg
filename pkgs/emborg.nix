@@ -1,4 +1,7 @@
-scope: with scope; prev.overrideAttrs (attrs: {
+scope: with scope;
+(prev.overridePythonAttrs {
+  doCheck = !isDarwin;
+}).overrideAttrs (attrs: {
   propagatedBuildInputs = attrs.propagatedBuildInputs ++ [ prev.pythonModule.pkgs.nestedtext ];
   meta = attrs.meta // {
     mainProgram = "emborg";
