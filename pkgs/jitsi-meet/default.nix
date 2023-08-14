@@ -8,12 +8,12 @@ let
 in
 (buildNpmPackage.override { inherit fetchNpmDeps npmHooks; }) {
   inherit pname;
-  version = "unstable-2023-08-11";
+  version = "unstable-2023-08-14";
   src = fetchFromGitHub {
     owner = "jitsi";
     repo = pname;
-    rev = "2b520cbc4c06c3a6952ed682ed45969cbcb453fa";
-    hash = "sha256-otVYrdusLmJ7F1PHJAI0GPNP0OG7KebHHO/tRD28Xp8=";
+    rev = "e2a02f4b2165e3a018f8830c458beacfd2e8a9ee";
+    hash = "sha256-0YMcvOetSyfkD7aKTAhfLzX0ikv3HBeBUrkhIUr+jKA=";
   };
   npmDepsHash = "sha256-3kabfnlN8B7lJHKFyH0Ii6FWOOPKsV3HEivp9skNlsU=";
   makeCacheWritable = true;
