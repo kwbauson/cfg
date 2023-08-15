@@ -46,5 +46,6 @@
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
     inherit breeze-icons nixos-install-tools arduino util-linux;
     inherit nim nimlsp crystal;
+    inherit ncdu;
   };
 }
