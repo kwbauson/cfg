@@ -97,6 +97,7 @@
       font.size = 12;
       settings.scrollback_lines = 0;
       settings.detect_urls = false;
+      settings.cursor_blink_interval = 0;
     };
     direnv.enable = true;
     fzf = {
