@@ -94,19 +94,14 @@ pog {
       listen_clip & clip_pid=$!
       wait
     else
-      if [[ $isDarwin = true ]];then
-        if [[ -t 0 ]];then
-          pbpaste
-        else
-          pbcopy
-        fi
-      else
-        if [[ -t 0 ]];then
-          xsel --output --"$selection"
-        else
-          xsel --input --"$selection"
-        fi
+      args=()
+      if [[ -t 0 ]];then
+        args+=(--get-clipboard)
       fi
+      if [[ "$selection" = primary ]];then
+        args+=(--use-primary)
+      fi
+      ${kitty}/bin/kitten clipboard "''${args[@]}"
     fi
   '';
 }
