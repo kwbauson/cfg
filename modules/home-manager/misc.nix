@@ -11,7 +11,6 @@
       LESSHISTFILE = "$XDG_DATA_HOME/less_history";
       PAGER = "less";
       RANGER_LOAD_DEFAULT_RC = "FALSE";
-      RXVT_SOCKET = "$XDG_RUNTIME_DIR/urxvtd";
       SSH_ASKPASS = "";
       VISUAL = config.home.sessionVariables.EDITOR;
       _JAVA_AWT_WM_NONREPARENTING = 1;
@@ -92,17 +91,12 @@
         vim_mode = true;
       };
     };
-    alacritty = {
+    kitty = {
       enable = true;
-    };
-    urxvt = {
-      enable = !isDarwin && isGraphical;
-      extraConfig.reverseVideo = true;
-      extraConfig.termName = "xterm-256color";
-      fonts = [ "xft:DejaVuSansMNerdFontMono:size=12" ];
-      scroll.bar.enable = false;
-      scroll.lines = 0;
-      iso14755 = false;
+      font.name = "DejaVuSansMNerdFontMono";
+      font.size = 12;
+      settings.scrollback_lines = 0;
+      settings.detect_urls = false;
     };
     direnv.enable = true;
     fzf = {
@@ -250,7 +244,6 @@
       ''} &
       ${exe hsetroot} -solid black &
       xsetroot -cursor_name left_ptr &
-      urxvtd -q -o -f &
       togpad off &
       autorandr --change &
       ${optionalString (machine-name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
