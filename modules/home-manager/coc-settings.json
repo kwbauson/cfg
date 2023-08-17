@@ -72,6 +72,12 @@
           "formattingProvider": "fourmolu"
         }
       }
+    },
+    "unison": {
+      "filetypes": ["unison"],
+      "host": "127.0.0.1",
+      "port": 5757,
+      "settings": {}
     }
   }
 }
