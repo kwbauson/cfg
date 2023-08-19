@@ -67,12 +67,12 @@
         ${gitDf} --staged "$@" || true
       '';
       dfb = gs ''git df $(git merge-base ''${1:-origin/$(git default)} HEAD)'';
-      dfo = gs ''
+      dft = gs ''
         old=$PWD
         current=$(git rev-parse HEAD)
-        branch="origin/''${1:-$(git branch-name)}"
-        dir=$(mktemp --tmpdir -d dfo-XXXXX)
-        patch=$(mktemp --tmpdir dfo-XXXXX)
+        branch=$(git tracking)
+        dir=$(mktemp --tmpdir -d dft-XXXXX)
+        patch=$(mktemp --tmpdir dft-XXXXX)
         git add -A
         git diff --staged > "$patch"
         git worktree add --quiet --detach "$dir"
@@ -85,19 +85,19 @@
         ${gitDf} "$current.." || true
       '';
       f = "fetch --all";
-      g = gs "git f && git mo";
-      gr = gs "git pull origin $(git branch-name) --rebase --autostash";
+      g = gs "git f && git mt";
+      gr = gs "git pull $(git tracking | tr / ' ') --rebase --autostash";
       gd = gs "git fetch origin $(git default):$(git default)";
       md = gs "git merge $(git default)";
-      mo = gs "git merge --ff-only";
+      mt = gs "git merge --ff-only";
       gmd = gs "git gd && g md";
       rmo = gs "git branch -D $1 && git push origin --delete $1";
       hidden = gs "git ls-files -v | grep '^S' | cut -c3-";
       hide = gs ''touch "$@" && git add -N "$@" && git update-index --skip-worktree --assume-unchanged "$@"'';
       unhide = "update-index --no-skip-worktree --no-assume-unchanged";
       l = "log";
-      lg = gs "git lfo && git mo";
-      lfo = gs ''git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
+      lg = gs "git lfo && git mt";
+      lft = gs ''git f && git log HEAD..$(git tracking) --no-merges --reverse'';
       p = "put";
       pr = gs "git put && gh pr create --body ''";
       fp = gs ''
@@ -105,7 +105,7 @@
         git fetch
         loga=$(mktemp)
         logb=$(mktemp)
-        git log origin/$(git branch-name) > "$loga"
+        git log $(git tracking) > "$loga"
         git log > "$logb"
         ${exe delta} "$loga" "$logb" || true
         rm "$loga" "$logb"
@@ -123,9 +123,8 @@
           git push "$remote" HEAD:"$branch" "$@"
         fi
       '';
-      ro = gs ''git reset --hard origin/$(git branch-name) "$@"'';
-      ros = gs "git stash && git ro && git stash pop";
-      rt = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
+      rt = gs ''git reset --hard $(git tracking) "$@"'';
+      rh = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
       s = gs ''
         git br
         git -c color.status=always status | grep --color=never -Ev \
