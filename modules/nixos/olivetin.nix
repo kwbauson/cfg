@@ -1,5 +1,12 @@
 { config, scope, ... }: with scope;
-let cfg = config.services.olivetin; in
+let
+  cfg = config.services.olivetin;
+  olivetinDir = runCommand "olivetin-dir" { } ''
+    mkdir $out
+    ln -s ${olivetin}/* $out
+    ln -sf ${writeText "config.yaml" cfg.config} $out/config.yaml
+  '';
+in
 {
   options.services.olivetin = {
     enable = mkEnableOption "olivetin";
@@ -10,7 +17,8 @@ let cfg = config.services.olivetin; in
       wantedBy = [ "multi-user.target" ];
       script = ''
         export "PATH=/run/current-system/sw/bin:$PATH"
-        exec ${olivetin}/OliveTin --configdir ${writeTextDir "config.yaml" cfg.config}
+        cd ${olivetinDir}
+        exec ./OliveTin
       '';
     };
   };
