@@ -6,7 +6,7 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    extraPackages = attrValues { inherit nimlsp nil solargraph terraform-ls lua-language-server; };
+    extraPackages = attrValues { inherit nimlsp nil solargraph terraform-ls lua-language-server terraform; };
     withNodeJs = true;
     coc.enable = true;
     plugins = with vimPlugins; attrValues {
@@ -18,7 +18,7 @@
 
         coc-eslint coc-git coc-json coc-lists coc-prettier
         coc-solargraph coc-tsserver coc-pyright coc-explorer
-        coc-vetur coc-vimlsp;
+        coc-vetur coc-vimlsp formatter-nvim;
       nvim-treesitter = nvim-treesitter.withAllGrammars;
       barbar-nvim = barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
     };

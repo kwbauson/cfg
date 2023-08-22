@@ -29,3 +29,20 @@ require('nvim-treesitter.configs').setup {
   incremental_selection = { enable = true },
   indent = { enable = true },
 }
+
+require('formatter').setup {
+  filetype = {
+    terraform = {
+      require("formatter.filetypes.terraform").terraformfmt,
+    },
+    hcl = {
+      function()
+        return {
+          exe = "terraform",
+          args = { "fmt", "-" },
+          stdin = true,
+        }
+      end
+    },
+  }
+}
