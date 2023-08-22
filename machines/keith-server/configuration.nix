@@ -67,6 +67,7 @@
       disableTileEnlargement = true;
       enableNoAudioDetection = false;
       enableNoisyMicDetection = false;
+      noiseSuppression.krisp.enable = false;
       maxFullResolutionParticipants = -1;
       p2p.enabled = false;
     };
