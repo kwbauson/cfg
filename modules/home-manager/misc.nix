@@ -100,6 +100,7 @@
       settings.cursor_blink_interval = 0;
       settings.clipboard_control = "write-primary read-primary";
       settings.enable_audio_bell = false;
+      settings.shell_integration = "no-cursor";
     };
     direnv.enable = true;
     fzf = {
