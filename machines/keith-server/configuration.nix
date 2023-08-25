@@ -104,4 +104,13 @@
   services.auto-update.enable = true;
 
   services.tailscale.useRoutingFeatures = "both";
+
+  services.grafana = with constants; {
+    enable = true;
+    settings.server.http_addr = keith-server.ip;
+    settings.server.http_port = grafana.port;
+  };
+  # services.prometheus = {
+  #   enable = true;
+  # };
 }
