@@ -31,6 +31,7 @@
       content.fullscreen.window = true;
       content.geolocation = false;
       content.pdfjs = true;
+      content.javascript.clipboard = "access";
       completion.cmd_history_max_items = -1;
       completion.height = "25%";
       completion.show = "auto";
