@@ -69,11 +69,11 @@
       "<Space>" = "scroll-page 0 1";
       "<Up>" = "scroll up";
       F = "hint all tab-bg";
-      O = "set-cmd-text :open {url:pretty}";
+      O = "cmd-set-text :open {url:pretty}";
       P = "open -t {primary}";
-      T = "set-cmd-text :open -t {url:pretty}";
+      T = "cmd-set-text :open -t {url:pretty}";
       Y = "yank";
-      b = "set-cmd-text -s :open -b";
+      b = "cmd-set-text -s :open -b";
       c = "tab-clone";
       gb = "open qute:bookmarks";
       gp = "spawn -u login-fill";
@@ -89,7 +89,7 @@
       l = "scroll-px 40 0";
       p = "open {primary}";
       s = "stop";
-      t = "set-cmd-text -s :open -t";
+      t = "cmd-set-text -s :open -t";
       w = "open -t";
       y = "yank --sel";
       u = "undo --window";
