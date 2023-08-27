@@ -110,7 +110,7 @@
     settings.server.http_addr = keith-server.ip;
     settings.server.http_port = grafana.port;
   };
-  # services.prometheus = {
-  #   enable = true;
-  # };
+  services.prometheus = {
+    enable = true;
+  };
 }
