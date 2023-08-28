@@ -9,6 +9,8 @@ buildGoModule {
     hash = "sha256-+lSeu0OAnlYy5bym7rnfg+qvg39Sf5+DpwmDNqId4P4=";
   };
   vendorHash = "sha256-EjagOu1L27D1AkyP78VRMR+QULGLdAxGJusUsi8JEr4=";
+  patches = [ ./choose-ten.patch ];
+  doCheck = false;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { })
     (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
