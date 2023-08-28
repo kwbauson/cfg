@@ -96,7 +96,6 @@
       font.name = "DejaVuSansMNerdFontMono";
       font.size = 12;
       settings.scrollback_lines = 65535;
-      settings.detect_urls = false;
       settings.cursor_blink_interval = 0;
       settings.clipboard_control = "write-primary read-primary";
       settings.enable_audio_bell = false;
