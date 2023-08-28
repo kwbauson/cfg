@@ -44,6 +44,8 @@
         shell: reboot
   '';
 
+  services.scribblers.enable = true;
+
   services.netdata.enable = true;
 
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
