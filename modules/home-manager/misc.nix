@@ -100,6 +100,10 @@
       settings.clipboard_control = "write-primary read-primary";
       settings.enable_audio_bell = false;
       settings.shell_integration = "no-cursor";
+      extraConfig = ''
+        mouse_map left click ungrabbed no-op
+        mouse_map ctrl+left click ungrabbed mouse_handle_click selection link prompt
+      '';
     };
     direnv.enable = true;
     fzf = {
