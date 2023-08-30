@@ -1,14 +1,14 @@
 scope: with scope;
 buildGoModule {
   inherit pname;
-  version = "unstable-2023-08-26";
+  version = "unstable-2023-08-29";
   src = fetchFromGitHub {
     owner = "scribble-rs";
     repo = "scribble.rs";
-    rev = "00b9d0dc855158d539797d45d6858b0ee232bb23";
-    hash = "sha256-+lSeu0OAnlYy5bym7rnfg+qvg39Sf5+DpwmDNqId4P4=";
+    rev = "b4ac83145eae1bfb674ccb9112312cc77ff0adaa";
+    hash = "sha256-i4XGllrIJODi/Vyo2nK5UjJfU/2dDt2wjzAjqRLCse4=";
   };
-  vendorHash = "sha256-EjagOu1L27D1AkyP78VRMR+QULGLdAxGJusUsi8JEr4=";
+  vendorHash = "sha256-xdadV4WPY7cmsXf+nyPsFCXNTSxLhkau8GZtLopDcuY=";
   patches = [ ./choose-ten.patch ];
   doCheck = false;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
