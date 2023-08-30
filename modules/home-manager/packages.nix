@@ -24,7 +24,7 @@
       };
       inherit
         ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons signal-desktop
-        discord zoom-us zoom-emoji-fix dejavu_fonts dejavu_fonts_nerd zathura
+        discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura
         ;
       sox = sox.override { enableLame = true; };
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
