@@ -21,4 +21,5 @@ rec {
   grafana.port = 3000;
   loki.port = 3100;
   prometheus.port = 9001;
+  scribblers.port = 8100;
 }

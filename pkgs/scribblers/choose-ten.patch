@@ -1,0 +1,75 @@
+diff --git a/internal/frontend/templates/lobby.html b/internal/frontend/templates/lobby.html
+index 2f1c65e..fa7fbca 100644
+--- a/internal/frontend/templates/lobby.html
++++ b/internal/frontend/templates/lobby.html
+@@ -93,12 +93,7 @@
+                         <div id="word-dialog" class="center-dialog">
+                             <span class="dialog-title">{{.Translation.Get "choose-a-word"}}</span>
+                             <div class="center-dialog-content">
+-                                <div class="word-button-container">
+-                                    <button id="word-button-zero" class="dialog-button"
+-                                        onclick="chooseWord(0)"></button>
+-                                    <button id="word-button-one" class="dialog-button" onclick="chooseWord(1)"></button>
+-                                    <button id="word-button-two" class="dialog-button" onclick="chooseWord(2)"></button>
+-                                </div>
++                                <div class="word-button-container"></div>
+                             </div>
+                         </div>
+ 
+@@ -525,9 +520,11 @@
+         const gameOverScoreboard = document.getElementById("game-over-scoreboard");
+         const restartButton = document.getElementById("restart-button");
+         const wordDialog = document.getElementById("word-dialog");
+-        const wordButtonZero = document.getElementById("word-button-zero");
+-        const wordButtonOne = document.getElementById("word-button-one");
+-        const wordButtonTwo = document.getElementById("word-button-two");
++        const wordButtonContainer = document.getElementsByClassName('word-button-container')[0];
++        for (let i = 0; i < 10; i++) {
++          wordButtonContainer.innerHTML += `<button id="word-button-${i}" class="dialog-button" onclick="chooseWord(${i})"></button>`;
++        }
++        const wordButtons = [...wordButtonContainer.children];
+ 
+         const kickDialog = document.getElementById("kick-dialog");
+         const kickDialogPlayers = document.getElementById("kick-dialog-players");
+@@ -1126,7 +1123,7 @@
+                     //This dialog could potentially stay visible from last
+                     //turn, in case nobody has chosen a word.
+                     waitChooseDialog.style.visibility = "hidden";
+-                    promptWords(parsed.data[0], parsed.data[1], parsed.data[2]);
++                    promptWords(parsed.data);
+                 } else if (parsed.type === "drawing") {
+                     applyDrawData(parsed.data);
+                 } else if (parsed.type === "kick-vote") {
+@@ -1324,10 +1321,8 @@
+             }
+         }
+ 
+-        function promptWords(wordOne, wordTwo, wordThree) {
+-            wordButtonZero.textContent = wordOne;
+-            wordButtonOne.textContent = wordTwo;
+-            wordButtonTwo.textContent = wordThree;
++        function promptWords(data) {
++            wordButtons.forEach((button, i) => button.textContent = data[i]);
+             wordDialog.style.visibility = "visible";
+         }
+ 
+@@ -1890,4 +1885,4 @@
+ </body>
+ 
+ </html>
+-{{end}}
+\ No newline at end of file
++{{end}}
+diff --git a/internal/game/lobby.go b/internal/game/lobby.go
+index 07e6cdc..d459bf2 100644
+--- a/internal/game/lobby.go
++++ b/internal/game/lobby.go
+@@ -652,7 +652,7 @@ func advanceLobbyPredefineDrawer(lobby *Lobby, roundOver bool, newDrawer *Player
+ 	lobby.ClearDrawing()
+ 	newDrawer.State = Drawing
+ 	lobby.State = Ongoing
+-	lobby.wordChoice = GetRandomWords(3, lobby)
++	lobby.wordChoice = GetRandomWords(10, lobby)
+ 
+ 	// We use milliseconds for higher accuracy
+ 	lobby.roundEndTime = getTimeAsMillis() + int64(lobby.DrawingTime)*1000

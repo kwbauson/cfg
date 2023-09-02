@@ -23,9 +23,8 @@
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
       inherit
-        ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons
-        signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
-        zathura
+        ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons signal-desktop
+        discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura
         ;
       sox = sox.override { enableLame = true; };
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
@@ -46,6 +45,5 @@
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
     inherit breeze-icons nixos-install-tools arduino util-linux;
     inherit nim nimlsp crystal;
-    inherit ncdu;
   };
 }
