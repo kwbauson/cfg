@@ -1,8 +1,13 @@
 scope: with scope;
 let
-  patched = applyPatches { src = pkgs.path; patches = [ ./prefetch-npm-deps-ignore-bad.patch ]; };
-  inherit (callPackage "${patched}/pkgs/build-support/node/fetch-npm-deps" { inherit prefetch-npm-deps; }) fetchNpmDeps prefetch-npm-deps;
-  npmHooks = callPackage "${patched}/pkgs/build-support/node/build-npm-package/hooks" {
+  patched = applyPatches {
+    name = "nixpkgs-prefetch-npm-deps-ignore-bad";
+    src = pkgs.path + "/pkgs/build-support/node/fetch-npm-deps";
+    dontUnpack = true;
+    patches = [ ./prefetch-npm-deps-ignore-bad.patch ];
+  };
+  inherit (callPackage patched { inherit prefetch-npm-deps; }) fetchNpmDeps prefetch-npm-deps;
+  npmHooks = scope.npmHooks.override {
     buildPackages = buildPackages // { inherit prefetch-npm-deps; };
   };
 in

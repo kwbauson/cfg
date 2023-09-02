@@ -1,7 +1,7 @@
-diff --git a/pkgs/build-support/node/fetch-npm-deps/src/main.rs b/pkgs/build-support/node/fetch-npm-deps/src/main.rs
-index 62e5752c74c..3f54d1c73ef 100644
---- a/pkgs/build-support/node/fetch-npm-deps/src/main.rs
-+++ b/pkgs/build-support/node/fetch-npm-deps/src/main.rs
+diff --git a/src/main.rs b/src/main.rs
+index 62e5752c74c0..3f54d1c73efa 100644
+--- a/src/main.rs
++++ b/src/main.rs
 @@ -74,6 +74,7 @@ fn fixup_lockfile(
                                  .ok_or_else(|| anyhow!("package isn't a map"))?
                                  .remove("integrity");
@@ -18,10 +18,10 @@ index 62e5752c74c..3f54d1c73ef 100644
                          }
                      }
                  }
-diff --git a/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs b/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs
-index f50a31651d0..f6cad6b6f61 100644
---- a/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs
-+++ b/pkgs/build-support/node/fetch-npm-deps/src/parse/lock.rs
+diff --git a/src/parse/lock.rs b/src/parse/lock.rs
+index f50a31651d0e..f6cad6b6f61b 100644
+--- a/src/parse/lock.rs
++++ b/src/parse/lock.rs
 @@ -34,7 +34,7 @@ pub(super) fn packages(content: &str) -> anyhow::Result<Vec<Package>> {
              lockfile.version
          ),
