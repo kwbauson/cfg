@@ -60,6 +60,7 @@
       '';
       co = "checkout";
       cod = gs ''git co $(git default) "$@"'';
+      cob = gs ''git co $(git merge-base ''${1:-origin/$(git default)} HEAD) "$@"'';
       cof = gs ''br=$(git branch --color=always -av | fzf | sed -e 's/^..//' -e 's@remotes/origin/@@' | awk '{ print $1 }') && git switch "$br"'';
       df = gs ''
         ${tmpGitIndex}
