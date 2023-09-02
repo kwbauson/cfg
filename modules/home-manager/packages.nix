@@ -23,9 +23,8 @@
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
       inherit
-        ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons
-        signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
-        zathura
+        ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons signal-desktop
+        discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura
         ;
       sox = sox.override { enableLame = true; };
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
@@ -34,7 +33,7 @@
       inherit
         bat colordiff gron highlight xh icdiff jq watchexec yarn
         yarn-bash-completion nodejs_latest cachix nle concurrently arduino
-        tasknix devenv google-cloud-sdk nix-index python3
+        tasknix devenv google-cloud-sdk nix-index python3 unison-ucm
         ;
       inherit (nodePackages) npm-check-updates prettier;
     };

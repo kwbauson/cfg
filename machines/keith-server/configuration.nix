@@ -44,12 +44,15 @@
         shell: reboot
   '';
 
+  services.scribblers.enable = true;
+
   services.netdata.enable = true;
 
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
 
   services.github-runner = {
     enable = true;
+    nodeRuntimes = [ "node16" "node20" ];
     extraLabels = [ "nix" ];
     extraPackages = [ gh cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
@@ -67,6 +70,7 @@
       disableTileEnlargement = true;
       enableNoAudioDetection = false;
       enableNoisyMicDetection = false;
+      noiseSuppression.krisp.enable = false;
       maxFullResolutionParticipants = -1;
       p2p.enabled = false;
     };

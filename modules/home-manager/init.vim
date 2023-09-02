@@ -105,3 +105,8 @@ nmap <silent> <leader>b :Buffers<cr>
 nmap <silent> <leader>g :RG<cr>
 nmap <expr> <leader>G ':Rg \b'.expand('<cword>').'\b<cr>'
 vmap <silent> <leader>G y:Rg \b<c-r>"\b<cr>
+
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost * FormatWrite
+augroup END

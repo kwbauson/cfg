@@ -16,13 +16,11 @@ bar {
 
 # programs
 bindsym $mod+p         exec --no-startup-id termbar
-bindsym $mod+t         exec --no-startup-id term tmux
-bindsym $mod+Shift+t   exec --no-startup-id term
-bindsym $mod+Control+t exec --no-startup-id term tmux new ssh keith-mac
-bindsym $mod+e         exec --no-startup-id term tmux new nvim
-bindsym $mod+Shift+e   exec --no-startup-id term nvim
-bindsym $mod+Control+e exec --no-startup-id term tmux new ssh keith-mac -t .nix-profile/bin/bash -ilc nvim
-bindsym $mod+f         exec --no-startup-id term tmux new ranger
+bindsym $mod+t         exec --no-startup-id term
+bindsym $mod+Control+t exec --no-startup-id term ssh keith-mac
+bindsym $mod+e         exec --no-startup-id term nvim
+bindsym $mod+Control+e exec --no-startup-id term ssh keith-mac -t .nix-profile/bin/bash -ilc nvim
+bindsym $mod+f         exec --no-startup-id term ranger
 bindsym $mod+w exec --no-startup-id qtbr
 bindsym $mod+u exec --no-startup-id qutebrowser ':undo --window'
 bindsym $mod+space exec --no-startup-id "sleep 1; xset dpms force off"
@@ -119,7 +117,7 @@ bindsym $mod+Control+q exit
 
 # rules
 for_window [class="^.*$"] title_window_icon on
-for_window [instance="^termbar$"] floating enable, border none, resize set 700 22, move position 0 0
+for_window [instance="^termbar$"] floating enable, border none, resize set 700 23, move position 0 0
 for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
 no_focus [window_role="qutebrowser_background"]
