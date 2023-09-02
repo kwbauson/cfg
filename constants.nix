@@ -18,5 +18,8 @@ rec {
   jitsi.udp-port = 10000;
   valheim.ports = [ 2456 2457 ];
   ssh.port = 22;
+  grafana.port = 3000;
+  loki.port = 3100;
+  prometheus.port = 9001;
   scribblers.port = 8100;
 }
