@@ -1,18 +1,18 @@
 scope: with scope;
 buildGoModule {
   inherit pname;
-  version = "unstable-2023-09-02";
+  version = "unstable-2023-08-29";
   src = fetchFromGitHub {
     owner = "scribble-rs";
     repo = "scribble.rs";
-    rev = "6dff30b531eeef9bddb6b3fc3814f50a1fd33f0e";
-    hash = "sha256-oq54rfHisZA5sxLgjDvNoW8rsgk8uKHzOneO0ccW0DE=";
+    rev = "b4ac83145eae1bfb674ccb9112312cc77ff0adaa";
+    hash = "sha256-i4XGllrIJODi/Vyo2nK5UjJfU/2dDt2wjzAjqRLCse4=";
   };
   vendorHash = "sha256-xdadV4WPY7cmsXf+nyPsFCXNTSxLhkau8GZtLopDcuY=";
   patches = [ ./choose-ten.patch ];
   doCheck = false;
-  passthru.updateScript = _experimental-update-script-combinators.sequence [
-    (unstableGitUpdater { })
-    (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
-  ];
+  # passthru.updateScript = _experimental-update-script-combinators.sequence [
+  #   (unstableGitUpdater { })
+  #   (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
+  # ];
 }
