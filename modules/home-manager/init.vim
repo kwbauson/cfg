@@ -2,8 +2,8 @@ cmap <c-p> <up>
 cmap <c-n> <down>
 let mapleader = ' '
 let maplocalleader = '  '
-map <silent> <leader>s :set invspell spell?<cr>
-map <silent> <leader>w :set invwrap wrap?<cr>
+map <silent> <leader>s :setlocal invspell spell?<cr>
+map <silent> <leader>w :setlocal invwrap wrap?<cr>
 map <silent> <leader>n :set invnumber number?<cr>
 map <silent> <leader>N :set invrelativenumber relativenumber?<cr>
 map <silent> <leader>r :up<bar>vs<bar>term %:p:S<cr>i
