@@ -9,7 +9,7 @@ jobs:
     name: '${{ matrix.system.os }} ${{ matrix.system.arch }}'
     runs-on: [nix, '${{ matrix.system.os }}', '${{ matrix.system.arch }}']
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: nix -L build .#checks.default
       - run: ./result/bin/checks
       - run: |
