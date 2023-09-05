@@ -46,10 +46,6 @@
       "command": "lua-language-server",
       "filetypes": ["lua"]
     },
-    "nim": {
-      "command": "nimlsp",
-      "filetypes": ["nim"]
-    },
     "terraform": {
       "command": "terraform-ls",
       "args": ["serve"],
