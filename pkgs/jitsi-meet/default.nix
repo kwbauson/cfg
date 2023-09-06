@@ -13,12 +13,12 @@ let
 in
 (buildNpmPackage.override { inherit fetchNpmDeps npmHooks; }) {
   inherit pname;
-  version = "unstable-2023-09-04";
+  version = "unstable-2023-09-05";
   src = fetchFromGitHub {
     owner = "jitsi";
     repo = pname;
-    rev = "609942654a3a892474f56b2e837ce3552092855a";
-    hash = "sha256-sSK7tkCBSuIVlluYAkFk8OubzcAKqjgnECaVdBdtijU=";
+    rev = "a95eaa6c2efe38dd42f3b5c55f887274d4a68e34";
+    hash = "sha256-Km6UvgKQt871sB/SRSrYmIwuHT3dJ4w1IqPlMp/8VGo=";
   };
   npmDepsHash = "sha256-d83PObytcDowNQHGKNxRrrSDl7wyQMqWXGOagbjFGWQ=";
   makeCacheWritable = true;
