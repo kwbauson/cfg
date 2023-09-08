@@ -74,6 +74,11 @@
       "host": "127.0.0.1",
       "port": 5757,
       "settings": {}
+    },
+    "nim": {
+      "command": "nimlangserver",
+      "filetypes": ["nim"],
+      "trace.server": "verbose"
     }
   }
 }
