@@ -29,22 +29,22 @@ let
         inherit (parseGithubUrl spec.url) owner repo;
         rev = spec.vcsRevision;
       };
-      buildInputs = map (n: nimblePackages.${n}) spec.dependencies;
+      buildInputs = map (n: nimblePackages.${n}) spec.dependencies ++ overrides.${pname}.buildInputs or [ ];
       passthru = { inherit spec; };
-    } // overrides.${pname} or { } // allOverrides)))
+    } // removeAttrs overrides.${pname} or { } [ "buildInputs" ] // allOverrides)))
     (attrs: attrs // { inherit nim; })
   ];
 in
 nim.pkgs.buildNimPackage (
   (recursiveUpdate
     {
-      buildInputs = map (n: nimblePackages.${n}) (attrNames nimbleLock.packages);
+      buildInputs = map (n: nimblePackages.${n}) (attrNames nimbleLock.packages) ++ attrs.buildInputs or [ ];
       passthru = {
         pkgs = nimblePackages;
         inherit nimbleLock;
       };
     }
-    (removeAttrs attrs [ "nim" "allOverrides" "overrides" ])
+    (removeAttrs attrs [ "nim" "allOverrides" "overrides" "buildInputs" ])
   ) //
   allOverrides
 )
