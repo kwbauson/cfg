@@ -7,11 +7,11 @@ let
     patches = [ ./prefetch-npm-deps-ignore-bad.patch ];
   };
   inherit (callPackage patched { inherit prefetch-npm-deps; }) fetchNpmDeps prefetch-npm-deps;
-  npmHooks = scope.npmHooks.override {
-    buildPackages = buildPackages // { inherit prefetch-npm-deps; };
+  buildPackages = scope.buildPackages // {
+    npmHooks = scope.buildPackages.npmHooks.override { inherit prefetch-npm-deps; };
   };
 in
-(buildNpmPackage.override { inherit fetchNpmDeps npmHooks; }) {
+(buildNpmPackage.override { inherit fetchNpmDeps buildPackages; }) {
   inherit pname;
   version = "unstable-2023-09-08";
   src = fetchFromGitHub {
