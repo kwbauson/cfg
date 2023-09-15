@@ -22,13 +22,24 @@
 
   services.caddy.enable = true;
   services.caddy.virtualHosts = with constants; {
-    "${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString olivetin.authed-port}";
-    "files.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString file-server.port}";
-    "netdata.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString netdata.port}";
-    "jitsi.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString jitsi.caddy-port}";
-    "api.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString personal-api.port}";
-    "scribblers.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString scribblers.port}";
+    "*.${kwbauson.fqdn}:${toString http.port}".extraConfig = ''
+      header Content-Type text/html
+      respond <<HTML
+        <html>
+          <head>
+            <title>404 Not Found</title>
+          </head>
+          <body>
+            <center><h1>404 Not Found</h1></center>
+          </body>
+        </html>
+        HTML 404
+    '';
   };
+  services.caddy.subdomainsOf = constants.kwbauson.fqdn;
+  services.caddy.subdomains = forAttrNames
+    (machines.keith-server.configuration { inherit scope; config = { }; }).services.caddy.subdomains
+    (const "reverse_proxy keith-server:${toString constants.http.port}");
 
   systemd.services.forward-ports = {
     wantedBy = [ "multi-user.target" ];

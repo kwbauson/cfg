@@ -11,6 +11,7 @@ builtins // pkgs.lib // {
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
+  forAttrs' = flip mapAttrs';
   forAttrNames = flip mapAttrNames;
   forAttrValues = flip mapAttrValues;
   forAttrNamesHaving = attrs: attr: forAttrNames (filterAttrs (_: hasAttr attr) attrs);
