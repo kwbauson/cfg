@@ -11,8 +11,20 @@
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
   time.hardwareClockInLocalTime = true;
-
   services.openssh.enable = true;
+  services.tailscale.useRoutingFeatures = "both";
+  services.auto-update.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.oci-containers.backend = "docker";
+
+  virtualisation.oci-containers.containers.valheim = {
+    autoStart = false;
+    image = "ghcr.io/lloesche/valheim-server";
+    environmentFiles = [ /var/lib/valheim/environment ];
+    extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
+    ports = [ "2456-2457:2456-2457/udp" ];
+    volumes = [ "/var/lib/valheim:/config" ];
+  };
 
   services.caddy.enable = true;
   services.caddy.virtualHosts.":${toString constants.on-demand-tls.port}".extraConfig = ''
@@ -44,6 +56,7 @@
         icon: "&#128683;"
         shell: reboot
   '';
+  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
   services.caddy.subdomains."" = with constants; ''
     basicauth /* {
       {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
@@ -53,6 +66,7 @@
 
   services.caddy.subdomains.api = constants.personal-api.port;
 
+  systemd.tmpfiles.rules = [ "d /srv/files 777" ];
   services.caddy.subdomains.files = ''
     file_server browse {
       root /srv/files
@@ -64,8 +78,6 @@
 
   services.netdata.enable = true;
   services.caddy.subdomains.netdata = constants.netdata.port;
-
-  systemd.tmpfiles.rules = [ "d /srv/files 777" ];
 
   services.github-runner = {
     enable = true;
@@ -102,27 +114,9 @@
     publicAddress = kwbauson.ip;
   };
   services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
-
-  systemd.services = recursiveUpdate
-    {
-      caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
-      jitsi-meet-init-secrets.requiredBy = splitString " " config.systemd.services.jitsi-meet-init-secrets.unitConfig.Before;
-    }
-    (genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
-      restartTriggers = [ pkgs.jitsi-meet ];
-    }));
-
-  virtualisation.docker.enable = true;
-  virtualisation.oci-containers.containers.valheim = {
-    autoStart = false;
-    image = "ghcr.io/lloesche/valheim-server";
-    environmentFiles = [ /var/lib/valheim/environment ];
-    extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
-    ports = [ "2456-2457:2456-2457/udp" ];
-    volumes = [ "/var/lib/valheim:/config" ];
-  };
-
-  services.auto-update.enable = true;
-
-  services.tailscale.useRoutingFeatures = "both";
+  systemd.services.jitsi-meet-init-secrets.requiredBy = splitString " " config.systemd.services.jitsi-meet-init-secrets.unitConfig.Before;
+  systemd.services.prosody.restartTriggers = [ jitsi-meet ];
+  systemd.services.jicofo.restartTriggers = [ jitsi-meet ];
+  systemd.services.jitsi-videobridge2.restartTriggers = [ jitsi-meet ];
+  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ jitsi-meet ];
 }

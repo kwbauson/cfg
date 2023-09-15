@@ -95,5 +95,40 @@
           -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
     '';
     batwhich = ''bat "$(which "$@")"'';
+    startpkg = ''
+      set -eu
+      github=''${1:-}
+      read -r owner repo < <(echo "$github" | sed -E 's@^https://github.com/([^/]+)/([^/]+)$@\1 \2@')
+      pname=''${2:-''${repo:-}}
+      if [[ $owner = $pname ]];then
+        owner=pname
+      else
+        owner="\"$owner\""
+      fi
+      if [[ $repo = $pname ]];then
+        repo=pname
+      else
+        repo="\"$repo\""
+      fi
+      cd ~/cfg
+      file=pkgs/"$pname".nix
+      echo "~/cfg/$file"
+      tee "$file" <<-EOF
+      scope: with scope;
+      stdenv.mkDerivation {
+        inherit pname;
+        version = "TODO";
+        src = fetchFromGitHub {
+          owner = $owner;
+          repo = $repo;
+          rev = "TODO";
+          hash = "sha256-TODO";
+        };
+        meta.mainProgram = pname;
+        passthru.updateScript = unstableGitUpdater { };
+      }
+      EOF
+      nr updates."$pname"
+    '';
   };
 }
