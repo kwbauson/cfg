@@ -17,9 +17,9 @@ bar {
 # programs
 bindsym $mod+p         exec --no-startup-id termbar
 bindsym $mod+t         exec --no-startup-id term
-bindsym $mod+Control+t exec --no-startup-id term ssh keith-mac
+bindsym $mod+Control+t exec --no-startup-id term ssh keith-server
 bindsym $mod+e         exec --no-startup-id term nvim
-bindsym $mod+Control+e exec --no-startup-id term ssh keith-mac -t .nix-profile/bin/bash -ilc nvim
+bindsym $mod+Control+e exec --no-startup-id term ssh keith-server -t .nix-profile/bin/bash -ilc nvim
 bindsym $mod+f         exec --no-startup-id term ranger
 bindsym $mod+w exec --no-startup-id qtbr
 bindsym $mod+u exec --no-startup-id qutebrowser ':undo --window'
