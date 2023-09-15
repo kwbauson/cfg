@@ -7,16 +7,16 @@ let cfg = config.services.caddy; in
       default = "localhost:80";
     };
     subdomains = mkOption {
-      type = with types; attrsOf (oneOf [ port lines ]);
+      type = with types; attrsOf (oneOf [ attrs lines port ]);
       default = { };
     };
   };
   config.services.caddy.virtualHosts = forAttrs' cfg.subdomains
     (subdomain: value: {
       name = "${subdomain}${optionalString (subdomain != "") "."}${cfg.subdomainsOf}";
-      value.extraConfig =
-        if isString value
-        then value
-        else "reverse_proxy localhost:${toString value}";
+      value =
+        if isAttrs value then value
+        else if isString value then { extraConfig = value; }
+        else { extraConfig = "reverse_proxy localhost:${toString value}"; };
     });
 }

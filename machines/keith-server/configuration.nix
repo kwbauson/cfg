@@ -14,25 +14,41 @@
 
   services.openssh.enable = true;
 
-  services.caddy.enable = true;
-  services.caddy.subdomainsOf = with constants; "${kwbauson.fqdn}:${toString http.port}";
-  services.caddy.subdomains = with constants; {
-    "" = ''
-      basicauth /* {
-        {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
+  services.caddy = with constants; {
+    enable = true;
+    virtualHosts.":${toString on-demand-tls.port}".extraConfig = ''
+      route {
+        @filter {
+          ${pipe config.services.caddy.subdomains [
+            attrNames
+            (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
+            (map (prefix: "not query domain=${prefix}${kwbauson.fqdn}"))
+            (concatStringsSep "\n")
+          ]}
+        }
+        respond @filter 404
+        respond 200
       }
-      reverse_proxy localhost:${toString olivetin.port}
     '';
-    test = ''respond "hello this is a test"'';
-    jitsi = ""; # provided by jitsi service
-    files = ''
-      file_server browse {
-        root /srv/files
-      }
-    '';
-    netdata = netdata.port;
-    api = personal-api.port;
-    scribblers = scribblers.port;
+    subdomainsOf = "${kwbauson.fqdn}:${toString http.port}";
+    subdomains = {
+      "" = ''
+        basicauth /* {
+          {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
+        }
+        reverse_proxy localhost:${toString olivetin.port}
+      '';
+      test = ''respond "hello this is a test"'';
+      jitsi = ""; # provided by jitsi service
+      files = ''
+        file_server browse {
+          root /srv/files
+        }
+      '';
+      netdata = netdata.port;
+      api = personal-api.port;
+      scribblers = scribblers.port;
+    };
   };
 
   services.olivetin.enable = true;

@@ -17,4 +17,5 @@ rec {
   valheim.ports = [ 2456 2457 ];
   ssh.port = 22;
   scribblers.port = 8100;
+  on-demand-tls.port = 5555;
 }

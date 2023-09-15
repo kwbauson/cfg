@@ -20,26 +20,23 @@
   services.openssh.enable = true;
   services.xserver.enable = false;
 
-  services.caddy.enable = true;
-  services.caddy.virtualHosts = with constants; {
-    "*.${kwbauson.fqdn}:${toString http.port}".extraConfig = ''
-      header Content-Type text/html
-      respond <<HTML
-        <html>
-          <head>
-            <title>404 Not Found</title>
-          </head>
-          <body>
-            <center><h1>404 Not Found</h1></center>
-          </body>
-        </html>
-        HTML 404
+  services.caddy = with constants; {
+    enable = true;
+    globalConfig = ''
+      on_demand_tls {
+        ask http://keith-server:${toString on-demand-tls.port}
+      }
+    '';
+
+    extraConfig = ''
+      https:// {
+        tls {
+          on_demand
+        }
+        reverse_proxy keith-server:${toString http.port}
+      }
     '';
   };
-  services.caddy.subdomainsOf = constants.kwbauson.fqdn;
-  services.caddy.subdomains = forAttrNames
-    (machines.keith-server.configuration { inherit scope; config = { }; }).services.caddy.subdomains
-    (const "reverse_proxy keith-server:${toString constants.http.port}");
 
   systemd.services.forward-ports = {
     wantedBy = [ "multi-user.target" ];
