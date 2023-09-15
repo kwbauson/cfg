@@ -14,20 +14,40 @@
 
   services.openssh.enable = true;
 
-  services.caddy.enable = true;
-  services.caddy.virtualHosts = with constants; {
-    ":${toString olivetin.authed-port}".extraConfig = ''
-      basicauth /* {
-        {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
+  services.caddy = with constants; {
+    enable = true;
+    virtualHosts.":${toString on-demand-tls.port}".extraConfig = ''
+      route {
+        @filter {
+          ${pipe config.services.caddy.subdomains [
+            attrNames
+            (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
+            (map (prefix: "not query domain=${prefix}${kwbauson.fqdn}"))
+            (concatStringsSep "\n")
+          ]}
+        }
+        respond @filter 404
+        respond 200
       }
-      reverse_proxy localhost:${toString olivetin.port}
     '';
-    ":${toString file-server.port}".extraConfig = ''
-      file_server browse {
-        root /srv/files
-      }
-    '';
-    ":${toString jitsi.caddy-port}".extraConfig = with config.services; caddy.virtualHosts.${jitsi-meet.hostName}.extraConfig;
+    subdomainsOf = "${kwbauson.fqdn}:${toString http.port}";
+    subdomains = {
+      "" = ''
+        basicauth /* {
+          {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
+        }
+        reverse_proxy localhost:${toString olivetin.port}
+      '';
+      jitsi = ""; # provided by jitsi service
+      files = ''
+        file_server browse {
+          root /srv/files
+        }
+      '';
+      netdata = netdata.port;
+      api = personal-api.port;
+      scribblers = scribblers.port;
+    };
   };
 
   services.olivetin.enable = true;
@@ -63,7 +83,7 @@
     enable = true;
     nginx.enable = false;
     caddy.enable = true;
-    hostName = "jitsi.${constants.kwbauson.fqdn}";
+    hostName = "jitsi.${constants.kwbauson.fqdn}:80";
     config = {
       analytics.disabled = true;
       desktopSharingFrameRate = { min = 5; max = 30; };

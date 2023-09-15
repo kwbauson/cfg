@@ -20,14 +20,22 @@
   services.openssh.enable = true;
   services.xserver.enable = false;
 
-  services.caddy.enable = true;
-  services.caddy.virtualHosts = with constants; {
-    "${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString olivetin.authed-port}";
-    "files.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString file-server.port}";
-    "netdata.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString netdata.port}";
-    "jitsi.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString jitsi.caddy-port}";
-    "api.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString personal-api.port}";
-    "scribblers.${kwbauson.fqdn}".extraConfig = "reverse_proxy keith-server:${toString scribblers.port}";
+  services.caddy = with constants; {
+    enable = true;
+    globalConfig = ''
+      on_demand_tls {
+        ask http://keith-server:${toString on-demand-tls.port}
+      }
+    '';
+
+    extraConfig = ''
+      https:// {
+        tls {
+          on_demand
+        }
+        reverse_proxy keith-server:${toString http.port}
+      }
+    '';
   };
 
   systemd.services.forward-ports = {
