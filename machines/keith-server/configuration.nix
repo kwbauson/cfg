@@ -14,41 +14,22 @@
 
   services.openssh.enable = true;
 
-  services.caddy = with constants; {
-    enable = true;
-    virtualHosts.":${toString on-demand-tls.port}".extraConfig = ''
-      route {
-        @filter {
-          ${pipe config.services.caddy.subdomains [
-            attrNames
-            (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
-            (map (prefix: "not query domain=${prefix}${kwbauson.fqdn}"))
-            (concatStringsSep "\n")
-          ]}
-        }
-        respond @filter 404
-        respond 200
+  services.caddy.enable = true;
+  services.caddy.virtualHosts.":${toString constants.on-demand-tls.port}".extraConfig = ''
+    route {
+      @subdomains {
+        ${pipe config.services.caddy.subdomains [
+          attrNames
+          (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
+          (map (prefix: "query domain=${prefix}${constants.kwbauson.fqdn}"))
+          (concatStringsSep "\n")
+        ]}
       }
-    '';
-    subdomainsOf = "${kwbauson.fqdn}:${toString http.port}";
-    subdomains = {
-      "" = ''
-        basicauth /* {
-          {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
-        }
-        reverse_proxy localhost:${toString olivetin.port}
-      '';
-      jitsi = ""; # provided by jitsi service
-      files = ''
-        file_server browse {
-          root /srv/files
-        }
-      '';
-      netdata = netdata.port;
-      api = personal-api.port;
-      scribblers = scribblers.port;
-    };
-  };
+      respond @subdomains 200
+      respond 404
+    }
+  '';
+  services.caddy.subdomainsOf = with constants; "${kwbauson.fqdn}:${toString http.port}";
 
   services.olivetin.enable = true;
   services.olivetin.config = ''
@@ -63,10 +44,26 @@
         icon: "&#128683;"
         shell: reboot
   '';
+  services.caddy.subdomains."" = with constants; ''
+    basicauth /* {
+      {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
+    }
+    reverse_proxy localhost:${toString olivetin.port}
+  '';
+
+  services.caddy.subdomains.api = constants.personal-api.port;
+
+  services.caddy.subdomains.files = ''
+    file_server browse {
+      root /srv/files
+    }
+  '';
 
   services.scribblers.enable = true;
+  services.caddy.subdomains.scribblers = constants.scribblers.port;
 
   services.netdata.enable = true;
+  services.caddy.subdomains.netdata = constants.netdata.port;
 
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
 
@@ -99,6 +96,7 @@
       SHOW_WATERMARK_FOR_GUESTS = false;
     };
   };
+  services.caddy.subdomains.jitsi = "";
   services.jitsi-videobridge.nat = with constants; {
     localAddress = keith-server.ip;
     publicAddress = kwbauson.ip;
@@ -111,7 +109,7 @@
       jitsi-meet-init-secrets.requiredBy = splitString " " config.systemd.services.jitsi-meet-init-secrets.unitConfig.Before;
     }
     (genAttrs [ "prosody" "jicofo" "jitsi-meet-init-secrets" "jitsi-videobridge2" ] (_: {
-      restartTriggers = [ config.systemd.units."caddy.service".unit ];
+      restartTriggers = [ pkgs.jitsi-meet ];
     }));
 
   virtualisation.docker.enable = true;
