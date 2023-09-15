@@ -38,7 +38,6 @@
         }
         reverse_proxy localhost:${toString olivetin.port}
       '';
-      test = ''respond "hello this is a test"'';
       jitsi = ""; # provided by jitsi service
       files = ''
         file_server browse {
