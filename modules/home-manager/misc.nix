@@ -28,18 +28,11 @@
   };
 
   nix.package = lib.mkForce nix;
-  nix.settings =
-    optionalAttrs isDarwin
-      {
-        max-jobs = "auto";
-        extra-experimental-features = [ "nix-command" "flakes" ];
-        extra-platforms = [ "x86_64-darwin" ];
-      }
-    // optionalAttrs (machine-name == "keith-mac")
-      {
-        builders-use-substitutes = "true";
-        builders = [ "ssh-ng://keith@keith-desktop.tail6a226.ts.net x86_64-linux,i686-linux,x86_64-v1-linux,x86_64-v2-linux,x86_64-v3-linux - 24 - benchmark,big-parallel,kvm,nixos-test" ];
-      };
+  nix.settings = optionalAttrs isDarwin {
+    max-jobs = "auto";
+    extra-experimental-features = [ "nix-command" "flakes" ];
+    extra-platforms = [ "x86_64-darwin" ];
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -57,17 +50,6 @@
       matchBlocks = {
         "kwbauson.com".user = "keith";
         "gitlab.com".extraOptions.UpdateHostKeys = "no";
-        keith-mac = {
-          user = "keithbauson";
-          hostname = "keith-mac.tail5bdda.ts.net";
-          localForwards =
-            map
-              (port: { bind.port = port; host.address = "localhost"; host.port = port; })
-              [ 1234 3000 3001 3306 4000 4306 5432 8000 8025 4002 ]
-            ++ [
-              { bind.port = 8080; host.address = "api"; host.port = 8080; }
-            ];
-        };
         keith-desktop.user = "keith";
       };
     };
@@ -225,11 +207,7 @@
     };
   };
 
-  services.clip = {
-    # enable = true;
-    # hosts = remove machine-name [ "keith-server" "keith-desktop" "keith-mac" ];
-    sync-primary.enable = isLinux && isGraphical;
-  };
+  services.clip.sync-primary.enable = isLinux && isGraphical;
 
   xsession = {
     enable = isNixOS && isGraphical;
