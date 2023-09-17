@@ -119,4 +119,15 @@
   systemd.services.jicofo.restartTriggers = [ jitsi-meet ];
   systemd.services.jitsi-videobridge2.restartTriggers = [ jitsi-meet ];
   systemd.services.jitsi-meet-init-secrets.restartTriggers = [ jitsi-meet ];
+
+  systemd.services.miro = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.DynamicUser = true;
+    serviceConfig.PrivateTmp = true;
+    script = "
+      export PORT=${toString constants.miro.port}
+      ${getExe mirotalk}
+    ";
+  };
+  services.caddy.subdomains.miro = constants.miro.port;
 }
