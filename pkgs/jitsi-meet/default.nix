@@ -13,14 +13,14 @@ let
 in
 (buildNpmPackage.override { inherit fetchNpmDeps buildPackages; }) {
   inherit pname;
-  version = "unstable-2023-09-26";
+  version = "unstable-2023-09-27";
   src = fetchFromGitHub {
     owner = "jitsi";
     repo = pname;
-    rev = "e1dc573c3cca8b617b28e3e048f5a0a494f3225f";
-    hash = "sha256-eOok/P6BTH/C0IcgagZuCpMHxn4riFZjLqwQvWKjYzQ=";
+    rev = "f9ac965e18e17b67da269e7f050c04d3945c4c94";
+    hash = "sha256-onWjv2mT5XV8i8uFsfT2OMjXMgTaSlR63mDiCPhTnQ8=";
   };
-  npmDepsHash = "sha256-hPQ1O2Zitehpad1VSyFrh9nQyFT0N9pD+xXWAJxoz3Q=";
+  npmDepsHash = "sha256-Gd6+80BV2cGAVxyETmbNp0vQ91T+Wu8SQoHa/RrEPHY=";
   makeCacheWritable = true;
   patches = [ ./jitsi-meet-changes.patch ];
   nativeBuildInputs = [ python3 pkg-config ];
