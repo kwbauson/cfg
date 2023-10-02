@@ -1,10 +1,10 @@
 scope: with scope;
 stdenv.mkDerivation (attrs: {
   inherit pname;
-  version = "G6.0.2";
+  version = "G6.0.3";
   src = fetchurl {
     url = "https://cdn1.waterfox.net/${attrs.pname}/releases/${attrs.version}/Linux_x86_64/${attrs.pname}-${attrs.version}.tar.bz2";
-    hash = "sha256-12l3uySd0rn1VpE4cxy+0G+Pkro1lTgOW6oDGpq7+U4=";
+    hash = "sha256-ah/bN063B7g0DN3bQN3ZNr9MpbxhYJKXVTYSsveQyzw=";
   };
   nativeBuildInputs = [ autoPatchelfHook ];
   buildInputs = firefox-unwrapped.buildInputs ++ [ gtk2 ];
