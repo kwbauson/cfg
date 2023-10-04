@@ -124,10 +124,17 @@
     wantedBy = [ "multi-user.target" ];
     serviceConfig.DynamicUser = true;
     serviceConfig.PrivateTmp = true;
+    serviceConfig.EnvironmentFile = "/etc/nixos/miro-environment";
     script = "
       export PORT=${toString constants.miro.port}
       ${getExe mirotalk}
     ";
   };
+  services.coturn.enable = true;
+  services.coturn.static-auth-secret-file = "/etc/nixos/coturn-auth";
+  services.coturn.realm = constants.kwbauson.fqdn;
+  services.coturn.extraConfig = ''
+    user=test
+  '';
   services.caddy.subdomains.miro = constants.miro.port;
 }

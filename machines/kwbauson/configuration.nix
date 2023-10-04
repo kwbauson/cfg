@@ -1,4 +1,4 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
 {
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
@@ -13,8 +13,8 @@
     defaultGateway.address = kwbauson.gateway;
     nameservers = cloudflare-dns.ips;
     inherit (kwbauson) domain;
-    firewall.allowedTCPPorts = [ http.port https.port jitsi.tcp-port ] ++ valheim.ports;
-    firewall.allowedUDPPorts = [ jitsi.udp-port ] ++ valheim.ports;
+    firewall.allowedTCPPorts = [ http.port https.port jitsi.tcp-port config.services.coturn.listening-port ] ++ valheim.ports;
+    firewall.allowedUDPPorts = [ jitsi.udp-port config.services.coturn.listening-port ] ++ valheim.ports;
   };
 
   services.openssh.enable = true;
@@ -42,12 +42,12 @@
     wantedBy = [ "multi-user.target" ];
     path = [ socat ];
     script = with constants; ''
-      # valheim
-      # for port in ${toString valheim.ports};do
-      #   for proto in TCP UDP;do
-      #     socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
-      #   done
-      # done
+      # coturn
+      for port in ${toString valheim.ports} ${toString config.services.coturn.listening-port};do
+        for proto in TCP UDP;do
+          socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
+        done
+      done
       # jitsi
       socat TCP-LISTEN:${toString jitsi.tcp-port},fork,reuseaddr TCP:keith-server:${toString jitsi.tcp-port} &
       socat UDP-LISTEN:${toString jitsi.udp-port},fork,reuseaddr UDP:keith-server:${toString jitsi.udp-port} &
