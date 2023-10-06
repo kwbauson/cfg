@@ -11,7 +11,6 @@
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.loadInInitrd = false;
   time.hardwareClockInLocalTime = true;
-  services.openssh.enable = true;
   services.tailscale.useRoutingFeatures = "both";
   services.auto-update.enable = true;
   virtualisation.docker.enable = true;

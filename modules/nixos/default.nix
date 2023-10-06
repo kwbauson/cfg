@@ -94,7 +94,9 @@
   programs.command-not-found.enable = false;
   programs.steam.enable = mkDefault config.services.xserver.enable;
   programs.pmount.enable = true;
-  services.tailscale.enable = mkDefault config.services.openssh.enable;
+  services.openssh.enable = true;
+  services.openssh.openFirewall = false;
+  services.tailscale.enable = mkDefault true;
   services.tailscale.useRoutingFeatures = mkDefault "client";
   hardware.bluetooth.enable = mkDefault config.services.xserver.enable;
 

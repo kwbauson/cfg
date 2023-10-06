@@ -17,7 +17,7 @@
     firewall.allowedUDPPorts = [ jitsi.udp-port ] ++ valheim.ports;
   };
 
-  services.openssh.enable = true;
+  services.openssh.openFirewall = mkForce true;
   services.xserver.enable = false;
 
   services.caddy = with constants; {
