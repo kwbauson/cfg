@@ -1,5 +1,5 @@
 with builtins;
-{ system ? currentSystem, forceFlakeCompat ? true }:
+{ system ? currentSystem, forceFlakeCompat ? false }:
 let
   lock = fromJSON (readFile ./flake.lock);
   flake-compat = with lock.nodes.flake-compat.locked; import (fetchTarball {
