@@ -38,7 +38,6 @@ final: prev: with final.scope; {
   });
   sourcesInfo = pipe ../flake.lock [
     readFile
-    unsafeDiscardStringContext
     fromJSON
     (x: x.nodes)
     (filterAttrs (name: _: name != "root"))
