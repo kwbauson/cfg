@@ -130,5 +130,15 @@
       EOF
       nr updates."$pname"
     '';
+    cnix = ''
+      set -u
+      cachename=$1
+      shift
+      args=$(
+        curl -s app.cachix.org/api/v1/cache/"$cachename" | jq -r \
+        '"--extra-substituters \(.uri) --extra-trusted-public-keys \(.publicSigningKeys[0])"'
+      )
+      exec nix ''${args[@]} "$@"
+    '';
   };
 }
