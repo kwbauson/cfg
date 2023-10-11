@@ -24,7 +24,6 @@
   system.nixos.label = flakeLastModifiedDateString;
 
   nix.channel.enable = false;
-  nixpkgs = { inherit (pkgs) pkgs; };
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
