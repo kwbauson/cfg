@@ -33,9 +33,10 @@
       inherit
         bat colordiff gron highlight xh icdiff jq watchexec yarn
         yarn-bash-completion nodejs_latest cachix nle concurrently arduino
-        tasknix devenv google-cloud-sdk nix-index python3 unison-ucm
+        tasknix devenv google-cloud-sdk nix-index unison-ucm
         ;
       inherit (nodePackages) npm-check-updates prettier;
+      python3 = python3.withPackages (ps: with ps; [ pynvim ]);
     };
     inherit nrs switch;
     inherit nle-cfg;

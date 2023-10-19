@@ -46,3 +46,39 @@ require('formatter').setup {
     },
   }
 }
+
+local api = vim.api
+local fn = vim.fn
+local group_id = api.nvim_create_augroup("KeithTest", {})
+
+local create_callback = function()
+  local not_started = true
+  local channel
+  local on_change = function()
+    local lines = api.nvim_buf_get_lines(0, 0, -1, false)
+    fn.chansend(channel, lines)
+  end
+
+  return function()
+    if not_started then
+      channel = fn.jobstart({ "/home/keith/cfg/modules/home-manager/buftest.rb" }, {
+        on_stdout = function(_, data)
+          if data then
+            api.nvim_buf_set_lines(0, 0, -1, false, data)
+          end
+        end,
+      })
+
+      api.nvim_create_autocmd({ 'CursorMoved', 'TextChanged', 'TextChangedI', 'TextChangedP' }, {
+        group = group_id,
+        callback = on_change,
+      })
+    else
+      api.nvim_clear_autocmds({ group = group_id })
+      fn.jobstop(channel)
+    end
+    not_started = not not_started
+  end
+end
+
+api.nvim_create_user_command('KeithTest', create_callback(), {})
