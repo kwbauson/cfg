@@ -39,6 +39,7 @@
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
+    dircolors.enable = true;
     firefox.enable = !isDarwin;
     chromium.enable = !isDarwin;
     autorandr.enable = isLinux && isGraphical;
