@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage (attrs: {
   inherit pname;
-  version = "unstable-2023-11-06";
+  version = "unstable-2023-11-08";
   src = fetchFromGitHub {
     owner = "garnix-io";
     repo = pname;
-    rev = "7a0bcf4c20bd1e978c0f3cd44bc3b3cb7b90f4b3";
-    hash = "sha256-tzgpPKgRLWiS6TZkJzZH+WzogVMEpmxHtmG9oXZ99Gc=";
+    rev = "36b09f7a7a925bb80722f51459ceec80a3803cee";
+    hash = "sha256-QaLdeilzygMMNpjRPDW3OVqWfBLO/ahGRWIMp/hZvKQ=";
   };
   package = (haskellPackages.callPackage "${attrs.src}/garn.nix" { }).overrideAttrs (old: {
     doCheck = false;
