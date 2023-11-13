@@ -46,11 +46,6 @@
   services.olivetin.config = ''
     listenAddressSingleHTTPFrontend: localhost:${toString constants.olivetin.port}
     actions:
-      - title: Restart Jitsi
-        icon: "&#128577;"
-        shell: systemctl restart prosody jitsi-meet-init-secrets jicofo jitsi-videobridge2
-        timeout: 10
-
       - title: Reboot Server
         icon: "&#128683;"
         shell: reboot
@@ -86,36 +81,4 @@
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
   };
-
-  services.jitsi-meet = {
-    enable = true;
-    nginx.enable = false;
-    caddy.enable = true;
-    hostName = "jitsi.${constants.kwbauson.fqdn}:80";
-    config = {
-      analytics.disabled = true;
-      desktopSharingFrameRate = { min = 5; max = 30; };
-      disableTileEnlargement = true;
-      enableNoAudioDetection = false;
-      enableNoisyMicDetection = false;
-      noiseSuppression.krisp.enable = false;
-      maxFullResolutionParticipants = -1;
-      p2p.enabled = false;
-    };
-    interfaceConfig = {
-      SHOW_JITSI_WATERMARK = false;
-      SHOW_WATERMARK_FOR_GUESTS = false;
-    };
-  };
-  services.caddy.subdomains.jitsi = "";
-  services.jitsi-videobridge.nat = with constants; {
-    localAddress = keith-server.ip;
-    publicAddress = kwbauson.ip;
-  };
-  services.jitsi-videobridge.config.videobridge.cc.trust-bwe = false;
-  systemd.services.jitsi-meet-init-secrets.requiredBy = splitString " " config.systemd.services.jitsi-meet-init-secrets.unitConfig.Before;
-  systemd.services.prosody.restartTriggers = [ jitsi-meet ];
-  systemd.services.jicofo.restartTriggers = [ jitsi-meet ];
-  systemd.services.jitsi-videobridge2.restartTriggers = [ jitsi-meet ];
-  systemd.services.jitsi-meet-init-secrets.restartTriggers = [ jitsi-meet ];
 }
