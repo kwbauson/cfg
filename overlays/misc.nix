@@ -1,12 +1,6 @@
 final: prev: with final.scope; {
   nix = nixUnstable;
   nixOld = prev.nix;
-  github-runner = prev.github-runner.override {
-    nodejs_16 = nodejs_16.overrideAttrs (old: {
-      meta = removeAttrs old.meta [ "knownVulnerabilities" ];
-    });
-    nodeRuntimes = [ "node16" "node20" ];
-  };
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =

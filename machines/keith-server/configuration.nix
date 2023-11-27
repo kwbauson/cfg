@@ -75,7 +75,6 @@
 
   services.github-runner = {
     enable = true;
-    nodeRuntimes = [ "node16" "node20" ];
     extraLabels = [ "nix" ];
     extraPackages = [ gh cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
