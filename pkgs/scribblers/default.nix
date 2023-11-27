@@ -9,7 +9,13 @@ buildGoModule {
     hash = "sha256-i4XGllrIJODi/Vyo2nK5UjJfU/2dDt2wjzAjqRLCse4=";
   };
   vendorHash = "sha256-xdadV4WPY7cmsXf+nyPsFCXNTSxLhkau8GZtLopDcuY=";
-  patches = [ ./choose-ten.patch ];
+  patches = [
+    (fetchpatch {
+      url = "https://patch-diff.githubusercontent.com/raw/dataisbaye/scribble.rs/pull/2.patch";
+      hash = "sha256-G6gAbwVpXeV2Etsr4WrYKd8B+wlKbFHR4JobjbueYFY=";
+    })
+    ./choose-ten.patch
+  ];
   doCheck = false;
   # passthru.updateScript = _experimental-update-script-combinators.sequence [
   #   (unstableGitUpdater { })
