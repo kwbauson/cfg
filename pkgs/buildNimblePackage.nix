@@ -21,7 +21,7 @@ let
   ];
   nimblePackages = pipe nimbleLock [
     (getAttr "packages")
-    (mapAttrs (pname: spec: nim.pkgs.buildNimPackage ({
+    (mapAttrs (pname: spec: buildNimPackage ({
       pname = "nim-${pname}";
       inherit (spec) version;
       src = fetchTree {
@@ -35,7 +35,7 @@ let
     (attrs: attrs // { inherit nim; })
   ];
 in
-nim.pkgs.buildNimPackage (
+buildNimPackage (
   (recursiveUpdate
     {
       buildInputs = map (n: nimblePackages.${n}) (attrNames nimbleLock.packages) ++ attrs.buildInputs or [ ];
