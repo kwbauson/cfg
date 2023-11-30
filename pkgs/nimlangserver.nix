@@ -10,4 +10,5 @@ buildNimblePackage {
   };
   allOverrides.doCheck = false;
   passthru.updateScript = unstableGitUpdater { };
+  meta.skipBuild = true;
 }
