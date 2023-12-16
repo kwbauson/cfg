@@ -17,7 +17,7 @@
     ${attrIf isGraphical "graphical"} = {
       graphical-core = {
         inherit
-          dzen2 graphviz i3-easyfocus i3lock imagemagick sway term nsxiv
+          dzen2 graphviz i3-easyfocus i3lock imagemagick term nsxiv
           xclip xdotool xsel xterm maim imgloc w3m
           ;
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
@@ -41,7 +41,7 @@
     inherit nle-cfg;
   };
   excluded-packages = optionalAttrs isDarwin {
-    inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
+    inherit i3-easyfocus iproute2 iputils pavucontrol strace dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
     inherit breeze-icons nixos-install-tools arduino util-linux;
   };
