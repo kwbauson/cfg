@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage (attrs: {
   inherit pname;
-  version = "unstable-2023-12-08";
+  version = "unstable-2023-12-14";
   src = fetchFromGitHub {
     owner = "cachix";
     repo = pname;
-    rev = "2ff5c8bda714a0a78c11e4402bfb6dabeeddc582";
-    hash = "sha256-Cfey2TztpW9zCzW9OI/xTWQw+tkZjRZ0K9iRM2bNALk=";
+    rev = "e681a99ffe2d2882f413a5d771129223c838ddce";
+    hash = "sha256-mEN+8gjWUXRxBCcixeth+jlDNuzxbpFwZNOEc4K22vw=";
   };
   package = compatGetFlakeDefault attrs.src;
   passthru.updateScript = unstableGitUpdater { };
