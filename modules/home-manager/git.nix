@@ -37,7 +37,18 @@
         git --no-pager stash list
       '';
       brf = gs "git f --quiet && git br";
-      default = gs "git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
+      default = gs ''
+        set +e
+        originHead=$(
+          git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null |
+          sed s@refs/remotes/origin/@@
+        )
+        if [[ -n $originHead ]];then
+          echo $originHead
+        else
+          echo main
+        fi
+      '';
       branch-name = "rev-parse --abbrev-ref HEAD";
       gone = gs ''git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
       rmg = gs ''
