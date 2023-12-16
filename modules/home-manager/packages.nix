@@ -42,7 +42,7 @@
   };
   excluded-packages = optionalAttrs isDarwin {
     inherit i3-easyfocus iproute2 iputils pavucontrol strace sway dzen2
-      maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord;
+      maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
     inherit breeze-icons nixos-install-tools arduino util-linux;
   };
 }
