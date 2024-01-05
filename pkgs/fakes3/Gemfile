@@ -1,2 +1,8 @@
 source 'https://rubygems.org'
 gem 'fakes3'
+
+# missing dependencies with ruby 3, see https://github.com/jubos/fake-s3/pull/252
+gem 'rexml'
+gem 'sorted_set'
+gem 'thor'
+gem 'webrick'
