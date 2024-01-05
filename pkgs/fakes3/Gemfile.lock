@@ -6,8 +6,14 @@ GEM
       builder
       thor
       xml-simple
+    rbtree (0.4.6)
     rexml (3.2.6)
+    set (1.1.0)
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
     thor (1.3.0)
+    webrick (1.8.1)
     xml-simple (1.1.9)
       rexml
 
@@ -18,6 +24,10 @@ PLATFORMS
 
 DEPENDENCIES
   fakes3
+  rexml
+  sorted_set
+  thor
+  webrick
 
 BUNDLED WITH
    2.4.22
