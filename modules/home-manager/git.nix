@@ -86,7 +86,11 @@
         dir=$(mktemp --tmpdir -d dft-XXXXX)
         patch=$(mktemp --tmpdir dft-XXXXX)
         git add -A
-        git diff --staged > "$patch"
+        if [[ $1 = --no-pager ]];then
+          shift
+          export DELTA_PAGER=
+        fi
+        git diff --staged "$@" > "$patch"
         git worktree add --quiet --detach "$dir"
         cd "$dir"
         trap 'cd "$old" && git worktree remove "$dir" && rm "$patch"' EXIT
