@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages git nix jq bat
+# with-packages git nix jq bat delta
 set -euo pipefail
 repo=${2:-~/cfg}
 cd "$repo"
@@ -13,8 +13,9 @@ cache=~/.cache/updates-log
 mkdir -p "$cache"
 
 ignore=''
-
-logs=$(
+logs=$(git dft --no-pager | delta --dark)
+logs+=$'\n\n'
+logs+=$(
   (
     echo "$sourcesInfo" | jq -r 'keys[]' | while read source;do
       if echo "$source" | grep -qFxf <(echo "$ignore" | tr ' ' '\n');then continue; fi
