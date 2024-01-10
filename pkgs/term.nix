@@ -5,18 +5,16 @@ let
     one_command() {
       if [[ $BASH_COMMAND != *_prompt_command* ]];then
         history -a
-        nohup $BASH_COMMAND > /dev/null &
-        disown
-        exit
+        exec ${getExe tmux} -L termbar new -d $BASH_COMMAND
       fi
     }
     PROMPT_COMMAND="$PROMPT_COMMAND; trap one_command DEBUG"
   '';
   term = writeBashBin "term" ''
-    exec ${kitty}/bin/kitty --single-instance "$@"
+    exec ${getExe kitty} --single-instance "$@"
   '';
   termbar = writeBashBin "termbar" ''
-    exec ${kitty}/bin/kitty --single-instance --name termbar bash --init-file ${init-file}
+    exec ${getExe kitty} --single-instance --name termbar bash --init-file ${init-file}
   '';
 in
 buildEnv { name = pname; paths = [ term termbar ]; }
