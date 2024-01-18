@@ -43,11 +43,12 @@ builtins // pkgs.lib // {
     let b = (pkg.meta or { }).mainProgram or (removePrefix "node_" (pkg.pname or (parseDrvName pkg.name).name));
     in "${pkg}/bin/${b}";
   prefixIf = b: x: y: if b then x + y else y;
-  desc = pkg: (x: trace "\n${concatStringsSep "\n" x}" null) [
+  descString = pkg: concatStringsSep "\n" [
     "  name: ${pkg.name or pkg.pname or "null"}"
     "  description: ${pkg.meta.description or "null"}"
     "  homepage: ${pkg.meta.homepage or "null"}"
   ];
+  desc = pkg: (trace "\n${descString pkg}" null);
   d = desc;
   mapLines = f: s: concatMapStringsSep "\n"
     (l: if l != "" then f l else l)

@@ -11,7 +11,7 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli bws libqalculate yt-dlp speedtest-cli tldr nix-top
-        nixos-install-tools better-comma dogdns dasel emborg clip
+        nixos-install-tools better-comma dogdns dasel clip
         ;
     };
     ${attrIf isGraphical "graphical"} = {
@@ -24,7 +24,7 @@
       };
       inherit
         ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons signal-desktop
-        discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura
+        discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura steamtinkerlaunch
         ;
       sox = sox.override { enableLame = true; };
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
@@ -43,6 +43,6 @@
   excluded-packages = optionalAttrs isDarwin {
     inherit i3-easyfocus iproute2 iputils pavucontrol strace dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
-    inherit breeze-icons nixos-install-tools arduino util-linux;
+    inherit breeze-icons nixos-install-tools arduino util-linux steamtinkerlaunch;
   };
 }

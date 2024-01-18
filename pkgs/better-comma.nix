@@ -3,7 +3,7 @@ scope: with scope; stdenv.mkDerivation {
   script = ''
     #!/usr/bin/env bash
     ${pathAdd [ gnused coreutils fzy nix ]}
-    set -eo pipefail
+    set -o pipefail
     overlays=()
     while [[ $1 = --overlay ]];do
       shift
@@ -12,6 +12,7 @@ scope: with scope; stdenv.mkDerivation {
     done
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
+    [[ $1 = -m ]] && man=1 && shift
     if [[ ''${#overlays[@]} -eq 0 ]];then
       source=${self-flake}
     else
@@ -34,44 +35,44 @@ scope: with scope; stdenv.mkDerivation {
       shift
       pkg=$1 && shift
       cmd=$1 && shift
-      exec nix shell "$source#$pkg" --command "$cmd" "$@"
     fi
     cmd=$1
+    shift
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
       echo usage: , [--overlay FILE ...] [-p package] COMMAND [ARGS]
       exit
     fi
-    shift
-    packages=$(sed -En "s/^([^ ]+) $cmd$/\1/p" ${nix-index-list})
-
-    if [[ $(echo "$packages" | wc -l) = 1 ]];then
-      if [[ -z $packages ]];then
-        attr=$cmd
-      else
-        attr=$packages
-      fi
-    else
-      cachefile=~/.cache/${pname}/$cmd
-      [[ -n $uncache ]] && rm -f "$cachefile"
-      if [[ -e $cachefile ]];then
-        attr=$(< "$cachefile")
-      else
-        attr=$(echo "$packages" | fzy)
-        mkdir -p "$(dirname "$cachefile")"
-        echo "$attr" > "$cachefile"
-      fi
-    fi
-    mkdir -p ~/.local/share/nix
-    if [[ -n $attr ]];then
-      if [[ $desc = 1 ]];then
-        exec nix eval --impure --expr "with import $source { forceFlakeCompat = false; }; desc $attr"
-      else
+    if [[ -z $pkg ]];then
+      packages=$(sed -En "s/^([^ ]+) $cmd$/\1/p" ${nix-index-list})
+      if [[ $(echo "$packages" | wc -l) = 1 ]];then
         if [[ -z $packages ]];then
-          exec nix shell "$source#$cmd" --command "$cmd" "$@"
+          pkg=$cmd
         else
-          exec nix shell "$source#$attr" --command "$cmd" "$@"
+          pkg=$packages
+        fi
+      else
+        cachefile=~/.cache/${pname}/$cmd
+        [[ -n $uncache ]] && rm -f "$cachefile"
+        if [[ -e $cachefile ]];then
+          pkg=$(< "$cachefile")
+        else
+          pkg=$(echo "$packages" | fzy)
+          mkdir -p "$(dirname "$cachefile")"
+          echo "$pkg" > "$cachefile"
         fi
       fi
+    fi
+    if [[ -z $pkg ]];then
+      pkg=$cmd
+    fi
+
+    mkdir -p ~/.local/share/nix
+    if [[ $desc = 1 ]];then
+      exec nix eval --impure --raw --expr "with import $source { forceFlakeCompat = false; }; descString $pkg + \"\n\""
+    elif [[ $man = 1 ]];then
+      exec nix shell "$source#$pkg" --command man "$cmd" "$@"
+    else
+      exec nix shell "$source#$pkg" --command "$cmd" "$@"
     fi
   '';
   completion = ''
