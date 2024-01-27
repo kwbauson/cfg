@@ -1,50 +1,36 @@
 scope: with scope;
+attrs:
 let
   parseGithubUrl = url:
-    let pair = match "https://github.com/([^/]*)/([^/]*)" url;
+    let pair = match "https://github.com/([^/]*)/([^/]*)/?" url;
     in {
       owner = elemAt pair 0;
       repo = removeSuffix ".git" (elemAt pair 1);
     };
-in
-{ nim ? pkgs.nim2
-, allOverrides ? { }
-, overrides ? { }
-, ...
-}@attrs:
-let
-  inherit (attrs) src;
-  nimbleLock = pipe "${src}/nimble.lock" [
+  nimbleLock = pipe "${attrs.src}/nimble.lock" [
     readFile
     unsafeDiscardStringContext
     fromJSON
   ];
-  nimblePackages = pipe nimbleLock [
+  packages = pipe nimbleLock [
     (getAttr "packages")
-    (mapAttrs (pname: spec: buildNimPackage ({
-      pname = "nim-${pname}";
-      inherit (spec) version;
-      src = fetchTree {
+    (mapAttrs (pname: spec:
+      fetchTree {
         type = "github";
         inherit (parseGithubUrl spec.url) owner repo;
         rev = spec.vcsRevision;
-      };
-      buildInputs = map (n: nimblePackages.${n}) spec.dependencies ++ overrides.${pname}.buildInputs or [ ];
-      passthru = { inherit spec; };
-    } // removeAttrs overrides.${pname} or { } [ "buildInputs" ] // allOverrides)))
-    (attrs: attrs // { inherit nim; })
+      }
+    ))
+    attrValues
   ];
 in
-buildNimPackage (
-  (recursiveUpdate
-    {
-      buildInputs = map (n: nimblePackages.${n}) (attrNames nimbleLock.packages) ++ attrs.buildInputs or [ ];
-      passthru = {
-        pkgs = nimblePackages;
-        inherit nimbleLock;
-      };
-    }
-    (removeAttrs attrs [ "nim" "allOverrides" "overrides" "buildInputs" ])
-  ) //
-  allOverrides
-)
+stdenv.mkDerivation (attrs // {
+  inherit packages;
+  nativeBuildInputs = [ nim ];
+  buildPhase = ''
+    export HOME=/tmp/home
+    nim compile ${concatMapStringsSep " " (p: "--path:${p}") packages} ${attrs.pname}
+    mkdir -p $out/bin
+    mv ${attrs.pname} $out/bin
+  '';
+})
