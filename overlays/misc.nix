@@ -1,6 +1,4 @@
 final: prev: with final.scope; {
-  nix = nixUnstable;
-  nixOld = prev.nix;
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =
