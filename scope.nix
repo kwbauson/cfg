@@ -147,6 +147,7 @@ builtins // pkgs.lib // {
   attrsToList = mapAttrsToList (name: value: { inherit name value; });
   joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
   joinLines = joinStrings "\n";
+  withPatch = pkg: patches: pkg.overrideAttrs (attrs: { patches = attrs.patches or [] ++ toList patches; });
   override = x: y:
     if y ? _replace then y._replace
     else if y ? _append then x + y._append

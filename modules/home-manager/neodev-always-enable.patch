@@ -1,0 +1,13 @@
+diff --git a/lua/neodev/util.lua b/lua/neodev/util.lua
+index c06fb94..236ba94 100644
+--- a/lua/neodev/util.lua
++++ b/lua/neodev/util.lua
+@@ -26,7 +26,7 @@ function M.is_nvim_config()
+     path = vim.fs.normalize(path)
+     local config_root = vim.loop.fs_realpath(vim.fn.stdpath("config")) or vim.fn.stdpath("config")
+     config_root = vim.fs.normalize(config_root)
+-    return path:find(config_root, 1, true) == 1
++    return true or path:find(config_root, 1, true) == 1
+   end
+   return false
+ end

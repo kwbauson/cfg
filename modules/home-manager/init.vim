@@ -7,7 +7,6 @@ map <silent> <leader>w :setlocal invwrap wrap?<cr>
 map <silent> <leader>n :set invnumber number?<cr>
 map <silent> <leader>N :set invrelativenumber relativenumber?<cr>
 map <silent> <leader>r :up<bar>vs<bar>term %:p:S<cr>i
-map <silent> <leader>, :e ~/cfg/init.vim<cr>
 
 set mouse= title
 set nojoinspaces smartindent
@@ -44,37 +43,16 @@ map ;w <Plug>(easymotion-bd-w)
 map ;l <Plug>(easymotion-bd-jk)
 map ;j <Plug>(easymotion-jumptoanywhere)
 
-map <silent> <leader>e :CocCommand explorer<cr>
-
 let g:context_enabled = 0
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_second_hightlight = 0
 
-command! GD Gdiff
-
-let g:coc_config_home = getenv('HOME') . '/cfg/modules/home-manager'
-
 set hidden nobackup nowritebackup updatetime=300 shortmess+=c signcolumn=yes:1
-highlight link CocHighlightText Search
-autocmd CursorHold * silent call CocActionAsync('highlight')
-augroup mygroup
-  autocmd!
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ge <Plug>(coc-rename)
-nmap <silent> g. <Plug>(coc-codeaction)
-nmap <silent> g/ <Plug>(coc-codelens-action)
-nmap <silent> gh :call CocAction('doHover')<cr>
 
 nmap <silent> gT :BufferPrevious<cr>
 nmap <silent> gt :BufferNext<cr>
@@ -110,3 +88,5 @@ augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost * FormatWrite
 augroup END
+
+command! W noa w
