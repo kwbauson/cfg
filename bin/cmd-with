@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+cmd=()
+lines=()
+delay=0.1
+if [[ $1 = -d ]];then
+  shift
+  delay=$1
+  shift
+fi
+while [[ -n $1 ]];do
+  if [[ $1 = -- ]];then
+    shift
+    break
+  fi
+  cmd+=("$1")
+  shift
+done
+while [[ -n $1 ]];do
+  lines+=("$1")
+  shift
+done
+if [[ -n $KITTY_PID ]] && kitten @ ls &> /dev/null;then
+  for line in "${lines[@]}";do
+    sleep "$delay"
+    echo "$line" | kitten @ send-text --stdin
+  done &
+  "${cmd[@]}"
+elif [[ -n $TMUX ]];then
+  for line in "${lines[@]}";do
+    sleep "$delay"
+    echo "$line"
+    tmux send-keys "$line"$'\n'
+  done &
+  "${cmd[@]}"
+else
+  # not in tmux or kitty, starting new tmux
+  sockname=tmux-$RANDOM
+  tmux -L "$sockname" new -d "${cmd[@]}"
+  for line in "${lines[@]}";do
+    sleep "$delay"
+    echo "$line"
+    tmux -L "$sockname" send-keys "$line"$'\n'
+  done &
+  tmux -L "$sockname" attach
+fi
