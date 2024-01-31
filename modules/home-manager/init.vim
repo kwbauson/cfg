@@ -82,6 +82,7 @@ nmap <silent> gb :BufferPick<cr>
 nmap <silent> gH :BufferMovePrevious<cr>
 nmap <silent> gL :BufferMoveNext<cr>
 nmap <silent> <leader>d :BufferClose<cr>
+inoremap <silent><expr> <c-space> coc#refresh()
 set noshowmode
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#nvimlsp#enabled = 0

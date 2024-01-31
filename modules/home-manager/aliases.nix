@@ -30,41 +30,6 @@
           $prefix nix-env --profile "$profile" --delete-generations old
         done
     '';
-    g = ''
-      if [[ $1 = -k ]];then
-        shift
-        keep_going=true
-      else
-        keep_going=false
-      fi
-      dirs=$(for dir in *;do
-        if [[ -d $dir/.git ]];then
-          echo "$dir"
-        fi
-      done)
-      length=$(echo "$dirs" | awk '{ print length }' | sort -V | tail -n1)
-      if [[ ! -z $dirs && ! -z $1 && $1 != 'clone' ]] && ! git rev-parse --git-dir &> /dev/null;then
-        for dir in $dirs;do
-          first=1
-          git -C "$dir" "$@" 2>&1 | while IFS=$'\n' read -r line;do
-            if [[ -n $first ]];then
-              first=
-              printf "%''${length}s ┤ %s\n" "$dir" "$line"
-            else
-              printf "%''${length}s │ %s\n" "" "$line"
-            fi
-          done
-          git_exit=''${PIPESTATUS[0]}
-          if [[ $git_exit != '0' && $keep_going = false ]];then
-            exit "$git_exit"
-          fi
-        done
-      elif [[ -z $1 ]];then
-        exec g s
-      else
-        exec git "$@"
-      fi
-    '';
     nixbuild-shell = "rlwrap ssh eu.nixbuild.net shell";
     nixbuild-status = ''
       set -e
@@ -95,41 +60,6 @@
           -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
     '';
     batwhich = ''bat "$(which "$@")"'';
-    startpkg = ''
-      set -eu
-      github=''${1:-}
-      read -r owner repo < <(echo "$github" | sed -E 's@^https://github.com/([^/]+)/([^/]+)$@\1 \2@')
-      pname=''${2:-''${repo:-}}
-      if [[ $owner = $pname ]];then
-        owner=pname
-      else
-        owner="\"$owner\""
-      fi
-      if [[ $repo = $pname ]];then
-        repo=pname
-      else
-        repo="\"$repo\""
-      fi
-      cd ~/cfg
-      file=pkgs/"$pname".nix
-      echo "~/cfg/$file"
-      tee "$file" <<-EOF
-      scope: with scope;
-      stdenv.mkDerivation {
-        inherit pname;
-        version = "TODO";
-        src = fetchFromGitHub {
-          owner = $owner;
-          repo = $repo;
-          rev = "TODO";
-          hash = "sha256-TODO";
-        };
-        meta.mainProgram = pname;
-        passthru.updateScript = unstableGitUpdater { };
-      }
-      EOF
-      nr updates."$pname"
-    '';
     cnix = ''
       set -u
       cachename=$1
