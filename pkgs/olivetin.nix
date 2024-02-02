@@ -1,10 +1,10 @@
 scope: with scope;
 stdenv.mkDerivation (attrs: {
   inherit pname;
-  version = "2023.12.21";
+  version = "2024.02.01";
   src = fetchurl {
     url = "https://github.com/OliveTin/OliveTin/releases/download/${attrs.version}/OliveTin-linux-amd64.tar.gz";
-    hash = "sha256-hG5fbn05BRCDmt9BkEVWNTzx/m25l05sG7KCIaJVYAs=";
+    hash = "sha256-wEqDHPI7sq4vM+5fV2mGGia+kkg2RtzRz3doqe9JCYA=";
   };
   nativeBuildInputs = [ autoPatchelfHook ];
   installPhase = "cp -r . $out";
