@@ -1,14 +1,14 @@
 scope: with scope;
 rustPlatform.buildRustPackage {
   inherit pname;
-  version = "unstable-2024-01-17";
+  version = "unstable-2024-02-04";
   src = fetchFromGitHub {
     owner = "tekumara";
     repo = "typos-vscode";
-    rev = "389d2e03de5cab1f61ff89a135290a6a98bc7bb4";
-    hash = "sha256-ijduf9Ao+1YJXZnsnbB+/W6Pa7m2kcuC3asCbTzPLQs=";
+    rev = "975fa04be6493e6468b66815f51b394d6e7e7d6f";
+    hash = "sha256-9Xmc8xa75R9wRaJeXuDDT3bLCp6qyfUbS4DnfKDppzY=";
   };
-  cargoHash = "sha256-t7kjlrjLZ8Pks8iCp/GZ2saI7BDzLS4gwDW8bTuj1qg=";
+  cargoHash = "sha256-qKG3Q16Q6LO1yYMXtk2q7S7DnEMqq6E/zcNo6lLpIq8=";
   meta.mainProgram = pname;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { })
