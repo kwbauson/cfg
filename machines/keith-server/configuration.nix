@@ -73,7 +73,7 @@
   services.netdata.enable = true;
   services.caddy.subdomains.netdata = constants.netdata.port;
 
-  services.github-runner = {
+  services.github-runners.keith-server = {
     enable = true;
     extraLabels = [ "nix" ];
     extraPackages = [ gh cachix ];
