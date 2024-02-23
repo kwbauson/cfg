@@ -4,7 +4,7 @@ stdenv.mkDerivation (attrs: {
   version = "G6.0.9";
   src = fetchurl {
     url = "https://cdn1.waterfox.net/${attrs.pname}/releases/${attrs.version}/Linux_x86_64/${attrs.pname}-${attrs.version}.tar.bz2";
-    hash = "sha256-mbonge75FeMrcqtWE+xUMAPLKZAHEy/0nq8I3VMPUp0=";
+    hash = "sha256-xJ/3L+e6+VTUE/D9SwtCgftDrwc+dgZLT5nsFg7MtCQ=";
   };
   nativeBuildInputs = [ autoPatchelfHook ];
   buildInputs = firefox-unwrapped.buildInputs ++ [ gtk2 ];
