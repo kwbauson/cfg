@@ -5,7 +5,7 @@
     common-gpu-amd
     common-cpu-amd-pstate
     ./personal-api.nix
-    "${cobi}/hosts/modules/games/palworld.nix"
+    "${cobi.src}/hosts/modules/games/palworld.nix"
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
