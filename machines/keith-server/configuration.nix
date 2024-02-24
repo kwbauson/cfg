@@ -18,8 +18,8 @@
   virtualisation.oci-containers.backend = "docker";
 
   networking = {
-    firewall.allowedTCPPorts = [ 8211 ];
-    firewall.allowedUDPPorts = [ 8211 ];
+    firewall.allowedTCPPorts = [ config.services.palworld.port ];
+    firewall.allowedUDPPorts = [ config.services.palworld.port ];
   };
 
   virtualisation.oci-containers.containers.valheim = {
