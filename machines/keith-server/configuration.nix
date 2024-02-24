@@ -16,6 +16,11 @@
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
 
+  networking = {
+    firewall.allowedTCPPorts = [ 8211 ];
+    firewall.allowedUDPPorts = [ 8211 ];
+  };
+
   virtualisation.oci-containers.containers.valheim = {
     autoStart = false;
     image = "ghcr.io/lloesche/valheim-server";
