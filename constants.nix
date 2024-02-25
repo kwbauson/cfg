@@ -12,9 +12,6 @@ rec {
   netdata.port = 19999;
   http.port = 80;
   https.port = 443;
-  jitsi.tcp-port = 4443;
-  jitsi.udp-port = 10000;
-  valheim.ports = [ 2456 2457 ];
   ssh.port = 22;
   scribblers.port = 8100;
   on-demand-tls.port = 5555;

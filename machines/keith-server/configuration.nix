@@ -5,6 +5,7 @@
     common-gpu-amd
     common-cpu-amd-pstate
     ./personal-api.nix
+    "${cobi.src}/hosts/modules/games/palworld.nix"
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -16,6 +17,11 @@
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
 
+  networking = {
+    firewall.allowedTCPPorts = [ config.services.palworld.port ];
+    firewall.allowedUDPPorts = [ config.services.palworld.port ];
+  };
+
   virtualisation.oci-containers.containers.valheim = {
     autoStart = false;
     image = "ghcr.io/lloesche/valheim-server";
@@ -23,6 +29,11 @@
     extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
     ports = [ "2456-2457:2456-2457/udp" ];
     volumes = [ "/var/lib/valheim:/config" ];
+  };
+
+  services.palworld = {
+    enable = true;
+    worldSettings.ServerName = "Kenneth Palworld Server";
   };
 
   services.caddy.enable = true;

@@ -1,4 +1,8 @@
 { scope, ... }: with scope;
+let
+  forwardedTCPPorts = [ ];
+  forwardedUDPPorts = [ ];
+in
 {
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
@@ -13,8 +17,8 @@
     defaultGateway.address = kwbauson.gateway;
     nameservers = cloudflare-dns.ips;
     inherit (kwbauson) domain;
-    firewall.allowedTCPPorts = [ http.port https.port jitsi.tcp-port ] ++ valheim.ports;
-    firewall.allowedUDPPorts = [ jitsi.udp-port ] ++ valheim.ports;
+    firewall.allowedTCPPorts = [ http.port https.port ] ++ forwardedTCPPorts;
+    firewall.allowedUDPPorts = forwardedUDPPorts;
   };
 
   services.openssh.openFirewall = mkForce true;
@@ -41,16 +45,13 @@
   systemd.services.forward-ports = {
     wantedBy = [ "multi-user.target" ];
     path = [ socat ];
-    script = with constants; ''
-      # valheim
-      # for port in ${toString valheim.ports};do
-      #   for proto in TCP UDP;do
-      #     socat $proto-LISTEN:$port,fork,reuseaddr $proto:keith-server:$port &
-      #   done
-      # done
-      # jitsi
-      socat TCP-LISTEN:${toString jitsi.tcp-port},fork,reuseaddr TCP:keith-server:${toString jitsi.tcp-port} &
-      socat UDP-LISTEN:${toString jitsi.udp-port},fork,reuseaddr UDP:keith-server:${toString jitsi.udp-port} &
+    script = ''
+      for port in ${toString forwardedTCPPorts};do
+        socat TCP-LISTEN:"$port",fork,reuseaddr TCP:keith-server:"$port" &
+      done
+      for port in ${toString forwardedUDPPorts};do
+        socat UDP-RECVFROM:"$port",fork,reuseaddr UDP-SENDTO:keith-server:"$port" &
+      done
       sleep inf
     '';
   };
