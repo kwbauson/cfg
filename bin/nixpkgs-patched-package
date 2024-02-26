@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+cd ~/src/nixpkgs
+patch=$(git diff --patch | grep -ve '^diff --git ' -e '^index ')
+rev=$(git rev-parse --abbrev-ref HEAD)
+package=$1
+
+read -rd '' output <<EOFALL
+#!/usr/bin/env bash
+export patch
+read -rd '' patch <<'EOF'
+$patch
+EOF
+nix build --impure --file - <<'EOF'
+let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/archive/$rev.tar.gz";
+  importNixpkgs = source: import source {
+    config = { allowUnfree = true; allowBroken = true; allowUnsupportedSystem = true; };
+    overlays = [];
+  };
+in
+(importNixpkgs ((importNixpkgs nixpkgs).applyPatches {
+  name = "patched";
+  src = nixpkgs;
+  patches = [ (builtins.toFile "patch" (builtins.getEnv "patch")) ];
+})).$package
+EOF
+EOFALL
+
+echo "$output"
