@@ -10,7 +10,6 @@
   services.nix-daemon.enable = true;
   system.defaults.finder.AppleShowAllExtensions = true;
   homebrew.enable = true;
-  homebrew.taps = [ "homebrew/cask" ];
   homebrew.global.autoUpdate = false;
   homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.upgrade = true;
