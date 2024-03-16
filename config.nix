@@ -10,4 +10,5 @@
   };
   # contentAddressedByDefault = true;
   zathura.useMupdf = false;
+  rocmSupport = true;
 }

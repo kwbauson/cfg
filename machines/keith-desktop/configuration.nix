@@ -16,4 +16,8 @@
   services.hardware.openrgb.motherboard = "amd";
 
   networking.extraHosts = "127.0.0.1 api";
+
+  services.tabby.enable = true;
+  services.tabby.acceleration = "rocm";
+  services.tabby.model = "TabbyML/DeepseekCoder-6.7B";
 }
