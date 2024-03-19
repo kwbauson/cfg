@@ -91,4 +91,16 @@
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
   };
+
+  services.ddclient = {
+    enable = true;
+    configFile = toFile "ddclient.conf" ''
+      use=web, web=checkip.dyndns.com/, web-skip='Current IP Address: '
+      protocol=porkbun
+      apikey_env=APIKEY
+      secretapikey_env=SECRETAPIKEY
+      palworld.kwbauson.com
+    '';
+  };
+  systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
 }
