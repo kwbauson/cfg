@@ -19,5 +19,5 @@
 
   services.tabby.enable = true;
   services.tabby.acceleration = "rocm";
-  services.tabby.model = "TabbyML/DeepseekCoder-6.7B";
+  services.tabby.model = "TabbyML/DeepseekCoder-1.3B";
 }
