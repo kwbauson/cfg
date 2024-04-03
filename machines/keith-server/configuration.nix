@@ -34,6 +34,7 @@
   services.palworld = {
     enable = true;
     worldSettings.ServerName = "Kenneth Palworld Server";
+    worldSettings.ServerPassword = "$PALWORLD_SERVER_PASSWORD";
   };
 
   services.caddy.enable = true;
