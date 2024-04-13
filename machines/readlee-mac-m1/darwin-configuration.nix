@@ -18,4 +18,5 @@
       tokenFile = "/etc/github-runner-benaduggan-nix.token";
     };
   };
+  launchd.daemons.github-runner-runner-kwbauson-cfg.path = mkBefore [ "/usr/bin" "/bin" ];
 }
