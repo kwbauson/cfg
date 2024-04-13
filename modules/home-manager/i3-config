@@ -70,6 +70,7 @@ mode "resize" {
   bindsym k resize shrink height 1 px or 1 ppt
   bindsym l resize grow width 1 px or 1 ppt
 }
+bindsym $mod+Shift+f floating enable; resize set 2560 px 1440 px; move position center; move up 12 px
 
 # layout and containers
 bindsym $mod+s split vertical
@@ -124,6 +125,7 @@ no_focus [window_role="qutebrowser_background"]
 for_window [workspace="floating"] floating enable
 for_window [title="^[Zz]oom$"] floating enable
 for_window [title="^Zoom .* Meetings?$"] floating enable
+for_window [title="^Developer Tools —.*$"] floating enable
 for_window [title="^.*action=.*confno=.*$"] floating enable, no_focus
 
 # vim:ft=i3config
