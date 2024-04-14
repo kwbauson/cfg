@@ -16,6 +16,11 @@
       overlays = [
         (final: prev: { scope = import ./scope.nix (final // { inherit flake; }); })
         overlays.default
+        (final: prev:
+          if system == "aarch64-darwin"
+          then { lib = prev.lib.extend (finallib: prevlib: { mdDoc = prevlib.id; }); }
+          else { }
+        )
       ];
     });
     overlays = import ./overlays scope;
