@@ -8,4 +8,5 @@ scope: with scope;
   });
 }).overridePythonAttrs (attrs: {
   doCheck = !isDarwin;
+  propagatedBuildInputs = attrs.propagatedBuildInputs ++ optional isDarwin [ prev.pythonModule.pkgs.nestedtext ];
 })
