@@ -6,6 +6,6 @@ scope: with scope;
       sed -i '/^version = /alicense = { file = "LICENSE" }' pyproject.toml
     '';
   });
-}).overrideAttrs (attrs: {
+}).overridePythonAttrs (attrs: {
   doCheck = !isDarwin;
 })
