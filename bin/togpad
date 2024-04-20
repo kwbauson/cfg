@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
 # with-packages xorg.xinput xdotool
-pad=$(xinput list --name-only | grep Touchpad)
+pad=$(xinput list | sed -En '/Touchpad/s/.*id=([0-9]+).*/\1/p')
 
 if [[ -z $1 ]];then
   if [[ $(xinput list-props "$pad" | grep 'Device Enabled' | grep ':\s*0') ]];then
