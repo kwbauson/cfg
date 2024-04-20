@@ -275,17 +275,4 @@ builtins // pkgs.lib // {
       disabledModules = map (path: "${src}/${path}") paths;
     };
   flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
-
-  nixConfBase = ''
-    max-jobs = auto
-    keep-going = true
-    extra-experimental-features = nix-command flakes recursive-nix
-    fallback = true
-  '';
-  nixConf = ''
-    ${nixConfBase}
-    narinfo-cache-negative-ttl = 10
-    extra-substituters = https://kwbauson.cachix.org
-    extra-trusted-public-keys = kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=
-  '';
 })
