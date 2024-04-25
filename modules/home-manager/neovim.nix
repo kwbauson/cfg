@@ -21,7 +21,8 @@
         coc-solargraph coc-tsserver coc-pyright coc-explorer
         coc-vetur coc-vimlsp formatter-nvim nim-vim;
       nvim-treesitter = nvim-treesitter.withAllGrammars;
-      barbar-nvim = barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
+      # FIXME
+      # barbar-nvim = barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
     };
     extraConfig = "
       source ${config.home.homeDirectory}/cfg/modules/home-manager/init.vim
