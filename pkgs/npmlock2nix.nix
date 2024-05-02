@@ -1,7 +1,7 @@
 scope: with scope;
 importPackage (attrs: {
   inherit pname;
-  version = "unstable-2023-01-11";
+  version = "0-unstable-2023-01-11";
   src = fetchFromGitHub {
     owner = "tweag";
     repo = pname;
