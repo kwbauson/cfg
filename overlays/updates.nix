@@ -17,7 +17,7 @@ final: prev: with final.scope; {
       echo | ${getExe python3} ${pkgs.path}/maintainers/scripts/update.py --max-workers 1 ${jsonFile}
     '';
   update-extra-packages =
-    let updatable = attrNames (filterAttrs (_: hasAttr "updateScript") extra-packages);
+    let updatable = attrNames (filterAttrs (_: p: hasAttr "updateScript" p && !p.meta.skipUpdate or false) extra-packages);
     in (updater updatable).overrideAttrs (_: {
       passthru = genAttrs updatable updater;
     });

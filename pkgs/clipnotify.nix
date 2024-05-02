@@ -1,6 +1,6 @@
 scope: with scope;
 prev.overrideAttrs (_: {
-  version = "unstable-2022-11-08";
+  version = "1.0.2-unstable-2022-11-08";
   src = fetchFromGitHub {
     owner = "cdown";
     repo = pname;
