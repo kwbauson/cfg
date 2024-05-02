@@ -1,7 +1,7 @@
 scope: with scope;
 buildGoPackage {
   inherit pname;
-  version = "unstable-2019-08-28";
+  version = "0.1.0-unstable-2019-08-28";
   src = fetchFromGitHub {
     owner = "ikruglov";
     repo = pname;
@@ -9,5 +9,5 @@ buildGoPackage {
     hash = "sha256-c/dXMIKE5CtjXQ7jJA6IiZpmWOgrFZnO3lDZOisYX30=";
   };
   goPackagePath = "github.com/ikruglov/slapper";
-  passthru.updateScript = unstableGitUpdater { };
+  passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
 }
