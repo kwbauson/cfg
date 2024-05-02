@@ -1,7 +1,7 @@
 scope: with scope;
 stdenv.mkDerivation {
   inherit pname;
-  version = "unstable-2023-11-20";
+  version = "0-unstable-2023-11-20";
   src = fetchFromGitHub {
     owner = "bigH";
     repo = pname;
