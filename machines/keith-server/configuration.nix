@@ -35,6 +35,7 @@
     enable = true;
     worldSettings.ServerName = "Kenneth Palworld Server";
     worldSettings.ServerPassword = "$PALWORLD_SERVER_PASSWORD";
+    worldSettings.BaseCampWorkerMaxNum = "30";
   };
 
   services.caddy.enable = true;
