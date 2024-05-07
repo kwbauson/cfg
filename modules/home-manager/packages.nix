@@ -23,7 +23,7 @@
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
       inherit
-        ffmpeg_6-full mediainfo pavucontrol qtbr breeze-icons signal-desktop
+        ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
         discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura steamtinkerlaunch
         ;
       sox = sox.override { enableLame = true; };
