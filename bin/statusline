@@ -62,10 +62,16 @@ blocks = [
   },
   interval(10) {
     output = `headsetcontrol -b 2>&1`
-    if output.include?('100')
-      '100%'
-    else
-      output.lines.grep(/^Battery: /).first&.chomp&.delete_prefix('Battery: ') || ''
+    percent = output.match(/\d+%/)&.[](0)
+    if percent
+      prefix = if output.include?('BATTERY_AVAILABLE')
+          '-'
+        elsif output.include?('BATTERY_CHARGING')
+          '+'
+        else
+          ''
+        end
+      "#{prefix}#{percent}"
     end
   },
   interval { Time.now.strftime('%a %b %_d %_I:%M %p') },

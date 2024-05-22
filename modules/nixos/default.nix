@@ -65,12 +65,14 @@
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
     xserver.enable = mkDefault true;
-    xserver.displayManager = mkIf config.services.xserver.enable {
+    displayManager = mkIf config.services.xserver.enable {
       defaultSession = "none+xsession";
       autoLogin = {
         enable = true;
         user = username;
       };
+    };
+    xserver.displayManager = mkIf config.services.xserver.enable {
       session = [
         {
           manage = "window";
