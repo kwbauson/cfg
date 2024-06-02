@@ -44,6 +44,6 @@
     inherit i3-easyfocus iproute2 iputils pavucontrol strace dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
     inherit breeze-icons nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
-    inherit man-pages;
+    inherit man-pages ncdu bitwarden-cli;
   };
 }
