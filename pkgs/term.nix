@@ -5,7 +5,7 @@ let
     one_command() {
       if [[ $BASH_COMMAND != *_prompt_command* ]];then
         history -a
-        exec ${getExe tmux} -L termbar new -d $BASH_COMMAND
+        exec ${getExe tmux} -L termbar new -d "$BASH_COMMAND"
       fi
     }
     PROMPT_COMMAND="$PROMPT_COMMAND; trap one_command DEBUG"
