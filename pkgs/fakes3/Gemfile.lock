@@ -7,8 +7,8 @@ GEM
       thor
       xml-simple
     rbtree (0.4.6)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.2.9)
+      strscan
     set (1.1.0)
     sorted_set (1.0.3)
       rbtree
