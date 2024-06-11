@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
 # with-packages bluez
-device=$(bluetoothctl devices | cut -d' ' -f2)
+touch ~/.bh_latest
+latest=$(< ~/.bh_latest)
+[[ -n $1 ]] && name=$1 || name=$latest
+echo "$name" > ~/.bh_latest
+device=$(bluetoothctl devices | grep "$name" | cut -d' ' -f2)
 bluetoothctl info &> /dev/null
 if [[ $? -ne 0 ]];then
   bluetoothctl connect "$device"
