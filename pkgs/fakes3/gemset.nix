@@ -36,10 +36,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "07pxb0ixiadjnbrkgjmb5z73xdyss8mq5hwzs8mgilc756lyb3x5";
+      sha256 = "0428ady49qssmnmwnafzrjvyba8mzbridsgblv7c7kmd0vqgfn99";
       type = "gem";
     };
-    version = "3.2.9";
+    version = "3.3.0";
   };
   set = {
     groups = ["default"];
