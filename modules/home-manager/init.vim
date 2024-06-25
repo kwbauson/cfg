@@ -44,6 +44,10 @@ map ;w <Plug>(easymotion-bd-w)
 map ;l <Plug>(easymotion-bd-jk)
 map ;j <Plug>(easymotion-jumptoanywhere)
 
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "vim-slime", "target_pane": 1}
+let g:slime_dont_ask_default = 1
+
 map <silent> <leader>e :CocCommand explorer<cr>
 
 let g:context_enabled = 0

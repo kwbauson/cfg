@@ -15,7 +15,7 @@
         vim-airline vim-better-whitespace vim-code-dark vim-easymotion
         vim-fugitive vim-lastplace vim-multiple-cursors vim-sensible
         vim-startify nvim-web-devicons vim-peekaboo vim-caddyfile unison
-        vim-tabby
+        vim-tabby vim-slime
 
         coc-eslint coc-git coc-json coc-lists coc-prettier
         coc-solargraph coc-tsserver coc-pyright coc-explorer

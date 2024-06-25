@@ -70,5 +70,6 @@
       )
       exec nix ''${args[@]} "$@"
     '';
+    slime = "tmux -L vim-slime new";
   };
 }
