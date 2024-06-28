@@ -47,6 +47,8 @@ map ;j <Plug>(easymotion-jumptoanywhere)
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "vim-slime", "target_pane": 1}
 let g:slime_dont_ask_default = 1
+let g:slime_no_mappings = 1
+nmap <C-Space> <Plug>SlimeParagraphSend
 
 map <silent> <leader>e :CocCommand explorer<cr>
 
