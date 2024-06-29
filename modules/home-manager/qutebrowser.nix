@@ -10,7 +10,7 @@
       wq = "quit --save";
     };
     searchEngines = {
-      DEFAULT = "https://www.google.com/search?q={}";
+      DEFAULT = "https://www.google.com/search?udm=14&q={}";
       aur = "https://aur.archlinux.org/packages/?K={}";
       aw = "https://wiki.archlinux.org/index.php?search={}";
       g = "https://www.google.com/search?q={}";
@@ -18,7 +18,7 @@
       tv = "https://www.google.com/search?q=site:tvtropes.org+{}";
       w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
       yt = "http://www.youtube.com/results?search_query={}";
-      b = "https://www.biblegateway.com/passage/?version=NLT&search={}";
+      b = "https://www.biblegateway.com/passage/?version=NRSVUE&search={}";
       tf = "https://api.kwbauson.com/search/tf/{}";
       tfd = "https://api.kwbauson.com/search/tfd/{}";
     };
