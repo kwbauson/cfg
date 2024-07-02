@@ -10,7 +10,7 @@
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
-  hardware.amdgpu.loadInInitrd = false;
+  hardware.amdgpu.initrd = false;
   time.hardwareClockInLocalTime = true;
   services.tailscale.useRoutingFeatures = "both";
   services.auto-update.enable = true;
