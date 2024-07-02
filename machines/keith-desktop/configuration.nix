@@ -8,7 +8,7 @@
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
-  hardware.amdgpu.initrd = false;
+  hardware.amdgpu.initrd.enable = false;
   time.hardwareClockInLocalTime = true;
 
   virtualisation.docker.enable = true;
