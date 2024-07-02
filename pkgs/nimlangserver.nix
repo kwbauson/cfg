@@ -1,12 +1,12 @@
 scope: with scope;
 buildNimblePackage {
   inherit pname;
-  version = "1.2.0-unstable-2024-06-27";
+  version = "1.2.0-unstable-2024-06-28";
   src = fetchFromGitHub {
     owner = "nim-lang";
     repo = "langserver";
-    rev = "fe0d9edff537f2dd653e011963c1b56ee95b9536";
-    hash = "sha256-biBTX7X27RtFpQFPOOxdOFvT71m/AdrLhnZxEh+t9k8=";
+    rev = "8ef7420dae7561ee291c9de25429c6b2f4bba396";
+    hash = "sha256-KCdCjj+9M1bn1TvQCNQxaNukTGzzXmGsKf8pn4z2TVw=";
   };
   passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
   meta.skipBuild = true;
