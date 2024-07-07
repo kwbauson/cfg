@@ -8,6 +8,7 @@ scope: with scope;
   });
 }).overridePythonAttrs (attrs: {
   doCheck = !isDarwin;
+  patches = [ ];
   propagatedBuildInputs = attrs.propagatedBuildInputs ++ [ prev.pythonModule.pkgs.nestedtext ];
   meta = attrs.meta // { skipUpdate = true; };
 })
