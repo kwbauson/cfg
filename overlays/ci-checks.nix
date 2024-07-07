@@ -9,9 +9,12 @@ let
     ${exe better-comma} -p hello hello
     mkdir -p /tmp/nle-test
     cd /tmp/nle-test
+    export NLE_CACHE=/tmp/nle-cache
+    ${exe nle} clean
     ${exe nle} init
     echo "scope: with scope; [ hello ]" > local.nix
     ${exe nle}
+    ${exe nle} uncache
   '';
   getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}-${name}" switch.${machine}.${name}) names));
 in
