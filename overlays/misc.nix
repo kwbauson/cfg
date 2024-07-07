@@ -67,4 +67,5 @@ final: prev: with final.scope; {
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
   llama-cpp = (importNixpkgs { owner = "ghthor"; rev = "d9188fc882a42de3cdb2c7c8063758a405a3fb13"; }).llama-cpp; # FIXME latest llama-cpp breaks tabbyml
+  qutebrowser = prev.qutebrowser.override { python3 = prev.python311; };
 }
