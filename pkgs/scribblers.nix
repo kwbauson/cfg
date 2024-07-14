@@ -1,7 +1,7 @@
 scope: with scope;
 buildGoModule {
   inherit pname;
-  version = "unstable-2024-01-28";
+  version = "0-unstable-2024-01-28";
   src = fetchFromGitHub {
     owner = "kwbauson";
     repo = "scribble.rs";
