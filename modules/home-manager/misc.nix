@@ -27,7 +27,7 @@
     };
   };
 
-  nix.package = lib.mkForce nix;
+  nix.package = lib.mkForce lix;
   nix.settings = optionalAttrs isDarwin {
     max-jobs = "auto";
     extra-experimental-features = [ "nix-command" "flakes" ];

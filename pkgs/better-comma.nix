@@ -2,7 +2,7 @@ scope: with scope; stdenv.mkDerivation {
   inherit pname version;
   script = ''
     #!/usr/bin/env bash
-    ${pathAdd [ gnused coreutils fzy nix ]}
+    ${pathAdd [ gnused coreutils fzy ]}
     set -o pipefail
     overlays=()
     while [[ $1 = --overlay ]];do

@@ -5,6 +5,7 @@
   ];
   _module.args.username = lib.mkDefault "keith";
   environment.etc."nixpkgs-path".source = pkgs.path;
+  nix.package = lix;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings = {
     max-jobs = "auto";

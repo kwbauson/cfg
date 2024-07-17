@@ -56,7 +56,7 @@ stdenv.mkDerivation {
     echo "$(< ${flakeNix})" > "$workdir"/flake.nix
     echo "$(< ${flakeLock})" > "$workdir"/flake.lock
     echo "$(< tasks.nix)" > "$workdir"/tasks.nix
-    ${nix}/bin/nix --extra-experimental-features 'nix-command flakes' run --no-update-lock-file "$workdir"#"$task" -- "$@"
+    nix --extra-experimental-features 'nix-command flakes' run --no-update-lock-file "$workdir"#"$task" -- "$@"
   '';
   installPhase = ''
     mkdir -p $out/bin
