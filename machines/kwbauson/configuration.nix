@@ -1,7 +1,7 @@
 { scope, ... }: with scope;
 let
-  forwardedTCPPorts = [ ];
-  forwardedUDPPorts = [ ];
+  forwardedTCPPorts = [ 2456 2457 ];
+  forwardedUDPPorts = [ 2456 2457 ];
 in
 {
   boot.loader.systemd-boot.enable = false;
