@@ -200,6 +200,8 @@
   qt.style.name = "adwaita-dark";
   dconf.enable = false;
 
+  services.picom.enable = isGraphical && isLinux;
+
   services.flameshot = {
     enable = isLinux && isGraphical;
     settings.General = {
