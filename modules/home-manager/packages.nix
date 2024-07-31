@@ -25,6 +25,7 @@
       inherit
         ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
         discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura steamtinkerlaunch
+        headsetcontrol
         ;
       sox = sox.override { enableLame = true; };
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
