@@ -101,7 +101,7 @@
       protocol=porkbun
       apikey_env=APIKEY
       secretapikey_env=SECRETAPIKEY
-      palworld.kwbauson.com
+      home.kwbauson.com,palworld.kwbauson.com
     '';
   };
   systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
