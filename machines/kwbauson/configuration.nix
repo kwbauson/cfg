@@ -14,7 +14,6 @@
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
 
-  services.openssh.openFirewall = mkForce true;
   services.xserver.enable = false;
 
   services.caddy = with constants; {
