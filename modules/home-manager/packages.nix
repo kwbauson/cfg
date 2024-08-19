@@ -1,4 +1,4 @@
-{ scope, isGraphical, ... }: with scope;
+{ scope, isGraphical, isMinimal, ... }: with scope;
 {
   included-packages = with pkgs; {
     core = {
@@ -11,31 +11,31 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli bws libqalculate yt-dlp speedtest-cli tldr nix-top
-        nixos-install-tools better-comma dogdns dasel clip emborg
-        ;
+        nixos-install-tools better-comma dogdns dasel clip emborg;
     };
     ${attrIf isGraphical "graphical"} = {
       graphical-core = {
         inherit
           dzen2 graphviz i3-easyfocus i3lock imagemagick term nsxiv
-          xclip xdotool xsel xterm maim imgloc w3m
-          ;
+          xclip xdotool xsel xterm maim imgloc w3m;
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
       inherit
         ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
         discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura steamtinkerlaunch
-        headsetcontrol
-        ;
+        headsetcontrol arduino;
       sox = sox.override { enableLame = true; };
-      ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
     };
     development = {
       inherit
-        bat colordiff gron highlight xh icdiff jq watchexec yarn
-        yarn-bash-completion nodejs_latest cachix nle concurrently arduino
-        tasknix devenv google-cloud-sdk nix-index python3 unison-ucm garn
-        ;
+        bat colordiff gron highlight xh icdiff jq watchexec nle
+        tasknix devenv nix-index python3;
+      ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
+    };
+    development-extra = optionalAttrs (!isMinimal) {
+      inherit
+        yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
+        unison-ucm garn cachix;
       inherit (nodePackages) npm-check-updates prettier;
     };
     inherit nrs switch;
