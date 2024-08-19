@@ -15,4 +15,8 @@ rec {
   ssh.port = 22;
   scribblers.port = 8100;
   on-demand-tls.port = 5555;
+  temp-http.port = 8000;
+  valheim.start-port = 2456;
+  valheim.end-port = 2457;
+  valheim.ports = [ valheim.start-port valheim.end-port ];
 }

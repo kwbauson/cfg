@@ -18,8 +18,8 @@
   virtualisation.oci-containers.backend = "docker";
 
   networking = {
-    firewall.allowedTCPPorts = [ config.services.palworld.port ] ++ [ 2456 2457 ];
-    firewall.allowedUDPPorts = [ config.services.palworld.port ] ++ [ 2456 2457 ];
+    firewall.allowedTCPPorts = with constants; [ temp-http.port config.services.palworld.port ] ++ valheim.ports;
+    firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
 
   virtualisation.oci-containers.containers.valheim = {
@@ -27,7 +27,7 @@
     image = "ghcr.io/lloesche/valheim-server";
     environmentFiles = [ /var/lib/valheim/environment ];
     extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
-    ports = [ "2456-2457:2456-2457/udp" ];
+    ports = with mapAttrValues toString constants.valheim; [ "${start-port}-${end-port}:${start-port}-${end-port}/udp" ];
     volumes = [ "/var/lib/valheim:/config" ];
   };
 
