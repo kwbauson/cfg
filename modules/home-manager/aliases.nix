@@ -70,6 +70,29 @@
       )
       exec nix ''${args[@]} "$@"
     '';
+    build-for-cachix = ''
+      set -euo pipefail
+      cachename=$1
+      shift
+      cmd=
+      if [[ $1 = -c ]];then
+        shift
+        cmd=$1
+        shift
+      fi
+      args=$(
+        curl -s app.cachix.org/api/v1/cache/"$cachename" | jq -r \
+        '"--extra-substituters \(.uri) --extra-trusted-public-keys \(.publicSigningKeys[0])"'
+      )
+      outPaths=$(nix build --no-link --print-out-paths "$@")
+      cachix push kwbauson "$outPaths" 1>&2
+      realize="nix-store ''${args[@]} --realize $outPaths"
+      if [[ -z $cmd ]];then
+        echo "$realize"
+      else
+        echo "$realize && $outPaths/bin/$cmd"
+      fi
+    '';
     slime = "tmux -L vim-slime new";
   };
 }
