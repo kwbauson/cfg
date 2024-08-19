@@ -40,8 +40,8 @@
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
     dircolors.enable = true;
-    firefox.enable = !isDarwin;
-    chromium.enable = !isDarwin;
+    firefox.enable = !isDarwin && isGraphical;
+    chromium.enable = !isDarwin && isGraphical;
     autorandr.enable = isLinux && isGraphical;
     ssh = {
       enable = true;
@@ -193,24 +193,24 @@
   '';
   home.file.".cache/nix-index".source = nix-index-database;
 
-  gtk.enable = isLinux;
+  gtk.enable = isGraphical && isLinux;
   gtk.theme.name = "Adwaita-dark";
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-  qt.enable = isLinux;
+  qt.enable = isGraphical && isLinux;
   qt.style.name = "adwaita-dark";
   dconf.enable = false;
 
   services.picom.enable = isGraphical && isLinux;
 
   services.flameshot = {
-    enable = isLinux && isGraphical;
+    enable = isGraphical && isLinux;
     settings.General = {
       disabledTrayIcon = true;
       showStartupLaunchMessage = false;
     };
   };
 
-  services.clip.sync-primary.enable = isLinux && isGraphical;
+  services.clip.sync-primary.enable = isGraphical && isLinux;
 
   xsession = {
     enable = isNixOS && isGraphical;

@@ -1,4 +1,4 @@
-{ config, scope, machine-name, username, ... }: with scope;
+{ config, scope, machine-name, username, isGraphical, ... }: with scope;
 {
   imports = [
     modules.common-system
@@ -53,7 +53,7 @@
   security.rtkit.enable = true;
   services = {
     pipewire = {
-      enable = true;
+      enable = isGraphical;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
@@ -64,7 +64,7 @@
     tlp.enable = false;
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
-    xserver.enable = mkDefault true;
+    xserver.enable = mkDefault isGraphical;
     displayManager = mkIf config.services.xserver.enable {
       defaultSession = "none+xsession";
       autoLogin = {

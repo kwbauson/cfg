@@ -14,8 +14,6 @@
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
 
-  services.xserver.enable = false;
-
   services.caddy = with constants; {
     enable = true;
     globalConfig = ''

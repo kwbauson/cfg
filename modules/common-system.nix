@@ -1,9 +1,9 @@
 { scope, machine-name, username, ... }: with scope;
 {
   imports = [
+    modules.args
     modules.auto-update
   ];
-  _module.args.username = lib.mkDefault "keith";
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.package = lix;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];

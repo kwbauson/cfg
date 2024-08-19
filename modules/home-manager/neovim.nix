@@ -1,12 +1,12 @@
-{ config, scope, ... }: with scope;
+{ config, scope, isMinimal, ... }: with scope;
 {
-  included-packages = {
+  included-packages = optionalAttrs (!isMinimal) {
     inherit ctags dhall crystal nim2 nixpkgs-fmt shellcheck shfmt black;
   };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    extraPackages = attrValues { inherit nil solargraph terraform-ls lua-language-server terraform; } ++ optional (!isDarwin) nimlangserver;
+    ${attrIf (!isMinimal) "extraPackages"} = attrValues { inherit nil solargraph terraform-ls lua-language-server terraform; } ++ optional (!isDarwin) nimlangserver;
     withNodeJs = true;
     coc.enable = true;
     plugins = with vimPlugins; attrValues {

@@ -1,14 +1,10 @@
-{ config, scope, machine-name, ... }: with scope;
+{ config, scope, machine-name, username, ... }: with scope;
 {
   imports = [
+    modules.args
     (machines.${machine-name}.home or { })
   ] ++ attrValues (importDir ./.);
 
-  _module.args = {
-    isNixOS = hasAttr machine-name nixosConfigurations;
-    isGraphical = !elem machine-name [ "kwbauson" ];
-  };
-
-  home.username = mkDefault (if !isDarwin then "keith" else "keithbauson");
+  home.username = mkDefault (if !isDarwin then username else "keithbauson");
   home.homeDirectory = mkDefault "/${if !isDarwin then "home" else "Users"}/${config.home.username}";
 }
