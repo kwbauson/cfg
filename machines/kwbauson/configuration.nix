@@ -8,6 +8,7 @@
 
   services.tailscale.useRoutingFeatures = "both";
   networking = with constants; {
+    networkmanager.enable = false;
     inherit (kwbauson) domain;
     firewall.allowedTCPPorts = [ http.port https.port ];
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
