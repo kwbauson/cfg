@@ -15,7 +15,7 @@
         vim-airline vim-better-whitespace vim-code-dark vim-easymotion
         vim-fugitive vim-lastplace vim-multiple-cursors vim-sensible
         vim-startify nvim-web-devicons vim-peekaboo vim-caddyfile unison
-        vim-tabby vim-slime
+        vim-slime
 
         coc-eslint coc-git coc-json coc-lists coc-prettier
         coc-solargraph coc-tsserver coc-pyright coc-explorer
@@ -28,8 +28,4 @@
       source ${config.home.homeDirectory}/cfg/modules/home-manager/init.lua
     ";
   };
-  home.file.".tabby-client/agent/config.toml".text = ''
-    [server]
-    endpoint = "http://keith-desktop:11029"
-  '';
 }

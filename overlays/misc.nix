@@ -66,5 +66,4 @@ final: prev: with final.scope; {
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
-  llama-cpp = (importNixpkgs { owner = "ghthor"; rev = "d9188fc882a42de3cdb2c7c8063758a405a3fb13"; }).llama-cpp; # FIXME latest llama-cpp breaks tabbyml
 }
