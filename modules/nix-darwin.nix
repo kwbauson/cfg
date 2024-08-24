@@ -6,6 +6,7 @@
     inputs.home-manager.darwinModule
   ];
   nix.settings.extra-platforms = [ "x86_64-darwin" ];
+  nix.settings.trusted-users = [ username ];
   system.darwinLabel = "${machine-name}-${flakeLastModifiedDateString}";
   users.users.${username}.home = "/Users/${username}";
   services.nix-daemon.enable = true;
