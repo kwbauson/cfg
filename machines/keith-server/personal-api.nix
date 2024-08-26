@@ -1,6 +1,8 @@
 { scope, ... }: with scope;
 let
-  app = writePython3Bin "main.py" { libraries = with python3.pkgs; [ fastapi uvicorn ]; } ''
+  scriptPython = (python3.withPackages (ps: with ps; [ uvicorn fastapi ])).overrideAttrs (_: { ignoreCollisions = true; });
+  script = /* python */ ''
+    #!${getExe scriptPython}
     from fastapi import FastAPI
     from fastapi.responses import RedirectResponse
     import uvicorn
@@ -28,6 +30,7 @@ let
     if __name__ == "__main__":
         uvicorn.run("main:app", host="0.0.0.0", port=${toString constants.personal-api.port}, log_level="info")
   '';
+  app = writeScriptBin "main.py" script;
 in
 {
   systemd.services.personal-api = {
