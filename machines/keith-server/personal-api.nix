@@ -2,7 +2,7 @@
 let
   scriptPython = (python3.withPackages (ps: with ps; [ uvicorn fastapi ])).overrideAttrs (_: { ignoreCollisions = true; });
   script = /* python */ ''
-    #!${scriptPython.interpreter}
+    #!${getExe scriptPython}
     from fastapi import FastAPI
     from fastapi.responses import RedirectResponse
     import uvicorn
