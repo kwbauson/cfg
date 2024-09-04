@@ -66,15 +66,4 @@ final: prev: with final.scope; {
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
-  kitty =
-    if !isDarwin then prev.kitty
-    else
-      prev.kitty.overridePythonAttrs (old: {
-        patchPhase = ''
-          runHook prePatch
-          mkdir -p fonts
-          cp ${nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];}}/share/fonts/truetype/NerdFonts/* fonts
-          runHook postPatch
-        '';
-      });
 }
