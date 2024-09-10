@@ -22,6 +22,16 @@
         coc-vetur coc-vimlsp formatter-nvim nim-vim;
       nvim-treesitter = nvim-treesitter.withAllGrammars;
       barbar-nvim = barbar-nvim; # FIXME barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
+      vim-ohm = vimUtils.buildVimPlugin rec {
+        pname = "vim-ohm";
+        version = "0-unstable-2024-10-31";
+        src = fetchFromGitHub {
+          owner = "nfischer";
+          repo = pname;
+          rev = "76d7cf8f4a131158c4bdde7698bb46bd4d69451f";
+          hash = "sha256-F9FU2Cvutf3v3GZiw3NqXL4mBbQ9VxY4goZ+4eQKEl4=";
+        };
+      };
     };
     extraConfig = "
       source ${config.home.homeDirectory}/cfg/modules/home-manager/init.vim
