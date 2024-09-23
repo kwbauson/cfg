@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage (attrs: {
   inherit pname;
-  version = "0-unstable-2024-09-20";
+  version = "0-unstable-2024-09-22";
   src = fetchFromGitHub {
     owner = "jpetrucciani";
     repo = "nix";
-    rev = "5394871874ea054a8b8034bb70e8a65b804bc8ce";
-    hash = "sha256-2pFgEMxf/BrJQ1UF/LgyosU8yG5WTOij/nsNDvHvUzM=";
+    rev = "09b51f32ad90bd3d6f484abe1141831218a88371";
+    hash = "sha256-GAub4KM5CV7InVsM/7+E8X5est6Kl5ImqAjSzW6z9p0=";
   };
   pkgs = (import attrs.src { inherit nixpkgs system; });
   passthru.updateScript = unstableGitUpdater { };
