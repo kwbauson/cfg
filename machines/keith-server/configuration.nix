@@ -6,11 +6,14 @@
     common-cpu-amd-pstate
     ./personal-api.nix
     "${cobi.src}/hosts/modules/games/palworld.nix"
+    "${cobi.src}/hosts/modules/games/valheim.nix"
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.initrd.enable = false;
+  hardware.amdgpu.legacySupport.enable = true;
+  hardware.amdgpu.opencl.enable = true;
   time.hardwareClockInLocalTime = true;
   services.tailscale.useRoutingFeatures = "both";
   services.auto-update.enable = true;
@@ -22,13 +25,10 @@
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
 
-  virtualisation.oci-containers.containers.valheim = {
-    autoStart = true;
-    image = "ghcr.io/lloesche/valheim-server";
-    environmentFiles = [ /var/lib/valheim/environment ];
-    extraOptions = [ "--cap-add=sys_nice" "--stop-timeout=120" ];
-    ports = with mapAttrValues toString constants.valheim; [ "${start-port}-${end-port}:${start-port}-${end-port}/udp" ];
-    volumes = [ "/var/lib/valheim:/config" ];
+  services.valheim = {
+    enable = true;
+    serverName = "hangin bois";
+    worldName = "hangin";
   };
 
   services.palworld = {
