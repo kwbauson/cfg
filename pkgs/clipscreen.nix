@@ -1,12 +1,12 @@
 scope: with scope;
 stdenv.mkDerivation {
   inherit pname;
-  version = "0-unstable-2024-10-16";
+  version = "0-unstable-2024-11-13";
   src = fetchFromGitHub {
     owner = "splitbrain";
     repo = pname;
-    rev = "788c1458886b7484d72e1cd512ec5b3a01c90190";
-    hash = "sha256-9Um8CF+/ntX9R7ZIqZjs80Vkkxga05N/LRBIex1wdSg=";
+    rev = "9ac39663feb4736632c2adc6035690518c380242";
+    hash = "sha256-UQ/SrynRUiZV6Cp7fRR8o7/Me+nzQTjeNhqqiA1k5X4=";
   };
   buildInputs = with xorg; [ pkg-config cairo libXfixes libXrandr libXcomposite ];
   installPhase = ''
