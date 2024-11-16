@@ -215,21 +215,6 @@
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
-      xmodmap ${writeText "Xmodmap" ''
-        remove mod1 = Alt_L
-        keycode 64 = Escape
-        ${optionalString (machine-name == "keith-xps") "keycode 105 = Super_R"}
-        ${optionalString (machine-name == "keith-desktop") ''
-          keycode 134 = Super_R
-          keycode 105 = Control_R
-        ''}
-      ''}
-      xmodmap ${writeText "Xmodmap-fix-modifiers" ''
-        remove control = Super_R
-        remove mod4 = Control_R
-        add control = Control_R
-        add mod4 = Super_R
-      ''} &
       ${exe hsetroot} -solid black &
       xsetroot -cursor_name left_ptr &
       togpad off &
