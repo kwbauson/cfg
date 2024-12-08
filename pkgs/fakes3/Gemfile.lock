@@ -8,12 +8,12 @@ GEM
       xml-simple
     rbtree (0.4.6)
     rexml (3.3.9)
-    set (1.1.0)
+    set (1.1.1)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
     thor (1.3.2)
-    webrick (1.9.0)
+    webrick (1.9.1)
     xml-simple (1.1.9)
       rexml
 

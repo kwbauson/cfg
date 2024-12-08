@@ -1,12 +1,12 @@
 scope: with scope;
 stdenv.mkDerivation {
   inherit pname;
-  version = "0-unstable-2024-04-20";
+  version = "0-unstable-2024-11-24";
   src = fetchFromGitHub {
     owner = "alexanderjeurissen";
     repo = pname;
-    rev = "a8d626485ca83719e1d8d5e32289cd96a097c861";
-    hash = "sha256-sijO9leDXgnjgcVlh5fKYalhjOupwFMRyH0xh2g/rEQ=";
+    rev = "84db73d0a50a8c6085b3ec63f834c781b603e83e";
+    hash = "sha256-sqqsWU5/zBwIpyJKEBiCfosqKNvISWCw8cFgzLcNjUY=";
   };
   installPhase = "cp -r . $out";
   passthru.updateScript = unstableGitUpdater { };
