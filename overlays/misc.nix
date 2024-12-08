@@ -25,7 +25,6 @@ final: prev: with final.scope; {
     '';
   };
   steam-native = steam.override { nativeOnly = true; };
-  dejavu_fonts_nerd = nerdfonts.override { fonts = [ "DejaVuSansMono" ]; };
   nle-cfg = nle.build { path = ../.; };
   inherit (nle-cfg.pkgs) fordir;
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
