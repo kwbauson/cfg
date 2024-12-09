@@ -124,7 +124,7 @@
 
   services.caddy.email = "kwbauson@gmail.com";
 
-  services.evremap. settings.remap = [
+  services.evremap.settings.remap = [
     { input = [ "KEY_CAPSLOCK" ]; output = [ "KEY_LEFTCTRL" ]; }
     { input = [ "KEY_LEFTALT" ]; output = [ "KEY_ESC" ]; }
     { input = [ "KEY_COMPOSE" ]; output = [ "KEY_RIGHTMETA" ]; }

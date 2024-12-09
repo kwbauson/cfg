@@ -24,7 +24,6 @@
         ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
         discord zoom-us dejavu_fonts zathura steamtinkerlaunch
         headsetcontrol arduino;
-      inherit (nerd-fonts) dejavu-sans-mono;
       sox = sox.override { enableLame = true; };
     };
     development = {
