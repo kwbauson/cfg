@@ -39,6 +39,10 @@
   };
 
   services.caddy.enable = true;
+  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
+  services.caddy.subdomainsOf = constants.kwbauson.fqdn;
+  services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";
+  services.caddy.subdomains.auth = "authenticate with default";
   services.caddy.virtualHosts.":${toString constants.on-demand-tls.port}".extraConfig = ''
     route {
       @subdomains {
@@ -53,7 +57,6 @@
       respond 404
     }
   '';
-  services.caddy.subdomainsOf = with constants; "${kwbauson.fqdn}:${toString http.port}";
 
   services.olivetin.enable = true;
   services.olivetin.config = ''
@@ -63,12 +66,9 @@
         icon: "&#128683;"
         shell: reboot
   '';
-  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
-  services.caddy.subdomains."" = with constants; ''
-    basicauth /* {
-      {$OLIVETIN_USERNAME} {$OLIVETIN_HASHED_PASSWORD}
-    }
-    reverse_proxy localhost:${toString olivetin.port}
+  services.caddy.subdomains.olivetin = ''
+    authorize with admin
+    reverse_proxy localhost:${toString constants.olivetin.port}
   '';
 
   services.caddy.subdomains.api = constants.personal-api.port;
@@ -84,7 +84,10 @@
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
   services.netdata.enable = true;
-  services.caddy.subdomains.netdata = constants.netdata.port;
+  services.caddy.subdomains.netdata = ''
+    authorize with admin
+    reverse_proxy localhost:${toString constants.netdata.port}
+  '';
 
   services.github-runners.keith-server = {
     enable = true;
