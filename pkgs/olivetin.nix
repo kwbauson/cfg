@@ -9,5 +9,5 @@ stdenv.mkDerivation (attrs: {
   nativeBuildInputs = [ autoPatchelfHook ];
   installPhase = "cp -r . $out";
   meta.platforms = platforms.linux;
-  # passthru.updateScript = nix-update-script { extraArgs = [ "--flake" ]; };
+  passthru.updateScript = nix-update-script { extraArgs = [ "--flake" ]; };
 })
