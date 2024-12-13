@@ -6,6 +6,8 @@
     device = "/dev/vda";
   };
 
+  time.timeZone = "America/Chicago";
+
   services.tailscale.useRoutingFeatures = "both";
   networking = with constants; {
     networkmanager.enable = false;
@@ -33,5 +35,4 @@
   };
 
   services.auto-update.enable = true;
-  time.timeZone = mkDefault "America/Chicago";
 }
