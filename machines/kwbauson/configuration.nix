@@ -33,4 +33,5 @@
   };
 
   services.auto-update.enable = true;
+  time.timeZone = mkDefault "America/Chicago";
 }

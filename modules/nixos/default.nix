@@ -44,11 +44,8 @@
   };
 
   fonts.enableDefaultPackages = config.services.xserver.enable;
-  location.provider = "geoclue2";
 
-  time = mkIf config.time.hardwareClockInLocalTime {
-    timeZone = "America/Indianapolis";
-  };
+  time.timeZone = mkDefault "America/Indianapolis";
 
   security.rtkit.enable = true;
   services = {
@@ -59,8 +56,6 @@
       pulse.enable = true;
     };
     dbus.packages = [ dconf ];
-    localtimed.enable = mkDefault (!config.time.hardwareClockInLocalTime);
-    chrony.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";

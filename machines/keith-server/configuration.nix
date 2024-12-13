@@ -14,7 +14,6 @@
   hardware.amdgpu.initrd.enable = false;
   hardware.amdgpu.legacySupport.enable = true;
   hardware.amdgpu.opencl.enable = true;
-  time.hardwareClockInLocalTime = true;
   services.tailscale.useRoutingFeatures = "both";
   services.auto-update.enable = true;
   virtualisation.docker.enable = true;
