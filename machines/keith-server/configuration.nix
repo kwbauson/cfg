@@ -107,4 +107,18 @@
     '';
   };
   systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
+
+  services.xrdp.enable = true;
+  services.guacamole-server = {
+    enable = true;
+    userMappingXml = ./user-mapping.xml;
+  };
+  services.guacamole-client = {
+    enable = true;
+    enableWebserver = true;
+  };
+  services.caddy.subdomains.guacamole = ''
+    authorize with user
+    reverse_proxy localhost:8080
+  '';
 }

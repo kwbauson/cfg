@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user-mapping>
+     <authorize username="test" password="test">
+      <connection name="test">
+          <protocol>rdp</protocol>
+          <param name="hostname">127.0.0.1</param>
+          <param name="port">3389</param>
+          <param name="ignore-cert">true</param>
+      </connection>
+    </authorize>
+</user-mapping>
