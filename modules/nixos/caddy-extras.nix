@@ -1,5 +1,13 @@
 { config, scope, ... }: with scope;
-let cfg = config.services.caddy; in
+let
+  cfg = config.services.caddy;
+  authSubmodule = types.submodule {
+    options = {
+      role = mkOption { type = types.str; };
+      port = mkOption { type = types.port; };
+    };
+  };
+in
 {
   options.services.caddy = {
     subdomainsOf = mkOption {
@@ -7,7 +15,7 @@ let cfg = config.services.caddy; in
       default = "localhost";
     };
     subdomains = mkOption {
-      type = with types; attrsOf (oneOf [ attrs lines port ]);
+      type = with types; attrsOf (oneOf [ authSubmodule lines port ]);
       default = { };
     };
   };
@@ -55,10 +63,13 @@ let cfg = config.services.caddy; in
     virtualHosts = forAttrs' cfg.subdomains
       (subdomain: value: {
         name = "${subdomain}${optionalString (subdomain != "") "."}${cfg.subdomainsOf}:80";
-        value =
-          if isAttrs value then value
-          else if isString value then { extraConfig = value; }
-          else { extraConfig = "reverse_proxy localhost:${toString value}"; };
+        value.extraConfig =
+          if isAttrs value then ''
+            authorize with ${value.role}
+            reverse_proxy localhost:${toString value.port}
+          ''
+          else if isString value then value
+          else "reverse_proxy localhost:${toString value}";
       });
   };
 }

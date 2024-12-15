@@ -65,10 +65,7 @@
         icon: "&#128683;"
         shell: reboot
   '';
-  services.caddy.subdomains.olivetin = ''
-    authorize with admin
-    reverse_proxy localhost:${toString constants.olivetin.port}
-  '';
+  services.caddy.subdomains.olivetin = { role = "admin"; inherit (constants.olivetin) port; };
 
   services.caddy.subdomains.api = constants.personal-api.port;
 
@@ -83,10 +80,7 @@
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
   services.netdata.enable = true;
-  services.caddy.subdomains.netdata = ''
-    authorize with admin
-    reverse_proxy localhost:${toString constants.netdata.port}
-  '';
+  services.caddy.subdomains.netdata = { role = "admin"; inherit (constants.netdata) port; };
 
   services.github-runners.keith-server = {
     enable = true;
@@ -107,4 +101,11 @@
     '';
   };
   systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
+
+  services.caddy.subdomains.chat = { role = "user"; port = 8080; };
+  services.open-webui.enable = true;
+  services.open-webui.package = inputs.nixpkgs.legacyPackages.${system}.open-webui;
+  services.open-webui.environment.WEBUI_AUTH = "False";
+  services.ollama.enable = true;
+  services.ollama.host = "[::]";
 }
