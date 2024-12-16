@@ -30,6 +30,7 @@
   "explorer.git.showIgnored": true,
   "explorer.previewAction.onHover": false,
   "semanticTokens.enable": true,
+  "inlayHint.enable": false,
 
   "languageserver": {
     "nix": {

@@ -17,7 +17,7 @@
       graphical-core = {
         inherit
           dzen2 graphviz i3-easyfocus i3lock imagemagick term nsxiv
-          xclip xdotool xsel xterm maim imgloc w3m;
+          xclip xdotool xsel xterm maim w3m;
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
       inherit
@@ -29,8 +29,9 @@
     development = {
       inherit
         bat colordiff gron highlight xh icdiff jq watchexec nle
-        tasknix devenv nix-index python3;
+        tasknix devenv nix-index;
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
+      python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ]);
     };
     development-extra = optionalAttrs (!isMinimal) {
       inherit
@@ -39,7 +40,7 @@
       inherit (nodePackages) npm-check-updates prettier;
     };
     inherit nrs switch;
-    inherit nle-cfg;
+    inherit nle-cfg imgloc atfj;
   };
   excluded-packages = optionalAttrs isDarwin {
     inherit i3-easyfocus iproute2 iputils pavucontrol strace dzen2
