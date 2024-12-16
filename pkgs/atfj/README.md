@@ -52,4 +52,8 @@ Choose an action
 (accept, test, edit, retry, abort): accept
 
 ubuntu
+
+# remembers previously accepted script
+~ $ atfj run docker image ls | jq -r '.[0].REPOSITORY'
+ubuntu
 ```
