@@ -14,6 +14,10 @@ rustPlatform.buildRustPackage rec {
     cmake
     pkg-config
   ];
+  buildInputs = [ bash ];
+  postPatch = ''
+    sed -i '/let attempts = \[".bin.sh"/s@"/bin/sh"@"${bash}/bin/sh"@' crates/uv-python/src/libc.rs
+  '';
   doCheck = false;
   meta.mainProgram = "uv";
   meta.platforms = platforms.linux;
