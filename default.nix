@@ -6,10 +6,9 @@ let
     url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
     sha256 = narHash;
   });
-  compatGetFlake = src: (flake-compat { inherit src; }).defaultNix;
   getFlake = src:
     if builtins ? getFlake && !forceFlakeCompat
     then builtins.getFlake (toString src)
-    else compatGetFlake src;
+    else (flake-compat { inherit src; }).defaultNix;
 in
 (getFlake ./.).packages.${system}.scope // { inherit getFlake; }
