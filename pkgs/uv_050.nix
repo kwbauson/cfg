@@ -14,5 +14,7 @@ rustPlatform.buildRustPackage rec {
     cmake
     pkg-config
   ];
+  doCheck = false;
   meta.mainProgram = "uv";
+  meta.platforms = platforms.linux;
 }

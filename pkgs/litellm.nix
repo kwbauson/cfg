@@ -13,8 +13,9 @@ importPackage (attrs: {
   migrated-src = stdenv.mkDerivation {
     name = "migrated-src";
     inherit (attrs) src;
-    nativeBuildInputs = [ uv-migrator uv-050 ];
+    nativeBuildInputs = [ uv-migrator uv_050 ];
     installPhase = ''
+      export HOME=/tmp/home
       uv-migrator .
       cp -r . $out
     '';
