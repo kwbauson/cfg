@@ -12,7 +12,9 @@ stdenv.mkDerivation {
     cp ${./main.py} $out/bin/${pname}
     chmod +x $out/bin/${pname}
     patchShebangs $out
+    ${optionalString (!isDarwin) ''
     $out/bin/${pname} --show-completion > ${pname}.bash
     installShellCompletion --bash ${pname}.bash
+    ''}
   '';
 }
