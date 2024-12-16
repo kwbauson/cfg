@@ -19,6 +19,13 @@
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
 
+  zramSwap.memoryPercent = 25;
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 64 * 1024;
+  }];
+
+
   networking = {
     firewall.allowedTCPPorts = with constants; [ temp-http.port config.services.palworld.port ] ++ valheim.ports;
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;

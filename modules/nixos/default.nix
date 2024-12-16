@@ -33,8 +33,8 @@
   hardware.enableAllFirmware = true;
 
   zramSwap = {
-    enable = true;
-    memoryPercent = 100;
+    enable = mkDefault true;
+    memoryPercent = mkDefault 100;
   };
 
   console = {
