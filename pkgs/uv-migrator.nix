@@ -9,6 +9,10 @@ rustPlatform.buildRustPackage {
     hash = "sha256-sVhNF4bL/zsZvXX+JnHOwkKvBHmzy+iFFRBLBl6zfu8=";
   };
   cargoHash = "sha256-va/qLJdD+NGLz8oQRUsjlo7okbaaAqla3Jn5FabzO6M=";
+  nativeBuildInputs = [ makeWrapper ];
+  postInstall = ''
+    wrapProgram $out/bin/uv-migrator --prefix PATH : ${makeBinPath [ uv_050 ]}
+  '';
   meta.mainProgram = pname;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { tagPrefix = "v"; })

@@ -6,8 +6,6 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     nixos-hardware.flake = true;
-    uv2nix.url = "github:pyproject-nix/uv2nix";
-    uv2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
