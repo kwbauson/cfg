@@ -20,5 +20,4 @@ rustPlatform.buildRustPackage rec {
   '';
   doCheck = false;
   meta.mainProgram = "uv";
-  meta.platforms = platforms.linux;
 }
