@@ -13,6 +13,7 @@
     "jacobi.cachix.org-1:JJghCz+ZD2hc9BHO94myjCzf4wS3DeBLKHOz3jCukMU="
   ];
 
+  users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {
     runner-kwbauson-cfg = {
       enable = true;
