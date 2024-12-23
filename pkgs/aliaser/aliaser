@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+fileExtensions=(
+  nix
+  json
+  yaml
+  yml
+  toml
+)
+
+if [[ ${1-} = '--config' ]];then
+  configPath=$2
+  shift
+  shift
+else
+  for ext in "${fileExtensions[@]}";do
+    testPath=aliases.$ext
+    if [[ -e $testPath ]];then
+      configPath=$testPath
+      unset testPath
+      break
+    fi
+  done
+fi
+
+if [[ -z ${configPath-} ]];then
+  echo "Missing configuration, please create file aliases.{nix,json,yaml,toml}"
+  exit 1
+fi
+
+if [[ $configPath = *.nix ]];then
+  config=$(nix eval --json --file "$configPath")
+elif [[ $configPath = *.json ]];then
+  config=$(< "$configPath")
+elif [[ $configPath = *.yaml || $configPath = *.yml ]];then
+  config=$(yaml2json < "$configPath")
+elif [[ $configPath = *.toml ]];then
+  config=$(toml2json < "$configPath")
+fi
+
+help() {
+  echo "Available aliases:"
+  echo
+  echo "$config" | jq -r 'keys[]'
+}
+
+if [[ -z ${1-} || $1 = '--help' ]];then
+  help
+else
+  cmd=$1
+  shift
+  script=$(echo "$config" | jq -r ".[\"$cmd\"]")
+  bash <(echo "$script") "$@"
+fi
