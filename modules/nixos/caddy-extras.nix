@@ -46,6 +46,10 @@ in
             match email kwbauson@gmail.com
             action add role authp/admin authp/user
           }
+          transform user {
+            match email billbauson@gmail.com
+            action add role authp/user
+          }
         }
 
         authorization policy admin {

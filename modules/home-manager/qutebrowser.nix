@@ -9,8 +9,9 @@
       w = "session-save";
       wq = "quit --save";
     };
-    searchEngines = {
-      DEFAULT = "https://www.google.com/search?udm=14&q={}";
+    searchEngines = rec {
+      DEFAULT = k;
+      k = "https://kagi.com/search?q={}";
       aur = "https://aur.archlinux.org/packages/?K={}";
       aw = "https://wiki.archlinux.org/index.php?search={}";
       g = "https://www.google.com/search?q={}";
