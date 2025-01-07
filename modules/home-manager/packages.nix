@@ -36,7 +36,7 @@
     development-extra = optionalAttrs (!isMinimal) {
       inherit
         yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
-        unison-ucm garn cachix;
+        unison-ucm garn cachix remmina;
       inherit (nodePackages) npm-check-updates prettier;
     };
     inherit nrs switch;
