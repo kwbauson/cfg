@@ -23,7 +23,7 @@
       inherit
         ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
         discord zoom-us dejavu_fonts zathura steamtinkerlaunch
-        headsetcontrol arduino;
+        headsetcontrol arduino remmina;
       sox = sox.override { enableLame = true; };
     };
     development = {
@@ -36,7 +36,7 @@
     development-extra = optionalAttrs (!isMinimal) {
       inherit
         yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
-        unison-ucm garn cachix remmina;
+        unison-ucm garn cachix;
       inherit (nodePackages) npm-check-updates prettier;
     };
     inherit nrs switch;
