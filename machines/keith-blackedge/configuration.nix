@@ -1,7 +1,5 @@
 { scope, ... }: with scope;
 {
-  _module.args.username = "kbauson";
-
   imports = [
     ./hardware-configuration.nix
     "${cobi.src}/hosts/modules/conf/blackedge.nix"
@@ -54,5 +52,5 @@
   virtualisation.vmware.guest.enable = true;
   system.stateVersion = "24.05";
 
-  users.users.kbauson.openssh.authorizedKeys.keys = mkForce [ ];
+  users.users.keith.openssh.authorizedKeys.keys = mkForce [ ];
 }
