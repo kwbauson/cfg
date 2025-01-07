@@ -85,7 +85,7 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  system.stateVersion = "21.11";
+  system.stateVersion = mkDefault "21.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = mkDefault config.services.xserver.enable;
   # FIXME programs.pmount.enable = true;

@@ -52,6 +52,7 @@
   time.timeZone = "America/Chicago";
   users.users.root.hashedPassword = "!";
   virtualisation.vmware.guest.enable = true;
+  system.stateVersion = "24.05";
 
   users.users.kbauson.openssh.authorizedKeys.keys = mkForce [ ];
 }
