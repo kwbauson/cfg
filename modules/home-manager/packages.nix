@@ -23,7 +23,7 @@
       inherit
         ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
         discord zoom-us dejavu_fonts zathura steamtinkerlaunch
-        headsetcontrol arduino remmina;
+        headsetcontrol arduino remmina nm-applet;
       sox = sox.override { enableLame = true; };
     };
     development = {

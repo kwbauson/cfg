@@ -52,11 +52,17 @@
   virtualisation.vmware.guest.enable = true;
   system.stateVersion = "24.05";
 
-  services.xserver.enable = false;
-
   users.users.keith.openssh.authorizedKeys.keys = mkForce [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXTCckeJ1gBp+IASGnvwkAp1HuobNvrMr7SNU0xgwPd keith-blackedge-access"
   ];
 
   services.auto-update.enable = true;
+
+  services._3proxy = {
+    enable = true;
+    services = [{
+      type = "socks";
+      auth = [ "none" ];
+    }];
+  };
 }
