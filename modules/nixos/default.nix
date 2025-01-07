@@ -15,7 +15,7 @@
         configurationLimit = mkDefault 5;
         consoleMode = "auto";
       };
-      timeout = 1;
+      timeout = mkDefault 1;
     };
     tmp.useTmpfs = true;
     supportedFilesystems = [ "ntfs" ];
@@ -85,7 +85,7 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  system.stateVersion = "21.11";
+  system.stateVersion = mkDefault "21.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = mkDefault config.services.xserver.enable;
   # FIXME programs.pmount.enable = true;
@@ -97,7 +97,7 @@
 
   services.udev.packages = optionals config.services.xserver.enable [ headsetcontrol ];
   services.openssh.settings = {
-    PasswordAuthentication = false;
+    PasswordAuthentication = mkDefault false;
     PermitRootLogin = "no";
     X11Forwarding = true;
     KexAlgorithms = [
