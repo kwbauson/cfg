@@ -53,5 +53,5 @@
   users.users.root.hashedPassword = "!";
   virtualisation.vmware.guest.enable = true;
 
-  users.users.${username}.openssh.authorizedKeys.keys = mkForce [ ];
+  users.users.kbauson.openssh.authorizedKeys.keys = mkForce [ ];
 }
