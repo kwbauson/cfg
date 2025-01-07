@@ -53,6 +53,7 @@
         "gitlab.com".extraOptions.UpdateHostKeys = "no";
         keith-desktop.user = "keith";
       };
+      includes = [ "config.d/*" ];
     };
     htop = {
       enable = true;
@@ -114,6 +115,7 @@
     vscode.enable = isGraphical;
     # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
     mpv.enable = isGraphical && isLinux;
+    mpv.bindings.M = ''cycle-values audio-channels "mono" "stereo"'';
   };
   xdg = {
     enable = true;
