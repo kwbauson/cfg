@@ -15,7 +15,7 @@
         configurationLimit = mkDefault 5;
         consoleMode = "auto";
       };
-      timeout = 1;
+      timeout = mkDefault 1;
     };
     tmp.useTmpfs = true;
     supportedFilesystems = [ "ntfs" ];
@@ -97,7 +97,7 @@
 
   services.udev.packages = optionals config.services.xserver.enable [ headsetcontrol ];
   services.openssh.settings = {
-    PasswordAuthentication = false;
+    PasswordAuthentication = mkDefault false;
     PermitRootLogin = "no";
     X11Forwarding = true;
     KexAlgorithms = [
