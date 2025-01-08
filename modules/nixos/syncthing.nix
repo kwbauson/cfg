@@ -24,7 +24,7 @@ in
         urAccepted = -1;
       };
       devices = mkDevices {
-        keith-server = mkDevice "TODO";
+        keith-server = mkDevice "4UZWH3Y-YRO6MCJ-XNOQEYI-M2LK4OK-LZETKPQ-5Q5MSVT-WGKELCY-5KCWQQV";
         keith-desktop = mkDevice "WLPCWRZ-SIRCUKK-2B2F6P6-XA5O7HI-DXZFMXI-UB4FAE4-6NPYQ7E-HPHSJAG";
         keith-xps = mkDevice "TLPHMKL-SMTBB6W-OODSBGW-DXQ36UB-ILKK67U-2ZKPIKI-G4TZNSP-UMWXNAH";
       };
