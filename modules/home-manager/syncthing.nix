@@ -1,6 +1,6 @@
 { scope, ... }: with scope;
 let
-  devices = [ "keith-desktop" ];
+  devices = [ "keith-desktop" "keith-xps" ];
   mkDevice = id: {
     inherit id;
     allowedNetworks = "100.0.0.0/8";
@@ -12,8 +12,14 @@ in
     enable = true;
     extraOptions = [ "--no-default-folder" ];
     settings = {
+      options = {
+        relaysEnabled = false;
+        globalAnnounceEnabled = false;
+        urAccepted = -1;
+      };
       devices = {
         keith-desktop = mkDevice "WLPCWRZ-SIRCUKK-2B2F6P6-XA5O7HI-DXZFMXI-UB4FAE4-6NPYQ7E-HPHSJAG";
+        keith-xps = mkDevice "TLPHMKL-SMTBB6W-OODSBGW-DXQ36UB-ILKK67U-2ZKPIKI-G4TZNSP-UMWXNAH";
       };
       folders = {
         notes = mkFolder "~/notes";
