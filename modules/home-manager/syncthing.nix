@@ -1,4 +1,4 @@
-{ scope, ... }: with scope;
+{ scope, machine-name, ... }: with scope;
 let
   devices = [ "keith-desktop" "keith-xps" ];
   mkDevices = mapAttrs (name: value: {
@@ -17,6 +17,7 @@ in
     extraOptions = [ "--no-default-folder" ];
     settings = {
       options = {
+        listenAddresses = [ "tcp://${constants.${machine-name}.ip}:22000" ];
         relaysEnabled = false;
         globalAnnounceEnabled = false;
         urAccepted = -1;
