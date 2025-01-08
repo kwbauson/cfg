@@ -13,9 +13,9 @@ let
   inherit (config.users.users.${username}) home;
 in
 {
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
   services.syncthing = {
     enable = elem machine-name (attrNames config.services.syncthing.settings.devices);
+    extraFlags = [ "--no-default-folder" ];
     settings = {
       options = {
         listenAddresses = [ "tcp://${constants.${machine-name}.ip}:22000" ];
