@@ -109,6 +109,7 @@
         fi
       }
       PS1="\$(new_line_ps1)$PS1"
+      bind '\C-j:"\C-uzn\C-m"'
     '' + optionalString (!isNixOS) ''
       export GPG_TTY=$(tty)
 
