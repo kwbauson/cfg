@@ -2,7 +2,6 @@
 {
   home = {
     stateVersion = "22.11";
-    keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
       BROWSER = "firefox";
       EMAIL = "${userName} <${userEmail}>";
