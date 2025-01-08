@@ -16,7 +16,6 @@ in
         keith-desktop = mkDevice "WLPCWRZ-SIRCUKK-2B2F6P6-XA5O7HI-DXZFMXI-UB4FAE4-6NPYQ7E-HPHSJAG";
       };
       folders = {
-        ssh_config_d = mkFolder "~/.ssh/config.d";
         notes = mkFolder "~/notes";
       };
     };
