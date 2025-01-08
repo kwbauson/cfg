@@ -2,8 +2,9 @@
 {
   _module.args = {
     username = lib.mkDefault "keith";
-    isGraphical = !elem machine-name [ "kwbauson" ];
     isNixOS = hasAttr machine-name nixosConfigurations;
+    # TODO figure out a clean way to get these in machine configs
+    isGraphical = !elem machine-name [ "kwbauson" "keith-blackedge" ];
     isMinimal = elem machine-name [ "kwbauson" ];
   };
 }
