@@ -48,6 +48,7 @@ bindsym $mod+Shift+c exec --no-startup-id slopcast
 bindsym $mod+Mod1+c exec --no-startup-id flameshot gui
 bindsym $mod+Control+v exec --no-startup-id xpaste
 bindsym $mod+x exec --no-startup-id runner
+bindsym $mod+n [title=".*Obsidian Vault.*"] scratchpad show
 
 # windows
 bindsym $mod+q kill
@@ -73,6 +74,8 @@ mode "resize" {
   bindsym l resize grow width 1 px or 1 ppt
 }
 bindsym $mod+Shift+f floating enable; resize set 2560 px 1440 px; move position center; move up 12 px
+bindsym $mod+Control+minus move scratchpad
+bindsym $mod+Control+Shift+underscore scratchpad show
 
 # layout and containers
 bindsym $mod+s split vertical
