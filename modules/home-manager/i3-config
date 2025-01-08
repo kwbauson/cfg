@@ -120,7 +120,7 @@ bindsym $mod+Control+q exit
 
 # rules
 for_window [class="^.*$"] title_window_icon on
-for_window [instance="^termbar$"] floating enable, border none, resize set 700 23, move position 0 0
+for_window [instance="^termbar$"] floating enable, border none, resize set 800 23, move position 0 0
 for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
 no_focus [window_role="qutebrowser_background"]
