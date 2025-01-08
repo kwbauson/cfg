@@ -1,6 +1,6 @@
 { config, username, scope, machine-name, ... }: with scope;
 let
-  devices = [ "keith-desktop" "keith-xps" ];
+  devices = [ "keith-server" "keith-desktop" "keith-xps" ];
   mkDevices = mapAttrs (name: value: {
     addresses = [ "tcp://${constants.${name}.ip}" ];
     autoAcceptFolders = true;
@@ -24,6 +24,7 @@ in
         urAccepted = -1;
       };
       devices = mkDevices {
+        keith-server = mkDevice "TODO";
         keith-desktop = mkDevice "WLPCWRZ-SIRCUKK-2B2F6P6-XA5O7HI-DXZFMXI-UB4FAE4-6NPYQ7E-HPHSJAG";
         keith-xps = mkDevice "TLPHMKL-SMTBB6W-OODSBGW-DXQ36UB-ILKK67U-2ZKPIKI-G4TZNSP-UMWXNAH";
       };
