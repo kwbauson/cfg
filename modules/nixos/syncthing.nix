@@ -7,20 +7,27 @@ let
   } // value);
   mkDevice = id: {
     inherit id;
-    # allowedNetworks = "100.0.0.0/8";
+    allowedNetworks = "100.0.0.0/8";
   };
-  mkFolder = arg: if isString arg then { path = arg; inherit devices; } else arg;
+  mkFolder = arg:
+    if isString arg then {
+      path = arg;
+      inherit devices;
+      ignorePerms = true;
+    } else arg;
   inherit (config.users.users.${username}) home;
 in
 {
   services.syncthing = {
     enable = elem machine-name (attrNames config.services.syncthing.settings.devices);
-    extraFlags = [ "--no-default-folder" ];
+    user = username;
+    inherit (config.users.users.${username}) group;
+    dataDir = "${home}/.syncthing";
     settings = {
       options = {
         listenAddresses = [ "tcp://${constants.${machine-name}.ip}:22000" ];
-        relaysEnabled = false;
-        globalAnnounceEnabled = false;
+        # relaysEnabled = false;
+        # globalAnnounceEnabled = false;
         urAccepted = -1;
       };
       devices = mkDevices {
@@ -29,7 +36,7 @@ in
         keith-xps = mkDevice "TLPHMKL-SMTBB6W-OODSBGW-DXQ36UB-ILKK67U-2ZKPIKI-G4TZNSP-UMWXNAH";
       };
       folders = {
-        notes = mkFolder "${home}/notes";
+        sync = mkFolder "${home}/sync";
       };
     };
   };
