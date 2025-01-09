@@ -5,6 +5,8 @@ rec {
   kwbauson.fqdn = "kwbauson.${kwbauson.domain}";
   kwbauson.domain = "com";
   keith-server.ip = "100.107.6.112";
+  keith-desktop.ip = "100.82.72.117";
+  keith-xps.ip = "100.92.188.49";
   cloudflare-dns.ips = [ "1.1.1.1" "1.0.0.1" ];
   personal-api.port = 13000;
   olivetin.port = 1337;
