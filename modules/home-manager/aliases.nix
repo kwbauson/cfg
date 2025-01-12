@@ -7,11 +7,11 @@
     undup = ''tac "$@" | awk '!x[$0]++' | tac'';
     cfgu = "cd ~/cfg && git fetch && git rebase --autostash $(git tracking)";
     cfgp = "git -C ~/cfg cap";
-    built-as-host = "echo ${machine-name}";
+    machine-name = "echo ${machine-name}";
     nou = "cfgu && noa";
     nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
     noc = "cd ~/cfg && gh workflow run updates.yml";
-    noe = "nvim ~/cfg/hosts/$(built-as-host)/configuration.nix && nos";
+    noe = "nvim ~/cfg/hosts/$(machine-name)/configuration.nix && nos";
     hme = "nvim ~/cfg/home.nix && hms";
     nb = ''pkg=$1 && shift; git -C ~/cfg add --all && nix build $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
     ns = ''pkg=$1 && shift; git -C ~/cfg add --all && nix shell $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g")'';
