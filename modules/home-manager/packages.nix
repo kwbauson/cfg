@@ -39,7 +39,7 @@
         unison-ucm garn cachix;
       inherit (nodePackages) npm-check-updates prettier;
     };
-    inherit nrs switch;
+    inherit nrs switch nixos-port-list;
     inherit nle-cfg imgloc atfj;
   };
   excluded-packages = optionalAttrs isDarwin {

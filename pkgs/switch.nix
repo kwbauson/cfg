@@ -63,7 +63,7 @@ let
   makeBin = name: makeNamedScript name ''
     cd ~/cfg
     git add --all
-    host=$(built-as-host)
+    host=$(machine-name)
     buildArg=.#switch.$host.${name}
     if [[ -z $(git status -s) ]];then
       pinName=$(git rev-parse HEAD)-$host-${name}
