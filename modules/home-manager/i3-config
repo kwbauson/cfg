@@ -50,6 +50,15 @@ bindsym $mod+Control+v exec --no-startup-id xpaste
 bindsym $mod+x exec --no-startup-id runner
 bindsym $mod+n [class="^obsidian$"] scratchpad show
 
+# more programs
+bindsym $mod+Control+p mode "programs"
+mode "programs" {
+  bindsym Escape mode "default"
+  bindsym f exec --no-startup-id firefox; mode "default"
+  bindsym c exec --no-startup-id chromium; mode "default"
+  bindsym n exec --no-startup-id obsidian; mode "default"
+}
+
 # windows
 bindsym $mod+q kill
 bindsym $mod+h focus left
