@@ -88,7 +88,7 @@
   system.stateVersion = mkDefault "21.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = mkDefault config.services.xserver.enable;
-  # FIXME programs.pmount.enable = true;
+  programs.pmount.enable = true;
   services.openssh.enable = true;
   services.openssh.openFirewall = false;
   services.tailscale.enable = mkDefault true;
