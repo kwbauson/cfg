@@ -13,6 +13,7 @@ bar {
   position top
   status_command statusline i3
 }
+focus_wrapping no
 
 # programs
 bindsym $mod+p         exec --no-startup-id termbar

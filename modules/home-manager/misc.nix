@@ -94,6 +94,7 @@
       '';
     };
     direnv.enable = true;
+    direnv.nix-direnv.enable = true;
     fzf = {
       enable = true;
       enableBashIntegration = false;
