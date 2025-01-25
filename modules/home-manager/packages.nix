@@ -29,7 +29,7 @@
     development = {
       inherit
         bat colordiff gron highlight xh icdiff jq watchexec nle
-        tasknix devenv nix-index;
+        tasknix devenv nix-index mk-dev;
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
       python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ]);
     };
