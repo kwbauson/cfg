@@ -1,11 +1,12 @@
 scope: with scope;
 let
-  getMkDevAttrs = arg:
-    if isAttrs arg then arg
-    else if isList arg then { packages = arg; }
-    else if isFunction arg then getMkDevAttrs (arg result)
-    else throw "${pname}: must be called with attrs, list, or function";
-  mkDev =
+  mkDev = arg: fix (result: (
+    if isAttrs arg then mkDevFromAttrs arg
+    else if isList arg then mkDevFromAttrs { packages = arg; }
+    else if isFunction arg then mkDev (arg result)
+    else throw "${pname}: must be called with attrs, list, or function"
+  ));
+  mkDevFromAttrs =
     { name ? "dev-shell"
     , packages ? [ ]
     , meta ? { }
@@ -86,6 +87,6 @@ stdenv.mkDerivation {
   '';
   passthru = {
     inherit pkgs;
-    __functor = _: arg: mkDev (getMkDevAttrs arg);
+    __functor = _: mkDev;
   };
 }
