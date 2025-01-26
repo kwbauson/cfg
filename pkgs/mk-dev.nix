@@ -3,7 +3,7 @@ let
   getMkDevAttrs = arg:
     if isAttrs arg then arg
     else if isList arg then { packages = arg; }
-    else if isFunction arg then getAttrs (arg result)
+    else if isFunction arg then getMkDevAttrs (arg result)
     else throw "${pname}: must be called with attrs, list, or function";
   mkDev =
     { name ? "dev-shell"
