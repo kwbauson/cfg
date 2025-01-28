@@ -40,6 +40,7 @@
     historyFileSize = -1;
     historySize = -1;
     shellAliases = {
+      k = "kubectl";
       l = "ls -lh";
       ll = "l -a";
       ls = "ls --color=auto --group-directories-first";
