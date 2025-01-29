@@ -115,5 +115,4 @@
   services.open-webui.environment.WEBUI_AUTH = "False";
   services.ollama.enable = true;
   services.ollama.host = "[::]";
-  services.ollama.acceleration = false;
 }
