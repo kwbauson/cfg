@@ -55,7 +55,9 @@
         paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local .dir_colors";
       }; "sudo ln -sft /root ${config.home.homeDirectory}/{${concatStringsSep "," paths}}";
       qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
-      zn = ''_dir=~/$(cd ~ && FZF_DEFAULT_COMMAND="fd -c always -H --ignore-file ${../../ignore} -E .git -td | sort -V" fzf) && cd "$_dir"'';
+      zd = ''_dir=~/$(cd ~ && FZF_DEFAULT_COMMAND="fd -c always -H --ignore-file ${../../ignore} -E .git -td | sort -V" fzf) && cd "$_dir"'';
+      zp = ''_dir=$(FZF_DEFAULT_COMMAND="sort ~/.prompt_pwd_history | uniq -c | sed -E 's/^\s+//' | sort -rn | sed -Ee 's/^[0-9]+\s+//' -e \"s#^$HOME#~#\"" fzf) && cd "$(echo "$_dir" | sed "s#^~#$HOME#")"'';
+      dr = "direnv reload";
     };
     initExtra = ''
       [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
@@ -82,6 +84,7 @@
 
           history -a
           tail -n1 ~/.bash_history >> ~/.bash_history-all
+          echo "$PWD" >> ~/.prompt_pwd_history
       }
       PROMPT_COMMAND='_promptcmd'
 
@@ -110,7 +113,7 @@
         fi
       }
       PS1="\$(new_line_ps1)$PS1"
-      bind '\C-j:"\C-uzn\C-m"'
+      bind '\C-j:"\C-uzp\C-m"'
     '' + optionalString (!isNixOS) ''
       export GPG_TTY=$(tty)
 
