@@ -109,10 +109,6 @@
   };
   systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
 
-  services.caddy.subdomains.chat = { role = "user"; port = 8080; };
-  services.open-webui.enable = true;
-  services.open-webui.package = inputs.nixpkgs.legacyPackages.${system}.open-webui;
-  services.open-webui.environment.WEBUI_AUTH = "False";
   services.ollama.enable = true;
   services.ollama.host = "[::]";
 }
