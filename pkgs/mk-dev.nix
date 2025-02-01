@@ -33,7 +33,9 @@ let
       } // attrs.passthru or { };
       buildPhase = attrs.buildPhase or "${coreutils}/bin/ln -s ${result.env} $out";
       shellHook = ''
-        rmdir "$NIX_BUILD_TOP"
+        if [[ $NIX_BUILD_TOP != /tmp && -e $NIX_BUILD_TOP ]];then
+          rmdir "$NIX_BUILD_TOP"
+        fi
         unset NIX_BUILD_CORES NIX_BUILD_TOP NIX_STORE
         unset TEMP TEMPDIR TMP TMPDIR
         ${attrs.shellHook or ""}
