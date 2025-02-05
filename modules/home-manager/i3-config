@@ -58,6 +58,7 @@ mode "programs" {
   bindsym f exec --no-startup-id firefox; mode "default"
   bindsym c exec --no-startup-id chromium; mode "default"
   bindsym n exec --no-startup-id obsidian; mode "default"
+  bindsym d exec --no-startup-id discord; mode "default"
 }
 
 # windows
@@ -84,6 +85,7 @@ mode "resize" {
   bindsym l resize grow width 1 px or 1 ppt
 }
 bindsym $mod+Shift+f floating enable; resize set 2560 px 1440 px; move position center; move up 12 px
+bindsym $mod+Shift+b floating enable; resize set 1366 px 768 px; exec --no-startup-id i3-move-top-right 1366
 bindsym $mod+Control+minus move scratchpad
 bindsym $mod+Control+Shift+underscore scratchpad show
 

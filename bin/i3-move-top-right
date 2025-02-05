@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+offset=$1
+width=$(i3-msg -t get_outputs | jq '.[0].rect.width')
+
+i3-msg move position $(("$width" - "$offset")) px 48 px
