@@ -8,8 +8,14 @@
   boot.loader.timeout = 5;
 
   nix.settings = {
-    extra-substituters = [ "https://blackedge-nix.s3.us-east-2.amazonaws.com" ];
-    extra-trusted-public-keys = [ "blackedge-nix.s3.us-east-2.amazonaws.com:1MDUZHbXmD18H1RJYRo7Fy4prdg+xjyyKm8CUjrOj5w=" ];
+    extra-substituters = [
+      "https://blackedge-nix.s3.us-east-2.amazonaws.com"
+      "https://jacobi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "blackedge-nix.s3.us-east-2.amazonaws.com:1MDUZHbXmD18H1RJYRo7Fy4prdg+xjyyKm8CUjrOj5w="
+      "jacobi.cachix.org-1:JJghCz+ZD2hc9BHO94myjCzf4wS3DeBLKHOz3jCukMU="
+    ];
   };
 
   users = {
