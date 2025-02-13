@@ -15,7 +15,7 @@ jobs:
       - run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
-      - if: github.ref == 'refs/head/main'
+      - if: github.ref == 'refs/heads/main'
         run: |
           cd ./result/builds
           for build in *;do
