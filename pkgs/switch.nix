@@ -66,14 +66,13 @@ let
     host=$(machine-name)
     buildArg=.#switch.$host.${name}
     if [[ -z $(git status -s) ]];then
-      pinName=$(git rev-parse HEAD)-$host-${name}
+      pinName=$host.${name}.$(git rev-parse HEAD)
       storePath=$(curl -s https://app.cachix.org/api/v1/cache/kwbauson/pin | jq -r ".[] | select(.name == \"$pinName\") | .lastRevision.storePath")
       if [[ -n $storePath ]];then
-        buildArg=$storePath
+        buildArg=https://kwbauson.github.io/cfg/pins#$pinName
       fi
     fi
-    builtPath=$(nix build --no-link --print-out-paths "$buildArg")
-    exec "$builtPath"/bin/switch "$@"
+    nix shell "$buildArg" -c switch
   '';
 in
 buildEnv {
