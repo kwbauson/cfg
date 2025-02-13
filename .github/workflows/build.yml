@@ -19,5 +19,5 @@ jobs:
         run: |
           cd ./result/builds
           for build in *;do
-            cachix pin kwbauson $build.$GITHUB_SHA ./$build --keep-days 3
+            cachix pin kwbauson $build.$GITHUB_SHA $(realpath $build) --keep-days 3
           done
