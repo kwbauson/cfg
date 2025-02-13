@@ -1,7 +1,7 @@
 name: pins
 on:
   push:
-    branches: ['pins-test']
+    branches: ['main']
   workflow_dispatch:
 
 permissions:
