@@ -22,9 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v27
-      - run: nix run github:kwbauson/create-pin-refs -- kwbauson
+      - run: mkdir pages && cd pages && nix run github:kwbauson/create-pin-refs -- kwbauson
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: './pins'
+          path: './pages'
       - uses: actions/deploy-pages@v4
