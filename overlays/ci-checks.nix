@@ -16,7 +16,7 @@ let
     ${exe nle}
     ${exe nle} uncache
   '';
-  getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}-${name}" switch.${machine}.${name}) names));
+  getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}.${name}" switch.${machine}.${name}) names));
 in
 {
   makeTest = commands: runCommand "test" { } ''
