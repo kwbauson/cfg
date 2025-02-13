@@ -69,10 +69,10 @@ let
       pinName=$host.${name}.$(git rev-parse HEAD)
       storePath=$(curl -s https://app.cachix.org/api/v1/cache/kwbauson/pin | jq -r ".[] | select(.name == \"$pinName\") | .lastRevision.storePath")
       if [[ -n $storePath ]];then
-        buildArg=https://kwbauson.github.io/cfg/pins#$pinName
+        exec nix shell -f https://kwbauson.github.io/cfg/pins $pinName -c switch
       fi
     fi
-    nix shell "$buildArg" -c switch
+    exec nix shell "$buildArg" -c switch
   '';
 in
 buildEnv {
