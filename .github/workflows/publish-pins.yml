@@ -1,33 +1,20 @@
 name: publish-pins
 on:
-  workflow_run:
-    workflows: ['build']
-    branches: [main]
-    types:
-      - completed
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: false
-
+  workflow_run:
+    workflows: [build]
+    branches: [main]
+    types: [completed]
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+  publish:
+    runs-on: [nix, Linux, X64]
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v30
-      - run: nix run github:kwbauson/create-pin-refs -- kwbauson
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: './pins'
-      - uses: actions/deploy-pages@v4
+      - run: |
+          nix run github:kwbauson/create-pin-refs -- kwbauson
+          git config --global global user.name 'Keith Bauson'
+          git config --global user.email 'kwbauson@gmail.com'
+          git branch --delete --force pins
+          git add --all
+          git commit --message 'publish pins'
+          git push --force
