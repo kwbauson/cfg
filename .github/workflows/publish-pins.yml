@@ -20,4 +20,4 @@ jobs:
           mv pins-dir/* .
           git add --all
           git commit --message 'publish pins'
-          git push --force
+          git push --force --set-upstream origin pins
