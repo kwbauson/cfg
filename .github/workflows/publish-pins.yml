@@ -16,7 +16,8 @@ jobs:
           git config user.email 'kwbauson@gmail.com'
           git branch --delete --force pins || true
           git switch --orphan pins
-          mv pins/* .
+          mv pins pins-dir
+          mv pins-dir/* .
           git add --all
           git commit --message 'publish pins'
           git push --force
