@@ -14,7 +14,6 @@ jobs:
           nix run github:kwbauson/create-pin-refs -- kwbauson
           git config user.name 'Keith Bauson'
           git config user.email 'kwbauson@gmail.com'
-          git branch --delete --force pins || true
           git switch --orphan pins
           mv pins pins-dir
           mv pins-dir/* .
