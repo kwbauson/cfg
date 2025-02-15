@@ -43,4 +43,5 @@
   launchd.daemons = forAttrs' config.services.github-runners (name: _: nameValuePair "github-runner-${name}" {
     path = mkBefore [ "/usr/bin" "/bin" ];
   });
+  ids.gids.nixbld = 30000;
 }
