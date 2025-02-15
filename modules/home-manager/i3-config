@@ -146,6 +146,6 @@ for_window [title="^[Zz]oom$"] floating enable
 for_window [title="^Zoom .* Meetings?$"] floating enable
 for_window [title="^Developer Tools —.*$"] floating enable
 for_window [title="^.*action=.*confno=.*$"] floating enable, no_focus
-for_window [class="^obsidian$"] border normal, move scratchpad
+for_window [class="^obsidian$"] border normal, move scratchpad, scratchpad show
 
 # vim:ft=i3config
