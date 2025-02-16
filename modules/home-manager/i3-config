@@ -61,6 +61,7 @@ mode "programs" {
   bindsym n exec --no-startup-id obsidian; mode "default"
   bindsym d exec --no-startup-id discord; mode "default"
   bindsym t exec --no-startup-id kitty; mode "default"
+  bindsym s exec --no-startup-id steam; mode "default"
 }
 
 # windows
