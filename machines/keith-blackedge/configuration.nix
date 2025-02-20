@@ -1,4 +1,4 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
 {
   imports = [
     ./hardware-configuration.nix
@@ -71,4 +71,24 @@
       auth = [ "none" ];
     }];
   };
+
+  services.caddy =
+    let
+      inherit (config.networking) hostName;
+      hosts = "${hostName}:80, ${hostName}.blackedge.capital:80";
+    in
+    {
+      enable = true;
+      virtualHosts.${hosts} = {
+        logFormat = ''
+          output file ${config.services.caddy.logDir}/access-file-server.log
+        '';
+        extraConfig = ''
+          file_server browse {
+            root /srv/files
+          }
+        '';
+      };
+    };
+  systemd.tmpfiles.rules = [ "d /srv/files 777" ];
 }
