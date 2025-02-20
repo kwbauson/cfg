@@ -4,7 +4,7 @@
     modules.common-system
     machines.${machine-name}.configuration
     machines.${machine-name}.hardware-configuration
-    inputs.home-manager.nixosModule
+    inputs.home-manager.nixosModules.default
   ] ++ attrValues (importDir ./.);
 
   boot = {
