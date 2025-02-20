@@ -3,7 +3,7 @@
   imports = [
     modules.common-system
     machines.${machine-name}.darwin-configuration
-    inputs.home-manager.darwinModule
+    inputs.home-manager.darwinModules.default
   ];
   nix.settings.extra-platforms = [ "x86_64-darwin" ];
   nix.settings.trusted-users = [ username ];
