@@ -21,7 +21,7 @@
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
       inherit
-        ffmpeg mediainfo pavucontrol qtbr breeze-icons signal-desktop
+        ffmpeg mediainfo pavucontrol qtbr signal-desktop
         discord zoom-us dejavu_fonts zathura steamtinkerlaunch
         headsetcontrol arduino remmina networkmanagerapplet obsidian;
       sox = sox.override { enableLame = true; };
@@ -41,11 +41,15 @@
     };
     inherit nrs switch nixos-port-list;
     inherit nle-cfg imgloc atfj;
+    linuxOnly = optionalAttrs isLinux {
+      inherit (kdePackages) breeze-icons;
+      inherit i3-easyfocus;
+    };
   };
   excluded-packages = optionalAttrs isDarwin {
-    inherit i3-easyfocus iproute2 iputils pavucontrol strace dzen2
+    inherit iproute2 iputils pavucontrol strace dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
-    inherit breeze-icons nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
+    inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
     inherit man-pages ncdu bitwarden-cli remmina networkmanagerapplet;
   };
 }
