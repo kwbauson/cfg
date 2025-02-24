@@ -16,7 +16,7 @@
     ${attrIf isGraphical "graphical"} = {
       graphical-core = {
         inherit
-          dzen2 graphviz i3-easyfocus i3lock imagemagick term nsxiv
+          dzen2 graphviz i3lock imagemagick term nsxiv
           xclip xdotool xsel xterm maim w3m;
         inherit (xorg) xdpyinfo xev xfontsel xmodmap;
       };
