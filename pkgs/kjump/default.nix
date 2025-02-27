@@ -8,7 +8,13 @@ let
       bind '"\C-j":"\C-ukj\C-m"'
     '';
     jump = /* bash */ ''
-      _kjump_dir=$(FZF_DEFAULT_COMMAND='kjump list' fzf --scheme=history --height=20)
+      _min_height=20
+      IFS='[;' read -p $'\e[6n' -d R -rs _ _lineno _ _
+      _height=$(($LINES - $_lineno + 1))
+      if [[ $_height -lt $_min_height ]];then
+        _height=$_min_height
+      fi
+      _kjump_dir=$(FZF_DEFAULT_COMMAND='kjump list' fzf --scheme=history --height=$_height)
       if [[ -n $_kjump_dir ]];then
         cd "$(echo "$_kjump_dir" | sed "s#^~#$HOME#")"
       fi
