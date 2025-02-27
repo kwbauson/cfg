@@ -15,6 +15,7 @@ rustPlatform.buildRustPackage {
     wrapProgram $out/bin/uv-migrator --prefix PATH : ${makeBinPath [ uv_050 ]}
   '';
   meta.mainProgram = pname;
+  meta.skipBuild = true;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { tagPrefix = "v"; })
     (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
