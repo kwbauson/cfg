@@ -1,20 +1,21 @@
 scope: with scope;
 rustPlatform.buildRustPackage {
   inherit pname;
-  version = "2025.6.0-unstable-2025-02-03";
+  version = "2025.7.0-unstable-2025-02-25";
   src = fetchFromGitHub {
     owner = "stvnksslr";
     repo = pname;
-    rev = "f68b29d1d4afc4ba1b1d9a25d355d07759d44997";
-    hash = "sha256-E4WoQFeyTK0BzBrDJS/9ob9CCSPzjFkZly6JBtmJBMg=";
+    rev = "56b34a8093b29fbd80e80cd1f6d18211ac41f67b";
+    hash = "sha256-kC1qYvXZVPK+8FMMZ6st0Egr2qSiThQOTgzBnIQ7LwE=";
   };
   useFetchCargoVendor = true;
-  cargoHash = "sha256-c3Kqp/WSCR42PmCdBqGGj+G0soSJcGssNscaBtbiDrA=";
+  cargoHash = "sha256-ITfH2U61cC2h0h4RKcASTfi9oBONjjQNJtDU9M2mK8s=";
   nativeBuildInputs = [ makeWrapper ];
   postInstall = ''
     wrapProgram $out/bin/uv-migrator --prefix PATH : ${makeBinPath [ uv_050 ]}
   '';
   meta.mainProgram = pname;
+  meta.skipBuild = true;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { tagPrefix = "v"; })
     (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })

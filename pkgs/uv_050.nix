@@ -20,4 +20,5 @@ rustPlatform.buildRustPackage rec {
   '';
   doCheck = false;
   meta.mainProgram = "uv";
+  meta.skipBuild = true;
 }
