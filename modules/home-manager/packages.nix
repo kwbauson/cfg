@@ -41,6 +41,7 @@
     };
     inherit nrs switch nixos-port-list;
     inherit nle-cfg imgloc atfj;
+    meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
     linuxOnly = optionalAttrs isLinux {
       inherit (kdePackages) breeze-icons;
       inherit i3-easyfocus;
