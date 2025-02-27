@@ -18,6 +18,7 @@
   "prettier.arrowParens": "avoid",
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
+  "prettier.proseWrap": "always",
   "typescript.preferences.quoteStyle": "single",
   "tsserver.disableAutomaticTypeAcquisition": true,
   "git.addGBlameToVirtualText": true,
