@@ -56,7 +56,7 @@
       }; "sudo ln -sft /root ${config.home.homeDirectory}/{${concatStringsSep "," paths}}";
       qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
       zd = ''_dir=~/$(cd ~ && FZF_DEFAULT_COMMAND="fd -c always -H --ignore-file ${../../ignore} -E .git -td | sort -V" fzf) && cd "$_dir"'';
-      zp = ''_dir=$(FZF_DEFAULT_COMMAND="sort ~/.prompt_pwd_history | uniq -c | sed -E 's/^\s+//' | sort -rn | sed -Ee 's/^[0-9]+\s+//' -e \"s#^$HOME#~#\"" fzf) && cd "$(echo "$_dir" | sed "s#^~#$HOME#")"'';
+      zp = ''_dir=$(FZF_DEFAULT_COMMAND="undup ~/.prompt_pwd_history | sed -E \"s#^$HOME#~#\" | tac" fzf) && cd "$(echo "$_dir" | sed "s#^~#$HOME#")"'';
       dr = "direnv reload";
     };
     initExtra = ''
