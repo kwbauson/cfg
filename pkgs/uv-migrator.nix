@@ -1,15 +1,15 @@
 scope: with scope;
 rustPlatform.buildRustPackage {
   inherit pname;
-  version = "2025.7.0-unstable-2025-02-25";
+  version = "2025.7.1-unstable-2025-02-27";
   src = fetchFromGitHub {
     owner = "stvnksslr";
     repo = pname;
-    rev = "56b34a8093b29fbd80e80cd1f6d18211ac41f67b";
-    hash = "sha256-kC1qYvXZVPK+8FMMZ6st0Egr2qSiThQOTgzBnIQ7LwE=";
+    rev = "f2c414461dc4801a5964e81fd04b04721104c113";
+    hash = "sha256-Xkp/SVIIUfXSUga70M4Vy8rusFG0m2ClTN0ezwvHIU8=";
   };
   useFetchCargoVendor = true;
-  cargoHash = "sha256-ITfH2U61cC2h0h4RKcASTfi9oBONjjQNJtDU9M2mK8s=";
+  cargoHash = "sha256-qHMtVFdRgfpXqivb45JWvmV1WrWPocAos1sI0GQF7so=";
   nativeBuildInputs = [ makeWrapper ];
   postInstall = ''
     wrapProgram $out/bin/uv-migrator --prefix PATH : ${makeBinPath [ uv_050 ]}
