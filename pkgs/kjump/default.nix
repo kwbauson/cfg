@@ -14,7 +14,7 @@ let
       if [[ $_height -lt $_min_height ]];then
         _height=$_min_height
       fi
-      _kjump_dir=$(FZF_DEFAULT_COMMAND='kjump list' fzf --scheme=history --height=$_height)
+      _kjump_dir=$(FZF_DEFAULT_COMMAND='kjump list' fzf --scheme=history --height=$_height --tiebreak=pathname,index)
       if [[ -n $_kjump_dir ]];then
         cd "$(echo "$_kjump_dir" | sed "s#^~#$HOME#")"
       fi
