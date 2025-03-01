@@ -83,7 +83,7 @@
 
           history -a
           tail -n1 ~/.bash_history >> ~/.bash_history-all
-          echo "$PWD" >> ~/.prompt_pwd_history
+          echo "$PWD" >> ~/.kjump_history
       }
       PROMPT_COMMAND='_promptcmd'
 

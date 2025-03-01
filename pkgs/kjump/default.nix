@@ -14,9 +14,19 @@ let
       if [[ $_height -lt $_min_height ]];then
         _height=$_min_height
       fi
-      _kjump_dir=$(FZF_DEFAULT_COMMAND='kjump list' fzf --scheme=history --height=$_height --tiebreak=pathname,index)
-      if [[ -n $_kjump_dir ]];then
-        cd "$(echo "$_kjump_dir" | sed "s#^~#$HOME#")"
+      _kjump_to=$(
+        fzf \
+          --scheme=history \
+          --height=$_height \
+          --bind='ctrl-j:jump,ctrl-e:execute(kjump edit {})+abort,ctrl-o:execute(kjump run {})+abort,start:reload(kjump list)'
+      )
+      if [[ -n $_kjump_to ]];then
+        _kjump_to=$(echo "$_kjump_to" | sed "s#^~#$HOME#")
+        echo "$_kjump_to" >> ~/.kjump_history
+        if [[ ! -d $_kjump_to ]];then
+          _kjump_to=$(dirname "$_kjump_to")
+        fi
+        cd "$_kjump_to"
       fi
     '';
   };
@@ -28,9 +38,46 @@ let
 in
 addMetaAttrs { includePackage = true; } (writeBashBin "kjump" ''
   set -eu
-  case "''${1:-}" in
+  cmd=''${1:-}
+  shift
+  histfile=~/.kjump_history
+  if [[ ! -e $histfile ]];then
+    touch "$histfile"
+  fi
+  pre() {
+    file=$(echo "$1" | sed "s#^~#$HOME#")
+    if [[ ! $file = "/"* ]];then
+      file=$PWD/$file
+    fi
+    echo "$file" >> "$histfile"
+    cd "$(dirname "$file")"
+  }
+  case "$cmd" in
+    clean)
+      wc -l "$histfile"
+      undup "$histfile" | sponge "$histfile"
+      wc -l "$histfile"
+      ;;
     list)
-      undup ~/.prompt_pwd_history | grep -vFx "$PWD" | sed -E "s#^$HOME#~#" | tac
+      (
+        run_fd() {
+          fd --hidden --ignore-file ~/cfg/ignore --exclude .git "$@"
+        }
+        if [[ $PWD != $HOME ]];then
+          run_fd
+        fi
+        cd ~
+        tac "$histfile"
+        run_fd --absolute-path
+      ) | awk '!x[$0]++' | grep -vFx "$PWD" | sed -E "s#^$HOME#~#"
+      ;;
+    edit)
+      pre "$1"
+      exec $EDITOR "$file"
+      ;;
+    run)
+      pre "$1"
+      exec rifle "$file"
       ;;
     ${concatMapAttrsStringSep "\n" echoCase echos}
     *)
