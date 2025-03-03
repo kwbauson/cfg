@@ -66,10 +66,13 @@ let
     host=$(machine-name)
     buildArg=.#switch.$host.${name}
     if [[ -z $(git status -s) ]];then
-      pinName=$host.${name}.$(git rev-parse HEAD)
-      storePath=$(curl -s https://app.cachix.org/api/v1/cache/kwbauson/pin | jq -r ".[] | select(.name == \"$pinName\") | .lastRevision.storePath")
-      if [[ -n $storePath ]];then
-        exec nix --refresh shell --impure github:kwbauson/cfg/pins#$pinName -c switch
+      pinAttr=$(git rev-parse HEAD)
+      pinLoc=$host.${name}
+      pinName=$pinLoc.$pinAttr
+      pinsRef='.?ref=origin/pins'
+      hasAttr=$(nix eval "$pinsRef#$pinLoc" --apply "builtins.hasAttr \"$pinAttr\"")
+      if [[ $hasAttr = true ]];then
+        exec nix shell --impure "$pinsRef#$pinName" -c switch
       fi
     fi
     exec nix shell "$buildArg" -c switch
