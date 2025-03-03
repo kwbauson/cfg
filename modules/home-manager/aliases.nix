@@ -2,7 +2,7 @@
 {
   included-packages = alias {
     nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
-    nixpkgs-path = "echo ${pkgs.path}";
+    nixpkgs-path = "echo ${nixpkgsPath}";
     nixpkgs-branch = "echo ${nixpkgs-branch}";
     undup = ''tac "$@" | awk '!x[$0]++' | tac'';
     cfgu = "cd ~/cfg && git fetch && git rebase --autostash $(git tracking)";

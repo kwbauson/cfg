@@ -107,6 +107,7 @@ builtins // pkgs.lib // {
       chmod +x $out/bin/${pname}
     '';
   };
+  nixpkgsPath = toString pkgs.path;
   importNixpkgs = args:
     let
       helper =
@@ -115,7 +116,7 @@ builtins // pkgs.lib // {
         , overlays ? [ ]
         , rev ? null
         , sha256 ? null
-        , path ? pkgs.path
+        , path ? nixpkgsPath
         , owner ? "NixOS"
         , repo ? "nixpkgs"
         , src ? if sha256 != null then fetchFromGitHub { inherit owner repo rev sha256; }

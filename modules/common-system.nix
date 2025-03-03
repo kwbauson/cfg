@@ -4,7 +4,7 @@
     modules.args
     modules.auto-update
   ];
-  environment.etc."nixpkgs-path".source = pkgs.path;
+  environment.etc."nixpkgs-path".source = nixpkgsPath;
   nix.package = lix;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings = {
