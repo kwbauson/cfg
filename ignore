@@ -7,6 +7,7 @@
 **/.parcel-cache
 **/.sass-cache
 **/.terraform
+**/.terraform.d
 **/Application Cache
 **/Battle.net
 **/Cache
@@ -23,6 +24,7 @@
 **/Stats
 **/Steam
 **/__pycache__
+**/.mypy_cache
 **/bak
 **/bower_components
 **/cache
@@ -45,4 +47,18 @@
 **/.pub-cache
 **/.var
 **/.wine
+**/.idris
+**/.compose-cache
+**/.nimble
+**/.sbt
+**/.zoom
+**/.cursor
+**/.steam
+**/.devenv
+**/.direnv
+**/.continue
+**/.nuget
+**/.syncthing
+**/.itch
+**/.local/share/virtualenv
 **/src/nixpkgs

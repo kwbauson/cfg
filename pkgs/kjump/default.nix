@@ -69,7 +69,7 @@ addMetaAttrs { includePackage = true; } (writeBashBin "kjump" ''
         cd ~
         tac "$histfile"
         run_fd --absolute-path
-      ) | awk '!x[$0]++' | grep -vFx "$PWD" | sed -E "s#^$HOME#~#"
+      ) | awk '!x[$0]++' | grep -vFx "$PWD/" | sed -E "s#^$HOME#~#"
       ;;
     edit)
       pre "$1"
