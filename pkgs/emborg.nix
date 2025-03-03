@@ -10,5 +10,5 @@ scope: with scope;
   doCheck = !isDarwin;
   patches = [ ];
   propagatedBuildInputs = attrs.propagatedBuildInputs ++ [ prev.pythonModule.pkgs.nestedtext ];
-  meta = attrs.meta // { skipUpdate = true; };
+  meta = attrs.meta // { skipUpdate = true; includePackage = true; };
 })

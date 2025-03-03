@@ -11,7 +11,7 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
-        nixos-install-tools better-comma dogdns dasel clip emborg terraform;
+        nixos-install-tools better-comma dogdns dasel clip terraform;
     };
     ${attrIf isGraphical "graphical"} = {
       graphical-core = {
@@ -27,7 +27,7 @@
       sox = sox.override { enableLame = true; };
     };
     development = {
-      inherit bat colordiff gron highlight xh icdiff jq watchexec nle nix-index;
+      inherit bat colordiff gron highlight xh icdiff jq watchexec nix-index;
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
       python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ]);
     };

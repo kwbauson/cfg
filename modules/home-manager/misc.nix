@@ -153,17 +153,23 @@
       videos = "$HOME";
     };
     configFile = {
-      "ranger/rc.conf".text = ''
-        ${readFile "${ranger}/share/doc/ranger/config/rc.conf"}
+      "ranger/rc.conf".source = runCommand "ranger-rc.conf" { } ''
+        cat ${ranger}/share/doc/ranger/config/rc.conf > $out
+        cat >> $out <<EOF
         set vcs_aware true
         map D delete
         map Q quit!
         map ! shell bash
+        EOF
       '';
-      "ranger/rifle.conf".text = replaceStrings
-        [ "xdg-open --" "has sxiv" "sxiv --" ]
-        [ "xdg-open" "has nsxiv" "nsxiv -a --" ]
-        (readFile "${ranger}/share/doc/ranger/config/rifle.conf");
+      "ranger/rifle.conf".source = runCommand "ranger-rifle.conf" { } ''
+        cat ${ranger}/share/doc/ranger/config/rifle.conf > $out
+        sed -i \
+          -e 's/xdg-open --/xdg-open/' \
+          -e 's/has sxiv/has nsxiv/' \
+          -e 's/sxiv --/nsxiv -a --/' \
+          $out
+      '';
       "ranger/plugins/ranger_devicons".source = ranger_devicons;
       "emborg/settings".text = ''
         configurations = "default"
