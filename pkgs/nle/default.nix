@@ -4,8 +4,8 @@ let
     { path, pkgs ? nixpkgs, source ? null }:
     import ./nix-local-env.nix { inherit pkgs path source; };
 in
-(build { path = writeTextDir "bin/nle" (readFile ./nle); }).overrideAttrs (_: {
+(build { path = ./.; }).overrideAttrs (_: {
   name = "nle";
   passthru = { inherit build; };
-  passthru.tests.default = nle.build { path = writeTextDir "meme" ''meme''; };
+
 })

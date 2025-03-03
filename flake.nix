@@ -6,6 +6,8 @@
     flake-compat.url = "github:edolstra/flake-compat";
     flake-compat.flake = false;
     nixos-hardware.flake = true;
+    jacobi-nix.url = "github:jpetrucciani/nix";
+    jacobi-nix.flake = false;
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };

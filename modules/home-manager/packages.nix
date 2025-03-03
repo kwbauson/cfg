@@ -27,7 +27,7 @@
       sox = sox.override { enableLame = true; };
     };
     development = {
-      inherit bat colordiff gron highlight xh icdiff jq watchexec nle nix-index;
+      inherit bat colordiff gron highlight xh icdiff jq watchexec nix-index;
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
       python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ]);
     };

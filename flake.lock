@@ -35,6 +35,22 @@
         "type": "indirect"
       }
     },
+    "jacobi-nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740960657,
+        "narHash": "sha256-IRLRCy1iGTPeIHFg7GdchLteK2wePcy3E9KtZr3p3Iw=",
+        "owner": "jpetrucciani",
+        "repo": "nix",
+        "rev": "1b91e3c67a7a25a010001aa233bedebd6eda43f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jpetrucciani",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -87,6 +103,7 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "home-manager": "home-manager",
+        "jacobi-nix": "jacobi-nix",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs"
