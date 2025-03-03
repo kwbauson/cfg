@@ -7,5 +7,4 @@ in
 (build { path = ./.; }).overrideAttrs (_: {
   name = "nle";
   passthru = { inherit build; };
-
 })
