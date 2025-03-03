@@ -87,6 +87,7 @@ stdenv.mkDerivation {
     cp "$scriptPath" $out/bin/${pname}
     chmod +x $out/bin/${pname}
   '';
+  meta.includePackage = true;
   passthru = {
     inherit pkgs;
     __functor = _: mkDev;

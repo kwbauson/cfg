@@ -64,4 +64,5 @@ stdenv.mkDerivation {
     chmod +x $out/bin/tasknix
     ln -s $out/bin/{tasknix,t}
   '';
+  meta.includePackage = true;
 }

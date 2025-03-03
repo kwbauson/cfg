@@ -82,4 +82,5 @@ buildEnv {
   name = pname;
   paths = map makeBin (attrNames scripts.${head (attrNames scripts)}.switchers);
   passthru = scripts // { inherit scripts; };
+  meta.includePackage = true;
 }

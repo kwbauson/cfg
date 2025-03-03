@@ -17,4 +17,5 @@ stdenv.mkDerivation {
     installShellCompletion --bash ${pname}.bash
     ''}
   '';
+  meta.includePackage = true;
 }

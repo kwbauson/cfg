@@ -1,4 +1,5 @@
-scope: with scope; (
+scope: with scope;
+addMetaAttrs { includePackage = true; } ((
   writeBashBin pname ''
     nix eval --impure --raw --expr \
       "with import ${self-flake} {}; ${pname}.get nixosConfigurations.$(machine-name).config" 2>&1 |
@@ -38,4 +39,4 @@ scope: with scope; (
       ${str}
     '')
   ];
-})
+}))

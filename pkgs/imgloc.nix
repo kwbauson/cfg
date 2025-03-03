@@ -1,4 +1,5 @@
-scope: with scope; writePython3Bin pname { libraries = [ python3.pkgs.opencv4 ]; } ''
+scope: with scope;
+addMetaAttrs { includePackage = true; } (writePython3Bin pname { libraries = [ python3.pkgs.opencv4 ]; } ''
   import cv2
   import sys
   part_path, full_path = sys.argv[1:3]
@@ -13,4 +14,4 @@ scope: with scope; writePython3Bin pname { libraries = [ python3.pkgs.opencv4 ];
   else:
       print("x=")
       print("y=")
-''
+'')

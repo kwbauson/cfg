@@ -27,20 +27,17 @@
       sox = sox.override { enableLame = true; };
     };
     development = {
-      inherit
-        bat colordiff gron highlight xh icdiff jq watchexec nle
-        tasknix devenv nix-index mk-dev;
+      inherit bat colordiff gron highlight xh icdiff jq watchexec nle nix-index;
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
       python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ]);
     };
     development-extra = optionalAttrs (!isMinimal) {
       inherit
         yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
-        unison-ucm garn cachix;
+        unison-ucm cachix;
       inherit (nodePackages) npm-check-updates prettier;
     };
-    inherit nrs switch nixos-port-list;
-    inherit nle-cfg imgloc atfj;
+    inherit nle-cfg;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
     linuxOnly = optionalAttrs isLinux {
       inherit (kdePackages) breeze-icons;
