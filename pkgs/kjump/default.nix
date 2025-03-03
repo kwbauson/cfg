@@ -55,7 +55,15 @@ addMetaAttrs { includePackage = true; } (writeBashBin "kjump" ''
   case "$cmd" in
     clean)
       wc -l "$histfile"
-      undup "$histfile" | sponge "$histfile"
+      undup "$histfile" | while read entry;do
+        if [[ -e $entry ]];then
+          if [[ -d $entry && ! $entry = *"/" ]];then
+            echo "$entry"/
+          else
+            echo "$entry"
+          fi
+        fi
+      done | undup | sponge "$histfile"
       wc -l "$histfile"
       ;;
     list)
