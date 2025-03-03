@@ -57,7 +57,7 @@ mode "programs" {
   bindsym Escape mode "default"
   bindsym f exec --no-startup-id firefox; mode "default"
   bindsym c exec --no-startup-id chromium; mode "default"
-  bindsym shift+c exec --no-startup-id chromium --proxy-server=socks5://cy1-kbauson-01:1080; mode "default"
+  bindsym shift+c exec --no-startup-id chromium --user-data-dir="$HOME/.config/chromium/work" --proxy-server=socks5://cy1-kbauson-01:1080; mode "default"
   bindsym n exec --no-startup-id obsidian; mode "default"
   bindsym d exec --no-startup-id discord; mode "default"
   bindsym t exec --no-startup-id kitty; mode "default"
