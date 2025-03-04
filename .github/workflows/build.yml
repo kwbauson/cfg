@@ -20,5 +20,5 @@ jobs:
           cachix pin kwbauson 'checks-${{ matrix.system.os }}-${{ matrix.system.arch }}' ./result --keep-revisions 1
           cd ./result/builds
           for build in *;do
-            cachix pin kwbauson $build.$GITHUB_SHA $(realpath $build) --keep-days 3
+            cachix pin kwbauson $build.$GITHUB_SHA $(realpath $build) --keep-days 1
           done
