@@ -30,6 +30,7 @@
     firewall.allowedTCPPorts = with constants; [ temp-http.port config.services.palworld.port ] ++ valheim.ports;
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
+  services._3proxy.enable = true;
 
   services.valheim = {
     enable = true;
