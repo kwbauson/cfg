@@ -5,7 +5,7 @@ let
       kj() {
         eval "$(kjump jump)"
       }
-      bind '"\C-j":"\C-ukj\C-m"'
+      bind -m vi-insert '"\C-j":"\e0Ckj\C-m"'
     '';
     jump = /* bash */ ''
       _min_height=20
@@ -27,6 +27,8 @@ let
           _kjump_to=$(dirname "$_kjump_to")
         fi
         cd "$_kjump_to"
+      else
+        false
       fi
     '';
   };
