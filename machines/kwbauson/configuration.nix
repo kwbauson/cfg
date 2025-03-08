@@ -15,6 +15,7 @@
     firewall.allowedTCPPorts = [ http.port https.port ];
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
+  services._3proxy.enable = true;
 
   services.caddy = with constants; {
     enable = true;

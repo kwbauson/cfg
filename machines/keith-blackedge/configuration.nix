@@ -64,13 +64,7 @@
 
   services.auto-update.enable = true;
 
-  services._3proxy = {
-    enable = true;
-    services = [{
-      type = "socks";
-      auth = [ "none" ];
-    }];
-  };
+  services._3proxy.enable = true;
 
   services.caddy =
     let

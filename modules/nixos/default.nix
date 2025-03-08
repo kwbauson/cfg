@@ -123,4 +123,10 @@
     { input = [ "KEY_LEFTALT" ]; output = [ "KEY_ESC" ]; }
     { input = [ "KEY_COMPOSE" ]; output = [ "KEY_RIGHTMETA" ]; }
   ];
+
+  services._3proxy.services = [{
+    type = "socks";
+    auth = [ "iponly" ];
+    bindAddress = constants.${machine-name}.tailscale-ip;
+  }];
 }
