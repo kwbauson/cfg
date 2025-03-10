@@ -1,0 +1,40 @@
+{ storePath }:
+{
+  "kwbauson"."nos"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/jj9alsq7smx2rrmj40wcizq8qbx9hrh3-switch;
+  "kwbauson"."nob"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/prwlndiixkq2adlwihyxxq2df8lnb8mh-switch;
+  "kwbauson"."noa"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/chv0y4kvpxq2mpzkqb8p1alh4capn71s-kwbauson-noa;
+  "keith-xps"."nos"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/a8psrd9d2v1asbsa79hix0mqwcw0z5ng-switch;
+  "keith-xps"."nob"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/9cffhjbll6b1ckb4ckr3zx91hk4znin8-switch;
+  "keith-xps"."noa"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/nqn25wy080md9cija2c7fchbih9fbkal-keith-xps-noa;
+  "keith-server"."nos"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/frnvnl209mai66s63xv059z9nhigas3d-switch;
+  "keith-server"."nob"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/36z8dcj67i0abcncawmy9d9dzfrgkkhp-switch;
+  "keith-server"."noa"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/m6s165s5ci5w1y27zd7dx2xdmpmmzqhp-keith-server-noa;
+  "keith-desktop"."nos"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/jg8qpfdk6h7qyplzizx5y2khwa6qchvi-switch;
+  "keith-desktop"."nob"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/4ndn066kwkdibfr14gi7gj13d4qqcfhg-switch;
+  "keith-desktop"."noa"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/ipx6v6dl2kh9hwshssalhainqfbd06ys-keith-desktop-noa;
+  "keith-blackedge"."nos"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/vp5zcy1lgf57m0gzskxrhq00hngnv2vh-switch;
+  "keith-blackedge"."nob"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/vwxr98ni26zsy0y01vg12iv9vw1hg2fg-switch;
+  "keith-blackedge"."noa"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/xijc5gkpw15f004is1wv3n4vsll7pp9k-keith-blackedge-noa;
+  "checks-Linux-X64" = storePath /nix/store/ip07jwna7vb5k5b0zyrgj9dlxxinq1pm-ci-checks-env;
+  "readlee-mac-m1"."noa"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/hv6r3y8jvs3yvgxzfnlsq2xijcr4zpbd-readlee-mac-m1-noa;
+  "readlee-mac-m1"."nds"."240bd73e50592f899f91bfef4c970a27201bdb0e" = storePath /nix/store/w3lbfirlla3sda06h1p9z0h87l6rv5xr-switch;
+  "checks-macOS-ARM64" = storePath /nix/store/zfnlmszxayw6m1r25vjfks3awfgnbja6-ci-checks-env;
+  "kwbauson"."nos"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/07pypyx85jpv3nhqvbg4gpbdv7jcvrq6-switch;
+  "kwbauson"."nob"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/ibjnmh2rczznghfrb7mk4sv0jfi8v67i-switch;
+  "kwbauson"."noa"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/0vcb1gx107z6pqscyj7gazh3m08w305k-kwbauson-noa;
+  "keith-xps"."nos"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/qsmb2v4m95d0pw6wn770wpyazwjfdrbj-switch;
+  "keith-xps"."nob"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/v7ss5my5g5h4ng2fv9g52868qri8ivxc-switch;
+  "keith-xps"."noa"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/yd8wd59hl3zr4381fgs1zrf5cphg99hl-keith-xps-noa;
+  "keith-server"."nos"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/a3c8l03dcq4zq0j6n995wh16yqvkbbdn-switch;
+  "keith-server"."nob"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/jyn86drdgi8syc48rmmmbwajq0g6rscp-switch;
+  "keith-server"."noa"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/h84y26yaw5r10d15dqr8kjxj4227cqxs-keith-server-noa;
+  "keith-desktop"."nos"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/d1a2jyhx3208h19b41jm54d5138rygys-switch;
+  "keith-desktop"."nob"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/lwzbzs5dgbskrj6j4s47bhl2h41bbk5j-switch;
+  "keith-desktop"."noa"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/k2mms395vmn2ix7l5750hlc2kksy64hi-keith-desktop-noa;
+  "keith-blackedge"."nos"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/dm8x9lj8mhvgziwg9cznk030f50v5jd1-switch;
+  "keith-blackedge"."nob"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/sw32wjqlpkq7rd3mns94qwww1mxznssm-switch;
+  "keith-blackedge"."noa"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/4mnx8zy231ca6gvjifqbi5x8apaif2g0-keith-blackedge-noa;
+  "readlee-mac-m1"."noa"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/29xwq5p4kmy0g7byjwp3fq0dzkz0ayfs-readlee-mac-m1-noa;
+  "readlee-mac-m1"."nds"."281fe86cf5c7b1529d3f832841ed02cdb75b6f22" = storePath /nix/store/j8pd7aprjfy23zzbnjii41v5yb9qq3h2-switch;
+  "test" = storePath /nix/store/x749zp0ajc8fmvg1rkz0csdyy5wsj8sq-test;
+}
