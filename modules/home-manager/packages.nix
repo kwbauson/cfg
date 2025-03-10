@@ -45,7 +45,6 @@
     };
   };
   excluded-packages = optionalAttrs isDarwin {
-    inherit obsidian;
     inherit iproute2 iputils pavucontrol strace dzen2
       maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
     inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
