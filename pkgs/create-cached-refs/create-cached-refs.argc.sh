@@ -22,16 +22,6 @@ generate() {
   ) > "$out/pins/$argc_tag.nix"
 }
 
-# @cmd Pack pins into a tarball that nix can read over http
-# @arg output=pins.tar.gz
-# @arg paths=./result Directory of paths to be pinned
-pack() {
-  out=$(mktemp -d)
-  generate "$out" "$2"
-  tar czf "$1" "$out"
-  rm -r "$out"
-}
-
 # @cmd
 # @arg flakeref!
 # @arg package
@@ -39,7 +29,10 @@ run() {
   nix $refresh
 }
 
-
+# @cmd
+# @arg paths=./result
+push() {
+}
 
 set -euo pipefail
 
