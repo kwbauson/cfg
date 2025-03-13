@@ -51,7 +51,7 @@ push() {
 
     git add --all
     commit() {
-      git commit --message cached-refs --author "$argc_name <$argc_email>" "$@"
+      git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
     }
     commit --amend || commit
     git push --force-with-lease --set-upstream origin cached
