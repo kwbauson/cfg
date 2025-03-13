@@ -51,10 +51,10 @@ push() {
     git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
 
-    touch "$argc_tag" # TODO
+    date > "$argc_tag" # TODO
 
-    git config user.name "$argc_name"
-    git config user.email "$argc_email"
+    git config set user.name "$argc_name"
+    git config set user.email "$argc_email"
     git add --all
     git commit --amend --message cached-refs || git commit --message cached-refs
     git push --force-with-lease --set-upstream origin cached
