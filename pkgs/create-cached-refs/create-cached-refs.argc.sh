@@ -51,7 +51,7 @@ push() {
     git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
 
-    "$0" gen . "$root/$paths" --tag "$argc_tag"
+    "$0" gen . "$root/$argc_paths" --tag "$argc_tag"
 
     git add --all
     commit() {
