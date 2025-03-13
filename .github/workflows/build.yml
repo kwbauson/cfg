@@ -10,15 +10,13 @@ jobs:
     runs-on: [nix, '${{ matrix.system.os }}', '${{ matrix.system.arch }}']
     steps:
       - uses: actions/checkout@v4
-      - run: nix -L build .#checks.default
+      - run: nix -L build .#checks
       - run: ./result/bin/checks
       - run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
-      - if: github.ref == 'refs/heads/main'
+      - if: github.ref == 'refs/heads/create-cached-refs'
         run: |
-          cachix pin kwbauson 'checks-${{ matrix.system.os }}-${{ matrix.system.arch }}' ./result --keep-revisions 1
-          cd ./result/builds
-          for build in *;do
-            cachix pin kwbauson $build.$GITHUB_SHA $(realpath $build) --keep-days 1
-          done
+          tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
+          cachix pin kwbauson "build-$tag" ./result --keep-revisions 1
+          nix run .#create-cached-refs -- push ./result/cached-paths --tag "$tag"

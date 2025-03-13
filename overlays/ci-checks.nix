@@ -46,7 +46,7 @@ in
       includeSystem = false;
       includeFlakeStoreHash = true;
     };
-  checks.default = runCommand "checks" { } ''
+  checks = runCommand "checks" { } ''
     mkdir -p $out/bin
     ln -s ${checks-script} $out/bin/checks
     ln -s ${final.cached-paths} $out/cached-paths

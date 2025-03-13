@@ -31,7 +31,21 @@ run() {
 
 # @cmd
 # @arg paths=./result
+# @option --tag=
 push() {
+  echo 'TODO push to git'
+  echo "paths: $argc_paths"
+  echo "tag: $argc_tag"
+
+  # nix run github:kwbauson/create-pin-refs -- kwbauson
+  # git config user.name 'Keith Bauson'
+  # git config user.email 'kwbauson@gmail.com'
+  # git switch --orphan pins
+  # mv pins pins-dir
+  # mv pins-dir/* .
+  # git add --all
+  # git commit --message 'publish pins'
+  # git push --force --set-upstream origin pins
 }
 
 set -euo pipefail
