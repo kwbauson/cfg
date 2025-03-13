@@ -32,20 +32,28 @@ run() {
 # @cmd
 # @arg paths=./result
 # @option --tag=
+# @option --name=
+# @option --email=
 push() {
   echo 'TODO push to git'
   echo "paths: $argc_paths"
   echo "tag: $argc_tag"
+  echo "name: $argc_name"
+  echo "email: $argc_email"
 
-  # nix run github:kwbauson/create-pin-refs -- kwbauson
-  # git config user.name 'Keith Bauson'
-  # git config user.email 'kwbauson@gmail.com'
-  # git switch --orphan pins
-  # mv pins pins-dir
-  # mv pins-dir/* .
-  # git add --all
-  # git commit --message 'publish pins'
-  # git push --force --set-upstream origin pins
+  g() {
+    git -c user.name="$argc_name" -c user.email="$argc_email" "$@"
+  }
+
+  try_push() {
+    g fetch origin cached:cached || true
+    g switch -C cached
+    g add --all
+    g commit --amend --message cached-refs
+    g push --force-with-lease --set-upstream origin cached
+  }
+
+  try_push || (sleep 5 && try_push)
 }
 
 set -euo pipefail
