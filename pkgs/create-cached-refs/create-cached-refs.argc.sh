@@ -53,7 +53,7 @@ push() {
     commit() {
       git commit --message cached-refs --author "$argc_name <$argc_email>" "$@"
     }
-    commit --amend || commit
+    commit --amend --reset-author || commit
     git push --force-with-lease --set-upstream origin cached
     cd "$root"
     git worktree remove "$worktree"
