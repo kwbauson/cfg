@@ -32,8 +32,8 @@ run() {
 # @cmd
 # @arg paths=./result
 # @option --tag=
-# @option --name=
-# @option --email=
+# @option --name=create-cached-refs
+# @option --email=noreply@example.com
 push() {
   root=$PWD
 
