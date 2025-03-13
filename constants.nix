@@ -7,7 +7,6 @@ rec {
   kwbauson.domain = "com";
   keith-server.ip = "100.107.6.112";
   keith-server.tailscale-ip = keith-server.ip;
-  keith-blackedge.tailscale-ip = "100.93.99.84";
   cloudflare-dns.ips = [ "1.1.1.1" "1.0.0.1" ];
   personal-api.port = 13000;
   olivetin.port = 1337;
