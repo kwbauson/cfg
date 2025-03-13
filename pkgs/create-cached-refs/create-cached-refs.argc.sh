@@ -1,5 +1,5 @@
 # @cmd Generate pin nix files
-# @alias g gen
+# @alias g
 # @arg out! Output location
 # @arg paths=./result Directory of paths to be pinned
 # @option --tag=default Name for generated paths file
@@ -47,11 +47,12 @@ push() {
     cd "$root"
     worktree=/tmp/create-cached-refs/cached
     rm -rf "$worktree"
+    git worktree prune
     git fetch origin cached:cached || true
     git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
 
-    "$0" gen . "$root/$argc_paths" --tag "$argc_tag"
+    "$0" generate . "$root/$argc_paths" --tag "$argc_tag"
 
     git add --all
     commit() {
