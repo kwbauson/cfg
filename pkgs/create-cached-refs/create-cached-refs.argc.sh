@@ -50,6 +50,7 @@ push() {
   try_push() {
     cd "$root"
     worktree=/tmp/create-cached-refs/cached
+    rm -rf "$worktree"
     g fetch origin cached:cached || true
     g worktree add "$worktree" --orphan || g worktree add "$worktree"
     cd "$worktree"
