@@ -47,7 +47,7 @@ push() {
 
   try_push() {
     g fetch origin cached:cached || true
-    g switch -C cached
+    g switch cached || g switch --orphan cached
     g add --all
     g commit --amend --message cached-refs
     g push --force-with-lease --set-upstream origin cached
