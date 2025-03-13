@@ -42,7 +42,7 @@ push() {
     worktree=/tmp/create-cached-refs/cached
     rm -rf "$worktree"
     git worktree prune
-    # git fetch --prune origin # FIXME
+    git fetch --prune origin
     git fetch origin cached:cached || true
     git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
