@@ -59,7 +59,7 @@ push() {
     git worktree remove "$worktree"
   }
 
-  try_push || (sleep 5 && try_push)
+  try_push || sleep 5 && try_push
 }
 
 set -euo pipefail
