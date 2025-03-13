@@ -53,10 +53,11 @@ push() {
 
     date > "$argc_tag" # TODO
 
-    git config set user.name "$argc_name"
-    git config set user.email "$argc_email"
     git add --all
-    git commit --amend --message cached-refs || git commit --message cached-refs
+    commit() {
+      git commit --message cached-refs --author "$argc_name <$argc_email>" "$@"
+    }
+    commit --amend || commit
     git push --force-with-lease --set-upstream origin cached
     cd "$root"
     git worktree remove "$worktree"
