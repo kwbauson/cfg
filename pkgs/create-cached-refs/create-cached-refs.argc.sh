@@ -1,13 +1,13 @@
 # @cmd Generate pin nix files
 # @alias g gen
-# @arg out! Output pins location
+# @arg out! Output location
 # @arg paths=./result Directory of paths to be pinned
-# @option --tag=default Optional suffix for generated pins file
+# @option --tag=default Name for generated paths file
 generate() {
   out=$PWD/$argc_out
   paths=$argc_paths
 
-  mkdir -p "$out"/pins
+  mkdir -p "$out"/paths
   cp --no-preserve=mode $TEMPLATE_FLAKE "$out"/flake.nix
   cp --no-preserve=mode $TEMPLATE_DEFAULT "$out"/default.nix
 
@@ -19,7 +19,7 @@ generate() {
       echo "  $attrName = storePath $(realpath "$path");"
     done
     echo "}"
-  ) > "$out/pins/$argc_tag.nix"
+  ) > "$out/paths/$argc_tag.nix"
 }
 
 # @cmd
@@ -51,7 +51,7 @@ push() {
     git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
 
-    date > "$argc_tag" # TODO
+    "$0" gen . "$root/$paths" --tag "$argc_tag"
 
     git add --all
     commit() {
