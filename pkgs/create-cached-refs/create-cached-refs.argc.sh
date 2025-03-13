@@ -41,27 +41,25 @@ push() {
   echo "name: $argc_name"
   echo "email: $argc_email"
 
-  g() {
-    git -c user.name="$argc_name" -c user.email="$argc_email" "$@"
-  }
-
   root=$PWD
 
   try_push() {
     cd "$root"
     worktree=/tmp/create-cached-refs/cached
     rm -rf "$worktree"
-    g fetch origin cached:cached || true
-    g worktree add "$worktree" --orphan || g worktree add "$worktree"
+    git fetch origin cached:cached || true
+    git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
 
-    touch a # TODO
+    touch "$argc_tag" # TODO
 
-    g add --all
-    g commit --amend --message cached-refs || g commit --message cached-refs
-    g push --force-with-lease --set-upstream origin cached
+    git config user.name "$argc_name"
+    git config user.email "$argc_email"
+    git add --all
+    git commit --amend --message cached-refs || git commit --message cached-refs
+    git push --force-with-lease --set-upstream origin cached
     cd "$root"
-    g worktree remove "$worktree"
+    git worktree remove "$worktree"
   }
 
   try_push || (sleep 5 && try_push)
