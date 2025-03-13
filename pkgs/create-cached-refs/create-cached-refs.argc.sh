@@ -35,12 +35,6 @@ run() {
 # @option --name=
 # @option --email=
 push() {
-  echo 'TODO push to git'
-  echo "paths: $argc_paths"
-  echo "tag: $argc_tag"
-  echo "name: $argc_name"
-  echo "email: $argc_email"
-
   root=$PWD
 
   try_push() {
@@ -48,7 +42,7 @@ push() {
     worktree=/tmp/create-cached-refs/cached
     rm -rf "$worktree"
     git worktree prune
-    git fetch --prune
+    # git fetch --prune origin # FIXME
     git fetch origin cached:cached || true
     git worktree add "$worktree" --orphan || git worktree add "$worktree"
     cd "$worktree"
