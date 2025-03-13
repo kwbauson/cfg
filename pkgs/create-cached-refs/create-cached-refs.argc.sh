@@ -58,7 +58,7 @@ push() {
     touch a # TODO
 
     g add --all
-    g commit --amend --message cached-refs || git commit --message cached-refs
+    g commit --amend --message cached-refs || g commit --message cached-refs
     g push --force-with-lease --set-upstream origin cached
     cd "$root"
     g worktree remove "$worktree"
