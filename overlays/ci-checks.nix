@@ -43,8 +43,7 @@ in
     in
     create-cached-refs.mkRefPaths {
       inherit paths flake;
-      includeSystem = false;
-      includeFlakeStoreHash = true;
+      appendSystem = false;
     };
   checks = runCommand "checks" { } ''
     mkdir -p $out/bin

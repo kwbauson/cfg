@@ -1,4 +1,4 @@
-# @cmd Generate pin nix files
+# @cmd Generate nix files for cached paths
 # @alias g
 # @arg out! Output location
 # @arg paths=./result Directory of paths to be pinned
@@ -13,23 +13,20 @@ generate() {
 
   cd "$paths"
   (
-    echo "{ storePath }:"
+    echo "{ mkPath }:"
     for path in *;do
-      attrName=$(echo "$path" | sed -e 's/^/"/' -e 's/\./"."/g' -e 's/$/"/')
-      echo "  $attrName = storePath $(realpath "$path");"
+      if [[ $path = __sourceHash ]];then
+        echo "  $path = $(< $path);"
+      else
+        attrName=$(echo "$path" | sed -e 's/^/"/' -e 's/\./"."/g' -e 's/$/"/')
+        echo "  $attrName = storePath $(realpath "$path");"
+      fi
     done
     echo "}"
   ) > "$out/paths/$argc_tag.nix"
 }
 
-# @cmd
-# @arg flakeref!
-# @arg package
-run() {
-  nix $refresh
-}
-
-# @cmd
+# @cmd Generate, add to cached branch, and push to origin
 # @arg paths=./result
 # @option --tag=
 # @option --name=create-cached-refs
@@ -60,6 +57,13 @@ push() {
   }
 
   try_push || sleep 5 && try_push
+}
+
+# @cmd
+# @arg flakeref!
+# @arg package
+run() {
+  nix $refresh
 }
 
 set -euo pipefail

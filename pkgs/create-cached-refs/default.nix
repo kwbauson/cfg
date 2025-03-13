@@ -11,19 +11,20 @@ mkArgc {
   passthru.mkRefPaths =
     { paths
     , flake ? null
-    , includeSystem ? true
-    , includeFlakeStoreHash ? false
+    , sourceStorePath ? flake.outPath
     , packages ? flake.packages.${system}
+    , appendSystem ? true
+    , appendStoreHash ? false
     }:
     let
-      storeHash = lib.substring 11 32 (builtins.unsafeDiscardStringContext flake.outPath);
+      sourceHash = lib.substring 11 32 (builtins.unsafeDiscardStringContext sourceStorePath);
       getName = p: lib.concatStringsSep "." (lib.flatten [
         p
-        (lib.optional includeSystem system)
-        (lib.optional includeFlakeStoreHash storeHash)
+        (lib.optional appendSystem system)
+        (lib.optional appendStoreHash sourceHash)
       ]);
       getOutput = p: lib.getAttrFromPath (lib.splitString "." p) packages;
       outputs = lib.listToAttrs (map (p: { name = getName p; value = getOutput p; }) paths);
     in
-    linkFarm "ref-paths" outputs;
+    linkFarm "ref-paths" (outputs // { __sourceHash = writeText "ref-paths-hash" sourceHash; });
 }

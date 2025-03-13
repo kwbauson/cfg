@@ -1,8 +1,4 @@
 {
-  nixConfig = {
-    extra-substituters = [ "https://CACHE.cachix.org" ];
-    tarball-ttl = 0;
-  };
   outputs = { self }:
     let
       # see https://github.com/NixOS/nixpkgs/blob/master/lib/attrsets.nix
@@ -20,20 +16,10 @@
         "riscv64-linux"
         "x86_64-freebsd"
       ];
-      storePath = path:
-        if builtins ? fetchClosure
-        then
-          builtins.fetchClosure
-            {
-              fromStore = "https://CACHE.cachix.org";
-              fromPath = path;
-              inputAddressed = true;
-            }
-        else
-          builtins.storePath path;
+      mkPath = builtins.storePath;
     in
     {
-      packages = genAttrs systems.flakeExposed (system: import ./default.nix { inherit system storePath; });
+      packages = genAttrs systems.flakeExposed (system: import ./default.nix { inherit system mkPath; });
       apps = genAttrs systems.flakeExposed (system:
         builtins.mapAttrs (name: path: { type = "app"; program = path + "/bin/${name}"; }) self.packages.${system}
       );
