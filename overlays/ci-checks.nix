@@ -16,7 +16,6 @@ let
     ${exe nle}
     ${exe nle} uncache
   '';
-  getSwitchScripts = names: concatMapAttrs (machine: _: listToAttrs (map (name: nameValuePair "${machine}.${name}" switch.${machine}.${name}) names));
 in
 {
   makeTest = commands: runCommand "test" { } ''
@@ -34,16 +33,21 @@ in
       (elem system pkg.meta.platforms or [ system ])
     ])
     extra-packages;
-  ci-checks = (forAttrValues
-    {
-      x86_64-linux = getSwitchScripts [ "noa" "nos" "nob" ] nixosConfigurations;
-      aarch64-darwin = getSwitchScripts [ "noa" "nds" ] darwinConfigurations;
-    }
-    (drvs: runCommand "ci-checks-env" { meta.mainProgram = "checks"; } ''
-      mkdir -p $out/bin
-      ln -s ${checks-script} $out/bin/checks
-      ln -s ${linkFarm "builds" drvs} $out/builds
-    '')
-  ).${system};
-  checks.default = final.ci-checks;
+  cached-paths =
+    let
+      getPaths = ns: machines: concatMap (m: map (n: "switch.scripts.${m}.${n}") ns) (attrNames machines);
+      paths = {
+        x86_64-linux = getPaths [ "noa" "nos" "nob" ] nixosConfigurations;
+        aarch64-darwin = getPaths [ "noa" "nds" ] darwinConfigurations;
+      }.${system};
+    in
+    create-cached-refs.mkRefPaths {
+      inherit paths flake;
+      appendSystem = false;
+    };
+  checks = runCommand "checks" { } ''
+    mkdir -p $out/bin
+    ln -s ${checks-script} $out/bin/checks
+    ln -s ${final.cached-paths} $out/cached-paths
+  '';
 }

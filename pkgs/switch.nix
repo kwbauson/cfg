@@ -60,22 +60,10 @@ let
         };
       in
       switchers.noa.overrideAttrs (_: { passthru = switchers // { inherit switchers; }; }));
-  makeBin = name: makeNamedScript name ''
+  makeBin = name: makeNamedScript name /* bash */ ''
     cd ~/cfg
     git add --all
-    host=$(machine-name)
-    buildArg=.#switch.$host.${name}
-    if [[ -z $(git status -s) ]];then
-      pinAttr=$(git rev-parse HEAD)
-      pinLoc=$host.${name}
-      pinName=$pinLoc.$pinAttr
-      pinsRef='.?ref=origin/pins'
-      hasAttr=$(nix eval "$pinsRef#$pinLoc" --apply "builtins.hasAttr \"$pinAttr\"")
-      if [[ $hasAttr = true ]];then
-        exec nix shell --impure "$pinsRef#$pinName" -c switch
-      fi
-    fi
-    exec nix shell "$buildArg" -c switch
+    ${getExe create-cached-refs} shell . "switch.script.$(machine-name).${name}" -c switch
   '';
 in
 buildEnv {

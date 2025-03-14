@@ -20,7 +20,6 @@
     });
     overlays = import ./overlays scope;
     nixosModules = modules;
-    checks = forAttrValues packages (getAttr "checks");
 
     nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
       nixpkgs.lib.nixosSystem rec {
