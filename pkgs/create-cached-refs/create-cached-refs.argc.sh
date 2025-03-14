@@ -89,9 +89,11 @@ wrapped_nix() {
 
   if [[ $sourceHash = $cachedSourceHash && $hasPackage = true ]];then
     flakeref=$cachedFlakeRef
+    impure=--impure
   else
     flakeref=$argc_flakeref
+    impure=
   fi
 
-  nix "$argc_cmd" "$flakeref#$argc_package" "$@"
+  nix "$argc_cmd" $impure "$flakeref#$argc_package" "$@"
 }
