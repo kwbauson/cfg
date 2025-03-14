@@ -21,7 +21,7 @@ in
   };
 
   config.services.caddy = {
-    package = cobi.pkgs.zaddy.overrideAttrs (_: { postInstall = caddy.postInstall; });
+    package = cobi.pkgs.zaddy.overrideAttrs (_: { postInstall = caddy.postInstall; vendorHash = "sha256-MrOIyLPoX8Tk2FsHIl0VJL3ZA6D3sqmNfE00bItfnyM="; });
     globalConfig = ''
       order authenticate before respond
       order authorize before basicauth
