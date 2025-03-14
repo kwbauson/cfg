@@ -63,7 +63,7 @@ let
   makeBin = name: makeNamedScript name /* bash */ ''
     cd ~/cfg
     git add --all
-    ${getExe create-cached-refs} nix shell . "switch.script.$(machine-name).${name}" -c switch
+    ${getExe create-cached-refs} nix shell . "switch.scripts.$(machine-name).${name}" -c switch
   '';
 in
 buildEnv {
