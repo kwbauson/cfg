@@ -14,6 +14,7 @@ generate() {
   cd "$paths"
   (
     echo "{ mkPath }:"
+    echo "{"
     for path in *;do
       if [[ $path = __sourceHash ]];then
         echo "  $path = \"$(< $path)\";"
