@@ -17,14 +17,14 @@ mkArgc {
     , appendStoreHash ? false
     }:
     let
-      sourceHash = lib.substring 11 32 (builtins.unsafeDiscardStringContext sourceStorePath);
-      getName = p: lib.concatStringsSep "." (lib.flatten [
+      sourceHash = substring 11 32 (builtins.unsafeDiscardStringContext sourceStorePath);
+      getName = p: concatStringsSep "." (flatten [
         p
-        (lib.optional appendSystem system)
-        (lib.optional appendStoreHash sourceHash)
+        (optional appendSystem system)
+        (optional appendStoreHash sourceHash)
       ]);
-      getOutput = p: lib.getAttrFromPath (lib.splitString "." p) packages;
-      outputs = lib.listToAttrs (map (p: { name = getName p; value = getOutput p; }) paths);
+      getOutput = p: getAttrFromPath (splitString "." p) packages;
+      outputs = listToAttrs (map (p: { name = getName p; value = getOutput p; }) paths);
     in
     linkFarm "ref-paths" (outputs // { __sourceHash = writeText "ref-paths-hash" sourceHash; });
 }

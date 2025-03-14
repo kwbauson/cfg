@@ -60,11 +60,44 @@ push() {
   try_push || sleep 5 && try_push
 }
 
-# @cmd
+# @cmd Wraps `nix run`
 # @arg flakeref!
-# @arg package
+# @arg package=default
 run() {
-  nix $refresh
+  shift
+  [[ -n ${1:-} ]] && shift || true
+  setFlakeRef
+
+  nix run "$flakeref#$argc_package" "$@"
+}
+
+# @cmd Wraps `nix shell`
+# @arg flakeref!
+# @arg package=default
+shell() {
+  shift
+  [[ -n ${1:-} ]] && shift || true
+  setFlakeRef
+
+  nix run "$flakeref#$argc_package" "$@"
+}
+
+setFlakeRef() {
+  if [[ -e $argc_flakeref ]];then
+    fetchExpr="fetchGit $(realpath "$argc_flakeref")"
+  else
+    fetchExpr="fetchTree (parseFlakeRef \"$argc_flakeref\")"
+  fi
+  sourceHash=$(nix --refresh eval --raw --impure --expr "with builtins; substring 11 32 ($fetchExpr).outPath")
+
+  cachedFlakeRef=$argc_flakeref?ref=origin/cached
+  cachedSourceHash=$(nix eval --raw "$cachedFlakeRef#__sourceHash")
+
+  if [[ $sourceHash = $cachedSourceHash ]];then
+    flakeref=$cachedFlakeRef
+  else
+    flakeref=$argc_flakeref
+  fi
 }
 
 set -euo pipefail
