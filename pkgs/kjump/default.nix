@@ -69,17 +69,30 @@ addMetaAttrs { includePackage = true; } (writeBashBin "kjump" ''
       wc -l "$histfile"
       ;;
     list)
+      topCount=10
+      count=0
+      topLines=
+      restLines=
+      while read line;do
+        if [[ $count -le $topCount ]];then
+          topLines+=$'\n'$line
+          count=$(($count + 1))
+        else
+          restLines+=$'\n'$line
+        fi
+      done < <(tac "$histfile" | awk '!x[$0]++')
       (
         run_fd() {
           fd --hidden --ignore-file ~/cfg/ignore --exclude .git "$@"
         }
+        echo "$topLines"
         if [[ $PWD != $HOME ]];then
           run_fd
         fi
+        echo "$restLines"
         cd ~
-        tac "$histfile"
         run_fd --absolute-path
-      ) | awk '!x[$0]++' | grep -vFx "$PWD/" | sed -E "s#^$HOME#~#"
+      ) | awk '!x[$0]++' | grep -vFxe "$PWD/" -e "" | sed -E "s#^$HOME#~#"
       ;;
     edit)
       pre "$1"
