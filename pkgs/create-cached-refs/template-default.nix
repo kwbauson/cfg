@@ -2,7 +2,7 @@
 , mkPath ? builtins.storePath
 }:
 let
-  inherit (builtins) foldl' attrNames readDir mapAttrs zipAttrsWith length head elemAt isAttrs;
+  inherit (builtins) foldl' attrNames readDir mapAttrs zipAttrsWith length head elemAt isAttrs elem;
   # see https://github.com/NixOS/nixpkgs/blob/master/lib/attrsets.nix
   recursiveUpdateUntil =
     pred:
@@ -25,9 +25,13 @@ let
     lhs:
     rhs:
     recursiveUpdateUntil (path: lhs: rhs: !(isAttrs lhs && isAttrs rhs)) lhs rhs;
+  # see https://github.com/NixOS/nixpkgs/blob/master/lib/lists.nix
+  unique = foldl' (acc: e: if elem e acc then acc else acc ++ [ e ]) [ ];
 
   files = attrNames (readDir ./paths);
   pathsAttrs = map (p: import (./paths + ("/" + p)) { inherit mkPath; }) files;
   paths = foldl' recursiveUpdate { } pathsAttrs;
+  sourceHashes = unique (map (x: x.__sourceHash) pathsAttrs);
 in
+assert length sourceHashes == 1;
 mapAttrs (_: value: value.${system} or value) paths
