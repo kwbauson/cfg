@@ -16,10 +16,10 @@ generate() {
     echo "{ mkPath }:"
     for path in *;do
       if [[ $path = __sourceHash ]];then
-        echo "  $path = $(< $path);"
+        echo "  $path = \"$(< $path)\";"
       else
         attrName=$(echo "$path" | sed -e 's/^/"/' -e 's/\./"."/g' -e 's/$/"/')
-        echo "  $attrName = storePath $(realpath "$path");"
+        echo "  $attrName = mkPath $(realpath "$path");"
       fi
     done
     echo "}"
