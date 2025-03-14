@@ -1,3 +1,5 @@
+set -euo pipefail
+
 # @cmd Generate nix files for cached paths
 # @alias g
 # @arg out! Output location
@@ -60,7 +62,7 @@ push() {
   try_push || sleep 5 && try_push
 }
 
-# @cmd Wraps `nix run`
+# @cmd Wraps nix to use cached if it exists
 # @alias nix
 # @arg cmd!
 # @arg flakeref!
@@ -70,12 +72,6 @@ wrapped_nix() {
   shift
   [[ -n ${1:-} ]] && shift || true
 
-  setFlakeRef
-
-  nix "$argc_cmd" "$flakeref#$argc_package" "$@"
-}
-
-setFlakeRef() {
   if [[ -e $argc_flakeref ]];then
     fetchExpr="fetchGit $(realpath "$argc_flakeref")"
   else
@@ -85,15 +81,16 @@ setFlakeRef() {
 
   cachedFlakeRef=$argc_flakeref?ref=origin/cached
   cachedSourceHash=$(nix eval --raw "$cachedFlakeRef#__sourceHash")
+  hasPackage=$(
+    nix eval "$cachedFlakeRef#packages" --impure --apply \
+      "with builtins; x: let pkgs = x.\${currentSystem}; in with pkgs.lib; hasAttrByPath (splitString \".\" \"$argc_package\") pkgs"
+  )
 
-  if [[ $sourceHash = $cachedSourceHash ]];then
+  if [[ $sourceHash = $cachedSourceHash && $hasPackage = true ]];then
     flakeref=$cachedFlakeRef
   else
     flakeref=$argc_flakeref
   fi
+
+  nix "$argc_cmd" "$flakeref#$argc_package" "$@"
 }
-
-set -euo pipefail
-
-refresh='--refresh'
-
