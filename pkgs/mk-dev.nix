@@ -15,8 +15,8 @@ let
     let
       expectedArgs = [ "name" "packages" ];
       expectedMkShellArgs = subtractLists expectedArgs (attrNames (functionArgs mkShell));
-      isMinimal = !any (a: hasAttr a attrs) expectedMkShellArgs;
-      mergeableAttrs = removeAttrs attrs (expectedArgs ++ [ "shellHook" "passthru" "meta" ]);
+      isMinimal = !any (a: hasAttr a attrs) expectedMkShellArgs && attrs.isMinimal or true;
+      mergeableAttrs = removeAttrs attrs (expectedArgs ++ [ "shellHook" "passthru" "meta" "isMinimal" ]);
       passthru = {
         inherit pkgs;
         env = buildEnv {
