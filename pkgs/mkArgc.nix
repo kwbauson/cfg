@@ -34,4 +34,5 @@ scope: with scope;
 
       runHook postInstall
     '';
+    meta.mainProgram = name;
   })).overrideAttrs
