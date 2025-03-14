@@ -67,6 +67,7 @@ push() {
 # @arg cmd!
 # @arg flakeref!
 # @arg package=default
+# @arg _rest~
 wrapped_nix() {
   shift
   shift
