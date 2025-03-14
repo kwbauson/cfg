@@ -61,25 +61,18 @@ push() {
 }
 
 # @cmd Wraps `nix run`
+# @alias nix
+# @arg cmd!
 # @arg flakeref!
 # @arg package=default
-run() {
+wrapped_nix() {
+  shift
   shift
   [[ -n ${1:-} ]] && shift || true
+
   setFlakeRef
 
-  nix run "$flakeref#$argc_package" "$@"
-}
-
-# @cmd Wraps `nix shell`
-# @arg flakeref!
-# @arg package=default
-shell() {
-  shift
-  [[ -n ${1:-} ]] && shift || true
-  setFlakeRef
-
-  nix run "$flakeref#$argc_package" "$@"
+  nix "$argc_cmd" "$flakeref#$argc_package" "$@"
 }
 
 setFlakeRef() {
