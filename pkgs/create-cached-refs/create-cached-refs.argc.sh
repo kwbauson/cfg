@@ -59,7 +59,7 @@ push() {
     git worktree remove "$worktree"
   }
 
-  try_push || sleep 5 && try_push
+  try_push
 }
 
 # @cmd Wraps nix to use cached if it exists
