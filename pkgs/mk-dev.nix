@@ -66,18 +66,41 @@ stdenv.mkDerivation {
   script = ''
     #!${getExe bash}
     set -euo pipefail
-    if [[ -e default.nix || -e .envrc ]];then
-      echo "default.nix or .envrc already exists, doing nothing"
+
+    branch=main
+    repo=kwbauson/cfg
+    archivePrefix=https://github.com/kwbauson/cfg/archive
+
+    getLatest() {
+      latestRev=$(${getExe curl} -s "https://api.github.com/repos/$repo/commits/$branch" | ${getExe jq} -r .sha)
+      latestUrl="$archivePrefix/$latestRev".tar.gz
+    }
+
+    if [[ ''${1:-} = -u ]];then
+      if [[ -e default.nix ]];then
+        file=default.nix
+      elif [[ -e shell.nix ]];then
+        file=shell.nix
+      fi
+      getLatest
+      sed -Ei "s@$archivePrefix/[^.]+\.tar\.gz@$latestUrl@" "$file"
+      exit
+    fi
+
+    if [[ -e default.nix || -e shell.nix || -e .envrc ]];then
+      echo "default.nix, shell.nix, or .envrc already exists, doing nothing"
       exit 1
     fi
+
+    getLatest
     echo 'use nix' > .envrc
-    mainRev=$(${getExe curl} -s 'https://api.github.com/repos/kwbauson/cfg/commits/main' | ${getExe jq} -r .sha)
     cat > default.nix <<-EOF
-    { mk-dev ? (import (fetchTarball "https://github.com/kwbauson/cfg/archive/$mainRev.tar.gz") {}).mk-dev
+    { mk-dev ? (import (fetchTarball "$latestUrl") {}).mk-dev
     , pkgs ? mk-dev.pkgs
     }: with pkgs; mk-dev [
     ]
     EOF
+
     $EDITOR default.nix
     direnv allow
   '';

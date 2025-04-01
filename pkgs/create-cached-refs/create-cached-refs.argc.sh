@@ -78,7 +78,7 @@ wrapped_nix() {
   else
     fetchExpr="fetchTree (parseFlakeRef \"$argc_flakeref\")"
   fi
-  sourceHash=$(nix --refresh eval --raw --impure --expr "with builtins; substring 11 32 ($fetchExpr).outPath")
+  sourceHash=$(nix --no-warn-dirty --refresh eval --raw --impure --expr "with builtins; substring 11 32 ($fetchExpr).outPath")
 
   cachedFlakeRef=$argc_flakeref?ref=origin/cached
   cachedSourceHash=$(nix eval --raw "$cachedFlakeRef#__sourceHash")
