@@ -21,6 +21,7 @@
   "prettier.proseWrap": "always",
   "typescript.preferences.quoteStyle": "single",
   "tsserver.disableAutomaticTypeAcquisition": true,
+  "tsserver.useLocalTsdk": true,
   "git.addGBlameToVirtualText": true,
   "git.addGBlameToBufferVar": true,
   "solargraph.definitions": true,
