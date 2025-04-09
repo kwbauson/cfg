@@ -15,12 +15,12 @@ stdenv.mkDerivation (attrs: {
   '';
   meta.broken = true;
   meta.platforms = platforms.linux;
-  passthru.updateScript = writeShellScript "update-waterfox" ''
-    ${common-updater-scripts}/bin/update-source-version waterfox "$(
-      ${getExe curl} -sLIw %{url_effective} https://cdn1.waterfox.net/waterfox/releases/latest/linux |
-      tail -n1 |
-      sed -E 's@.*waterfox-([^/]*)\.tar\.bz2.*@\1@'
-    )"
-    ${getExe nix-update} --flake --version skip waterfox
-  '';
+  # passthru.updateScript = writeShellScript "update-waterfox" ''
+  #   ${common-updater-scripts}/bin/update-source-version waterfox "$(
+  #     ${getExe curl} -sLIw %{url_effective} https://cdn1.waterfox.net/waterfox/releases/latest/linux |
+  #     tail -n1 |
+  #     sed -E 's@.*waterfox-([^/]*)\.tar\.bz2.*@\1@'
+  #   )"
+  #   ${getExe nix-update} --flake --version skip waterfox
+  # '';
 })
