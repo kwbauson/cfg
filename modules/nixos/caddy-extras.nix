@@ -21,7 +21,7 @@ in
   };
 
   config.services.caddy = {
-    package = cobi.pkgs.zaddy.overrideAttrs (_: { postInstall = caddy.postInstall; });
+    package = zaddy;
     globalConfig = ''
       order authenticate before respond
       order authorize before basicauth
