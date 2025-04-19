@@ -8,7 +8,7 @@
     defaultEditor = true;
     ${attrIf (!isMinimal) "extraPackages"} = attrValues { inherit nil solargraph terraform-ls lua-language-server terraform; };
     withNodeJs = true;
-    coc.enable = isLinux; # FIXME
+    coc.enable = true;
     plugins = with vimPlugins; attrValues {
       inherit
         conflict-marker-vim fzf-vim nvim-scrollview quick-scope tcomment_vim
