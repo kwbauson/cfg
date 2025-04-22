@@ -15,14 +15,13 @@
         vim-airline vim-better-whitespace vim-code-dark vim-easymotion
         vim-fugitive vim-lastplace vim-multiple-cursors vim-sensible
         vim-startify nvim-web-devicons vim-peekaboo vim-caddyfile unison
-        vim-slime
+        vim-slime patched-barbar-nvim
 
         coc-eslint coc-git coc-json coc-lists coc-prettier
         coc-solargraph coc-tsserver coc-pyright coc-explorer
         coc-vetur coc-vimlsp formatter-nvim nim-vim;
       nvim-treesitter = nvim-treesitter.withAllGrammars;
       treesitter-koka = neovimUtils.grammarToPlugin tree-sitter-grammars.tree-sitter-koka;
-      barbar-nvim = barbar-nvim; # FIXME barbar-nvim.overrideAttrs (attrs: { patches = attrs.patches or [ ] ++ [ ./barbar-show-parent-option.patch ]; });
     };
     extraConfig = "
       source ${config.home.homeDirectory}/cfg/modules/home-manager/init.vim
