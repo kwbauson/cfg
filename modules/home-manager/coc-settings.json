@@ -82,6 +82,11 @@
       "command": "nimlangserver",
       "filetypes": ["nim"],
       "trace.server": "verbose"
+    },
+    "koka": {
+      "command": "koka",
+      "args": ["--language-server", "--lsstdio"],
+      "filetypes": ["koka"]
     }
   }
 }
