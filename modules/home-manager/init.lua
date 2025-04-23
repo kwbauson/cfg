@@ -30,6 +30,12 @@ require('nvim-treesitter.configs').setup {
   indent = { enable = true },
 }
 
+vim.filetype.add({
+  extension = {
+    kk = "koka",
+  },
+})
+
 require('formatter').setup {
   filetype = {
     terraform = {
