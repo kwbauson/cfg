@@ -94,11 +94,13 @@ stdenv.mkDerivation {
 
     getLatest
     echo 'use nix' > .envrc
-    cat > default.nix <<-EOF
+    cat > shell.nix <<-EOF
     { mk-dev ? (import (fetchTarball "$latestUrl") {}).mk-dev
     , pkgs ? mk-dev.pkgs
-    }: with pkgs; mk-dev [
-    ]
+    }: with pkgs; mk-dev {
+      packages = [
+      ];
+    }
     EOF
 
     $EDITOR default.nix

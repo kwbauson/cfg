@@ -91,6 +91,10 @@
     "scala": {
       "filetypes": ["scala"],
       "command": "metals"
+    },
+    "purescript": {
+      "filetypes": ["purescript"],
+      "command": "purescript-language-server"
     }
   }
 }
