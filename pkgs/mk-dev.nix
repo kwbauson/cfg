@@ -103,7 +103,7 @@ stdenv.mkDerivation {
     }
     EOF
 
-    $EDITOR default.nix
+    $EDITOR shell.nix
     direnv allow
   '';
   passAsFile = [ "script" ];
