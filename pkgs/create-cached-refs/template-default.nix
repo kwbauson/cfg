@@ -67,5 +67,8 @@ let
   paths = foldl' recursiveUpdate { } pathsAttrs;
   sourceHashes = unique (map (x: x.__sourceHash) pathsAttrs);
 in
-assert length sourceHashes == 1;
-mapAttrs (_: value: value.${ system} or value) paths // { inherit lib; }
+if length sourceHashes == 1
+then
+  mapAttrs (_: value: value.${ system} or value) paths // { inherit lib; }
+else
+  { }
