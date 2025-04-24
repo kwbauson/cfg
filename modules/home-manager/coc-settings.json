@@ -79,14 +79,18 @@
       "settings": {}
     },
     "nim": {
-      "command": "nimlangserver",
       "filetypes": ["nim"],
+      "command": "nimlangserver",
       "trace.server": "verbose"
     },
     "koka": {
+      "filetypes": ["koka"],
       "command": "koka",
-      "args": ["--language-server", "--lsstdio"],
-      "filetypes": ["koka"]
+      "args": ["--language-server", "--lsstdio"]
+    },
+    "scala": {
+      "filetypes": ["scala"],
+      "command": "metals"
     }
   }
 }
