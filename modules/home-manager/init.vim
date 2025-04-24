@@ -6,8 +6,6 @@ map <silent> <leader>s :setlocal invspell spell?<cr>
 map <silent> <leader>w :setlocal invwrap wrap?<cr>
 map <silent> <leader>n :set invnumber number?<cr>
 map <silent> <leader>N :set invrelativenumber relativenumber?<cr>
-map <silent> <leader>r :up<bar>vs<bar>term %:p:S<cr>i
-map <silent> <leader>, :e ~/cfg/init.vim<cr>
 
 set mouse= title
 set nojoinspaces smartindent
@@ -35,52 +33,12 @@ let g:startify_lists = [
       \ ]
 let g:startify_fortune_use_unicode = 1
 
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ASDFGHJKL;QWERTYUIOPZXCVBNM'
-map ;w <Plug>(easymotion-bd-w)
-map ;l <Plug>(easymotion-bd-jk)
-map ;j <Plug>(easymotion-jumptoanywhere)
-
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "vim-slime", "target_pane": 1}
-let g:slime_dont_ask_default = 1
-let g:slime_no_mappings = 1
-nmap <C-Space> <Plug>SlimeParagraphSend
-
-map <silent> <leader>e :CocCommand explorer<cr>
-
-let g:context_enabled = 0
-
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_second_hightlight = 0
 
 command! GD Gdiff
 
-let g:coc_config_home = getenv('HOME') . '/cfg/modules/home-manager'
-
 set hidden nobackup nowritebackup updatetime=300 shortmess+=c signcolumn=yes:1
-highlight link CocHighlightText Search
-autocmd CursorHold * silent call CocActionAsync('highlight')
-augroup mygroup
-  autocmd!
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ge <Plug>(coc-rename)
-nmap <silent> g. <Plug>(coc-codeaction)
-nmap <silent> g/ <Plug>(coc-codelens-action)
-nmap <silent> gh :call CocAction('doHover')<cr>
 
 nmap <silent> gT :BufferPrevious<cr>
 nmap <silent> gt :BufferNext<cr>
@@ -88,10 +46,10 @@ nmap <silent> gb :BufferPick<cr>
 nmap <silent> gH :BufferMovePrevious<cr>
 nmap <silent> gL :BufferMoveNext<cr>
 nmap <silent> <leader>d :BufferClose<cr>
-inoremap <silent><expr> <c-space> coc#refresh()
+
 set noshowmode
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#nvimlsp#enabled = 0
+let g:airline#extensions#nvimlsp#enabled = 1
 hi default BufferCurrent guibg=#0A7ACA guifg=white
 hi default BufferCurrentMod guibg=#FFAF00 guifg=black
 hi default BufferCurrentSign guibg=#0A7ACA guifg=white
@@ -107,13 +65,7 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 nmap <silent> <leader>p :Files<cr>
-nmap <silent> <leader>o :History<cr>
 nmap <silent> <leader>b :Buffers<cr>
 nmap <silent> <leader>g :RG<cr>
 nmap <expr> <leader>G ':Rg \b'.expand('<cword>').'\b<cr>'
 vmap <silent> <leader>G y:Rg \b<c-r>"\b<cr>
-
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
-augroup END
