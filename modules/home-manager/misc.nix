@@ -42,6 +42,7 @@
     firefox.enable = !isDarwin && isGraphical;
     chromium.enable = !isDarwin && isGraphical;
     autorandr.enable = isLinux && isGraphical;
+    helix.enable = true;
     ssh = {
       enable = true;
       compression = true;

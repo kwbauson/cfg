@@ -1,5 +1,16 @@
 { config, scope, isMinimal, ... }: with scope;
 {
+  imports = [
+    nixvim.flake.homeManagerModules.nixvim
+    { programs.nixvim = nixvim.configuration; }
+  ];
+
+  programs.nixvim = {
+    # enable = true;
+    defaultEditor = true;
+    nixpkgs.useGlobalPackages = true;
+  };
+
   included-packages = optionalAttrs (!isMinimal) {
     inherit nixpkgs-fmt shellcheck vim-language-server lua-language-server;
     inherit typescript-language-server;

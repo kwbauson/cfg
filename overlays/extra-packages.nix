@@ -30,7 +30,7 @@ in
       { name = "${attrs.pname}-${attrs.version}"; }
       (optionalAttrs (attrs ? package) {
         type = "derivation";
-        inherit (attrs.package) drvPath outPath;
+        inherit (attrs.package) drvPath outPath out outputName meta;
       })
       (filterAttrs (n: _: elem n [ "package" "__functor" ]) attrs)
       attrs
