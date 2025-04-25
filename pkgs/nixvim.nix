@@ -60,7 +60,6 @@ importPackage rec {
       " p" = ":Telescope find_files<cr>";
       " d" = ":bdelete!<cr>";
     };
-    diagnostics.virtual_lines.current_line = true;
     plugins = {
       bufferline.enable = true;
       bufferline.settings.options.show_buffer_close_icons = false;
