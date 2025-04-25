@@ -66,6 +66,10 @@ importPackage rec {
       web-devicons.enable = true;
       lualine.enable = true;
       treesitter.enable = true;
+      treesitter.settings = {
+        highlight.enable = true;
+        indent.enable = true;
+      };
       lsp.enable = true;
       lsp.servers = {
         nil_ls.enable = true; # FIXME switch to nixd?
