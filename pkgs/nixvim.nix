@@ -35,8 +35,7 @@ importPackage rec {
   };
 
   configuration = {
-    colorschemes.nightfox.enable = true;
-    colorschemes.nightfox.flavor = "carbonfox";
+    colorschemes.vscode.enable = true;
     opts = rec {
       number = true;
       expandtab = true;
@@ -111,5 +110,9 @@ importPackage rec {
       };
       which-key.enable = true;
     };
+    extraConfigLua = ''
+      vim.o.winborder = "rounded"
+    '';
+    extraPackages = [ nixpkgs-fmt ];
   };
 }
