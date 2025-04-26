@@ -14,6 +14,7 @@ importPackage rec {
     inherit pkgs;
     module = configuration;
   };
+  inherit (package) extend;
 
   lib = flake.lib.nixvim // {
     mkKeyMaps = mapAttrsToList (
@@ -21,6 +22,7 @@ importPackage rec {
         if !isString value then value else {
           action = value;
           options.silent = true;
+          mode = [ "n" "x" "v" "s" ];
         }
       )
     );
@@ -34,7 +36,7 @@ importPackage rec {
     }'';
   };
 
-  configuration = {
+  configuration = fix (cfg: {
     colorschemes.vscode.enable = true;
     opts = rec {
       number = true;
@@ -47,19 +49,32 @@ importPackage rec {
       backup = false;
       writebackup = false;
       hidden = true;
-      winborder = "rounded";
+      undofile = true;
     };
+    highlight.NormalFloat.bg = "#303030";
+    highlight.Pmenu = cfg.highlight.NormalFloat;
     keymaps = lib.mkKeyMaps {
       "<C-p>" = { mode = "c"; action = "<up>"; };
       "<C-n>" = { mode = "c"; action = "<down>"; };
-      gh = ":BufferLineCyclePrev<cr>";
-      gl = ":BufferLineCycleNext<cr>";
-      gH = ":BufferLineMovePrev<cr>";
-      gL = ":BufferLineMoveNext<cr>";
-      gb = ":BufferLinePick<cr>";
-      gd = "<C-]>";
-      " p" = ":Telescope find_files<cr>";
-      " d" = ":bdelete!<cr>";
+      gh = "<cmd>BufferLineCyclePrev<cr>";
+      gl = "<cmd>BufferLineCycleNext<cr>";
+      gH = "<cmd>BufferLineMovePrev<cr>";
+      gL = "<cmd>BufferLineMoveNext<cr>";
+      gb = "<cmd>BufferLinePick<cr>";
+      " d" = "<cmd>bdelete!<cr>";
+      "g." = "<cmd>lua require('fastaction').code_action()<cr>";
+      gd = "<cmd>Telescope lsp_definitions<cr>";
+      " t" = "<cmd>Telescope<cr>";
+      " p" = "<cmd>Telescope find_files<cr>";
+      " g" = "<cmd>Telescope live_grep<cr>";
+      " G" = "<cmd>Telescope grep_string<cr>";
+      " b" = "<cmd>Telescope buffers<cr>";
+      " r" = "<cmd>Telescope lsp_references<cr>";
+      " u" = "<cmd>Telescope undo<cr>";
+      ";w" = "<cmd>HopCamelCase<cr>";
+      ";l" = "<cmd>HopLineStart<cr>";
+      " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
+
     };
     plugins = {
       bufferline.enable = true;
@@ -82,6 +97,14 @@ importPackage rec {
       comment.enable = true;
       comment.settings.toggler.block = "gcb";
       telescope.enable = true;
+      telescope.extensions.fzf-native.enable = true;
+      telescope.extensions.undo.enable = true;
+      telescope.settings.defaults.mappings = {
+        i."<esc>" = lib.mkRaw "require('telescope.actions').close";
+        i."<C-f>" = lib.mkRaw "require('telescope.actions').preview_scrolling_down";
+        i."<C-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
+        i."<C-u>" = false;
+      };
       nvim-tree.enable = true;
       scrollview.enable = true;
       blink-cmp.enable = true;
@@ -91,12 +114,16 @@ importPackage rec {
         completion.documentation.auto_show_delay_ms = 50;
         completion.menu.draw.treesitter = [ "lsp" ];
         signature.enabled = true;
-        keymap."<Enter>" = lib.mkCmdlineMap "select_and_accept" "fallback";
-        keymap."<Tab>" = [ "select_next" "fallback" ];
-        keymap."<S-Tab>" = [ "select_prev" "fallback" ];
+        keymap.preset = "none";
         keymap."<C-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
         keymap."<C-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
+        keymap."<Tab>" = [ "select_next" "fallback" ];
+        keymap."<S-Tab>" = [ "select_prev" "fallback" ];
+        keymap."<C-b>" = [ "scroll_documentation_up" "fallback" ];
+        keymap."<C-f>" = [ "scroll_documentation_down" "fallback" ];
+        keymap."<C-k>" = [ "show_signature" "hide_signature" "fallback" ];
         cmdline.keymap.preset = "inherit";
+        cmdline.completion.list.selection.preselect = false;
         cmdline.completion.menu.auto_show = true;
       };
       colorful-menu.enable = true;
@@ -115,6 +142,10 @@ importPackage rec {
         ];
       };
       which-key.enable = true;
+      hop.enable = true;
+      hop.settings.uppercase_labels = true;
+      fastaction.enable = true;
+      fastaction.settings.dismiss_keys = [ "<esc>" "q" ];
     };
     extraPackages = [ nixpkgs-fmt ];
     extraPlugins = with vimPlugins; [
@@ -127,5 +158,5 @@ importPackage rec {
         },
       })
     '';
-  };
+  });
 }
