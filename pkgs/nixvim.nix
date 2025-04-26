@@ -34,6 +34,7 @@ importPackage rec {
       end,
       "${fallback}",
     }'';
+    bg = "#202020"; # overall background color from colorscheme
   };
 
   configuration = fix (cfg: {
@@ -51,7 +52,7 @@ importPackage rec {
       hidden = true;
       undofile = true;
     };
-    highlight.NormalFloat.bg = "#303030";
+    highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "3" ] lib.bg; # slightly lighter
     highlight.Pmenu = cfg.highlight.NormalFloat;
     keymaps = lib.mkKeyMaps {
       "<C-p>" = { mode = "c"; action = "<up>"; };
@@ -71,6 +72,7 @@ importPackage rec {
       " b" = "<cmd>Telescope buffers<cr>";
       " r" = "<cmd>Telescope lsp_references<cr>";
       " u" = "<cmd>Telescope undo<cr>";
+      " s" = "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>";
       ";w" = "<cmd>HopCamelCase<cr>";
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
@@ -146,6 +148,8 @@ importPackage rec {
       hop.settings.uppercase_labels = true;
       fastaction.enable = true;
       fastaction.settings.dismiss_keys = [ "<esc>" "q" ];
+      notify.enable = true;
+      notify.settings.background_colour = lib.bg;
     };
     extraPackages = [ nixpkgs-fmt ];
     extraPlugins = with vimPlugins; [
