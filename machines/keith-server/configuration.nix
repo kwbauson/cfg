@@ -66,13 +66,14 @@
   '';
 
   services.olivetin.enable = true;
-  services.olivetin.config = ''
-    listenAddressSingleHTTPFrontend: localhost:${toString constants.olivetin.port}
-    actions:
-      - title: Reboot Server
-        icon: "&#128683;"
-        shell: reboot
-  '';
+  services.olivetin.settings = {
+    listenAddressSingleHTTPFrontend = "localhost:${toString constants.olivetin.port}";
+    actions = [{
+      title = "Reboot Server";
+      icon = "&#128683;";
+      shell = "reboot";
+    }];
+  };
   services.caddy.subdomains.olivetin = { role = "admin"; inherit (constants.olivetin) port; };
 
   services.caddy.subdomains.api = constants.personal-api.port;
