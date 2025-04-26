@@ -57,6 +57,7 @@ importPackage rec {
       gH = ":BufferLineMovePrev<cr>";
       gL = ":BufferLineMoveNext<cr>";
       gb = ":BufferLinePick<cr>";
+      gd = "<C-]>";
       " p" = ":Telescope find_files<cr>";
       " d" = ":bdelete!<cr>";
     };
@@ -85,16 +86,20 @@ importPackage rec {
       scrollview.enable = true;
       blink-cmp.enable = true;
       blink-cmp.settings = {
-        signature.enabled = true;
+        completion.list.selection.preselect = false;
         completion.documentation.auto_show = true;
         completion.documentation.auto_show_delay_ms = 50;
-        keymap."<Tab>" = [ "select_and_accept" "fallback" ];
-        keymap."<C-l>" = lib.mkCmdlineMap "select_and_accept" "fallback";
+        completion.menu.draw.treesitter = [ "lsp" ];
+        signature.enabled = true;
+        keymap."<Enter>" = lib.mkCmdlineMap "select_and_accept" "fallback";
+        keymap."<Tab>" = [ "select_next" "fallback" ];
+        keymap."<S-Tab>" = [ "select_prev" "fallback" ];
         keymap."<C-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
         keymap."<C-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
         cmdline.keymap.preset = "inherit";
         cmdline.completion.menu.auto_show = true;
       };
+      colorful-menu.enable = true;
       lastplace.enable = true;
       fugitive.enable = true;
       startify.enable = true;
@@ -112,5 +117,15 @@ importPackage rec {
       which-key.enable = true;
     };
     extraPackages = [ nixpkgs-fmt ];
+    extraPlugins = with vimPlugins; [
+      tiny-inline-diagnostic-nvim
+    ];
+    extraConfigLua = ''
+      require('tiny-inline-diagnostic').setup({
+        options = {
+          show_all_diags_on_cursorline = true,
+        },
+      })
+    '';
   };
 }
