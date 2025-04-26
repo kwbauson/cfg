@@ -80,7 +80,10 @@ importPackage rec {
     };
     plugins = {
       bufferline.enable = true;
-      bufferline.settings.options.show_buffer_close_icons = false;
+      bufferline.settings.options = {
+        show_buffer_close_icons = false;
+        indicator.style = "underline";
+      };
       web-devicons.enable = true;
       lualine.enable = true;
       treesitter.enable = true;
@@ -137,11 +140,10 @@ importPackage rec {
         session_persistence = true;
         lists = [
           { type = "sessions"; header = [ "   Sessions" ]; }
-          { type = "dir"; header = [{ __raw = "'   MRU' .. vim.loop.cwd()"; }]; }
-          { type = "files"; header = [ "   MRU" ]; }
-          { type = "bookmarks"; header = [ "   Bookmarks" ]; }
-          { type = "commands"; header = [ "   Commands" ]; }
+          { type = "dir"; header = [ (lib.mkRaw "'   MRU ' .. vim.loop.cwd()") ]; }
         ];
+        session_number = 2;
+        files_number = 10 - cfg.plugins.startify.settings.session_number;
       };
       which-key.enable = true;
       hop.enable = true;
