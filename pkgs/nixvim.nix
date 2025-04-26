@@ -94,6 +94,7 @@ importPackage rec {
       };
       web-devicons.enable = true;
       lualine.enable = true;
+      lualine.settings.options.globalstatus = true;
       treesitter.enable = true;
       treesitter.nixvimInjections = false;
       treesitter.settings = {
@@ -106,6 +107,9 @@ importPackage rec {
         nil_ls.settings.formatting.command = [ "nixpkgs-fmt" ];
         ts_ls.enable = true;
       };
+      none-ls.enable = true;
+      none-ls.sources.formatting.prettier.enable = true;
+      none-ls.sources.formatting.prettier.disableTsServerFormatter = true;
       lsp-format.enable = true;
       gitsigns.enable = true;
       comment.enable = true;
