@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage rec {
   inherit pname;
-  version = "0-unstable-2025-04-25";
+  version = "0-unstable-2025-04-26";
   src = fetchFromGitHub {
     owner = "nix-community";
     repo = pname;
-    rev = "a21504f2b084e7e1c5da09ca5cc87791d2564f3b";
-    hash = "sha256-Ig9m38EL6gZHwqKS89401Eooe/Zi9CqQsaehVlf1wcQ=";
+    rev = "8d8a8568968f0e77b90749929c4683633d1ebdf6";
+    hash = "sha256-WvozW6IXhuRfGlDy7S777S5fjZeGSOEIRRbo2eK6K5o=";
   };
   passthru.updateScript = unstableGitUpdater { };
   flake = import src;
