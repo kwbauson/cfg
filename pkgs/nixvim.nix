@@ -172,7 +172,7 @@ importPackage rec {
     extraPlugins = with vimPlugins; [
       tiny-inline-diagnostic-nvim
     ];
-    extraConfigLua = ''
+    extraConfigLua = /* lua */ ''
       require('tiny-inline-diagnostic').setup({
         options = {
           show_all_diags_on_cursorline = true,
