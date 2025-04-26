@@ -150,6 +150,11 @@ importPackage rec {
       fastaction.settings.dismiss_keys = [ "<esc>" "q" ];
       notify.enable = true;
       notify.settings.background_colour = lib.bg;
+      nvim-autopairs.enable = true;
+      nvim-autopairs.settings = {
+        map_c_h = true;
+        map_c_w = true;
+      };
     };
     extraPackages = [ nixpkgs-fmt ];
     extraPlugins = with vimPlugins; [
@@ -161,6 +166,38 @@ importPackage rec {
           show_all_diags_on_cursorline = true,
         },
       })
+
+      -- from https://github.com/rcarriga/nvim-notify/wiki/Usage-Recipes/#lsp-messages
+      -- table from lsp severity to vim severity.
+      local severity = {
+        "error",
+        "warn",
+        "info",
+        "info", -- map both hint and info to info?
+      }
+      vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
+        vim.notify(method.message, severity[params.type])
+      end
+
+      -- from https://github.com/windwp/nvim-autopairs/issues/276#issuecomment-1725034495
+      local api = vim.api
+      local insertCursorCol = 0
+      vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+         pattern = "*",
+         callback = function()
+            _, insertCursorCol = unpack(api.nvim_win_get_cursor(0));
+         end,
+      })
+
+      vim.keymap.set("i", "<C-u>", function()
+         local _, cursorCol = unpack(api.nvim_win_get_cursor(0));
+         local colDistance = cursorCol - insertCursorCol
+         local backspaces = ""
+         for i = 1, colDistance, 1 do
+           backspaces = backspaces .. '<BS>' 
+         end
+         return backspaces
+      end, { remap = true, expr = true })
     '';
   });
 }
