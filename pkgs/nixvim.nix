@@ -43,9 +43,8 @@ importPackage rec {
       byteCompileLua.configs = true;
       byteCompileLua.initLua = true;
       byteCompileLua.nvimRuntime = true;
-      # byteCompileLua.plugins = true;
+      byteCompileLua.plugins = true;
       combinePlugins.enable = true;
-      combinePlugins.standalonePlugins = [ "nvim-tree.lua" ];
     };
     colorschemes.vscode.enable = true;
     opts = rec {
@@ -121,6 +120,13 @@ importPackage rec {
         i."<C-u>" = false;
       };
       nvim-tree.enable = true;
+      # explicit package to resolve combinePlugins conflict
+      nvim-tree.package = vimPlugins.nvim-tree-lua.overrideAttrs (old: {
+        postInstall = ''
+          ${old.postInstall}
+          rm $out/doc/.gitignore
+        '';
+      });
       scrollview.enable = true;
       blink-cmp.enable = true;
       blink-cmp.settings = {
