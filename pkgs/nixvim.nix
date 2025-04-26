@@ -47,6 +47,7 @@ importPackage rec {
       backup = false;
       writebackup = false;
       hidden = true;
+      winborder = "rounded";
     };
     keymaps = lib.mkKeyMaps {
       "<C-p>" = { mode = "c"; action = "<up>"; };
@@ -110,9 +111,6 @@ importPackage rec {
       };
       which-key.enable = true;
     };
-    extraConfigLua = ''
-      vim.o.winborder = "rounded"
-    '';
     extraPackages = [ nixpkgs-fmt ];
   };
 }
