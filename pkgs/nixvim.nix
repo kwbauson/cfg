@@ -38,6 +38,15 @@ importPackage rec {
   };
 
   configuration = fix (cfg: {
+    performance = {
+      byteCompileLua.enable = true;
+      byteCompileLua.configs = true;
+      byteCompileLua.initLua = true;
+      byteCompileLua.nvimRuntime = true;
+      # byteCompileLua.plugins = true;
+      combinePlugins.enable = true;
+      combinePlugins.standalonePlugins = [ "nvim-tree.lua" ];
+    };
     colorschemes.vscode.enable = true;
     opts = rec {
       number = true;
@@ -87,6 +96,7 @@ importPackage rec {
       web-devicons.enable = true;
       lualine.enable = true;
       treesitter.enable = true;
+      treesitter.nixvimInjections = false;
       treesitter.settings = {
         highlight.enable = true;
         indent.enable = true;
