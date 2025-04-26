@@ -60,6 +60,7 @@ importPackage rec {
       hidden = true;
       undofile = true;
       mouse = "";
+      wrap = false;
     };
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "3" ] lib.bg; # slightly lighter
     highlight.Pmenu = cfg.highlight.NormalFloat;
