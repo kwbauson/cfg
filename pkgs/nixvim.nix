@@ -62,11 +62,11 @@ importPackage rec {
       mouse = "";
       wrap = false;
     };
-    highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "3" ] lib.bg; # slightly lighter
+    highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
     keymaps = lib.mkKeyMaps {
-      "<C-p>" = { mode = "c"; action = "<up>"; };
-      "<C-n>" = { mode = "c"; action = "<down>"; };
+      "<c-p>" = { mode = "c"; action = "<up>"; };
+      "<c-n>" = { mode = "c"; action = "<down>"; };
       gh = "<cmd>BufferLineCyclePrev<cr>";
       gl = "<cmd>BufferLineCycleNext<cr>";
       gH = "<cmd>BufferLineMovePrev<cr>";
@@ -86,7 +86,7 @@ importPackage rec {
       ";w" = "<cmd>HopCamelCase<cr>";
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
-
+      "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
     };
     plugins = {
       bufferline.enable = true;
@@ -121,9 +121,9 @@ importPackage rec {
       telescope.extensions.undo.enable = true;
       telescope.settings.defaults.mappings = {
         i."<esc>" = lib.mkRaw "require('telescope.actions').close";
-        i."<C-f>" = lib.mkRaw "require('telescope.actions').preview_scrolling_down";
-        i."<C-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
-        i."<C-u>" = false;
+        i."<c-f>" = lib.mkRaw "require('telescope.actions').preview_scrolling_down";
+        i."<c-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
+        i."<c-u>" = false;
       };
       nvim-tree.enable = true;
       # explicit package to resolve combinePlugins conflict
@@ -142,13 +142,13 @@ importPackage rec {
         completion.menu.draw.treesitter = [ "lsp" ];
         signature.enabled = true;
         keymap.preset = "none";
-        keymap."<C-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
-        keymap."<C-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
-        keymap."<Tab>" = [ "select_next" "fallback" ];
-        keymap."<S-Tab>" = [ "select_prev" "fallback" ];
-        keymap."<C-b>" = [ "scroll_documentation_up" "fallback" ];
-        keymap."<C-f>" = [ "scroll_documentation_down" "fallback" ];
-        keymap."<C-k>" = [ "show_signature" "hide_signature" "fallback" ];
+        keymap."<c-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
+        keymap."<c-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
+        keymap."<tab>" = [ "select_next" "fallback" ];
+        keymap."<s-tab>" = [ "select_prev" "fallback" ];
+        keymap."<c-b>" = [ "scroll_documentation_up" "fallback" ];
+        keymap."<c-f>" = [ "scroll_documentation_down" "fallback" ];
+        keymap."<c-k>" = [ "show_signature" "hide_signature" "fallback" ];
         cmdline.keymap.preset = "inherit";
         cmdline.completion.list.selection.preselect = false;
         cmdline.completion.menu.auto_show = true;
@@ -174,11 +174,6 @@ importPackage rec {
       fastaction.settings.dismiss_keys = [ "<esc>" "q" ];
       notify.enable = true;
       notify.settings.background_colour = lib.bg;
-      nvim-autopairs.enable = true;
-      nvim-autopairs.settings = {
-        map_c_h = true;
-        map_c_w = true;
-      };
     };
     extraPackages = [ nixpkgs-fmt ];
     extraPlugins = with vimPlugins; [
@@ -202,26 +197,6 @@ importPackage rec {
       vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
         vim.notify(method.message, severity[params.type])
       end
-
-      -- from https://github.com/windwp/nvim-autopairs/issues/276#issuecomment-1725034495
-      local api = vim.api
-      local insertCursorCol = 0
-      vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-         pattern = "*",
-         callback = function()
-            _, insertCursorCol = unpack(api.nvim_win_get_cursor(0));
-         end,
-      })
-
-      vim.keymap.set("i", "<C-u>", function()
-         local _, cursorCol = unpack(api.nvim_win_get_cursor(0));
-         local colDistance = cursorCol - insertCursorCol
-         local backspaces = ""
-         for i = 1, colDistance, 1 do
-           backspaces = backspaces .. '<BS>' 
-         end
-         return backspaces
-      end, { remap = true, expr = true })
     '';
   });
 }
