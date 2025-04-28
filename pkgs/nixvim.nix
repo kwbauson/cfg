@@ -134,6 +134,7 @@ importPackage rec {
         '';
       });
       scrollview.enable = true;
+      scrollview.settings.signs_max_per_row = 0;
       blink-cmp.enable = true;
       blink-cmp.settings = {
         completion.list.selection.preselect = false;
