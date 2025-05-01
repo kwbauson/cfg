@@ -89,6 +89,43 @@ importPackage rec {
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
     };
     plugins = {
+      lsp.enable = true;
+      lsp.servers = {
+        nil_ls.enable = true; # FIXME switch to nixd?
+        nil_ls.settings.formatting.command = [ "nixpkgs-fmt" ];
+        ts_ls.enable = true;
+        basedpyright.enable = true;
+      };
+      none-ls.enable = true;
+      none-ls.sources.formatting.prettier.enable = true;
+      none-ls.sources.formatting.prettier.disableTsServerFormatter = true;
+      none-ls.sources.code_actions.gitsigns.enable = true;
+      lsp-format.enable = true;
+      treesitter.enable = true;
+      treesitter.nixvimInjections = false;
+      treesitter.settings = {
+        highlight.enable = true;
+        indent.enable = true;
+      };
+      blink-cmp.enable = true;
+      blink-cmp.settings = {
+        completion.list.selection.preselect = false;
+        completion.documentation.auto_show = true;
+        completion.documentation.auto_show_delay_ms = 50;
+        completion.menu.draw.treesitter = [ "lsp" ];
+        signature.enabled = true;
+        keymap.preset = "none";
+        keymap."<c-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
+        keymap."<c-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
+        keymap."<tab>" = [ "select_next" "fallback" ];
+        keymap."<s-tab>" = [ "select_prev" "fallback" ];
+        keymap."<c-b>" = [ "scroll_documentation_up" "fallback" ];
+        keymap."<c-f>" = [ "scroll_documentation_down" "fallback" ];
+        keymap."<c-k>" = [ "show_signature" "hide_signature" "fallback" ];
+        cmdline.keymap.preset = "inherit";
+        cmdline.completion.list.selection.preselect = false;
+        cmdline.completion.menu.auto_show = true;
+      };
       bufferline.enable = true;
       bufferline.settings.options = {
         show_buffer_close_icons = false;
@@ -97,22 +134,6 @@ importPackage rec {
       web-devicons.enable = true;
       lualine.enable = true;
       lualine.settings.options.globalstatus = true;
-      treesitter.enable = true;
-      treesitter.nixvimInjections = false;
-      treesitter.settings = {
-        highlight.enable = true;
-        indent.enable = true;
-      };
-      lsp.enable = true;
-      lsp.servers = {
-        nil_ls.enable = true; # FIXME switch to nixd?
-        nil_ls.settings.formatting.command = [ "nixpkgs-fmt" ];
-        ts_ls.enable = true;
-      };
-      none-ls.enable = true;
-      none-ls.sources.formatting.prettier.enable = true;
-      none-ls.sources.formatting.prettier.disableTsServerFormatter = true;
-      lsp-format.enable = true;
       gitsigns.enable = true;
       comment.enable = true;
       comment.settings.toggler.block = "gcb";
@@ -135,25 +156,6 @@ importPackage rec {
       });
       scrollview.enable = true;
       scrollview.settings.signs_max_per_row = 0;
-      blink-cmp.enable = true;
-      blink-cmp.settings = {
-        completion.list.selection.preselect = false;
-        completion.documentation.auto_show = true;
-        completion.documentation.auto_show_delay_ms = 50;
-        completion.menu.draw.treesitter = [ "lsp" ];
-        signature.enabled = true;
-        keymap.preset = "none";
-        keymap."<c-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
-        keymap."<c-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
-        keymap."<tab>" = [ "select_next" "fallback" ];
-        keymap."<s-tab>" = [ "select_prev" "fallback" ];
-        keymap."<c-b>" = [ "scroll_documentation_up" "fallback" ];
-        keymap."<c-f>" = [ "scroll_documentation_down" "fallback" ];
-        keymap."<c-k>" = [ "show_signature" "hide_signature" "fallback" ];
-        cmdline.keymap.preset = "inherit";
-        cmdline.completion.list.selection.preselect = false;
-        cmdline.completion.menu.auto_show = true;
-      };
       colorful-menu.enable = true;
       lastplace.enable = true;
       fugitive.enable = true;
