@@ -61,6 +61,7 @@ importPackage rec {
       undofile = true;
       mouse = "";
       wrap = false;
+      smartcase = true;
     };
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
@@ -126,6 +127,8 @@ importPackage rec {
         cmdline.completion.list.selection.preselect = false;
         cmdline.completion.menu.auto_show = true;
       };
+      tiny-inline-diagnostic.enable = true;
+      tiny-inline-diagnostic.settings.options.show_all_diags_on_cursorline = true;
       bufferline.enable = true;
       bufferline.settings.options = {
         show_buffer_close_icons = false;
@@ -179,16 +182,7 @@ importPackage rec {
       notify.settings.background_colour = lib.bg;
     };
     extraPackages = [ nixpkgs-fmt ];
-    extraPlugins = with vimPlugins; [
-      tiny-inline-diagnostic-nvim
-    ];
     extraConfigLua = /* lua */ ''
-      require('tiny-inline-diagnostic').setup({
-        options = {
-          show_all_diags_on_cursorline = true,
-        },
-      })
-
       -- from https://github.com/rcarriga/nvim-notify/wiki/Usage-Recipes/#lsp-messages
       -- table from lsp severity to vim severity.
       local severity = {
