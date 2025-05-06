@@ -61,6 +61,7 @@ importPackage rec {
       undofile = true;
       mouse = "";
       wrap = false;
+      ignorecase = true;
       smartcase = true;
     };
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
