@@ -98,8 +98,8 @@ importPackage rec {
         basedpyright.enable = true;
       };
       none-ls.enable = true;
-      none-ls.sources.formatting.prettier.enable = true;
-      none-ls.sources.formatting.prettier.disableTsServerFormatter = true;
+      none-ls.sources.formatting.prettierd.enable = true;
+      none-ls.sources.formatting.prettierd.disableTsServerFormatter = true;
       none-ls.sources.code_actions.gitsigns.enable = true;
       lsp-format.enable = true;
       treesitter.enable = true;
