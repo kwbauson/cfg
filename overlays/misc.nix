@@ -75,5 +75,4 @@ final: prev: with final.scope; {
       }).config.system.build.vm;
     in
     writeBashBin "vm-console" ''${getExe vm} --nographic "$@"'';
-  cachix = if isDarwin then (importNixpkgs "ab08953dd2f1d468331895e8b1f876a4095ad9e3").cachix else prev.cachix;
 }
