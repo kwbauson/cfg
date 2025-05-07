@@ -100,6 +100,9 @@ importPackage rec {
       end'';
       jsonls.enable = true;
       basedpyright.enable = true;
+      ruff.enable = true;
+      bashls.enable = true;
+      terraformls.enable = true;
     };
     plugins = {
       lspconfig.enable = true;
