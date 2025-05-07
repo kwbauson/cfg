@@ -89,6 +89,7 @@ importPackage rec {
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
+      K = "<cmd>lua vim.lsp.buf.hover({ focus = false, anchor_bias = 'above' })<cr>";
     };
     plugins = {
       lsp.enable = true;
@@ -99,9 +100,11 @@ importPackage rec {
         basedpyright.enable = true;
       };
       none-ls.enable = true;
-      none-ls.sources.formatting.prettierd.enable = true;
-      none-ls.sources.formatting.prettierd.disableTsServerFormatter = true;
-      none-ls.sources.code_actions.gitsigns.enable = true;
+      none-ls.sources = {
+        formatting.prettierd.enable = true;
+        formatting.prettierd.disableTsServerFormatter = true;
+        code_actions.gitsigns.enable = true;
+      };
       lsp-format.enable = true;
       treesitter.enable = true;
       treesitter.nixvimInjections = false;
@@ -116,6 +119,7 @@ importPackage rec {
         completion.documentation.auto_show_delay_ms = 50;
         completion.menu.draw.treesitter = [ "lsp" ];
         signature.enabled = true;
+        signature.window.show_documentation = true;
         keymap.preset = "none";
         keymap."<c-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
         keymap."<c-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
