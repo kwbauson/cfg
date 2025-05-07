@@ -61,6 +61,8 @@ importPackage rec {
       undofile = true;
       mouse = "";
       wrap = false;
+      ignorecase = true;
+      smartcase = true;
     };
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
@@ -97,8 +99,8 @@ importPackage rec {
         basedpyright.enable = true;
       };
       none-ls.enable = true;
-      none-ls.sources.formatting.prettier.enable = true;
-      none-ls.sources.formatting.prettier.disableTsServerFormatter = true;
+      none-ls.sources.formatting.prettierd.enable = true;
+      none-ls.sources.formatting.prettierd.disableTsServerFormatter = true;
       none-ls.sources.code_actions.gitsigns.enable = true;
       lsp-format.enable = true;
       treesitter.enable = true;
@@ -126,10 +128,27 @@ importPackage rec {
         cmdline.completion.list.selection.preselect = false;
         cmdline.completion.menu.auto_show = true;
       };
+      tiny-inline-diagnostic.enable = true;
+      tiny-inline-diagnostic.settings.options.show_all_diags_on_cursorline = true;
       bufferline.enable = true;
       bufferline.settings.options = {
         show_buffer_close_icons = false;
         indicator.style = "underline";
+        style_preset = lib.mkRaw "require('bufferline').style_preset.no_italic";
+        tab_size = 0;
+        truncate_names = false;
+        diagnostics = "nvim_lsp";
+        name_formatter =
+          let
+            names = [ "default.nix" "configuration.nix" "index.html" "index.ts" ];
+          in
+          lib.mkRaw /* lua */ ''function(buf)
+            if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
+              return buf.path:match("([^/]+/[^/]+)$")
+            else
+              return buf.name
+            end
+          end'';
       };
       web-devicons.enable = true;
       lualine.enable = true;
@@ -179,16 +198,7 @@ importPackage rec {
       notify.settings.background_colour = lib.bg;
     };
     extraPackages = [ nixpkgs-fmt ];
-    extraPlugins = with vimPlugins; [
-      tiny-inline-diagnostic-nvim
-    ];
     extraConfigLua = /* lua */ ''
-      require('tiny-inline-diagnostic').setup({
-        options = {
-          show_all_diags_on_cursorline = true,
-        },
-      })
-
       -- from https://github.com/rcarriga/nvim-notify/wiki/Usage-Recipes/#lsp-messages
       -- table from lsp severity to vim severity.
       local severity = {
