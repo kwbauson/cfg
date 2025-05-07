@@ -136,7 +136,8 @@ importPackage rec {
         indicator.style = "underline";
         style_preset = lib.mkRaw "require('bufferline').style_preset.no_italic";
         tab_size = 0;
-        max_name_length = 50;
+        truncate_names = false;
+        diagnostics = "nvim_lsp";
         name_formatter =
           let
             names = [ "default.nix" "configuration.nix" "index.html" "index.ts" ];
