@@ -134,6 +134,20 @@ importPackage rec {
       bufferline.settings.options = {
         show_buffer_close_icons = false;
         indicator.style = "underline";
+        style_preset = lib.mkRaw "require('bufferline').style_preset.no_italic";
+        tab_size = 0;
+        max_name_length = 50;
+        name_formatter =
+          let
+            names = [ "default.nix" "configuration.nix" "index.html" "index.ts" ];
+          in
+          lib.mkRaw /* lua */ ''function(buf)
+            if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
+              return buf.path:match("([^/]+/[^/]+)$")
+            else
+              return buf.name
+            end
+          end'';
       };
       web-devicons.enable = true;
       lualine.enable = true;
