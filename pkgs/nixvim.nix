@@ -26,7 +26,7 @@ importPackage rec {
         }
       )
     );
-    mkCmdlineMap = action: fallback: lib.mkRaw /* lua */ ''{
+    mkCmdlineMap = action: fallback: lib.mkRaw ''{
       function (cmp)
         if vim.fn.getcmdtype() ~= ':' then
           return cmp.${action}()
@@ -91,21 +91,34 @@ importPackage rec {
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
       K = "<cmd>lua vim.lsp.buf.hover({ focus = false, anchor_bias = 'above' })<cr>";
     };
+    lsp.servers = {
+      nil_ls.enable = true; # FIXME switch to nixd?
+      nil_ls.settings.formatting.command = [ "nixpkgs-fmt" ];
+      ts_ls.enable = true;
+      ts_ls.settings.on_attach = lib.mkRaw ''function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+      end'';
+      jsonls.enable = true;
+      basedpyright.enable = true;
+    };
     plugins = {
-      lsp.enable = true;
-      lsp.servers = {
-        nil_ls.enable = true; # FIXME switch to nixd?
-        nil_ls.settings.formatting.command = [ "nixpkgs-fmt" ];
-        ts_ls.enable = true;
-        basedpyright.enable = true;
-      };
+      lspconfig.enable = true;
       none-ls.enable = true;
       none-ls.sources = {
         formatting.prettierd.enable = true;
-        formatting.prettierd.disableTsServerFormatter = true;
+        formatting.prettierd.disableTsServerFormatter = true; # NOTE: doesn't work with new lsp module yet
         code_actions.gitsigns.enable = true;
       };
-      lsp-format.enable = true;
+      conform-nvim.enable = true;
+      conform-nvim.settings.format_on_save = {
+        lsp_format = "fallback";
+      };
+      conform-nvim.package = vimPlugins.conform-nvim.overrideAttrs (old: {
+        postInstall = ''
+          ${old.postInstall}
+          rm $out/doc/recipes.md
+        '';
+      });
       treesitter.enable = true;
       treesitter.nixvimInjections = false;
       treesitter.settings = {
@@ -146,7 +159,7 @@ importPackage rec {
           let
             names = [ "default.nix" "configuration.nix" "index.html" "index.ts" ];
           in
-          lib.mkRaw /* lua */ ''function(buf)
+          lib.mkRaw ''function(buf)
             if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
               return buf.path:match("([^/]+/[^/]+)$")
             else
@@ -157,6 +170,13 @@ importPackage rec {
       web-devicons.enable = true;
       lualine.enable = true;
       lualine.settings.options.globalstatus = true;
+      lualine.settings.sections.lualine_x = [
+        "filetype"
+        {
+          __unkeyed-1 = "lsp_status";
+          ignore_lsp = [ "null-ls" ];
+        }
+      ];
       gitsigns.enable = true;
       comment.enable = true;
       comment.settings.toggler.block = "gcb";
