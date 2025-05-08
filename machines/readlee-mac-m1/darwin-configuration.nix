@@ -1,4 +1,4 @@
-{ config, scope, ... }: with scope;
+{ config, scope, machine-name, ... }: with scope;
 {
   _module.args.username = "benjamin";
 
@@ -15,12 +15,12 @@
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {
-    runner-kwbauson-cfg = {
+    ${machine-name} = {
       enable = true;
       replace = true;
       url = "https://github.com/kwbauson/cfg";
       tokenFile = "/etc/github-runner-kwbauson-cfg.token";
-      extraLabels = [ "nix" ];
+      extraLabels = [ "nix" system ];
       extraPackages = [ gh cachix ];
     };
     runner-benaduggan-nix-3 = {
