@@ -7,9 +7,6 @@ jobs:
       matrix:
         system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
-    outputs:
-      checks_x86_64-linux: ${{ steps.outputs.outputs.checks_x86_64-linux }}
-      checks_aarch64-darwin: ${{ steps.outputs.outputs.checks_aarch64-darwin }}
     steps:
       - uses: actions/checkout@v4
       - run: nix -L build .#checks
@@ -23,6 +20,13 @@ jobs:
         id: outputs
         run: |
           echo 'checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
+          nix build .#create-cached-refs
+          echo 'create_cached_refs_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
+    outputs:
+      checks_x86_64-linux: ${{ steps.outputs.outputs.checks_x86_64-linux }}
+      checks_aarch64-darwin: ${{ steps.outputs.outputs.checks_aarch64-darwin }}
+      create_cached_refs_x86_64-linux: ${{ steps.outputs.outputs.create_cached_refs_x86_64-linux }}
+      create_cached_refs_aarch64-darwin: ${{ steps.outputs.outputs.create_cached_refs_aarch64-darwin }}
 
   cached-refs:
     if: github.ref == 'refs/heads/actions-cache-lock'
@@ -34,9 +38,8 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - run: |
-          echo '${{ toJSON(needs.build.outputs) }}'
+          echo '${{ needs.build.outputs.checks_${{ matrix.system }} }}'
       # - name: Run create-cached-refs
-      #   if: github.ref == 'refs/heads/main'
       #   run: |
       #     tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
       #     cachix pin kwbauson "build-$tag" ./result --keep-revisions 1
