@@ -16,7 +16,7 @@ jobs:
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
   cached-refs:
-    if: github.ref == 'refs/heads/actions-cache-lock'
+    if: github.ref == 'refs/heads/actions-cache-loc'
     needs: build
     concurrency: { group: cached-refs }
     strategy:
