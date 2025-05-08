@@ -23,9 +23,8 @@ jobs:
           nix build .#create-cached-refs
           echo 'create_cached_refs_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
     outputs:
-      checks:
-        x86_64-linux: ${{ steps.store_paths.outputs.checks_x86_64-linux }}
-        aarch64-darwin: ${{ steps.store_paths.outputs.checks_aarch64-darwin }}
+      checks_x86_64-linux: ${{ steps.store_paths.outputs.checks_x86_64-linux }}
+      checks_aarch64-darwin: ${{ steps.store_paths.outputs.checks_aarch64-darwin }}
       create_cached_refs_x86_64-linux: ${{ steps.store_paths.outputs.create_cached_refs_x86_64-linux }}
       create_cached_refs_aarch64-darwin: ${{ steps.store_paths.outputs.create_cached_refs_aarch64-darwin }}
 
@@ -39,7 +38,7 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - run: |
-          echo '${{ toJSON(needs.build.outputs) }}'
+          echo '${{ needs.build.outputs[format("checks_{0}", matrix.system)] }}'
       # - name: Run create-cached-refs
       #   run: |
       #     tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
