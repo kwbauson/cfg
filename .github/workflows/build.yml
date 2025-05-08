@@ -8,19 +8,22 @@ jobs:
         system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
     outputs:
-      checks_x86_64-linux: ${{ steps.build_checks.outputs.checks_x86_64-linux }}
-      checks_aarch64-darwin: ${{ steps.build_checks.outputs.checks_aarch64-darwin }}
+      checks_x86_64-linux: ${{ steps.outputs.outputs.checks_x86_64-linux }}
+      checks_aarch64-darwin: ${{ steps.outputs.outputs.checks_aarch64-darwin }}
     steps:
       - uses: actions/checkout@v4
-      - id: build_checks
-        run: |
-          nix -L build .#checks
-          echo 'checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
+      - run: nix -L build .#checks
       - run: ./result/bin/checks
-      - name: Push to cachix
+      - name: Run cachix push
         run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
+      - name: Generate outputs
+        if: github.ref == 'refs/heads/actions-cache-lock'
+        id: outputs
+        run: |
+          echo 'checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
+
   cached-refs:
     if: github.ref == 'refs/heads/actions-cache-lock'
     needs: build
