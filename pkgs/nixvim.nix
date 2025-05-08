@@ -78,7 +78,7 @@ importPackage rec {
       "g." = "<cmd>lua require('fastaction').code_action()<cr>";
       gd = "<cmd>Telescope lsp_definitions<cr>";
       " t" = "<cmd>Telescope<cr>";
-      " p" = "<cmd>Telescope find_files<cr>";
+      " p" = "<cmd>Telescope find_files hidden=true<cr>";
       " g" = "<cmd>Telescope live_grep<cr>";
       " G" = "<cmd>Telescope grep_string<cr>";
       " b" = "<cmd>Telescope buffers<cr>";
