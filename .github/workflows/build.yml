@@ -37,12 +37,11 @@ jobs:
         system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
     env:
-      checks_path: ${{ needs.build.outputs[format('checks_{0}', matrix.system)] }}
+      system: ${{ matrix.system }}
+      checks: ${{ needs.build.outputs[format('checks_{0}', matrix.system)] }}
+      create_cached_refs: ${{ needs.build.outputs[format('create_cached_refs_{0}', matrix.system)] }}
     steps:
-      - run: |
-          echo "$checks_path"
-      # - name: Run create-cached-refs
-      #   run: |
-      #     tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
-      #     cachix pin kwbauson "build-$tag" ./result --keep-revisions 1
-      #     nix run .#create-cached-refs -- push ./result/cached-paths --tag "$tag"
+      - name: Run create-cached-refs
+        run: |
+          cachix pin kwbauson "build-$system" "$checks" --keep-revisions 1
+          "$create_cached_refs"/bin/create-cached-refs -- push "$checks"/cached-paths --tag "$tag"
