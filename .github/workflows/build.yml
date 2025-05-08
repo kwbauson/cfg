@@ -17,6 +17,10 @@ jobs:
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
   cache:
+    strategy:
+      matrix:
+        system: [{ os: Linux, arch: X64 }, { os: macOS, arch: ARM64 }]
+    runs-on: [nix, "${{ matrix.system.os }}", "${{ matrix.system.arch }}"]
     needs: build
     runs-on: [nix]
     if: github.ref == 'refs/heads/actions-cache-lock'
