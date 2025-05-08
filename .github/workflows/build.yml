@@ -6,8 +6,8 @@ jobs:
       fail-fast: false
       matrix:
         system: [{ os: Linux, arch: X64 }, { os: macOS, arch: ARM64 }]
-    name: '${{ matrix.system.os }} ${{ matrix.system.arch }}'
-    runs-on: [nix, '${{ matrix.system.os }}', '${{ matrix.system.arch }}']
+    name: "${{ matrix.system.os }} ${{ matrix.system.arch }}"
+    runs-on: [nix, "${{ matrix.system.os }}", "${{ matrix.system.arch }}"]
     steps:
       - uses: actions/checkout@v4
       - run: nix -L build .#checks
@@ -16,9 +16,17 @@ jobs:
         run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
+      - name: Lock cached branch
+        uses: github/lock@v2.3.1
+        id: cached
+        with: { mode: lock }
       - name: Run create-cached-refs
         if: github.ref == 'refs/heads/main'
         run: |
           tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
           cachix pin kwbauson "build-$tag" ./result --keep-revisions 1
           nix run .#create-cached-refs -- push ./result/cached-paths --tag "$tag"
+      - name: Unlock cached branch
+        uses: github/lock@v2.3.1
+        id: cached
+        with: { mode: unlock }
