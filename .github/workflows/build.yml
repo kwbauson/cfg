@@ -38,7 +38,7 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - run: |
-          echo '${{ needs.build.outputs.checks_${{ matrix.system }} }}'
+          echo '${{ toJSON(needs.build.outputs) }}'
       # - name: Run create-cached-refs
       #   run: |
       #     tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
