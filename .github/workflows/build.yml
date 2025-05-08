@@ -1,7 +1,7 @@
 name: build
 on: { workflow_dispatch, push }
 jobs:
-  build:
+  checks:
     strategy:
       fail-fast: false
       matrix:
@@ -30,7 +30,7 @@ jobs:
 
   cached-refs:
     if: github.ref == 'refs/heads/main'
-    needs: build
+    needs: checks
     concurrency: { group: cached-refs }
     strategy:
       matrix:
@@ -38,11 +38,11 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     env:
       system: ${{ matrix.system }}
-      checks: ${{ needs.build.outputs[format('checks_{0}', matrix.system)] }}
-      create_cached_refs: ${{ needs.build.outputs[format('create_cached_refs_{0}', matrix.system)] }}
+      checks: ${{ needs.checks.outputs[format('checks_{0}', matrix.system)] }}
+      create_cached_refs: ${{ needs.checks.outputs[format('create_cached_refs_{0}', matrix.system)] }}
     steps:
       - uses: actions/checkout@v4
       - name: Run create-cached-refs
         run: |
-          cachix pin kwbauson "build.$system" "$checks" --keep-revisions 1
+          cachix pin kwbauson "checks.$system" "$checks" --keep-revisions 1
           "$create_cached_refs"/bin/create-cached-refs push "$checks"/cached-paths --tag "$system"
