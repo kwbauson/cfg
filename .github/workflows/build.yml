@@ -31,7 +31,7 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - run: |
-          echo "${{ needs.foo }}"
+          echo '${{ toJSON(needs.build.outputs) }}'
       # - name: Run create-cached-refs
       #   if: github.ref == 'refs/heads/main'
       #   run: |
