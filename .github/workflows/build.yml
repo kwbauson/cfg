@@ -15,7 +15,7 @@ jobs:
       - id: build_checks
         run: |
           nix -L build .#checks
-          echo 'output_checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
+          echo 'checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
       - run: ./result/bin/checks
       - name: Push to cachix
         run: |
