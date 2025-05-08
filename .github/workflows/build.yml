@@ -15,8 +15,8 @@ jobs:
         run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
-      - name: Generate outputs
-        if: github.ref == 'refs/heads/actions-cache-lock'
+      - name: Store path job outputs
+        if: github.ref == 'refs/heads/actions-cache-loc'
         id: outputs
         run: |
           echo 'checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
@@ -29,7 +29,7 @@ jobs:
       create_cached_refs_aarch64-darwin: ${{ steps.outputs.outputs.create_cached_refs_aarch64-darwin }}
 
   cached-refs:
-    if: github.ref == 'refs/heads/actions-cache-lock'
+    if: github.ref == 'refs/heads/actions-cache-loc'
     needs: build
     concurrency: { group: cached-refs }
     strategy:
