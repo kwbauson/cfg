@@ -1,4 +1,4 @@
-set -euo pipefail
+set -xeuo pipefail
 
 # @cmd Generate nix files for cached paths
 # @alias g

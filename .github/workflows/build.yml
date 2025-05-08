@@ -44,5 +44,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run create-cached-refs
         run: |
-          cachix pin kwbauson "build-$system" "$checks" --keep-revisions 1
+          cachix pin kwbauson "build.$system" "$checks" --keep-revisions 1
           "$create_cached_refs"/bin/create-cached-refs push "$checks"/cached-paths --tag "$system"
