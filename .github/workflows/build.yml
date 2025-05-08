@@ -5,26 +5,33 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        system: [{ os: Linux, arch: X64 }, { os: macOS, arch: ARM64 }]
-    runs-on: [nix, "${{ matrix.system.os }}", "${{ matrix.system.arch }}"]
+        system: [x86_64-linux, aarch64-darwin]
+    runs-on: [nix, "${{ matrix.system }}"]
+    outputs:
+      checks_x86_64-linux: ${{ steps.build_checks.outputs.checks_x86_64-linux }}
+      checks_aarch64-darwin: ${{ steps.build_checks.outputs.checks_aarch64-darwin }}
     steps:
       - uses: actions/checkout@v4
-      - run: nix -L build .#checks
+      - id: build_checks
+        run: |
+          nix -L build .#checks
+          echo 'output_checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
       - run: ./result/bin/checks
       - name: Push to cachix
         run: |
           cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
           cachix push kwbauson ./result
   cached-refs:
-    if: github.ref == 'refs/heads/actions-cache-loc'
+    if: github.ref == 'refs/heads/actions-cache-lock'
     needs: build
     concurrency: { group: cached-refs }
     strategy:
       matrix:
-        system: [{ os: Linux, arch: X64 }, { os: macOS, arch: ARM64 }]
-    runs-on: [nix, "${{ matrix.system.os }}", "${{ matrix.system.arch }}"]
+        system: [x86_64-linux, aarch64-darwin]
+    runs-on: [nix, "${{ matrix.system }}"]
     steps:
-      - run: echo itsa me
+      - run: |
+          echo "${{ needs.foo }}"
       # - name: Run create-cached-refs
       #   if: github.ref == 'refs/heads/main'
       #   run: |
