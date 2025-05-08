@@ -36,9 +36,11 @@ jobs:
       matrix:
         system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
+    env:
+      checks_path: ${{ needs.build.outputs[format('checks_{0}', matrix.system)] }}
     steps:
       - run: |
-          echo '${{ needs.build.outputs[format("checks_{0}", matrix.system)] }}'
+          echo "$checks_path"
       # - name: Run create-cached-refs
       #   run: |
       #     tag='${{ matrix.system.os }}-${{ matrix.system.arch }}'
