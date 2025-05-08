@@ -36,30 +36,25 @@ generate() {
 # @option --email=noreply@example.com
 push() {
   root=$PWD
+  worktree=/tmp/create-cached-refs/cached
 
-  try_push() {
-    cd "$root"
-    worktree=/tmp/create-cached-refs/cached
-    rm -rf "$worktree"
-    git worktree prune
-    git fetch --prune origin
-    git fetch origin cached:cached || true
-    git worktree add "$worktree" --orphan || git worktree add "$worktree"
-    cd "$worktree"
+  rm -rf "$worktree"
+  git worktree prune
+  git fetch --prune origin
+  git fetch origin cached:cached || true
+  git worktree add "$worktree" --orphan || git worktree add "$worktree"
+  cd "$worktree"
 
-    "$0" generate . "$root/$argc_paths" --tag "$argc_tag"
+  "$0" generate . "$root/$argc_paths" --tag "$argc_tag"
 
-    git add --all
-    commit() {
-      git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
-    }
-    commit --amend || commit
-    git push --force-with-lease --set-upstream origin cached
-    cd "$root"
-    git worktree remove "$worktree"
+  git add --all
+  commit() {
+    git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
   }
-
-  try_push
+  commit --amend || commit
+  git push --force-with-lease --set-upstream origin cached
+  cd "$root"
+  git worktree remove "$worktree"
 }
 
 # @cmd Wraps nix to use cached if it exists
