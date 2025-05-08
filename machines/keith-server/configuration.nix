@@ -93,7 +93,7 @@
 
   services.github-runners.keith-server = {
     enable = true;
-    extraLabels = [ "nix" ];
+    extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
     url = "https://github.com/kwbauson/cfg";
