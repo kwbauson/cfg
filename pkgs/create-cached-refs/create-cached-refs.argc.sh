@@ -6,7 +6,7 @@ set -euo pipefail
 # @arg paths=./result Directory of paths to be pinned
 # @option --tag=default Name for generated paths file
 generate() {
-  out=$PWD/$argc_out
+  out=$(realpath "$argc_out")
   paths=$argc_paths
 
   mkdir -p "$out"/paths
