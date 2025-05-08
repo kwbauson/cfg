@@ -1,4 +1,4 @@
-set -xeuo pipefail
+set -euo pipefail
 
 # @cmd Generate nix files for cached paths
 # @alias g
@@ -6,14 +6,13 @@ set -xeuo pipefail
 # @arg paths=./result Directory of paths to be pinned
 # @option --tag=default Name for generated paths file
 generate() {
-  out=$(realpath "$argc_out")
-  paths=$argc_paths
+  out=$PWD/$argc_out
 
   mkdir -p "$out"/paths
   cp --no-preserve=mode $TEMPLATE_FLAKE "$out"/flake.nix
   cp --no-preserve=mode $TEMPLATE_DEFAULT "$out"/default.nix
 
-  cd "$paths"
+  cd "$argc_paths"
   (
     echo "{ mkPath }:"
     echo "{"
@@ -36,6 +35,7 @@ generate() {
 # @option --email=noreply@example.com
 push() {
   root=$PWD
+  paths=$(realpath "$argc_paths")
   worktree=/tmp/create-cached-refs/cached
 
   rm -rf "$worktree"
@@ -45,7 +45,7 @@ push() {
   git worktree add "$worktree" --orphan || git worktree add "$worktree"
   cd "$worktree"
 
-  "$0" generate . "$root/$argc_paths" --tag "$argc_tag"
+  "$0" generate . "$paths" --tag "$argc_tag"
 
   git add --all
   commit() {
