@@ -1,4 +1,4 @@
-{ config, scope, username, ... }: with scope;
+{ config, scope, username, machine-name, ... }: with scope;
 let
   cfg = config.services.auto-update;
   script = ''
@@ -8,7 +8,7 @@ let
     if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
       if [[ -z $(git status -s) ]];then
         nou
-        nod
+        nod ${optionalString (machine-name == "kwbauson") "--delete-booted-system"}
       else
         echo working branch dirty, skipping
       fi

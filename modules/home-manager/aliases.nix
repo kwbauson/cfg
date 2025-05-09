@@ -9,7 +9,7 @@
     cfgp = "git -C ~/cfg cap";
     machine-name = "echo ${machine-name}";
     nou = "cfgu && noa";
-    nod = "delete-old-generations && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}";
+    nod = ''delete-old-generations "$@" && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}'';
     noc = "cd ~/cfg && gh workflow run updates.yml";
     noe = "nvim ~/cfg/hosts/$(machine-name)/configuration.nix && nos";
     hme = "nvim ~/cfg/home.nix && hms";
@@ -18,20 +18,8 @@
     nr = ''pkg=$1 && shift; git -C ~/cfg add --all && nix run $(echo "$pkg" | sed -E "s@^|,@ $HOME/cfg#@g") --'';
     reboot-windows = "systemctl reboot --boot-loader-entry=auto-windows";
     lr = ''find "$@" -print0 | sort -z | xargs -0 ls --color=auto -lhd'';
-    delete-old-generations = ''
-      find {/nix/var,~/.local/state}/nix/profiles -not -type d |
-        sed -E 's/-[0-9]+-link$//' |
-        sort |
-        uniq -c |
-        while read count profile;do
-          [[ $count -gt 2 ]] || continue
-          [[ -O $profile ]] && prefix= || prefix=sudo
-          echo deleting $(($count-2)) old generations for "$profile"
-          $prefix nix-env --profile "$profile" --delete-generations old
-        done
-    '';
     nixbuild-shell = "rlwrap ssh eu.nixbuild.net shell";
-    nixbuild-status = ''
+    nixbuild-status = /* bash */ ''
       set -e
       esc=$'\e'
       reset=$esc[0m
@@ -60,7 +48,7 @@
           -e "s/(\[(Running|In queue)\])$/$yellow\1$reset/"
     '';
     batwhich = ''bat "$(which "$@")"'';
-    cnix = ''
+    cnix = /* bash */ ''
       set -u
       cachename=$1
       shift
@@ -70,7 +58,7 @@
       )
       exec nix ''${args[@]} "$@"
     '';
-    build-for-cachix = ''
+    build-for-cachix = /* bash */ ''
       set -euo pipefail
       cachename=$1
       shift
