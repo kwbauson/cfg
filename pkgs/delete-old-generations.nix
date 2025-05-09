@@ -1,7 +1,7 @@
 scope: with scope;
 addMetaAttrs { includePackage = true; } (writeBashBin pname ''
   if [[ $1 = --delete-booted-system ]];then
-    echo sudo rm -f {/nix/var/nix/gcroots,/run}/booted-system
+    sudo rm -f {/nix/var/nix/gcroots,/run}/booted-system
   fi
   find {/nix/var,~/.local/state}/nix/profiles -not -type d |
     sort |
