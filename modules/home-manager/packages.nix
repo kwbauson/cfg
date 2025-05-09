@@ -22,7 +22,7 @@
       };
       inherit
         ffmpeg mediainfo pavucontrol qtbr signal-desktop
-        discord zoom-us dejavu_fonts zathura steamtinkerlaunch
+        discord dejavu_fonts zathura steamtinkerlaunch
         headsetcontrol arduino remmina networkmanagerapplet obsidian;
       sox = sox.override { enableLame = true; };
     };
@@ -46,7 +46,7 @@
   };
   excluded-packages = optionalAttrs isDarwin {
     inherit iproute2 iputils pavucontrol strace dzen2
-      maim zoom-us acpi usbutils xdotool qtbr signal-desktop discord zathura;
+      maim acpi usbutils xdotool qtbr signal-desktop discord zathura;
     inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
     inherit man-pages ncdu bitwarden-cli remmina networkmanagerapplet;
   };
