@@ -77,9 +77,7 @@ stdenv.mkDerivation {
     }
 
     if [[ ''${1:-} = -u ]];then
-      if [[ -e default.nix ]];then
-        file=default.nix
-      elif [[ -e shell.nix ]];then
+      if [[ -e shell.nix ]];then
         file=shell.nix
       fi
       getLatest
@@ -87,8 +85,8 @@ stdenv.mkDerivation {
       exit
     fi
 
-    if [[ -e default.nix || -e shell.nix || -e .envrc ]];then
-      echo "default.nix, shell.nix, or .envrc already exists, doing nothing"
+    if [[ -e shell.nix || -e .envrc ]];then
+      echo "shell.nix or .envrc already exists, doing nothing"
       exit 1
     fi
 
