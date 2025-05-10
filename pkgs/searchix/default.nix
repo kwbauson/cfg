@@ -10,7 +10,7 @@ importPackage (attrs: {
       hash = "sha256-D0qkde1cyGWD7nzsYIzyp/SmERd8BAF1sCs+Elf8cr0=";
     };
   };
-  passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
+  # passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
 
   flake = compatGetFlake attrs.src;
   package = compatGetFlakeDefault attrs.src;
