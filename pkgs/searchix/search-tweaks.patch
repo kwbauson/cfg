@@ -1,0 +1,65 @@
+diff --git a/internal/index/search.go b/internal/index/search.go
+index afc1d3c..8d18166 100644
+--- a/internal/index/search.go
++++ b/internal/index/search.go
+@@ -127,24 +127,24 @@ func (index *ReadIndex) Search(
+ 	query := bleve.NewBooleanQuery()
+ 
+ 	// match the user's query in any field ...
+-	query.AddMust(bleve.NewDisjunctionQuery(
+-		setBoost(bleve.NewTermQuery(keyword), 50),
+-		setBoost(bleve.NewPrefixQuery(keyword), 25),
+-		setBoost(bleve.NewMatchPhraseQuery(keyword), 25),
+-		bleve.NewMatchQuery(keyword),
+-	))
++	// query.AddMust(bleve.NewDisjunctionQuery(
++	// 	setBoost(bleve.NewTermQuery(keyword), 50),
++	// 	setBoost(bleve.NewPrefixQuery(keyword), 25),
++	// 	setBoost(bleve.NewMatchPhraseQuery(keyword), 25),
++	// 	bleve.NewMatchQuery(keyword),
++	// ))
+ 
+ 	if source != nil {
+ 		query.AddMust(
+ 			setField(bleve.NewTermQuery(source.Key), "Source"),
+ 		)
+ 	} else {
+-		q := bleve.NewDisjunctionQuery(
+-			setBoost(setField(bleve.NewTermQuery("nixpkgs"), "Source"), -1000),
+-			setBoost(setField(bleve.NewTermQuery("nur"), "Source"), -5000),
+-		)
+-
+-		query.AddShould(q)
++		// q := bleve.NewDisjunctionQuery(
++		// 	setBoost(setField(bleve.NewTermQuery("nixpkgs"), "Source"), -1000),
++		// 	setBoost(setField(bleve.NewTermQuery("nur"), "Source"), -5000),
++		// )
++		//
++		// query.AddShould(q)
+ 	}
+ 
+ 	mainProgramQuery := bleve.NewMatchQuery(keyword)
+@@ -157,15 +157,15 @@ func (index *ReadIndex) Search(
+ 	mainProgramLiteralQuery.SetBoost(50)
+ 	query.AddShould(mainProgramLiteralQuery)
+ 
+-	programsQuery := bleve.NewMatchQuery(keyword)
+-	programsQuery.SetField("Programs")
+-	programsQuery.SetBoost(2)
+-	query.AddShould(programsQuery)
++	// programsQuery := bleve.NewMatchQuery(keyword)
++	// programsQuery.SetField("Programs")
++	// programsQuery.SetBoost(2)
++	// query.AddShould(programsQuery)
+ 
+-	programsLiteralQuery := bleve.NewTermQuery(keyword)
+-	programsLiteralQuery.SetField("Programs")
+-	programsLiteralQuery.SetBoost(100)
+-	query.AddShould(programsLiteralQuery)
++	// programsLiteralQuery := bleve.NewTermQuery(keyword)
++	// programsLiteralQuery.SetField("Programs")
++	// programsLiteralQuery.SetBoost(100)
++	// query.AddShould(programsLiteralQuery)
+ 
+ 	attrQuery := bleve.NewMatchQuery(keyword)
+ 	attrQuery.SetField("Attribute")
