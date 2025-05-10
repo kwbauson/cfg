@@ -43,7 +43,7 @@ final: prev: with final.scope; {
     (filterAttrs (name: _: name != "root"))
     (mapAttrValues (x: { inherit (x.locked) owner repo rev; }))
   ] // pipe extra-packages [
-    (filterAttrs (_: pkg: pkg ? src.rev))
+    (filterAttrs (_: pkg: pkg ? src.repo))
     (mapAttrValues (pkg: { inherit (pkg.src) owner repo rev; }))
   ];
 }
