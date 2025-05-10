@@ -7,6 +7,7 @@
     ./personal-api.nix
     "${cobi.src}/hosts/modules/games/palworld.nix"
     "${cobi.src}/hosts/modules/games/valheim.nix"
+    searchix.flake.nixosModules.web
   ];
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -113,4 +114,16 @@
 
   services.ollama.enable = true;
   services.ollama.host = "[::]";
+
+  services.searchix.enable = true;
+  services.searchix.settings = {
+    web.baseUrl = "https://searchix.kwbauson.com";
+    importer.Sources = {
+      darwin.Enable = true;
+      home-manager.Enable = true;
+      nur.Enable = true;
+    };
+  };
+  systemd.services.searchix.environment.NIX_PATH = "nixpkgs=${toString pkgs.path}";
+  services.caddy.subdomains.searchix = config.services.searchix.settings.web.port;
 }
