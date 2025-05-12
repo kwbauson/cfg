@@ -4,14 +4,14 @@
     core = {
       inherit
         acpi atool banner bash-completion bashInteractive bc binutils
-        borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
-        dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip inetutils
-        iproute2 iputils ldns less libarchive libnotify lsof man-pages
-        moreutils nano ncdu netcat-gnu nix-tree nmap openssh p7zip patch
-        perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
-        strace time unzip usbutils watch wget which xdg-utils xxd xz zip
-        bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
-        nixos-install-tools better-comma dogdns dasel clip terraform;
+        borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils dos2unix
+        ed fd file findutils gawk gnugrep gnused gnutar gzip inetutils iproute2
+        iputils ldns less libarchive libnotify lsof man-pages moreutils nano ncdu
+        netcat-gnu nix-tree nmap openssh p7zip patch perl pigz procps progress pv
+        ranger ripgrep rlwrap rsync sd socat strace time unzip usbutils watch
+        wget which xdg-utils xxd xz zip bitwarden-cli libqalculate yt-dlp
+        speedtest-cli tldr nix-top jless nixos-install-tools better-comma dogdns
+        dasel clip terraform nix-output-monitor;
     };
     ${attrIf isGraphical "graphical"} = {
       graphical-core = {

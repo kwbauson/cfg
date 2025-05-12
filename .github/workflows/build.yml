@@ -9,7 +9,7 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - uses: actions/checkout@v4
-      - run: nix -L build .#checks
+      - run: nix shell .#nix-output-monitor -c nom build .#checks
       - run: ./result/bin/checks
       - name: Run cachix push
         run: |
