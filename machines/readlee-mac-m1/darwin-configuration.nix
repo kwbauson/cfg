@@ -2,16 +2,7 @@
 {
   _module.args.username = "benjamin";
 
-  nix.settings.extra-substituters = [
-    "https://benaduggan.cachix.org"
-    "https://devenv.cachix.org"
-    "https://jacobi.cachix.org"
-  ];
-  nix.settings.extra-trusted-public-keys = [
-    "benaduggan.cachix.org-1:BY2tmi++VqJD6My4kB/dXGfxT7nJqrOtRVNn9UhgrHE="
-    "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-    "jacobi.cachix.org-1:JJghCz+ZD2hc9BHO94myjCzf4wS3DeBLKHOz3jCukMU="
-  ];
+  ci-substituters.enable = true;
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {

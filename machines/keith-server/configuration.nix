@@ -26,6 +26,7 @@
     size = 64 * 1024;
   }];
 
+  ci-substituters.enable = true;
 
   networking = {
     firewall.allowedTCPPorts = with constants; [ temp-http.port config.services.palworld.port ] ++ valheim.ports;
