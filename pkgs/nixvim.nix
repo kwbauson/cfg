@@ -160,7 +160,7 @@ importPackage rec {
         diagnostics = "nvim_lsp";
         name_formatter =
           let
-            names = [ "default.nix" "configuration.nix" "index.html" "index.ts" ];
+            names = [ "default.nix" "configuration.nix" "darwin-configuration.nix" "index.html" "index.ts" ];
           in
           lib.mkRaw ''function(buf)
             if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
