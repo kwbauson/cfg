@@ -1,8 +1,10 @@
 { config, scope, machine-name, ... }: with scope;
 {
-  _module.args.username = "benjamin";
+  imports = [
+    modules.ci-substituters
+  ];
 
-  ci-substituters.enable = true;
+  _module.args.username = "benjamin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {

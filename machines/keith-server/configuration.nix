@@ -4,6 +4,7 @@
     common-cpu-amd
     common-gpu-amd
     common-cpu-amd-pstate
+    modules.ci-substituters
     ./personal-api.nix
     "${cobi.src}/hosts/modules/games/palworld.nix"
     "${cobi.src}/hosts/modules/games/valheim.nix"
@@ -25,8 +26,6 @@
     device = "/var/lib/swapfile";
     size = 64 * 1024;
   }];
-
-  ci-substituters.enable = true;
 
   networking = {
     firewall.allowedTCPPorts = with constants; [ temp-http.port config.services.palworld.port ] ++ valheim.ports;
