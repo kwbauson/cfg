@@ -3,7 +3,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.url = "git+https://git.lix.systems/lix-project/flake-compat";
     flake-compat.flake = false;
     nixos-hardware.flake = true;
   };

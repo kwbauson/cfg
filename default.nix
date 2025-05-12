@@ -1,14 +1,12 @@
 with builtins;
-{ system ? currentSystem, forceFlakeCompat ? false }:
+{ system ? currentSystem, forceFlakeCompat ? true }:
 let
   lock = fromJSON (readFile ./flake.lock);
-  flake-compat = with lock.nodes.flake-compat.locked; import (fetchTarball {
-    url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
-    sha256 = narHash;
-  });
+  flake-compat = with lock.nodes.flake-compat.locked;
+    import (fetchTarball { inherit url; sha256 = narHash; });
   getFlake = src:
     if builtins ? getFlake && !forceFlakeCompat
     then builtins.getFlake (toString src)
-    else (flake-compat { inherit src; }).defaultNix;
+    else (flake-compat { inherit src; copySourceTreeToStore = false; }).defaultNix;
 in
 (getFlake ./.).packages.${system}.scope // { inherit getFlake; }
