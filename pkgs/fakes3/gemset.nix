@@ -45,10 +45,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1w4q7ww999yyskkfyarpibpaab75zzixmmd4jmij21srdp0ccykc";
+      sha256 = "1wcfdmj162d1ydka5wbnan3kj5jv6494qpaav50q0y1f406sccya";
       type = "gem";
     };
-    version = "1.1.1";
+    version = "1.1.2";
   };
   sorted_set = {
     dependencies = ["rbtree" "set"];
