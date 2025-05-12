@@ -93,7 +93,7 @@ importPackage rec {
     };
     lsp.servers = {
       nil_ls.enable = true; # FIXME switch to nixd?
-      nil_ls.settings.formatting.command = [ "nixpkgs-fmt" ];
+      nil_ls.settings.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
       ts_ls.enable = true;
       ts_ls.settings.on_attach = lib.mkRaw ''function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
