@@ -40,7 +40,7 @@ final: prev: with final.scope; {
     readFile
     fromJSON
     (x: x.nodes)
-    (filterAttrs (name: _: name != "root"))
+    (filterAttrs (name: x: name != "root" && x ? repo))
     (mapAttrValues (x: { inherit (x.locked) owner repo rev; }))
   ] // pipe extra-packages [
     (filterAttrs (_: pkg: pkg ? src.repo))
