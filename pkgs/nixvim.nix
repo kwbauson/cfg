@@ -42,6 +42,7 @@ importPackage rec {
       byteCompileLua.enable = true;
       byteCompileLua.configs = true;
       byteCompileLua.initLua = true;
+      byteCompileLua.luaLib = true;
       byteCompileLua.nvimRuntime = true;
       byteCompileLua.plugins = true;
       combinePlugins.enable = true;
