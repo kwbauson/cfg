@@ -74,7 +74,7 @@ importPackage rec {
       gH = "<cmd>BufferLineMovePrev<cr>";
       gL = "<cmd>BufferLineMoveNext<cr>";
       gb = "<cmd>BufferLinePick<cr>";
-      " d" = "<cmd>bdelete!<cr>";
+      " d" = "<cmd>Bdelete<cr>";
       "g." = "<cmd>lua require('fastaction').code_action()<cr>";
       gd = "<cmd>Telescope lsp_definitions<cr>";
       " t" = "<cmd>Telescope<cr>";
@@ -180,6 +180,7 @@ importPackage rec {
           ignore_lsp = [ "null-ls" ];
         }
       ];
+      bufdelete.enable = true;
       gitsigns.enable = true;
       comment.enable = true;
       comment.settings.toggler.block = "gcb";
