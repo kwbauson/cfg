@@ -13,7 +13,7 @@ let
     (filter (x: x.name != null))
     listToAttrs
     (mapAttrs (pname: path: pipeValue [
-      (final.scope // { inherit pname; prev = prev.${pname}; })
+      (final.scope // { inherit pname; version = "unstable"; prev = prev.${pname}; })
       (optionalAttrs (functionArgs (import path) == { }))
       (prev.callPackage path)
       (addMetaAttrs { position = "${toString path}:1"; })

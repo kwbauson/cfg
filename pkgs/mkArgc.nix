@@ -1,5 +1,5 @@
 scope: with scope;
-(stdenv.mkDerivation (attrs:
+args: (stdenv.mkDerivation (attrs:
   let
     name = attrs.pname or attrs.name;
   in
@@ -35,4 +35,4 @@ scope: with scope;
       runHook postInstall
     '';
     meta.mainProgram = name;
-  })).overrideAttrs
+  })).overrideAttrs ({ __intentionallyOverridingVersion = true; } // args)
