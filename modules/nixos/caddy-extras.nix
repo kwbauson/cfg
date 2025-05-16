@@ -21,7 +21,7 @@ in
   };
 
   config.services.caddy = {
-    package = zaddy;
+    package = zaddy.overrideAttrs { vendorHash = "sha256-EUJqeo6sWT5N334MQ73iNVcOMVEalu31vescu9ckm5g="; };
     globalConfig = ''
       order authenticate before respond
       order authorize before basicauth
