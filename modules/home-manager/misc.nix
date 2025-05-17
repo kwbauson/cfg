@@ -26,7 +26,7 @@
     };
   };
 
-  nix.package = lib.mkForce lix;
+  nix.package = lib.mkForce lixPackageSets.latest.lix;
   nix.settings = optionalAttrs isDarwin {
     max-jobs = "auto";
     extra-experimental-features = [ "nix-command" "flakes" ];
@@ -96,6 +96,7 @@
     };
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
+    direnv.nix-direnv.package = lixPackageSets.latest.nix-direnv;
     fzf = {
       enable = true;
       enableBashIntegration = false;
