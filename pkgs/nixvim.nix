@@ -194,6 +194,7 @@ importPackage rec {
         i."<c-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
         i."<c-u>" = false;
       };
+      telescope.settings.defaults.file_ignore_patterns = [ "^.git/" ];
       nvim-tree.enable = true;
       # explicit package to resolve combinePlugins conflict
       nvim-tree.package = vimPlugins.nvim-tree-lua.overrideAttrs (old: {
