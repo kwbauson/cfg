@@ -9,6 +9,7 @@
   nix.settings.trusted-users = [ username ];
   system.darwinLabel = "${machine-name}-${flakeLastModifiedDateString}";
   users.users.${username}.home = "/Users/${username}";
+  system.primaryUser = username;
   system.defaults.finder.AppleShowAllExtensions = true;
   homebrew.enable = true;
   homebrew.global.autoUpdate = false;
