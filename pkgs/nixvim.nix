@@ -64,6 +64,8 @@ importPackage rec {
       wrap = false;
       ignorecase = true;
       smartcase = true;
+      cursorline = true;
+      cursorlineopt = "number";
     };
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
