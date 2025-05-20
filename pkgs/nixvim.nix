@@ -80,6 +80,7 @@ importPackage rec {
       " d" = "<cmd>Bdelete<cr>";
       "g." = "<cmd>lua require('fastaction').code_action()<cr>";
       gd = "<cmd>Telescope lsp_definitions<cr>";
+      gt = "<cmd>Telescope lsp_type_definitions<cr>";
       " t" = "<cmd>Telescope<cr>";
       " p" = "<cmd>Telescope find_files hidden=true<cr>";
       " g" = "<cmd>Telescope live_grep<cr>";
