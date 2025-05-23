@@ -5,7 +5,7 @@
     modules.auto-update
   ];
   environment.etc."nixpkgs-path".source = nixpkgsPath;
-  nix.package = lix;
+  nix.package = lixPackageSets.latest.lix;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings = {
     max-jobs = "auto";
