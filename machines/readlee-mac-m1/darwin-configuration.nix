@@ -16,7 +16,7 @@
       extraLabels = [ "nix" system ];
       extraPackages = [ gh cachix ];
     };
-    runner-benaduggan-nix-3 = {
+    runner-benaduggan-nix-4 = {
       enable = true;
       replace = true;
       url = "https://github.com/benaduggan/nix";
