@@ -1,7 +1,7 @@
-{ config, scope, isMinimal, ... }: with scope;
+{ scope, ... }: with scope;
 {
   imports = [
-    nixvim.flake.homeManagerModules.nixvim
+    nixvim.flake.homeModules.nixvim
     { programs.nixvim = nixvim.configuration; }
   ];
 
