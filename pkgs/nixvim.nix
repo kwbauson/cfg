@@ -107,13 +107,12 @@ importPackage rec {
       ruff.enable = true;
       bashls.enable = true;
       terraformls.enable = true;
+      biome.enable = true;
     };
     plugins = {
       lspconfig.enable = true;
       none-ls.enable = true;
       none-ls.sources = {
-        formatting.prettierd.enable = true;
-        formatting.prettierd.disableTsServerFormatter = true; # NOTE: doesn't work with new lsp module yet
         code_actions.gitsigns.enable = true;
       };
       conform-nvim.enable = true;
@@ -134,6 +133,7 @@ importPackage rec {
       };
       blink-cmp.enable = true;
       blink-cmp.settings = {
+        completion.keyword.range = "full";
         completion.list.selection.preselect = false;
         completion.documentation.auto_show = true;
         completion.documentation.auto_show_delay_ms = 50;
