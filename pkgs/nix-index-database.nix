@@ -1,10 +1,10 @@
 scope: with scope;
 stdenv.mkDerivation (attrs: {
   inherit pname;
-  version = "2025-05-25-034005";
+  version = "2025-06-01-035302";
   src = fetchurl {
     url = "https://github.com/nix-community/${attrs.pname}/releases/download/${attrs.version}/index-aarch64-linux";
-    hash = "sha256-/zruQx2izHyYgexS9rdLCVEX3QeryVEXLAUO3/AIJ1E=";
+    hash = "sha256-gqDKAybgBW4uytXjD71HhYAQcH2yEjJZ9Q25uGHH8Sc=";
   };
   dontUnpack = true;
   installPhase = ''
