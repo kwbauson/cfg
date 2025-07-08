@@ -46,7 +46,7 @@
   };
   excluded-packages = optionalAttrs isDarwin {
     inherit iproute2 iputils pavucontrol strace dzen2
-      maim acpi usbutils xdotool qtbr signal-desktop discord zathura;
+      maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
     inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
     inherit man-pages ncdu bitwarden-cli remmina networkmanagerapplet;
   };
