@@ -23,7 +23,7 @@
       inherit
         ffmpeg mediainfo pavucontrol qtbr signal-desktop
         discord dejavu_fonts zathura steamtinkerlaunch
-        headsetcontrol arduino remmina networkmanagerapplet obsidian;
+        headsetcontrol arduino remmina obsidian;
       sox = sox.override { enableLame = true; };
     };
     development = {
@@ -48,6 +48,6 @@
     inherit iproute2 iputils pavucontrol strace dzen2
       maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
     inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
-    inherit man-pages ncdu bitwarden-cli remmina networkmanagerapplet;
+    inherit man-pages ncdu bitwarden-cli remmina;
   };
 }

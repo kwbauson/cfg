@@ -82,5 +82,6 @@
       fi
     '';
     slime = "tmux -L vim-slime new";
+    ${attrIf isLinux "nm-applet"} = getExe networkmanagerapplet;
   };
 }
