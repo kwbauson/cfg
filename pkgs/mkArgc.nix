@@ -1,7 +1,7 @@
 scope: with scope;
 args: (stdenv.mkDerivation (attrs:
   let
-    name = attrs.pname or attrs.name;
+    name = args.pname or args.name; # FIXME this isn't overridable anymore
   in
   {
     dontUnpack = true;
