@@ -11,7 +11,7 @@
         '';
       in
       "! ${script}";
-    tmpGitIndex = ''
+    tmpGitIndex = /* bash */ ''
       export GIT_INDEX_FILE=$(mktemp)
       index=$(git rev-parse --show-toplevel)/.git/index
       [[ -e $index ]] && cp "$index" "$GIT_INDEX_FILE" || rm "$GIT_INDEX_FILE"
@@ -24,20 +24,24 @@
     aliases = {
       v = gs "nvim '+ Git | only'";
       a = "add -A";
-      br = gs ''
-        esc=$'\e'
-        reset=$esc[0m
-        red=$esc[31m
-        yellow=$esc[33m
-        green=$esc[32m
-        git -c color.ui=always branch -vv "$@" | sed -E \
-          -e "s/: (gone)]/: $red\1$reset]/" \
-          -e "s/[:,] (ahead [0-9]*)([],])/: $green\1$reset\2/g" \
-          -e "s/[:,] (behind [0-9]*)([],])/: $yellow\1$reset\2/g"
+      br = gs /* bash */ ''
+        output=$(git branch --list --format="%(refname:short) %(refname)")
+        width=$(echo "$output" | awk '{ print $1 }' | wc -L)
+        echo "$output" | while read -r _ long;do
+          git for-each-ref "$long" --format=\
+        "\
+        %(HEAD) \
+        %(if)%(HEAD)%(then)%(color:green)%(end)\
+        %(align:$width,left)%(refname:short)%(end)\
+        %(color:reset) %(objectname:short) \
+        %(if)%(upstream)%(then)[%(color:blue)%(upstream:short)%(color:reset)%(if)%(upstream:track)%(then): %(color:yellow)%(upstream:track,nobracket)%(color:reset)%(end)] %(end)\
+        %(subject)\
+        "
+        done
         git --no-pager stash list
       '';
       brf = gs "git f --quiet && git br";
-      default = gs ''
+      default = gs /* bash */ ''
         set +e
         originHead=$(
           git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null |
@@ -51,7 +55,7 @@
       '';
       branch-name = "rev-parse --abbrev-ref HEAD";
       gone = gs ''git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
-      rmg = gs ''
+      rmg = gs /* bash */ ''
         gone=$(git gone)
         echo About to remove branches: $gone
         read -n1 -p "Continue? [y/n] " continue
@@ -79,7 +83,7 @@
         ${gitDf} --staged "$@" || true
       '';
       dfb = gs ''git df $(git merge-base ''${1:-origin/$(git default)} HEAD)'';
-      dft = gs ''
+      dft = gs /* bash */ ''
         old=$PWD
         current=$(git rev-parse HEAD)
         branch=$(git tracking)
@@ -116,7 +120,7 @@
       lft = gs ''git f && git log HEAD..$(git tracking) --no-merges --reverse'';
       p = "put";
       pr = gs "git put && gh pr create --body ''";
-      fp = gs ''
+      fp = gs /* bash */ ''
         set -e
         git fetch
         loga=$(mktemp)
@@ -130,7 +134,7 @@
         [[ $continue = y ]] && git put --force
       '';
       tracking = gs "git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null";
-      put = gs ''
+      put = gs /* bash */ ''
         tracking=$(git tracking || true)
         if [[ -z $tracking ]];then
           git push --set-upstream origin $(git branch-name) "$@"
@@ -141,7 +145,7 @@
       '';
       rt = gs ''git reset --hard $(git tracking) "$@"'';
       rh = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
-      s = gs ''
+      s = gs /* bash */ ''
         git br
         git -c color.status=always status | grep --color=never -Ev \
           -e '^$' \
