@@ -65,7 +65,7 @@
       ca = gs ''git a && git ci "$@"'';
       cap = gs ''git ca "$@" && git p'';
       capr = gs ''git ca "$@" && git pr'';
-      ci = gs ''
+      ci = gs /* bash */ ''
         if [[ -t 0 && -t 1 ]];then
           git commit -v "$@"
         else
@@ -104,6 +104,7 @@
         git merge --quiet --no-edit "$branch"
         ${gitDf} "$current.." || true
       '';
+      dfp = gs "git df $(git parent -H)";
       f = "fetch --all";
       g = gs "git f && git mt";
       gr = gs "git pull $(git tracking | tr / ' ') --rebase --autostash";
@@ -134,6 +135,23 @@
         [[ $continue = y ]] && git put --force
       '';
       tracking = gs "git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null";
+      parent = gs /* bash */ ''
+        output=$(
+          git log --simplify-by-decoration --decorate --pretty=format:'%H %(decorate:prefix=,suffix=,separator= ,pointer=->,tag=)' |
+            sed -E 's@ HEAD->\w+@@g' |
+            grep -E '^\S+ ' |
+            head -n1
+        )
+        if [[ "$output" = *origin/HEAD* ]];then
+          exit 0
+        elif [[ $1 = "-b" ]];then
+          echo "$output"
+        elif [[ $1 = "-H" ]];then
+          echo "$output" | awk '{ print $1 }'
+        else
+          echo "$output" | sed -E 's/^\S+ //'
+        fi
+      '';
       put = gs /* bash */ ''
         tracking=$(git tracking || true)
         if [[ -z $tracking ]];then
