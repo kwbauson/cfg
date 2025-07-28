@@ -14,6 +14,7 @@ final: prev: with final.scope; {
       jsonFile = writeText "packageData.json" (toJSON (map packageData packages));
     in
     writeBashBin "updater" ''
+      set -euo pipefail
       echo 'import ${nixpkgsPath}/shell.nix' > shell.nix
       echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py --max-workers 1 ${jsonFile}
       rm shell.nix
