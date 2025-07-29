@@ -8,7 +8,6 @@ rustPlatform.buildRustPackage {
     rev = "ccb2afd304d6bd8864b5c28f890c016b39dbe3bd";
     hash = "sha256-ZrHMCfkNz+Ufae1Ylze4poPtYSb8PvW56juR3iLYIOk=";
   };
-  useFetchCargoVendor = true;
   cargoHash = "sha256-0t18fKYOp6qF+V24tPLK9IUUYp8OTghlT4j3qxqc9kw=";
   nativeBuildInputs = [ makeWrapper ];
   postInstall = ''
