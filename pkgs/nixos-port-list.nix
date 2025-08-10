@@ -2,7 +2,7 @@ scope: with scope;
 addMetaAttrs { includePackage = true; } ((
   writeBashBin pname ''
     nix eval --impure --raw --expr \
-      "with import ${self-flake} {}; ${pname}.get nixosConfigurations.$(machine-name).config" 2>&1 |
+      "with import ${cfgRoot} {}; ${pname}.get nixosConfigurations.$(machine-name).config" 2>&1 |
       grep -v 'trace: Obsolete option'
   ''
 ).overrideAttrs (_: {
