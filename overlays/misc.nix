@@ -25,11 +25,11 @@ final: prev: with final.scope; {
     '';
   };
   steam-native = steam.override { nativeOnly = true; };
-  nle-cfg = nle.build { path = ../.; };
+  nle-cfg = nle.build { path = cfgRoot; };
   inherit (nle-cfg.pkgs) fordir;
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
   self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
-    cp ${self-source}/flake.lock $out
+    cp ${cfgRoot}/flake.lock $out
     chmod +w $out
     entries=$(jq '.nodes.root.inputs | to_entries' $out)
     inputs_keys=$(jq -r '.[].key' <<<"$entries")
@@ -55,7 +55,7 @@ final: prev: with final.scope; {
     done
   '';
   self-flake = runCommand "self-flake" { } ''
-    cp -r ${self-source} $out
+    cp -r ${cfgRoot} $out
     chmod -R +w $out
     cp ${self-flake-lock} $out/flake.lock
   '';

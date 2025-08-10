@@ -3,6 +3,9 @@ pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
 builtins // pkgs.lib // {
+  rawFlake = pkgs.flake;
+  isImpure = builtins ? currentSystem;
+  cfgRoot = if isImpure then (fetchGit ./.).outPath else rawFlake.outPath;
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (importDir ./.) machines constants modules;
@@ -252,12 +255,6 @@ builtins // pkgs.lib // {
       ${preRebuild}
       npm rebuild --nodedir=${nodedir}
     '';
-  self-source = builtins.path {
-    path = ./.;
-    name = "source";
-    filter = path: type: !builtins.any (p: p == (baseNameOf path))
-      [ ".git" ".github" "secrets" ];
-  };
 
   patchModules = src: patches:
     let
