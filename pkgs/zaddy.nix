@@ -1,6 +1,8 @@
 scope: with scope;
-cobi.pkgs.zaddy.overrideAttrs {
-  postInstall = caddy.postInstall;
-  passthru = { };
-  meta.skipBuild = isDarwin;
-}
+addMetaAttrs { skipBuild = isDarwin; }
+  (
+    cobi.pkgs.zaddy.overrideAttrs {
+      postInstall = caddy.postInstall;
+      passthru = { };
+    }
+  )
