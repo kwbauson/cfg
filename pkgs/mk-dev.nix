@@ -55,7 +55,7 @@ let
         PATH = "${result.env}/bin";
         XDG_DATA_DIRS = "${result.env}/share";
       };
-      minimalShell = derivation (baseMinimalDrvAttrs // extraMinimalDrvAttrs) // passthru // { inherit meta; };
+      minimalShell = derivation (baseMinimalDrvAttrs // extraMinimalDrvAttrs // mergeableAttrs) // passthru // { inherit meta; };
       stdenvShell = mkShell ({ inherit name packages shellHook buildPhase passthru meta; } // mergeableAttrs);
     in
     if isMinimal then minimalShell else stdenvShell);

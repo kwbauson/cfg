@@ -35,6 +35,7 @@ importPackage rec {
       "${fallback}",
     }'';
     bg = "#202020"; # overall background color from colorscheme
+    oneline = text: concatStringsSep " " (filter isString (builtins.split "[[:space:]]+" text));
   };
 
   configuration = fix (cfg: {
@@ -81,6 +82,9 @@ importPackage rec {
       "g." = "<cmd>lua require('fastaction').code_action()<cr>";
       gd = "<cmd>Telescope lsp_definitions<cr>";
       gt = "<cmd>Telescope lsp_type_definitions<cr>";
+      ge = "<cmd>Telescope diagnostics<cr>";
+      "[e" = "<cmd>lua vim.diagnostic.jump({ count = -1, severity = 'error' })<cr>";
+      "]e" = "<cmd>lua vim.diagnostic.jump({ count =  1, severity = 'error' })<cr>";
       " t" = "<cmd>Telescope<cr>";
       " p" = "<cmd>Telescope find_files hidden=true<cr>";
       " g" = "<cmd>Telescope live_grep<cr>";
@@ -93,7 +97,13 @@ importPackage rec {
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
-      K = "<cmd>lua vim.lsp.buf.hover({ focus = false, anchor_bias = 'above' })<cr>";
+      K = lib.oneline ''<cmd>lua
+        vim.lsp.buf.hover({
+          focus = false,
+          anchor_bias = 'above',
+          close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave' },
+        })
+      <cr>'';
     };
     lsp.servers = {
       nil_ls.enable = true; # FIXME switch to nixd?
@@ -116,9 +126,7 @@ importPackage rec {
         code_actions.gitsigns.enable = true;
       };
       conform-nvim.enable = true;
-      conform-nvim.settings.format_on_save = {
-        lsp_format = "fallback";
-      };
+      conform-nvim.settings.format_on_save.lsp_format = "fallback";
       conform-nvim.package = vimPlugins.conform-nvim.overrideAttrs (old: {
         postInstall = ''
           ${old.postInstall}
@@ -133,7 +141,7 @@ importPackage rec {
       };
       blink-cmp.enable = true;
       blink-cmp.settings = {
-        completion.keyword.range = "full";
+        sources.default = [ "lsp" ];
         completion.list.selection.preselect = false;
         completion.documentation.auto_show = true;
         completion.documentation.auto_show_delay_ms = 50;
@@ -164,7 +172,16 @@ importPackage rec {
         diagnostics = "nvim_lsp";
         name_formatter =
           let
-            names = [ "default.nix" "configuration.nix" "darwin-configuration.nix" "index.html" "index.ts" ];
+            names = [
+              "default.nix"
+              "shell.nix"
+              "configuration.nix"
+              "darwin-configuration.nix"
+              "index.html"
+              "index.css"
+              "index.ts"
+              "index.tsx"
+            ];
           in
           lib.mkRaw ''function(buf)
             if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
@@ -177,12 +194,17 @@ importPackage rec {
       web-devicons.enable = true;
       lualine.enable = true;
       lualine.settings.options.globalstatus = true;
+      lualine.settings.options.refresh.statusline = 200;
+      lualine.settings.sections.lualine_b = [ "branch" "diff" ];
       lualine.settings.sections.lualine_x = [
-        "filetype"
+        { __unkeyed-1 = "lsp_status"; ignore_lsp = [ "null-ls" ]; }
         {
-          __unkeyed-1 = "lsp_status";
-          ignore_lsp = [ "null-ls" ];
+          __unkeyed-1 = "diagnostics";
+          sources = [ "nvim_workspace_diagnostic" ];
+          sections = [ "hint" "info" "warn" "error" ];
+          update_in_insert = true;
         }
+        { __unkeyed-1 = "filetype"; icon_only = true; }
       ];
       bufdelete.enable = true;
       gitsigns.enable = true;
@@ -191,13 +213,17 @@ importPackage rec {
       telescope.enable = true;
       telescope.extensions.fzf-native.enable = true;
       telescope.extensions.undo.enable = true;
-      telescope.settings.defaults.mappings = {
-        i."<esc>" = lib.mkRaw "require('telescope.actions').close";
-        i."<c-f>" = lib.mkRaw "require('telescope.actions').preview_scrolling_down";
-        i."<c-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
-        i."<c-u>" = false;
+      telescope.settings.defaults = {
+        mappings = {
+          i."<esc>" = lib.mkRaw "require('telescope.actions').close";
+          i."<c-f>" = lib.mkRaw "require('telescope.actions').preview_scrolling_down";
+          i."<c-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
+          i."<c-u>" = false;
+        };
+        file_ignore_patterns = [ "^.git/" ];
+        sorting_strategy = "ascending";
+        layout_config.prompt_position = "top";
       };
-      telescope.settings.defaults.file_ignore_patterns = [ "^.git/" ];
       nvim-tree.enable = true;
       # explicit package to resolve combinePlugins conflict
       nvim-tree.package = vimPlugins.nvim-tree-lua.overrideAttrs (old: {
@@ -219,7 +245,7 @@ importPackage rec {
           { type = "sessions"; header = [ "   Sessions" ]; }
           { type = "dir"; header = [ (lib.mkRaw "'   MRU ' .. vim.loop.cwd()") ]; }
         ];
-        session_number = 2;
+        session_number = 4;
         files_number = 10 - cfg.plugins.startify.settings.session_number;
       };
       which-key.enable = true;
