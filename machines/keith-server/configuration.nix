@@ -79,6 +79,8 @@
 
   services.caddy.subdomains.api = constants.personal-api.port;
 
+  services.caddy.subdomains.playground = "reverse_proxy http://keith-desktop:3000";
+
   systemd.tmpfiles.rules = [ "d /srv/files 777" ];
   services.caddy.subdomains.files = ''
     file_server browse {
