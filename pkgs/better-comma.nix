@@ -68,6 +68,7 @@ scope: with scope; stdenv.mkDerivation {
 
     mkdir -p ~/.local/share/nix
     if [[ $desc = 1 ]];then
+      echo "$pkg"
       exec nix eval --impure --raw --expr "with import $source { forceFlakeCompat = false; }; descString $pkg + \"\n\""
     elif [[ $man = 1 ]];then
       exec nix shell "$source#$pkg" --command man "$cmd" "$@"
