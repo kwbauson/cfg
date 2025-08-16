@@ -101,7 +101,7 @@ importPackage rec {
         vim.lsp.buf.hover({
           focus = false,
           anchor_bias = 'above',
-          close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave' },
+          close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave', 'BufLeave' },
         })
       <cr>'';
     };
