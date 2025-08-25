@@ -108,7 +108,6 @@
   services.ddclient = {
     enable = true;
     configFile = toFile "ddclient.conf" ''
-      use=web, web=checkip.dyndns.com/, web-skip='Current IP Address: '
       protocol=porkbun
       apikey_env=APIKEY
       secretapikey_env=SECRETAPIKEY
