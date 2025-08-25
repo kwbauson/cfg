@@ -10,7 +10,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: |
           gh pr list --json autoMergeRequest,headRefName --jq '.[] | select(.autoMergeRequest != null) | .headRefName' |
              xargs -I% gh api --method POST '/repos/${{ github.repository }}/merges' -f head=main -f base=%
