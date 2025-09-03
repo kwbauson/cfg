@@ -45,10 +45,13 @@
     helix.enable = true;
     ssh = {
       enable = true;
-      compression = true;
-      controlMaster = "auto";
-      controlPersist = "1s";
+      enableDefaultConfig = false;
       matchBlocks = {
+        "*" = {
+          compression = true;
+          controlMaster = "auto";
+          controlPersist = "1s";
+        };
         "kwbauson.com".user = "keith";
         "gitlab.com".extraOptions.UpdateHostKeys = "no";
         keith-desktop.user = "keith";
