@@ -10,6 +10,7 @@
   services.github-runners = {
     ${machine-name} = {
       enable = true;
+      nodeRuntimes = [ "node20" "node24" ];
       replace = true;
       url = "https://github.com/kwbauson/cfg";
       tokenFile = "/etc/github-runner-kwbauson-cfg.token";

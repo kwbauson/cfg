@@ -99,6 +99,7 @@
 
   services.github-runners.keith-server = {
     enable = true;
+    nodeRuntimes = [ "node20" "node24" ];
     extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];
     tokenFile = "/etc/nixos/github-runner-token";
