@@ -20,7 +20,7 @@
     gitDf = "git -c core.pager='${exe delta} --dark' diff";
   }; {
     enable = true;
-    package = gitFull;
+    package = if isDarwin then git else gitFull;
     aliases = {
       v = gs "nvim '+ Git | only'";
       a = "add -A";
