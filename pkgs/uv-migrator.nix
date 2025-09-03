@@ -1,12 +1,12 @@
 scope: with scope;
 rustPlatform.buildRustPackage {
   inherit pname;
-  version = "2025.8.2-unstable-2025-06-20";
+  version = "2025.8.2-unstable-2025-09-03";
   src = fetchFromGitHub {
     owner = "stvnksslr";
     repo = pname;
-    rev = "ccb2afd304d6bd8864b5c28f890c016b39dbe3bd";
-    hash = "sha256-ZrHMCfkNz+Ufae1Ylze4poPtYSb8PvW56juR3iLYIOk=";
+    rev = "0f9e6ee3472610a26fcbb50d30fcd5ee74b382a3";
+    hash = "sha256-5tNfj/tE0qw+Jx6mU/bi4qm312TmXVvJSRhWQwyEj/o=";
   };
   cargoHash = "sha256-0t18fKYOp6qF+V24tPLK9IUUYp8OTghlT4j3qxqc9kw=";
   nativeBuildInputs = [ makeWrapper ];
