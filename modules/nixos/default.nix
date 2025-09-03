@@ -56,7 +56,7 @@
     };
     dbus.packages = [ dconf ];
     tlp.enable = false;
-    logind.lidSwitch = "ignore";
+    logind.settings.Login.HandleLidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
     xserver.enable = mkDefault isGraphical;
     displayManager = mkIf config.services.xserver.enable {
