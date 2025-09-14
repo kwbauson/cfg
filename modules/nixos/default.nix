@@ -56,7 +56,11 @@
     };
     dbus.packages = [ dconf ];
     tlp.enable = false;
-    logind.settings.Login.HandleLidSwitch = "ignore";
+    logind.settings.Login = {
+      HandlePowerKey = "ignore";
+      HandlePowerKeyLongPress = "poweroff";
+      HandleLidSwitch = "ignore";
+    };
     journald.extraConfig = "SystemMaxUse=100M";
     xserver.enable = mkDefault isGraphical;
     displayManager = mkIf config.services.xserver.enable {
