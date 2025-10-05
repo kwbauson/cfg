@@ -61,6 +61,12 @@ mode "programs" {
   bindsym s exec --no-startup-id steam; mode "default"
 }
 
+bindsym XF86PowerOff mode "poweroff"
+mode "poweroff" {
+  bindsym Escape mode "default"
+  bindsym XF86PowerOff exec poweroff
+}
+
 # windows
 bindsym $mod+q kill
 bindsym $mod+h focus left

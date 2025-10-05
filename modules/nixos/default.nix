@@ -99,6 +99,7 @@
   services.tailscale.useRoutingFeatures = mkDefault "client";
   systemd.services.tailscaled.after = [ "systemd-networkd-wait-online.service" ];
   hardware.bluetooth.enable = mkDefault config.services.xserver.enable;
+  programs.i3lock.enable = true;
 
   services.udev.packages = optionals config.services.xserver.enable [ headsetcontrol ];
   services.openssh.settings = {
