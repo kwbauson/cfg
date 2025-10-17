@@ -117,7 +117,7 @@
   };
   systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
 
-  services.ollama.enable = true;
+  # services.ollama.enable = true; # tmp disable ollama
   services.ollama.host = "[::]";
 
   services.searchix.enable = true;
