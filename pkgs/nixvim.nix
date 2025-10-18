@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage rec {
   inherit pname;
-  version = "0-unstable-2025-10-04";
+  version = "0-unstable-2025-10-16";
   src = fetchFromGitHub {
     owner = "nix-community";
     repo = pname;
-    rev = "61f1475f7f9085d4508f95f5a953d6850038b5d7";
-    hash = "sha256-vrpvHdaPfFu0EEbbvEtU6zTXJa5Ea+nCBp46x5jUw7U=";
+    rev = "5275e258bf89e4947409ba36e362031ca491c67c";
+    hash = "sha256-z6+MKQBXfeZTdUK+PXbmBydaUuJK+k3iFnTanRvdkXg=";
   };
   passthru.updateScript = unstableGitUpdater { };
   flake = import src;
@@ -107,9 +107,9 @@ importPackage rec {
     };
     lsp.servers = {
       nil_ls.enable = true; # FIXME switch to nixd?
-      nil_ls.settings.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
+      nil_ls.config.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
       ts_ls.enable = true;
-      ts_ls.settings.on_attach = lib.mkRaw ''function(client, bufnr)
+      ts_ls.config.on_attach = lib.mkRaw ''function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
       end'';
       jsonls.enable = true;
