@@ -114,7 +114,7 @@ builtins // pkgs.lib // {
   importNixpkgs = args:
     let
       helper =
-        { system ? pkgs.system
+        { system ? pkgs.stdenv.hostPlatform.system
         , config ? { }
         , overlays ? [ ]
         , rev ? null

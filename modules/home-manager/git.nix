@@ -21,7 +21,7 @@
   }; {
     enable = true;
     package = if isDarwin then git else gitFull;
-    aliases = {
+    settings.alias = {
       v = gs "nvim '+ Git | only'";
       a = "add -A";
       br = gs /* bash */ ''
@@ -175,8 +175,9 @@
       '';
       sf = gs ''git f --quiet && git s "$@"'';
     };
-    inherit userName userEmail;
-    extraConfig = {
+    settings.user.email = userEmail;
+    settings.user.name = userName;
+    settings = {
       clean.requireForce = false;
       checkout.defaultRemote = "origin";
       core.autocrlf = "input";
