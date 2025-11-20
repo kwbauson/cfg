@@ -21,4 +21,5 @@ rec {
   valheim.start-port = 2456;
   valheim.end-port = 2457;
   valheim.ports = [ valheim.start-port valheim.end-port ];
+  ntfy.port = 28080;
 }

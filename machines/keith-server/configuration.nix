@@ -97,6 +97,13 @@
   services.netdata.enable = true;
   services.caddy.subdomains.netdata = { role = "admin"; inherit (constants.netdata) port; };
 
+  services.ntfy-sh = {
+    enable = true;
+    settings.base-url = "https://ntfy.${constants.kwbauson.fqdn}";
+    settings.listen-http = ":${toString constants.ntfy.port}";
+  };
+  services.caddy.subdomains.ntfy = constants.ntfy.port;
+
   services.github-runners.keith-server = {
     enable = true;
     nodeRuntimes = [ "node20" "node24" ];

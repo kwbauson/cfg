@@ -36,4 +36,12 @@
   };
 
   services.auto-update.enable = true;
+
+  systemd.services.notify-usage = {
+    startAt = "*-*-* 06:00:00";
+    path = [ curl coreutils ];
+    script = ''
+      curl -d "$(df -h /dev/vda1 --output=pcent | tail -n1)" https://ntfy.kwbauson.com/kwbauson-usage
+    '';
+  };
 }

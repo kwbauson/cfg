@@ -1,4 +1,4 @@
-{ scope, machine-name, isNixOS, ... }: with scope;
+{ scope, machine-name, isNixOS, isGraphical, ... }: with scope;
 {
   included-packages = alias {
     nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
@@ -82,6 +82,6 @@
       fi
     '';
     slime = "tmux -L vim-slime new";
-    ${attrIf isLinux "nm-applet"} = getExe networkmanagerapplet;
+    ${attrIf (isLinux && isGraphical) "nm-applet"} = getExe networkmanagerapplet;
   };
 }
