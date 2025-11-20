@@ -8,6 +8,7 @@ builtins // pkgs.lib // {
   cfgRoot = if isImpure then (fetchGit ./.).outPath else rawFlake.outPath;
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
+  inherit (stdenv.hostPlatform) system;
   inherit (importDir ./.) machines constants modules;
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
