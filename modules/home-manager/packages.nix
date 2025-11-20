@@ -25,6 +25,10 @@
         discord dejavu_fonts zathura steamtinkerlaunch
         headsetcontrol arduino remmina obsidian;
       sox = sox.override { enableLame = true; };
+      linuxOnly = optionalAttrs isLinux {
+        inherit (kdePackages) breeze-icons;
+        inherit i3-easyfocus;
+      };
     };
     development = {
       inherit bat colordiff gron highlight xh icdiff jq watchexec nix-index ast-grep;
@@ -37,17 +41,18 @@
         unison-ucm cachix;
       inherit (nodePackages) npm-check-updates prettier;
     };
-    inherit nle-cfg;
+    nle-cfg = nle-cfg.pkgs;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
-    linuxOnly = optionalAttrs isLinux {
-      inherit (kdePackages) breeze-icons;
-      inherit i3-easyfocus;
-    };
   };
-  excluded-packages = optionalAttrs isDarwin {
-    inherit iproute2 iputils pavucontrol strace time dzen2
-      maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
-    inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
-    inherit man-pages ncdu bitwarden-cli remmina;
+  excluded-packages = optionalAttrs isDarwin
+    {
+      inherit iproute2 iputils pavucontrol strace time dzen2
+        maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
+      inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
+      inherit man-pages ncdu bitwarden-cli remmina;
+    }
+  // optionalAttrs isMinimal {
+    inherit imgloc yt-dlp;
+    inherit (nle-cfg.pkgs) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
   };
 }
