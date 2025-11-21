@@ -61,7 +61,6 @@ final: prev: with final.scope; {
   '';
   iso = with packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
     imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
-    nixpkgs.config.allowUnfree = true;
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
