@@ -99,8 +99,12 @@
 
   services.ntfy-sh = {
     enable = true;
-    settings.base-url = "https://ntfy.${constants.kwbauson.fqdn}";
-    settings.listen-http = ":${toString constants.ntfy.port}";
+    settings = {
+      base-url = "https://ntfy.${constants.kwbauson.fqdn}";
+      listen-http = ":${toString constants.ntfy.port}";
+      enable-login = true;
+      auth-default-access = "deny-all";
+    };
   };
   services.caddy.subdomains.ntfy = constants.ntfy.port;
 
