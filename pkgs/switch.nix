@@ -44,7 +44,6 @@ let
             profile=/nix/var/nix/profiles/system
             nvd diff "$profile" ${nix-darwin-system}
             sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
-            ${nix-darwin-system}/activate-user
             sudo ${nix-darwin-system}/activate
           '';
           hms = makeScript ''
