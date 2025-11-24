@@ -2,7 +2,7 @@ scope: with scope;
 mkArgc {
   inherit pname version;
   scriptPath = ./create-cached-refs.argc.sh;
-  buildInputs = [ jq coreutils gnutar gzip gnused ];
+  buildInputs = [ jq coreutils gnutar gzip gnused git ];
   postInstall = ''
     wrapProgram $out/bin/${pname} \
       --set TEMPLATE_DEFAULT ${./template-default.nix} \
