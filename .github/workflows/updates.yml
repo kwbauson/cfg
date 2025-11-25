@@ -12,7 +12,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v5
       - run: nix run .#updates.${{ inputs.source || 'all' }}
       - uses: peter-evans/create-pull-request@v7.0.9
         id: cpr
