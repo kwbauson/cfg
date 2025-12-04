@@ -1,4 +1,4 @@
-set -xeuo pipefail
+set -euo pipefail
 
 # @cmd Generate nix files for cached paths
 # @alias g
@@ -52,7 +52,9 @@ push() {
     git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
   }
   commit --amend || commit
-  git config list --includes
+  echo '> git config'
+  git config list
+  echo '> catting'
   cat "$(git config list | grep includeif.gitdir | head -n1 | sed 's/.*=//')"
   git push --force-with-lease --set-upstream origin cached
   cd "$root"
