@@ -1,40 +1,11 @@
 name: build
 on: { workflow_dispatch, push }
 jobs:
-  checks:
-    strategy:
-      fail-fast: false
-      matrix:
-        system: [x86_64-linux, aarch64-darwin]
-    runs-on: [nix, "${{ matrix.system }}"]
-    steps:
-      - uses: actions/checkout@v6.0.1
-      - run: nix -L build .#checks
-      - run: ./result/bin/checks
-      - name: Run cachix push
-        run: |
-          cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          cachix push kwbauson ./result
-      - name: Store path job outputs
-        if: github.ref == 'refs/heads/main'
-        id: store_paths
-        run: |
-          echo 'checks_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
-          nix build .#create-cached-refs
-          echo 'create_cached_refs_${{ matrix.system }}'=$(realpath ./result) >> "$GITHUB_OUTPUT"
-    outputs:
-      checks_x86_64-linux: ${{ steps.store_paths.outputs.checks_x86_64-linux }}
-      checks_aarch64-darwin: ${{ steps.store_paths.outputs.checks_aarch64-darwin }}
-      create_cached_refs_x86_64-linux: ${{ steps.store_paths.outputs.create_cached_refs_x86_64-linux }}
-      create_cached_refs_aarch64-darwin: ${{ steps.store_paths.outputs.create_cached_refs_aarch64-darwin }}
-
   cached-refs:
-    if: github.ref == 'refs/heads/main'
-    needs: checks
     concurrency: { group: cached-refs }
     strategy:
       matrix:
-        system: [x86_64-linux, aarch64-darwin]
+        system: [aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
     env:
       system: ${{ matrix.system }}
