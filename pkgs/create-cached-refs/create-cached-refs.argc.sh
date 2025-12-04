@@ -52,9 +52,9 @@ push() {
     git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
   }
   commit --amend || commit
-  git config list
-  # git push --force-with-lease --set-upstream origin cached
   cd "$root"
+  git config list
+  git push --force-with-lease --set-upstream origin cached
   git worktree remove "$worktree"
 }
 
