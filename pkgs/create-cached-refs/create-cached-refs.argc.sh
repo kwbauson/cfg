@@ -52,14 +52,16 @@ push() {
     git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
   }
   commit --amend || commit
-  pwd
   echo '> git config'
   git config --list --show-origin
   echo '> catting'
   credfile=$(git config list | grep includeif.gitdir | head -n1 | sed 's/.*=//')
   cat "$credfile"
-  git push --force-with-lease --set-upstream origin cached
+  echo '> more'
+  echo "$root"
+  # git push --force-with-lease --set-upstream origin cached
   cd "$root"
+  pwd
   git worktree remove "$worktree"
 }
 
