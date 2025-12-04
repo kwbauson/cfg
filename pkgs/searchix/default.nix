@@ -14,4 +14,5 @@ importPackage (attrs: {
 
   flake = compatGetFlake attrs.src;
   package = compatGetFlakeDefault attrs.src;
+  meta.skipBuild = true;
 })
