@@ -53,7 +53,7 @@ push() {
   }
   commit --amend || commit
   git config list --includes
-  cat "$(git config list | grep includeif.gitdir | head -n1 | sed 's/.*=')"
+  cat "$(git config list | grep includeif.gitdir | head -n1 | sed 's/.*=//')"
   git push --force-with-lease --set-upstream origin cached
   cd "$root"
   git worktree remove "$worktree"
