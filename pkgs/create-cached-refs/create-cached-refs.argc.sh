@@ -52,6 +52,7 @@ push() {
     git -c user.name="$argc_name" -c user.email="$argc_email" commit --message cached-refs "$@"
   }
   commit --amend || commit
+  pwd
   echo '> git config'
   git config --list --show-origin
   echo '> catting'
