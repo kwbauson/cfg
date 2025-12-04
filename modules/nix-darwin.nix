@@ -20,8 +20,7 @@
   homebrew.onActivation.autoUpdate = true;
   homebrew.onActivation.upgrade = true;
   homebrew.onActivation.cleanup = "zap";
-  homebrew.casks = map (name: { inherit name; }) [ "firefox" "google-chrome" "docker-desktop" ];
+  homebrew.casks = map (name: { inherit name; }) [ "tailscale-app" "firefox" "google-chrome" "docker-desktop" ];
   services.auto-update.enable = true;
-  services.tailscale.enable = true;
   system.stateVersion = 5;
 }
