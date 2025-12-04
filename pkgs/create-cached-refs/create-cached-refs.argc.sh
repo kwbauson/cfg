@@ -59,7 +59,7 @@ push() {
   cat "$credfile"
   echo '> more'
   echo "$root"
-  # git push --force-with-lease --set-upstream origin cached
+  git push --force-with-lease --set-upstream origin cached
   cd "$root"
   pwd
   git worktree remove "$worktree"

@@ -10,7 +10,7 @@ jobs:
     env:
       system: ${{ matrix.system }}
     steps:
-      - uses: kwbauson/github-actions-checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: kwbauson/github-actions-checkout@71f4b77450509d640af3a3a9ec97b979fa8dae10
       - name: Run create-cached-refs
         run: |
           nix run .#create-cached-refs -- push /nix/store/99qjarx4yjwh0ik9xl9idw0jd270l26m-hello-2.12.2 --tag "$system"
