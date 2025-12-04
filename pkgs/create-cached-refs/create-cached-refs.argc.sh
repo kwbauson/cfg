@@ -57,7 +57,6 @@ push() {
   echo '> catting'
   credfile=$(git config list | grep includeif.gitdir | head -n1 | sed 's/.*=//')
   cat "$credfile"
-  git config set include.path "$credfile"
   git push --force-with-lease --set-upstream origin cached
   cd "$root"
   git worktree remove "$worktree"
