@@ -9,11 +9,8 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     env:
       system: ${{ matrix.system }}
-      checks: ${{ needs.checks.outputs[format('checks_{0}', matrix.system)] }}
-      create_cached_refs: ${{ needs.checks.outputs[format('create_cached_refs_{0}', matrix.system)] }}
     steps:
       - uses: actions/checkout@v5.0.1
       - name: Run create-cached-refs
         run: |
-          cachix pin kwbauson "checks.$system" "$checks" --keep-revisions 5
-          "$create_cached_refs"/bin/create-cached-refs push "$checks"/cached-paths --tag "$system"
+          "$create_cached_refs"/bin/create-cached-refs push /nix/store/99qjarx4yjwh0ik9xl9idw0jd270l26m-hello-2.12.2 --tag "$system"
