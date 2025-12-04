@@ -53,7 +53,7 @@ push() {
   }
   commit --amend || commit
   echo '> git config'
-  git config list
+  git config --list --show-origin
   echo '> catting'
   credfile=$(git config list | grep includeif.gitdir | head -n1 | sed 's/.*=//')
   cat "$credfile"
