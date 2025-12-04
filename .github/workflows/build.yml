@@ -5,7 +5,7 @@ jobs:
     concurrency: { group: cached-refs }
     strategy:
       matrix:
-        system: [aarch64-darwin]
+        system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
     env:
       system: ${{ matrix.system }}

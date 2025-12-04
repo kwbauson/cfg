@@ -53,7 +53,7 @@ push() {
   }
   commit --amend || commit
   git config list
-  git push --force-with-lease --set-upstream origin cached
+  # git push --force-with-lease --set-upstream origin cached
   cd "$root"
   git worktree remove "$worktree"
 }
