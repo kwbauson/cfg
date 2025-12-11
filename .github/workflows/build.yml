@@ -41,7 +41,7 @@ jobs:
       checks: ${{ needs.checks.outputs[format('checks_{0}', matrix.system)] }}
       create_cached_refs: ${{ needs.checks.outputs[format('create_cached_refs_{0}', matrix.system)] }}
     steps:
-      - uses: actions/checkout@v5.0.1
+      - uses: actions/checkout@v6.0.1
       - name: Run create-cached-refs
         run: |
           cachix pin kwbauson "checks.$system" "$checks" --keep-revisions 5
