@@ -45,6 +45,7 @@
     worldSettings.ServerPassword = "$PALWORLD_SERVER_PASSWORD";
     worldSettings.BaseCampWorkerMaxNum = "30";
   };
+  systemd.services.palworld.wantedBy = mkForce [ ];
 
   services.caddy.enable = true;
   systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
@@ -67,15 +68,28 @@
   '';
 
   services.olivetin.enable = true;
+  services.olivetin.user = "root";
   services.olivetin.settings = {
-    listenAddressSingleHTTPFrontend = "localhost:${toString constants.olivetin.port}";
-    actions = [{
-      title = "Reboot Server";
-      icon = "&#128683;";
-      shell = "reboot";
-    }];
+    ListenAddressSingleHTTPFrontend = "localhost:${toString constants.olivetin.port}";
+    actions = [
+      {
+        title = "Reboot Server";
+        icon = "&#128683;";
+        shell = "reboot";
+      }
+      {
+        title = "Start/Restart Palworld";
+        icon = ''<iconify-icon icon="cil:animal"></iconify-icon>'';
+        shell = "systemctl restart palworld";
+      }
+    ];
   };
-  services.caddy.subdomains.olivetin = { role = "admin"; inherit (constants.olivetin) port; };
+  services.caddy.subdomains.olivetin = ''
+    basic_auth {
+      {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
+    }
+    reverse_proxy localhost:${toString constants.olivetin.port}
+  '';
 
   services.caddy.subdomains.api = constants.personal-api.port;
 
