@@ -46,6 +46,11 @@
     worldSettings.BaseCampWorkerMaxNum = "30";
   };
   systemd.services.palworld.wantedBy = mkForce [ ];
+  systemd.sockets.palworld = {
+    listenStreams = [ "0.0.0.0:${toString config.services.palworld.port}" ];
+    listenDatagrams = config.systemd.sockets.palworld.listenStreams;
+    wantedBy = [ "sockets.target" ];
+  };
 
   services.caddy.enable = true;
   systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
