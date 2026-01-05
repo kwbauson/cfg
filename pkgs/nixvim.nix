@@ -135,10 +135,8 @@ importPackage rec {
       });
       treesitter.enable = true;
       treesitter.nixvimInjections = false;
-      treesitter.settings = {
-        highlight.enable = true;
-        indent.enable = true;
-      };
+      treesitter.highlight.enable = true;
+      treesitter.indent.enable = true;
       blink-cmp.enable = true;
       blink-cmp.settings = {
         sources.default = [ "lsp" ];
@@ -256,7 +254,7 @@ importPackage rec {
       notify.enable = true;
       notify.settings.background_colour = lib.bg;
     };
-    extraPackages = [ nixpkgs-fmt ];
+    extraPackages = [ nixpkgs-fmt tree-sitter ];
     extraConfigLua = /* lua */ ''
       -- from https://github.com/rcarriga/nvim-notify/wiki/Usage-Recipes/#lsp-messages
       -- table from lsp severity to vim severity.
