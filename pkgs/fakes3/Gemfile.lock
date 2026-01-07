@@ -12,7 +12,7 @@ GEM
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
-    thor (1.4.0)
+    thor (1.5.0)
     webrick (1.9.2)
     xml-simple (1.1.9)
       rexml
