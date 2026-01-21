@@ -50,4 +50,10 @@ in
     ln -s ${checks-script} $out/bin/checks
     ln -s ${final.cached-paths} $out/cached-paths
   '';
+
+  requiredSubstitutes = {
+    inherit ffmpeg;
+  } // optionalAttrs isLinux {
+    inherit firefox-unwrapped chromium ffmpeg-full;
+  };
 }

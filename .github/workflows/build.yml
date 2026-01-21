@@ -9,6 +9,7 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - uses: actions/checkout@v6.0.1
+      - run: nix -L build --no-link --max-jobs 0 -f . requiredSubstitutes
       - run: nix -L build .#checks
       - run: ./result/bin/checks
       - name: Run cachix push
