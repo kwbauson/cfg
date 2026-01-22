@@ -105,6 +105,9 @@ importPackage rec {
         })
       <cr>'';
     };
+    diagnostic.settings = {
+      signs.priority = 9;
+    };
     lsp.servers = {
       nil_ls.enable = true; # FIXME switch to nixd?
       nil_ls.config.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
@@ -122,9 +125,6 @@ importPackage rec {
     plugins = {
       lspconfig.enable = true;
       none-ls.enable = true;
-      none-ls.sources = {
-        code_actions.gitsigns.enable = true;
-      };
       conform-nvim.enable = true;
       conform-nvim.settings.format_on_save.lsp_format = "fallback";
       conform-nvim.package = vimPlugins.conform-nvim.overrideAttrs (old: {
@@ -137,6 +137,14 @@ importPackage rec {
       treesitter.nixvimInjections = false;
       treesitter.highlight.enable = true;
       treesitter.indent.enable = true;
+      coverage.enable = true;
+      coverage.settings = {
+        auto_reload = true;
+        signs.covered.text = "";
+        signs.uncovered.text = "C";
+        signs.partial.text = "C";
+        summary.min_coverage = 100;
+      };
       blink-cmp.enable = true;
       blink-cmp.settings = {
         sources.default = [ "lsp" ];
@@ -205,7 +213,9 @@ importPackage rec {
         { __unkeyed-1 = "filetype"; icon_only = true; }
       ];
       bufdelete.enable = true;
-      gitsigns.enable = true;
+      gitgutter.enable = true;
+      gitgutter.settings.sign_allow_clobber = true;
+      gitgutter.settings.sign_priority = 8;
       comment.enable = true;
       comment.settings.toggler.block = "gcb";
       telescope.enable = true;
