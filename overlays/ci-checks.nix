@@ -54,6 +54,7 @@ in
   requiredSubstitutes = {
     inherit ffmpeg;
   } // optionalAttrs isLinux {
-    inherit firefox-unwrapped chromium ffmpeg-full;
+    inherit firefox-unwrapped ffmpeg-full;
+    chromium = chromium.browser;
   };
 }
