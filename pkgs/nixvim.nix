@@ -111,8 +111,8 @@ importPackage rec {
     lsp.servers = {
       nil_ls.enable = true; # FIXME switch to nixd?
       nil_ls.config.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
-      tsgo.enable = true;
-      tsgo.config.on_attach = lib.mkRaw ''function(client, bufnr)
+      ts_ls.enable = true;
+      ts_ls.config.on_attach = lib.mkRaw ''function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
       end'';
       jsonls.enable = true;
