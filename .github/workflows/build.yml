@@ -8,7 +8,7 @@ jobs:
         system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
       - run: nix -L build --no-link --max-jobs 0 -f . requiredSubstitutes
       - run: nix -L build .#checks
       - run: ./result/bin/checks
@@ -42,7 +42,7 @@ jobs:
       checks: ${{ needs.checks.outputs[format('checks_{0}', matrix.system)] }}
       create_cached_refs: ${{ needs.checks.outputs[format('create_cached_refs_{0}', matrix.system)] }}
     steps:
-      - uses: actions/checkout@v5.0.1
+      - uses: actions/checkout@v6.0.2
       - name: Run create-cached-refs
         run: |
           cachix pin kwbauson "checks.$system" "$checks" --keep-revisions 5
