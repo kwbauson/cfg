@@ -1,5 +1,5 @@
 scope: with scope;
-addMetaAttrs { includePackage = true; } (writePython3Bin pname { libraries = [ python3.pkgs.opencv4 ]; } ''
+addMetaAttrs { includePackage = isLinux; } (writePython3Bin pname { libraries = [ python3.pkgs.opencv4 ]; } ''
   import cv2
   import sys
   part_path, full_path = sys.argv[1:3]

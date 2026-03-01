@@ -17,8 +17,8 @@
       graphical-core = {
         inherit
           dzen2 graphviz imagemagick term nsxiv
-          xclip xdotool xsel xterm maim w3m;
-        inherit (xorg) xdpyinfo xev xfontsel xmodmap;
+          xclip xdotool xsel xterm maim w3m
+          xdpyinfo xev xfontsel xmodmap;
       };
       inherit
         ffmpeg mediainfo pavucontrol qtbr signal-desktop
