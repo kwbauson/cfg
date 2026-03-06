@@ -40,26 +40,16 @@
     };
     version = "3.4.4";
   };
-  set = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "1wcfdmj162d1ydka5wbnan3kj5jv6494qpaav50q0y1f406sccya";
-      type = "gem";
-    };
-    version = "1.1.2";
-  };
   sorted_set = {
-    dependencies = ["rbtree" "set"];
+    dependencies = ["rbtree"];
     groups = ["default"];
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "0brpwv68d7m9qbf5js4bg8bmg4v7h4ghz312jv9cnnccdvp8nasg";
+      sha256 = "10zf4isl10i60zlxpsngzp4vbs1b8a3qx8ijsyvwvkvbdfqixh5s";
       type = "gem";
     };
-    version = "1.0.3";
+    version = "1.1.0";
   };
   thor = {
     groups = ["default"];
