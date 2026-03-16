@@ -67,7 +67,7 @@
     }
   '';
 
-  services.olivetin.enable = true;
+  # services.olivetin.enable = true; // NOTE disabled because insecure
   services.olivetin.user = "root";
   services.olivetin.settings = {
     ListenAddressSingleHTTPFrontend = "localhost:${toString constants.olivetin.port}";
