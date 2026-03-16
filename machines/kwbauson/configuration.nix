@@ -16,6 +16,7 @@
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
   services._3proxy.enable = true;
+  services.smartd.enable = false;
 
   services.caddy = with constants; {
     enable = true;
