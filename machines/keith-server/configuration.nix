@@ -38,6 +38,7 @@
     serverName = "hangin bois";
     worldName = "hangin";
   };
+  systemd.services.valheim.wantedBy = mkForce [ ];
 
   services.palworld = {
     enable = true;
@@ -105,14 +106,14 @@
     }
   '';
 
-  services.scribblers.enable = true;
+  services.scribblers.enable = false;
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
-  services.netdata.enable = true;
+  services.netdata.enable = false;
   services.caddy.subdomains.netdata = { role = "admin"; inherit (constants.netdata) port; };
 
   services.ntfy-sh = {
-    enable = true;
+    enable = false;
     settings = {
       base-url = "https://ntfy.${constants.kwbauson.fqdn}";
       listen-http = ":${toString constants.ntfy.port}";
@@ -145,7 +146,7 @@
   # services.ollama.enable = true; # tmp disable ollama
   services.ollama.host = "[::]";
 
-  services.searchix.enable = true;
+  services.searchix.enable = false;
   services.searchix.settings = {
     web.baseUrl = "https://searchix.kwbauson.com";
     importer.Sources = {
