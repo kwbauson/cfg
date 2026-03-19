@@ -33,6 +33,8 @@
   };
   services._3proxy.enable = true;
 
+  systemd.services.display-manager.enable = false;
+
   services.valheim = {
     enable = true;
     serverName = "hangin bois";
