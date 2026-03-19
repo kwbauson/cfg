@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages xorg.xinput xdotool
+# with-packages xinput xdotool
 pad=$(xinput list | sed -En '/Touchpad/s/.*id=([0-9]+).*/\1/p')
 
 if [[ -z $1 ]];then

@@ -20,6 +20,7 @@
   services.auto-update.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
+  systemd.defaultUnit = mkForce "multi-user.target";
 
   zramSwap.memoryPercent = 25;
   swapDevices = [{
@@ -32,8 +33,6 @@
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
   services._3proxy.enable = true;
-
-  systemd.services.display-manager.enable = false;
 
   services.valheim = {
     enable = true;
