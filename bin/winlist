@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages xorg.xprop wmctrl
+# with-packages xprop wmctrl
 join -1 2 \
   <(xprop -root _NET_CLIENT_LIST_STACKING |
       sed -e 's/.* # //' -e 's/, /\n/g' |

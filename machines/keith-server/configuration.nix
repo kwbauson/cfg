@@ -20,6 +20,7 @@
   services.auto-update.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
+  systemd.defaultUnit = mkForce "multi-user.target";
 
   zramSwap.memoryPercent = 25;
   swapDevices = [{
