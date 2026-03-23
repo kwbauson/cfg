@@ -21,7 +21,7 @@ in
   };
 
   config.services.caddy = {
-    package = zaddy;
+    package = mcaddy;
     globalConfig = ''
       order authenticate before respond
       order authorize before basicauth
