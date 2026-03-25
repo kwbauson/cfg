@@ -1,4 +1,4 @@
-{ config, scope, ... }: with scope;
+{ config, scope, machine-name, ... }: with scope;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
@@ -86,12 +86,12 @@
       }
     ];
   };
-  services.caddy.subdomains.olivetin = ''
-    basic_auth {
-      {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
-    }
-    reverse_proxy localhost:${toString constants.olivetin.port}
-  '';
+  # services.caddy.subdomains.olivetin = ''
+  #   basic_auth {
+  #     {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
+  #   }
+  #   reverse_proxy localhost:${toString constants.olivetin.port}
+  # '';
 
   services.caddy.subdomains.api = constants.personal-api.port;
 
@@ -107,14 +107,14 @@
     }
   '';
 
-  services.scribblers.enable = false;
+  services.scribblers.enable = true;
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
-  services.netdata.enable = false;
+  services.netdata.enable = true;
   services.caddy.subdomains.netdata = { role = "admin"; inherit (constants.netdata) port; };
 
   services.ntfy-sh = {
-    enable = false;
+    enable = true;
     settings = {
       base-url = "https://ntfy.${constants.kwbauson.fqdn}";
       listen-http = ":${toString constants.ntfy.port}";
@@ -158,4 +158,26 @@
   };
   systemd.services.searchix.environment.NIX_PATH = "nixpkgs=${toString pkgs.path}";
   services.caddy.subdomains.searchix = config.services.searchix.settings.web.port;
+
+  services.grafana = {
+    enable = true;
+    settings = {
+      server.http_addr = constants.${machine-name}.tailscale-ip;
+      server.http_port = 8888;
+      server.domain = machine-name;
+      security.admin_user = "keith";
+      security.secret_key = "$__file{/etc/nixos/grafana-secret-key}";
+    };
+  };
+  services.prometheus = {
+    enable = true;
+    port = constants.prometheus.port;
+    listenAddress = "127.0.0.1";
+    scrapeConfigs = [{
+      job_name = "node";
+      static_configs = [{
+        targets = forEach (attrNames machines) (machine: "${machine}:${toString constants.prometheus.exporters.node.port}");
+      }];
+    }];
+  };
 }
