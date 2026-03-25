@@ -1,4 +1,5 @@
 rec {
+  localhost.ip = "127.0.0.1";
   kwbauson.ip = "208.87.134.252";
   kwbauson.ip6 = "2602:ff16:3:0:1:10d:0:1";
   kwbauson.tailscale-ip = "100.89.245.93";
@@ -29,4 +30,5 @@ rec {
     port = 9090;
     exporters.node.port = 9002;
   };
+  loki.port = 9091;
 }

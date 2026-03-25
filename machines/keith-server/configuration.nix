@@ -134,7 +134,7 @@
   };
 
   services.ddclient = {
-    enable = true;
+    enable = false; # FIXME
     configFile = toFile "ddclient.conf" ''
       protocol=porkbun
       apikey_env=APIKEY
@@ -172,12 +172,35 @@
   services.prometheus = {
     enable = true;
     port = constants.prometheus.port;
-    listenAddress = "127.0.0.1";
+    listenAddress = constants.localhost.ip;
     scrapeConfigs = [{
       job_name = "node";
       static_configs = [{
         targets = forEach (attrNames machines) (machine: "${machine}:${toString constants.prometheus.exporters.node.port}");
       }];
     }];
+  };
+  services.loki = {
+    enable = true;
+    # adapted from https://grafana.com/docs/loki/latest/configure/examples/configuration-examples/#1-local-configuration-exampleyaml
+    configuration = {
+      auth_enabled = false;
+      server.http_listen_port = constants.loki.port;
+      common = {
+        ring.instance_addr = constants.localhost.ip;
+        ring.kvstore.store = "inmemory";
+        replication_factor = 1;
+        path_prefix = "/tmp/loki";
+      };
+      schema_config.configs = [{
+        schema = "v13";
+        from = "2020-05-15";
+        store = "tsdb";
+        object_store = "filesystem";
+        index.prefix = "index_";
+        index.period = "24h";
+      }];
+      storage_config.filesystem.directory = "/var/lib/loki/chunks";
+    };
   };
 }
