@@ -169,15 +169,17 @@
       security.secret_key = "$__file{/etc/nixos/grafana-secret-key}";
     };
   };
+  systemd.services.grafana.after = [ "tailscaled.service" ];
   services.prometheus = {
     enable = true;
     port = constants.prometheus.port;
     listenAddress = constants.localhost.ip;
     scrapeConfigs = [{
       job_name = "node";
-      static_configs = [{
-        targets = forEach (attrNames machines) (machine: "${machine}:${toString constants.prometheus.exporters.node.port}");
-      }];
+      static_configs = forEach (attrNames machines) (machine: {
+        labels.instance = machine;
+        targets = [ "${machine}.${constants.tailnet}:${toString constants.prometheus.exporters.node.port}" ];
+      });
     }];
   };
   services.loki = {

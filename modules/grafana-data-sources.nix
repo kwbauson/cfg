@@ -7,6 +7,8 @@
   };
   imports = [
     (optionalAttrs isLinux {
+      systemd.services.prometheus-node-exporter.after = [ "tailscaled.service" ];
+
       services.alloy.enable = true;
       systemd.services.alloy.serviceConfig.SupplementaryGroups = [ "adm" "systemd-journal" ];
       environment.etc."alloy/config.alloy".text = ''

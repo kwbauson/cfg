@@ -19,6 +19,7 @@
     };
     tmp.useTmpfs = true;
     supportedFilesystems = [ "ntfs" ];
+    kernel.sysctl."net.ipv4.ip_nonlocal_bind" = 1;
   };
 
   system.nixos.label = flakeLastModifiedDateString;
@@ -28,6 +29,7 @@
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  services.resolved.enable = true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
