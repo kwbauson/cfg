@@ -6,11 +6,13 @@
     listenAddress = constants.${machine-name}.tailscale-ip;
   };
   imports = [
-    (mkIf isLinux {
+    (optionalAttrs isLinux {
       services.alloy.enable = true;
+      systemd.services.alloy.serviceConfig.SupplementaryGroups = [ "adm" "systemd-journal" ];
       environment.etc."alloy/config.alloy".text = ''
         loki.source.journal "systemd_journal" {
           forward_to = [loki.write.grafana_loki.receiver]
+          format_as_json = true
           labels = {
             instance = "${machine-name}",
           }
