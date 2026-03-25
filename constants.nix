@@ -1,4 +1,5 @@
 rec {
+  localhost.ip = "127.0.0.1";
   kwbauson.ip = "208.87.134.252";
   kwbauson.ip6 = "2602:ff16:3:0:1:10d:0:1";
   kwbauson.tailscale-ip = "100.89.245.93";
@@ -7,6 +8,9 @@ rec {
   kwbauson.domain = "com";
   keith-server.ip = "100.107.6.112";
   keith-server.tailscale-ip = keith-server.ip;
+  keith-desktop.tailscale-ip = "100.82.72.117";
+  keith-xps.tailscale-ip = "100.92.188.49";
+  readlee-mac-m1.tailscale-ip = "100.118.226.25";
   cloudflare-dns.ips = [ "1.1.1.1" "1.0.0.1" ];
   personal-api.port = 13000;
   olivetin.port = 1337;
@@ -22,4 +26,9 @@ rec {
   valheim.end-port = 2457;
   valheim.ports = [ valheim.start-port valheim.end-port ];
   ntfy.port = 28080;
+  prometheus = {
+    port = 9090;
+    exporters.node.port = 9002;
+  };
+  loki.port = 9091;
 }

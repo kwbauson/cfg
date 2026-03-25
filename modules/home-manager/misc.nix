@@ -1,7 +1,7 @@
 { config, scope, machine-name, isNixOS, isGraphical, ... }: with scope;
 {
   home = {
-    stateVersion = "22.11";
+    stateVersion = "26.05";
     sessionVariables = {
       BROWSER = "firefox";
       EMAIL = "${userName} <${userEmail}>";
