@@ -29,13 +29,7 @@
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
-  services.resolved = {
-    enable = true;
-    settings.Resolve = {
-      DNSOverTLS = "opportunistic";
-      Domains = [ "~." ];
-    };
-  };
+  services.resolved.enable = true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
