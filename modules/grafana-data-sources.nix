@@ -1,7 +1,7 @@
 { scope, machine-name, ... }: with scope; {
   services.prometheus.exporters.node = {
     enable = true;
-    enabledCollectors = optionals isLinux [ "systemd" ];
+    enabledCollectors = optionals isLinux [ "systemd" "processes" ];
     port = constants.prometheus.exporters.node.port;
     listenAddress = constants.${machine-name}.tailscale-ip;
   };
