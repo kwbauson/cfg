@@ -110,20 +110,6 @@
   services.scribblers.enable = true;
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
-  services.netdata.enable = true;
-  services.caddy.subdomains.netdata = { role = "admin"; inherit (constants.netdata) port; };
-
-  services.ntfy-sh = {
-    enable = true;
-    settings = {
-      base-url = "https://ntfy.${constants.kwbauson.fqdn}";
-      listen-http = ":${toString constants.ntfy.port}";
-      enable-login = true;
-      auth-default-access = "deny-all";
-    };
-  };
-  services.caddy.subdomains.ntfy = constants.ntfy.port;
-
   services.github-runners.keith-server = {
     enable = true;
     nodeRuntimes = [ "node20" "node24" ];
