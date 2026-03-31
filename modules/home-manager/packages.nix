@@ -38,8 +38,7 @@
     development-extra = optionalAttrs (!isMinimal) {
       inherit
         yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
-        unison-ucm cachix;
-      inherit (nodePackages) npm-check-updates prettier;
+        unison-ucm cachix npm-check-updates prettier;
     };
     nle-cfg = nle-cfg.pkgs;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
