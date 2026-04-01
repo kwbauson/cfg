@@ -5,7 +5,7 @@ final: prev: with final.scope; {
       let
         extraPackages = set: concatMapStringsSep "\n" (n: "${set}.${n} ${n}") (attrNames (pkgs.${set}));
         extra-set-list = concatMapStringsSep "\n" extraPackages
-          [ "nodePackages" "python3Packages" "rubyPackages" ];
+          [ "python3Packages" "rubyPackages" ];
         base-list = concatMapStringsSep "\n" (n: "${n} ${n}") (attrNames pkgs);
       in
       base-list + extra-set-list;
