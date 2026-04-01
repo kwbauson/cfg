@@ -15,6 +15,9 @@
         loki.source.journal "systemd_journal" {
           format_as_json = true
           forward_to = [loki.write.grafana_loki.receiver]
+          labels = {
+            instance = "${machine-name}",
+          }
         }
         loki.write "grafana_loki" {
           endpoint {

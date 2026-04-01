@@ -21,6 +21,7 @@
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
   systemd.defaultUnit = mkForce "multi-user.target";
+  boot.kernel.sysctl."kernel.panic" = 60;
 
   zramSwap.memoryPercent = 25;
   swapDevices = [{
