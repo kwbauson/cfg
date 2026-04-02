@@ -26,14 +26,16 @@ importPackage rec {
         }
       )
     );
-    mkCmdlineMap = action: fallback: lib.mkRaw ''{
-      function (cmp)
-        if vim.fn.getcmdtype() ~= ':' then
-          return cmp.${action}()
-        end
-      end,
-      "${fallback}",
-    }'';
+    mkCmdlineMap = action: fallback: lib.mkRaw ''
+      {
+        function (cmp)
+          if vim.fn.getcmdtype() ~= ':' then
+            return cmp.${action}()
+          end
+        end,
+        "${fallback}",
+      }
+    '';
     bg = "#202020"; # overall background color from colorscheme
     oneline = text: concatStringsSep " " (filter isString (builtins.split "[[:space:]]+" text));
   };
@@ -97,13 +99,15 @@ importPackage rec {
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
-      K = lib.oneline ''<cmd>lua
-        vim.lsp.buf.hover({
-          focus = false,
-          anchor_bias = 'above',
-          close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave', 'BufLeave' },
-        })
-      <cr>'';
+      K = lib.oneline ''
+        <cmd>lua
+          vim.lsp.buf.hover({
+            focus = false,
+            anchor_bias = 'above',
+            close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave', 'BufLeave' },
+          })
+        <cr>
+      '';
     };
     diagnostic.settings = {
       signs.priority = 9;
@@ -113,9 +117,11 @@ importPackage rec {
       nil_ls.config.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
       ts_ls.enable = true;
       ts_ls.config.init_options.preferences.disableSuggestions = true;
-      ts_ls.config.on_attach = lib.mkRaw ''function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-      end'';
+      ts_ls.config.on_attach = lib.mkRaw ''
+        function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+        end
+      '';
       jsonls.enable = true;
       basedpyright.enable = true;
       ruff.enable = true;
@@ -190,13 +196,15 @@ importPackage rec {
               "index.tsx"
             ];
           in
-          lib.mkRaw ''function(buf)
-            if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
-              return buf.path:match("([^/]+/[^/]+)$")
-            else
-              return buf.name
+          lib.mkRaw ''
+            function(buf)
+              if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
+                return buf.path:match("([^/]+/[^/]+)$")
+              else
+                return buf.name
+              end
             end
-          end'';
+          '';
       };
       web-devicons.enable = true;
       lualine.enable = true;
