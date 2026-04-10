@@ -38,7 +38,7 @@ let
     in
     runCommand "${sourceHash}-${flakeHash}" { } ''
       mkdir -p $out
-      ln -s ${links} $out/.${links.pname}
+      ln -s ${links} $out/.${links.name}
       ${postBuild}
     '';
 in
