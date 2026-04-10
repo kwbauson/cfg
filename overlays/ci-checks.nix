@@ -33,23 +33,20 @@ in
       (elem system pkg.meta.platforms or [ system ])
     ])
     extra-packages;
-  cached-paths =
-    let
-      getPaths = ns: machines: concatMap (m: map (n: "switch.scripts.${m}.${n}") ns) (attrNames machines);
-      paths = {
-        x86_64-linux = getPaths [ "noa" "nos" "nob" ] nixosConfigurations;
-        aarch64-darwin = getPaths [ "noa" "nds" ] darwinConfigurations;
-      }.${system};
-    in
-    create-cached-refs.mkRefPaths {
-      inherit paths flake;
-      appendSystem = false;
-    };
-  checks = runCommand "checks" { } ''
-    mkdir -p $out/bin
-    ln -s ${checks-script} $out/bin/checks
-    ln -s ${final.cached-paths} $out/cached-paths
-  '';
+
+  checks = cached-refs.build {
+    inherit flake;
+    refs = [ [ "hello" ] ] ++ rec {
+      getPaths = ns: machines: concatMap (m: map (n: [ "switch" "scripts" m n ]) ns) (attrNames machines);
+      x86_64-linux = getPaths [ "noa" "nos" "nob" ] nixosConfigurations;
+      aarch64-darwin = getPaths [ "noa" "nds" ] darwinConfigurations;
+    }.${system};
+
+    postBuild = ''
+      mkdir -p $out/bin
+      ln -s ${checks-script} $out/bin/checks
+    '';
+  };
 
   requiredSubstitutes = optionalAttrs isLinux {
     inherit firefox-unwrapped ffmpeg-full;
