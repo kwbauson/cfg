@@ -15,4 +15,4 @@ jobs:
       - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: cachix push kwbauson ./result
       - run: cachix pin kwbauson checks.'${{ matrix.system }}' ./result --keep-revisions 5
-        # if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
