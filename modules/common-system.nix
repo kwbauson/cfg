@@ -3,6 +3,7 @@
   imports = [
     modules.args
     modules.auto-update
+    modules.grafana-data-sources
   ];
   environment.etc."nixpkgs-path".source = nixpkgsPath;
   nix.package = lixPackageSets.latest.lix;

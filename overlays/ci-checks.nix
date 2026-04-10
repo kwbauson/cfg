@@ -51,9 +51,7 @@ in
     ln -s ${final.cached-paths} $out/cached-paths
   '';
 
-  requiredSubstitutes = {
-    inherit ffmpeg;
-  } // optionalAttrs isLinux {
+  requiredSubstitutes = optionalAttrs isLinux {
     inherit firefox-unwrapped ffmpeg-full;
     chromium = chromium.browser;
   };

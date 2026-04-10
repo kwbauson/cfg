@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage rec {
   inherit pname;
-  version = "0-unstable-2026-01-20";
+  version = "0-unstable-2026-04-10";
   src = fetchFromGitHub {
     owner = "nix-community";
     repo = pname;
-    rev = "5b138edcb2f1c3ed4b29eca3658f04f0639b98b3";
-    hash = "sha256-YRU0IHMzXluZxr0JDfq9jtblb4DV7MIB5wj2jYMFKQc=";
+    rev = "37e43d800387d3a387e29109b2673a9bd72d8b7c";
+    hash = "sha256-YZTv64nVKhJCDbP/LsMM0KWsjdkMcZRrxIR3RXxG+Pw=";
   };
   passthru.updateScript = unstableGitUpdater { };
   flake = import src;
@@ -26,14 +26,16 @@ importPackage rec {
         }
       )
     );
-    mkCmdlineMap = action: fallback: lib.mkRaw ''{
-      function (cmp)
-        if vim.fn.getcmdtype() ~= ':' then
-          return cmp.${action}()
-        end
-      end,
-      "${fallback}",
-    }'';
+    mkCmdlineMap = action: fallback: lib.mkRaw ''
+      {
+        function (cmp)
+          if vim.fn.getcmdtype() ~= ':' then
+            return cmp.${action}()
+          end
+        end,
+        "${fallback}",
+      }
+    '';
     bg = "#202020"; # overall background color from colorscheme
     oneline = text: concatStringsSep " " (filter isString (builtins.split "[[:space:]]+" text));
   };
@@ -97,13 +99,15 @@ importPackage rec {
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
-      K = lib.oneline ''<cmd>lua
-        vim.lsp.buf.hover({
-          focus = false,
-          anchor_bias = 'above',
-          close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave', 'BufLeave' },
-        })
-      <cr>'';
+      K = lib.oneline ''
+        <cmd>lua
+          vim.lsp.buf.hover({
+            focus = false,
+            anchor_bias = 'above',
+            close_events = { 'CursorMoved', 'ModeChanged', 'WinLeave', 'BufLeave' },
+          })
+        <cr>
+      '';
     };
     diagnostic.settings = {
       signs.priority = 9;
@@ -111,10 +115,13 @@ importPackage rec {
     lsp.servers = {
       nil_ls.enable = true; # FIXME switch to nixd?
       nil_ls.config.settings.nil.formatting.command = [ "nixpkgs-fmt" ];
-      tsgo.enable = true;
-      tsgo.config.on_attach = lib.mkRaw ''function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-      end'';
+      ts_ls.enable = true;
+      ts_ls.config.init_options.preferences.disableSuggestions = true;
+      ts_ls.config.on_attach = lib.mkRaw ''
+        function(client, bufnr)
+          client.server_capabilities.documentFormattingProvider = false
+        end
+      '';
       jsonls.enable = true;
       basedpyright.enable = true;
       ruff.enable = true;
@@ -189,13 +196,15 @@ importPackage rec {
               "index.tsx"
             ];
           in
-          lib.mkRaw ''function(buf)
-            if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
-              return buf.path:match("([^/]+/[^/]+)$")
-            else
-              return buf.name
+          lib.mkRaw ''
+            function(buf)
+              if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
+                return buf.path:match("([^/]+/[^/]+)$")
+              else
+                return buf.name
+              end
             end
-          end'';
+          '';
       };
       web-devicons.enable = true;
       lualine.enable = true;

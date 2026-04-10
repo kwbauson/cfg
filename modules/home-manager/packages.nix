@@ -17,8 +17,8 @@
       graphical-core = {
         inherit
           dzen2 graphviz imagemagick term nsxiv
-          xclip xdotool xsel xterm maim w3m;
-        inherit (xorg) xdpyinfo xev xfontsel xmodmap;
+          xclip xdotool xsel xterm maim w3m
+          xdpyinfo xev xfontsel xmodmap;
       };
       inherit
         ffmpeg mediainfo pavucontrol qtbr signal-desktop
@@ -38,8 +38,7 @@
     development-extra = optionalAttrs (!isMinimal) {
       inherit
         yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
-        unison-ucm cachix;
-      inherit (nodePackages) npm-check-updates prettier;
+        unison-ucm cachix npm-check-updates prettier;
     };
     nle-cfg = nle-cfg.pkgs;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
@@ -49,7 +48,7 @@
       inherit iproute2 iputils pavucontrol strace time dzen2
         maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
       inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
-      inherit man-pages ncdu bitwarden-cli remmina;
+      inherit man-pages ncdu bitwarden-cli remmina ffmpeg;
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;

@@ -14,11 +14,13 @@
         enable = mkDefault true;
         configurationLimit = mkDefault 5;
         consoleMode = "auto";
+        memtest86.enable = true;
       };
       timeout = mkDefault 1;
     };
     tmp.useTmpfs = true;
     supportedFilesystems = [ "ntfs" ];
+    kernel.sysctl."net.ipv4.ip_nonlocal_bind" = 1;
   };
 
   system.nixos.label = flakeLastModifiedDateString;
@@ -28,6 +30,7 @@
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine-name;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  services.resolved.enable = true;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
@@ -42,7 +45,7 @@
     font = "default8x16";
   };
 
-  fonts.enableDefaultPackages = config.services.xserver.enable;
+  fonts.enableDefaultPackages = mkDefault isGraphical;
 
   time.timeZone = mkDefault "America/Indianapolis";
 
@@ -66,15 +69,15 @@
       HandleLidSwitch = "ignore";
     };
     journald.extraConfig = "SystemMaxUse=100M";
-    xserver.enable = mkDefault isGraphical;
-    displayManager = mkIf config.services.xserver.enable {
+    displayManager = mkIf isGraphical {
       defaultSession = "none+xsession";
       autoLogin = {
-        enable = true;
+        enable = mkDefault true;
         user = username;
       };
     };
-    xserver.displayManager = mkIf config.services.xserver.enable {
+    xserver.enable = mkDefault isGraphical;
+    xserver.displayManager = mkIf isGraphical {
       session = [
         {
           manage = "window";
@@ -82,9 +85,8 @@
           start = "exec ~/.xsession";
         }
       ];
-      lightdm.enable = true;
+      lightdm.enable = mkDefault true;
     };
-    earlyoom.enable = true;
   };
 
   users.users.${username} = {
@@ -95,17 +97,19 @@
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = mkDefault "25.05";
   programs.command-not-found.enable = false;
-  programs.steam.enable = mkDefault config.services.xserver.enable;
+  programs.steam.enable = mkDefault isGraphical;
   programs.pmount.enable = true;
   services.openssh.enable = true;
   services.openssh.openFirewall = false;
   services.tailscale.enable = mkDefault true;
   services.tailscale.useRoutingFeatures = mkDefault "client";
   systemd.services.tailscaled.after = [ "systemd-networkd-wait-online.service" ];
-  hardware.bluetooth.enable = mkDefault config.services.xserver.enable;
+  hardware.bluetooth.enable = mkDefault isGraphical;
   programs.i3lock.enable = true;
+  services.smartd.enable = mkDefault true;
+  services.earlyoom.enable = true;
 
-  services.udev.packages = optionals config.services.xserver.enable [ headsetcontrol ];
+  services.udev.packages = optionals isGraphical [ headsetcontrol ];
   services.openssh.settings = {
     PasswordAuthentication = mkDefault false;
     PermitRootLogin = "no";

@@ -1,4 +1,4 @@
-{ config, scope, ... }: with scope;
+{ config, scope, machine-name, ... }: with scope;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
@@ -20,6 +20,8 @@
   services.auto-update.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.backend = "docker";
+  systemd.defaultUnit = mkForce "multi-user.target";
+  boot.kernel.sysctl."kernel.panic" = 60;
 
   zramSwap.memoryPercent = 25;
   swapDevices = [{
@@ -38,6 +40,7 @@
     serverName = "hangin bois";
     worldName = "hangin";
   };
+  systemd.services.valheim.wantedBy = mkForce [ ];
 
   services.palworld = {
     enable = true;
@@ -67,7 +70,7 @@
     }
   '';
 
-  services.olivetin.enable = true;
+  # services.olivetin.enable = true; // NOTE disabled because insecure
   services.olivetin.user = "root";
   services.olivetin.settings = {
     ListenAddressSingleHTTPFrontend = "localhost:${toString constants.olivetin.port}";
@@ -84,12 +87,12 @@
       }
     ];
   };
-  services.caddy.subdomains.olivetin = ''
-    basic_auth {
-      {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
-    }
-    reverse_proxy localhost:${toString constants.olivetin.port}
-  '';
+  # services.caddy.subdomains.olivetin = ''
+  #   basic_auth {
+  #     {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
+  #   }
+  #   reverse_proxy localhost:${toString constants.olivetin.port}
+  # '';
 
   services.caddy.subdomains.api = constants.personal-api.port;
 
@@ -108,20 +111,6 @@
   services.scribblers.enable = true;
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
-  services.netdata.enable = true;
-  services.caddy.subdomains.netdata = { role = "admin"; inherit (constants.netdata) port; };
-
-  services.ntfy-sh = {
-    enable = true;
-    settings = {
-      base-url = "https://ntfy.${constants.kwbauson.fqdn}";
-      listen-http = ":${toString constants.ntfy.port}";
-      enable-login = true;
-      auth-default-access = "deny-all";
-    };
-  };
-  services.caddy.subdomains.ntfy = constants.ntfy.port;
-
   services.github-runners.keith-server = {
     enable = true;
     nodeRuntimes = [ "node20" "node24" ];
@@ -132,7 +121,7 @@
   };
 
   services.ddclient = {
-    enable = true;
+    enable = false; # FIXME
     configFile = toFile "ddclient.conf" ''
       protocol=porkbun
       apikey_env=APIKEY
@@ -145,7 +134,7 @@
   # services.ollama.enable = true; # tmp disable ollama
   services.ollama.host = "[::]";
 
-  services.searchix.enable = true;
+  services.searchix.enable = false;
   services.searchix.settings = {
     web.baseUrl = "https://searchix.kwbauson.com";
     importer.Sources = {
@@ -156,4 +145,51 @@
   };
   systemd.services.searchix.environment.NIX_PATH = "nixpkgs=${toString pkgs.path}";
   services.caddy.subdomains.searchix = config.services.searchix.settings.web.port;
+
+  services.grafana = {
+    enable = true;
+    settings = {
+      server.http_addr = constants.${machine-name}.tailscale-ip;
+      server.http_port = 8888;
+      server.domain = machine-name;
+      security.admin_user = "keith";
+      security.secret_key = "$__file{/etc/nixos/grafana-secret-key}";
+    };
+  };
+  systemd.services.grafana.after = [ "tailscaled.service" ];
+  services.prometheus = {
+    enable = true;
+    port = constants.prometheus.port;
+    listenAddress = constants.localhost.ip;
+    scrapeConfigs = [{
+      job_name = "node";
+      static_configs = forEach (attrNames machines) (machine: {
+        labels.instance = machine;
+        targets = [ "${machine}.${constants.tailnet}:${toString constants.prometheus.exporters.node.port}" ];
+      });
+    }];
+  };
+  services.loki = {
+    enable = true;
+    # adapted from https://grafana.com/docs/loki/latest/configure/examples/configuration-examples/#1-local-configuration-exampleyaml
+    configuration = {
+      auth_enabled = false;
+      server.http_listen_port = constants.loki.port;
+      common = {
+        ring.instance_addr = constants.localhost.ip;
+        ring.kvstore.store = "inmemory";
+        replication_factor = 1;
+        path_prefix = "/tmp/loki";
+      };
+      schema_config.configs = [{
+        schema = "v13";
+        from = "2020-05-15";
+        store = "tsdb";
+        object_store = "filesystem";
+        index.prefix = "index_";
+        index.period = "24h";
+      }];
+      storage_config.filesystem.directory = "/var/lib/loki/chunks";
+    };
+  };
 }

@@ -274,4 +274,11 @@ builtins // pkgs.lib // {
       disabledModules = map (path: "${src}/${path}") paths;
     };
   flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
+
+  exesFrom = { path, exes ? attrNames (readDir path) }: runCommand "exes-from" { } ''
+    mkdir -p $out/bin
+    ${concatMapStringsSep "\n" (exe: ''
+    ln -s ${toString path}/${exe} $out/bin
+    '') exes}
+  '';
 })
