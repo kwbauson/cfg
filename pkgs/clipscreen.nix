@@ -8,7 +8,7 @@ stdenv.mkDerivation {
     rev = "a4aaee4376a040ecca5f6024bd026974a4fafa25";
     hash = "sha256-ZVWhrIqFOQxConBDkEKbtlOoeoEHPhBpTap9TZjpcMg=";
   };
-  buildInputs = with xorg; [ pkg-config cairo libXfixes libXrandr libXcomposite ];
+  buildInputs = [ pkg-config cairo libxfixes libxrandr libxcomposite ];
   installPhase = ''
     mkdir -p $out/bin
     cp clipscreen $out/bin
