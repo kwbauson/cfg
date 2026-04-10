@@ -37,9 +37,8 @@ let
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
     in
     runCommand "${sourceHash}-${flakeHash}" { } ''
-      mkdir -p $out/cached-refs
-      ln -s ${links} $out/cached-refs/.links
-      touch $out/cached-refs/$(basename ${flakeBuild})
+      mkdir -p $out
+      ln -s ${links} $out/.${links.pname}
       ${postBuild}
     '';
 in
