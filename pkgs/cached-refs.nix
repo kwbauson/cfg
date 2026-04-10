@@ -79,7 +79,6 @@ in
     impure=
   fi
 
-  # trigger rebuild
   exec nix "$cmd" $impure "$flake"#"$installable" "$@"
 '').overrideAttrs {
   passthru = { inherit build; };
