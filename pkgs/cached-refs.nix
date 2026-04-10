@@ -47,17 +47,16 @@ in
   set -euo pipefail
   ${pathAdd [ curl jq ]}
 
-  cache=$1
-  shift
-  pin=$1
-  shift
+  if [[ $1 = -v ]];then
+    set -x && shift
+  fi
 
-  cmd=$1
-  shift
-  flake=$1
-  shift
-  installable=$1
-  shift
+  cache=$1 && shift
+  pin=$1 && shift
+
+  cmd=$1 && shift
+  flake=$1 && shift
+  installable=$1 && shift
 
   storePath=$(
     curl -s https://app.cachix.org/api/v1/cache/"$cache"/pin |
