@@ -52,4 +52,23 @@ in
     inherit firefox-unwrapped ffmpeg-full;
     chromium = chromium.browser;
   };
+
+  meme = runCommand "meme"
+    {
+      passAsFile = [ "flake" ];
+      flake = /* nix */ ''
+        {
+          outputs = { self }: {
+            hello = builtins.storePath ${hello};
+          };
+        }
+      '';
+      sourceHash = substring 11 32 (builtins.unsafeDiscardStringContext flake.outPath);
+    }
+    ''
+      mkdir $out
+      mkdir flake
+      cp $flakePath flake/flake.nix
+      tar cvzf $out/$sourceHash flake
+    '';
 }
