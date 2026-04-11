@@ -34,7 +34,7 @@ logs+=$(
       git init -q
       git remote add origin "$url"
     fi
-    git fetch origin
+    git fetch origin --prune --prune-tags
     echo "----- $source -----"
     git -c color.ui=always log --pretty=oneline --abbrev-commit --reverse --no-merges "$current_rev".."$new_rev"
     echo

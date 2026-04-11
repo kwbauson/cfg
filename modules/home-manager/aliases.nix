@@ -5,7 +5,7 @@
     nixpkgs-path = "echo ${nixpkgsPath}";
     nixpkgs-branch = "echo ${nixpkgs-branch}";
     undup = ''tac "$@" | awk '!x[$0]++' | tac'';
-    cfgu = "cd ~/cfg && git fetch && git rebase --autostash $(git tracking)";
+    cfgu = "cd ~/cfg && git f && git rebase --autostash $(git tracking)";
     cfgp = "git -C ~/cfg cap";
     machine-name = "echo ${machine-name}";
     nou = "cfgu && noa";

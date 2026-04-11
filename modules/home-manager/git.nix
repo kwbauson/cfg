@@ -105,7 +105,7 @@
         ${gitDf} "$current.." || true
       '';
       dfp = gs "git df $(git parent -H)";
-      f = "fetch --all";
+      f = "fetch --all --prune --prune-tags";
       g = gs "git f && git mt";
       gr = gs "git pull $(git tracking | tr / ' ') --rebase --autostash";
       gd = gs "git fetch origin $(git default):$(git default)";
@@ -182,7 +182,6 @@
       checkout.defaultRemote = "origin";
       core.autocrlf = "input";
       core.hooksPath = "/dev/null";
-      fetch.prune = true;
       pager.branch = false;
       push.default = "simple";
       pull.rebase = false;
