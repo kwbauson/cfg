@@ -16,7 +16,7 @@ importPackage rec {
   };
   inherit (package) extend;
 
-  lib = flake.lib.nixvim // {
+  lib = flake.lib.nixvim // rec {
     mkKeyMaps = mapAttrsToList (
       key: value: { inherit key; } // (
         if !isString value then value else {
@@ -37,7 +37,8 @@ importPackage rec {
       }
     '';
     bg = "#202020"; # overall background color from colorscheme
-    oneline = text: concatStringsSep " " (filter isString (builtins.split "[[:space:]]+" text));
+    isNonEmptyString = x: isString x && x != "";
+    oneline = text: concatStringsSep " " (filter isNonEmptyString (builtins.split "[[:space:]]+" text));
   };
 
   configuration = fix (cfg: {
