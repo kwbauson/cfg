@@ -17,5 +17,6 @@ jobs:
       - run: cachix pin kwbauson checks.'${{ matrix.system }}' ./result --keep-revisions 5
         if: github.ref == 'refs/heads/main'
       - uses: actions/upload-artifact@v7.0.1
-        path: ./result/.cached-refs-links/flake
         # if: github.ref == 'refs/heads/main'
+        with:
+          path: ./result/.cached-refs-links/flake
