@@ -61,7 +61,7 @@ let
       switchers.noa.overrideAttrs (_: { passthru = switchers // { inherit switchers; }; }));
   makeBin = name: makeNamedScript name /* bash */ ''
     cd ~/cfg
-    git add --all
+    git add --all -N
     ${getExe cached-refs} kwbauson checks.${system} shell . "switch.scripts.$(machine-name).${name}" -c switch
   '';
 in
