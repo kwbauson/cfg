@@ -45,8 +45,28 @@ in
     postBuild = ''
       mkdir -p $out/bin
       ln -s ${checks-script} $out/bin/checks
+      ln -s ${final.testFlake} $out/test
     '';
   };
+
+  testFlake = runCommand "meme"
+    {
+      passAsFile = [ "flakeNix" ];
+      sourceHash = substring 11 32 (builtins.unsafeDiscardStringContext flake.outPath);
+      flakeNix = /* nix */ ''
+        {
+          outputs = { self }: {
+            hello = builtins.storePath ${hello};
+          };
+        }
+      '';
+    }
+    ''
+      mkdir flake
+      cp $flakeNixPath flake/flake.nix
+      mkdir $out
+      tar cvzf $out/flake-$sourceHash flake
+    '';
 
   requiredSubstitutes = optionalAttrs isLinux {
     inherit firefox-unwrapped ffmpeg-full;
