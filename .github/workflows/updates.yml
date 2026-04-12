@@ -1,14 +1,14 @@
 name: updates
-env:
-  source: ${{ inputs.source || 'all' }}
-  run-name: updates-${{ inputs.source || 'all' }}
-  title: '${{ env.run-name }}: update'
-run-name: ${{ env.run-name }}
+run-name: ${{ inputs.source || 'all' }}
 on:
   workflow_dispatch:
     inputs:
       source: { type: string }
   schedule: [cron: '0 7 * * *']
+env:
+  source: ${{ inputs.source || 'all' }}
+  run-name: updates-${{ inputs.source || 'all' }}
+  title: '${{ env.run-name }}: update'
 jobs:
   updates:
     name: ${{ env.run-name }}
