@@ -1,12 +1,13 @@
 name: updates
-env:
-  source: ${{ inputs.source || 'all' }}
-run-name: updates-${{ env.source }}
 on:
   workflow_dispatch:
     inputs:
       source: { type: string }
   schedule: [cron: '0 7 * * *']
+run-name: updates-${{ inputs.source || 'all' }}
+env:
+  source: ${{ inputs.source || 'all' }}
+  title: '${{ env.source }}: update'
 jobs:
   updates:
     name: updates-${{ inputs.source || 'all' }}
@@ -15,15 +16,13 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v6.0.2
-      - run: nix run .#updates.'${{ inputs.source || "all" }}'
+      - run: nix run .#updates.'${{ env.source }}'
       - uses: peter-evans/create-pull-request@v8.1.0
         id: cpr
         with:
-          author: Keith Bauson <kwbauson@gmail.com>
-          title: "${{ inputs.source || 'all' }}: update"
-          commit-message: "${{ inputs.source || 'all' }}: update"
-          branch: updates-${{ inputs.source || 'all' }}
+          title: ${{ env.title }}
+          commit-message: ${{ env.title }}
+          branch: updates-${{ env.source }}
           delete-branch: true
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
+        run: echo gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
