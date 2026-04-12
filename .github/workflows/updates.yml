@@ -11,7 +11,7 @@ on:
   schedule: [cron: '0 7 * * *']
 jobs:
   updates:
-    name: ${{ env.run_name }}
+    name: updates-${{ inputs.source || 'all' }}
     runs-on: [nix, Linux, X64]
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
