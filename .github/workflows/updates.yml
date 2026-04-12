@@ -7,7 +7,7 @@ on:
 run-name: updates-${{ inputs.source || 'all' }}
 env:
   source: ${{ inputs.source || 'all' }}
-  title: '${{ env.source }}: update'
+  title: "${{ inputs.source || 'all' }}: update"
 jobs:
   updates:
     name: updates-${{ inputs.source || 'all' }}
