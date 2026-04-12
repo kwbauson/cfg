@@ -3,7 +3,7 @@ env:
   source: ${{ inputs.source || 'all' }}
   run_name: updates-${{ inputs.source || 'all' }}
   title: "${{ inputs.source || 'all' }}: update"
-run-name: ${{ env.run_name }}
+run-name: updates-${{ inputs.source || 'all' }}
 on:
   workflow_dispatch:
     inputs:
