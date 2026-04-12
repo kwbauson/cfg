@@ -1,17 +1,17 @@
 name: updates
-run-name: ${{ inputs.source || 'all' }}
+env:
+  source: ${{ inputs.source || 'all' }}
+  run_name: updates-${{ inputs.source || 'all' }}
+  title: '${{ env.run_name }}: update'
+run-name: ${{ env.run_name }}
 on:
   workflow_dispatch:
     inputs:
       source: { type: string }
   schedule: [cron: '0 7 * * *']
-env:
-  source: ${{ inputs.source || 'all' }}
-  run-name: updates-${{ inputs.source || 'all' }}
-  title: '${{ env.run-name }}: update'
 jobs:
   updates:
-    name: ${{ env.run-name }}
+    name: ${{ env.run_name }}
     runs-on: [nix, Linux, X64]
     env:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -23,7 +23,7 @@ jobs:
         id: cpr
         with:
           title: ${{ env.title }}
-          branch: ${{ env.run-name }}
+          branch: ${{ env.run_name }}
           delete-branch: true
       # - if: ${{ steps.cpr.outputs.pull-request-number }}
       #   run: gh pr merge --auto --squash ${{ steps.cpr.outputs.pull-request-url }}
