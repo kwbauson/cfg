@@ -3,8 +3,10 @@ let
   inherit (flake) nixosConfigurations homeConfigurations;
   hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
-  makeNamedScript = name: text: stdenv.mkDerivation {
+  makeNamedScript = name: text: stdenvNoCC.mkDerivation {
     inherit name;
+    preferLocalBuild = true;
+    allowSubstitutes = false;
     dontUnpack = true;
     script = ''
       #!${bash}/bin/bash

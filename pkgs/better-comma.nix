@@ -1,5 +1,9 @@
-scope: with scope; stdenv.mkDerivation {
+scope: with scope; stdenvNoCC.mkDerivation {
   inherit pname version;
+  preferLocalBuild = true;
+  allowSubstitutes = false;
+  dontUnpack = true;
+  passAsFile = [ "script" "completion" ];
   script = ''
     #!/usr/bin/env bash
     ${pathAdd [ gnused coreutils fzy ]}
@@ -98,8 +102,6 @@ scope: with scope; stdenv.mkDerivation {
     complete -F _${pname} better-comma
     complete -F _${pname} ,
   '';
-  passAsFile = [ "script" "completion" ];
-  dontUnpack = true;
   nativeBuildInputs = [ installShellFiles ];
   installPhase = ''
     mkdir -p $out/bin

@@ -28,7 +28,7 @@ final: prev: with final.scope; {
   nle-cfg = nle.build { path = cfgRoot; };
   inherit (nle-cfg.pkgs) fordir;
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
-  self-flake-lock = runCommand "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
+  self-flake-lock = runCommandLocal "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
     cp ${cfgRoot}/flake.lock $out
     chmod +w $out
     entries=$(jq '.nodes.root.inputs | to_entries' $out)
@@ -54,7 +54,7 @@ final: prev: with final.scope; {
       jq ".nodes.\"$input\".locked = { type: \"path\", path: \"$outPath\", narHash: \"$narHash\" }" $out | sponge $out
     done
   '';
-  self-flake = runCommand "self-flake" { } ''
+  self-flake = runCommandLocal "self-flake" { } ''
     cp -r ${cfgRoot} $out
     chmod -R +w $out
     cp ${self-flake-lock} $out/flake.lock
