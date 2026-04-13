@@ -19,7 +19,6 @@ let
 in
 {
   makeTest = commands: runCommandLocal "test" { } ''
-    # rebuild 1
     ${writeShellScript "commands" ''
       set -xeuo pipefail
       ${commands}
