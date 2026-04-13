@@ -117,7 +117,7 @@
         monitor = "-1";
       };
     };
-    vscode.enable = isGraphical;
+    vscode.enable = isGraphical && isLinux;
     # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
     mpv.enable = isGraphical && isLinux;
     mpv.bindings.M = ''cycle-values audio-channels "mono" "stereo"'';
