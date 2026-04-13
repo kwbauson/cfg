@@ -27,16 +27,15 @@
       br = gs /* bash */ ''
         output=$(git branch --list --format="%(refname:short) %(refname)")
         width=$(echo "$output" | awk '{ print $1 }' | wc -L)
+
+        refCol="%(HEAD) %(if)%(HEAD)%(then)%(color:green)%(end)%(align:$width,left)%(refname:short)%(end)%(color:reset)"
+        trackColor="%(if:equals=[gone])%(upstream:track)%(then)%(color:red)%(else)%(color:yellow)%(end)"
+        ifTrack="%(if)%(upstream:track)%(then): $trackColor%(upstream:track,nobracket)%(color:reset)%(end)"
+        ifUpstream="%(if)%(upstream)%(then)[%(color:blue)%(upstream:short)%(color:reset)$ifTrack] %(end)"
+        format="$refCol %(objectname:short) $ifUpstream%(subject)"
+
         echo "$output" | while read -r _ long;do
-          git for-each-ref "$long" --format=\
-        "\
-        %(HEAD) \
-        %(if)%(HEAD)%(then)%(color:green)%(end)\
-        %(align:$width,left)%(refname:short)%(end)\
-        %(color:reset) %(objectname:short) \
-        %(if)%(upstream)%(then)[%(color:blue)%(upstream:short)%(color:reset)%(if)%(upstream:track)%(then): %(color:yellow)%(upstream:track,nobracket)%(color:reset)%(end)] %(end)\
-        %(subject)\
-        "
+          git for-each-ref "$long" --format="$format"
         done
         git --no-pager stash list
       '';
