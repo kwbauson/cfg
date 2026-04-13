@@ -5,6 +5,7 @@
   ];
 
   _module.args.username = "benjamin";
+  nixpkgs.hostPlatform = mkDefault "aarch64-darwin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {

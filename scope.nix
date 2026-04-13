@@ -12,6 +12,20 @@ builtins // pkgs.lib // {
   inherit (importDir ./.) machines constants modules;
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
+  partialConfigs = forAttrs machines (machine-name: dir:
+    evalModules {
+      specialArgs = { inherit scope machine-name; modulesPath = "${inputs.nixpkgs.outPath}/nixos/modules"; };
+      modules = [
+        ({ modulesPath, ... }: {
+          _module.check = false;
+          imports = [ "${modulesPath}/misc/nixpkgs.nix" ];
+        })
+        (dir.configuration or dir.darwin-configuration or dir.home-configuration)
+        (dir.hardware-configuration or { })
+      ];
+    }
+  );
+  getMachineSystem = machine-name: partialConfigs.${machine-name}.config.nixpkgs.hostPlatform.system;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;

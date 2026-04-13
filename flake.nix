@@ -23,21 +23,21 @@
 
     nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
       nixpkgs.lib.nixosSystem rec {
-        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
+        pkgs = packages.${getMachineSystem machine-name};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.nixos ];
       });
 
     darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
       nix-darwin.lib.darwinSystem rec {
-        pkgs = packages.${machines.${machine-name}.system or "aarch64-darwin"};
+        pkgs = packages.${getMachineSystem machine-name};
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.nix-darwin ];
       });
 
     homeConfigurations = forAttrNames machines (machine-name:
       home-manager.lib.homeManagerConfiguration rec {
-        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
+        pkgs = packages.${getMachineSystem machine-name};
         extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.home-manager ];
       });
