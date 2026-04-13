@@ -5,6 +5,7 @@ on:
     inputs:
       source: { type: string }
   schedule: [cron: '0 7 * * *']
+# what's going on
 jobs:
   updates:
     name: updates-${{ inputs.source || 'all' }}
