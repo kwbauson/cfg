@@ -37,14 +37,4 @@
   };
 
   services.auto-update.enable = true;
-
-  systemd.services.notify-usage = {
-    enable = false;
-    startAt = "*-*-* 06:00:00";
-    serviceConfig.EnvironmentFile = "/etc/nixos/ntfy-environment";
-    path = [ curl coreutils ];
-    script = ''
-      curl -u ":$TOKEN" -d "$(df -h /dev/vda1 --output=pcent | tail -n1)" https://ntfy.kwbauson.com/kwbauson-usage
-    '';
-  };
 }
