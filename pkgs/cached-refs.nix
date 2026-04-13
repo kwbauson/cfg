@@ -23,7 +23,7 @@ let
       '';
       getDrvHash = drv: substring 11 32 (builtins.unsafeDiscardStringContext drv.outPath);
       sourceHash = getDrvHash flake;
-      flakeBuild = runCommand "flake"
+      flakeBuild = runCommandLocal "flake"
         {
           passAsFile = [ "flakeText" ];
           inherit flakeText;
@@ -36,7 +36,7 @@ let
         "${pname}-links"
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
     in
-    runCommand "${sourceHash}-${flakeHash}" { } ''
+    runCommandLocal "${sourceHash}-${flakeHash}" { } ''
       mkdir -p $out
       ln -s ${links} $out/.${links.name}
       ${postBuild}
