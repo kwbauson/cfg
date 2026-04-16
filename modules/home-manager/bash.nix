@@ -1,4 +1,4 @@
-{ config, scope, machine, isNixOS, ... }: with scope;
+{ config, scope, isNixOS, ... }: with scope;
 {
   programs.readline = {
     enable = true;

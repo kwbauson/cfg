@@ -1,4 +1,4 @@
-{ config, scope, machine, isNixOS, isGraphical, ... }: with scope;
+{ config, scope, isNixOS, isGraphical, ... }: with scope;
 {
   home = {
     stateVersion = "26.05";

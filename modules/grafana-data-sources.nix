@@ -1,4 +1,4 @@
-{ scope, machine, ... }: with scope; {
+{ scope, ... }: with scope; {
   services.prometheus.exporters.node = {
     enable = true;
     enabledCollectors = optionals isLinux [ "systemd" "processes" ];

@@ -1,4 +1,4 @@
-{ config, scope, machine, ... }: with scope;
+{ config, scope, ... }: with scope;
 let
   sync-machines = [ "keith-desktop" "keith-xps" ];
 in
