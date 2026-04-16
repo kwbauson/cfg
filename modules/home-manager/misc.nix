@@ -1,4 +1,4 @@
-{ config, scope, machine-name, isNixOS, isGraphical, ... }: with scope;
+{ config, scope, machine, isNixOS, isGraphical, ... }: with scope;
 {
   home = {
     stateVersion = "26.05";
@@ -236,13 +236,13 @@
       xsetroot -cursor_name left_ptr &
       togpad off &
       autorandr --change &
-      ${optionalString (machine-name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
+      ${optionalString (machine.name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
     '';
     windowManager = {
       i3 = {
         enable = isNixOS && isGraphical;
         config = null;
-        extraConfig = readFile ./i3-config + { }.${machine-name} or "";
+        extraConfig = readFile ./i3-config + { }.${machine.name} or "";
       };
     };
   };

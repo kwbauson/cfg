@@ -1,13 +1,13 @@
-{ scope, machine-name, username, ... }: with scope;
+{ scope, machine, username, ... }: with scope;
 {
   imports = [
     modules.common-configuration
-    machines.${machine-name}.darwin-configuration
+    machine.darwin-configuration
     inputs.home-manager.darwinModules.default
   ];
   nix.settings.extra-platforms = [ "x86_64-darwin" ];
   nix.settings.trusted-users = [ username ];
-  system.darwinLabel = "${machine-name}-${flakeLastModifiedDateString}";
+  system.darwinLabel = "${machine.name}-${flakeLastModifiedDateString}";
   users.users.${username}.home = "/Users/${username}";
   system.primaryUser = username;
   system.defaults.finder = {

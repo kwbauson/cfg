@@ -1,4 +1,4 @@
-{ config, scope, machine-name, ... }: with scope;
+{ config, scope, machine, ... }: with scope;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
@@ -149,9 +149,9 @@
   services.grafana = {
     enable = true;
     settings = {
-      server.http_addr = constants.${machine-name}.tailscale-ip;
+      server.http_addr = constants.${machine.name}.tailscale-ip;
       server.http_port = 8888;
-      server.domain = machine-name;
+      server.domain = machine.name;
       security.admin_user = "keith";
       security.secret_key = "$__file{/etc/nixos/grafana-secret-key}";
     };

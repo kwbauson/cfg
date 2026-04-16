@@ -1,4 +1,4 @@
-{ config, scope, machine-name, ... }: with scope;
+{ config, scope, machine, ... }: with scope;
 {
   imports = [
     modules.ci-substituters
@@ -9,7 +9,7 @@
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {
-    ${machine-name} = {
+    ${machine.name} = {
       enable = true;
       nodeRuntimes = [ "node20" "node24" ];
       replace = true;

@@ -1,9 +1,9 @@
-{ config, scope, machine-name, username, isGraphical, ... }: with scope;
+{ scope, machine, username, isGraphical, ... }: with scope;
 {
   imports = [
     modules.common-configuration
-    machines.${machine-name}.configuration
-    machines.${machine-name}.hardware-configuration
+    machine.configuration
+    machine.hardware-configuration
     inputs.home-manager.nixosModules.default
   ] ++ attrValues (importDir ./.);
 
@@ -28,7 +28,7 @@
   nix.channel.enable = false;
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
-  networking.hostName = mkDefault machine-name;
+  networking.hostName = mkDefault machine.name;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   services.resolved.enable = true;
 
@@ -143,6 +143,6 @@
   services._3proxy.services = [{
     type = "socks";
     auth = [ "none" ];
-    bindAddress = constants.${machine-name}.tailscale-ip;
+    bindAddress = constants.${machine.name}.tailscale-ip;
   }];
 }

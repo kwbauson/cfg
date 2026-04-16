@@ -1,8 +1,8 @@
-{ config, scope, machine-name, username, ... }: with scope;
+{ config, scope, machine, username, ... }: with scope;
 {
   imports = [
     modules.args
-    (machines.${machine-name}.home or { })
+    (machine.home or { })
   ] ++ attrValues (importDir ./.);
 
   home.username = mkDefault username;

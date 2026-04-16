@@ -1,9 +1,9 @@
-{ scope, machine-name, ... }: with scope; {
+{ scope, machine, ... }: with scope; {
   services.prometheus.exporters.node = {
     enable = true;
     enabledCollectors = optionals isLinux [ "systemd" "processes" ];
     port = constants.prometheus.exporters.node.port;
-    listenAddress = constants.${machine-name}.tailscale-ip;
+    listenAddress = constants.${machine.name}.tailscale-ip;
   };
   imports = [
     (optionalAttrs isLinux {
@@ -16,7 +16,7 @@
           format_as_json = true
           forward_to = [loki.write.grafana_loki.receiver]
           labels = {
-            instance = "${machine-name}",
+            instance = "${machine.name}",
           }
         }
         loki.write "grafana_loki" {
