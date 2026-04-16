@@ -165,7 +165,7 @@
     scrapeConfigs = [{
       job_name = "node";
       static_configs = forEach (attrValues machines) (machine: {
-        labels.instance = machine;
+        labels.instance = machine.name;
         targets = [ "${machine.tailscale-ip}:${toString constants.prometheus.exporters.node.port}" ];
       });
     }];
