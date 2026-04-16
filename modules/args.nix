@@ -1,7 +1,6 @@
-{ scope, machine-name, ... }: with scope;
+{ scope, machine, ... }: with scope;
 {
-  _module.args = let machine = machines.${machine-name}; in {
-    inherit machine;
+  _module.args = {
     inherit (machine) isNixOS isNixDarwin;
     username = mkDefault machine.username or "keith";
     isGraphical = mkDefault machine.isGraphical or true;

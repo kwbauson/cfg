@@ -21,17 +21,17 @@
     overlays = import ./overlays scope;
     nixosModules = modules;
 
-    nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
+    nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
       nixpkgs.lib.nixosSystem rec {
-        pkgs = packages.${machines.${machine-name}.system};
-        specialArgs = { inherit (pkgs) scope; inherit machine-name; };
+        pkgs = packages.${machine.system};
+        specialArgs = { inherit (pkgs) scope; inherit machine; machine-name = machine.name; };
         modules = [ nixosModules.nixos ];
       });
 
-    darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
+    darwinConfigurations = forAttrValuesFlagged machines "isNixDarwin" (machine:
       nix-darwin.lib.darwinSystem rec {
-        pkgs = packages.${machines.${machine-name}.system};
-        specialArgs = { inherit (pkgs) scope; inherit machine-name; };
+        pkgs = packages.${machine.system};
+        specialArgs = { inherit (pkgs) scope; inherit machine; machine-name = machine.name; };
         modules = [ nixosModules.nix-darwin ];
       });
   };

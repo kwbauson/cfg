@@ -11,7 +11,7 @@ builtins // pkgs.lib // {
   inherit (stdenv.hostPlatform) system;
   importDirRoot = importDir ./.;
   inherit (importDirRoot) constants modules;
-  machines = pipe importDirRoot.machines (map mapAttrValues [
+  machines = pipe (mapAttrs (n: x: x // { name = n; }) importDirRoot.machines) (map mapAttrValues [
     (machine: machine // rec {
       partial = naiveMergeModules [
         (machine.hardware-configuration or { })
@@ -33,7 +33,7 @@ builtins // pkgs.lib // {
   forAttrs' = flip mapAttrs';
   forAttrNames = flip mapAttrNames;
   forAttrValues = flip mapAttrValues;
-  forAttrNamesHaving = attrs: attr: forAttrNames (filterAttrs (_: hasAttr attr) attrs);
+  forAttrValuesFlagged = attrs: name: forAttrValues (filterAttrs (_: getAttr name) attrs);
   mergeAttrsList = foldl' mergeAttrs { };
   mergeAttrsListWithFunc = f: foldl' (mergeAttrsWithFunc f) { };
   recursiveUpdateList = foldl' recursiveUpdate { };
