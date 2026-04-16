@@ -2,6 +2,7 @@
 {
   machine.isGraphical = false;
   machine.isMinimal = true;
+  machine.tailscale-ip = "100.89.245.93";
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;

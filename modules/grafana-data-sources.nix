@@ -3,7 +3,7 @@
     enable = true;
     enabledCollectors = optionals isLinux [ "systemd" "processes" ];
     port = constants.prometheus.exporters.node.port;
-    listenAddress = constants.${machine.name}.tailscale-ip;
+    listenAddress = machine.tailscale-ip;
   };
   imports = [
     (optionalAttrs isLinux {

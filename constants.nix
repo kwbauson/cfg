@@ -5,11 +5,6 @@ rec {
   ssh.port = 22;
 
   tailnet = "tail6a226.ts.net";
-  kwbauson.tailscale-ip = "100.89.245.93";
-  keith-server.tailscale-ip = "100.107.6.112";
-  keith-desktop.tailscale-ip = "100.82.72.117";
-  keith-xps.tailscale-ip = "100.92.188.49";
-  readlee-mac-m1.tailscale-ip = "100.118.226.25";
 
   kwbauson.ip = "208.87.134.252";
   kwbauson.ip6 = "2602:ff16:3:0:1:10d:0:1";
