@@ -21,25 +21,18 @@
     overlays = import ./overlays scope;
     nixosModules = modules;
 
-    nixosConfigurations = forAttrNamesHaving machines "configuration" (machine-name:
+    nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
       nixpkgs.lib.nixosSystem rec {
-        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
-        specialArgs = { inherit (pkgs) scope; inherit machine-name; };
+        pkgs = packages.${machine.system};
+        specialArgs = { inherit (pkgs) scope; inherit machine; };
         modules = [ nixosModules.nixos ];
       });
 
-    darwinConfigurations = forAttrNamesHaving machines "darwin-configuration" (machine-name:
+    darwinConfigurations = forAttrValuesFlagged machines "isNixDarwin" (machine:
       nix-darwin.lib.darwinSystem rec {
-        pkgs = packages.${machines.${machine-name}.system or "aarch64-darwin"};
-        specialArgs = { inherit (pkgs) scope; inherit machine-name; };
+        pkgs = packages.${machine.system};
+        specialArgs = { inherit (pkgs) scope; inherit machine; };
         modules = [ nixosModules.nix-darwin ];
-      });
-
-    homeConfigurations = forAttrNames machines (machine-name:
-      home-manager.lib.homeManagerConfiguration rec {
-        pkgs = packages.${machines.${machine-name}.system or "x86_64-linux"};
-        extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ nixosModules.home-manager ];
       });
   };
 }

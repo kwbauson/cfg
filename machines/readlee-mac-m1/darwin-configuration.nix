@@ -1,14 +1,16 @@
-{ config, scope, machine-name, ... }: with scope;
+{ config, scope, machine, ... }: with scope;
 {
   imports = [
     modules.ci-substituters
   ];
 
-  _module.args.username = "benjamin";
+  machine.username = "benjamin";
+  machine.tailscale-ip = "100.118.226.25";
+  nixpkgs.hostPlatform = mkDefault "aarch64-darwin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   services.github-runners = {
-    ${machine-name} = {
+    ${machine.name} = {
       enable = true;
       nodeRuntimes = [ "node20" "node24" ];
       replace = true;

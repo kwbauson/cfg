@@ -1,4 +1,4 @@
-{ config, scope, machine-name, isNixOS, ... }: with scope;
+{ config, scope, machine, isNixOS, ... }: with scope;
 {
   programs.readline = {
     enable = true;
@@ -60,7 +60,7 @@
     };
     initExtra = ''
       [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-      [[ -n $SSH_CLIENT ]] && _host="${machine-name} " || _host=
+      [[ -n $SSH_CLIENT ]] && _host="${machine.name} " || _host=
       PS1="\[\e[1;''${_color}m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
 
       set -o vi

@@ -1,7 +1,7 @@
-{ scope, machine-name, username, ... }: with scope;
+{ scope, machine, username, ... }: with scope;
 {
   imports = [
-    modules.args
+    modules.machine
     modules.auto-update
     modules.grafana-data-sources
   ];
@@ -21,7 +21,7 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit scope machine-name; };
+    extraSpecialArgs = { inherit scope machine; };
     users.${username}.imports = [ modules.home-manager ];
   };
 

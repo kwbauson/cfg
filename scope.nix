@@ -9,7 +9,7 @@ builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (stdenv.hostPlatform) system;
-  inherit (importDir ./.) machines constants modules;
+  inherit (importDir ./.) constants modules machines;
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
@@ -18,8 +18,9 @@ builtins // pkgs.lib // {
   forAttrs' = flip mapAttrs';
   forAttrNames = flip mapAttrNames;
   forAttrValues = flip mapAttrValues;
-  forAttrNamesHaving = attrs: attr: forAttrNames (filterAttrs (_: hasAttr attr) attrs);
+  forAttrValuesFlagged = attrs: name: forAttrValues (filterAttrs (_: getAttr name) attrs);
   mergeAttrsList = foldl' mergeAttrs { };
+  mergeAttrsListWithFunc = f: foldl' (mergeAttrsWithFunc f) { };
   recursiveUpdateList = foldl' recursiveUpdate { };
   readDirPaths = dir: mapAttrNames (n: dir + "/${n}") (readDir dir);
   filterDirPaths = p: dir: filterAttrs p (readDirPaths dir);
@@ -38,8 +39,8 @@ builtins // pkgs.lib // {
     (map (x: nameValuePair (removeSuffix ".nix" x.name) x.value))
     listToAttrs
     (mapAttrValues (p: if pathExists (p + "/default.nix") || !pathIsDirectory p then import p else importDir p))
+    (mapAttrValues (x: if isFunction x && (functionArgs x == { scope = false; }) then x { inherit scope; } else x))
   ];
-
 
   inherit (writers) writeBash writeBashBin;
   ap = x: f: f x;

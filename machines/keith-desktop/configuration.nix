@@ -6,6 +6,7 @@
     common-cpu-amd-pstate
   ];
 
+  machine.tailscale-ip = "100.82.72.117";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.initrd.enable = false;

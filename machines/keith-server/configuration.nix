@@ -1,4 +1,4 @@
-{ config, scope, machine-name, ... }: with scope;
+{ config, scope, machine, ... }: with scope;
 {
   imports = with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
@@ -11,6 +11,7 @@
     searchix.flake.nixosModules.web
   ];
 
+  machine.tailscale-ip = "100.107.6.112";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.initrd.enable = false;
@@ -149,9 +150,9 @@
   services.grafana = {
     enable = true;
     settings = {
-      server.http_addr = constants.${machine-name}.tailscale-ip;
+      server.http_addr = machine.tailscale-ip;
       server.http_port = 8888;
-      server.domain = machine-name;
+      server.domain = machine.name;
       security.admin_user = "keith";
       security.secret_key = "$__file{/etc/nixos/grafana-secret-key}";
     };
@@ -163,9 +164,9 @@
     listenAddress = constants.localhost.ip;
     scrapeConfigs = [{
       job_name = "node";
-      static_configs = forEach (attrNames machines) (machine: {
-        labels.instance = machine;
-        targets = [ "${machine}.${constants.tailnet}:${toString constants.prometheus.exporters.node.port}" ];
+      static_configs = forEach (attrValues machines) (machine: {
+        labels.instance = machine.name;
+        targets = [ "${machine.tailscale-ip}:${toString constants.prometheus.exporters.node.port}" ];
       });
     }];
   };
