@@ -1,4 +1,4 @@
-{ scope, machine, username, ... }: with scope;
+{ scope, username, ... }: with scope;
 {
   imports = [
     modules.common-configuration

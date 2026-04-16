@@ -1,4 +1,4 @@
-{ scope }: with scope;
+{ _auto, scope }: with scope;
 let
   naiveModuleConfig = m:
     let r = if isFunction m then m (functionArgs m // { inherit lib scope; }) else m; in

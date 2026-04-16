@@ -1,4 +1,4 @@
-{ scope, machine, username, isGraphical, ... }: with scope;
+{ scope, username, isGraphical, ... }: with scope;
 {
   imports = [
     modules.common-configuration
