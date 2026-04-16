@@ -34,12 +34,5 @@
         specialArgs = { inherit (pkgs) scope; inherit machine-name; };
         modules = [ nixosModules.nix-darwin ];
       });
-
-    homeConfigurations = forAttrNames machines (machine-name:
-      home-manager.lib.homeManagerConfiguration rec {
-        pkgs = packages.${machines.${machine-name}.system};
-        extraSpecialArgs = { inherit (pkgs) scope; inherit machine-name; };
-        modules = [ nixosModules.home-manager ];
-      });
   };
 }

@@ -2,7 +2,6 @@
 {
   _module.args.isGraphical = false;
   _module.args.isMinimal = true;
-
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;

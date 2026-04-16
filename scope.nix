@@ -11,15 +11,18 @@ builtins // pkgs.lib // {
   inherit (stdenv.hostPlatform) system;
   importDirRoot = importDir ./.;
   inherit (importDirRoot) constants modules;
-  machines = forAttrs importDirRoot.machines (machine-name: machine: machine // rec {
-    partial = naiveMergeModules [
-      (machine.hardware-configuration or { })
-      (machine.home-configuration or { })
-      (machine.darwin-configuration or { })
-      (machine.configuration or { })
-    ];
-    system = partial.nixpkgs.hostPlatform;
-  });
+  machines = pipe importDirRoot.machines (map mapAttrValues [
+    (machine: machine // {
+      partial = naiveMergeModules [
+        (machine.hardware-configuration or { })
+        (machine.home-configuration or { })
+        (machine.darwin-configuration or { })
+        (machine.configuration or { })
+      ];
+    })
+    (m: m // { system = m.partial.nixpkgs.hostPlatform; })
+    (m: m // m.partial._module.args or { })
+  ]);
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
