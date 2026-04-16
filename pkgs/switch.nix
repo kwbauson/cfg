@@ -1,7 +1,6 @@
 scope: with scope;
 let
-  inherit (flake) nixosConfigurations homeConfigurations;
-  hosts = concatMap attrNames [ nixosConfigurations homeConfigurations ];
+  hosts = concatMap attrNames [ nixosConfigurations darwinConfigurations ];
   eachHost = f: listToAttrs (map (name: { inherit name; value = f name; }) hosts);
   makeNamedScript = name: text: stdenvNoCC.mkDerivation {
     inherit name;
@@ -30,7 +29,6 @@ let
         isNixDarwin = hasAttr host darwinConfigurations;
         nixos-toplevel = nixosConfigurations.${host}.config.system.build.toplevel;
         nix-darwin-system = darwinConfigurations.${host}.system;
-        home-conf = homeConfigurations.${host};
         switchers = rec {
           nob = makeScript ''
             sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
@@ -47,15 +45,6 @@ let
             nvd diff "$profile" ${nix-darwin-system}
             sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
             sudo ${nix-darwin-system}/activate
-          '';
-          hms = makeScript ''
-            hm_path=$(nix-env -q home-manager-path --out-path --no-name 2> /dev/null || true)
-            if [[ $hm_path != ${home-conf.config.home.path} ]];then
-              if [[ -n $hm_path ]];then
-                nvd diff $hm_path ${home-conf.config.home.path}
-              fi
-              ${home-conf.activationPackage}/activate
-            fi
           '';
           noa = (makeScript (exe (if isNixOS then nos else if isNixDarwin then nds else hms))).overrideAttrs (_: { name = "${host}-noa"; });
         };
