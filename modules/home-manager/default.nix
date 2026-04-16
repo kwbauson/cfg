@@ -1,7 +1,7 @@
 { config, scope, machine, username, ... }: with scope;
 {
   imports = [
-    modules.args
+    modules.machine
     (machine.home or { })
   ] ++ attrValues (importDir ./.);
 

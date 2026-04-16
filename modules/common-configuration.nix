@@ -1,7 +1,7 @@
 { scope, machine, username, ... }: with scope;
 {
   imports = [
-    modules.args
+    modules.machine
     modules.auto-update
     modules.grafana-data-sources
   ];
