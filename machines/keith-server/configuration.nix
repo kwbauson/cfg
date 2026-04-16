@@ -6,8 +6,8 @@
     common-cpu-amd-pstate
     modules.ci-substituters
     ./personal-api.nix
-    "${inputs.cobi}/hosts/modules/games/palworld.nix"
-    "${inputs.cobi}/hosts/modules/games/valheim.nix"
+    "${cobi.src}/hosts/modules/games/palworld.nix"
+    "${cobi.src}/hosts/modules/games/valheim.nix"
     searchix.flake.nixosModules.web
   ];
 
