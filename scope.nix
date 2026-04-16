@@ -9,22 +9,7 @@ builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (stdenv.hostPlatform) system;
-  importDirRoot = importDir ./.;
-  inherit (importDirRoot) constants modules;
-  machines = pipe (mapAttrs (n: x: x // { name = n; }) importDirRoot.machines) (map mapAttrValues [
-    (machine: machine // rec {
-      partial = naiveMergeModules [
-        (machine.hardware-configuration or { })
-        (machine.home-configuration or { })
-        (machine.darwin-configuration or { })
-        (machine.configuration or { })
-      ];
-      system = partial.nixpkgs.hostPlatform;
-      isNixOS = machine ? configuration;
-      isNixDarwin = machine ? darwin-configuration;
-    })
-    (m: m // m.partial._module.args or { })
-  ]);
+  inherit (importDir ./.) constants modules machines;
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
@@ -45,12 +30,6 @@ builtins // pkgs.lib // {
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
   pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
-  naiveModuleConfig = m:
-    let r = if isFunction m then m (functionArgs m // { inherit lib scope; }) else m; in
-    naiveResolveModuleOverrides (r.config or r);
-  naiveResolveModuleOverrides = mapAttrsRecursiveCond (x: !(isAttrs x && x._type or "" == "override")) (_: x: x.content or x);
-  naiveMergeModuleFunc = x: y: if isAttrs x && isAttrs y then x // y else throw "cannot merge";
-  naiveMergeModules = ms: mergeAttrsListWithFunc naiveMergeModuleFunc (map naiveModuleConfig ms);
 
   importDir = dir: pipe dir [
     readDirPaths
@@ -60,8 +39,8 @@ builtins // pkgs.lib // {
     (map (x: nameValuePair (removeSuffix ".nix" x.name) x.value))
     listToAttrs
     (mapAttrValues (p: if pathExists (p + "/default.nix") || !pathIsDirectory p then import p else importDir p))
+    (mapAttrValues (x: if isFunction x && (functionArgs x == { scope = false; }) then x { inherit scope; } else x))
   ];
-
 
   inherit (writers) writeBash writeBashBin;
   ap = x: f: f x;
