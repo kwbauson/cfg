@@ -6,8 +6,6 @@
     flake-compat.url = "git+https://git.lix.systems/lix-project/flake-compat";
     flake-compat.flake = false;
     nixos-hardware.flake = true;
-    cobi.url = "github:jpetrucciani/nix";
-    cobi.flake = false;
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };

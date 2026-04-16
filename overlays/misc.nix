@@ -64,8 +64,6 @@ final: prev: with final.scope; {
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
   })).config.system.build.isoImage;
-  cobi = import inputs.cobi { inherit nixpkgs system; };
-  inherit (final.cobi) pog;
 
   vmConsole = configuration:
     let
