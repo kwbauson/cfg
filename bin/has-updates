@@ -10,7 +10,7 @@ join_by() {
 }
 cd ~/cfg
 status=()
-git fetch --quiet
+git fetch --quiet --prune --prune-tags
 if [[ $(git rev-parse $branch) != $(git rev-parse origin/$branch) ]];then
   status+=(updates)
 fi
