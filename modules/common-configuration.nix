@@ -5,6 +5,7 @@
     modules.auto-update
     modules.grafana-data-sources
   ];
+  nixpkgs.pkgs = scope.pkgs;
   environment.etc."nixpkgs-path".source = nixpkgsPath;
   nix.package = lixPackageSets.latest.lix;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];

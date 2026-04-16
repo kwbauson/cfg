@@ -22,16 +22,14 @@
     nixosModules = modules;
 
     nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
-      nixpkgs.lib.nixosSystem rec {
-        pkgs = packages.${machine.system};
-        specialArgs = { inherit (pkgs) scope; inherit machine; };
+      nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit (packages.${machine.system}) scope; inherit machine; };
         modules = [ nixosModules.nixos ];
       });
 
     darwinConfigurations = forAttrValuesFlagged machines "isNixDarwin" (machine:
-      nix-darwin.lib.darwinSystem rec {
-        pkgs = packages.${machine.system};
-        specialArgs = { inherit (pkgs) scope; inherit machine; };
+      nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit (packages.${machine.system}) scope; inherit machine; };
         modules = [ nixosModules.nix-darwin ];
       });
   };
