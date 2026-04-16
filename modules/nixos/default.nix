@@ -1,7 +1,7 @@
 { config, scope, machine-name, username, isGraphical, ... }: with scope;
 {
   imports = [
-    modules.common-system
+    modules.common-configuration
     machines.${machine-name}.configuration
     machines.${machine-name}.hardware-configuration
     inputs.home-manager.nixosModules.default

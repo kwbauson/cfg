@@ -12,15 +12,17 @@ builtins // pkgs.lib // {
   importDirRoot = importDir ./.;
   inherit (importDirRoot) constants modules;
   machines = pipe importDirRoot.machines (map mapAttrValues [
-    (machine: machine // {
+    (machine: machine // rec {
       partial = naiveMergeModules [
         (machine.hardware-configuration or { })
         (machine.home-configuration or { })
         (machine.darwin-configuration or { })
         (machine.configuration or { })
       ];
+      system = partial.nixpkgs.hostPlatform;
+      isNixOS = machine ? configuration;
+      isNixDarwin = machine ? darwin-configuration;
     })
-    (m: m // { system = m.partial.nixpkgs.hostPlatform; })
     (m: m // m.partial._module.args or { })
   ]);
   inherit (flake) overlays;

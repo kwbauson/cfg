@@ -1,7 +1,7 @@
 { scope, machine-name, username, ... }: with scope;
 {
   imports = [
-    modules.common-system
+    modules.common-configuration
     machines.${machine-name}.darwin-configuration
     inputs.home-manager.darwinModules.default
   ];
