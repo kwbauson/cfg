@@ -12,20 +12,22 @@ builtins // pkgs.lib // {
   inherit (importDir ./.) machines constants modules;
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
-  partialConfigs = forAttrs machines (machine-name: dir:
-    evalModules {
-      specialArgs = { inherit scope machine-name; modulesPath = "${inputs.nixpkgs.outPath}/nixos/modules"; };
-      modules = [
-        ({ modulesPath, ... }: {
-          _module.check = false;
-          imports = [ "${modulesPath}/misc/nixpkgs.nix" ];
-        })
-        (dir.configuration or dir.darwin-configuration or dir.home-configuration)
-        (dir.hardware-configuration or { })
-      ];
-    }
+  partialConfigs = forAttrs machines (machine-name: machine:
+    let
+      fakeCall = m: if isFunction m then m (functionArgs m // { inherit lib scope; }) else m;
+      fakeConfig = m: let r = fakeCall m; in resolvePriorities (r.config or r);
+      resolvePriorities = mapAttrsRecursiveCond (x: !(isAttrs x && x._type or "" == "override")) (_: x: x.content or x);
+      mergeFunc = x: y: if isAttrs x && isAttrs y then x // y else throw "cannot merge non-attrs";
+      mergeList = foldl' (mergeAttrsWithFunc mergeFunc) { };
+    in
+    mergeList (map fakeConfig [
+      (machine.hardware-configuration or { })
+      (machine.home-configuration or { })
+      (machine.darwin-configuration or { })
+      (machine.configuration or { })
+    ])
   );
-  getMachineSystem = machine-name: partialConfigs.${machine-name}.config.nixpkgs.hostPlatform.system;
+  getMachineSystem = machine-name: partialConfigs.${machine-name}.config.nixpkgs.hostPlatform;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
