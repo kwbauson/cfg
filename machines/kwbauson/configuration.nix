@@ -1,7 +1,7 @@
 { config, scope, ... }: with scope;
 {
-  _module.args.isGraphical = false;
-  _module.args.isMinimal = true;
+  machine.isGraphical = false;
+  machine.isMinimal = true;
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
     enable = true;

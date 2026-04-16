@@ -4,7 +4,7 @@
     modules.ci-substituters
   ];
 
-  _module.args.username = "benjamin";
+  machine.username = "benjamin";
   nixpkgs.hostPlatform = mkDefault "aarch64-darwin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";

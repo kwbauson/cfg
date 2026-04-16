@@ -8,17 +8,23 @@ let
   naiveMergeModules = ms: mergeAttrsListWithFunc naiveMergeModuleFunc (map naiveModuleConfig ms);
   rawMachines = removeAttrs (importDir ./.) [ "default" ];
 in
-pipe (mapAttrs (n: x: x // { name = n; }) rawMachines) (map mapAttrValues [
-  (machine: machine // rec {
+pipe rawMachines (map mapAttrs [
+  (name: machine: machine // {
+    inherit name;
     partial = naiveMergeModules [
       (machine.hardware-configuration or { })
       (machine.home-configuration or { })
       (machine.darwin-configuration or { })
       (machine.configuration or { })
     ];
-    system = partial.nixpkgs.hostPlatform;
+  })
+  (_: m: m // m.partial.machine or { })
+  (_: machine: machine // {
+    system = machine.partial.nixpkgs.hostPlatform;
+    username = machine.username or "keith";
     isNixOS = machine ? configuration;
     isNixDarwin = machine ? darwin-configuration;
+    isGraphical = machine.isGraphical or true;
+    isMinimal = machine.isMinimal or false;
   })
-  (m: m // m.partial._module.args or { })
 ])
