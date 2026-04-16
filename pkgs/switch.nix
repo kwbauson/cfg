@@ -20,10 +20,10 @@ let
     meta.mainProgram = name;
   };
   makeScript = makeNamedScript "switch";
-  scripts = forAttrs machines (machine-name: { isNixOS, isNixDarwin, ... }:
+  scripts = forAttrValues machines (machine@{ isNixOS, isNixDarwin, ... }:
     let
-      nixos-toplevel = nixosConfigurations.${machine-name}.config.system.build.toplevel;
-      nix-darwin-system = darwinConfigurations.${machine-name}.system;
+      nixos-toplevel = nixosConfigurations.${machine.name}.config.system.build.toplevel;
+      nix-darwin-system = darwinConfigurations.${machine.name}.system;
       switchers = rec {
         nob = makeScript ''
           sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
@@ -41,7 +41,7 @@ let
           sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
           sudo ${nix-darwin-system}/activate
         '';
-        noa = (makeScript (exe (if isNixOS then nos else if isNixDarwin then nds else null))).overrideAttrs (_: { name = "${machine-name}-noa"; });
+        noa = (makeScript (exe (if isNixOS then nos else if isNixDarwin then nds else null))).overrideAttrs (_: { name = "${machine.name}-noa"; });
       };
     in
     switchers.noa.overrideAttrs (_: { passthru = switchers // { inherit switchers; }; }));

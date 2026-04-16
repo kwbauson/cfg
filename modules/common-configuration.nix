@@ -1,4 +1,4 @@
-{ scope, machine-name, username, ... }: with scope;
+{ scope, machine, machine-name, username, ... }: with scope;
 {
   imports = [
     modules.args
@@ -21,7 +21,7 @@
 
   home-manager = {
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit scope machine-name; };
+    extraSpecialArgs = { inherit scope machine machine-name; };
     users.${username}.imports = [ modules.home-manager ];
   };
 
