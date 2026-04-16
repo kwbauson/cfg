@@ -3,7 +3,7 @@
   _module.args = {
     username = lib.mkDefault "keith";
     isNixOS = hasAttr machine-name nixosConfigurations;
-    isGraphical = partialConfigs.${machine-name}.isGraphical or true;
-    isMinimal = partialConfigs.${machine-name}.isGraphical or false;
+    isGraphical = partialConfigs.${machine-name}._module.args.isGraphical or true;
+    isMinimal = partialConfigs.${machine-name}._module.args.isGraphical or false;
   };
 }

@@ -27,7 +27,7 @@ builtins // pkgs.lib // {
       (machine.configuration or { })
     ])
   );
-  getMachineSystem = machine-name: partialConfigs.${machine-name}.config.nixpkgs.hostPlatform;
+  getMachineSystem = machine-name: partialConfigs.${machine-name}.nixpkgs.hostPlatform;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
