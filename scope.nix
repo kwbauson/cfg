@@ -11,25 +11,15 @@ builtins // pkgs.lib // {
   inherit (stdenv.hostPlatform) system;
   importDirRoot = importDir ./.;
   inherit (importDirRoot) constants modules;
-  machines = recursiveUpdate
-    importDirRoot.machines
-    (forAttrs importDirRoot.machines (machine-name: machine: rec {
-      partial =
-        let
-          fakeCall = m: if isFunction m then m (functionArgs m // { inherit lib scope; }) else m;
-          fakeConfig = m: let r = fakeCall m; in resolvePriorities (r.config or r);
-          resolvePriorities = mapAttrsRecursiveCond (x: !(isAttrs x && x._type or "" == "override")) (_: x: x.content or x);
-          mergeFunc = x: y: if isAttrs x && isAttrs y then x // y else throw "cannot merge non-attrs";
-          mergeList = foldl' (mergeAttrsWithFunc mergeFunc) { };
-        in
-        mergeList (map fakeConfig [
-          (machine.hardware-configuration or { })
-          (machine.home-configuration or { })
-          (machine.darwin-configuration or { })
-          (machine.configuration or { })
-        ]);
-      system = partial.nixpkgs.hostPlatform;
-    }));
+  machines = forAttrs importDirRoot.machines (machine-name: machine: machine // rec {
+    partial = naiveMergeModules [
+      (machine.hardware-configuration or { })
+      (machine.home-configuration or { })
+      (machine.darwin-configuration or { })
+      (machine.configuration or { })
+    ];
+    system = partial.nixpkgs.hostPlatform;
+  });
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
   mapAttrNames = f: mapAttrs (n: _: f n);
@@ -40,6 +30,7 @@ builtins // pkgs.lib // {
   forAttrValues = flip mapAttrValues;
   forAttrNamesHaving = attrs: attr: forAttrNames (filterAttrs (_: hasAttr attr) attrs);
   mergeAttrsList = foldl' mergeAttrs { };
+  mergeAttrsListWithFunc = f: foldl' (mergeAttrsWithFunc f) { };
   recursiveUpdateList = foldl' recursiveUpdate { };
   readDirPaths = dir: mapAttrNames (n: dir + "/${n}") (readDir dir);
   filterDirPaths = p: dir: filterAttrs p (readDirPaths dir);
@@ -49,6 +40,12 @@ builtins // pkgs.lib // {
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
   pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
+  naiveModuleConfig = m:
+    let r = if isFunction m then m (functionArgs m // { inherit lib scope; }) else m; in
+    naiveResolveModuleOverrides (r.config or r);
+  naiveResolveModuleOverrides = mapAttrsRecursiveCond (x: !(isAttrs x && x._type or "" == "override")) (_: x: x.content or x);
+  naiveMergeModuleFunc = x: y: if isAttrs x && isAttrs y then x // y else throw "cannot merge";
+  naiveMergeModules = ms: mergeAttrsListWithFunc naiveMergeModuleFunc (map naiveModuleConfig ms);
 
   importDir = dir: pipe dir [
     readDirPaths
