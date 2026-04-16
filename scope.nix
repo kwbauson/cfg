@@ -9,25 +9,29 @@ builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlake;
   inherit (stdenv) isLinux isDarwin;
   inherit (stdenv.hostPlatform) system;
-  inherit (importDir ./.) machines constants modules;
+  importDirRoot = importDir ./.;
+  inherit (importDirRoot) constants modules;
+  machines = recursiveUpdate
+    importDirRoot.machines
+    (forAttrs importDirRoot.machines (machine-name: machine: rec {
+      partial =
+        let
+          fakeCall = m: if isFunction m then m (functionArgs m // { inherit lib scope; }) else m;
+          fakeConfig = m: let r = fakeCall m; in resolvePriorities (r.config or r);
+          resolvePriorities = mapAttrsRecursiveCond (x: !(isAttrs x && x._type or "" == "override")) (_: x: x.content or x);
+          mergeFunc = x: y: if isAttrs x && isAttrs y then x // y else throw "cannot merge non-attrs";
+          mergeList = foldl' (mergeAttrsWithFunc mergeFunc) { };
+        in
+        mergeList (map fakeConfig [
+          (machine.hardware-configuration or { })
+          (machine.home-configuration or { })
+          (machine.darwin-configuration or { })
+          (machine.configuration or { })
+        ]);
+      system = partial.nixpkgs.hostPlatform;
+    }));
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;
-  partialConfigs = forAttrs machines (machine-name: machine:
-    let
-      fakeCall = m: if isFunction m then m (functionArgs m // { inherit lib scope; }) else m;
-      fakeConfig = m: let r = fakeCall m; in resolvePriorities (r.config or r);
-      resolvePriorities = mapAttrsRecursiveCond (x: !(isAttrs x && x._type or "" == "override")) (_: x: x.content or x);
-      mergeFunc = x: y: if isAttrs x && isAttrs y then x // y else throw "cannot merge non-attrs";
-      mergeList = foldl' (mergeAttrsWithFunc mergeFunc) { };
-    in
-    mergeList (map fakeConfig [
-      (machine.hardware-configuration or { })
-      (machine.home-configuration or { })
-      (machine.darwin-configuration or { })
-      (machine.configuration or { })
-    ])
-  );
-  getMachineSystem = machine-name: partialConfigs.${machine-name}.nixpkgs.hostPlatform;
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
