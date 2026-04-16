@@ -39,7 +39,7 @@ builtins // pkgs.lib // {
     (map (x: nameValuePair (removeSuffix ".nix" x.name) x.value))
     listToAttrs
     (mapAttrValues (p: if pathExists (p + "/default.nix") || !pathIsDirectory p then import p else importDir p))
-    (mapAttrValues (x: if isFunction x && (functionArgs x == { scope = false; }) then x { inherit scope; } else x))
+    (mapAttrValues (x: if isFunction x && (functionArgs x == { _auto = false; scope = false; }) then x { _auto = true; inherit scope; } else x))
   ];
 
   inherit (writers) writeBash writeBashBin;
