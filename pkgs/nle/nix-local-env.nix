@@ -16,7 +16,7 @@
       (filter (hasInfix pkgsMark) lines);
     pkgsNames = flatten (map (x: splitString " " (elemAt x 1)) pkgsLines);
     buildInputs = map (x: getAttrFromPath (splitString "." x) pkgs) pkgsNames ++ local-nix-paths;
-    makeScriptText = replaceStrings [ "SELF_FLAKE" ] [ "${self-flake}" ];
+    makeScriptText = replaceStrings [ "SELF_FLAKE" ] [ "${flake}" ];
     isBash = hasSuffix "bash" (head lines);
     script = stdenv.mkDerivation {
       name = "${name}-unwrapped";

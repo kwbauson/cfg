@@ -3,12 +3,9 @@ pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
 builtins // pkgs.lib // {
-  rawFlake = pkgs.flake;
-  isImpure = builtins ? currentSystem;
-  cfgRoot = if isImpure then (fetchGit ./.).outPath else rawFlake.outPath;
   inherit (import ./. { inherit system; }) getFlake;
-  inherit (stdenv) isLinux isDarwin;
   inherit (stdenv.hostPlatform) system;
+  inherit (stdenv) isLinux isDarwin;
   inherit (importDir ./.) constants modules machines;
   inherit (flake) overlays;
   inherit (pkgs) fetchurl;

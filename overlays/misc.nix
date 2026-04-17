@@ -28,37 +28,6 @@ final: prev: with final.scope; {
   nle-cfg = nle.build { path = cfgRoot; };
   inherit (nle-cfg.pkgs) fordir;
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
-  self-flake-lock = runCommandLocal "self-flake-lock" { nativeBuildInputs = [ jq moreutils ]; } ''
-    cp ${cfgRoot}/flake.lock $out
-    chmod +w $out
-    entries=$(jq '.nodes.root.inputs | to_entries' $out)
-    inputs_keys=$(jq -r '.[].key' <<<"$entries")
-    inputs_values=$(jq -r '.[].value' <<<"$entries")
-    if [[ $inputs_keys != $inputs_values ]];then
-      echo invalid input mapping
-      jq '.nodes.root.inputs' $out
-      echo generated flake.lock of self does not support nested inputs
-      exit 1
-    fi
-    self_inputs="${concatStringsSep "\n" (attrNames inputs)}"
-    self_inputs=$(echo "$self_inputs" | sort)
-    lock_inputs=$(jq -r '.nodes | keys | sort[]' $out | grep -vFx root)
-    if [[ $inputs_keys != $lock_inputs ]];then
-      echo self_inputs: $self_inputs
-      echo lock_inputs: $lock_inputs
-      echo inputs of self do not match flake.lock nodes
-      exit 1
-    fi
-    self_inputs="${concatStringsSep "\n" (mapAttrsToList (n: v: "${n} ${v.outPath} ${v.narHash}") inputs)}"
-    echo "$self_inputs" | while read input outPath narHash;do
-      jq ".nodes.\"$input\".locked = { type: \"path\", path: \"$outPath\", narHash: \"$narHash\" }" $out | sponge $out
-    done
-  '';
-  self-flake = runCommandLocal "self-flake" { } ''
-    cp -r ${cfgRoot} $out
-    chmod -R +w $out
-    cp ${self-flake-lock} $out/flake.lock
-  '';
   iso = with packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
     imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
     hardware.enableRedistributableFirmware = true;
