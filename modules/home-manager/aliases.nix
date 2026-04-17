@@ -8,6 +8,11 @@
     cfgu = "cd ~/cfg && git f && git rebase --autostash $(git tracking)";
     cfgp = "git -C ~/cfg cap";
     machine-name = "echo ${machine.name}";
+    check-hardware-config = /* bash */ ''
+      cd ~/cfg/machines/"$(machine-name)"
+      nixos-generate-config --show-hardware-config > hardware-configuration.nix
+      git --no-pager diff hardware-configuration.nix
+    '';
     nou = "cfgu && noa";
     nod = ''delete-old-generations "$@" && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}'';
     noc = "cd ~/cfg && gh workflow run updates.yml";
