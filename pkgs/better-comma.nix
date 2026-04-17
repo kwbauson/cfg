@@ -18,17 +18,17 @@ scope: with scope; stdenvNoCC.mkDerivation {
     [[ $1 = -d ]] && desc=1 && shift
     [[ $1 = -m ]] && man=1 && shift
     if [[ ''${#overlays[@]} -eq 0 ]];then
-      source=${self-flake}
+      source=${flake}
     else
       contents=
       for file in "''${overlays[@]}";do
         contents+=$(< "$file")
       done
-      hash=($(echo "${self-flake} $contents" | md5sum))
+      hash=($(echo "${flake} $contents" | md5sum))
       source=~/.cache/${pname}/$hash
       if [[ ! -e $source ]];then
         mkdir -p "$source"
-        cp -rT ${self-flake} "$source"
+        cp -rT ${flake} "$source"
         mkdir -p "$source"/extra-overlays
         for file in "''${overlays[@]}";do
           cp "$file" "$source"/extra-overlays

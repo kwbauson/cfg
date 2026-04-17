@@ -1,7 +1,7 @@
 scope: with scope;
 addMetaAttrs { includePackage = true; } ((
   writeBashBin pname ''
-    nix eval --raw "${cfgRoot}#${pname}.machines.$(machine-name)" \
+    nix eval --raw "${flake}#${pname}.machines.$(machine-name)" \
       2>&1 | grep -Ev '^trace: Obsolete option|^fetching path input'
   ''
 ).overrideAttrs (_: {

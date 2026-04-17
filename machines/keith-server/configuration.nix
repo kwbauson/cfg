@@ -144,7 +144,7 @@
       nur.Enable = true;
     };
   };
-  systemd.services.searchix.environment.NIX_PATH = "nixpkgs=${toString pkgs.path}";
+  systemd.services.searchix.environment.NIX_PATH = "nixpkgs=${nixpkgsPath}";
   services.caddy.subdomains.searchix = config.services.searchix.settings.web.port;
 
   services.grafana = {
