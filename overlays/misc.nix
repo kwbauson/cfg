@@ -25,7 +25,7 @@ final: prev: with final.scope; {
     '';
   };
   steam-native = steam.override { nativeOnly = true; };
-  nle-cfg = nle.build { path = cfgRoot; };
+  nle-cfg = nle.build { path = flake.outPath; };
   inherit (nle-cfg.pkgs) fordir;
   inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
   iso = with packages.x86_64-linux; (nixos ({ modulesPath, ... }: {

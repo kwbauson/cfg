@@ -4,9 +4,9 @@ addMetaAttrs { includePackage = true; } ((writeBashBin pname ''
     shift
     pkg=$1 && shift
     cmd=$1 && shift
-    exec nix shell "${cfgRoot}#$pkg" --command "$cmd" "$@"
+    exec nix shell "${flake}#$pkg" --command "$cmd" "$@"
   else
     pkg=$1 && shift
-    exec nix run "${cfgRoot}#$pkg" -- "$@"
+    exec nix run "${flake}#$pkg" -- "$@"
   fi
 '').overrideAttrs (attrs: { passthru.__functor = _: exe; }))
