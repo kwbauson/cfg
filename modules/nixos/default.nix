@@ -14,6 +14,7 @@
         enable = mkDefault true;
         configurationLimit = mkDefault 5;
         consoleMode = "auto";
+        memtest86.enable = true;
       };
       timeout = mkDefault 1;
     };
