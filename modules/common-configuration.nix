@@ -1,4 +1,4 @@
-{ scope, username, ... }: with scope;
+{ scope, ... }: with scope;
 {
   imports = [
     modules.machine

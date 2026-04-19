@@ -1,4 +1,4 @@
-{ scope, isNixOS, isGraphical, ... }: with scope;
+{ scope, ... }: with scope;
 {
   included-packages = alias {
     nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";

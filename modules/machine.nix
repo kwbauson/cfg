@@ -6,8 +6,4 @@
     visible = false;
     apply = _: throw "machine module is write-only";
   };
-
-  config._module.args = {
-    inherit (machine) isNixOS isNixDarwin username isGraphical isMinimal;
-  };
 }
