@@ -71,30 +71,6 @@
     }
   '';
 
-  # services.olivetin.enable = true; // NOTE disabled because insecure
-  services.olivetin.user = "root";
-  services.olivetin.settings = {
-    ListenAddressSingleHTTPFrontend = "localhost:${toString constants.olivetin.port}";
-    actions = [
-      {
-        title = "Reboot Server";
-        icon = "&#128683;";
-        shell = "reboot";
-      }
-      {
-        title = "Start/Restart Palworld";
-        icon = ''<iconify-icon icon="cil:animal"></iconify-icon>'';
-        shell = "systemctl restart palworld";
-      }
-    ];
-  };
-  # services.caddy.subdomains.olivetin = ''
-  #   basic_auth {
-  #     {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
-  #   }
-  #   reverse_proxy localhost:${toString constants.olivetin.port}
-  # '';
-
   services.caddy.subdomains.api = constants.personal-api.port;
 
   services.caddy.subdomains.playground = ''
@@ -121,21 +97,7 @@
     url = "https://github.com/kwbauson/cfg";
   };
 
-  services.ddclient = {
-    enable = false; # FIXME
-    configFile = toFile "ddclient.conf" ''
-      protocol=porkbun
-      apikey_env=APIKEY
-      secretapikey_env=SECRETAPIKEY
-      home.kwbauson.com
-    '';
-  };
-  systemd.services.ddclient.serviceConfig.EnvironmentFile = "/etc/nixos/ddclient-env";
-
-  # services.ollama.enable = true; # tmp disable ollama
-  services.ollama.host = "[::]";
-
-  services.searchix.enable = false;
+  services.searchix.enable = true;
   services.searchix.settings = {
     web.baseUrl = "https://searchix.kwbauson.com";
     importer.Sources = {
