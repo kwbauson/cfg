@@ -32,6 +32,8 @@ final: prev: with final.scope; {
     imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
+    nix.package = lixPackageSets.latest.lix;
+    environment.systemPackages = [ better-comma ];
   })).config.system.build.isoImage;
 
   vmConsole = configuration:
