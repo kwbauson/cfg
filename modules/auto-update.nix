@@ -1,4 +1,4 @@
-{ config, scope, username, ... }: with scope;
+{ config, scope, ... }: with scope;
 let
   cfg = config.services.auto-update;
   script = ''

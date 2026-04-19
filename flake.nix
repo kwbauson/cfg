@@ -23,13 +23,13 @@
 
     nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
       nixpkgs.lib.nixosSystem {
-        specialArgs.scope = packages.${machine.system}.scope // { inherit machine; };
+        specialArgs.scope = packages.${machine.system}.scope // machine.scope;
         modules = [ nixosModules.nixos ];
       });
 
     darwinConfigurations = forAttrValuesFlagged machines "isNixDarwin" (machine:
       nix-darwin.lib.darwinSystem {
-        specialArgs.scope = packages.${machine.system}.scope // { inherit machine; };
+        specialArgs.scope = packages.${machine.system}.scope // machine.scope;
         modules = [ nixosModules.nix-darwin ];
       });
   };

@@ -1,4 +1,4 @@
-{ scope, isGraphical, ... }: with scope;
+{ scope, ... }: with scope;
 {
   programs.tmux = {
     enable = true;

@@ -1,4 +1,4 @@
-{ scope, isGraphical, isMinimal, ... }: with scope;
+{ scope, ... }: with scope;
 {
   included-packages = with pkgs; {
     core = {

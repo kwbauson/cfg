@@ -19,12 +19,16 @@ pipe rawMachines (map mapAttrs [
     ];
   })
   (_: m: m // m.partial.machine or { })
-  (_: machine: machine // {
-    system = machine.partial.nixpkgs.hostPlatform;
-    username = machine.username or "keith";
-    isNixOS = machine ? configuration;
-    isNixDarwin = machine ? darwin-configuration;
-    isGraphical = machine.isGraphical or true;
-    isMinimal = machine.isMinimal or false;
-  })
+  (_: m: fix (machine: m // {
+    system = m.partial.nixpkgs.hostPlatform;
+    username = m.username or "keith";
+    isNixOS = m ? configuration;
+    isNixDarwin = m ? darwin-configuration;
+    isGraphical = m.isGraphical or true;
+    isMinimal = m.isMinimal or false;
+    scope = {
+      inherit machine;
+      inherit (machine) isNixOS isNixDarwin username isGraphical isMinimal;
+    };
+  }))
 ])

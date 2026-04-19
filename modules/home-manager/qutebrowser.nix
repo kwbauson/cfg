@@ -1,4 +1,4 @@
-{ scope, isGraphical, ... }: with scope;
+{ scope, ... }: with scope;
 {
   programs.qutebrowser = {
     enable = isGraphical && isLinux;
