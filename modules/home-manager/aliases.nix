@@ -9,6 +9,7 @@
     cfgp = "git -C ~/cfg cap";
     machine-name = "echo ${machine.name}";
     check-hardware-config = /* bash */ ''
+      set -euo pipefail
       cd ~/cfg/machines/"$(machine-name)"
       nixos-generate-config --show-hardware-config > hardware-configuration.nix
       git --no-pager diff hardware-configuration.nix
