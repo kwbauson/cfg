@@ -52,6 +52,7 @@
   systemd.services.palworld.wantedBy = mkForce [ ];
 
   services.caddy.enable = true;
+  services.caddy.enableSecurity = true;
   systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
   services.caddy.subdomainsOf = constants.kwbauson.fqdn;
   services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";

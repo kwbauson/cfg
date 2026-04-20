@@ -10,6 +10,7 @@ let
 in
 {
   options.services.caddy = {
+    enableSecurity = mkEnableOption "caddy security";
     subdomainsOf = mkOption {
       type = types.str;
       default = "localhost";
@@ -22,7 +23,7 @@ in
 
   config.services.caddy = {
     package = mcaddy;
-    globalConfig = ''
+    globalConfig = mkIf cfg.enableSecurity ''
       order authenticate before respond
       order authorize before basicauth
 
