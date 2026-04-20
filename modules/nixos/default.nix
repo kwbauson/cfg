@@ -107,7 +107,6 @@
   hardware.bluetooth.enable = mkDefault isGraphical;
   programs.i3lock.enable = true;
   services.smartd.enable = mkDefault true;
-  services.earlyoom.enable = true;
 
   services.udev.packages = optionals isGraphical [ headsetcontrol ];
   services.openssh.settings = {
