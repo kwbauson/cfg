@@ -70,10 +70,12 @@ scope: with scope; stdenvNoCC.mkDerivation {
       pkg=$cmd
     fi
 
-    mkdir -p ~/.local/share/nix
+    if [[ ! -e ~/.local/share/nix ]];then
+      mkdir -p ~/.local/share/nix
+    fi
     if [[ $desc = 1 ]];then
       echo "$pkg"
-      exec nix eval --impure --raw --expr "with import $source { forceFlakeCompat = false; }; descString $pkg + \"\n\""
+      exec nix eval --impure --raw --expr "with import $source {}; descString $pkg + \"\n\""
     elif [[ $man = 1 ]];then
       exec nix shell "$source#$pkg" --command man "$cmd" "$@"
     else

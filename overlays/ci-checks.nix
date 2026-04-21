@@ -5,8 +5,10 @@ let
     (attrValues (forAttrValues checked-extra-packages (pkg: attrValues (pkg.tests or { }))))
   ]);
   checks-script = writeBash "checks" ''
+    set -euo pipefail
     echo ${checks}
     ${exe better-comma} -p hello hello
+    ${exe better-comma} -d hello
   '';
 in
 {

@@ -16,8 +16,8 @@ final: prev: with final.scope; {
     writeBashBin "updater" ''
       set -euo pipefail
       echo 'import ${nixpkgsPath}/shell.nix' > shell.nix
+      trap 'rm shell.nix' EXIT
       echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py --max-workers 1 ${jsonFile}
-      rm shell.nix
     '';
   update-extra-packages =
     let updatable = attrNames (filterAttrs (_: p: hasAttr "updateScript" p && !p.meta.skipUpdate or false) extra-packages);
