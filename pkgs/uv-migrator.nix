@@ -15,6 +15,7 @@ rustPlatform.buildRustPackage {
   '';
   meta.mainProgram = pname;
   meta.skipBuild = true;
+  meta.skipUpdate = true;
   passthru.updateScript = _experimental-update-script-combinators.sequence [
     (unstableGitUpdater { tagPrefix = "v"; })
     (nix-update-script { extraArgs = [ "--flake" "--version" "skip" ]; })
