@@ -32,9 +32,11 @@ let
         cp $flakeTextPath $out/flake.nix
       '';
       flakeHash = getDrvHash flakeBuild;
-      links = linkFarmFromDrvs
+      links = linkFarm
         "${pname}-links"
-        ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
+        (map (p: { name = getDrvHash p; path = p; })
+          ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs)
+        );
     in
     runCommandLocal "${sourceHash}-${flakeHash}" { } ''
       mkdir -p $out
