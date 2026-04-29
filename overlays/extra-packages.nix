@@ -1,6 +1,6 @@
 final: prev: with final.scope;
 let
-  extra-packages = with prev.scope-lib; pipeValue [
+  extra-packages = with prev.scope'; pipeValue [
     (readDir ../pkgs)
     attrNames
     (map (path:

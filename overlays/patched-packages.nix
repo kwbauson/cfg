@@ -1,4 +1,4 @@
-final: prev: with prev.scope-lib;
+final: prev: with prev.scope';
 mapDirEntries
   (n: value: optionalAttrs (hasSuffix ".patch" n) rec {
     name = removeSuffix ".patch" n;

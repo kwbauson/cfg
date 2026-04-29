@@ -1,15 +1,15 @@
-pkgs: pkgs.lib.fix (scope: with scope;
-pkgs.lib.generators // pkgs.formats or { } //
-pkgs.writers or { } // pkgs //
-pkgs.flake.inputs or { } // pkgs.flake or { } //
-builtins // pkgs.lib // {
+args: args.lib.fix (scope: with scope;
+args.lib.generators // args.formats or { } //
+args.writers or { } // args //
+args.flake.inputs or { } // args.flake or { } //
+builtins // args.lib // {
   inherit (import ./. { inherit system; }) getFlakeCompat;
   inherit (stdenv.hostPlatform) system;
   inherit (stdenv) isLinux isDarwin;
   root = importDir ./.;
   inherit (root) constants modules machines;
   inherit (pkgs) fetchurl;
-  scope-lib = root.scope { inherit lib; };
+  scope' = root.scope { inherit lib flake; };
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
@@ -110,7 +110,7 @@ builtins // pkgs.lib // {
       chmod +x $out/bin/${pname}
     '';
   };
-  nixpkgsPath = toString pkgs.path;
+  nixpkgsPath = inputs.nixpkgs.outPath;
   importNixpkgs = args:
     let
       helper =
