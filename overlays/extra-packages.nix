@@ -22,8 +22,6 @@ let
   ];
 in
 {
-  compatGetFlake = src: (import inputs.flake-compat { inherit src; }).defaultNix;
-  compatGetFlakeDefault = src: (compatGetFlake src).packages.${system}.default;
   inherit extra-packages;
   importPackage = arg:
     (attrs: mergeAttrsList [

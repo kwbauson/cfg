@@ -12,7 +12,7 @@ importPackage (attrs: {
   };
   # passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
 
-  flake = compatGetFlake attrs.src;
-  package = compatGetFlakeDefault attrs.src;
+  flake = getFlakeCompat attrs.src;
+  package = attrs.flake.packages.${system}.default;
   meta.skipBuild = true;
 })

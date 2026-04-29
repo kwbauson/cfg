@@ -3,7 +3,7 @@ pkgs.lib.generators // pkgs.formats or { } //
 pkgs.writers or { } // pkgs //
 pkgs.flake.inputs or { } // pkgs.flake or { } //
 builtins // pkgs.lib // {
-  inherit (import ./. { inherit system; }) getFlake;
+  inherit (import ./. { inherit system; }) getFlakeCompat;
   inherit (stdenv.hostPlatform) system;
   inherit (stdenv) isLinux isDarwin;
   inherit (importDir ./.) constants modules machines;
