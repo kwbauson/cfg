@@ -48,7 +48,7 @@
       inherit iproute2 iputils pavucontrol strace time dzen2
         maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
       inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
-      inherit man-pages ncdu bitwarden-cli remmina ffmpeg;
+      inherit man-pages ncdu bitwarden-cli remmina ffmpeg yt-dlp;
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
