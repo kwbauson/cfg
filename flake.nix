@@ -3,8 +3,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    flake-compat.url = "git+https://git.lix.systems/lix-project/flake-compat";
-    flake-compat.flake = false;
+    flake-compat.url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
     nixos-hardware.flake = true;
   };
   outputs = { self, ... }: with self.scope; {
