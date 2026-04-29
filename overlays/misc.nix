@@ -1,4 +1,6 @@
 final: prev: with final.scope; {
+  pkgsUnsupported = importNixpkgs { config = root.config // { allowUnsupportedSystem = true; }; };
+  pkgsInsecure = importNixpkgs { config = root.config // { allowInsecurePredicate = _: true; }; };
   nix-index-list = stdenv.mkDerivation {
     name = "nix-index-list";
     extra =

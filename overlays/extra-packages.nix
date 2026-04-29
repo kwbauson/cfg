@@ -1,7 +1,7 @@
 final: prev: with final.scope;
 let
-  extra-packages = with prev.scope-lib; pipe ../pkgs [
-    readDir
+  extra-packages = with prev.scope-lib; pipeValue [
+    (readDir ../pkgs)
     attrNames
     (map (path:
       let isPkgDir = pathExists (../pkgs + "/${path}/default.nix"); in

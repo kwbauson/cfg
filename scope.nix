@@ -6,9 +6,10 @@ builtins // pkgs.lib // {
   inherit (import ./. { inherit system; }) getFlakeCompat;
   inherit (stdenv.hostPlatform) system;
   inherit (stdenv) isLinux isDarwin;
-  inherit (importDir ./.) constants modules machines;
-  inherit (flake) overlays;
+  root = importDir ./.;
+  inherit (root) constants modules machines;
   inherit (pkgs) fetchurl;
+  scope-lib = root.scope { inherit lib; };
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;

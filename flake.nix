@@ -11,25 +11,23 @@
 
     packages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
-      config = import ./config.nix;
+      config = root.config;
       overlays = [
-        (final: prev: { scope = import ./scope.nix (final // { inherit flake; }); })
-        overlays.default
+        (final: prev: { scope = root.scope (final // { inherit flake; }); })
+        root.overlays
       ];
     });
-    overlays = import ./overlays scope;
-    nixosModules = modules;
 
     nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
       nixpkgs.lib.nixosSystem {
         specialArgs.scope = packages.${machine.system}.scope // machine.scope;
-        modules = [ nixosModules.nixos ];
+        modules = [ modules.nixos ];
       });
 
     darwinConfigurations = forAttrValuesFlagged machines "isNixDarwin" (machine:
       nix-darwin.lib.darwinSystem {
         specialArgs.scope = packages.${machine.system}.scope // machine.scope;
-        modules = [ nixosModules.nix-darwin ];
+        modules = [ modules.nix-darwin ];
       });
   };
 }
