@@ -5,9 +5,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        system: [x86_64-linux]
+        system: [x86_64-linux, aarch64-darwin]
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - uses: actions/checkout@v6.0.2
-      # - run: nix-instantiate --eval -E 'with import ./. {}; clipscreen.src.gitRepoUrl'
-      - run: nix run .#updates.clipscreen
+      - run: nix -L build --no-link --max-jobs 0 -f . requiredSubstitutes
+      - run: nix -L build .#checks
+      - run: ./result/bin/checks
+      - run: cachix authtoken '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: cachix push kwbauson ./result
+      - run: cachix pin kwbauson checks.'${{ matrix.system }}' ./result --keep-revisions 5
+        if: github.ref == 'refs/heads/main'

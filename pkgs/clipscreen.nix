@@ -15,9 +15,5 @@ stdenv.mkDerivation {
   '';
   meta.mainProgram = pname;
   meta.platforms = platforms.linux;
-  passthru.updateScript = [
-    (writeBash "what" ''
-      ${nix}/bin/nix-instantiate --eval -E 'with import ./. {}; clipscreen.src.gitRepoUrl'
-    '')
-  ];
+  passthru.updateScript = unstableGitUpdater { };
 }
