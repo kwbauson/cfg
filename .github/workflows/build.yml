@@ -9,4 +9,5 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - uses: actions/checkout@v6.0.2
-      - run: nix run .#updates.cobi
+      - run: nix-instantiate --eval -E 'with import ./. {}; clipscreen.src.gitRepoUrl'
+      # - run: nix run .#updates.cobi
