@@ -17,7 +17,7 @@ stdenv.mkDerivation {
   meta.platforms = platforms.linux;
   passthru.updateScript = [
     (writeBash "what" ''
-      nix-instantiate --eval -E 'with import ./. {}; clipscreen.src.gitRepoUrl'
+      ${nix}/bin/nix-instantiate --eval -E 'with import ./. {}; clipscreen.src.gitRepoUrl'
     '')
   ];
 }
