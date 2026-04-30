@@ -14,5 +14,5 @@ importPackage (attrs: {
 
   flake = getFlakeCompat attrs.src;
   package = attrs.flake.packages.${system}.default;
-  meta.skipBuild = true;
+  meta.skipBuild = isDarwin;
 })
