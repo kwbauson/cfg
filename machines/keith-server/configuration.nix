@@ -8,7 +8,7 @@
     ./personal-api.nix
     "${cobi.src}/hosts/modules/games/palworld.nix"
     "${cobi.src}/hosts/modules/games/valheim.nix"
-    searchix.flake.nixosModules.web
+    (import "${searchix.src}/nix/modules" { packages.${system}.default = searchix; })
   ];
 
   machine.tailscale-ip = "100.107.6.112";
