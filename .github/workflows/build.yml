@@ -9,4 +9,4 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - uses: actions/checkout@v6.0.2
-      - run: nix run .#updates.clipscreen
+      - run: nix run .#updates.nix-index-database
