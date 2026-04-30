@@ -7,7 +7,7 @@ let
   getFlakeCompat = src: (flake-compat {
     # do own copying to store since lix flake-compat doesn't fetchGit shallow clones
     # see https://github.com/NixOS/flake-compat/pull/75
-    src = if builtins ? fetchGit && pathExists (src + "/.git") then fetchGit src else src;
+    src = if builtins ? fetchGit && pathExists (src + "/.git") then fetchGit { url = src; shallow = true; } else src;
     copySourceTreeToStore = false;
     useBuiltinsFetchTree = true;
   }).defaultNix;
