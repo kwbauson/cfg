@@ -1,12 +1,12 @@
 scope: with scope;
 stdenv.mkDerivation {
   inherit pname;
-  version = "0-unstable-2026-04-28";
+  version = "0-unstable-2026-04-30";
   src = fetchFromGitHub {
     owner = "bigH";
     repo = pname;
-    rev = "80929410eaecd53c87e9b9caedc08ae510434e6b";
-    hash = "sha256-9wskWfpnBuyV15oI9uaVnh9iQF1QZ+Nx3QEABzmXcJs=";
+    rev = "f5c4a57b49c03136ca2dc5e2534ef62a39904f64";
+    hash = "sha256-GoSw8iAZgdE27C2sl+mYj9hzcYrlbX9XNIb1CUuXDq8=";
   };
   installPhase = ''
     mkdir -p $out/{bin,share}
