@@ -61,32 +61,6 @@ mode "programs" {
   bindsym s exec --no-startup-id steam; mode "default"
 }
 
-# modes
-bindsym $mod+Control+m mode "modes"
-mode "modes" {
-  bindsym Escape mode "default"
-  bindsym v mode "vim"
-  bindsym s mode "scrolling"
-}
-
-mode "vim" {
-  bindsym Escape mode "default"
-  bindsym --release h exec --no-startup-id xdotool key Left
-  bindsym --release j exec --no-startup-id xdotool key Down
-  bindsym --release k exec --no-startup-id xdotool key Up
-  bindsym --release l exec --no-startup-id xdotool key Right
-}
-
-mode "scrolling" {
-  bindsym Escape mode "default"
-  bindsym --release F1 exec --no-startup-id xdotool key Down
-  bindsym --release Delete exec --no-startup-id xdotool key Down
-  bindsym --release XF86AudioMute exec --no-startup-id xdotool key Down
-  bindsym --release F2 exec --no-startup-id xdotool key Up
-  bindsym --release Insert exec --no-startup-id xdotool key Up
-  bindsym --release XF86AudioLowerVolume exec --no-startup-id xdotool key Up
-}
-
 bindsym XF86PowerOff mode "poweroff"
 mode "poweroff" {
   bindsym Escape mode "default"

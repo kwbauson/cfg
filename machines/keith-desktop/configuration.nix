@@ -15,7 +15,6 @@
   services.hardware.openrgb.enable = true;
   services.hardware.openrgb.motherboard = "amd";
 
-  networking.extraHosts = "127.0.0.1 api";
-  services.evremap.enable = true;
-  services.evremap.settings.device_name = "Corsair Corsair Gaming K68 Keyboard";
+  services.keyd.enable = true;
+  services.keyd.keyboards.default.ids = [ "1b1c:1b3f:bee979b7" ];
 }

@@ -27,7 +27,7 @@
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {
         inherit (kdePackages) breeze-icons;
-        inherit i3-easyfocus;
+        inherit i3-easyfocus keyd;
       };
     };
     development = {

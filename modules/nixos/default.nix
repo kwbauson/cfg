@@ -133,11 +133,34 @@
 
   services.caddy.email = "kwbauson@gmail.com";
 
-  services.evremap.settings.remap = [
-    { input = [ "KEY_CAPSLOCK" ]; output = [ "KEY_LEFTCTRL" ]; }
-    { input = [ "KEY_LEFTALT" ]; output = [ "KEY_ESC" ]; }
-    { input = [ "KEY_COMPOSE" ]; output = [ "KEY_RIGHTMETA" ]; }
-  ];
+  services.keyd.keyboards.default.settings = {
+    main = {
+      capslock = "leftcontrol";
+      leftalt = "escape";
+    };
+    "meta+control+shift" = {
+      v = "toggle(vim)";
+      s = "toggle(scroll)";
+    };
+    vim = {
+      h = "left";
+      j = "down";
+      k = "up";
+      l = "right";
+    };
+    scroll = {
+      f1 = "down";
+      f2 = "up";
+      "1" = "right";
+      "2" = "left";
+      mute = "down";
+      volumedown = "up";
+      delete = "down";
+      insert = "up";
+      backspace = "right";
+      "=" = "left";
+    };
+  };
 
   services._3proxy.services = [{
     type = "socks";
