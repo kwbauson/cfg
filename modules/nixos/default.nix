@@ -149,12 +149,11 @@
       l = "right";
     };
     scroll = {
-      f1 = "down";
-      f2 = "up";
-      "1" = "right";
-      "2" = "left";
-      mute = "down";
-      volumedown = "up";
+      escape = "down";
+      f1 = "up";
+      "`" = "right";
+      "1" = "left";
+      mute = "up";
       delete = "down";
       insert = "up";
       backspace = "right";
