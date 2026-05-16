@@ -31,9 +31,9 @@ in
   checks = cached-refs.build {
     inherit flake;
     refs = [ [ "hello" ] ] ++ rec {
-      getPaths = ns: machines: concatMap (m: map (n: [ "switch" "scripts" m n ]) ns) (attrNames machines);
-      x86_64-linux = getPaths [ "noa" "nos" "nob" ] nixosConfigurations;
-      aarch64-darwin = getPaths [ "noa" "nds" ] darwinConfigurations;
+      getPaths = ns: cs: concatMap (m: map (n: [ "switch" "scripts" m n ]) ns) (attrNames cs);
+      x86_64-linux = getPaths [ "noa" "nob" ] nixosConfigurations;
+      aarch64-darwin = getPaths [ "noa" ] darwinConfigurations;
     }.${system};
 
     postBuild = ''

@@ -1,59 +1,41 @@
 scope: with scope;
 let
-  makeNamedScript = name: text: stdenvNoCC.mkDerivation {
-    inherit name;
-    preferLocalBuild = true;
-    allowSubstitutes = false;
-    dontUnpack = true;
-    script = ''
-      #!${bash}/bin/bash
-      set -e
-      ${pathAdd [ coreutils git nvd ] }
-      ${text}
-    '';
-    passAsFile = "script";
-    installPhase = ''
-      mkdir -p $out/bin
-      cp $scriptPath $out/bin/${name}
-      chmod +x $out/bin/${name}
-    '';
-    meta.mainProgram = name;
-  };
-  makeScript = makeNamedScript "switch";
   scripts = forAttrValues machines (machine@{ isNixOS, isNixDarwin, ... }:
     let
-      nixos-toplevel = nixosConfigurations.${machine.name}.config.system.build.toplevel;
-      nix-darwin-system = darwinConfigurations.${machine.name}.system;
-      switchers = rec {
-        nob = makeScript ''
-          sudo nix-env -p /nix/var/nix/profiles/system --set ${nixos-toplevel}
-          sudo ${nixos-toplevel}/bin/switch-to-configuration boot
+      kind = if isNixOS then "nixos" else if isNixDarwin then "darwin" else null;
+      toplevel = {
+        nixos = nixosConfigurations.${machine.name}.config.system.build.toplevel;
+        darwin = darwinConfigurations.${machine.name}.system;
+      }.${kind};
+      mkAction = action: (writeBashBin "switch" (''
+        set -euo pipefail
+        profile=/nix/var/nix/profiles/system
+        ${getExe nvd} diff "$profile" ${toplevel}
+      '' + {
+        nixos = ''
+          sudo nixos-rebuild --no-reexec --store-path ${toplevel} ${action}
         '';
-        nos = makeScript ''
-          profile=/nix/var/nix/profiles/system
-          nvd diff "$profile" ${nixos-toplevel}
-          sudo -H nix-env -p "$profile" --set ${nixos-toplevel}
-          sudo ${nixos-toplevel}/bin/switch-to-configuration switch
+        darwin = ''
+          sudo -H nix-env -p "$profile" --set ${toplevel}
+          sudo ${toplevel}/activate
         '';
-        nds = makeScript ''
-          profile=/nix/var/nix/profiles/system
-          nvd diff "$profile" ${nix-darwin-system}
-          sudo -H nix-env -p "$profile" --set ${nix-darwin-system}
-          sudo ${nix-darwin-system}/activate
-        '';
-        noa = (makeScript (exe (if isNixOS then nos else if isNixDarwin then nds else null))).overrideAttrs (_: { name = "${machine.name}-noa"; });
-      };
+      }.${kind})).overrideAttrs { name = "${action}-${toplevel.name}"; };
     in
-    switchers.noa.overrideAttrs (_: { passthru = switchers // { inherit switchers; }; }));
-  makeBin = name: makeNamedScript name /* bash */ ''
+    {
+      nob = mkAction "boot";
+      noa = mkAction "switch";
+    }
+  );
+  makeBin = name: writeBashBin name ''
+    set -euo pipefail
     cd ~/cfg
-    git add --all -N
+    ${getExe git} add --all -N
     ${getExe cached-refs} kwbauson checks.${system} shell . "switch.scripts.$(machine-name).${name}" -c switch
   '';
 in
 buildEnv {
   name = pname;
-  paths = map makeBin (attrNames scripts.${head (attrNames scripts)}.switchers);
-  passthru = scripts // { inherit scripts; };
+  paths = map makeBin (attrNames scripts.${head (attrNames scripts)});
+  passthru = { inherit scripts; };
   meta.includePackage = true;
 }
