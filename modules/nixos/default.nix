@@ -160,6 +160,7 @@
       "=" = "left";
     };
   };
+  systemd.services.keyd.serviceConfig.Group = "wheel";
 
   services._3proxy.services = [{
     type = "socks";
