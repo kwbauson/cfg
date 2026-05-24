@@ -46,15 +46,15 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "*" = {
-          compression = true;
-          controlMaster = "auto";
-          controlPersist = "1s";
+          Compression = "yes";
+          ControlMaster = "auto";
+          ControlPersist = "1s";
         };
-        "kwbauson.com".user = "keith";
-        "gitlab.com".extraOptions.UpdateHostKeys = "no";
-        keith-desktop.user = "keith";
+        "kwbauson.com".User = "keith";
+        "gitlab.com".UpdateHostKeys = "no";
+        keith-desktop.User = "keith";
       };
       includes = [ "config.d/*" ];
     };
