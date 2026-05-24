@@ -1,4 +1,4 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
 {
   imports = [
     modules.common-configuration
@@ -29,7 +29,7 @@
   networking.networkmanager.enable = mkDefault true;
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.hostName = mkDefault machine.name;
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
   services.resolved.enable = true;
 
   hardware.enableRedistributableFirmware = true;
