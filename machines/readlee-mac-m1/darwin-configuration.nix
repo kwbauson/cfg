@@ -9,10 +9,9 @@
   nixpkgs.hostPlatform = mkDefault "aarch64-darwin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
-  services.github-runners = {
+  services.github-runners = mapAttrValues (c: c // { nodeRuntimes = [ "node24" ]; }) {
     ${machine.name} = {
       enable = true;
-      nodeRuntimes = [ "node20" "node24" ];
       replace = true;
       url = "https://github.com/kwbauson/cfg";
       tokenFile = "/etc/github-runner-kwbauson-cfg.token";
