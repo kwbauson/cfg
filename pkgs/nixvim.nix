@@ -66,10 +66,12 @@ importPackage rec {
       undofile = true;
       mouse = "";
       wrap = false;
+      linebreak = true;
       ignorecase = true;
       smartcase = true;
       cursorline = true;
       cursorlineopt = "number";
+      spelllang = "en_us";
     };
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
