@@ -73,6 +73,16 @@ importPackage rec {
       cursorlineopt = "number";
       spelllang = "en_us";
     };
+    extraPlugins = [
+      (vimUtils.buildVimPlugin rec {
+        name = "hunspell";
+        src = runCommand name { } ''
+          HOME=$PWD ${getExe neovim} --cmd 'mkspell ${name} ${hunspellDicts.en-us}/share/hunspell/en_US' --cmd quit
+          mkdir -p $out/spell
+          mv ${name}.* $out/spell
+        '';
+      })
+    ];
     highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
     keymaps = lib.mkKeyMaps {
