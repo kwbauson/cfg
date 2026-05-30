@@ -5,7 +5,7 @@
   ];
   services.ncro = {
     enable = true;
-    settings.server.listen = ":9180";
+    settings.server.listen = "localhost:9180";
     settings.upstreams = imap (i: a: { priority = i * 10; } // a) [
       {
         url = "https://cache.nixos.org";
