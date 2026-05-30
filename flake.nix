@@ -4,7 +4,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
-    nixos-hardware.flake = true;
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
