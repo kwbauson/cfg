@@ -156,4 +156,9 @@
       storage_config.filesystem.directory = "/var/lib/loki/chunks";
     };
   };
+  services.nix-serve = {
+    enable = true;
+    bindAddress = machine.tailscale-ip;
+    secretKeyFile = "/etc/nixos/harmonia.secret";
+  };
 }
