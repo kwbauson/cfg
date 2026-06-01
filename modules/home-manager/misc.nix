@@ -87,6 +87,7 @@
       settings.clipboard_control = "write-primary read-primary";
       settings.enable_audio_bell = false;
       settings.allow_remote_control = true;
+      settings.auto_reload_config = -1;
       shellIntegration.mode = "disabled";
       extraConfig = ''
         mouse_map left click ungrabbed no-op
