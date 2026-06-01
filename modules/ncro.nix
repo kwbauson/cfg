@@ -31,6 +31,10 @@
         url = "https://devenv.cachix.org";
         public_key = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
       }
+      {
+        url = "http://${machines.keith-server.tailscale-ip}:5000";
+        public_key = "${machines.keith-server.tailscale-ip}:amORAvA0d0VWxUnZyLPJXEY7QEKebU4SqURpe1CbsDY=";
+      }
     ];
   };
   nix.settings.substituters = mkForce [ "http://localhost:9180" ];
