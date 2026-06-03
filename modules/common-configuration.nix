@@ -28,9 +28,7 @@
     users.${username}.imports = [ modules.home-manager ];
   };
 
-  users.users.${username}.openssh.authorizedKeys.keys = pipe ../authorized_keys [
-    readFile
-    (splitString "\n")
-    (filter (x: x != ""))
-  ];
+  users.users.${username}.openssh.authorizedKeys.keys =
+    let names = [ "keith-desktop" "keith-xps" "keith-server" ]; in
+    mapAttrsToList (_: m: m.public-key) (getAttrs names machines);
 }

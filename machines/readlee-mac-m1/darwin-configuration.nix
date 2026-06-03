@@ -6,6 +6,7 @@
 
   machine.username = "benjamin";
   machine.tailscale-ip = "100.118.226.25";
+  machine.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvKJG6bwQ4M3LooY17neqDueOZyVfxLfgUBMcv39iqv benjamin@m1";
   nixpkgs.hostPlatform = mkDefault "aarch64-darwin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
