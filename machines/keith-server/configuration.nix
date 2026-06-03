@@ -94,6 +94,7 @@
 
   services.github-runners.keith-server = {
     enable = true;
+    replace = true;
     nodeRuntimes = [ "node24" ];
     extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];

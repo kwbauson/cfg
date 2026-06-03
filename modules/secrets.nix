@@ -42,9 +42,7 @@ in
 
   config = mkMerge [
     {
-      age.identityPaths =
-        let path = "${config.users.users.${username}.home}/.ssh/id_ed25519";
-        in [ path "${path}.old" ];
+      age.identityPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
       age.secrets = mapAttrValues (s: removeAttrs s (attrNames extraSecretOptions)) enabledSecrets;
     }
     (optionalAttrs isLinux {
