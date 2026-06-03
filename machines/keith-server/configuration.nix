@@ -43,7 +43,7 @@
     worldName = "hangin";
   };
   systemd.services.valheim.wantedBy = mkForce [ ];
-  systemd.services.valheim.serviceConfig.EnvironmentFile = mkForce config.age.secrets.valheim-environment.path;
+  secrets.valheim.isEnvironment = true;
 
   services.palworld = {
     enable = true;
@@ -52,11 +52,11 @@
     worldSettings.BaseCampWorkerMaxNum = "30";
   };
   systemd.services.palworld.wantedBy = mkForce [ ];
-  systemd.services.palworld.serviceConfig.EnvironmentFile = mkForce config.age.secrets.palworld-environment.path;
+  secrets.palworld.isEnvironment = true;
 
   services.caddy.enable = true;
   services.caddy.enableSecurity = true;
-  systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets.caddy-environment.path;
+  secrets.caddy.isEnvironment = true;
   services.caddy.subdomainsOf = constants.kwbauson.fqdn;
   services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";
   services.caddy.subdomains.auth = "authenticate with default";
@@ -94,12 +94,14 @@
 
   services.github-runners.keith-server = {
     enable = true;
+    replace = true;
     nodeRuntimes = [ "node24" ];
     extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];
-    tokenFile = config.age.secrets.keith-server-github-runner-token.path;
+    tokenFile = config.secrets.github-runner-token.path;
     url = "https://github.com/kwbauson/cfg";
   };
+  secrets.github-runner-token.enable = true;
 
   services.searchix.enable = true;
   services.searchix.settings = {
@@ -120,9 +122,10 @@
       server.http_port = 8888;
       server.domain = machine.name;
       security.admin_user = "keith";
-      security.secret_key = "$__file{${config.age.secrets.grafana-secret-key.path}}";
+      security.secret_key = "$__file{${config.secrets.grafana-secret-key.path}}";
     };
   };
+  secrets.grafana-secret-key.owner = "grafana";
   systemd.services.grafana.after = [ "tailscaled.service" ];
   services.prometheus = {
     enable = true;
@@ -161,7 +164,8 @@
   };
   services.harmonia.cache = {
     enable = true;
-    signKeyPaths = [ config.age.secrets.harmonia-sign-key.path ];
+    signKeyPaths = [ config.secrets.harmonia-sign-key.path ];
     settings.bind = "${machine.tailscale-ip}:5000";
   };
+  secrets.harmonia-sign-key.enable = true;
 }

@@ -10,12 +10,13 @@
   nixpkgs.hostPlatform = mkDefault "aarch64-darwin";
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
+  secrets.github-runner-token.owner = "_github-runner";
   services.github-runners = mapAttrValues (c: c // { nodeRuntimes = [ "node24" ]; }) {
     ${machine.name} = {
       enable = true;
       replace = true;
       url = "https://github.com/kwbauson/cfg";
-      tokenFile = config.age.secrets.readlee-mac-m1-github-runner-token.path;
+      tokenFile = config.secrets.github-runner-token.path;
       extraLabels = [ "nix" system ];
       extraPackages = [ gh cachix ];
     };

@@ -9,17 +9,6 @@ importPackage (attrs: {
     hash = "sha256-9VnK6Oqai65puVJ4WYtCTvlJeXxMzAp/69HhQuTdl/I=";
   };
   meta.mainProgram = pname;
-  meta.includePackage = true;
-  package = (callPackage "${attrs.src}/pkgs/agenix.nix" { }).overrideAttrs (old: {
-    nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ makeWrapper ];
-    installPhase = ''
-      ${old.installPhase}
-      wrapProgram $out/bin/agenix --set-default RULES './secrets.nix {}'
-    '';
-    postInstallCheck = ''
-      export RULES=./secrets.nix
-      ${old.postInstallCheck}
-    '';
-  });
+  package = callPackage "${attrs.src}/pkgs/agenix.nix" { };
   passthru.updateScript = unstableGitUpdater { };
 })
