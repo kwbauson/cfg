@@ -30,7 +30,7 @@ in
       modules = options.age.secrets.type.getSubModules ++ [
         { options = extraSecretOptions; }
         ({ config, name, ... }: {
-          file = /tmp/${if config.isShared then name else "${machine.name}.${name}"}.age;
+          file = ../secrets/${if config.isShared then name else "${machine.name}.${name}"}.age;
         })
         ({ config, ... }: {
           config = mkIf config.isUser { owner = username; };
@@ -40,15 +40,19 @@ in
     default = { };
   };
 
-  config = {
-    age.identityPaths =
-      let path = "${config.users.users.${username}.home}/.ssh/id_ed25519";
-      in [ path "${path}.old" ];
-    age.secrets = mapAttrValues (s: removeAttrs s (attrNames extraSecretOptions)) enabledSecrets;
-    systemd.services = pipeValue [
-      enabledSecrets
-      (filterAttrs (_: v: v.isEnvironment))
-      (mapAttrValues (v: { serviceConfig.EnvironmentFile = mkForce v.path; }))
-    ];
-  };
+  config = mkMerge [
+    {
+      age.identityPaths =
+        let path = "${config.users.users.${username}.home}/.ssh/id_ed25519";
+        in [ path "${path}.old" ];
+      age.secrets = mapAttrValues (s: removeAttrs s (attrNames extraSecretOptions)) enabledSecrets;
+    }
+    (optionalAttrs isLinux {
+      systemd.services = pipeValue [
+        enabledSecrets
+        (filterAttrs (_: v: v.isEnvironment))
+        (mapAttrValues (v: { serviceConfig.EnvironmentFile = mkForce v.path; }))
+      ];
+    })
+  ];
 }
