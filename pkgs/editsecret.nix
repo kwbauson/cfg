@@ -1,5 +1,6 @@
 scope: with scope;
 let
+  agenix = pkgs.agenix.package.override { nix = lixPackageSets.latest.lix; };
   machineKeys = mapAttrValues (m: m.public-key) machines;
   mkRules = writeText "mk-rules.nix" /* nix */ ''
     { isShared, name, machines }:
@@ -24,7 +25,7 @@ let
     fi
     printf -v machinesStr '"%s" ' $machines
     export RULES="${mkRules} { isShared = $isShared; name = \"$name\"; machines = [ $machinesStr]; }"
-    ${getExe agenix} --edit "$name"
+    ${agenix}/bin/agenix --edit "$name"
   '';
 in
 addMetaAttrs { includePackage = true; } (script.overrideAttrs { passthru = { inherit mkRules; }; })
