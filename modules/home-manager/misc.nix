@@ -226,7 +226,6 @@
       disabledTrayIcon = true;
       showStartupLaunchMessage = false;
       showDesktopNotification = false;
-      useX11LegacyScreenshot = true;
     };
   };
 
