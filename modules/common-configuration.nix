@@ -1,9 +1,10 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
 {
   imports = [
     modules.machine
     modules.auto-update
     modules.grafana-data-sources
+    "${agenix.src}/modules/age.nix"
   ];
   nixpkgs.pkgs = scope.pkgs;
   environment.etc."nixpkgs-path".source = nixpkgsPath;
@@ -31,4 +32,13 @@
   users.users.${username}.openssh.authorizedKeys.keys =
     let names = [ "keith-desktop" "keith-xps" "keith-server" ]; in
     mapAttrsToList (_: m: m.public-key) (getAttrs names machines);
+
+  age.identityPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
+  age.secrets = pipeValue [
+    (import ../secrets/secrets.nix { inherit scope; })
+    (filterAttrs (_: v: elem machine.public-key v.publicKeys))
+    (mapAttrs (_: v: if v.isUserSecret or false then v // { owner = username; } else v))
+    (mapAttrs (_: v: removeAttrs v [ "publicKeys" "isUserSecret" ]))
+    (mapAttrs' (n: v: nameValuePair (removeSuffix ".age" n) (v // { file = ../secrets/${n}; })))
+  ];
 }

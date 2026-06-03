@@ -1,4 +1,4 @@
-{ config, scope, ... }: with scope;
+{ config, osConfig, scope, ... }: with scope;
 {
   home = {
     stateVersion = "26.05";
@@ -198,6 +198,7 @@
         ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ../../ignore)}
         """
       '';
+      "cachix/cachix.dhall".source = config.lib.file.mkOutOfStoreSymlink osConfig.age.secrets.cachix-dhall.path;
     };
     dataFile = {
       "xmonad/.keep".text = "";
