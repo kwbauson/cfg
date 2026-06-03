@@ -12,6 +12,7 @@
   ];
 
   machine.tailscale-ip = "100.107.6.112";
+  machine.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+DyV8BQbs+ei0ao+MwdgJM/IHeHFv61H/Mf5hO8odu keith@keith-server";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.initrd.enable = false;
@@ -42,6 +43,7 @@
     worldName = "hangin";
   };
   systemd.services.valheim.wantedBy = mkForce [ ];
+  systemd.services.valheim.serviceConfig.EnvironmentFile = mkForce config.age.secrets.valheim-environment.path;
 
   services.palworld = {
     enable = true;
@@ -50,10 +52,11 @@
     worldSettings.BaseCampWorkerMaxNum = "30";
   };
   systemd.services.palworld.wantedBy = mkForce [ ];
+  systemd.services.palworld.serviceConfig.EnvironmentFile = mkForce config.age.secrets.palworld-environment.path;
 
   services.caddy.enable = true;
   services.caddy.enableSecurity = true;
-  systemd.services.caddy.serviceConfig.EnvironmentFile = "/etc/nixos/caddy-environment";
+  systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets.caddy-environment.path;
   services.caddy.subdomainsOf = constants.kwbauson.fqdn;
   services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";
   services.caddy.subdomains.auth = "authenticate with default";
@@ -94,7 +97,7 @@
     nodeRuntimes = [ "node24" ];
     extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];
-    tokenFile = "/etc/nixos/github-runner-token";
+    tokenFile = config.age.secrets.keith-server-github-runner-token.path;
     url = "https://github.com/kwbauson/cfg";
   };
 
@@ -117,7 +120,7 @@
       server.http_port = 8888;
       server.domain = machine.name;
       security.admin_user = "keith";
-      security.secret_key = "$__file{/etc/nixos/grafana-secret-key}";
+      security.secret_key = "$__file{${config.age.secrets.grafana-secret-key.path}}";
     };
   };
   systemd.services.grafana.after = [ "tailscaled.service" ];
@@ -158,7 +161,7 @@
   };
   services.harmonia.cache = {
     enable = true;
-    signKeyPaths = [ "/etc/nixos/harmonia.secret" ];
+    signKeyPaths = [ config.age.secrets.harmonia-sign-key.path ];
     settings.bind = "${machine.tailscale-ip}:5000";
   };
 }

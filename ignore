@@ -32,7 +32,6 @@
 **/log
 **/node_modules
 **/old
-**/secrets
 **/temp
 **/tmp
 **/vendor/bundle

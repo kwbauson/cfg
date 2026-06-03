@@ -7,6 +7,7 @@
   ];
 
   machine.tailscale-ip = "100.82.72.117";
+  machine.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIiFgQqHtbb63VIn4ZloBZkCRtRl2teWb2bBH8ev7/iN keith@keith-desktop";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.initrd.enable = false;
