@@ -15,4 +15,5 @@ mkRules {
   caddy-environment = keith-server;
   palworld-environment = keith-server;
   valheim-environment = keith-server;
+  readlee-mac-m1-github-runner-token = { publicKeys = [ readlee-mac-m1 ]; owner = "_github-runner"; };
 }

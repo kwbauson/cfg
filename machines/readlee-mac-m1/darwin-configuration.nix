@@ -15,7 +15,7 @@
       enable = true;
       replace = true;
       url = "https://github.com/kwbauson/cfg";
-      tokenFile = "/etc/github-runner-kwbauson-cfg.token";
+      tokenFile = config.age.secrets.readlee-mac-m1-github-runner-token.path;
       extraLabels = [ "nix" system ];
       extraPackages = [ gh cachix ];
     };
