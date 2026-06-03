@@ -198,8 +198,8 @@
         ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ../../ignore)}
         """
       '';
-      "cachix/cachix.dhall" = mkIf (osConfig.age.secrets ? cachix-dhall) {
-        source = config.lib.file.mkOutOfStoreSymlink osConfig.age.secrets.cachix-dhall.path;
+      "cachix/cachix.dhall" = mkIf (osConfig.secrets ? cachix-dhall) {
+        source = config.lib.file.mkOutOfStoreSymlink osConfig.secrets.cachix-dhall.path;
       };
     };
     dataFile = {

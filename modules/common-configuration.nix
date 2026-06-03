@@ -1,10 +1,10 @@
-{ config, scope, ... }: with scope;
+{ scope, ... }: with scope;
 {
   imports = [
     modules.machine
     modules.auto-update
     modules.grafana-data-sources
-    "${agenix.src}/modules/age.nix"
+    modules.secrets
   ];
   nixpkgs.pkgs = scope.pkgs;
   environment.etc."nixpkgs-path".source = nixpkgsPath;
@@ -33,12 +33,9 @@
     let names = [ "keith-desktop" "keith-xps" "keith-server" ]; in
     mapAttrsToList (_: m: m.public-key) (getAttrs names machines);
 
-  age.identityPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
-  age.secrets = pipeValue [
-    (import ../secrets/secrets.nix { inherit scope; })
-    (filterAttrs (_: v: elem machine.public-key v.publicKeys))
-    (mapAttrs (_: v: if v.isUserSecret or false then v // { owner = username; } else v))
-    (mapAttrs (_: v: removeAttrs v [ "publicKeys" "isUserSecret" ]))
-    (mapAttrs' (n: v: nameValuePair (removeSuffix ".age" n) (v // { file = ../secrets/${n}; })))
-  ];
+  secrets.cachix-dhall = {
+    enable = elem machine.name [ "keith-desktop" "keith-xps" "keith-server" "readlee-mac-m1" ];
+    isShared = true;
+    isUser = true;
+  };
 }
