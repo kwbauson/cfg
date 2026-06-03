@@ -9,11 +9,10 @@ mkRules {
     publicKeys = [ keith-desktop keith-xps keith-server readlee-mac-m1 ];
     isUserSecret = true;
   };
-  test = [ keith-desktop keith-server ];
-  test2 = keith-desktop;
-  test3 = {
-    publicKeys = [ keith-desktop ];
-    owner = "keith";
-  };
-  test4 = [ keith-desktop keith-server ];
+  keith-server-github-runner-token = keith-server;
+  grafana-secret-key = { publicKeys = [ keith-server ]; owner = "grafana"; };
+  harmonia-sign-key = keith-server;
+  caddy-environment = keith-server;
+  palworld-environment = keith-server;
+  valheim-environment = keith-server;
 }
