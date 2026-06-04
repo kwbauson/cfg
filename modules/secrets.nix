@@ -55,5 +55,14 @@ in
         (x: genAttrs x (_: { enable = true; }))
       ];
     }
+    (optionalAttrs isLinux {
+      systemd.services = pipeValue [
+        enabledSecrets
+        (filterAttrs (_: v: v.environmentFile != false))
+        (mapAttrs' (n: v: nameValuePair (if v.environmentFile == true then n else v.environmentFile) {
+          serviceConfig.EnvironmentFile = mkForce v.path;
+        }))
+      ];
+    })
   ];
 }
