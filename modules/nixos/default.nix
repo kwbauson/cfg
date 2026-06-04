@@ -90,9 +90,12 @@
     };
   };
 
+  users.mutableUsers = false;
+  secrets.password.neededForUsers = true;
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" "dialout" ];
+    hashedPasswordFile = config.secrets.password.path;
   };
 
   security.sudo.wheelNeedsPassword = false;

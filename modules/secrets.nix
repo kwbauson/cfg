@@ -45,7 +45,7 @@ in
               if config.loadCredential != false
               then "/run/credentials/${config.serviceName}.service/${config.name}"
               else osConfig.sops.secrets.${config.name}.path
-            else "/run/secrets/${config.name}";
+            else throw "secret '${config.name}' is not defined";
         })
       ];
     }));
