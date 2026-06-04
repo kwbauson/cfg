@@ -1,15 +1,8 @@
 { config, options, scope, ... }: with scope;
 let
   extraSecretOptions = {
-    enable = mkOption {
-      default = true;
-      type = types.bool;
-    };
+    enable = mkEnableOption "secret";
     isUser = mkOption {
-      default = false;
-      type = types.bool;
-    };
-    isShared = mkOption {
       default = false;
       type = types.bool;
     };
@@ -29,21 +22,32 @@ in
     type = types.attrsOf (types.submoduleWith ({
       modules = options.age.secrets.type.getSubModules ++ [
         { options = extraSecretOptions; }
-        ({ config, name, ... }: {
-          file = ../secrets/${if config.isShared then name else "${machine.name}.${name}"}.age;
-        })
         ({ config, ... }: {
           config = mkIf config.isUser { owner = username; };
         })
       ];
     }));
-    default = { };
   };
 
   config = mkMerge [
     {
       age.identityPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
       age.secrets = mapAttrValues (s: removeAttrs s (attrNames extraSecretOptions)) enabledSecrets;
+      secrets = pipeValue [
+        (readDir ../secrets)
+        (mapAttrNames (filename: rec {
+          inherit filename;
+          parts = splitString "." filename;
+          isShared = length parts == 2;
+          name = elemAt parts (if isShared then 0 else 1);
+          forMachine = if isShared then null else head parts;
+        }))
+        (filterAttrs (_: v: v.isShared || v.forMachine == machine.name))
+        (mapAttrs' (_: v: nameValuePair v.name {
+          enable = mkDefault true;
+          file = ../secrets/${v.filename};
+        }))
+      ];
     }
     (optionalAttrs isLinux {
       systemd.services = pipeValue [

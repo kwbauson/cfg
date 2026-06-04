@@ -35,7 +35,6 @@
 
   secrets.cachix-dhall = {
     enable = elem machine.name [ "keith-desktop" "keith-xps" "keith-server" "readlee-mac-m1" ];
-    isShared = true;
     isUser = true;
   };
 }
