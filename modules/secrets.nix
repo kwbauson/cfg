@@ -39,7 +39,7 @@ in
             let
               xs = filter isString [ config.environmentFile config.loadCredential ];
             in
-            if length xs == 0 then config.name else head xs;
+            if length xs == 0 then mkDefault config.name else head xs;
           path =
             if hasAttr config.name osConfig.sops.secrets then
               if config.loadCredential != false
