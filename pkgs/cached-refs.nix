@@ -23,7 +23,7 @@ let
       '';
       getDrvHash = drv: substring 11 32 (builtins.unsafeDiscardStringContext drv.outPath);
       sourceHash = getDrvHash flake;
-      flakeBuild = runCommandLocal "flake"
+      flakeBuild = runCommandLocal "source"
         {
           passAsFile = [ "flakeText" ];
           inherit flakeText;
@@ -70,7 +70,7 @@ in
   sourceHash=''${sourceStorePath:11:32}
 
   if [[ $sourceHash = $cachedSourceHash ]];then
-    flake=/nix/store/$cachedFlakeHash-flake
+    flake=/nix/store/$cachedFlakeHash-source
     impure=--impure
     if [[ ! -e "$flake" ]];then
       nix build --no-link "$flake"
