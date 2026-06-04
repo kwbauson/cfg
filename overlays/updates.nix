@@ -17,7 +17,7 @@ final: prev: with final.scope; {
       set -euo pipefail
       echo 'import ${nixpkgsPath}/shell.nix' > shell.nix
       trap 'rm shell.nix' EXIT
-      echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py --max-workers 1 ${jsonFile}
+      echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py ${jsonFile}
     '';
   update-extra-packages =
     let updatable = attrNames (filterAttrs (_: p: hasAttr "updateScript" p && !p.meta.skipUpdate or false) extra-packages);
