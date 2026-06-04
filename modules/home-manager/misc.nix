@@ -198,7 +198,7 @@
         ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ../../ignore)}
         """
       '';
-      "cachix/cachix.dhall" = mkIf (osConfig.secrets ? cachix) {
+      "cachix/cachix.dhall" = mkIf (osConfig.secrets.cachix.enable or false) {
         source = config.lib.file.mkOutOfStoreSymlink osConfig.secrets.cachix.path;
       };
     };
