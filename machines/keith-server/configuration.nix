@@ -101,7 +101,6 @@
     tokenFile = config.secrets.github-runner-token.path;
     url = "https://github.com/kwbauson/cfg";
   };
-  secrets.github-runner-token.enable = true;
 
   services.searchix.enable = true;
   services.searchix.settings = {
@@ -167,5 +166,4 @@
     signKeyPaths = [ config.secrets.harmonia-sign-key.path ];
     settings.bind = "${machine.tailscale-ip}:5000";
   };
-  secrets.harmonia-sign-key.enable = true;
 }
