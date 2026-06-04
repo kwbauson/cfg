@@ -41,9 +41,11 @@ in
             in
             if length xs == 0 then config.name else head xs;
           path =
-            if config.loadCredential != false
-            then "/run/credentials/${config.serviceName}.service/${config.name}"
-            else osConfig.sops.secrets.${config.name}.path;
+            if config ? name then
+              if config.loadCredential != false
+              then "/run/credentials/${config.serviceName}.service/${config.name}"
+              else osConfig.sops.secrets.${config.name}.path
+            else null;
         })
       ];
     }));
