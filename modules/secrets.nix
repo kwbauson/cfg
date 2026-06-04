@@ -45,7 +45,7 @@ in
               if config.loadCredential != false
               then "/run/credentials/${config.serviceName}.service/${config.name}"
               else osConfig.sops.secrets.${config.name}.path
-            else null;
+            else "/run/secrets/${config.name}";
         })
       ];
     }));
