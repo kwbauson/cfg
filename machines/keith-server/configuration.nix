@@ -124,7 +124,7 @@
       security.secret_key = "$__file{${config.secrets.grafana-secret-key.path}}";
     };
   };
-  secrets.grafana-secret-key.owner = "grafana";
+  secrets.grafana-secret-key.loadCredential = "grafana";
   systemd.services.grafana.after = [ "tailscaled.service" ];
   services.prometheus = {
     enable = true;

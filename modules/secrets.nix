@@ -1,20 +1,20 @@
 { config, options, scope, ... }: with scope;
 let
+  osConfig = config;
   boolOrStrOption = mkOption {
     type = types.oneOf [ types.bool types.str ];
     default = false;
   };
+  strOption = mkOption {
+    type = types.str;
+  };
   extraSecretOptions = {
     enable = mkEnableOption "secret";
-    user = mkOption {
-      type = types.bool;
-      default = false;
-    };
+    user = mkEnableOption "user";
     environmentFile = boolOrStrOption;
     loadCredential = boolOrStrOption;
-    path = mkOption {
-      type = types.str;
-    };
+    path = strOption;
+    serviceName = strOption;
   };
   enabledSecrets = filterAttrs (_: v: v.enable) config.secrets;
   sopsFile = ../machines/${machine.name}/secrets.yaml;
@@ -33,6 +33,17 @@ in
         { options = extraSecretOptions; }
         ({ config, ... }: {
           config = mkIf config.user { owner = username; };
+        })
+        ({ config, ... }: {
+          serviceName =
+            let
+              xs = filter isString [ config.environmentFile config.loadCredential ];
+            in
+            if length xs == 0 then config.name else head xs;
+          path =
+            if config.loadCredential != false
+            then "/run/credentials/${config.serviceName}.service/${config.name}"
+            else osConfig.sops.secrets.${config.name}.path;
         })
       ];
     }));
@@ -56,11 +67,13 @@ in
       ];
     }
     (optionalAttrs isLinux {
-      systemd.services = pipeValue [
-        enabledSecrets
-        (filterAttrs (_: v: v.environmentFile != false))
-        (mapAttrs' (n: v: nameValuePair (if v.environmentFile == true then n else v.environmentFile) {
-          serviceConfig.EnvironmentFile = mkForce v.path;
+      systemd.services = pipe enabledSecrets [
+        (filterAttrs (_: c: c.environmentFile != false || c.loadCredential != false))
+        (mapAttrs' (n: c: nameValuePair c.serviceName {
+          serviceConfig = {
+            EnvironmentFile = mkIf (c.environmentFile != false) [ c.path ];
+            LoadCredential = mkIf (c.loadCredential != false) [ "${n}:${config.sops.secrets.${n}.path}" ];
+          };
         }))
       ];
     })
