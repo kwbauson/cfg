@@ -8,7 +8,7 @@ mkMerge [
       listenAddress = machine.tailscale-ip;
     };
   }
-  (mkConfigIf isLinux {
+  (optionalAttrs isLinux {
     systemd.services.prometheus-node-exporter.after = [ "tailscaled.service" ];
 
     services.alloy.enable = true;
