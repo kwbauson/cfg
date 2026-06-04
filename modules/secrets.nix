@@ -1,29 +1,51 @@
 { config, options, scope, ... }: with scope;
 let
+  osConfig = config;
+  boolOrStrOption = mkOption {
+    type = types.oneOf [ types.bool types.str ];
+    default = false;
+  };
+  strOption = mkOption {
+    type = types.str;
+  };
   extraSecretOptions = {
     enable = mkEnableOption "secret";
-    isUser = mkOption {
-      default = false;
-      type = types.bool;
-    };
-    isEnvironment = mkOption {
-      default = false;
-      type = types.bool;
-    };
+    user = mkEnableOption "user";
+    environmentFile = boolOrStrOption;
+    loadCredential = boolOrStrOption;
+    path = strOption;
+    serviceName = strOption;
   };
   enabledSecrets = filterAttrs (_: v: v.enable) config.secrets;
+  sopsFile = ../machines/${machine.name}/secrets.yaml;
+  excludedOptions = attrNames extraSecretOptions ++ [ "sopsFileHash" ];
 in
 {
   imports = [
-    "${agenix.src}/modules/age.nix"
+    (optionalAttrs isLinux "${sops-nix.src}/modules/sops")
+    (optionalAttrs isDarwin "${sops-nix.src}/modules/nix-darwin")
   ];
 
   options.secrets = mkOption {
     type = types.attrsOf (types.submoduleWith ({
-      modules = options.age.secrets.type.getSubModules ++ [
+      modules = flatten [
+        options.sops.secrets.type.getSubModules
         { options = extraSecretOptions; }
         ({ config, ... }: {
-          config = mkIf config.isUser { owner = username; };
+          config = mkIf config.user { owner = username; };
+        })
+        ({ config, ... }: {
+          serviceName =
+            let
+              xs = filter isString [ config.environmentFile config.loadCredential ];
+            in
+            if length xs == 0 then mkDefault config.name else head xs;
+          path =
+            if hasAttr config.name osConfig.sops.secrets then
+              if config.loadCredential != false
+              then "/run/credentials/${config.serviceName}.service/${config.name}"
+              else osConfig.sops.secrets.${config.name}.path
+            else "/run/secrets/${config.name}";
         })
       ];
     }));
@@ -31,29 +53,30 @@ in
 
   config = mkMerge [
     {
-      age.identityPaths = [ "${config.users.users.${username}.home}/.ssh/id_ed25519" ];
-      age.secrets = mapAttrValues (s: removeAttrs s (attrNames extraSecretOptions)) enabledSecrets;
+      sops.defaultSopsFile = sopsFile;
+      sops.age.keyFile = "${config.users.users.${username}.home}/.config/sops/age/keys.txt";
+      sops.age.sshKeyPaths = mkForce [ ];
+      sops.gnupg.sshKeyPaths = mkForce [ ];
+      sops.secrets = mapAttrValues (v: removeAttrs v excludedOptions) enabledSecrets;
       secrets = pipeValue [
-        (readDir ../secrets)
-        (mapAttrNames (filename: rec {
-          inherit filename;
-          parts = splitString "." filename;
-          isShared = length parts == 2;
-          name = elemAt parts (if isShared then 0 else 1);
-          forMachine = if isShared then null else head parts;
-        }))
-        (filterAttrs (_: v: v.isShared || v.forMachine == machine.name))
-        (mapAttrs' (_: v: nameValuePair v.name {
-          enable = mkDefault true;
-          file = ../secrets/${v.filename};
-        }))
+        (if pathExists sopsFile then readFile sopsFile else "")
+        (splitString "\n")
+        (map (match "^([^[:space:]]+):.*$"))
+        (filter isList)
+        (map head)
+        (remove "sops")
+        (x: genAttrs x (_: { enable = true; }))
       ];
     }
     (optionalAttrs isLinux {
-      systemd.services = pipeValue [
-        enabledSecrets
-        (filterAttrs (_: v: v.isEnvironment))
-        (mapAttrValues (v: { serviceConfig.EnvironmentFile = mkForce v.path; }))
+      systemd.services = pipe enabledSecrets [
+        (filterAttrs (_: c: c.environmentFile != false || c.loadCredential != false))
+        (mapAttrs' (n: c: nameValuePair c.serviceName {
+          serviceConfig = {
+            EnvironmentFile = mkIf (c.environmentFile != false) [ c.path ];
+            LoadCredential = mkIf (c.loadCredential != false) [ "${n}:${config.sops.secrets.${n}.path}" ];
+          };
+        }))
       ];
     })
   ];

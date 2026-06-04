@@ -43,7 +43,7 @@
     worldName = "hangin";
   };
   systemd.services.valheim.wantedBy = mkForce [ ];
-  secrets.valheim.isEnvironment = true;
+  secrets.valheim.environmentFile = true;
 
   services.palworld = {
     enable = true;
@@ -52,11 +52,11 @@
     worldSettings.BaseCampWorkerMaxNum = "30";
   };
   systemd.services.palworld.wantedBy = mkForce [ ];
-  secrets.palworld.isEnvironment = true;
+  secrets.palworld.environmentFile = true;
 
   services.caddy.enable = true;
   services.caddy.enableSecurity = true;
-  secrets.caddy.isEnvironment = true;
+  secrets.caddy.environmentFile = true;
   services.caddy.subdomainsOf = constants.kwbauson.fqdn;
   services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";
   services.caddy.subdomains.auth = "authenticate with default";
@@ -124,7 +124,7 @@
       security.secret_key = "$__file{${config.secrets.grafana-secret-key.path}}";
     };
   };
-  secrets.grafana-secret-key.owner = "grafana";
+  secrets.grafana-secret-key.loadCredential = "grafana";
   systemd.services.grafana.after = [ "tailscaled.service" ];
   services.prometheus = {
     enable = true;

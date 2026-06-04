@@ -33,8 +33,5 @@
     let names = [ "keith-desktop" "keith-xps" "keith-server" ]; in
     mapAttrsToList (_: m: m.public-key) (getAttrs names machines);
 
-  secrets.cachix-dhall = {
-    enable = elem machine.name [ "keith-desktop" "keith-xps" "keith-server" "readlee-mac-m1" ];
-    isUser = true;
-  };
+  secrets.cachix.user = true;
 }
