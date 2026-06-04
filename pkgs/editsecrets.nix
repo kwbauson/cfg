@@ -25,8 +25,9 @@ addMetaAttrs { includePackage = true; } (writeBashBin pname ''
       nix copy --no-check-sigs --to ssh-ng://"$sshTarget" "$@"
     }
     if [[ ${system} = $targetSystem ]];then
-      nixCopy ${placeholder "out"}
-      remoteBin=$0
+      out=${placeholder "out"}
+      nixCopy "$out"
+      remoteBin=$out/bin/${pname}
     else
       nixCopy ${flake}
       remoteBin=$(ssh "$sshTarget" 'nix build --no-link --print-out-paths ${flake}#${pname}')/bin/${pname}
