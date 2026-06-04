@@ -28,6 +28,7 @@ builtins // args.lib // {
       (n: p: f n (p + "/${name}"))
       (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
   pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
+  mkConfigIf = pred: config: { config = mkIf pred config; };
 
   importDir = dir: pipe dir [
     readDirPaths

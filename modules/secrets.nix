@@ -22,9 +22,7 @@ in
     type = types.attrsOf (types.submoduleWith ({
       modules = options.age.secrets.type.getSubModules ++ [
         { options = extraSecretOptions; }
-        ({ config, ... }: {
-          config = mkIf config.isUser { owner = username; };
-        })
+        ({ config, ... }: mkConfigIf config.isUser { owner = username; })
       ];
     }));
   };
@@ -49,7 +47,7 @@ in
         }))
       ];
     }
-    (optionalAttrs isLinux {
+    (mkConfigIf isLinux {
       systemd.services = pipeValue [
         enabledSecrets
         (filterAttrs (_: v: v.isEnvironment))
