@@ -1,8 +1,8 @@
 final: prev: with final.scope;
 let
   checked-pkgs = linkFarmOfHashes "checked-pkgs" (flatten [
-    (attrValues checked-extra-packages)
-    (attrValues (forAttrValues checked-extra-packages (pkg: attrValues (pkg.tests or { }))))
+    (attrValues check-all)
+    (attrValues (forAttrValues check-all (pkg: attrValues (pkg.tests or { }))))
   ]);
   checks-script = writeBash "checks" ''
     set -euo pipefail
@@ -10,6 +10,9 @@ let
     ${exe better-comma} -p hello hello
     ${exe better-comma} -d hello
   '';
+  check-linux = { inherit zoom-us; };
+  check-darwin = { inherit iterm2; };
+  check-all = check-extra-packages // optionalAttrs isLinux check-linux // optionalAttrs isDarwin check-darwin;
 in
 {
   getDrvHash = drv: substring 11 32 (builtins.unsafeDiscardStringContext drv.outPath);
@@ -21,14 +24,14 @@ in
     ''} > $out
     echo OK >> $out
   '';
-  checked-extra-packages = filterAttrs
+  check-extra-packages = filterAttrs
     (_: pkg: all id [
       (isDerivation pkg)
       (!pkg.meta.broken or false)
       (!pkg.meta.skipBuild or false)
       (elem system pkg.meta.platforms or [ system ])
     ])
-    extra-packages // { inherit zoom-us; };
+    extra-packages;
 
   checks = cached-refs.build {
     inherit flake;
