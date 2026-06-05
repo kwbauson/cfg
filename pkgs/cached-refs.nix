@@ -21,7 +21,6 @@ let
             };
         }
       '';
-      getDrvHash = drv: substring 11 32 (builtins.unsafeDiscardStringContext drv.outPath);
       sourceHash = getDrvHash flake;
       flakeBuild = runCommandLocal "source"
         {
@@ -32,11 +31,8 @@ let
         cp $flakeTextPath $out/flake.nix
       '';
       flakeHash = getDrvHash flakeBuild;
-      links = linkFarm
-        "${pname}-links"
-        (map (p: { name = getDrvHash p; path = p; })
-          ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs)
-        );
+      links = linkFarmOfHashes "${pname}-links"
+        ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
     in
     runCommandLocal "${sourceHash}-${flakeHash}" { } ''
       mkdir -p $out
