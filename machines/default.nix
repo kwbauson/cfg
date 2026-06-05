@@ -26,6 +26,7 @@ pipe rawMachines (map mapAttrs [
     isNixDarwin = m ? darwin-configuration;
     isGraphical = m.isGraphical or true;
     isMinimal = m.isMinimal or false;
+    tailscale-fqdn = "${machine.name}.tail6a226.ts.net";
     scope = {
       inherit machine;
       inherit (machine) isNixOS isNixDarwin username isGraphical isMinimal;
