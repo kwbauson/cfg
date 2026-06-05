@@ -4,6 +4,7 @@
     common-cpu-amd
     common-gpu-amd
     common-cpu-amd-pstate
+    modules.ci-server
     ./personal-api.nix
     "${cobi.src}/hosts/modules/games/palworld.nix"
     "${cobi.src}/hosts/modules/games/valheim.nix"
@@ -91,16 +92,6 @@
   services.scribblers.enable = true;
   services.caddy.subdomains.scribblers = constants.scribblers.port;
 
-  services.github-runners.keith-server = {
-    enable = true;
-    replace = true;
-    nodeRuntimes = [ "node24" ];
-    extraLabels = [ "nix" system ];
-    extraPackages = [ gh cachix ];
-    tokenFile = config.secrets.github-runner-token.path;
-    url = "https://github.com/kwbauson/cfg";
-  };
-
   services.searchix.enable = true;
   services.searchix.settings = {
     web.baseUrl = "https://searchix.kwbauson.com";
@@ -159,10 +150,5 @@
       }];
       storage_config.filesystem.directory = "/var/lib/loki/chunks";
     };
-  };
-  services.harmonia.cache = {
-    enable = true;
-    signKeyPaths = [ config.secrets.harmonia-sign-key.path ];
-    settings.bind = "${machine.tailscale-ip}:5000";
   };
 }
