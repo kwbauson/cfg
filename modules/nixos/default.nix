@@ -32,6 +32,7 @@
   networking.hostName = mkDefault machine.name;
   networking.firewall.trustedInterfaces = [ config.services.tailscale.interfaceName ];
   services.resolved.enable = true;
+  services.speechd.enable = false;
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;
