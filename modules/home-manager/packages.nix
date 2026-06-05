@@ -11,9 +11,9 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
-        nixos-install-tools better-comma doggo dasel clip terraform;
+        nixos-install-tools better-comma doggo dasel clip;
     };
-    ${attrIf isGraphical "graphical"} = {
+    graphical = optionalAttrs isGraphical {
       graphical-core = {
         inherit
           dzen2 graphviz imagemagick term nsxiv
@@ -37,8 +37,10 @@
     };
     development-extra = optionalAttrs (!isMinimal) {
       inherit
-        yarn yarn-bash-completion nodejs_latest concurrently google-cloud-sdk
+        yarn yarn-bash-completion nodejs_latest concurrently
         unison-ucm cachix npm-check-updates prettier;
+      inherit terranix google-cloud-sdk;
+      terraform = scope.root.terraform.pkgs scope;
     };
     nle-cfg = nle-cfg.pkgs;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;

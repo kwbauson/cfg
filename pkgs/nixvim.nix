@@ -140,7 +140,6 @@ importPackage rec {
       basedpyright.enable = true;
       ruff.enable = true;
       bashls.enable = true;
-      terraformls.enable = true;
       biome.enable = true;
     };
     plugins = {
@@ -208,6 +207,9 @@ importPackage rec {
               "index.css"
               "index.ts"
               "index.tsx"
+              "config.nix"
+              "secrets.yaml"
+              "main.tf"
             ];
           in
           lib.mkRaw ''
