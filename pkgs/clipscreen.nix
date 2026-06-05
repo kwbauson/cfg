@@ -13,7 +13,6 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     cp clipscreen $out/bin
   '';
-  meta.mainProgram = pname;
   meta.platforms = platforms.linux;
   passthru.updateScript = unstableGitUpdater { };
 }

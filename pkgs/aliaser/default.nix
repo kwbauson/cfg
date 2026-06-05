@@ -11,7 +11,6 @@ stdenv.mkDerivation {
     wrapProgram $out/bin/${pname} --prefix PATH : "$addPath"
     ln -s ${pname} a
   '';
-  meta.mainProgram = pname;
   passthru.__functor = _: config:
     let
       jsonFile = writeText "aliases.json" (toJSON config);

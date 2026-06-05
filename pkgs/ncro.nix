@@ -1,5 +1,5 @@
 scope: with scope;
-importPackage {
+importPackage (attrs: {
   inherit pname;
   version = "2.2.0-unstable-2026-06-04";
   src = fetchFromGitHub {
@@ -8,5 +8,6 @@ importPackage {
     rev = "15a1c0b180a815373d8a61298dbb2baa2dbbf578";
     hash = "sha256-mEEA8YtAWJZlLaci4z7JXuXSL5W5aIrdjCn/6rtcQqs=";
   };
+  package = callPackage "${attrs.src}/nix/package.nix" { };
   passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
-}
+})
