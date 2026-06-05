@@ -50,10 +50,8 @@
           ControlMaster = "auto";
           ControlPersist = "1s";
         };
-        "kwbauson.com".User = "keith";
         "gitlab.com".UpdateHostKeys = "no";
-        keith-desktop.User = "keith";
-      };
+      } // forAttrValues machines (m: { User = m.username; });
       includes = [ "config.d/*" ];
     };
     htop = {
