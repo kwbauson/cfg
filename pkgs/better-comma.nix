@@ -5,36 +5,13 @@ scope: with scope; stdenvNoCC.mkDerivation {
   dontUnpack = true;
   passAsFile = [ "script" "completion" ];
   script = ''
-    #!/usr/bin/env bash
+    #!${getExe bash}
     ${pathAdd [ gnused coreutils fzy ]}
     set -o pipefail
-    overlays=()
-    while [[ $1 = --overlay ]];do
-      shift
-      overlays+=("$1")
-      shift
-    done
+    source=${flake}
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
     [[ $1 = -m ]] && man=1 && shift
-    if [[ ''${#overlays[@]} -eq 0 ]];then
-      source=${flake}
-    else
-      contents=
-      for file in "''${overlays[@]}";do
-        contents+=$(< "$file")
-      done
-      hash=($(echo "${flake} $contents" | md5sum))
-      source=~/.cache/${pname}/$hash
-      if [[ ! -e $source ]];then
-        mkdir -p "$source"
-        cp -rT ${flake} "$source"
-        mkdir -p "$source"/extra-overlays
-        for file in "''${overlays[@]}";do
-          cp "$file" "$source"/extra-overlays
-        done
-      fi
-    fi
     if [[ $1 = -p ]];then
       shift
       pkg=$1 && shift
@@ -42,8 +19,13 @@ scope: with scope; stdenvNoCC.mkDerivation {
     fi
     cmd=$1
     shift
+    cachefile=~/.cache/${pname}/$cmd
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
-      echo usage: , [--overlay FILE ...] [-p package] COMMAND [ARGS]
+      echo 'usage: , [OPTIONS] COMMAND [ARGS]'
+      echo '  -p package      explicitly specify package'
+      echo '  -d package      print info about package'
+      echo '  -u command      clear cached info about command'
+      echo '  -m command      open man-page for command'
       exit
     fi
     if [[ -z $pkg ]];then
@@ -55,14 +37,11 @@ scope: with scope; stdenvNoCC.mkDerivation {
           pkg=$packages
         fi
       else
-        cachefile=~/.cache/${pname}/$cmd
         [[ -n $uncache ]] && rm -f "$cachefile"
         if [[ -e $cachefile ]];then
-          pkg=$(< "$cachefile")
+          read pkg cacheStorePath cacheSource < "$cachefile"
         else
           pkg=$(echo "$packages" | fzy)
-          mkdir -p "$(dirname "$cachefile")"
-          echo "$pkg" > "$cachefile"
         fi
       fi
     fi
@@ -76,13 +55,22 @@ scope: with scope; stdenvNoCC.mkDerivation {
     if [[ $desc = 1 ]];then
       echo "$pkg"
       exec nix eval --impure --raw --expr "with import $source {}; descString $pkg + \"\n\""
-    elif [[ $man = 1 ]];then
-      exec nix shell "$source#$pkg" --command man "$cmd" "$@"
     else
-      exec nix shell "$source#$pkg" --command "$cmd" "$@"
+      if [[ $source = $cacheSource && -e $cacheStorePath ]];then
+        storePath=$cacheStorePath
+      else
+        storePath=$(nix build --no-link --print-out-paths "$source#$pkg")
+        echo "$pkg $storePath $source" > "$cachefile"
+      fi
+      export PATH="$PATH":"$storePath"/bin
+      if [[ $man = 1 ]];then
+        exec man "$cmd" "$@"
+      else
+        exec "$cmd" "$@"
+      fi
     fi
   '';
-  completion = ''
+  completion = /* bash */ ''
     _${pname}()
     {
         local cur prev opts exes PATH
