@@ -27,11 +27,6 @@
   };
 
   nix.package = lib.mkForce lixPackageSets.latest.lix;
-  nix.settings = optionalAttrs isDarwin {
-    max-jobs = "auto";
-    extra-experimental-features = [ "nix-command" "flakes" ];
-    extra-platforms = [ "x86_64-darwin" ];
-  };
 
   programs = {
     home-manager.enable = true;

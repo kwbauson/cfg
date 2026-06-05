@@ -1,9 +1,5 @@
 { config, scope, ... }: with scope;
 {
-  imports = [
-    modules.ci-substituters
-  ];
-
   machine.username = "benjamin";
   machine.tailscale-ip = "100.118.226.25";
   machine.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPvKJG6bwQ4M3LooY17neqDueOZyVfxLfgUBMcv39iqv benjamin@m1";
@@ -41,4 +37,10 @@
     path = mkBefore [ "/usr/bin" "/bin" ];
   });
   ids.gids.nixbld = 30000;
+
+  services.harmonia.cache = {
+    enable = true;
+    signKeyPaths = [ config.secrets.harmonia-sign-key.path ];
+    settings.bind = "${machine.tailscale-ip}:5000";
+  };
 }

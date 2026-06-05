@@ -5,7 +5,6 @@
     machine.configuration
     machine.hardware-configuration
     inputs.home-manager.nixosModules.default
-    modules.ncro
   ] ++ attrValues (importDir ./.);
 
   boot = {
