@@ -11,5 +11,6 @@ scope: with scope;
   (opentofu.withPlugins (ps: [
     ps.hashicorp_google
     ps.cullenmcdermott_porkbun
+    ps.integrations_github
   ]))
 ]

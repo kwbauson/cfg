@@ -14,3 +14,10 @@ provider "registry.opentofu.org/hashicorp/google" {
     "h1:jnyksGNfQ47XTdy/D+fA0ohvhNlA2ilyYssetRLzQw4=",
   ]
 }
+
+provider "registry.opentofu.org/integrations/github" {
+  version = "6.12.1"
+  hashes = [
+    "h1:lVujKUjpXCvVePPAgKW0kj5pj0kg4vZgAvZQy2CuEOM=",
+  ]
+}

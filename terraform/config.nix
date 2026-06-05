@@ -1,10 +1,23 @@
-{ lib, ... }:
+{ config, lib, ... }:
 let scope = import ../scope.nix { inherit lib; }; in with scope;
+let
+  stripKeyComment = key: concatStringsSep " " (take 2 (splitString " " key));
+in
 {
+  _module.args = { inherit scope; };
+  imports = [
+    ./secret.nix
+  ];
+
   terraform.cloud = {
     hostname = "app.terraform.io";
     organization = "kwbauson";
     workspaces.name = "cfg";
+  };
+
+  terraform.required_providers = {
+    porkbun.source = "cullenmcdermott/porkbun";
+    github.source = "integrations/github";
   };
 
   provider.google = {
@@ -13,23 +26,19 @@ let scope = import ../scope.nix { inherit lib; }; in with scope;
     zone = "us-east1-a";
   };
 
-  terraform.required_providers = {
-    porkbun.source = "cullenmcdermott/porkbun";
-  };
+  resource.github_user_ssh_key = genAttrs
+    [ "keith-desktop" "keith-xps" "keith-server" ]
+    (name: {
+      title = name;
+      key = stripKeyComment machines.${name}.public-key;
+    });
 
-  module.porkbun_api_key = {
-    source = "./modules/secret";
-    id = "porkbun_api_key";
-  };
-
-  module.porkbun_secret_key = {
-    source = "./modules/secret";
-    id = "porkbun_secret_key";
-  };
+  secret.porkbun_api_key.enable = true;
+  secret.porkbun_secret_key.enable = true;
 
   provider.porkbun = {
-    api_key = tf.ref "module.porkbun_api_key.secret_value";
-    secret_key = tf.ref "module.porkbun_secret_key.secret_value";
+    api_key = config.secret.porkbun_api_key.value;
+    secret_key = config.secret.porkbun_secret_key.value;
   };
 
   resource.porkbun_dns_record.kwbauson_com = {
