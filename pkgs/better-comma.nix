@@ -10,18 +10,18 @@ scope: with scope; stdenvNoCC.mkDerivation {
     set -o pipefail
     source=${flake}
     [[ $1 = -u ]] && uncache=1 && shift
-    [[ $1 = -d ]] && desc=1 && shift && pkg=$1
+    [[ $1 = -d ]] && desc=1 && shift && pkg=$1 && shift
     [[ $1 = -m ]] && man=1 && shift
     [[ $1 = --trace ]] && trace=1 && shift
+    [[ $1 = -p ]] && shift && pkg=$1 && shift
+    if [[ $desc = 1 ]];then
+      cmd=fakecmd
+    else
+      cmd=$1
+    fi
     if [[ $trace = 1 ]];then
       set -x
     fi
-    if [[ $1 = -p ]];then
-      shift
-      pkg=$1 && shift
-      cmd=$1 && shift
-    fi
-    cmd=$1
     shift
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
       echo 'usage: , [OPTIONS] COMMAND [ARGS]'
