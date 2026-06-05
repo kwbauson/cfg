@@ -12,6 +12,10 @@ scope: with scope; stdenvNoCC.mkDerivation {
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
     [[ $1 = -m ]] && man=1 && shift
+    [[ $1 = --trace ]] && trace=1 && shift
+    if [[ $trace = 1 ]];then
+      set -x
+    fi
     if [[ $1 = -p ]];then
       shift
       pkg=$1 && shift
@@ -19,7 +23,6 @@ scope: with scope; stdenvNoCC.mkDerivation {
     fi
     cmd=$1
     shift
-    cachefile=~/.cache/${pname}/$cmd
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
       echo 'usage: , [OPTIONS] COMMAND [ARGS]'
       echo '  -p package      explicitly specify package'
@@ -27,6 +30,17 @@ scope: with scope; stdenvNoCC.mkDerivation {
       echo '  -u command      clear cached info about command'
       echo '  -m command      open man-page for command'
       exit
+    fi
+    cachefile=~/.cache/${pname}/$cmd
+    if [[ $uncache = 1 && -e $cachefile ]];then
+      unlink "$cachefile"
+    fi
+    cached=
+    if [[ -e $cachefile ]];then
+      read pkg storePath cacheSource < "$cachefile"
+      if [[ $source = $cacheSource && -e $storePath ]];then
+        cached=1
+      fi
     fi
     if [[ -z $pkg ]];then
       packages=$(sed -En "s/^([^ ]+) $cmd$/\1/p" ${nix-index-list})
@@ -37,16 +51,8 @@ scope: with scope; stdenvNoCC.mkDerivation {
           pkg=$packages
         fi
       else
-        [[ -n $uncache ]] && rm -f "$cachefile"
-        if [[ -e $cachefile ]];then
-          read pkg cacheStorePath cacheSource < "$cachefile"
-        else
-          pkg=$(echo "$packages" | fzy)
-        fi
+        pkg=$(echo "$packages" | fzy)
       fi
-    fi
-    if [[ -z $pkg ]];then
-      pkg=$cmd
     fi
 
     if [[ ! -e ~/.local/share/nix ]];then
@@ -55,19 +61,16 @@ scope: with scope; stdenvNoCC.mkDerivation {
     if [[ $desc = 1 ]];then
       echo "$pkg"
       exec nix eval --impure --raw --expr "with import $source {}; descString $pkg + \"\n\""
+    fi
+    if [[ $cached != 1 ]];then
+      storePath=$(nix build --no-link --print-out-paths "$source#$pkg")
+      echo "$pkg $storePath $source" > "$cachefile"
+    fi
+    export PATH="$PATH":"$storePath"/bin
+    if [[ $man = 1 ]];then
+      exec man "$cmd" "$@"
     else
-      if [[ $source = $cacheSource && -e $cacheStorePath ]];then
-        storePath=$cacheStorePath
-      else
-        storePath=$(nix build --no-link --print-out-paths "$source#$pkg")
-        echo "$pkg $storePath $source" > "$cachefile"
-      fi
-      export PATH="$PATH":"$storePath"/bin
-      if [[ $man = 1 ]];then
-        exec man "$cmd" "$@"
-      else
-        exec "$cmd" "$@"
-      fi
+      exec "$cmd" "$@"
     fi
   '';
   completion = /* bash */ ''
