@@ -10,7 +10,7 @@ scope: with scope; stdenvNoCC.mkDerivation {
     set -o pipefail
     source=${flake}
     [[ $1 = -u ]] && uncache=1 && shift
-    [[ $1 = -d ]] && desc=1 && shift
+    [[ $1 = -d ]] && desc=1 && shift && pkg=$1
     [[ $1 = -m ]] && man=1 && shift
     [[ $1 = --trace ]] && trace=1 && shift
     if [[ $trace = 1 ]];then
