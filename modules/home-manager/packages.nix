@@ -22,7 +22,7 @@
       };
       inherit
         ffmpeg mediainfo pavucontrol qtbr signal-desktop
-        discord dejavu_fonts zathura steamtinkerlaunch
+        discord zathura steamtinkerlaunch
         headsetcontrol arduino remmina obsidian;
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {

@@ -33,8 +33,6 @@
     extra-platforms = [ "x86_64-darwin" ];
   };
 
-  fonts.fontconfig.enable = true;
-
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;

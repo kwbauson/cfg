@@ -47,7 +47,10 @@
     font = "default8x16";
   };
 
-  fonts.enableDefaultPackages = mkDefault isGraphical;
+  fonts = optionalAttrs isGraphical {
+    enableDefaultPackages = true;
+    packages = [ corefonts ];
+  };
 
   time.timeZone = mkDefault "America/Indianapolis";
 
