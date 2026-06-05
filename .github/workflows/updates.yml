@@ -13,7 +13,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v6.0.3
-        with: { fetch-depth: 0 }
       - run: nix run .#updates.${{ inputs.source || 'all' }}
       - uses: peter-evans/create-pull-request@v8.1.1
         id: cpr
