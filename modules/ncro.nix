@@ -35,9 +35,11 @@
         url = "http://${machines.keith-server.tailscale-fqdn}:5000";
         public_key = "${machines.keith-server.tailscale-fqdn}:amORAvA0d0VWxUnZyLPJXEY7QEKebU4SqURpe1CbsDY=";
       }
+      {
+        url = "http://${machines.readlee-mac-m1.tailscale-fqdn}:5000";
+        public_key = "${machines.readlee-mac-m1.tailscale-fqdn}:dHyGth5OeFh3Tg2OFAQHFwtvOLJbOB/tYEzJIuogWcc=";
+      }
     ];
   };
   nix.settings.substituters = mkForce [ "http://localhost:9180" ];
-  nix.settings.extra-substituters = mkForce [ ];
-  nix.settings.extra-trusted-public-keys = mkForce [ ];
 }
