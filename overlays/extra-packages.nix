@@ -17,7 +17,7 @@ let
       (optionalAttrs (functionArgs (import path) == { }))
       (prev.callPackage path)
       (addMetaAttrs { position = "${toString path}:1"; })
-      (p: addMetaAttrs (optionalAttrs (p.meta.mainProgram or null == null) { mainProgram = p.pname; }) p)
+      (p: addMetaAttrs (optionalAttrs (p.meta.mainProgram or null == null) { mainProgram = pname; }) p)
       (attrs: attrs // optionalAttrs (hasAttr pname prev) { prev = prev.${pname}; })
     ]))
   ];
