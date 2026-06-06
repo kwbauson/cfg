@@ -7,8 +7,8 @@ let
   checks-script = writeBash "checks" ''
     set -euo pipefail
     echo ${checked-pkgs}
-    ${exe better-comma} -p hello hello
-    ${exe better-comma} -d hello
+    ${getExe better-comma} -p hello hello
+    ${getExe better-comma} -d hello
   '';
   check-linux = { inherit zoom-us; };
   check-darwin = { inherit iterm2; };
