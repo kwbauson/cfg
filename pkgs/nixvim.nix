@@ -210,6 +210,7 @@ importPackage rec {
               "config.nix"
               "secrets.yaml"
               "main.tf"
+              "misc.nix"
             ];
           in
           lib.mkRaw ''

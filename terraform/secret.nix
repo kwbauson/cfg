@@ -1,7 +1,6 @@
 { config, scope, ... }: with scope;
 let
   cfg = config.secret;
-  mkRef = ref: mkOption { type = types.str; default = tf.ref ref; };
   secretModule = { name, ... }: {
     options = {
       enable = mkEnableOption "secret";

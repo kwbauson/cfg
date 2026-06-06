@@ -39,8 +39,7 @@
       inherit
         yarn yarn-bash-completion nodejs_latest concurrently
         unison-ucm cachix npm-check-updates prettier;
-      inherit terranix google-cloud-sdk;
-      terraform = scope.root.terraform.pkgs scope;
+      inherit tfn;
     };
     nle-cfg = nle-cfg.pkgs;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
