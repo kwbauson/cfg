@@ -82,4 +82,15 @@ removeAttrs builtins [ "fetchurl" ] // args.lib // {
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
   mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
   flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
+
+  mkFromEnabled = attrs: f:
+    let
+      error = throw "mkFromEnabled: `f` must produce non-lazy attrs";
+      fake = f error error;
+      enabled = filterAttrs (_: c: c.enable) attrs;
+    in
+    mapAttrs (name: _: mkMerge (mapAttrsToList (n: v: (f n v).${name}) enabled)) fake;
+  mkSubmodulesOption = module: mkOption {
+    type = types.attrsOf (types.submodule module);
+  };
 })

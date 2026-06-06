@@ -26,30 +26,26 @@ in
     (optionalAttrs isDarwin "${sops-nix.src}/modules/nix-darwin")
   ];
 
-  options.secrets = mkOption {
-    type = types.attrsOf (types.submoduleWith ({
-      modules = flatten [
-        options.sops.secrets.type.getSubModules
-        { options = extraSecretOptions; }
-        ({ config, ... }: {
-          config = mkIf config.user { owner = username; };
-        })
-        ({ config, ... }: {
-          serviceName =
-            let
-              xs = filter isString [ config.environmentFile config.loadCredential ];
-            in
-            if length xs == 0 then mkDefault config.name else head xs;
-          path =
-            if hasAttr config.name osConfig.sops.secrets then
-              if config.loadCredential != false
-              then "/run/credentials/${config.serviceName}.service/${config.name}"
-              else osConfig.sops.secrets.${config.name}.path
-            else throw "secret '${config.name}' is not defined";
-        })
-      ];
-    }));
-  };
+  options.secrets = mkSubmodulesOption ({ name, config, ... }: {
+    imports = flatten [
+      options.sops.secrets.type.getSubModules
+      { options = extraSecretOptions; }
+      { config = mkIf config.user { owner = username; }; }
+      {
+        serviceName =
+          let
+            xs = filter isString [ config.environmentFile config.loadCredential ];
+          in
+          if length xs == 0 then mkDefault config.name else head xs;
+        path =
+          if hasAttr name osConfig.sops.secrets then
+            if config.loadCredential != false
+            then "/run/credentials/${config.serviceName}.service/${name}"
+            else osConfig.sops.secrets.${name}.path
+          else throw "secret '${name}' is not defined";
+      }
+    ];
+  });
 
   config = mkMerge [
     {
