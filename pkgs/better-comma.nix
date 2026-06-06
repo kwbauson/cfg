@@ -31,7 +31,7 @@ scope: with scope; stdenvNoCC.mkDerivation {
       echo '  -m command      open man-page for command'
       exit
     fi
-    cachdir=~/.cache/"${pname}"
+    cachedir=~/.cache/"${pname}"
     cachefile=$cachedir/$cmd
     if [[ $uncache = 1 && -e $cachefile ]];then
       unlink "$cachefile"
@@ -107,5 +107,9 @@ scope: with scope; stdenvNoCC.mkDerivation {
     ln -s $out/bin/{${pname},","}
     installShellCompletion --bash --name better-comma $completionPath
     installShellCompletion --bash --name , $completionPath
+  '';
+  passthru.checkScript = /* bash */ ''
+    , -p hello hello
+    , -d hello
   '';
 }

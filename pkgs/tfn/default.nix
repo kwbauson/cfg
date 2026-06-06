@@ -13,11 +13,17 @@ let
     ps.cullenmcdermott_porkbun
     ps.integrations_github
   ]);
+in
+buildEnv {
+  name = "${pname}-env";
   paths = [
     wrapper
     terranix
     google-cloud-sdk
     opentofu
   ];
-in
-buildEnv { name = "${pname}-env"; inherit paths; }
+  passthru.checkScript = /* bash */ ''
+    echo '{}' > config.nix
+    tfn --version
+  '';
+}
