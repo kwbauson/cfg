@@ -3,8 +3,8 @@ let
   cfg = config.services.caddy;
   authSubmodule = types.submodule {
     options = {
-      role = mkOption { type = types.str; };
-      port = mkOption { type = types.port; };
+      role = mkTypeOption types.str;
+      port = mkTypeOption types.port;
     };
   };
 in

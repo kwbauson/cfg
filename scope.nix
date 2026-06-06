@@ -93,4 +93,5 @@ removeAttrs builtins [ "fetchurl" ] // args.lib // {
   mkSubmodulesOption = module: mkOption {
     type = types.attrsOf (types.submodule module);
   };
+  mkTypeOption = type: mkOption { inherit type; };
 })

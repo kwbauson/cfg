@@ -5,16 +5,13 @@ let
     type = types.oneOf [ types.bool types.str ];
     default = false;
   };
-  strOption = mkOption {
-    type = types.str;
-  };
   extraSecretOptions = {
     enable = mkEnableOption "secret";
     user = mkEnableOption "user";
     environmentFile = boolOrStrOption;
     loadCredential = boolOrStrOption;
-    path = strOption;
-    serviceName = strOption;
+    path = mkTypeOption types.str;
+    serviceName = mkTypeOption types.str;
   };
   enabledSecrets = filterAttrs (_: v: v.enable) config.secrets;
   sopsFile = ../machines/${machine.name}/secrets.yaml;
