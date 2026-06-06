@@ -136,10 +136,6 @@
     '' + optionalString isDarwin ''
       export PATH="$PATH":/opt/homebrew/bin
     '';
-    profileExtra = ''
-      [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
-      [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
-    '';
   };
   programs.zoxide.enable = true;
 }

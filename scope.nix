@@ -2,13 +2,12 @@ args: args.lib.fix (scope: with scope;
 args.lib.generators // args.formats or { } //
 args.writers or { } // args //
 args.flake.inputs or { } // args.flake or { } //
-builtins // args.lib // {
+removeAttrs builtins [ "fetchurl" ] // args.lib // {
   inherit (import ./. { inherit system; }) getFlakeCompat;
   inherit (stdenv.hostPlatform) system;
   inherit (stdenv) isLinux isDarwin;
   root = importDir ./.;
   inherit (root) constants modules machines;
-  inherit (pkgs) fetchurl;
   scope' = root.scope { inherit lib flake; };
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
@@ -17,20 +16,12 @@ builtins // args.lib // {
   forAttrNames = flip mapAttrNames;
   forAttrValues = flip mapAttrValues;
   forAttrValuesFlagged = attrs: name: forAttrValues (filterAttrs (_: getAttr name) attrs);
-  mergeAttrsList = foldl' mergeAttrs { };
   mergeAttrsListWithFunc = f: foldl' (mergeAttrsWithFunc f) { };
   recursiveUpdateList = foldl' recursiveUpdate { };
-  readDirPaths = dir: mapAttrNames (n: dir + "/${n}") (readDir dir);
-  filterDirPaths = p: dir: filterAttrs p (readDirPaths dir);
-  forDirPaths = dir: f: mapAttrs f (readDirPaths dir);
-  forDirPathsWith = dir: name: f:
-    mapAttrs
-      (n: p: f n (p + "/${name}"))
-      (filterDirPaths (_: p: pathExists (p + "/${name}")) dir);
   pipeValue = xs: pipe null ([ (const (head xs)) ] ++ (tail xs));
 
-  importDir = dir: pipe dir [
-    readDirPaths
+  importDir = dir: pipeValue [
+    (mapAttrNames (n: dir + "/${n}") (readDir dir))
     attrsToList
     (filter (x: pathIsDirectory x.value || hasSuffix ".nix" x.name))
     (filter (x: x.name != "default.nix"))
@@ -40,7 +31,6 @@ builtins // args.lib // {
     (mapAttrValues (x: if isFunction x && (functionArgs x == { _auto = false; scope = false; }) then x { _auto = true; inherit scope; } else x))
   ];
 
-  inherit (writers) writeBash writeBashBin;
   ap = x: f: f x;
   prefixIf = b: x: y: if b then x + y else y;
   descString = pkg: concatStringsSep "\n" [
@@ -57,24 +47,6 @@ builtins // args.lib // {
   attrIf = check: name: if check then name else null;
   userName = "Keith Bauson";
   userEmail = "kwbauson@gmail.com";
-  nixpkgs-branch = let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url; in
-    if length urlParts == 3 then elemAt urlParts 2 else "master";
-  excludeLines = f: text: concatStringsSep "\n" (filter (x: !f x) (splitString "\n" text));
-  unpack = src: stdenv.mkDerivation {
-    src = if src ? url && src ? sha256 then fetchurl { inherit (src) url sha256; } else src;
-    name = src.name or "source";
-    phases = [ "unpackPhase" "installPhase" ];
-    installPhase = ''
-      mv $PWD $out
-    '';
-  };
-  runBin = name: script: runCommand
-    name
-    { } ''
-    mkdir -p $out/bin
-    ${getExe (writeBashBin "script" script)} > $out/bin/${name}
-    chmod +x $out/bin/${name}
-  '';
   alias = name:
     if isString name
     then arg:
@@ -108,20 +80,8 @@ builtins // args.lib // {
       else if isDerivation args then { src = args; }
       else args
     );
-  buildDir = paths:
-    let
-      copyCommand = p: "cp -r ${builtins.path { name = "source"; path = p; }} $out/${baseNameOf p}";
-      cmds = concatMapStringsSep "\n" copyCommand (toList paths);
-    in
-    runCommand "source" { } "mkdir $out\n${cmds}";
-  buildDirExcept = path: except: buildDir (map (x: path + ("/" + x)) (
-    filter
-      (x: ! any (y: y == x) (toList except))
-      (attrNames (readDir path))
-  ));
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
   echo = text: writeBash "echo-script" ''echo "$(< ${writeText "text" text})"'';
-  attrsToList = mapAttrsToList (name: value: { inherit name value; });
   joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
   joinLines = joinStrings "\n";
   override = x: y:
