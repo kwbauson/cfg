@@ -10,28 +10,22 @@
     secret_key = config.secret.porkbun_secret_key.value;
   };
 
-  resource.porkbun_dns_record =
-    let
-      machine = machines.kwbauson;
-      domain = machine.public-fqdn;
-      ip = machine.public-ip;
-    in
+  resource.porkbun_dns_record = mapAttrValues
+    (r: {
+      domain = machines.kwbauson.public-fqdn;
+      content = machines.kwbauson.public-ip;
+    } // r)
     {
       kwbauson_com = {
-        inherit domain;
         type = "A";
-        content = ip;
       };
 
       wildcard_kwbauson_com = {
-        inherit domain;
         type = "A";
         name = "*";
-        content = ip;
       };
 
       home_kwbauson_com = {
-        inherit domain;
         type = "A";
         name = "home";
         content = constants.localhost.ip; # dynamic
@@ -39,7 +33,6 @@
       };
 
       kwbauson_com_txt = {
-        domain = "kwbauson.com";
         type = "TXT";
         content = "v=spf1 mx include:_spf.porkbun.com ~all";
       };

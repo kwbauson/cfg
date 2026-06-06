@@ -66,7 +66,7 @@
         ${pipe config.services.caddy.subdomains [
           attrNames
           (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
-          (map (prefix: "query domain=${prefix}${machine.kwbauson.public-fqdn}"))
+          (map (prefix: "query domain=${prefix}${machines.kwbauson.public-fqdn}"))
           (concatStringsSep "\n")
         ]}
       }
