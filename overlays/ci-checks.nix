@@ -9,6 +9,8 @@ let
     echo ${checked-pkgs}
     ${getExe better-comma} -p hello hello
     ${getExe better-comma} -d hello
+    echo '{}' > config.nix
+    ${getExe tfn} --help
   '';
   check-linux = { inherit zoom-us; };
   check-darwin = { inherit iterm2; };
