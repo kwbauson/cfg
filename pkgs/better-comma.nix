@@ -31,7 +31,8 @@ scope: with scope; stdenvNoCC.mkDerivation {
       echo '  -m command      open man-page for command'
       exit
     fi
-    cachefile=~/.cache/${pname}/$cmd
+    cachdir=~/.cache/"${pname}"
+    cachefile=$cachedir/$cmd
     if [[ $uncache = 1 && -e $cachefile ]];then
       unlink "$cachefile"
     fi
@@ -64,6 +65,9 @@ scope: with scope; stdenvNoCC.mkDerivation {
     fi
     if [[ $cached != 1 ]];then
       storePath=$(nix build --no-link --print-out-paths "$source#$pkg")
+      if [[ ! -e $cachedir ]];then
+        mkdir -p "$cachdir"
+      fi
       echo "$pkg $storePath $source" > "$cachefile"
     fi
     export PATH="$PATH":"$storePath"/bin
