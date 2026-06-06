@@ -127,7 +127,7 @@
         logb=$(mktemp)
         git log $(git tracking) > "$loga"
         git log > "$logb"
-        ${exe delta} "$loga" "$logb" || true
+        ${getExe delta} "$loga" "$logb" || true
         rm "$loga" "$logb"
         read -n1 -p "Continue? [y/n] " continue
         echo
