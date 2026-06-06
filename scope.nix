@@ -81,22 +81,6 @@ removeAttrs builtins [ "fetchurl" ] // args.lib // {
       else args
     );
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
-  echo = text: writeBash "echo-script" ''echo "$(< ${writeText "text" text})"'';
-  joinStrings = sep: f: g: concatMapStringsSep sep (s: if isString s then f s else g (head s) (lib.last s));
-  joinLines = joinStrings "\n";
-  override = x: y:
-    if y ? _replace then y._replace
-    else if y ? _append then x + y._append
-    else if isList x && isList y then x ++ y
-    else if isDerivation x && isPath y && pathExists y then y
-    else if isDerivation x && isPath y && !pathExists y then x
-    else if isDerivation x && isAttrs y then
-      override x.overrideAttrs y
-    else if isFunction x && isAttrs y then
-      x (attrs: mapAttrs (n: v: if hasAttr n attrs then override attrs.${n} v else v) y)
-    else if isAttrs x && isAttrs y then
-      mapAttrs (n: v: if hasAttr n y then override v y.${n} else v) (y // x)
-    else y;
   mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
   flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
 })
