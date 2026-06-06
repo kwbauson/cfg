@@ -7,9 +7,18 @@ let
   checks-script = writeBash "checks" ''
     set -euo pipefail
     echo ${checked-pkgs}
-    ${exe better-comma} -p hello hello
-    ${exe better-comma} -d hello
+    ${full-checks-script}
   '';
+  full-checks-script = pipe check-extra-packages [
+    attrValues
+    (filter (p: p ? checkScript))
+    (concatMapStringsSep "\n" (pkg: /* bash */ ''
+      OLD_PATH=$PATH
+      ${pathAdd pkg}
+      ${pkg.checkScript}
+      export PATH="$OLD_PATH"
+    ''))
+  ];
   check-linux = { inherit zoom-us; };
   check-darwin = { inherit iterm2; };
   check-all = check-extra-packages // optionalAttrs isLinux check-linux // optionalAttrs isDarwin check-darwin;

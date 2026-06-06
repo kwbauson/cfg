@@ -30,7 +30,7 @@
 
   users.users.${username}.openssh.authorizedKeys.keys =
     let names = [ "keith-desktop" "keith-xps" "keith-server" ]; in
-    mapAttrsToList (_: m: m.public-key) (getAttrs names machines);
+    mapAttrsToList (_: m: m.public.key) (getAttrs names machines);
 
   secrets.cachix.user = true;
 }

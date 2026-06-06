@@ -4,9 +4,6 @@ rec {
   https.port = 443;
   ssh.port = 22;
 
-  kwbauson.fqdn = "kwbauson.${kwbauson.domain}";
-  kwbauson.domain = "com";
-
   personal-api.port = 13000;
   scribblers.port = 8100;
   on-demand-tls.port = 5555;

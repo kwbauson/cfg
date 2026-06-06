@@ -1,9 +1,6 @@
 { scope, ... }: with scope;
 {
   included-packages = alias {
-    nixpkgs-rev = "echo ${inputs.nixpkgs.rev}";
-    nixpkgs-path = "echo ${nixpkgsPath}";
-    nixpkgs-branch = "echo ${nixpkgs-branch}";
     undup = ''tac "$@" | awk '!x[$0]++' | tac'';
     cfgu = "cd ~/cfg && git f && git rebase --autostash $(git tracking)";
     cfgp = "git -C ~/cfg cap";

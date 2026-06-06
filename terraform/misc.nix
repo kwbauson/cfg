@@ -9,6 +9,6 @@ in
     [ "keith-desktop" "keith-xps" "keith-server" ]
     (name: {
       title = name;
-      key = stripKeyComment machines.${name}.public-key;
+      key = stripKeyComment machines.${name}.public.key;
     });
 }
