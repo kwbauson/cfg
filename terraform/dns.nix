@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, scope, ... }: with scope;
 {
   terraform.required_providers.porkbun.source = "cullenmcdermott/porkbun";
 
@@ -10,32 +10,38 @@
     secret_key = config.secret.porkbun_secret_key.value;
   };
 
-  resource.porkbun_dns_record = {
-    kwbauson_com = {
-      domain = "kwbauson.com";
-      type = "A";
-      content = "137.220.57.226";
-    };
+  resource.porkbun_dns_record =
+    let
+      machine = machines.kwbauson;
+      domain = machine.public-fqdn;
+      ip = machine.public-ip;
+    in
+    {
+      kwbauson_com = {
+        inherit domain;
+        type = "A";
+        content = ip;
+      };
 
-    wildcard_kwbauson_com = {
-      domain = "kwbauson.com";
-      type = "A";
-      name = "*";
-      content = "137.220.57.226";
-    };
+      wildcard_kwbauson_com = {
+        inherit domain;
+        type = "A";
+        name = "*";
+        content = ip;
+      };
 
-    home_kwbauson_com = {
-      domain = "kwbauson.com";
-      type = "A";
-      name = "home";
-      content = "127.0.0.1"; # dynamic
-      lifecycle.ignore_changes = [ "content" ];
-    };
+      home_kwbauson_com = {
+        inherit domain;
+        type = "A";
+        name = "home";
+        content = constants.localhost.ip; # dynamic
+        lifecycle.ignore_changes = [ "content" ];
+      };
 
-    kwbauson_com_txt = {
-      domain = "kwbauson.com";
-      type = "TXT";
-      content = "v=spf1 mx include:_spf.porkbun.com ~all";
+      kwbauson_com_txt = {
+        domain = "kwbauson.com";
+        type = "TXT";
+        content = "v=spf1 mx include:_spf.porkbun.com ~all";
+      };
     };
-  };
 }

@@ -31,7 +31,6 @@ removeAttrs builtins [ "fetchurl" ] // args.lib // {
     (mapAttrValues (x: if isFunction x && (functionArgs x == { _auto = false; scope = false; }) then x { _auto = true; inherit scope; } else x))
   ];
 
-  ap = x: f: f x;
   prefixIf = b: x: y: if b then x + y else y;
   descString = pkg: concatStringsSep "\n" [
     "  name: ${pkg.name or pkg.pname or "null"}"
@@ -61,7 +60,7 @@ removeAttrs builtins [ "fetchurl" ] // args.lib // {
   importNixpkgs = args:
     let
       helper =
-        { system ? pkgs.stdenv.hostPlatform.system
+        { system ? scope.system
         , config ? { }
         , overlays ? [ ]
         , rev ? null

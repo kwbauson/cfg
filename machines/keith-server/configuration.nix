@@ -57,7 +57,7 @@
   services.caddy.enable = true;
   services.caddy.enableSecurity = true;
   secrets.caddy.environmentFile = true;
-  services.caddy.subdomainsOf = constants.kwbauson.fqdn;
+  services.caddy.subdomainsOf = machine.kwbauson.public-fqdn;
   services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";
   services.caddy.subdomains.auth = "authenticate with default";
   services.caddy.virtualHosts.":${toString constants.on-demand-tls.port}".extraConfig = ''
@@ -66,7 +66,7 @@
         ${pipe config.services.caddy.subdomains [
           attrNames
           (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
-          (map (prefix: "query domain=${prefix}${constants.kwbauson.fqdn}"))
+          (map (prefix: "query domain=${prefix}${machine.kwbauson.public-fqdn}"))
           (concatStringsSep "\n")
         ]}
       }
