@@ -228,7 +228,7 @@
   xsession = {
     enable = isNixOS && isGraphical;
     initExtra = ''
-      ${exe hsetroot} -solid black &
+      ${getExe hsetroot} -solid black &
       xsetroot -cursor_name left_ptr &
       togpad off &
       autorandr --change &
