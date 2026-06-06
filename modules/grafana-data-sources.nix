@@ -5,7 +5,7 @@ mkMerge [
       enable = true;
       enabledCollectors = optionals isLinux [ "systemd" "processes" ];
       port = constants.prometheus.exporters.node.port;
-      listenAddress = machine.tailscale-ip;
+      listenAddress = machine.tailscale.ip;
     };
   }
   (optionalAttrs isLinux {

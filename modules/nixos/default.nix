@@ -172,6 +172,6 @@
   services._3proxy.services = [{
     type = "socks";
     auth = [ "none" ];
-    bindAddress = machine.tailscale-ip;
+    bindAddress = machine.tailscale.ip;
   }];
 }

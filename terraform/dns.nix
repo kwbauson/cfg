@@ -12,8 +12,8 @@
 
   resource.porkbun_dns_record = mapAttrValues
     (r: {
-      domain = machines.kwbauson.public-fqdn;
-      content = machines.kwbauson.public-ip;
+      domain = machines.kwbauson.public.fqdn;
+      content = machines.kwbauson.public.ip;
     } // r)
     {
       kwbauson_com = {

@@ -32,12 +32,12 @@
         public_key = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
       }
       {
-        url = "http://${machines.keith-server.tailscale-fqdn}:5000";
-        public_key = "${machines.keith-server.tailscale-fqdn}:amORAvA0d0VWxUnZyLPJXEY7QEKebU4SqURpe1CbsDY=";
+        url = "http://${machines.keith-server.tailscale.fqdn}:5000";
+        public_key = "${machines.keith-server.tailscale.fqdn}:amORAvA0d0VWxUnZyLPJXEY7QEKebU4SqURpe1CbsDY=";
       }
       {
-        url = "http://${machines.readlee-mac-m1.tailscale-fqdn}:5000";
-        public_key = "${machines.readlee-mac-m1.tailscale-fqdn}:dHyGth5OeFh3Tg2OFAQHFwtvOLJbOB/tYEzJIuogWcc=";
+        url = "http://${machines.readlee-mac-m1.tailscale.fqdn}:5000";
+        public_key = "${machines.readlee-mac-m1.tailscale.fqdn}:dHyGth5OeFh3Tg2OFAQHFwtvOLJbOB/tYEzJIuogWcc=";
       }
     ];
   };

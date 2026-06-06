@@ -11,8 +11,8 @@
     (import "${searchix.src}/nix/modules" { packages.${system}.default = searchix; })
   ];
 
-  machine.tailscale-ip = "100.107.6.112";
-  machine.public-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+DyV8BQbs+ei0ao+MwdgJM/IHeHFv61H/Mf5hO8odu keith@keith-server";
+  machine.tailscale.ip = "100.107.6.112";
+  machine.public.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+DyV8BQbs+ei0ao+MwdgJM/IHeHFv61H/Mf5hO8odu keith@keith-server";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.systemd-boot.configurationLimit = 3;
   hardware.amdgpu.initrd.enable = false;
@@ -57,7 +57,7 @@
   services.caddy.enable = true;
   services.caddy.enableSecurity = true;
   secrets.caddy.environmentFile = true;
-  services.caddy.subdomainsOf = machines.kwbauson.public-fqdn;
+  services.caddy.subdomainsOf = machines.kwbauson.public.fqdn;
   services.caddy.subdomains."" = "redir /* https://auth.${config.services.caddy.subdomainsOf}";
   services.caddy.subdomains.auth = "authenticate with default";
   services.caddy.virtualHosts.":${toString constants.on-demand-tls.port}".extraConfig = ''
@@ -66,7 +66,7 @@
         ${pipe config.services.caddy.subdomains [
           attrNames
           (map (subdomain: optionalString (subdomain != "") "${subdomain}."))
-          (map (prefix: "query domain=${prefix}${machines.kwbauson.public-fqdn}"))
+          (map (prefix: "query domain=${prefix}${machines.kwbauson.public.fqdn}"))
           (concatStringsSep "\n")
         ]}
       }
@@ -107,7 +107,7 @@
   services.grafana = {
     enable = true;
     settings = {
-      server.http_addr = machine.tailscale-ip;
+      server.http_addr = machine.tailscale.ip;
       server.http_port = 8888;
       server.domain = machine.name;
       security.admin_user = "keith";
@@ -124,7 +124,7 @@
       job_name = "node";
       static_configs = forEach (attrValues machines) (machine: {
         labels.instance = machine.name;
-        targets = [ "${machine.tailscale-ip}:${toString constants.prometheus.exporters.node.port}" ];
+        targets = [ "${machine.tailscale.ip}:${toString constants.prometheus.exporters.node.port}" ];
       });
     }];
   };
