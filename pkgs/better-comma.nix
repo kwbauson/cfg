@@ -66,7 +66,7 @@ scope: with scope; stdenvNoCC.mkDerivation {
     if [[ $cached != 1 ]];then
       storePath=$(nix build --no-link --print-out-paths "$source#$pkg")
       if [[ ! -e $cachedir ]];then
-        mkdir -p "$cachdir"
+        mkdir -p "$cachedir"
       fi
       echo "$pkg $storePath $source" > "$cachefile"
     fi
