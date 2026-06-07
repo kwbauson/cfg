@@ -80,7 +80,6 @@ removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
       else args
     );
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
-  mapDirEntries = f: dir: listToAttrs (filter (x: x != null && x != { }) (mapAttrsToList f (readDir dir)));
   flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
 
   mkFromEnabled = attrs: f:

@@ -1,13 +1,21 @@
 final: prev: with final.scope;
 let
+  patched-packages = with prev.scope'; pipeValue [
+    (readDir ../pkgs)
+    (filterAttrs (n: _: hasSuffix ".patch" n))
+    (mapAttrs' (n: _: rec {
+      name = removeSuffix ".patch" n;
+      value = prev.${name}.overrideAttrs (old: { patches = old.patches or [ ] ++ [ ../pkgs/${n} ]; });
+    }))
+  ];
   extra-packages = with prev.scope'; pipeValue [
     (readDir ../pkgs)
     attrNames
     (map (path:
-      let isPkgDir = pathExists (../pkgs + "/${path}/default.nix"); in
+      let isPkgDir = pathExists (../pkgs/${path}/default.nix); in
       {
         name = if isPkgDir || hasSuffix ".nix" path then removeSuffix ".nix" path else null;
-        value = ../pkgs + ("/" + (if isPkgDir then "${path}/default.nix" else path));
+        value = ../pkgs/${if isPkgDir then "${path}/default.nix" else path};
       })
     )
     (filter (x: x.name != null))
@@ -63,4 +71,4 @@ in
       attrs
       (attrs.passthru or { })
     ]) ((if isFunction arg then fix else id) arg);
-} // extra-packages
+} // patched-packages // extra-packages
