@@ -64,7 +64,7 @@ scope: with scope; stdenvNoCC.mkDerivation {
       exec nix eval --impure --raw --expr "with import $source {}; descString $pkg + \"\n\""
     fi
     if [[ $cached != 1 ]];then
-      storePath=$(nix build --no-link --print-out-paths "$source#$pkg")
+      storePath=$(nix build --no-link --print-out-paths "$source#$pkg.outPath")
       if [[ ! -e $cachedir ]];then
         mkdir -p "$cachedir"
       fi
