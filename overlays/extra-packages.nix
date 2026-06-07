@@ -44,9 +44,11 @@ in
         (map (n: getAttrFromPath (splitString "." n) pkgs))
         makeBinPath
       ];
-      buildCommand = ''
+      buildCommand = /* bash */ ''
         ${old.buildCommand}
-        wrapProgram $out/bin/${name} --prefix PATH : "$PATH_ADD"
+        if [[ -n $PATH_ADD ]];then
+          wrapProgram $out/bin/${name} --prefix PATH : "$PATH_ADD"
+        fi
       '';
     })))
   ];
