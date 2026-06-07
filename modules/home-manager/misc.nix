@@ -3,6 +3,7 @@
   home = {
     stateVersion = "26.05";
     sessionVariables = {
+      EDITOR = "nvim";
       BROWSER = "firefox";
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
