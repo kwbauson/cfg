@@ -26,8 +26,6 @@
     };
   };
 
-  nix.package = lib.mkForce lixPackageSets.latest.lix;
-
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
@@ -91,7 +89,6 @@
     };
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    direnv.nix-direnv.package = lixPackageSets.latest.nix-direnv;
     fzf = {
       enable = true;
       enableBashIntegration = false;
