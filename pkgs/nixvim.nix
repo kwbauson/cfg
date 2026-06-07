@@ -1,13 +1,16 @@
 scope: with scope;
 importPackage rec {
   inherit pname;
-  package = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
-    inherit pkgs;
-    module = configuration;
+  configuration = inputs.nixvim.lib.evalNixvim {
+    modules = [
+      { nixpkgs = { inherit pkgs; }; }
+      module
+    ];
   };
-  inherit (package) extend;
+  inherit (configuration) config;
+  inherit (config.build) package;
 
-  lib = inputs.nixvim.lib.nixvim // rec {
+  lib = inputs.nixvim.lib.nixvim.extend (final: prev: with final; {
     mkKeyMaps = mapAttrsToList (
       key: value: { inherit key; } // (
         if !isString value then value else {
@@ -17,7 +20,7 @@ importPackage rec {
         }
       )
     );
-    mkCmdlineMap = action: fallback: lib.mkRaw ''
+    mkCmdlineMap = action: fallback: mkRaw ''
       {
         function (cmp)
           if vim.fn.getcmdtype() ~= ':' then
@@ -27,12 +30,12 @@ importPackage rec {
         "${fallback}",
       }
     '';
-    bg = "#202020"; # overall background color from colorscheme
+    backgroundColor = "#202020"; # overall background color from colorscheme
     isNonEmptyString = x: isString x && x != "";
     oneline = text: concatStringsSep " " (filter isNonEmptyString (builtins.split "[[:space:]]+" text));
-  };
+  });
 
-  configuration = fix (cfg: {
+  module = with lib; fix (cfg: {
     performance = {
       byteCompileLua.enable = true;
       byteCompileLua.configs = true;
@@ -74,9 +77,9 @@ importPackage rec {
         '';
       })
     ];
-    highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] lib.bg; # lighter than bg
+    highlight.NormalFloat.bg = replaceStrings [ "2" ] [ "4" ] backgroundColor; # lighter than bg
     highlight.Pmenu = cfg.highlight.NormalFloat;
-    keymaps = lib.mkKeyMaps {
+    keymaps = mkKeyMaps {
       "<c-p>" = { mode = "c"; action = "<up>"; };
       "<c-n>" = { mode = "c"; action = "<down>"; };
       gh = "<cmd>BufferLineCyclePrev<cr>";
@@ -103,7 +106,7 @@ importPackage rec {
       ";l" = "<cmd>HopLineStart<cr>";
       " e" = "<cmd>NvimTreeFindFileToggle!<cr>";
       "<c-space>" = { mode = [ "i" "c" ]; action = "<cmd>lua require('blink.cmp').show()<cr>"; };
-      K = lib.oneline ''
+      K = oneline ''
         <cmd>lua
           vim.lsp.buf.hover({
             focus = false,
@@ -122,7 +125,7 @@ importPackage rec {
       nil_ls.config.settings.nil.nix.flake.autoArchive = false;
       ts_ls.enable = true;
       ts_ls.config.init_options.preferences.disableSuggestions = true;
-      ts_ls.config.on_attach = lib.mkRaw ''
+      ts_ls.config.on_attach = mkRaw ''
         function(client, bufnr)
           client.server_capabilities.documentFormattingProvider = false
         end
@@ -166,8 +169,8 @@ importPackage rec {
         signature.enabled = true;
         signature.window.show_documentation = true;
         keymap.preset = "none";
-        keymap."<c-p>" = lib.mkCmdlineMap "select_prev" "fallback_to_mappings";
-        keymap."<c-n>" = lib.mkCmdlineMap "select_next" "fallback_to_mappings";
+        keymap."<c-p>" = mkCmdlineMap "select_prev" "fallback_to_mappings";
+        keymap."<c-n>" = mkCmdlineMap "select_next" "fallback_to_mappings";
         keymap."<tab>" = [ "select_next" "fallback" ];
         keymap."<s-tab>" = [ "select_prev" "fallback" ];
         keymap."<c-b>" = [ "scroll_documentation_up" "fallback" ];
@@ -183,7 +186,7 @@ importPackage rec {
       bufferline.settings.options = {
         show_buffer_close_icons = false;
         indicator.style = "underline";
-        style_preset = lib.mkRaw "require('bufferline').style_preset.no_italic";
+        style_preset = mkRaw "require('bufferline').style_preset.no_italic";
         tab_size = 0;
         truncate_names = false;
         diagnostics = "nvim_lsp";
@@ -204,7 +207,7 @@ importPackage rec {
               "misc.nix"
             ];
           in
-          lib.mkRaw ''
+          mkRaw ''
             function(buf)
               if ${concatMapStringsSep " or " (n: "buf.name == '${n}'") names} then
                 return buf.path:match("([^/]+/[^/]+)$")
@@ -240,9 +243,9 @@ importPackage rec {
       telescope.extensions.undo.enable = true;
       telescope.settings.defaults = {
         mappings = {
-          i."<esc>" = lib.mkRaw "require('telescope.actions').close";
-          i."<c-f>" = lib.mkRaw "require('telescope.actions').preview_scrolling_down";
-          i."<c-b>" = lib.mkRaw "require('telescope.actions').preview_scrolling_up";
+          i."<esc>" = mkRaw "require('telescope.actions').close";
+          i."<c-f>" = mkRaw "require('telescope.actions').preview_scrolling_down";
+          i."<c-b>" = mkRaw "require('telescope.actions').preview_scrolling_up";
           i."<c-u>" = false;
         };
         file_ignore_patterns = [ "^.git/" ];
@@ -268,7 +271,7 @@ importPackage rec {
         session_persistence = true;
         lists = [
           { type = "sessions"; header = [ "   Sessions" ]; }
-          { type = "dir"; header = [ (lib.mkRaw "'   MRU ' .. vim.loop.cwd()") ]; }
+          { type = "dir"; header = [ (mkRaw "'   MRU ' .. vim.loop.cwd()") ]; }
         ];
         session_number = 4;
         files_number = 10 - cfg.plugins.startify.settings.session_number;
@@ -279,7 +282,7 @@ importPackage rec {
       fastaction.enable = true;
       fastaction.settings.dismiss_keys = [ "<esc>" "q" ];
       notify.enable = true;
-      notify.settings.background_colour = lib.bg;
+      notify.settings.background_colour = backgroundColor;
     };
     extraPackages = [ nixpkgs-fmt tree-sitter ];
     extraConfigLua = /* lua */ ''
