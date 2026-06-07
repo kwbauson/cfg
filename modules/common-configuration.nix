@@ -9,7 +9,6 @@
   ];
   nixpkgs.pkgs = scope.pkgs;
   environment.etc."nixpkgs-path".source = nixpkgsPath;
-  nix.package = lixPackageSets.latest.lix;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings = {
     max-jobs = "auto";
@@ -17,7 +16,6 @@
     fallback = true;
     trusted-users = [ "@wheel" ];
     extra-experimental-features = [ "nix-command" "flakes" ];
-    extra-deprecated-features = [ "shadow-internal-symbols" "broken-string-escape" ];
     narinfo-cache-negative-ttl = 10;
     warn-dirty = false;
   };
