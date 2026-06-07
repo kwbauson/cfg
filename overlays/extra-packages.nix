@@ -33,7 +33,7 @@ in
   extra-bin-packages = pipeValue [
     (readDir ../bin)
     (mapAttrs (n: _: readFile ../bin/${n}))
-    (filterAttrs (_: t: isLinux || !hasInfix "ONLY_LINUX"))
+    (filterAttrs (_: t: isLinux || !hasInfix "ONLY_LINUX" t))
     (mapAttrs (name: text: (writeScriptBin name text).overrideAttrs (old: {
       nativeBuildInputs = [ makeWrapper ];
       PATH_ADD = pipeValue [
