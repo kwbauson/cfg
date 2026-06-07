@@ -5,6 +5,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "https://github.com/NixOS/flake-compat/archive/master.tar.gz";
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };

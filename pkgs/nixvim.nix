@@ -1,22 +1,13 @@
 scope: with scope;
 importPackage rec {
   inherit pname;
-  version = "0-unstable-2026-06-05";
-  src = fetchFromGitHub {
-    owner = "nix-community";
-    repo = pname;
-    rev = "816a15282e58678dde831477964987d0262d4293";
-    hash = "sha256-Ckyl/l1XBmEwnaHcHD8PvBZk1uph0NqwbJ//CAvB7iE=";
-  };
-  passthru.updateScript = unstableGitUpdater { };
-  flake = import src;
-  package = flake.legacyPackages.${system}.makeNixvimWithModule {
+  package = inputs.nixvim.legacyPackages.${system}.makeNixvimWithModule {
     inherit pkgs;
     module = configuration;
   };
   inherit (package) extend;
 
-  lib = flake.lib.nixvim // rec {
+  lib = inputs.nixvim.lib.nixvim // rec {
     mkKeyMaps = mapAttrsToList (
       key: value: { inherit key; } // (
         if !isString value then value else {
