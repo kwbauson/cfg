@@ -2,24 +2,24 @@ scope: with scope;
 let
   scripts = forAttrValues machines (machine@{ isNixOS, isNixDarwin, ... }:
     let
-      kind = if isNixOS then "nixos" else if isNixDarwin then "darwin" else null;
-      toplevel = {
-        nixos = nixosConfigurations.${machine.name}.config.system.build.toplevel;
-        darwin = darwinConfigurations.${machine.name}.system;
-      }.${kind};
+      osConfigurations =
+        if isNixOS then nixosConfigurations
+        else if isNixDarwin then darwinConfigurations
+        else null;
+      inherit (osConfigurations.${machine.name}) config;
+      inherit (config.system) build;
+      inherit (build) toplevel;
       mkAction = action: (writeBashBin "switch" (''
         set -euo pipefail
         profile=/nix/var/nix/profiles/system
         ${getExe nvd} diff "$profile" ${toplevel}
-      '' + {
-        nixos = ''
-          sudo nixos-rebuild --no-reexec --store-path ${toplevel} ${action}
-        '';
-        darwin = ''
-          sudo -H nix-env -p "$profile" --set ${toplevel}
-          sudo ${toplevel}/activate
-        '';
-      }.${kind})).overrideAttrs { name = "${action}-${toplevel.name}"; };
+      '' + optionalString isNixOS ''
+        sudo ${getExe build.nixos-rebuild} --no-reexec --store-path ${toplevel} ${action}
+      '' + optionalString isNixDarwin ''
+        sudo -H nix-env -p "$profile" --set ${toplevel}
+        sudo ${toplevel}/activate
+      ''
+      )).overrideAttrs { name = "${action}-${toplevel.name}"; };
     in
     {
       nob = mkAction "boot";
