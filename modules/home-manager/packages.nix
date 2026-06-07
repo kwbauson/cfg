@@ -12,6 +12,7 @@
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
         nixos-install-tools better-comma doggo dasel clip nixvim;
+      inherit extra-bin-packages;
     };
     graphical = optionalAttrs isGraphical {
       graphical-core = {
@@ -41,7 +42,6 @@
         unison-ucm cachix npm-check-updates prettier;
       inherit tfn;
     };
-    nle-cfg = nle-cfg.pkgs;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
   };
   excluded-packages = optionalAttrs isDarwin
@@ -53,6 +53,6 @@
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
-    inherit (nle-cfg.pkgs) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
+    inherit (extra-bin-packages) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
   };
 }
