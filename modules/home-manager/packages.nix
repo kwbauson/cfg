@@ -12,6 +12,7 @@
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
         nixos-install-tools better-comma doggo dasel clip nixvim;
+      inherit extra-bin-packages;
     };
     graphical = optionalAttrs isGraphical {
       graphical-core = {
@@ -41,7 +42,6 @@
         unison-ucm cachix npm-check-updates prettier;
       inherit tfn;
     };
-    inherit extra-bin-packages;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
   };
   excluded-packages = optionalAttrs isDarwin
