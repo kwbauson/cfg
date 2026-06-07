@@ -41,7 +41,7 @@
         unison-ucm cachix npm-check-updates prettier;
       inherit tfn;
     };
-    nle-cfg = nle-cfg.pkgs;
+    inherit extra-bin-packages;
     meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
   };
   excluded-packages = optionalAttrs isDarwin
@@ -53,6 +53,6 @@
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
-    inherit (nle-cfg.pkgs) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
+    inherit (extra-bin-packages) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
   };
 }

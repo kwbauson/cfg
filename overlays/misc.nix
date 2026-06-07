@@ -27,9 +27,7 @@ final: prev: with final.scope; {
     '';
   };
   steam-native = steam.override { nativeOnly = true; };
-  nle-cfg = nle.build { path = flake.outPath; };
-  inherit (nle-cfg.pkgs) fordir;
-  inherit (nle-cfg.pkgs.poetry-env.python.pkgs) git-remote-codecommit;
+  inherit (extra-bin-packages) fordir;
   iso = with packages.x86_64-linux; (nixos ({ modulesPath, ... }: {
     imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-gnome.nix" ];
     hardware.enableRedistributableFirmware = true;
