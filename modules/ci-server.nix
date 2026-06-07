@@ -3,6 +3,7 @@
   services.github-runners.${machine.name} = {
     enable = true;
     replace = true;
+    nodeRuntimes = [ "node24" ];
     extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];
     tokenFile = config.secrets.github-runner-token.path;
