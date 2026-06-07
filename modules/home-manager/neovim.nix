@@ -1,7 +1,7 @@
 { scope, ... }: with scope;
 {
   imports = [
-    nixvim.flake.homeModules.nixvim
+    inputs.nixvim.homeModules.default
     { programs.nixvim = nixvim.configuration; }
   ];
 
