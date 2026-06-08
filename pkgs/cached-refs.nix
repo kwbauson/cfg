@@ -8,28 +8,24 @@ let
           value = (getAttrFromPath ref flake.packages.${system}).outPath;
         })
         refs);
-      flakeText = builtins.unsafeDiscardStringContext /* nix */ ''
-        {
-          outputs = { self }:
-            let
-              p = builtins.storePath;
-            in
-            {
-              ${concatMapAttrsStringSep "\n      " (n: p:
-              "${n} = p ${p};"
-              ) pathsAttrs}
-            };
-        }
-      '';
       sourceHash = getDrvHash flake;
-      flakeBuild = runCommandLocal "source"
-        {
-          passAsFile = [ "flakeText" ];
-          inherit flakeText;
-        } ''
-        mkdir $out
-        cp $flakeTextPath $out/flake.nix
-      '';
+      flakeBuild = writeTextFile {
+        name = "source";
+        destination = "/flake.nix";
+        text = builtins.unsafeDiscardStringContext /* nix */ ''
+          {
+            outputs = { self }:
+              let
+                p = builtins.storePath;
+              in
+              {
+                ${concatMapAttrsStringSep "\n      " (n: p:
+                "${n} = p ${p};"
+                ) pathsAttrs}
+              };
+          }
+        '';
+      };
       flakeHash = getDrvHash flakeBuild;
       links = linkFarmOfHashes "${pname}-links"
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
