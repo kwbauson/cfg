@@ -3,7 +3,7 @@ args.lib.generators // args.formats or { } // args.writers or { } //
 args.flake.inputs or { } // args.flake.outputs or { } //
 removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
   inherit (import ./. { inherit system; }) getFlakeCompat;
-  inherit (args.flake) inputs;
+  inherit (flake) inputs outPath;
   inherit (stdenv.hostPlatform) system;
   inherit (stdenv) isLinux isDarwin;
   root = importDir ./.;
