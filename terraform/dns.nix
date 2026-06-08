@@ -1,6 +1,6 @@
 { config, scope, ... }: with scope;
 {
-  terraform.required_providers.porkbun.source = "cullenmcdermott/porkbun";
+  plugins = ps: ps.cullenmcdermott_porkbun;
 
   secret.porkbun_api_key.enable = true;
   secret.porkbun_secret_key.enable = true;

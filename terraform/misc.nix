@@ -3,7 +3,7 @@ let
   stripKeyComment = key: concatStringsSep " " (take 2 (splitString " " key));
 in
 {
-  terraform.required_providers.github.source = "integrations/github";
+  plugins = ps: ps.integrations_github;
 
   resource.github_user_ssh_key = genAttrs
     [ "keith-desktop" "keith-xps" "keith-server" ]
