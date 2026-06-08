@@ -13,7 +13,7 @@ let
   core = import "${terranix.src}/core/default.nix" {
     inherit (scope) pkgs;
     extraArgs = { inherit scope; };
-    terranix_config = { imports = [ configPath ]; };
+    modules = [ configPath ];
   };
 in
 writeJSON "config.tf.json" core.config
