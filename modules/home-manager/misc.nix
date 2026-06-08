@@ -139,15 +139,9 @@
       };
     ${attrIf isNixOS "userDirs"} = {
       enable = true;
-      desktop = "$HOME";
-      documents = "$HOME";
-      download = "$HOME";
-      music = "$HOME";
-      pictures = "$HOME";
-      templates = "$HOME";
-      videos = "$HOME";
-      projects = "$HOME";
-    };
+    } // genAttrs
+      [ "desktop" "documents" "download" "music" "pictures" "templates" "videos" "projects" ]
+      (_: config.home.homeDirectory);
     configFile = {
       "ranger/rc.conf".source = runCommand "ranger-rc.conf" { } ''
         cat ${ranger}/share/doc/ranger/config/rc.conf > $out
