@@ -146,6 +146,7 @@
       pictures = "$HOME";
       templates = "$HOME";
       videos = "$HOME";
+      projects = "$HOME";
     };
     configFile = {
       "ranger/rc.conf".source = runCommand "ranger-rc.conf" { } ''
