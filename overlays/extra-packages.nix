@@ -62,7 +62,7 @@ in
   ];
   importPackage = arg:
     (attrs: mergeAttrsList [
-      { name = "${attrs.pname}-${attrs.version}"; }
+      { name = "${attrs.pname}-${attrs.version or "unstable"}"; }
       (optionalAttrs (attrs ? package) {
         type = "derivation";
         inherit (attrs.package) drvPath outPath out outputName meta;
