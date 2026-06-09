@@ -36,7 +36,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-lib"
         ]
       },
       "locked": {
@@ -55,7 +55,7 @@
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-lib"
         ]
       },
       "locked": {
@@ -74,7 +74,7 @@
     "nixos-hardware": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-lib"
         ]
       },
       "locked": {
@@ -105,6 +105,22 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-lib": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "pkgs/nixpkgs-lib",
+        "type": "path"
+      },
+      "original": {
+        "path": "pkgs/nixpkgs-lib",
+        "type": "path"
+      },
+      "parent": []
+    },
     "nixvim": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -133,6 +149,7 @@
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-lib": "nixpkgs-lib",
         "nixvim": "nixvim"
       }
     },

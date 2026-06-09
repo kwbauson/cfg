@@ -1,10 +1,12 @@
 {
   inputs = {
+    nixpkgs-lib.url = ./pkgs/nixpkgs-lib;
+    nixpkgs-lib.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "https://github.com/NixOS/flake-compat/archive/master.tar.gz";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-lib";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-lib";
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs-lib";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }: with self.scope; {
