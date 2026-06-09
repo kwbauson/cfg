@@ -1,3 +1,1 @@
-{
-  outputs = { self, nixpkgs }: { inherit (nixpkgs) lib; };
-}
+{ outputs = { self, nixpkgs }: { inherit (nixpkgs) lib; }; }
