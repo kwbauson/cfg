@@ -7,11 +7,4 @@
     organization = "kwbauson";
     workspaces.name = "cfg";
   };
-
-  plugins = ps: ps.hashicorp_google;
-  provider.google = {
-    project = "kwbauson";
-    region = "us-east1";
-    zone = "us-east1-a";
-  };
 }
