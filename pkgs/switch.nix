@@ -12,7 +12,7 @@ let
       mkAction = action: (writeBashBin "switch" (''
         set -euo pipefail
         profile=/nix/var/nix/profiles/system
-        ${getExe nvd} diff "$profile" ${toplevel}
+        ${getExe dix} "$profile" ${toplevel}
       '' + optionalString isNixOS ''
         sudo ${getExe build.nixos-rebuild} --no-reexec --store-path ${toplevel} ${action}
       '' + optionalString isNixDarwin ''
