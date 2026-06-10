@@ -107,9 +107,7 @@
     },
     "nixpkgs-lib": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "cfg": []
       },
       "locked": {
         "path": "pkgs/nixpkgs-lib",

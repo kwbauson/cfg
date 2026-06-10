@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs-lib.url = ./pkgs/nixpkgs-lib;
-    nixpkgs-lib.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs-lib.url = ./pkgs/nixpkgs-lib;
+    nixpkgs-lib.inputs.cfg.follows = "";
     flake-compat.url = "https://github.com/NixOS/flake-compat/archive/master.tar.gz";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-lib";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-lib";
