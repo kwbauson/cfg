@@ -20,8 +20,19 @@ scope: with scope;
       warningsAreErrors = false;
       options = getAttrFromPath path package.allOptions;
     };
-    inherit (doc) optionsJSON;
-    result = runCommand "options-man" { } ''
+    optionsJSON = doc.optionsJSON.overrideAttrs {
+      preferLocalBuild = true;
+      allowSubstitutes = false;
+    };
+    nixos-render-docs = pkgs.nixos-render-docs.overrideAttrs {
+      preBuild = ''
+        # the script assumes a full options set, but with partial ones we have references to non-included options
+        substituteInPlace nixos_render_docs/options.py --replace-fail \
+          'self._options_by_id[links[i]]' \
+          'self._options_by_id.get(links[i], links[i].lstrip("#opt-"))'
+      '';
+    };
+    result = runCommandLocal "options-man" { } ''
       mkdir -p $out/man5
       file=$out/man5/options.5
       ${getExe nixos-render-docs} -j $NIX_BUILD_CORES options manpage \
