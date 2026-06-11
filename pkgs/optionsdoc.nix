@@ -4,21 +4,31 @@ scope: with scope;
   pathStr=''${1-${if isLinux then "nixos" else "nix-darwin"}}
   exec nix shell "SELF_REF.run.$pathStr._run" -c options-man
 '').overrideAttrs (finalAttrs: previousAttrs:
-let inherit (finalAttrs) passthru; in {
+let inherit (finalAttrs) passthru; in with passthru; {
   SELF_REF = "$HOME/cfg#optionsdoc";
   content = /* bash */ ''
     ${replaceString "SELF_REF" finalAttrs.SELF_REF previousAttrs.content}
-    # keep render package in closure ${passthru.nixos-render-docs}
+    # keep render package in closure ${nixos-render-docs}
   '';
   meta = previousAttrs.meta // { includePackage = true; };
-  passthru.build = { path }: rec {
+  # this assumes a full options set, but with partial ones we have references to non-included options
+  passthru.nixos-render-docs = pkgs.nixos-render-docs.overrideAttrs {
+    preBuild = ''
+      substituteInPlace nixos_render_docs/options.py --replace-fail \
+        'self._options_by_id[links[i]]' \
+        'self._options_by_id.get(links[i], links[i].lstrip("#opt-"))'
+    '';
+  };
+  passthru.getOptionsPath = path: value:
+    if path == [ ] then value
+    else getOptionsPath (tail path) (if isOption value then value.type.getSubOptions value.loc else value).${head path};
+  passthru.build = { options }: rec {
     manualPath = "${nixpkgsPath}/nixos/doc/manual";
     common = import "${manualPath}/common.nix";
     revision = "none";
     doc = nixosOptionsDoc {
-      inherit revision;
+      inherit revision options;
       warningsAreErrors = false;
-      options = getAttrFromPath path passthru.allOptions;
     };
     optionsJSON = doc.optionsJSON.overrideAttrs {
       preferLocalBuild = true;
@@ -35,7 +45,7 @@ let inherit (finalAttrs) passthru; in {
       ''
         mkdir -p $out/{bin,man5}
         file=$out/man5/options.5
-        ${getExe passthru.nixos-render-docs} -j $NIX_BUILD_CORES options manpage \
+        ${getExe nixos-render-docs} -j $NIX_BUILD_CORES options manpage \
           --revision none \
           ${optionsJSON}/${common.outputPath}/options.json \
           $file
@@ -51,23 +61,15 @@ let inherit (finalAttrs) passthru; in {
       '';
   }.result;
   passthru = {
-    # the script assumes a full options set, but with partial ones we have references to non-included options
-    nixos-render-docs = pkgs.nixos-render-docs.overrideAttrs {
-      preBuild = ''
-        substituteInPlace nixos_render_docs/options.py --replace-fail \
-          'self._options_by_id[links[i]]' \
-          'self._options_by_id.get(links[i], links[i].lstrip("#opt-"))'
-      '';
-    };
     run =
       let
-        mapper = path: f: mapAttrs (name: value: let p = path ++ [ name ]; in f p name value (mapper p f value));
+        go = path: attrs:
+          if isDerivation attrs then attrs else
+          mapAttrs
+            (name: value: let p = path ++ [ name ]; in go p value)
+            ((if isOption attrs then attrs.type.getSubOptions attrs.loc else attrs) // { _run = build { options = attrs; }; });
       in
-      mapper [ ]
-        (path: _: value: rest:
-          (optionalAttrs (!isOption value) rest) // { _run = passthru.build { inherit path; }; }
-        )
-        passthru.allOptions;
+      go [ ] allOptions;
     baseOptions = fix (self: {
       nixos = (inputs.nixpkgs.lib.nixosSystem {
         modules = [{
@@ -103,6 +105,6 @@ let inherit (finalAttrs) passthru; in {
       }).options;
       tfn = (tfn.build { configPath = ../terraform/config.nix; }).unsanitized.options;
     };
-    allOptions = passthru.baseOptions // passthru.machineOptions // passthru.extraOptions;
+    allOptions = baseOptions // machineOptions // extraOptions;
   };
 })
