@@ -3,19 +3,18 @@ scope: with scope;
   set -euo pipefail
   pathStr=''${1-${if isLinux then "nixos" else "nix-darwin"}}
   MANPATH=$(
-    nix build --no-link --print-out-paths --file ${flake} \
-      optionsdoc.build --argstr pathStr "$pathStr"
+    nix build --no-link --print-out-paths \
+      "${flake}#optionsdoc.builds.$pathStr"
   )
   export MANPATH
   ${getExe man} options
 '').overrideAttrs (finalAttrs: previousAttrs:
 let inherit (finalAttrs) passthru; in {
   meta = previousAttrs.meta // { includePackage = true; };
-  passthru.build = { pathStr }: rec {
+  passthru.build = { path }: rec {
     manualPath = "${nixpkgsPath}/nixos/doc/manual";
     common = import "${manualPath}/common.nix";
     revision = "none";
-    path = splitString "." pathStr;
     doc = nixosOptionsDoc {
       inherit revision;
       warningsAreErrors = false;
@@ -50,6 +49,17 @@ let inherit (finalAttrs) passthru; in {
     '';
   }.result;
   passthru = {
+    builds =
+      let
+        mapper = path: f: mapAttrs (name: value: let p = path ++ [ name ]; in f p name value (mapper p f value));
+      in
+      mapper [ ]
+        (
+          path: _: value: rest:
+            let built = passthru.build { inherit path; }; in
+            (if isOption value then { } else rest) // { inherit (built) outPath drvPath; type = "derivation"; }
+        )
+        passthru.allOptions;
     baseOptions = fix (self: {
       nixos = (inputs.nixpkgs.lib.nixosSystem {
         modules = [{
