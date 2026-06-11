@@ -2,9 +2,14 @@ scope: with scope;
 (writeBashBin "optionsdoc" ''
   set -euo pipefail
   pathStr=''${1-${if isLinux then "nixos" else "nix-darwin"}}
-  exec nix shell "${flake}#optionsdoc.run.$pathStr" -c options-man
+  exec nix shell "SELF_REF.run.$pathStr._run" -c options-man
 '').overrideAttrs (finalAttrs: previousAttrs:
 let inherit (finalAttrs) passthru; in {
+  SELF_REF = "$HOME/cfg#optionsdoc";
+  buildCommand = ''
+    ${previousAttrs.buildCommand}
+    substituteInPlace $out/bin/${pname} --replace-fail SELF_REF "$SELF_REF"
+  '';
   meta = previousAttrs.meta // { includePackage = true; };
   passthru.build = { path }: rec {
     manualPath = "${nixpkgsPath}/nixos/doc/manual";
@@ -59,10 +64,8 @@ let inherit (finalAttrs) passthru; in {
         mapper = path: f: mapAttrs (name: value: let p = path ++ [ name ]; in f p name value (mapper p f value));
       in
       mapper [ ]
-        (
-          path: _: value: rest:
-            let built = passthru.build { inherit path; }; in
-            (if isOption value then { } else rest) // { type = "derivation"; inherit (built) outPath drvPath; }
+        (path: _: value: rest:
+          (optionalAttrs (!isOption value) rest) // { _run = passthru.build { inherit path; }; }
         )
         passthru.allOptions;
     baseOptions = fix (self: {
