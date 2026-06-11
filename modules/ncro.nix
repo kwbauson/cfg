@@ -1,4 +1,4 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
 {
   imports = [
     "${ncro.src}/nix/module.nix"
@@ -6,6 +6,7 @@
   services.ncro = {
     enable = true;
     settings.server.listen = "localhost:9180";
+    settings.cache.negative_ttl = "${config.nix.settings.narinfo-cache-negative-ttl}s";
     settings.upstreams = imap (i: a: { priority = i; } // a) [
       {
         url = "http://${machines.keith-server.tailscale.fqdn}:5000";
