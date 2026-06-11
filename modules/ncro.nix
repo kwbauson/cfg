@@ -6,7 +6,7 @@
   services.ncro = {
     enable = true;
     settings.server.listen = "localhost:9180";
-    settings.cache.negative_ttl = "${config.nix.settings.narinfo-cache-negative-ttl}s";
+    settings.cache.negative_ttl = "${toString config.nix.settings.narinfo-cache-negative-ttl}s";
     settings.upstreams = imap (i: a: { priority = i; } // a) [
       {
         url = "http://${machines.keith-server.tailscale.fqdn}:5000";
