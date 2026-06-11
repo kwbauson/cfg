@@ -20,7 +20,7 @@ bindsym $mod+p         exec --no-startup-id termbar
 bindsym $mod+t         exec --no-startup-id term
 bindsym $mod+Control+t exec --no-startup-id term ssh keith-server
 bindsym $mod+e         exec --no-startup-id term nvim
-bindsym $mod+Control+e exec --no-startup-id term ssh keith-server -t .nix-profile/bin/bash -ilc nvim
+bindsym $mod+Control+e exec --no-startup-id term ssh keith-server -t sh -lc nvim
 bindsym $mod+f         exec --no-startup-id term ranger
 bindsym $mod+w exec --no-startup-id qtbr
 bindsym $mod+u exec --no-startup-id qutebrowser ':undo --window'
@@ -61,6 +61,16 @@ mode "programs" {
   bindsym s exec --no-startup-id steam; mode "default"
 }
 
+bindsym $mod+Control+s mode "ssh"
+mode "ssh" {
+  bindsym Escape mode "default"
+  bindsym d exec --no-startup-id term ssh keith-desktop; mode "default"
+  bindsym x exec --no-startup-id term ssh keith-xps; mode "default"
+  bindsym s exec --no-startup-id term ssh keith-server; mode "default"
+  bindsym r exec --no-startup-id term ssh readlee-mac-m1; mode "default"
+  bindsym w exec --no-startup-id term ssh kwbauson; mode "default"
+}
+
 bindsym XF86PowerOff mode "poweroff"
 mode "poweroff" {
   bindsym Escape mode "default"
@@ -97,7 +107,7 @@ bindsym $mod+Control+Shift+underscore scratchpad show
 
 # layout and containers
 bindsym $mod+s split vertical
-bindsym $mod+Control+s layout stacking
+#bindsym $mod+Control+s layout stacking
 bindsym $mod+v split horizontal
 bindsym $mod+d split vertical; layout tabbed
 bindsym $mod+Shift+d layout tabbed
