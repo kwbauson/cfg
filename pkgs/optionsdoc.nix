@@ -8,8 +8,9 @@ scope: with scope;
   )
   export MANPATH
   ${getExe man} options
-'').overrideAttrs (old: {
-  meta = old.meta // { includePackage = true; };
+'').overrideAttrs (finalAttrs: previousAttrs:
+let inherit (finalAttrs) passthru; in {
+  meta = previousAttrs.meta // { includePackage = true; };
   passthru.build = { pathStr }: rec {
     manualPath = "${nixpkgsPath}/nixos/doc/manual";
     common = import "${manualPath}/common.nix";
@@ -18,7 +19,7 @@ scope: with scope;
     doc = nixosOptionsDoc {
       inherit revision;
       warningsAreErrors = false;
-      options = getAttrFromPath path package.allOptions;
+      options = getAttrFromPath path passthru.allOptions;
     };
     optionsJSON = doc.optionsJSON.overrideAttrs {
       preferLocalBuild = true;
@@ -49,7 +50,7 @@ scope: with scope;
     '';
   }.result;
   passthru = {
-    allOptions = fix (self: {
+    baseOptions = fix (self: {
       nixos = (inputs.nixpkgs.lib.nixosSystem {
         modules = [{
           nixpkgs = { inherit pkgs; };
@@ -74,7 +75,11 @@ scope: with scope;
         }];
       }).options;
       nd = self.nix-darwin;
+    });
+    machineOptions = mapAttrs (_: c: c.options) (nixosConfigurations // darwinConfigurations);
+    extraOptions = {
       tfn = (tfn.build { configPath = ../terraform/config.nix; }).unsanitized.options;
-    } // mapAttrs (_: c: c.options) (nixosConfigurations // darwinConfigurations));
+    };
+    allOptions = passthru.baseOptions // passthru.machineOptions // passthru.extraOptions;
   };
 })
