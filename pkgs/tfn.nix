@@ -10,6 +10,25 @@ scope: with scope;
     echo '{}' > config.nix
     tfn --version
   '';
+  passthru.baseModules = [
+    "${terranix.src}/modules"
+    "${terranix.src}/core/terraform-options.nix"
+    ({ config, ... }: {
+      options.plugins = mkTypeOption (with types;
+        coercedTo
+          (functionTo (coercedTo (listOf package) toList package))
+          (f: toList (f opentofu.plugins))
+          (listOf package)
+      );
+      config.terraform = mkMerge (forEach config.plugins (plugin:
+        let
+          source = removePrefix "https://registry.terraform.io/providers/" plugin.homepage;
+          name = last (splitString "/" source);
+        in
+        { required_providers.${name}.source = mkDefault source; }
+      ));
+    })
+  ];
   passthru.build =
     { configPath }:
     let
@@ -24,32 +43,8 @@ scope: with scope;
     with scope';
     let
       specialArgs = { scope = scope'; };
-      modules = [
-        configPath
-        ({ config, ... }: {
-          options.plugins = mkTypeOption (with types;
-            coercedTo
-              (functionTo (coercedTo (listOf package) toList package))
-              (f: toList (f opentofu.plugins))
-              (listOf package)
-          );
-          config.terraform = mkMerge (forEach config.plugins (plugin:
-            let
-              source = removePrefix "https://registry.terraform.io/providers/" plugin.homepage;
-              name = last (splitString "/" source);
-            in
-            { required_providers.${name}.source = mkDefault source; }
-          ));
-        })
-      ];
-      unsanitized = evalModules {
-        inherit specialArgs;
-        modules = [
-          "${terranix.src}/modules"
-          "${terranix.src}/core/terraform-options.nix"
-          { imports = modules; }
-        ];
-      };
+      modules = package.baseModules ++ [ configPath ];
+      unsanitized = evalModules { inherit specialArgs modules; };
       core = import "${terranix.src}/core/default.nix" {
         inherit pkgs modules;
         extraArgs = specialArgs;
@@ -61,5 +56,6 @@ scope: with scope;
         (opentofu.withPlugins (_: unsanitized.config.plugins))
         (writeTextDir "config.tf.json" (toJSON core.config))
       ];
+      passthru = { inherit unsanitized; };
     };
 }

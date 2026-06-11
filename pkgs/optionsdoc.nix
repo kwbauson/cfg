@@ -63,6 +63,7 @@ scope: with scope;
         }];
       }).options;
       nd = self.nix-darwin;
-    });
+      tfn = (tfn.build { configPath = ../terraform/config.nix; }).unsanitized.options;
+    } // mapAttrs (_: c: c.options) (nixosConfigurations // darwinConfigurations));
   };
 })
