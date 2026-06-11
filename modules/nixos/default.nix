@@ -23,7 +23,7 @@
     kernel.sysctl."net.ipv4.ip_nonlocal_bind" = 1;
   };
 
-  system.nixos.label = flakeLastModifiedDateString;
+  system.nixos.label = cfgLastModifiedDateString;
 
   nix.channel.enable = false;
   networking.networkmanager.enable = mkDefault true;

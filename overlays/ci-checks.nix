@@ -43,7 +43,7 @@ in
     extra-packages;
 
   checks = cached-refs.build {
-    inherit flake;
+    flake = cfg;
     refs = [ [ "hello" ] ] ++ rec {
       getPaths = ns: cs: concatMap (m: map (n: [ "switch" "scripts" m n ]) ns) (attrNames cs);
       x86_64-linux = getPaths [ "noa" "nob" ] nixosConfigurations;

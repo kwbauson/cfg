@@ -1,14 +1,14 @@
 args: args.lib.fix (scope: with scope;
 args.lib.generators // args.formats or { } // args.writers or { } //
-args.flake.inputs or { } // args.flake.outputs or { } //
+args.cfg.inputs or { } // args.cfg.outputs or { } //
 removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
   inherit (import ./. { inherit system; }) getFlakeCompat;
-  inherit (flake) inputs outPath;
+  inherit (cfg) inputs outPath;
   inherit (stdenv.hostPlatform) system;
   inherit (stdenv) isLinux isDarwin;
   root = importDir ./.;
   inherit (root) constants modules machines;
-  scope' = root.scope { inherit lib flake; };
+  scope' = root.scope { inherit lib cfg; };
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
@@ -80,7 +80,7 @@ removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
       else args
     );
   pathAdd = pkgs: "export PATH=${makeBinPath (toList pkgs)}:$PATH";
-  flakeLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" flake.lastModifiedDate);
+  cfgLastModifiedDateString = concatStringsSep "-" (match "(.{4})(.{2})(.{2}).*" cfg.lastModifiedDate);
 
   mkFromEnabled = attrs: f:
     let

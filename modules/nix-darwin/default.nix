@@ -7,7 +7,7 @@
   ] ++ attrValues (importDir ./.);
   nix.settings.extra-platforms = [ "x86_64-darwin" ];
   nix.settings.trusted-users = [ username ];
-  system.darwinLabel = "${machine.name}-${flakeLastModifiedDateString}";
+  system.darwinLabel = "${machine.name}-${cfgLastModifiedDateString}";
   users.users.${username}.home = "/Users/${username}";
   system.primaryUser = username;
   system.defaults.finder = {

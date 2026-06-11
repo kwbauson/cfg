@@ -29,8 +29,8 @@ addMetaAttrs { includePackage = true; } (writeBashBin pname ''
       nixCopy "$out"
       remoteBin=$out/bin/${pname}
     else
-      nixCopy ${flake}
-      remoteBin=$(ssh "$sshTarget" 'nix build --no-link --print-out-paths ${flake}#${pname}')/bin/${pname}
+      nixCopy ${cfg}
+      remoteBin=$(ssh "$sshTarget" 'nix build --no-link --print-out-paths ${cfg}#${pname}')/bin/${pname}
     fi
     resultFile=~/cfg/machines/$target/secrets.yaml
     if [[ -e $resultFile ]];then

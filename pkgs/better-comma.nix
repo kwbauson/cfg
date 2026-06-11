@@ -8,7 +8,7 @@ scope: with scope; stdenvNoCC.mkDerivation {
     #!${getExe bash}
     ${pathAdd [ gnused coreutils fzy ]}
     set -o pipefail
-    source=${flake}
+    source=${cfg}
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift && pkg=$1 && shift
     [[ $1 = -m ]] && man=1 && shift

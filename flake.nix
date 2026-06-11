@@ -10,13 +10,13 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }: with self.scope; {
-    scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; flake = self; };
+    scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; cfg = self; };
 
     packages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
       config = root.config;
       overlays = [
-        (final: prev: { scope = root.scope (final // { inherit flake; }); })
+        (final: prev: { scope = root.scope (final // { inherit cfg; }); })
         root.overlays
       ];
     });
