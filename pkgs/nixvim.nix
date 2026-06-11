@@ -36,6 +36,7 @@ importPackage rec {
   });
 
   module = with lib; fix (cfg: {
+    enableMan = false;
     performance = {
       byteCompileLua.enable = true;
       byteCompileLua.configs = true;

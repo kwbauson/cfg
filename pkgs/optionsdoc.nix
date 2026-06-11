@@ -78,6 +78,11 @@ let inherit (finalAttrs) passthru; in {
     });
     machineOptions = mapAttrs (_: c: c.options) (nixosConfigurations // darwinConfigurations);
     extraOptions = {
+      nixvim = (inputs.nixvim.lib.evalNixvim {
+        modules = [{
+          nixpkgs = { inherit pkgs; };
+        }];
+      }).options;
       tfn = (tfn.build { configPath = ../terraform/config.nix; }).unsanitized.options;
     };
     allOptions = passthru.baseOptions // passthru.machineOptions // passthru.extraOptions;
