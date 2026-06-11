@@ -6,9 +6,9 @@ scope: with scope;
 '').overrideAttrs (finalAttrs: previousAttrs:
 let inherit (finalAttrs) passthru; in {
   SELF_REF = "$HOME/cfg#optionsdoc";
-  buildCommand = ''
-    ${previousAttrs.buildCommand}
-    substituteInPlace $out/bin/${pname} --replace-fail SELF_REF "$SELF_REF"
+  content = /* bash */ ''
+    ${replaceString "SELF_REF" finalAttrs.SELF_REF previousAttrs.content}
+    # keep render package in closure ${passthru.nixos-render-docs}
   '';
   meta = previousAttrs.meta // { includePackage = true; };
   passthru.build = { path }: rec {
@@ -24,14 +24,6 @@ let inherit (finalAttrs) passthru; in {
       preferLocalBuild = true;
       allowSubstitutes = false;
     };
-    nixos-render-docs = pkgs.nixos-render-docs.overrideAttrs {
-      preBuild = ''
-        # the script assumes a full options set, but with partial ones we have references to non-included options
-        substituteInPlace nixos_render_docs/options.py --replace-fail \
-          'self._options_by_id[links[i]]' \
-          'self._options_by_id.get(links[i], links[i].lstrip("#opt-"))'
-      '';
-    };
     result = runCommandLocal "options-man"
       {
         passAsFile = [ "script" ];
@@ -43,7 +35,7 @@ let inherit (finalAttrs) passthru; in {
       ''
         mkdir -p $out/{bin,man5}
         file=$out/man5/options.5
-        ${getExe nixos-render-docs} -j $NIX_BUILD_CORES options manpage \
+        ${getExe passthru.nixos-render-docs} -j $NIX_BUILD_CORES options manpage \
           --revision none \
           ${optionsJSON}/${common.outputPath}/options.json \
           $file
@@ -59,6 +51,14 @@ let inherit (finalAttrs) passthru; in {
       '';
   }.result;
   passthru = {
+    # the script assumes a full options set, but with partial ones we have references to non-included options
+    nixos-render-docs = pkgs.nixos-render-docs.overrideAttrs {
+      preBuild = ''
+        substituteInPlace nixos_render_docs/options.py --replace-fail \
+          'self._options_by_id[links[i]]' \
+          'self._options_by_id.get(links[i], links[i].lstrip("#opt-"))'
+      '';
+    };
     run =
       let
         mapper = path: f: mapAttrs (name: value: let p = path ++ [ name ]; in f p name value (mapper p f value));
