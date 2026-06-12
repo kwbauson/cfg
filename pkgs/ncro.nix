@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage (attrs: {
   inherit pname;
-  version = "2.2.2-unstable-2026-06-09";
+  version = "2.2.2-unstable-2026-06-12";
   src = fetchFromGitHub {
     owner = "manic-systems";
     repo = pname;
-    rev = "b33e43200b2c28924b1f6a1304f316e9f8d75654";
-    hash = "sha256-POz3sWFFCYnwp79EMnal0I9487Q/ir+hPrswfGamExw=";
+    rev = "eb67df31a0d64e3361a5589c786e4af9a9cb8c1d";
+    hash = "sha256-6DQAktdvTUNNRb8cNGndntsYER02rDbL8GQGJVnZ7Ps=";
   };
   package = callPackage "${attrs.src}/nix/package.nix" { };
   passthru.updateScript = unstableGitUpdater { tagPrefix = "v"; };
