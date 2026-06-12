@@ -5,7 +5,7 @@ scope: with scope;
   exec nix shell "SELF_REF.run.$pathStr._run" -c options-man
 '').overrideAttrs (finalAttrs: previousAttrs:
 let inherit (finalAttrs) passthru; in with passthru; {
-  SELF_REF = "$HOME/cfg#optionsdoc";
+  SELF_REF = "${cfg}#optionsdoc";
   content = /* bash */ ''
     ${replaceString "SELF_REF" finalAttrs.SELF_REF previousAttrs.content}
     # keep render package in closure ${nixos-render-docs}
@@ -96,7 +96,6 @@ let inherit (finalAttrs) passthru; in with passthru; {
       };
       nd = self.nix-darwin;
     });
-    machine = nixosConfigurations // darwinConfigurations;
     extra = {
       nixvim = inputs.nixvim.lib.evalNixvim {
         modules = [{
@@ -110,6 +109,7 @@ let inherit (finalAttrs) passthru; in with passthru; {
         modules = [ ];
       };
     };
-    allOptions = mapAttrValues (c: c.options) (base // machine // extra);
+    machines = nixosConfigurations // darwinConfigurations;
+    allOptions = mapAttrValues (c: c.options) (base // extra // machines);
   };
 })
