@@ -22,7 +22,7 @@
           xdpyinfo xev xfontsel xmodmap;
       };
       inherit
-        ffmpeg mediainfo pavucontrol qtbr signal-desktop
+        ffmpeg mediainfo pavucontrol qtbr
         discord zathura steamtinkerlaunch
         headsetcontrol arduino remmina obsidian;
       sox = sox.override { enableLame = true; };
@@ -47,7 +47,7 @@
   excluded-packages = optionalAttrs isDarwin
     {
       inherit iproute2 iputils pavucontrol strace time dzen2
-        maim acpi usbutils xdotool qtbr signal-desktop discord zathura xdg-utils;
+        maim acpi usbutils xdotool qtbr discord zathura xdg-utils;
       inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
       inherit man-pages ncdu bitwarden-cli remmina ffmpeg yt-dlp;
     }
