@@ -24,7 +24,7 @@
       inherit
         ffmpeg mediainfo pavucontrol qtbr
         discord zathura steamtinkerlaunch
-        headsetcontrol arduino remmina obsidian;
+        headsetcontrol arduino remmina;
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {
         inherit (kdePackages) breeze-icons;
