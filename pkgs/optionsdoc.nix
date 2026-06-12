@@ -63,13 +63,12 @@ let inherit (finalAttrs) passthru; in with passthru; {
   passthru = {
     run =
       let
-        go = path: attrs:
+        go = attrs:
           if isDerivation attrs then attrs else
-          mapAttrs
-            (name: value: let p = path ++ [ name ]; in go p value)
+          mapAttrValues go
             ((if isOption attrs then attrs.type.getSubOptions attrs.loc else attrs) // { _run = build { options = attrs; }; });
       in
-      go [ ] allOptions;
+      go allOptions;
     base = fix (self: {
       nixos = inputs.nixpkgs.lib.nixosSystem {
         modules = [{
