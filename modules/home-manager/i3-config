@@ -47,7 +47,7 @@ bindsym $mod+Shift+c exec --no-startup-id slopcast
 bindsym $mod+Mod1+c exec --no-startup-id flameshot gui
 bindsym $mod+Control+v exec --no-startup-id xpaste
 bindsym $mod+x exec --no-startup-id runner
-bindsym $mod+n [class="^obsidian$"] scratchpad show
+bindsym $mod+n [instance="^termnotes$"] scratchpad show
 
 # more programs
 bindsym $mod+Control+p mode "programs"
@@ -55,7 +55,7 @@ mode "programs" {
   bindsym Escape mode "default"
   bindsym f exec --no-startup-id firefox; mode "default"
   bindsym c exec --no-startup-id chromium; mode "default"
-  bindsym n exec --no-startup-id obsidian; mode "default"
+  bindsym n exec --no-startup-id term --name termnotes --directory sync/notes nvim; mode "default"
   bindsym d exec --no-startup-id discord; mode "default"
   bindsym t exec --no-startup-id kitty; mode "default"
   bindsym s exec --no-startup-id steam; mode "default"
@@ -161,6 +161,6 @@ for_window [title="^Zoom .* Meetings?$"] floating enable
 for_window [title="^Developer Tools —.*$"] floating enable
 for_window [title="^.*action=.*confno=.*$"] floating enable, no_focus
 for_window [class="^steam$"] border normal
-for_window [class="^obsidian$"] border normal, move scratchpad, scratchpad show
+for_window [instance="^termnotes$"] border normal, move scratchpad, scratchpad show
 
 # vim:ft=i3config
