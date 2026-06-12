@@ -30,7 +30,7 @@ final: prev: with final.scope; {
       all = writeBashBin "update-all" ''
         set -euo pipefail
         nix flake update
-        nix run .#actions
+        nix run .#updates.actions
         nix run .#update-extra-packages
       '';
       actions = writeBashBin "update-actions" "${getExe pinact} run --update";
