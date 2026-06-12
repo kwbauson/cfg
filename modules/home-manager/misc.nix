@@ -5,6 +5,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       BROWSER = "firefox";
+      MOZ_USE_XINPUT2 = 1;
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
       LESS = "-iR";
