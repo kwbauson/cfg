@@ -25,21 +25,24 @@ final: prev: with final.scope; {
     in (updater updatable).overrideAttrs (_: {
       passthru = genAttrs updatable updater;
     });
-  updates = (writeBashBin "updates" ''
-    nix flake update
-    nix run .#update-extra-packages
-  '').overrideAttrs (_: {
-    passthru = mergeAttrsList [
-      update-extra-packages.passthru
-      (forAttrNames
-        inputs
-        (input: writeBashBin "update-${input}" ''
-          nix flake lock --update-input ${input}
-        '')
-      )
-      { all = updates; }
-    ];
-  });
+  updates = mergeAttrsList [
+    {
+      all = writeBashBin "update-all" ''
+        set -euo pipefail
+        nix flake update
+        nix run .#actions
+        nix run .#update-extra-packages
+      '';
+      actions = writeBashBin "update-actions" "${getExe pinact} run --update";
+    }
+    (forAttrNames
+      inputs
+      (input: writeBashBin "update-${input}" ''
+        nix flake lock --update-input ${input}
+      '')
+    )
+    update-extra-packages.passthru
+  ];
   sourcesInfo = pipe ../flake.lock [
     readFile
     fromJSON
