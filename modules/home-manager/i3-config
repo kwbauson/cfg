@@ -1,19 +1,11 @@
 # settings
 set $mod Mod4
 set $float_move_pixels 100
-font pango:DejaVu Sans Mono 11
-floating_modifier $mod
 floating_minimum_size 0 x 10
-workspace_layout tabbed
-hide_edge_borders both
-focus_follows_mouse no
-mouse_warping none
-workspace_auto_back_and_forth yes
 bar {
   position top
   status_command statusline i3
 }
-focus_wrapping no
 
 # programs
 bindsym $mod+p         exec --no-startup-id termbar

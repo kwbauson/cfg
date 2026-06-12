@@ -227,14 +227,5 @@
       autorandr --change &
       ${optionalString (machine.name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
     '';
-    windowManager = {
-      i3 = {
-        enable = isNixOS && isGraphical;
-        config = null;
-        extraConfig = readFile ./i3-config + { }.${machine.name} or "";
-      };
-    };
   };
-
-  systemd.user.startServices = "sd-switch";
 }
