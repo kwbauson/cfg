@@ -70,15 +70,15 @@ let inherit (finalAttrs) passthru; in with passthru; {
             ((if isOption attrs then attrs.type.getSubOptions attrs.loc else attrs) // { _run = build { options = attrs; }; });
       in
       go [ ] allOptions;
-    baseOptions = fix (self: {
-      nixos = (inputs.nixpkgs.lib.nixosSystem {
+    base = fix (self: {
+      nixos = inputs.nixpkgs.lib.nixosSystem {
         modules = [{
           nixpkgs = { inherit pkgs; };
           system.stateVersion = "FAKE";
         }];
-      }).options;
+      };
       no = self.nixos;
-      home-manager = (inputs.home-manager.lib.homeManagerConfiguration {
+      home-manager = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ({ options, ... }: {
@@ -87,24 +87,29 @@ let inherit (finalAttrs) passthru; in with passthru; {
             home.homeDirectory = "/FAKE";
           })
         ];
-      }).options;
+      };
       hm = self.home-manager;
-      nix-darwin = (inputs.nix-darwin.lib.darwinSystem {
+      nix-darwin = inputs.nix-darwin.lib.darwinSystem {
         modules = [{
           nixpkgs = { inherit pkgs; };
         }];
-      }).options;
+      };
       nd = self.nix-darwin;
     });
-    machineOptions = mapAttrs (_: c: c.options) (nixosConfigurations // darwinConfigurations);
-    extraOptions = {
-      nixvim = (inputs.nixvim.lib.evalNixvim {
+    machine = nixosConfigurations // darwinConfigurations;
+    extra = {
+      nixvim = inputs.nixvim.lib.evalNixvim {
         modules = [{
           nixpkgs = { inherit pkgs; };
         }];
-      }).options;
-      tfn = (tfn.build { configPath = ../terraform/config.nix; }).unsanitized.options;
+      };
+      tfn = (tfn.build { configPath = ../terraform/config.nix; }).unsanitized;
+      devenv = let flake = import devenv.src; in flake.lib.mkEval {
+        inherit (flake) inputs;
+        inherit pkgs;
+        modules = [ ];
+      };
     };
-    allOptions = baseOptions // machineOptions // extraOptions;
+    allOptions = mapAttrValues (c: c.options) (base // machine // extra);
   };
 })
