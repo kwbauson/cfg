@@ -11,7 +11,7 @@
 
   users.users._github-runner.home = mkForce "/private/var/lib/github-runners";
   secrets.github-runner-token.owner = "_github-runner";
-  services.github-runners = mapAttrValues (c: c // { nodeRuntimes = [ "node24" ]; }) {
+  services.github-runners = {
     runner-benaduggan-nix-4 = {
       enable = true;
       replace = true;
