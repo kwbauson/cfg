@@ -14,8 +14,6 @@
   machine.tailscale.ip = "100.107.6.112";
   machine.public.key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+DyV8BQbs+ei0ao+MwdgJM/IHeHFv61H/Mf5hO8odu keith@keith-server";
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.systemd-boot.configurationLimit = 3;
-  hardware.amdgpu.initrd.enable = false;
   hardware.amdgpu.legacySupport.enable = true;
   hardware.amdgpu.opencl.enable = true;
   services.tailscale.useRoutingFeatures = "both";
