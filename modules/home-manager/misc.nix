@@ -8,7 +8,7 @@
       MOZ_USE_XINPUT2 = 1;
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
-      LESS = "-iR";
+      LESS = "-iRc";
       LESSHISTFILE = "$XDG_DATA_HOME/less_history";
       PAGER = "less";
       RANGER_LOAD_DEFAULT_RC = "FALSE";
