@@ -7,7 +7,7 @@ import json
 import tempfile
 import os
 import re
-import shutil
+import io
 
 parser = argparse.ArgumentParser(
     description="diff nixpkgs lib.evalConfig between flakes, e.g. flake#nixosConfigurations.foo",
@@ -20,7 +20,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "--eval",
-    default="system.build.toplevel.drvPath",
+    default="system.build.toplevel.outPath",
     help="nix path in config to evaluate for trace (default: %(default)s)",
 )
 parser.add_argument(
@@ -45,59 +45,54 @@ def get_flake_path(path):
     return json.loads(ran.stdout)["path"]
 
 
-old_flake = get_flake_path(args.old)
-new_flake = get_flake_path(args.new)
+def flatten(x):
+    if isinstance(x, list) or isinstance(x, tuple):
+        result = []
+        for y in x:
+            result += flatten(y)
+        return result
+    else:
+        return [x]
 
-columns = shutil.get_terminal_size().columns
 
-
-def flatten(xss):
-    return [x for xs in xss for x in xs]
+def run_nix(*cmdline, autoExit=True):
+    ran = subprocess.Popen(
+        flatten(cmdline), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
+    )
+    if not ran.stdout:
+        print(f"{colored('error:', 'red', attrs=['bold'])} missing cmd stdout")
+        exit(1)
+    output = []
+    for line in io.TextIOWrapper(ran.stdout):
+        output.append(line.removesuffix("\n"))
+    ran.wait()
+    if autoExit and ran.returncode:
+        print(f"{colored('error:', 'red', attrs=['bold'])} nix had non-zero exit code")
+        print("\n".join(output))
+        exit(ran.returncode)
+    return output
 
 
 trace_lines = []
 
-
-trace_cmd = [
-    ["nix-instantiate"],
-    ["--eval", "--raw", args.self_nix, "--attr", args.self_run],
-    ["--argstr", "old", old_flake],
-    ["--argstr", "new", new_flake],
-    ["--argstr", "configurationPath", args.configuration],
-    ["--argstr", "evalPath", args.eval],
-]
-
-
-def run_trace():
-    return subprocess.run(flatten(trace_cmd), capture_output=True)
-
-
 if args.use_dump:
     trace_lines = open(args.use_dump).readlines()
 else:
-    ran = run_trace()
-    retry_mark = b" is not valid\n"
-    # FIXME this retry logic is messy and expensive
-    # TODO probs can work with a dynamic flake instead of getFlake
-    if ran.returncode and ran.stderr.endswith(retry_mark):
-        subprocess.run(
-            ["nix", "eval", f"{new_flake}#{args.configuration}.config.{args.eval}"],
-        )
-        ran = run_trace()
-        if ran.returncode and ran.stderr.endswith(retry_mark):
-            subprocess.run(
-                ["nix", "eval", f"{old_flake}#{args.configuration}.config.{args.eval}"],
-            )
-            ran = run_trace()
-    if ran.returncode:
-        print(f"{colored('error', 'red')}: nix had non-zero exit code")
-        print(ran.stdout.decode())
-        print(ran.stderr.decode())
+    old_flake = get_flake_path(args.old)
+    new_flake = get_flake_path(args.new)
+    traced_flake = run_nix(
+        ["nix", "build", "--file", args.self_nix, "configdiff.mkFlake"],
+        ["--no-link", "--print-out-paths"],
+        ["--arg", "old", old_flake],
+        ["--arg", "new", new_flake],
+        ["--argstr", "configuration", args.configuration],
+        ["--argstr", "eval", args.eval],
+    )[-1]
+    trace_lines = run_nix("nix", "eval", "--raw", f"{traced_flake}#traced")
     if args.debug:
-        print(ran.stdout.decode())
-        print(ran.stderr.decode())
+        print("\n".join(trace_lines))
         exit()
-    trace_lines = ran.stderr.decode().splitlines() + [args.trace_marker]
+    trace_lines += [args.trace_marker]
 
 if args.dump:
     with open(args.dump, "w") as out:

@@ -12,7 +12,6 @@ let
     parser.add_argument("--trace-marker-new", default="${traceMarkerNew}")
     parser.add_argument("--equals-marker", default="${equalsMarker}")
     parser.add_argument("--self-nix", default="${cfg}")
-    parser.add_argument("--self-run", default="${pname}.run")
   '';
 in
 (writePython3Bin pname
@@ -62,17 +61,39 @@ in
       inherit (payload) class specialArgs;
       modules = [{ _module.args.check = false; }] ++ payload.modules;
     }).config;
-  run =
-    { old
-    , new
-    , configurationPath
-    , evalPath
-    }:
-    let
-      configurationPath' = splitString "." configurationPath;
-      evalPath' = splitString "." evalPath;
-      getConfig = label: ref: traceConfig label (getAttrFromPath configurationPath' (getFlake ref).outputs);
-      getOutput = label: ref: getAttrFromPath evalPath' (getConfig label ref);
-    in
-    seq (seq (getOutput oldLabel old) (getOutput newLabel new)) "";
+  buildFlake = inputs: outputsStr: runCommand "source"
+    {
+      flakeNix = /* nix */ ''
+        {
+          inputs = {
+            ${concatMapAttrsStringSep "\n    " (n: p: ''${n}.url = "path:${p}";'') inputs}
+          };
+          outputs = { self, ${concatMapAttrsStringSep ", " (n: _: n) inputs} }:
+            ${concatStringsSep "\n    " (splitString "\n" (trim outputsStr))};
+        }
+      '';
+      nativeBuildInputs = [ nix ];
+      passAsFile = [ "flakeNix" ];
+    }
+    ''
+      export HOME=$PWD
+      mkdir $out
+      cd $out
+      cp $flakeNixPath flake.nix
+      cat flake.nix
+      nix --extra-experimental-features 'nix-command flakes' flake lock
+    '';
+  mkFlake = { old, new, configuration, eval }: buildFlake { cfg = cfg.outPath; inherit old new; } /* nix */ ''
+    {
+      traced = cfg.packages.${system}.${pname}.run {
+        old = old.outputs.${configuration};
+        new = new.outputs.${configuration};
+        eval = c: c.${eval};
+      };
+    }
+  '';
+  run = { old, new, eval }: foldl' (flip seq) "" [
+    (eval (traceConfig oldLabel old))
+    (eval (traceConfig newLabel new))
+  ];
 })
