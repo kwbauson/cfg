@@ -1,0 +1,14 @@
+diff --git a/lib/modules.nix b/lib/modules.nix
+index c5c935144ea6..5c5e41df9e5d 100644
+--- a/lib/modules.nix
++++ b/lib/modules.nix
+@@ -280,7 +280,8 @@ let
+         let
+ 
+           # For definitions that have an associated option
+-          declaredConfig = mapAttrsRecursiveCond (v: !isOption v) (_: v: v.value) options;
++          declaredConfig' = mapAttrsRecursiveCond (v: !isOption v) (_: v: v.value) options;
++          declaredConfig = lib.traceAccess declaredConfig';
+ 
+           # If freeformType is set, this is for definitions that don't have an associated option
+           freeformConfig =
