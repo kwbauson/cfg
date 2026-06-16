@@ -24,18 +24,19 @@ in
   skippedPaths = [
     [ "_module" ]
     [ "assertions" ]
+    [ "warnings" ]
     [ "home-manager" "extraSpecialArgs" ]
   ];
-  traceUsage = label: (f: f null null) (fix (cont': parent: at: path: arg:
+  traceUsage = (f: f null null) (fix (cont': parent: at: args@{ label, skip, path }: arg:
     let
       isDerivation = x: x ? outPath && x ? drvPath;
       inDerivation = isDerivation parent;
       skipDerivationAttrs = [ "type" "outputName" "outputs" "meta" ];
-      cont = at: cont' arg at (path ++ [ at ]);
+      cont = at: cont' arg at (args // { path = path ++ [ at ]; });
       trace = p: x: builtins.trace "${marker}${toJSON [label (toPathString p) x]}" arg;
     in
     # FIXME probably want to move the non-trace logic into python
-    if elem path skippedPaths then arg
+    if elem path skip then arg
     else if inDerivation && at == "outPath" then trace (init path) "<derivation ${arg}>"
     else if inDerivation && elem at skipDerivationAttrs then arg
     else if isAttrs arg then mapAttrs cont arg
@@ -44,32 +45,34 @@ in
   ));
   tracedLib = pkgs.lib.extend (final: prev: {
     traceConfigUsage = config:
-      let
-        inherit (config._module) args;
-        inherit (args._traceConfigUsage) label path;
-      in
-      if args ? _traceConfigUsage
-      then traceUsage label path config
+      if config._module.args ? _traceConfigUsage
+      then traceUsage config._module.args._traceConfigUsage config
       else config;
     modules = import patched-modules-nix { lib = final; };
   });
-  traceConfigUsageModule = label: path: {
-    _module.args._traceConfigUsage = { inherit label path; };
-    _module.args.check = false;
-  };
   traceConfig = label: configuration:
-    let inherit (configuration.type.functor) payload; in
+    let
+      mkModule = path: {
+        _module.args._traceConfigUsage = {
+          inherit label path;
+          skip = map (p: path ++ p) skippedPaths;
+        };
+        _module.args.check = false;
+      };
+      mkSubSystem = path:
+        optionalAttrs
+          (hasAttrByPath path configuration.options)
+          (setAttrByPath path (forAttrNames
+            (getAttrFromPath path configuration.config)
+            (name: { imports = [ (mkModule (path ++ [ name ])) ]; }))
+          );
+      inherit (configuration.type.functor) payload;
+    in
     (tracedLib.evalModules {
       inherit (payload) class specialArgs;
       modules = payload.modules ++ [
-        (traceConfigUsageModule label [ ])
-        {
-          config = optionalAttrs (configuration.config ? home-manager) {
-            home-manager.users = forAttrNames configuration.config.home-manager.users (name: {
-              imports = [ (traceConfigUsageModule label [ "home-manager" name ]) ];
-            });
-          };
-        }
+        (mkModule [ ])
+        (mkSubSystem [ "home-manager" "users" ])
       ];
     }).config;
   buildFlake = inputs: outputsStr: runCommand "source"
