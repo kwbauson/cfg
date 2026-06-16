@@ -1,20 +1,31 @@
+from typing import Generator, Any
 import argparse
 import difflib
 import io
 import json
 import os
 import re
+import selectors
 import subprocess
+import sys
 import tempfile
 
 parser = argparse.ArgumentParser(
+    usage="%(prog)s [OPTIONS] old new",
     description="diff nixpkgs lib.evalConfig between flakes, e.g. flake#nixosConfigurations.foo",
 )
 
-parser.add_argument("old", help="old flake")
-parser.add_argument("new", help="new flake")
 parser.add_argument(
-    "configuration", help="nix path to configuration, e.g. nixosConfigurations.foo"
+    "old",
+    nargs="?",
+    help="flake installable for old configuration, e.g. old#nixosConfigurations.foo",
+)
+parser.add_argument("new", nargs="?", help="flake installable for new configuration")
+parser.add_argument(
+    "-i",
+    "--include-hashes",
+    action="store_true",
+    help="include changes when the only difference is a store path hash",
 )
 parser.add_argument(
     "--eval",
@@ -22,13 +33,9 @@ parser.add_argument(
     help="nix path in config to evaluate for trace (default: %(default)s)",
 )
 parser.add_argument(
-    "-i",
-    "--include-hashes",
-    action="store_true",
-    help="include when a store path hash has changed",
+    "--dump", default=None, help="dump nix output to a file instead of diffing"
 )
 parser.add_argument("--use-dump", default=None, help="use previously dumped output")
-parser.add_argument("--dump", default=None, help="dump nix output to a file")
 
 # NIX_EXTRA_PARSER
 
@@ -40,20 +47,24 @@ END = "\033[0m"
 
 def color(text, c):
     if text:
-        result = "\n".join(f"{c}{l}{END}" if l else l for l in text.split("\n"))
+        result = "\n".join(
+            f"{c}{line}{END}" if line else line for line in text.split("\n")
+        )
     else:
         result = ""
     return result
 
 
+def die(message, exitCode=1):
+    print(f"{color('error:', RED + BOLD):} {message}")
+    exit(exitCode)
+
+
 args = parser.parse_args()
 
-
-def get_flake_path(path):
-    ran = subprocess.run(
-        ["nix", "flake", "metadata", "--json", path], capture_output=True
-    )
-    return json.loads(ran.stdout)["path"]
+if not (args.use_dump or (args.new and args.old)):
+    parser.print_help()
+    die("missing required args")
 
 
 def flatten(x):
@@ -66,77 +77,82 @@ def flatten(x):
         return [x]
 
 
-def run_nix(*cmdline, autoExit=True, tracing=False):
-    ran = subprocess.Popen(
-        flatten(cmdline), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
-    )
-    if not ran.stdout:
-        print(f"{color('error:', RED + BOLD)} missing cmd stdout")
-        exit(1)
-    output = []
-    for line in io.TextIOWrapper(ran.stdout):
-        line = line.removesuffix("\n")
-        if tracing:
-            if line.startswith(args.trace_marker):
-                output.append(line)
+def select_lines(*files) -> Generator[tuple[str, Any]]:
+    sel = selectors.DefaultSelector()
+    for f in files:
+        sel.register(f, events=selectors.EVENT_READ)
+    ok = True
+    while ok:
+        for key, _ in sel.select():
+            if key.fileobj in files:
+                key.fileobj
+            if isinstance(key.fileobj, io.TextIOWrapper):
+                line = key.fileobj.readline()
+                if line:
+                    yield (line, key.fileobj)
+                else:
+                    ok = False
             else:
-                print(line)
-        else:
-            print(line)
-            output.append(line)
-    ran.wait()
-    if autoExit and ran.returncode:
-        print(f"{color('error:', RED + BOLD)} nix had non-zero exit code")
-        exit(ran.returncode)
-    return output
+                die("reading from invalid fileobj")
+
+
+def run_nix(*cmdline):
+    spinner_chars = "/-\\"
+    spinner_idx = 0
+    lines = []
+    with subprocess.Popen(
+        flatten(cmdline), text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
+    ) as proc:
+        if proc.stdout and proc.stderr:
+            for line, f in select_lines(proc.stdout, proc.stderr):
+                if f == proc.stdout:
+                    lines.append(line)
+                elif line.startswith(args.marker):
+                    lines.append(line.removeprefix(args.marker))
+                    sys.stderr.write(spinner_chars[spinner_idx] + "\r")
+                    spinner_idx = (spinner_idx + 1) % len(spinner_chars)
+                else:
+                    sys.stderr.write(line)
+    sys.stderr.write("\r\033[1K")
+    if proc.returncode:
+        die("nix had non-zero exit code", proc.returncode)
+    return lines
+
+
+def get_flake_path(path):
+    return json.loads(run_nix("nix", "flake", "metadata", "--json", path)[0])["path"]
 
 
 trace_lines = []
 
 if args.use_dump:
-    trace_lines = [l.removesuffix("\n") for l in open(args.use_dump).readlines()]
+    with open(args.use_dump) as f:
+        trace_lines = f.readlines()
 else:
-    old_flake = get_flake_path(args.old)
-    new_flake = get_flake_path(args.new)
+    old_flake = get_flake_path(args.old.split("#")[0])
+    new_flake = get_flake_path(args.new.split("#")[0])
     traced_flake = run_nix(
         ["nix", "build", "--file", args.self_nix, "configdiff.mkFlake"],
         ["--no-link", "--print-out-paths"],
         ["--arg", "old", old_flake],
         ["--arg", "new", new_flake],
-        ["--argstr", "configuration", args.configuration],
+        ["--argstr", "oldOutput", args.old.split("#")[1]],
+        ["--argstr", "newOutput", args.new.split("#")[1]],
         ["--argstr", "eval", args.eval],
-    )[-1]
-    trace_lines = run_nix(
-        "nix", "eval", "--raw", f"{traced_flake}#traced", tracing=True
-    )
+    )[0].strip()
+    trace_lines = run_nix("nix", "eval", "--raw", f"{traced_flake}#traced")
 
 if args.dump:
     with open(args.dump, "w") as out:
         for line in trace_lines:
-            print(line, file=out)
+            out.write(line)
     exit()
 
-differ = difflib.Differ()
-
 items = {}
-current_key = None
-in_key = None
-for line in trace_lines:
-    is_old = line.startswith(args.trace_marker_old)
-    untraced = (
-        line.removeprefix(args.trace_marker_old)
-        if is_old
-        else line.removeprefix(args.trace_marker_new)
-    )
-    is_assign = args.equals_marker in line
-    if is_assign:
-        current_key = untraced.split(args.equals_marker)[0]
-    if current_key not in items:
-        items[current_key] = {"old": [], "new": []}
-    in_key = "old" if is_old else "new"
-    items[current_key][in_key].append(
-        untraced.removeprefix(current_key + args.equals_marker)
-    )
+for label, path, value in map(json.loads, trace_lines):
+    if path not in items:
+        items[path] = {"old": [], "new": []}
+    items[path][label].append(value)
 
 
 def norm_store_paths(text):
@@ -147,6 +163,7 @@ split_pattern = re.compile(r"""([\s/\-"'<>])""")
 
 
 def diff_item(key, item, out):
+    # FIXME try reversed diff
     old = "\n".join(item["old"])
     new = "\n".join(item["new"])
     if not args.include_hashes and norm_store_paths(old) == norm_store_paths(new):

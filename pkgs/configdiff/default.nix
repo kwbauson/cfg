@@ -1,17 +1,11 @@
 scope: with scope;
 let
-  traceMarker = "trace: CONFIG_ACCESSED";
-  traceMarkerOld = "${traceMarker} ${oldLabel}: ";
-  traceMarkerNew = "${traceMarker} ${newLabel}: ";
-  oldLabel = "OLD";
-  newLabel = "NEW";
-  equalsMarker = " CONFIG_EQUALS ";
+  marker = "TRACE_CONFIG";
+  traceMarker = "trace: ${marker}";
   extraParser = /* python */ ''
-    parser.add_argument("--trace-marker", default="${traceMarker}")
-    parser.add_argument("--trace-marker-old", default="${traceMarkerOld}")
-    parser.add_argument("--trace-marker-new", default="${traceMarkerNew}")
-    parser.add_argument("--equals-marker", default="${equalsMarker}")
-    parser.add_argument("--self-nix", default="${cfg}")
+    internal_help = "internal, do not use"
+    parser.add_argument("--self-nix", default="${cfg}", help=internal_help)
+    parser.add_argument("--marker", default="${traceMarker}", help=internal_help)
   '';
 in
 (writePython3Bin pname
@@ -34,9 +28,7 @@ in
   traceAccess' = label: (f: f false null [ ] null) (fix (cont': inDerivation: parent: path: at: arg:
     let
       cont = at: cont' inDerivation arg (path ++ [ at ]) at;
-      marker = "${traceMarker} ${label}: ";
-      mark = s: concatStringsSep ("\n" + marker) (splitString "\n" s);
-      trace = p: x: builtins.trace "${removePrefix "trace: " marker}${toPathString p}${equalsMarker}${mark x}" arg;
+      trace = p: x: builtins.trace "${marker}${toJSON [label (toPathString p) x]}" arg;
     in
     # FIXME probably want to move the non-trace logic into python
     if elem path skippedPaths then arg
@@ -85,17 +77,18 @@ in
       cat flake.nix
       nix --extra-experimental-features 'nix-command flakes' flake lock
     '';
-  mkFlake = { old, new, configuration, eval }: buildFlake { cfg = cfg.outPath; inherit old new; } /* nix */ ''
-    {
-      traced = cfg.packages.${system}.${pname}.run {
-        old = old.outputs.${configuration};
-        new = new.outputs.${configuration};
-        eval = c: c.${eval};
-      };
-    }
-  '';
+  mkFlake = { old, new, oldOutput, newOutput, eval }:
+    buildFlake { cfg = cfg.outPath; inherit old new; } /* nix */ ''
+      {
+        traced = cfg.packages.${system}.${pname}.run {
+          old = old.outputs.${oldOutput};
+          new = new.outputs.${newOutput};
+          eval = c: c.${eval};
+        };
+      }
+    '';
   run = { old, new, eval }: foldl' (flip seq) "" [
-    (eval (traceConfig oldLabel old))
-    (eval (traceConfig newLabel new))
+    (eval (traceConfig "old" old))
+    (eval (traceConfig "new" new))
   ];
 })
