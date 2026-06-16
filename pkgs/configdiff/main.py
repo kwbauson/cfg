@@ -55,7 +55,7 @@ def flatten(x):
         return [x]
 
 
-def run_nix(*cmdline, autoExit=True):
+def run_nix(*cmdline, autoExit=True, tracing=False):
     ran = subprocess.Popen(
         flatten(cmdline), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
     )
@@ -64,7 +64,15 @@ def run_nix(*cmdline, autoExit=True):
         exit(1)
     output = []
     for line in io.TextIOWrapper(ran.stdout):
-        output.append(line.removesuffix("\n"))
+        line = line.removesuffix("\n")
+        if tracing:
+            if line.startswith(args.trace_marker):
+                output.append(line)
+            else:
+                print(line)
+        else:
+            print(line)
+            output.append(line)
     ran.wait()
     if autoExit and ran.returncode:
         print(f"{colored('error:', 'red', attrs=['bold'])} nix had non-zero exit code")
@@ -88,11 +96,12 @@ else:
         ["--argstr", "configuration", args.configuration],
         ["--argstr", "eval", args.eval],
     )[-1]
-    trace_lines = run_nix("nix", "eval", "--raw", f"{traced_flake}#traced")
+    trace_lines = run_nix(
+        "nix", "eval", "--raw", f"{traced_flake}#traced", tracing=True
+    )
     if args.debug:
         print("\n".join(trace_lines))
         exit()
-    trace_lines += [args.trace_marker]
 
 if args.dump:
     with open(args.dump, "w") as out:
@@ -105,23 +114,22 @@ differ = difflib.Differ()
 items = {}
 current_key = None
 in_key = None
-for line, next_line in itertools.pairwise(trace_lines):
-    if line.startswith(args.trace_marker):
-        is_old = line.startswith(args.trace_marker_old)
-        untraced = (
-            line.removeprefix(args.trace_marker_old)
-            if is_old
-            else line.removeprefix(args.trace_marker_new)
-        )
+for line in trace_lines:
+    is_old = line.startswith(args.trace_marker_old)
+    untraced = (
+        line.removeprefix(args.trace_marker_old)
+        if is_old
+        else line.removeprefix(args.trace_marker_new)
+    )
+    is_assign = args.equals_marker in line
+    if is_assign:
         current_key = untraced.split(args.equals_marker)[0]
-        if current_key not in items:
-            items[current_key] = {"old": [], "new": []}
-        in_key = "old" if is_old else "new"
-        items[current_key][in_key].append(
-            untraced.removeprefix(current_key + args.equals_marker).rstrip()
-        )
-    elif current_key is not None:
-        items[current_key][in_key].append(line.rstrip())
+    if current_key not in items:
+        items[current_key] = {"old": [], "new": []}
+    in_key = "old" if is_old else "new"
+    items[current_key][in_key].append(
+        untraced.removeprefix(current_key + args.equals_marker)
+    )
 
 
 def diff_item(key, item, out):

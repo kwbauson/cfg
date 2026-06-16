@@ -34,7 +34,9 @@ in
   traceAccess' = label: (f: f false null [ ] null) (fix (cont': inDerivation: parent: path: at: arg:
     let
       cont = at: cont' inDerivation arg (path ++ [ at ]) at;
-      trace = p: x: builtins.trace "${removePrefix "trace: " traceMarker} ${label}: ${toPathString p}${equalsMarker}${x}" arg;
+      marker = "${traceMarker} ${label}: ";
+      mark = s: concatStringsSep ("\n" + marker) (splitString "\n" s);
+      trace = p: x: builtins.trace "${removePrefix "trace: " marker}${toPathString p}${equalsMarker}${mark x}" arg;
     in
     # FIXME probably want to move the non-trace logic into python
     if elem path skippedPaths then arg
