@@ -1,13 +1,11 @@
-import itertools
-import difflib
-from termcolor import cprint, colored
 import argparse
-import subprocess
+import difflib
+import io
 import json
-import tempfile
 import os
 import re
-import io
+import subprocess
+import tempfile
 
 parser = argparse.ArgumentParser(
     description="diff nixpkgs lib.evalConfig between flakes, e.g. flake#nixosConfigurations.foo",
@@ -31,9 +29,22 @@ parser.add_argument(
 )
 parser.add_argument("--use-dump", default=None, help="use previously dumped output")
 parser.add_argument("--dump", default=None, help="dump nix output to a file")
-parser.add_argument("--debug", action="store_true")
 
 # NIX_EXTRA_PARSER
+
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+BOLD = "\033[1m"
+END = "\033[0m"
+
+
+def color(text, c):
+    if text:
+        result = "\n".join(f"{c}{l}{END}" if l else l for l in text.split("\n"))
+    else:
+        result = ""
+    return result
+
 
 args = parser.parse_args()
 
@@ -60,7 +71,7 @@ def run_nix(*cmdline, autoExit=True, tracing=False):
         flatten(cmdline), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
     )
     if not ran.stdout:
-        print(f"{colored('error:', 'red', attrs=['bold'])} missing cmd stdout")
+        print(f"{color('error:', RED + BOLD)} missing cmd stdout")
         exit(1)
     output = []
     for line in io.TextIOWrapper(ran.stdout):
@@ -75,8 +86,7 @@ def run_nix(*cmdline, autoExit=True, tracing=False):
             output.append(line)
     ran.wait()
     if autoExit and ran.returncode:
-        print(f"{colored('error:', 'red', attrs=['bold'])} nix had non-zero exit code")
-        print("\n".join(output))
+        print(f"{color('error:', RED + BOLD)} nix had non-zero exit code")
         exit(ran.returncode)
     return output
 
@@ -84,7 +94,7 @@ def run_nix(*cmdline, autoExit=True, tracing=False):
 trace_lines = []
 
 if args.use_dump:
-    trace_lines = open(args.use_dump).readlines()
+    trace_lines = [l.removesuffix("\n") for l in open(args.use_dump).readlines()]
 else:
     old_flake = get_flake_path(args.old)
     new_flake = get_flake_path(args.new)
@@ -99,9 +109,6 @@ else:
     trace_lines = run_nix(
         "nix", "eval", "--raw", f"{traced_flake}#traced", tracing=True
     )
-    if args.debug:
-        print("\n".join(trace_lines))
-        exit()
 
 if args.dump:
     with open(args.dump, "w") as out:
@@ -132,27 +139,46 @@ for line in trace_lines:
     )
 
 
+def norm_store_paths(text):
+    return re.sub(r"/nix/store/.{32}-", f"/nix/store/{'A' * 32}-", text)
+
+
+split_pattern = re.compile(r"([/-]|\s)")
+
+
 def diff_item(key, item, out):
-    results = []
-    # FIXME would be nice to not erase hashes
-    if not args.include_hashes:
-        for lines in (item["old"], item["new"]):
-            for i, line in enumerate(lines):
-                lines[i] = re.sub(r"/nix/store/.{32}-", f"/nix/store/{'X' * 32}-", line)
-    for line in differ.compare(item["old"], item["new"]):
-        marker = line[0]
-        real_line = line[2:]
-        if marker == "-":
-            results.append([True, real_line])
-        elif marker == "+":
-            results.append([False, real_line])
-    if results:
-        is_one = len(results) == 1
-        cprint(key, attrs=["bold"], file=out, end="" if is_one else "\n")
-        if is_one:
-            print(" = ", file=out, end="")
-        for is_old, line in results:
-            cprint(line, "red" if is_old else "green", file=out)
+    old = "\n".join(item["old"])
+    new = "\n".join(item["new"])
+    if not args.include_hashes and norm_store_paths(old) == norm_store_paths(new):
+        return
+    old_seq = re.split(split_pattern, old)
+    new_seq = re.split(split_pattern, new)
+    result = ""
+    matcher = difflib.SequenceMatcher(None, old_seq, new_seq)
+    for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+        old_str = "".join(old_seq[i1:i2])
+        new_str = "".join(new_seq[j1:j2])
+        red = color(old_str, RED)
+        green = color(new_str, GREEN)
+        match tag:
+            case "equal":
+                result += old_str
+            case "replace":
+                result += red + green
+            case "delete":
+                result += red
+            case "insert":
+                result += green
+    diff_lines = result.split("\n")
+    result_lines = []
+    for line in diff_lines:
+        if RED in line or GREEN in line:
+            result_lines.append(line)
+    result = "\n".join(result_lines)
+    multiline = len(result_lines) > 1 or old.startswith("''") or new.startswith("''")
+    if multiline:
+        result = "\n" + result
+    print(color(key, BOLD), "=", result, file=out)
 
 
 with tempfile.NamedTemporaryFile("w") as out:
