@@ -25,22 +25,19 @@ in
     [ "_module" ]
     [ "assertions" ]
   ];
-  traceAccess' = label: (f: f false null [ ] null) (fix (cont': inDerivation: parent: path: at: arg:
+  traceAccess' = label: (f: f [ ] null null) (fix (cont': path: parent: at: arg:
     let
-      cont = at: cont' inDerivation arg (path ++ [ at ]) at;
+      isDerivation = x: x ? outPath && x ? drvPath;
+      inDerivation = isDerivation parent;
+      skipDerivationAttrs = [ "type" "outputName" "outputs" "meta" ];
+      cont = at: cont' (path ++ [ at ]) arg at;
       trace = p: x: builtins.trace "${marker}${toJSON [label (toPathString p) x]}" arg;
     in
     # FIXME probably want to move the non-trace logic into python
     if elem path skippedPaths then arg
-    else if inDerivation && at == "outPath" then
-      trace
-        (
-          if last (init path) == parent.outputName then init (init path) else init path
-        ) "<derivation ${arg}>"
-    else if inDerivation && elem at [ "meta" "type" ] then arg
-    else if isAttrs arg then
-      if arg ? outPath && arg ? drvPath then mapAttrs (n: cont' true arg (path ++ [ n ]) n) arg
-      else mapAttrs cont arg
+    else if inDerivation && at == "outPath" then trace (init path) "<derivation ${arg}>"
+    else if inDerivation && elem at skipDerivationAttrs then arg
+    else if isAttrs arg then mapAttrs cont arg
     else if isList arg then imap cont arg
     else trace path (toPretty { } arg)
   ));

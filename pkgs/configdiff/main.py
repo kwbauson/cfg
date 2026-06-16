@@ -1,4 +1,4 @@
-from typing import Generator, Any
+from typing import Generator, Any, Literal
 import argparse
 import difflib
 import io
@@ -91,6 +91,9 @@ def select_lines(*files) -> Generator[tuple[str, Any]]:
                 if line:
                     yield (line, key.fileobj)
                 else:
+                    for f in files:
+                        for line in f:
+                            yield (line, f)
                     ok = False
             else:
                 die("reading from invalid fileobj")
@@ -99,39 +102,39 @@ def select_lines(*files) -> Generator[tuple[str, Any]]:
 def run_nix(*cmdline):
     spinner_chars = "/-\\"
     spinner_idx = 0
-    lines = []
     with subprocess.Popen(
         flatten(cmdline), text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE
     ) as proc:
-        if proc.stdout and proc.stderr:
-            for line, f in select_lines(proc.stdout, proc.stderr):
-                if f == proc.stdout:
-                    lines.append(line)
-                elif line.startswith(args.marker):
-                    lines.append(line.removeprefix(args.marker))
-                    sys.stderr.write(spinner_chars[spinner_idx] + "\r")
-                    spinner_idx = (spinner_idx + 1) % len(spinner_chars)
-                else:
-                    sys.stderr.write(line)
+        for line, f in select_lines(proc.stdout, proc.stderr):
+            if f == proc.stdout:
+                yield line
+            elif line.startswith(args.marker):
+                yield line.removeprefix(args.marker)
+                sys.stderr.write(spinner_chars[spinner_idx] + "\r")
+                spinner_idx = (spinner_idx + 1) % len(spinner_chars)
+            else:
+                sys.stderr.write(line)
     sys.stderr.write("\r\033[1K")
     if proc.returncode:
         die("nix had non-zero exit code", proc.returncode)
-    return lines
+
+
+def run_nix_str(*cmdline):
+    return "".join(run_nix(*cmdline))
 
 
 def get_flake_path(path):
-    return json.loads(run_nix("nix", "flake", "metadata", "--json", path)[0])["path"]
+    return json.loads(run_nix_str("nix", "flake", "metadata", "--json", path))["path"]
 
 
 trace_lines = []
 
 if args.use_dump:
-    with open(args.use_dump) as f:
-        trace_lines = f.readlines()
+    trace_lines = open(args.use_dump)
 else:
     old_flake = get_flake_path(args.old.split("#")[0])
     new_flake = get_flake_path(args.new.split("#")[0])
-    traced_flake = run_nix(
+    traced_flake = run_nix_str(
         ["nix", "build", "--file", args.self_nix, "configdiff.mkFlake"],
         ["--no-link", "--print-out-paths"],
         ["--arg", "old", old_flake],
@@ -139,7 +142,7 @@ else:
         ["--argstr", "oldOutput", args.old.split("#")[1]],
         ["--argstr", "newOutput", args.new.split("#")[1]],
         ["--argstr", "eval", args.eval],
-    )[0].strip()
+    ).strip()
     trace_lines = run_nix("nix", "eval", "--raw", f"{traced_flake}#traced")
 
 if args.dump:
@@ -163,7 +166,6 @@ split_pattern = re.compile(r"""([\s/\-"'<>])""")
 
 
 def diff_item(key, item, out):
-    # FIXME try reversed diff
     old = "\n".join(item["old"])
     new = "\n".join(item["new"])
     if not args.include_hashes and norm_store_paths(old) == norm_store_paths(new):
@@ -171,31 +173,45 @@ def diff_item(key, item, out):
     old_seq = re.split(split_pattern, old)
     new_seq = re.split(split_pattern, new)
     result = ""
-    matcher = difflib.SequenceMatcher(None, old_seq, new_seq)
+    matcher = difflib.SequenceMatcher(a=old_seq, b=new_seq, autojunk=False)
+    sections: list[tuple[Literal["equal", "delete", "insert"], str]] = []
     for tag, i1, i2, j1, j2 in matcher.get_opcodes():
-        old_str = "".join(old_seq[i1:i2])
-        new_str = "".join(new_seq[j1:j2])
-        red = color(old_str, RED)
-        green = color(new_str, GREEN)
+        old_text = "".join(old_seq[i1:i2])
+        new_text = "".join(new_seq[j1:j2])
+        match tag:
+            case "equal" | "delete":
+                sections.append((tag, old_text))
+            case "replace":
+                sections.append(("delete", old_text))
+                sections.append(("insert", new_text))
+            case "insert":
+                sections.append((tag, new_text))
+    # TODO roll changes to line boundaries
+    for tag, text in sections:
         match tag:
             case "equal":
-                result += old_str
-            case "replace":
-                result += red + green
+                result += text
             case "delete":
-                result += red
+                result += color(text, RED)
             case "insert":
-                result += green
+                result += color(text, GREEN)
+    # TODO cleaner exclusion of unchanged lines
     diff_lines = result.split("\n")
-    result_lines = []
+    changed_lines = []
     for line in diff_lines:
         if RED in line or GREEN in line:
-            result_lines.append(line)
-    result = "\n".join(result_lines)
-    multiline = len(result_lines) > 1 or old.startswith("''") or new.startswith("''")
+            changed_lines.append(line)
+    result = "\n".join(changed_lines)
+    multiline = len(changed_lines) > 1 or old.startswith("''") or new.startswith("''")
     if multiline:
         result = "\n" + result
-    print(color(key, BOLD), "=", result, file=out)
+    print(
+        color(key, BOLD),
+        # TODO check that this is what i actually want
+        "=" if len(diff_lines) == len(changed_lines) else "= ...",
+        result,
+        file=out,
+    )
 
 
 with tempfile.NamedTemporaryFile("w") as out:
