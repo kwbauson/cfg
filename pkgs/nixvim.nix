@@ -132,7 +132,7 @@ importPackage rec {
         end
       '';
       jsonls.enable = true;
-      basedpyright.enable = true;
+      ty.enable = true;
       ruff.enable = true;
       bashls.enable = true;
       biome.enable = true;
