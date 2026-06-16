@@ -120,7 +120,7 @@ for line, next_line in itertools.pairwise(trace_lines):
         items[current_key][in_key].append(
             untraced.removeprefix(current_key + args.equals_marker).rstrip()
         )
-    else:
+    elif current_key is not None:
         items[current_key][in_key].append(line.rstrip())
 
 
