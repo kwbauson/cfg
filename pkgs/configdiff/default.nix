@@ -24,13 +24,14 @@ in
   skippedPaths = [
     [ "_module" ]
     [ "assertions" ]
+    [ "home-manager" "extraSpecialArgs" ]
   ];
-  traceAccess' = label: (f: f [ ] null null) (fix (cont': path: parent: at: arg:
+  traceUsage = label: (f: f null null) (fix (cont': parent: at: path: arg:
     let
       isDerivation = x: x ? outPath && x ? drvPath;
       inDerivation = isDerivation parent;
       skipDerivationAttrs = [ "type" "outputName" "outputs" "meta" ];
-      cont = at: cont' (path ++ [ at ]) arg at;
+      cont = at: cont' arg at (path ++ [ at ]);
       trace = p: x: builtins.trace "${marker}${toJSON [label (toPathString p) x]}" arg;
     in
     # FIXME probably want to move the non-trace logic into python
@@ -41,16 +42,35 @@ in
     else if isList arg then imap cont arg
     else trace path (toPretty { } arg)
   ));
-  evalModulesTraced = label: (import patched-modules-nix {
-    lib = inputs.nixpkgs.lib // {
-      traceAccess = traceAccess' label;
-    };
-  }).evalModules;
+  tracedLib = pkgs.lib.extend (final: prev: {
+    traceConfigUsage = config:
+      let
+        inherit (config._module) args;
+        inherit (args._traceConfigUsage) label path;
+      in
+      if args ? _traceConfigUsage
+      then traceUsage label path config
+      else config;
+    modules = import patched-modules-nix { lib = final; };
+  });
+  traceConfigUsageModule = label: path: {
+    _module.args._traceConfigUsage = { inherit label path; };
+    _module.args.check = false;
+  };
   traceConfig = label: configuration:
     let inherit (configuration.type.functor) payload; in
-    (evalModulesTraced label {
+    (tracedLib.evalModules {
       inherit (payload) class specialArgs;
-      modules = [{ _module.args.check = false; }] ++ payload.modules;
+      modules = payload.modules ++ [
+        (traceConfigUsageModule label [ ])
+        {
+          config = optionalAttrs (configuration.config ? home-manager) {
+            home-manager.users = forAttrNames configuration.config.home-manager.users (name: {
+              imports = [ (traceConfigUsageModule label [ "home-manager" name ]) ];
+            });
+          };
+        }
+      ];
     }).config;
   buildFlake = inputs: outputsStr: runCommand "source"
     {
