@@ -143,7 +143,7 @@ def norm_store_paths(text):
     return re.sub(r"/nix/store/.{32}-", f"/nix/store/{'A' * 32}-", text)
 
 
-split_pattern = re.compile(r"([/-]|\s)")
+split_pattern = re.compile(r"""([\s/\-"'<>])""")
 
 
 def diff_item(key, item, out):
