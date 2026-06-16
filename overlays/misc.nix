@@ -8,14 +8,4 @@ final: prev: with final.scope; {
     hardware.enableAllFirmware = true;
     environment.systemPackages = [ better-comma ];
   })).config.system.build.isoImage;
-
-  vmConsole = configuration:
-    let
-      vm = (nixos {
-        services.getty.autologinUser = "root";
-        system.stateVersion = "25.05";
-        imports = [ configuration ];
-      }).config.system.build.vm;
-    in
-    writeBashBin "vm-console" ''${getExe vm} --nographic "$@"'';
 }

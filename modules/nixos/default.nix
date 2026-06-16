@@ -102,7 +102,7 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-  system.stateVersion = mkDefault "25.05";
+  system.stateVersion = mkDefault "26.11";
   programs.command-not-found.enable = false;
   programs.steam.enable = mkDefault isGraphical;
   programs.pmount.enable = true;
