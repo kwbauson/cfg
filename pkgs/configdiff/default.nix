@@ -59,20 +59,16 @@ in
         };
         _module.args.check = false;
       };
-      mkSubSystem = path:
-        optionalAttrs
-          (hasAttrByPath path configuration.options)
-          (setAttrByPath path (forAttrNames
-            (getAttrFromPath path configuration.config)
-            (name: { imports = [ (mkModule (path ++ [ name ])) ]; }))
-          );
+      mkNested = path: f: optionalAttrs
+        (hasAttrByPath path configuration.options)
+        (setAttrByPath path (f path (getAttrFromPath path configuration.config)));
       inherit (configuration.type.functor) payload;
     in
     (tracedLib.evalModules {
       inherit (payload) class specialArgs;
       modules = payload.modules ++ [
         (mkModule [ ])
-        (mkSubSystem [ "home-manager" "users" ])
+        (mkNested [ "home-manager" "users" ] (p: mapAttrNames (n: mkModule (p ++ [ n ]))))
       ];
     }).config;
   buildFlake = inputs: outputsStr: runCommand "source"
