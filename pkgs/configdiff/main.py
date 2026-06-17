@@ -163,24 +163,42 @@ def norm_store_paths(text):
 
 
 # this should never include valid store hash characters
-split_pattern = re.compile(r"""([\s/\-"'<>])""")
+split_pattern = re.compile(r"""([/\-"'<>]|\s+)""", re.MULTILINE)
+compare_lines_threshold = 1000
+# NOTE perormance is a meme, espcially with nix-darwin which makes huge activation scripts
+# maybe i should diff first by line, then within that. somehow.
+# need to test replacement detection to see if it's accurate enough
+
+
+def split_text(text):
+    result = [s for s in re.split(split_pattern, text) if s != ""]
+    if len(result) < compare_lines_threshold:
+        return result
+    else:
+        return re.split(r"(\n)", text)
 
 
 def diff_item(key, item, out):
     old = "\n".join(item["old"])
     new = "\n".join(item["new"])
-    real_old_seq = re.split(split_pattern, old)
-    real_new_seq = re.split(split_pattern, new)
+    real_old_seq = split_text(old)
+    real_new_seq = split_text(new)
     if args.include_hashes:
+        if old == new:
+            return
         old_seq = real_old_seq
         new_seq = real_new_seq
     else:
-        old_seq = re.split(split_pattern, norm_store_paths(old))
-        new_seq = re.split(split_pattern, norm_store_paths(new))
+        old_norm = norm_store_paths(old)
+        new_norm = norm_store_paths(new)
+        if old_norm == new_norm:
+            return
+        old_seq = split_text(old)
+        new_seq = split_text(new)
     if len(real_old_seq) != len(old_seq) or len(real_new_seq) != len(new_seq):
         die("sequence length mismatch")
     result = ""
-    matcher = difflib.SequenceMatcher(a=old_seq, b=new_seq, autojunk=False)
+    matcher = difflib.SequenceMatcher(isjunk=None, a=old_seq, b=new_seq, autojunk=False)
     sections: list[tuple[Literal["equal", "delete", "insert"], str]] = []
     for tag, i1, i2, j1, j2 in matcher.get_opcodes():
         old_text = "".join(real_old_seq[i1:i2])
