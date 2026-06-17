@@ -1,4 +1,3 @@
-from typing import Generator, Any, Literal
 import argparse
 import difflib
 import io
@@ -9,6 +8,9 @@ import selectors
 import subprocess
 import sys
 import tempfile
+from typing import Any, Generator
+
+from termcolor import colored
 
 parser = argparse.ArgumentParser(
     usage="%(prog)s [OPTIONS] old new",
@@ -39,24 +41,9 @@ parser.add_argument("--use-dump", default=None, help="use previously dumped outp
 
 # NIX_EXTRA_PARSER
 
-RED = "\033[0;31m"
-GREEN = "\033[0;32m"
-BOLD = "\033[1m"
-END = "\033[0m"
-
-
-def color(text, c):
-    if text:
-        result = "\n".join(
-            f"{c}{line}{END}" if line else line for line in text.split("\n")
-        )
-    else:
-        result = ""
-    return result
-
 
 def die(message, exitCode=1):
-    print(f"{color('error:', RED + BOLD):} {message}")
+    print(f"{colored('error:', 'red', attrs=['bold']):} {message}")
     exit(exitCode)
 
 
@@ -155,7 +142,7 @@ items = {}
 for label, path, value in map(json.loads, trace_lines):
     if path not in items:
         items[path] = {"old": [], "new": []}
-    items[path][label].append(value)
+    items[path][label].extend(value.splitlines())
 
 
 def norm_store_paths(text):
@@ -164,92 +151,77 @@ def norm_store_paths(text):
 
 # this should never include valid store hash characters
 split_pattern = re.compile(r"""([/\-"'<>]|\s+)""", re.MULTILINE)
-compare_lines_threshold = 1000
-# NOTE perormance is a meme, espcially with nix-darwin which makes huge activation scripts
-# maybe i should diff first by line, then within that. somehow.
-# need to test replacement detection to see if it's accurate enough
 
 
 def split_text(text):
-    result = [s for s in re.split(split_pattern, text) if s != ""]
-    if len(result) < compare_lines_threshold:
-        return result
-    else:
-        return re.split(r"(\n)", text)
+    return [s for s in re.split(split_pattern, text) if s != ""]
 
 
-def diff_item(key, item, out):
-    old = "\n".join(item["old"])
-    new = "\n".join(item["new"])
-    real_old_seq = split_text(old)
-    real_new_seq = split_text(new)
+def diff_item(key, old, new, out):
+    raw_old = "\n".join(old)
+    raw_new = "\n".join(new)
     if args.include_hashes:
-        if old == new:
+        if raw_old == raw_new:
             return
-        old_seq = real_old_seq
-        new_seq = real_new_seq
+        old_seq = old
+        new_seq = new
     else:
-        old_norm = norm_store_paths(old)
-        new_norm = norm_store_paths(new)
-        if old_norm == new_norm:
+        norm_old = norm_store_paths(raw_old)
+        norm_new = norm_store_paths(raw_new)
+        if norm_old == norm_new:
             return
-        old_seq = split_text(old)
-        new_seq = split_text(new)
-    if len(real_old_seq) != len(old_seq) or len(real_new_seq) != len(new_seq):
-        die("sequence length mismatch")
-    result = ""
-    matcher = difflib.SequenceMatcher(isjunk=None, a=old_seq, b=new_seq, autojunk=False)
-    sections: list[tuple[Literal["equal", "delete", "insert"], str]] = []
-    for tag, i1, i2, j1, j2 in matcher.get_opcodes():
-        old_text = "".join(real_old_seq[i1:i2])
-        new_text = "".join(real_new_seq[j1:j2])
-        match tag:
-            case "equal" | "delete":
-                sections.append((tag, old_text))
-            case "replace":
-                sections.append(("delete", old_text))
-                sections.append(("insert", new_text))
-            case "insert":
-                sections.append((tag, new_text))
-    # TODO roll changes to line boundaries
-    # especially because hashes between lines look weird
-    for tag, text in sections:
-        match tag:
-            case "equal":
-                result += text
-            case "delete":
-                result += color(text, RED)
-            case "insert":
-                result += color(text, GREEN)
-    # TODO cleaner exclusion of unchanged lines
-    diff_lines = result.split("\n")
-    changed_lines = []
-    for line in diff_lines:
-        if RED in line or GREEN in line:
-            changed_lines.append(line)
-    if not changed_lines:
-        return
-    result = "\n".join(changed_lines)
-    multiline = len(changed_lines) > 1 or old.startswith("''") or new.startswith("''")
-    if multiline:
-        result = "\n" + result
-    print(
-        color(key, BOLD),
-        # TODO check that this is what i actually want
-        "=" if len(diff_lines) == len(changed_lines) else "= ...",
-        result,
-        file=out,
-    )
+        old_seq = norm_old.splitlines()
+        new_seq = norm_new.splitlines()
+        if len(old) != len(old_seq) or len(new) != len(new_seq):
+            dir("normalized diff sequence length mismatch")
+    line_matcher = difflib.SequenceMatcher(a=old_seq, b=new_seq, autojunk=False)
+    results = []
+    for tag, i1, i2, j1, j2 in line_matcher.get_opcodes():
+        old_lines = (colored(line, "red") for line in old[i1:i2])
+        new_lines = (colored(line, "green") for line in new[j1:j2])
+        if tag == "delete":
+            results.extend(old_lines)
+        elif tag == "insert":
+            results.extend(new_lines)
+        elif tag == "replace":
+            inline_old = split_text("\n".join(old[i1:i2]))
+            inline_new = split_text("\n".join(new[j1:j2]))
+            inline_old_seq = split_text("\n".join(old_seq[i1:i2]))
+            inline_new_seq = split_text("\n".join(new_seq[j1:j2]))
+            inline_matcher = difflib.SequenceMatcher(
+                a=inline_old_seq, b=inline_new_seq, autojunk=False
+            )
+            inline_results = []
+            for tag, i1, i2, j1, j2 in inline_matcher.get_opcodes():
+                equal_parts = "".join(inline_old[i1:i2])
+                old_parts = colored(equal_parts, "red")
+                new_parts = colored("".join(inline_new[j1:j2]), "green")
+                if tag == "equal":
+                    inline_results.append(equal_parts)
+                elif tag == "delete":
+                    inline_results.append(old_parts)
+                elif tag == "insert":
+                    inline_results.append(new_parts)
+                elif tag == "replace":
+                    inline_results.extend((old_parts, new_parts))
+            results.extend("".join(inline_results).splitlines())
+    if results:
+        result_text = "\n".join(results)
+        full_assign = (
+            len(old) == len(new) == len(results)
+            or (not old and len(new) == len(results))
+            or (not new and len(old) == len(results))
+        )
+        print(
+            colored(key, attrs=["bold"]),
+            "=" if full_assign else "= ...",
+            result_text if len(results) == 1 else "\n" + result_text,
+            file=out,
+        )
 
 
 with tempfile.NamedTemporaryFile("w") as out:
     for key in sorted(items.keys()):
-        item = items[key]
-
-        if item["old"] == item["new"]:
-            continue
-
-        diff_item(key, item, out)
-
+        diff_item(key, items[key]["old"], items[key]["new"], out)
     out.flush()
     subprocess.Popen([os.getenv("PAGER", "less"), out.name]).wait()
