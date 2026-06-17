@@ -43,13 +43,20 @@ in
     else if isList arg then imap cont arg
     else trace path (toPretty { } arg)
   ));
-  tracedLib = pkgs.lib.extend (final: prev: {
+  tracedLib = lib: lib.extend (final: prev: {
     traceConfigUsage = config:
       if config._module.args ? _traceConfigUsage
       then traceUsage config._module.args._traceConfigUsage config
       else config;
     modules = import patched-modules-nix { lib = final; };
   });
+  getLib = configuration: (configuration.extendModules {
+    modules = [
+      ({ lib, ... }: {
+        _module.args._traceConfigUsage.lib = lib;
+      })
+    ];
+  })._module.args._traceConfigUsage.lib;
   traceConfig = label: configuration:
     let
       mkModule = path: {
@@ -64,13 +71,14 @@ in
         (setAttrByPath path (f path (getAttrFromPath path configuration.config)));
       inherit (configuration.type.functor) payload;
     in
-    (tracedLib.evalModules {
+    ((tracedLib (getLib configuration)).evalModules {
       inherit (payload) class specialArgs;
       modules = payload.modules ++ [
         (mkModule [ ])
         (mkNested [ "home-manager" "users" ] (p: mapAttrNames (n: mkModule (p ++ [ n ]))))
       ];
     }).config;
+  indent = i: s: concatStringsSep "\n${i}" (splitString "\n" (trim s));
   buildFlake = inputs: outputsStr: runCommand "source"
     {
       flakeNix = /* nix */ ''
@@ -79,7 +87,7 @@ in
             ${concatMapAttrsStringSep "\n    " (n: p: ''${n}.url = "path:${p}";'') inputs}
           };
           outputs = { self, ${concatMapAttrsStringSep ", " (n: _: n) inputs} }:
-            ${concatStringsSep "\n    " (splitString "\n" (trim outputsStr))};
+            ${indent "    " outputsStr};
         }
       '';
       nativeBuildInputs = [ nix ];
@@ -93,18 +101,28 @@ in
       cat flake.nix
       nix --extra-experimental-features 'nix-command flakes' flake lock
     '';
-  mkFlake = { old, new, oldOutput, newOutput, eval }:
+  tryEvalOutput = cfg: config:
+    if elem cfg.class or null [ "nixos" "darwin" ] then config.system.build.toplevel.outPath
+    else if cfg.class or null == "homeManager" then config.home.activationPackage.outPath
+    else if hasAttrByPath [ "meta" "nixvimInfo" ] cfg.options then config.build.package.outPath
+    else throw "unknown configuration type, please pass `--eval PATH`";
+  setOutputString = ref: out: indent "    " /* nix */ ''
+    ${ref} = ${ref}.outputs.${out} or
+      ${ref}.outputs.packages.${system}.${out} or
+      ${ref}.outputs.legacyPackages.${system}.${out};
+  '';
+  mkFlake = { old, new, oldOutput, newOutput, eval ? null }:
     buildFlake { cfg = cfg.outPath; inherit old new; } /* nix */ ''
       {
         traced = cfg.packages.${system}.${pname}.run {
-          old = old.outputs.${oldOutput};
-          new = new.outputs.${newOutput};
-          eval = c: c.${eval};
+          ${setOutputString "old" oldOutput}
+          ${setOutputString "new" newOutput}
+          ${optionalString (eval != null) /* nix */ "eval = _: c: c.${eval};"}
         };
       }
     '';
-  run = { old, new, eval }: foldl' (flip seq) "" [
-    (eval (traceConfig "old" old))
-    (eval (traceConfig "new" new))
+  run = { old, new, eval ? tryEvalOutput }: foldl' (flip seq) "" [
+    (eval old (traceConfig "old" old))
+    (eval new (traceConfig "new" new))
   ];
 })

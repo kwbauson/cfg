@@ -31,13 +31,15 @@ parser.add_argument(
 )
 parser.add_argument(
     "--eval",
-    default="system.build.toplevel.outPath",
-    help="nix path in config to evaluate for trace (default: %(default)s)",
+    help="nix path in config to evaluate for trace, e.g. system.build.toplevel.outPath",
 )
+parser.add_argument("--dump", help="dump nix output to a file instead of diffing")
+parser.add_argument("--use-dump", help="use previously dumped output")
 parser.add_argument(
-    "--dump", default=None, help="dump nix output to a file instead of diffing"
+    "--build-trace-flake",
+    action="store_true",
+    help="only build the flake used to generate traces",
 )
-parser.add_argument("--use-dump", default=None, help="use previously dumped output")
 
 # NIX_EXTRA_PARSER
 
@@ -49,7 +51,7 @@ def die(message, exitCode=1):
 
 args = parser.parse_args()
 
-if not (args.use_dump or (args.new and args.old)):
+if not ((args.new and args.old) or args.use_dump):
     parser.print_help()
     die("missing required args")
 
@@ -123,13 +125,15 @@ else:
     new_flake = get_flake_path(args.new.split("#")[0])
     traced_flake = run_nix_str(
         ["nix", "build", "--file", args.self_nix, "configdiff.mkFlake"],
-        ["--no-link", "--print-out-paths"],
+        ["--no-link", "--print-out-paths"] if not args.build_trace_flake else [],
         ["--arg", "old", old_flake],
         ["--arg", "new", new_flake],
         ["--argstr", "oldOutput", args.old.split("#")[1]],
         ["--argstr", "newOutput", args.new.split("#")[1]],
-        ["--argstr", "eval", args.eval],
+        ["--argstr", "eval", args.eval] if args.eval else [],
     ).strip()
+    if args.build_trace_flake:
+        exit()
     trace_lines = run_nix("nix", "eval", "--raw", f"{traced_flake}#traced")
 
 if args.dump:
@@ -176,14 +180,20 @@ def diff_item(key, old, new, out):
             dir("normalized diff sequence length mismatch")
     line_matcher = difflib.SequenceMatcher(a=old_seq, b=new_seq, autojunk=False)
     results = []
+    deleted_count = 0
+    inserted_count = 0
     for tag, i1, i2, j1, j2 in line_matcher.get_opcodes():
-        old_lines = (colored(line, "red") for line in old[i1:i2])
-        new_lines = (colored(line, "green") for line in new[j1:j2])
+        old_lines = [colored(line, "red") for line in old[i1:i2]]
+        new_lines = [colored(line, "green") for line in new[j1:j2]]
+        if tag != "equal":
+            deleted_count += len(old_lines)
+            inserted_count += len(new_lines)
         if tag == "delete":
             results.extend(old_lines)
         elif tag == "insert":
             results.extend(new_lines)
         elif tag == "replace":
+            # FIXME this still doesn't work sometimes...
             inline_old = split_text("\n".join(old[i1:i2]))
             inline_new = split_text("\n".join(new[j1:j2]))
             inline_old_seq = split_text("\n".join(old_seq[i1:i2]))
@@ -208,7 +218,7 @@ def diff_item(key, old, new, out):
     if results:
         result_text = "\n".join(results)
         full_assign = (
-            len(old) == len(new) == len(results)
+            len(old) == len(new) == deleted_count == inserted_count
             or (not old and len(new) == len(results))
             or (not new and len(old) == len(results))
         )
