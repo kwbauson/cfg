@@ -154,11 +154,15 @@ def norm_store_paths(text):
 
 
 # this should never include valid store hash characters
-split_pattern = re.compile(r"""([/\-"'<>]|\s+)""", re.MULTILINE)
+split_pattern = re.compile(r"""([/\-"'<>])""")
 
 
 def split_text(text):
     return [s for s in re.split(split_pattern, text) if s != ""]
+
+
+def colored_lines(text, *args, **kwargs):
+    return "\n".join(colored(line, *args, **kwargs) for line in text.splitlines())
 
 
 def diff_item(key, old, new, out):
@@ -193,7 +197,6 @@ def diff_item(key, old, new, out):
         elif tag == "insert":
             results.extend(new_lines)
         elif tag == "replace":
-            # FIXME this still doesn't work sometimes...
             inline_old = split_text("\n".join(old[i1:i2]))
             inline_new = split_text("\n".join(new[j1:j2]))
             inline_old_seq = split_text("\n".join(old_seq[i1:i2]))
@@ -204,8 +207,8 @@ def diff_item(key, old, new, out):
             inline_results = []
             for tag, i1, i2, j1, j2 in inline_matcher.get_opcodes():
                 equal_parts = "".join(inline_old[i1:i2])
-                old_parts = colored(equal_parts, "red")
-                new_parts = colored("".join(inline_new[j1:j2]), "green")
+                old_parts = colored_lines(equal_parts, "red")
+                new_parts = colored_lines("".join(inline_new[j1:j2]), "green")
                 if tag == "equal":
                     inline_results.append(equal_parts)
                 elif tag == "delete":
@@ -216,7 +219,7 @@ def diff_item(key, old, new, out):
                     inline_results.extend((old_parts, new_parts))
             results.extend("".join(inline_results).splitlines())
     if results:
-        result_text = "\n".join(results)
+        result_text = "\n  ".join(results)
         full_assign = (
             len(old) == len(new) == deleted_count == inserted_count
             or (not old and len(new) == len(results))
@@ -225,7 +228,7 @@ def diff_item(key, old, new, out):
         print(
             colored(key, attrs=["bold"]),
             "=" if full_assign else "= ...",
-            result_text if len(results) == 1 else "\n" + result_text,
+            result_text if len(results) == 1 else "\n  " + result_text,
             file=out,
         )
 

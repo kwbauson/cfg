@@ -21,13 +21,19 @@ in
   '';
   toPathStringPart = n: if isString n then strings.escapeNixIdentifier n else "*";
   toPathString = path: concatMapStringsSep "." toPathStringPart path;
-  skippedPaths = [
+  skipPatterns = [
     [ "_module" ]
     [ "assertions" ]
     [ "warnings" ]
     [ "home-manager" "extraSpecialArgs" ]
+    [ "home-manager" "users" null "_module" ]
+    [ "home-manager" "users" null "assertions" ]
+    [ "home-manager" "users" null "warnings" ]
   ];
-  traceUsage = (f: f null null) (fix (cont': parent: at: args@{ label, skip, path }: arg:
+  pathMatches = path: pattern:
+    length path == length pattern &&
+    foldl' (acc: { fst, snd }: snd == null || fst == snd) true (zipLists path pattern);
+  traceUsage = (f: f null null) (fix (cont': parent: at: args@{ label, path }: arg:
     let
       isDerivation = x: x ? outPath && x ? drvPath;
       inDerivation = isDerivation parent;
@@ -36,7 +42,7 @@ in
       trace = p: x: builtins.trace "${marker}${toJSON [label (toPathString p) x]}" arg;
     in
     # FIXME probably want to move the non-trace logic into python
-    if elem path skip then arg
+    if any (pathMatches path) skipPatterns then arg
     else if inDerivation && at == "outPath" then trace (init path) "<derivation ${arg}>"
     else if inDerivation && elem at skipDerivationAttrs then arg
     else if isAttrs arg then mapAttrs cont arg
@@ -45,25 +51,21 @@ in
   ));
   tracedLib = lib: lib.extend (final: prev: {
     traceConfigUsage = config:
-      if config._module.args ? _traceConfigUsage
-      then traceUsage config._module.args._traceConfigUsage config
+      let args = config._module.args; in
+      if args ? _traceConfigUsage
+      then traceUsage args._traceConfigUsage config
       else config;
     modules = import patched-modules-nix { lib = final; };
   });
   getLib = configuration: (configuration.extendModules {
-    modules = [
-      ({ lib, ... }: {
-        _module.args._traceConfigUsage.lib = lib;
-      })
-    ];
+    modules = toList ({ lib, ... }: {
+      _module.args._traceConfigUsage.lib = lib;
+    });
   })._module.args._traceConfigUsage.lib;
   traceConfig = label: configuration:
     let
       mkModule = path: {
-        _module.args._traceConfigUsage = {
-          inherit label path;
-          skip = map (p: path ++ p) skippedPaths;
-        };
+        _module.args._traceConfigUsage = { inherit label path; };
         _module.args.check = false;
       };
       mkNested = path: f: optionalAttrs
