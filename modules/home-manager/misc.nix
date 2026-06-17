@@ -8,8 +8,6 @@
       MOZ_USE_XINPUT2 = 1;
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
-      LESS = "-iRc";
-      LESSHISTFILE = "$XDG_DATA_HOME/less_history";
       PAGER = "less";
       RANGER_LOAD_DEFAULT_RC = "FALSE";
       SSH_ASKPASS = "";
@@ -96,6 +94,12 @@
       enableBashIntegration = false;
       defaultCommand = "fd -c always -H --ignore-file ${../../ignore} -E .git -tf | sort -V";
       defaultOptions = words "--ansi --reverse --multi --filepath-word";
+    };
+    less.enable = true;
+    less.options = {
+      ignore-case = true;
+      RAW-CONTROL-CHARS = true;
+      clear-screen = true;
     };
     lesspipe.enable = true;
     rofi = {
