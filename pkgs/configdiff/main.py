@@ -162,22 +162,29 @@ def norm_store_paths(text):
     return re.sub(r"/nix/store/.{32}-", f"/nix/store/{'A' * 32}-", text)
 
 
+# this should never include valid store hash characters
 split_pattern = re.compile(r"""([\s/\-"'<>])""")
 
 
 def diff_item(key, item, out):
     old = "\n".join(item["old"])
     new = "\n".join(item["new"])
-    if not args.include_hashes and norm_store_paths(old) == norm_store_paths(new):
-        return
-    old_seq = re.split(split_pattern, old)
-    new_seq = re.split(split_pattern, new)
+    real_old_seq = re.split(split_pattern, old)
+    real_new_seq = re.split(split_pattern, new)
+    if args.include_hashes:
+        old_seq = real_old_seq
+        new_seq = real_new_seq
+    else:
+        old_seq = re.split(split_pattern, norm_store_paths(old))
+        new_seq = re.split(split_pattern, norm_store_paths(new))
+    if len(real_old_seq) != len(old_seq) or len(real_new_seq) != len(new_seq):
+        die("sequence length mismatch")
     result = ""
     matcher = difflib.SequenceMatcher(a=old_seq, b=new_seq, autojunk=False)
     sections: list[tuple[Literal["equal", "delete", "insert"], str]] = []
     for tag, i1, i2, j1, j2 in matcher.get_opcodes():
-        old_text = "".join(old_seq[i1:i2])
-        new_text = "".join(new_seq[j1:j2])
+        old_text = "".join(real_old_seq[i1:i2])
+        new_text = "".join(real_new_seq[j1:j2])
         match tag:
             case "equal" | "delete":
                 sections.append((tag, old_text))
@@ -187,6 +194,7 @@ def diff_item(key, item, out):
             case "insert":
                 sections.append((tag, new_text))
     # TODO roll changes to line boundaries
+    # especially because hashes between lines look weird
     for tag, text in sections:
         match tag:
             case "equal":
@@ -201,6 +209,8 @@ def diff_item(key, item, out):
     for line in diff_lines:
         if RED in line or GREEN in line:
             changed_lines.append(line)
+    if not changed_lines:
+        return
     result = "\n".join(changed_lines)
     multiline = len(changed_lines) > 1 or old.startswith("''") or new.startswith("''")
     if multiline:
