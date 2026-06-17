@@ -1,7 +1,7 @@
 { config, osConfig, scope, ... }: with scope;
 {
   home = {
-    stateVersion = "26.05";
+    stateVersion = "26.11";
     sessionVariables = {
       EDITOR = "nvim";
       BROWSER = "firefox";
