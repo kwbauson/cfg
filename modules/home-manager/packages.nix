@@ -32,9 +32,9 @@
       };
     };
     development = {
-      inherit bat colordiff gron highlight xh icdiff jq watchexec nix-index ast-grep;
+      inherit colordiff gron highlight xh icdiff jq watchexec nix-index ast-grep;
       ruby = ruby.withPackages (ps: [ ps.rb-inotify ]);
-      python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ]);
+      python3 = python3.withPackages (ps: [ ps.typer ps.fastapi ps.uvicorn ps.openai ps.termcolor ]);
     };
     development-extra = optionalAttrs (!isMinimal) {
       inherit

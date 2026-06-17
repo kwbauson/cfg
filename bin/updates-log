@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# ONLY_LINUX
-# with-packages git jq bat delta
 set -euo pipefail
 repo=${2:-~/cfg}
 cd "$repo"

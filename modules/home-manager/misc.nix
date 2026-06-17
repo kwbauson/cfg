@@ -102,6 +102,10 @@
       clear-screen = true;
     };
     lesspipe.enable = true;
+    delta.enable = true;
+    delta.options.paging = "always";
+    bat.enable = true;
+    bat.config.paging = "always";
     rofi = {
       enable = isNixOS && isGraphical;
       theme = "solarized";

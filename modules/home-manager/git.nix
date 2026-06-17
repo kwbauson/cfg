@@ -17,7 +17,7 @@
       [[ -e $index ]] && cp "$index" "$GIT_INDEX_FILE" || rm "$GIT_INDEX_FILE"
       trap 'rm -f "$GIT_INDEX_FILE"' EXIT
     '';
-    gitDf = "git -c core.pager='${getExe delta} --dark' diff";
+    gitDf = "git -c core.pager='delta --dark' diff";
   }; {
     enable = true;
     package = if isDarwin then git else gitFull;
@@ -127,7 +127,7 @@
         logb=$(mktemp)
         git log $(git tracking) > "$loga"
         git log > "$logb"
-        ${getExe delta} "$loga" "$logb" || true
+        delta "$loga" "$logb" || true
         rm "$loga" "$logb"
         read -n1 -p "Continue? [y/n] " continue
         echo
