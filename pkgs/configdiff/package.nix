@@ -28,7 +28,7 @@ let
     any isString concatMapStringsSep length foldl' fix zipLists toJSON init
     elem isAttrs mapAttrs isList imap optionalAttrs concatStringsSep
     hasAttrByPath getAttrFromPath setAttrByPath splitString optionalString flip
-    seq trim concatMapAttrsStringSep
+    seq trim concatMapAttrsStringSep id isFunction
     ;
   inherit (lib.generators) toPretty;
   inherit (lib.strings) escapeNixIdentifier;
@@ -81,8 +81,9 @@ let
       })
     ];
   })._module.args._traceConfigUsage.lib;
-  traceConfig = label: configuration:
+  traceConfig = args: label:
     let
+      configuration = args.${label};
       mkModule = path: {
         _module.args._traceConfigUsage = { inherit label path; };
         _module.args.check = false;
@@ -95,6 +96,7 @@ let
     ((tracedLib (getLib configuration)).evalModules {
       inherit (payload) class specialArgs;
       modules = payload.modules ++ [
+        (args."${label}Module" or { })
         (mkModule [ ])
         (mkNested [ "home-manager" "users" ] (p: mapAttrs (n: _: mkModule (p ++ [ n ]))))
       ];
@@ -127,24 +129,38 @@ let
     else if cfg.class or null == "homeManager" then config.home.activationPackage.outPath
     else if hasAttrByPath [ "meta" "nixvimInfo" ] cfg.options then config.build.package.outPath
     else throw "unknown configuration type, please pass `--eval PATH`";
-  setOutputString = ref: out: indent "    " /* nix */ ''
-    ${ref} = ${ref}.outputs.${out} or
-      ${ref}.outputs.packages.${system}.${out} or
-      ${ref}.outputs.legacyPackages.${system}.${out};
-  '';
-  mkFlake = { old, new, oldOutput, newOutput, eval ? null }:
+  mkFlake =
+    { old
+    , new
+    , oldOutput
+    , newOutput
+    , eval ? null
+    , oldModule ? null
+    , newModule ? null
+    }@args:
+    let
+      setOutputString = ref: out: indent "    " /* nix */ ''
+        ${ref} = ${ref}.outputs.${out} or
+          ${ref}.outputs.packages.${system}.${out} or
+          ${ref}.outputs.legacyPackages.${system}.${out};
+      '';
+      optionalRunArg = name: f: optionalString (args.${name} or null != null)
+        "${name} = ${if isFunction f then f args.${name} else f};";
+    in
     buildFlake { configdiff = configdiffFlake; inherit old new; } /* nix */ ''
       {
         traced = configdiff.packages.${system}.${configdiffFlakeAttr}.run {
           ${setOutputString "old" oldOutput}
           ${setOutputString "new" newOutput}
-          ${optionalString (eval != null) /* nix */ "eval = _: c: c.${eval};"}
+          ${optionalRunArg "oldModule" id}
+          ${optionalRunArg "newModule" id}
+          ${optionalRunArg "eval" "_: c: c.${eval}"}
         };
       }
     '';
-  run = { old, new, eval ? tryEvalOutput }: foldl' (flip seq) "" [
-    (eval old (traceConfig "old" old))
-    (eval new (traceConfig "new" new))
+  run = { old, new, eval ? tryEvalOutput, ... }@args: foldl' (flip seq) "" [
+    (eval old (traceConfig args "old"))
+    (eval new (traceConfig args "new"))
   ];
 in
 (writers.writePython3Bin "configdiff"

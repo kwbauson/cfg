@@ -30,6 +30,13 @@ parser.add_argument(
     help="include changes when the only difference is a store path hash",
 )
 parser.add_argument(
+    "--old-module",
+    help="the text of a module that gets injected into old, e.g. '{ services.postgresql.enable = true; }'. if this is set, only one flake is needed",
+)
+parser.add_argument(
+    "--new-module", help="the text of a module that gets injected into new"
+)
+parser.add_argument(
     "--eval",
     help="nix path in config to evaluate for trace, e.g. system.build.toplevel.outPath",
 )
@@ -60,6 +67,9 @@ def die(message, exitCode=1):
 
 
 args, extra_nix_eval_args = parser.parse_known_args()
+
+if (args.old_module or args.new_module) and not args.new:
+    args.new = args.old
 
 if not ((args.new and args.old) or args.use_dump):
     parser.print_help()
@@ -138,6 +148,16 @@ def get_flake_path(ref):
         return data["path"]
 
 
+def optionalArgStr(name):
+    arg = getattr(args, name)
+    if arg:
+        parts = name.split("_")
+        nix_name = "".join(parts[:1] + [part.capitalize() for part in parts[1:]])
+        return ["--argstr", nix_name, arg]
+    else:
+        return []
+
+
 trace_lines = []
 
 if args.use_dump:
@@ -156,7 +176,9 @@ else:
         ["--arg", "new", new_flake],
         ["--argstr", "oldOutput", args.old.split("#")[1]],
         ["--argstr", "newOutput", args.new.split("#")[1]],
-        ["--argstr", "eval", args.eval] if args.eval else [],
+        optionalArgStr("eval"),
+        optionalArgStr("old_module"),
+        optionalArgStr("new_module"),
     ).strip()
     if args.verbose:
         print("trace flake:", trace_flake)
