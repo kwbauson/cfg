@@ -105,11 +105,12 @@
       '';
       dfp = gs "git df $(git parent -H)";
       f = "fetch --all --prune --prune-tags";
-      g = gs "git f && git mt";
+      g = gs "git f && git ra && git submodule update --recursive";
       gr = gs "git pull $(git tracking | tr / ' ') --rebase --autostash";
       gd = gs "git fetch origin $(git default):$(git default)";
       md = gs "git merge $(git default)";
       mt = gs "git merge --ff-only";
+      ra = gs "git rebase --autostash $(git tracking)";
       gmd = gs "git gd && g md";
       rmo = gs "git branch -D $1 && git push origin --delete $1";
       hidden = gs "git ls-files -v | grep '^S' | cut -c3-";
