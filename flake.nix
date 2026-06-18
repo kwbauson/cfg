@@ -1,5 +1,6 @@
 {
   inputs = {
+    self.submodules = true;
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     nixpkgs-lib.url = ./pkgs/nixpkgs-lib;
     nixpkgs-lib.inputs.cfg.follows = "";
