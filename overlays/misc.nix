@@ -8,4 +8,6 @@ final: prev: with final.scope; {
     hardware.enableAllFirmware = true;
     environment.systemPackages = [ better-comma ];
   })).config.system.build.isoImage;
+  configdiffNix = cfg.outPath;
+  configdiffNixAttr = "configdiff";
 }

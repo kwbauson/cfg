@@ -1,27 +1,18 @@
-scope: with scope;
-let
-  marker = "TRACE_CONFIG";
-  traceMarker = "trace: ${marker}";
-  extraParser = /* python */ ''
-    internal_help = "internal, do not use"
-    parser.add_argument("--self-nix", default="${cfg}", help=internal_help)
-    parser.add_argument("--marker", default="${traceMarker}", help=internal_help)
-  '';
-in
-(writePython3Bin pname
-  {
-    doCheck = false;
-    libraries = [ python3.pkgs.termcolor ];
-  }
-  (replaceString "# NIX_EXTRA_PARSER" extraParser (readFile ./main.py))
-).overrideAttrs (final: prev: with final.passthru; (x: { passthru = x; meta.includePackage = true; }) {
-  patched-modules-nix = runCommand "patched-modules.nix" { } ''
-    cp ${nixpkgsPath}/lib/modules.nix $out
-    patch $out ${./eval-modules-traced.patch}
-  '';
-  toPathStringPart = n: if isString n then strings.escapeNixIdentifier n else "*";
-  toPathString = path: concatMapStringsSep "." toPathStringPart path;
-  skipPatterns = [
+{ lib
+, writers
+, pkgs
+, runCommandLocal
+, stdenv
+, nix
+
+  # required configuration
+, configdiffNix
+, configdiffNixAttr
+, configdiffFlake ? configdiffNix
+, configdiffFlakeAttr ? configdiffNixAttr
+
+  # optional configuration
+, skipPatterns ? [
     [ "_module" ]
     [ "assertions" ]
     [ "warnings" ]
@@ -29,7 +20,34 @@ in
     [ "home-manager" "users" null "_module" ]
     [ "home-manager" "users" null "assertions" ]
     [ "home-manager" "users" null "warnings" ]
-  ];
+  ]
+, skipDerivationAttrs ? [ "type" "outputName" "outputs" "meta" ]
+}:
+let
+  inherit (lib)
+    any isString concatMapStringsSep length foldl' fix zipLists toJSON init
+    elem isAttrs mapAttrs isList imap optionalAttrs concatStringsSep
+    hasAttrByPath getAttrFromPath setAttrByPath splitString optionalString flip
+    seq trim concatMapAttrsStringSep
+    ;
+  inherit (lib.generators) toPretty;
+  inherit (lib.strings) escapeNixIdentifier;
+  inherit (stdenv.hostPlatform) system;
+
+  marker = "TRACE_CONFIG";
+  traceMarker = "trace: ${marker}";
+  extraParser = /* python */ ''
+    internal_help = "internal, do not use"
+    parser.add_argument("--self-nix", default="${configdiffNix}", help=internal_help)
+    parser.add_argument("--self-attr", default="${configdiffNixAttr}", help=internal_help)
+    parser.add_argument("--marker", default="${traceMarker}", help=internal_help)
+  '';
+  patched-modules-nix = runCommandLocal "patched-modules.nix" { } ''
+    cp ${pkgs.path}/lib/modules.nix $out
+    patch $out ${./eval-modules-traced.patch}
+  '';
+  toPathStringPart = n: if isString n then escapeNixIdentifier n else "*";
+  toPathString = path: concatMapStringsSep "." toPathStringPart path;
   pathMatches = path: pattern:
     length path == length pattern &&
     foldl' (acc: { fst, snd }: snd == null || fst == snd) true (zipLists path pattern);
@@ -37,7 +55,6 @@ in
     let
       isDerivation = x: x ? outPath && x ? drvPath;
       inDerivation = isDerivation parent;
-      skipDerivationAttrs = [ "type" "outputName" "outputs" "meta" ];
       cont = at: cont' arg at (args // { path = path ++ [ at ]; });
       trace = p: x: builtins.trace "${marker}${toJSON [label (toPathString p) x]}" arg;
     in
@@ -58,9 +75,11 @@ in
     modules = import patched-modules-nix { lib = final; };
   });
   getLib = configuration: (configuration.extendModules {
-    modules = toList ({ lib, ... }: {
-      _module.args._traceConfigUsage.lib = lib;
-    });
+    modules = [
+      ({ lib, ... }: {
+        _module.args._traceConfigUsage.lib = lib;
+      })
+    ];
   })._module.args._traceConfigUsage.lib;
   traceConfig = label: configuration:
     let
@@ -77,11 +96,11 @@ in
       inherit (payload) class specialArgs;
       modules = payload.modules ++ [
         (mkModule [ ])
-        (mkNested [ "home-manager" "users" ] (p: mapAttrNames (n: mkModule (p ++ [ n ]))))
+        (mkNested [ "home-manager" "users" ] (p: mapAttrs (n: _: mkModule (p ++ [ n ]))))
       ];
     }).config;
   indent = i: s: concatStringsSep "\n${i}" (splitString "\n" (trim s));
-  buildFlake = inputs: outputsStr: runCommand "source"
+  buildFlake = inputs: outputsStr: runCommandLocal "source"
     {
       flakeNix = /* nix */ ''
         {
@@ -114,9 +133,9 @@ in
       ${ref}.outputs.legacyPackages.${system}.${out};
   '';
   mkFlake = { old, new, oldOutput, newOutput, eval ? null }:
-    buildFlake { cfg = cfg.outPath; inherit old new; } /* nix */ ''
+    buildFlake { configdiff = configdiffFlake; inherit old new; } /* nix */ ''
       {
-        traced = cfg.packages.${system}.${pname}.run {
+        traced = configdiff.packages.${system}.${configdiffFlakeAttr}.run {
           ${setOutputString "old" oldOutput}
           ${setOutputString "new" newOutput}
           ${optionalString (eval != null) /* nix */ "eval = _: c: c.${eval};"}
@@ -127,4 +146,11 @@ in
     (eval old (traceConfig "old" old))
     (eval new (traceConfig "new" new))
   ];
-})
+in
+(writers.writePython3Bin "configdiff"
+  {
+    doCheck = false;
+    libraries = ps: [ ps.termcolor ];
+  }
+  (lib.replaceString "# NIX_EXTRA_PARSER" extraParser (lib.readFile ./main.py))
+).overrideAttrs { passthru = { inherit mkFlake run; }; }
