@@ -13,7 +13,7 @@ from typing import Any, Generator
 from termcolor import colored
 
 parser = argparse.ArgumentParser(
-    usage="%(prog)s [OPTIONS] old new",
+    usage="%(prog)s [OPTIONS] old new [-- NIX_ARGS]",
     description="diff nixpkgs lib.evalConfig between flakes, e.g. flake#nixosConfigurations.foo",
 )
 
@@ -44,6 +44,11 @@ parser.add_argument(
     "--verbose",
     action="store_true",
     help="print more stuff as it happens",
+)
+parser.add_argument(
+    "--quiet",
+    action="store_true",
+    help="print less stuff as it happens (supresses nix output)",
 )
 
 # NIX_EXTRA_PARSER
@@ -93,13 +98,13 @@ def select_lines(*files) -> Generator[tuple[str, Any]]:
                 die("reading from invalid fileobj")
 
 
-show_spinner = sys.stdout.isatty()
+show_spinner = sys.stdout.isatty() and not args.quiet
 
 
 def run_nix(*cmdline):
     spinner_chars = "/-\\"
     spinner_idx = 0
-    run_args = flatten(cmdline)
+    run_args = ["nix"] + (["--quiet"] if args.quiet else []) + flatten(cmdline)
     if args.verbose:
         print("++", " ".join(run_args))
     with subprocess.Popen(
@@ -115,7 +120,8 @@ def run_nix(*cmdline):
                     spinner_idx = (spinner_idx + 1) % len(spinner_chars)
             else:
                 sys.stderr.write(line)
-    sys.stderr.write("\r\033[1K")
+    if show_spinner:
+        sys.stderr.write("\r\033[1K")
     if proc.returncode:
         die("nix had non-zero exit code", proc.returncode)
 
@@ -125,7 +131,7 @@ def run_nix_str(*cmdline):
 
 
 def get_flake_path(ref):
-    data = json.loads(run_nix_str("nix", "flake", "metadata", "--json", ref))
+    data = json.loads(run_nix_str("flake", "metadata", "--json", ref))
     if "dir" in data["resolved"]:
         return os.path.join(data["path"], data["resolved"]["dir"])
     else:
@@ -144,7 +150,7 @@ else:
     if args.verbose:
         print("new flake:", new_flake)
     trace_flake = run_nix_str(
-        ["nix", "build", "--file", args.self_nix, f"{args.self_attr}.mkFlake"],
+        ["build", "--file", args.self_nix, f"{args.self_attr}.mkFlake"],
         ["--no-link", "--print-out-paths"] if not args.build_trace_flake else [],
         ["--arg", "old", old_flake],
         ["--arg", "new", new_flake],
@@ -156,9 +162,7 @@ else:
         print("trace flake:", trace_flake)
     if args.build_trace_flake:
         exit()
-    trace_lines = run_nix(
-        "nix", "eval", "--raw", f"{trace_flake}#traced", extra_nix_eval_args
-    )
+    trace_lines = run_nix("eval", "--raw", f"{trace_flake}#traced", extra_nix_eval_args)
 
 if args.dump:
     with open(args.dump, "w") as out:
