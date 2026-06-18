@@ -13,8 +13,20 @@ from typing import Any, Generator
 from termcolor import colored
 
 parser = argparse.ArgumentParser(
-    usage="%(prog)s [OPTIONS] old new [-- NIX_ARGS]",
-    description="diff nixpkgs lib.evalConfig between flakes, e.g. flake#nixosConfigurations.foo",
+    usage="""%(prog)s [OPTIONS] ARGS [-- NIX_ARGS]
+
+diff how nixpkgs lib.evalModules gets used between configurations in flakes
+
+examples:
+    %(prog)s {new,old}#nixosConfigurations.machine
+    %(prog)s flake#nixosConfigurations.{machine,other}
+    %(prog)s ~/flake-repo{?ref=HEAD,}#nixosConfigurations.machine
+    %(prog)s flake#nixosConfigurations.machine -- --override-input new/nixpkgs nixpkgs/nixos-unstable-small
+    %(prog)s flake#nixosConfigurations.machine --new-module '{ services.postgresql.enable = true; }'
+    %(prog)s flake#darwinConfigurations.machine --new-module '{ services.dnsmasq.enable = true; }'
+    %(prog)s flake#homeConfigurations.user --new-module '{ programs.git.enable = true; }'
+    %(prog)s flake#nixvimConfiguration --new-module '{ lsp.servers.ty.enable = true; }'
+"""
 )
 
 parser.add_argument(
@@ -40,6 +52,12 @@ parser.add_argument(
     "--eval",
     help="nix path in config to evaluate for trace, e.g. system.build.toplevel.outPath",
 )
+parser.add_argument(
+    "nix_args",
+    nargs="*",
+    default=[],
+    help="args after -- that are passed through to nix",
+)
 parser.add_argument("--dump", help="dump nix output to a file instead of diffing")
 parser.add_argument("--use-dump", help="use previously dumped output")
 parser.add_argument(
@@ -57,6 +75,7 @@ parser.add_argument(
     action="store_true",
     help="print less stuff as it happens (supresses nix output)",
 )
+parser.add_argument("--usage", action="store_true", help="print usage section of help")
 
 # NIX_EXTRA_PARSER
 
@@ -66,14 +85,23 @@ def die(message, exitCode=1):
     exit(exitCode)
 
 
-args, extra_nix_eval_args = parser.parse_known_args()
+args = parser.parse_args()
 
-if (args.old_module or args.new_module) and not args.new:
+if args.usage:
+    print(parser.format_usage(), end="")
+    exit()
+
+if (
+    (args.old_module or args.new_module) and not args.new
+) or "--override-input" in args.nix_args:
+    args.new = args.old
+# oof this is hacky
+if args.new == "--override-input":
+    args.nix_args.insert(0, args.new)
     args.new = args.old
 
 if not ((args.new and args.old) or args.use_dump):
-    parser.print_help()
-    die("missing required args")
+    parser.error("missing required args")
 
 
 def flatten(x):
@@ -184,7 +212,7 @@ else:
         print("trace flake:", trace_flake)
     if args.build_trace_flake:
         exit()
-    trace_lines = run_nix("eval", "--raw", f"{trace_flake}#traced", extra_nix_eval_args)
+    trace_lines = run_nix("eval", "--raw", f"{trace_flake}#traced", args.nix_args)
 
 if args.dump:
     with open(args.dump, "w") as out:
@@ -204,7 +232,7 @@ def norm_store_paths(text):
 
 
 # this should never include valid store hash characters
-split_pattern = re.compile(r"""([/\-"'<>])""")
+split_pattern = re.compile(r"""([/\-"'<>]|\s+)""")
 
 
 def split_text(text):
