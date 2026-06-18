@@ -193,19 +193,11 @@ importPackage rec {
         diagnostics = "nvim_lsp";
         name_formatter =
           let
-            names = [
-              "default.nix"
-              "shell.nix"
-              "configuration.nix"
-              "darwin-configuration.nix"
-              "index.html"
-              "index.css"
-              "index.ts"
-              "index.tsx"
-              "config.nix"
-              "secrets.yaml"
-              "main.tf"
-              "misc.nix"
+            names = flatten [
+              [ "default.nix" "shell.nix" "flake.nix" "package.nix" ]
+              [ "configuration.nix" "darwin-configuration.nix" ]
+              [ "index.html" "index.css" "index.ts" "index.tsx" ]
+              [ "config.nix" "secrets.yaml" "main.tf" "misc.nix" ]
             ];
           in
           mkRaw ''
