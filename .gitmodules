@@ -1,0 +1,3 @@
+[submodule "pkgs/configdiff"]
+	path = pkgs/configdiff
+	url = https://github.com/kwbauson/configdiff.git
