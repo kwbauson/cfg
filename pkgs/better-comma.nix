@@ -112,4 +112,5 @@ scope: with scope; stdenvNoCC.mkDerivation {
     , -p hello hello
     , -d hello
   '';
+  meta.includePackage = true;
 }

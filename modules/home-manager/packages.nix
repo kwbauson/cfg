@@ -11,13 +11,13 @@
         perl pigz procps progress pv ranger ripgrep rlwrap rsync sd socat
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
-        better-comma doggo dasel clip nixvim configdiff;
+        doggo dasel configdiff;
       inherit extra-bin-packages;
     };
     graphical = optionalAttrs isGraphical {
       graphical-core = {
         inherit
-          dzen2 graphviz imagemagick term nsxiv
+          dzen2 graphviz imagemagick nsxiv
           xclip xdotool xsel xterm maim w3m
           xdpyinfo xev xfontsel xmodmap;
       };
@@ -42,7 +42,12 @@
         unison-ucm cachix npm-check-updates prettier;
       inherit tfn;
     };
-    meta-included = filterAttrs (_: pkg: pkg.meta.includePackage or false) extra-packages;
+    meta-included = filterAttrs
+      (_: pkg:
+        let i = pkg.meta.includePackage or false; in
+        if isFunction i then i machine else i
+      )
+      extra-packages;
   };
   excluded-packages = optionalAttrs isDarwin
     {

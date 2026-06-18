@@ -17,4 +17,8 @@ let
     exec ${getExe kitty} --single-instance --name termbar bash --init-file ${init-file}
   '';
 in
-buildEnv { name = pname; paths = [ term termbar ]; }
+buildEnv {
+  name = pname;
+  paths = [ term termbar ];
+  meta.includePackage = m: m.isGraphical;
+}

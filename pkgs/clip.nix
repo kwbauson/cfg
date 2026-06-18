@@ -1,5 +1,5 @@
 scope: with scope;
-pog {
+addMetaAttrs { includePackage = true; } (pog {
   name = "clip";
   flags = mapAttrsToList (name: mergeAttrs { inherit name; short = ""; }) {
     sync_primary = {
@@ -23,4 +23,4 @@ pog {
       fi
     fi
   '';
-}
+})

@@ -9,6 +9,7 @@ importPackage rec {
   };
   inherit (configuration) config;
   inherit (config.build) package;
+  meta.includePackage = true;
 
   lib = inputs.nixvim.lib.nixvim.extend (final: prev: with final; {
     mkKeyMaps = mapAttrsToList (
