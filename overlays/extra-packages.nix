@@ -12,10 +12,15 @@ let
     (readDir ../pkgs)
     attrNames
     (map (path:
-      let isPkgDir = pathExists (../pkgs/${path}/default.nix); in
+      let
+        packagePkgFile = ../pkgs/${path}/package.nix;
+        defaultPkgFile = ../pkgs/${path}/default.nix;
+        pkgFile = if pathExists packagePkgFile then packagePkgFile else defaultPkgFile;
+        isPkgDir = pathExists pkgFile;
+      in
       {
         name = if isPkgDir || hasSuffix ".nix" path then removeSuffix ".nix" path else null;
-        value = ../pkgs/${if isPkgDir then "${path}/default.nix" else path};
+        value = if isPkgDir then pkgFile else ../pkgs/${path};
       })
     )
     (filter (x: x.name != null))
