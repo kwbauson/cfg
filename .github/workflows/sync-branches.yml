@@ -2,6 +2,7 @@ name: sync-branches
 on:
   workflow_dispatch:
   push:
+    paths: [flake.lock]
     branches: [main]
 jobs:
   job:
