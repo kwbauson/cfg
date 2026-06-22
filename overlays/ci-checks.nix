@@ -56,8 +56,9 @@ in
     '';
   };
 
-  requiredSubstitutes = optionalAttrs isLinux {
-    inherit firefox-unwrapped ffmpeg-full;
-    chromium = chromium.browser;
-  };
+  required-substitutes = linkFarmOfHashes "required-substitutes"
+    (mapAttrsToList (_: toDerivation) (optionalAttrs isLinux {
+      inherit firefox-unwrapped ffmpeg-full;
+      chromium = chromium.browser;
+    }));
 }
