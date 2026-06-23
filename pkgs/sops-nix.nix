@@ -1,12 +1,12 @@
 scope: with scope;
 importPackage {
   inherit pname;
-  version = "0-unstable-2026-06-20";
+  version = "0-unstable-2026-06-22";
   src = fetchFromGitHub {
     owner = "Mic92";
     repo = pname;
-    rev = "420f8d2e9882911f65cfac15cc706f639ba96cca";
-    hash = "sha256-NFHmA7H47adqiyp+0iEOyZOQhmigDqA/NBAlf4imB6U=";
+    rev = "56b24064fdcaedca53553b1a6d607fd23b613a24";
+    hash = "sha256-478kKQBvK6SYTOdN2h9jhKJv94nbXRbFMfuL1WshErg=";
   };
   passthru.updateScript = unstableGitUpdater { hardcodeZeroVersion = true; };
 }
