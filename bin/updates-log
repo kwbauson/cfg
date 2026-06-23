@@ -2,7 +2,7 @@
 set -euo pipefail
 repo=${2:-~/cfg}
 cd "$repo"
-updateRepo=${1:-github:kwbauson/cfg/$(git rev-parse --abbrev-ref HEAD)}
+updateRepo=${1:-~/cfg?ref=origin/main}
 
 sourcesInfo=$(nix --refresh eval "$repo#sourcesInfo" --json)
 updateSourcesInfo=$(nix --refresh eval "$updateRepo#sourcesInfo" --json)
