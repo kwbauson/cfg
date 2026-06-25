@@ -5,7 +5,6 @@
     common-gpu-amd
     common-cpu-amd-pstate
     modules.ci-server
-    ./personal-api.nix
     "${cobi.src}/hosts/modules/games/palworld.nix"
     "${cobi.src}/hosts/modules/games/valheim.nix"
     (import "${searchix.src}/nix/modules" { packages.${system}.default = searchix; })
@@ -72,8 +71,6 @@
       respond 404
     }
   '';
-
-  services.caddy.subdomains.api = constants.personal-api.port;
 
   services.caddy.subdomains.playground = ''
     authorize with admin
@@ -148,5 +145,36 @@
       }];
       storage_config.filesystem.directory = "/var/lib/loki/chunks";
     };
+  };
+
+  services.caddy.subdomains.api = constants.personal-api.port;
+  systemd.services.personal-api = {
+    wantedBy = [ "multi-user.target" ];
+    environment.PORT = toString constants.personal-api.port;
+    script = getExe (writePython3Bin "main.py"
+      {
+        libraries = ps: [ ps.uvicorn ps.fastapi ];
+        doCheck = false;
+      }
+      ./personal-api.py
+    );
+  };
+
+  services.caddy.subdomains.actions = ''
+    basic_auth {
+      {env.ACTIONS_USERNAME} {env.ACTIONS_HASHED_PASSWORD}
+    }
+    reverse_proxy http://localhost:13001
+  '';
+  systemd.services.personal-actions = {
+    wantedBy = [ "multi-user.target" ];
+    script = getExe (
+      writePython3Bin "main.py"
+        {
+          libraries = ps: [ ps.uvicorn ps.fastapi ];
+          doCheck = false;
+        }
+        ./personal-actions.py
+    );
   };
 }
