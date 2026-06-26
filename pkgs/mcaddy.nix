@@ -4,7 +4,7 @@ let
 in
 (caddy.withPlugins {
   inherit plugins;
-  hash = "sha256-rv1d7FumBwro6pTNmoiwY2bCtDIfAF7NwXjYoocniao=";
+  hash = "sha256-jEfl5UaTHulvkpFnOuadca4jYbZaYt8Z704ts08jHlM=";
 }).overrideAttrs (old: {
   meta = old.meta // {
     skipBuild = isDarwin;
