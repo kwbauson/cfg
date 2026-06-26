@@ -6,7 +6,7 @@ GEM
       builder
       thor
       xml-simple
-    rbtree (0.4.6)
+    rbtree (0.4.7)
     rexml (3.4.4)
     sorted_set (1.1.0)
       rbtree
