@@ -43,4 +43,6 @@
     ];
   };
   nix.settings.substituters = mkForce [ "http://localhost:9180" ];
+  nix.settings.narinfo-cache-meta-ttl = 10;
+  nix.settings.narinfo-cache-positive-ttl = 10;
 }

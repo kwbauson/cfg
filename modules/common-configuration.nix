@@ -17,6 +17,7 @@
     fallback = true;
     trusted-users = [ "@wheel" ];
     extra-experimental-features = [ "nix-command" "flakes" ];
+    tarball-ttl = 60;
     narinfo-cache-negative-ttl = 10;
     warn-dirty = false;
   };
