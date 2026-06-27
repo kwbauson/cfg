@@ -47,6 +47,8 @@ final: prev: with final.scope; {
     readFile
     fromJSON
     (x: x.nodes)
+    (mapAttrValues (x: x // optionalAttrs (x.original.id or null == "nixpkgs")
+      { locked = x.locked // { owner = "NixOS"; repo = "nixpkgs"; }; }))
     (filterAttrs (name: x: name != "root" && x.locked.repo or false != false))
     (mapAttrValues (x: { inherit (x.locked) owner repo rev; }))
   ] // pipe extra-packages [
