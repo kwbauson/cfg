@@ -32,6 +32,7 @@ let
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
       push = writeBash "push-cached-refs" ''
         set -xeuo pipefail
+        alias git='git -c user.email=${pname}@example.com -c user.name=${pname}'
         git fetch origin ${refspec}:${refspec}
         git notes --ref=${pname} add --force --message test
         git push origin ${refspec}
