@@ -32,7 +32,8 @@ let
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
       push = writeBash "push-cached-refs" ''
         git notes --ref=${pname} add --force --message test
-        git push origin refs/notes/${pname}
+        git fetch origin ${refspec}
+        git push origin ${refspec}
       '';
     in
     runCommandLocal "${sourceHash}-${flakeHash}" { } ''
