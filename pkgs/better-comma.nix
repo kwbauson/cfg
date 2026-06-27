@@ -10,15 +10,11 @@ scope: with scope; stdenvNoCC.mkDerivation {
     set -o pipefail
     source=${cfg}
     [[ $1 = -u ]] && uncache=1 && shift
-    [[ $1 = -d ]] && desc=1 && shift && pkg=$1 && shift
+    [[ $1 = -d ]] && desc=1 && shift
     [[ $1 = -m ]] && man=1 && shift
     [[ $1 = --trace ]] && trace=1 && shift
     [[ $1 = -p ]] && shift && pkg=$1 && shift
-    if [[ $desc = 1 ]];then
-      cmd=fakecmd
-    else
-      cmd=$1
-    fi
+    cmd=$1
     if [[ $trace = 1 ]];then
       set -x
     fi
@@ -26,7 +22,7 @@ scope: with scope; stdenvNoCC.mkDerivation {
     if [[ -z $cmd || $cmd = -h || $cmd = --help ]];then
       echo 'usage: , [OPTIONS] COMMAND [ARGS]'
       echo '  -p package      explicitly specify package'
-      echo '  -d package      print info about package'
+      echo '  -d command      print info about package containing command'
       echo '  -u command      clear cached info about command'
       echo '  -m command      open man-page for command'
       exit
