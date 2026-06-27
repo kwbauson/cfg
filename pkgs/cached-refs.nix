@@ -1,5 +1,6 @@
 scope: with scope;
 let
+  refspec = "refs/notes/${pname}";
   build = { flake, refs, postBuild ? "" }:
     let
       pathsAttrs = listToAttrs (map
@@ -29,10 +30,15 @@ let
       flakeHash = getDrvHash flakeBuild;
       links = linkFarmOfHashes "${pname}-links"
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
+      push = writeBash "push-cached-refs" ''
+        git notes --ref=${pname} add --force --message test
+        git push origin refs/notes/${pname}
+      '';
     in
     runCommandLocal "${sourceHash}-${flakeHash}" { } ''
       mkdir -p $out
       ln -s ${links} $out/.${links.name}
+      ln -s ${push} $out/.push-${pname}
       ${postBuild}
     '';
 in
@@ -42,6 +48,15 @@ in
 
   if [[ $1 = -v ]];then
     set -x && shift
+  fi
+
+  repo=$1 && shift
+
+  cd "$repo"
+
+  if [[ $1 = --clean ]];then
+    git update-ref -d ${refspec}
+    exit
   fi
 
   cache=$1 && shift
@@ -72,6 +87,7 @@ in
   fi
 
   exec nix "$cmd" $impure "$flake"#"$installable" "$@"
-'').overrideAttrs {
+'').overrideAttrs (old: {
+  meta = old.meta // { includePackage = true; };
   passthru = { inherit build; };
-}
+})
