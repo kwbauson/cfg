@@ -105,7 +105,7 @@
       '';
       dfp = gs "git df $(git parent -H)";
       f = "fetch --all --prune --prune-tags";
-      g = gs "git f && git ra && git submodule update --recursive";
+      g = gs "git f && git ra && git submodule update --init --recursive --no-fetch";
       gr = gs "git pull $(git tracking | tr / ' ') --rebase --autostash";
       gd = gs "git fetch origin $(git default):$(git default)";
       md = gs "git merge $(git default)";
@@ -123,7 +123,7 @@
       pr = gs "git put && gh pr create --body ''";
       fp = gs /* bash */ ''
         set -e
-        git fetch
+        git f
         loga=$(mktemp)
         logb=$(mktemp)
         git log $(git tracking) > "$loga"
@@ -174,6 +174,14 @@
           -e '^nothing to commit' || true
       '';
       sf = gs ''git f --quiet && git s "$@"'';
+      submodule-changed = gs /* bash */ ''
+        git status --porcelain=v2 |
+          while read _ _ sub _ _ _ _ _ path;do
+            if [[ ''${sub:0:1} = S ]];then
+              echo "$path"
+            fi
+          done
+      '';
     };
     settings.user.email = userEmail;
     settings.user.name = userName;

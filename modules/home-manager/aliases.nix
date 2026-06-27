@@ -4,39 +4,18 @@ let
     set -euo pipefail
     pkg=$1
     shift
-
     cd ~/cfg
-    changes=()
-    while read _ path;do
-      changes+=("$path")
-    done < <(git status --short)
-    submodules=()
-    while read _ path _;do
-      submodules+=("$path")
-    done < <(git submodule status)
 
-    markerName=.__submodule_change_marker__
-
+    markerName=__submodule_changed_marker__
     cleanup() {
       cd ~/cfg
       rm -f "$markerName"
       git rm --force --quiet "$markerName"
     }
-
-    submoduleChanged=0
-    for change in "''${changes[@]}";do
-      for submodule in "''${submodules[@]}";do
-        if [[ $change = $submodule ]];then
-          submoduleChanged=1
-          break
-        fi
-      done
-      if [[ $submoduleChanged = 1 ]];then
-        touch "$markerName"
-        trap cleanup EXIT
-        break
-      fi
-    done
+    if [[ -n $(git submodule-changed) ]];then
+      > "$markerName"
+      trap cleanup EXIT
+    fi
 
     git add --all --intent-to-add
     cd "$OLDPWD"
@@ -54,8 +33,7 @@ in
       nixos-generate-config --show-hardware-config > hardware-configuration.nix
       git --no-pager diff hardware-configuration.nix
     '';
-    cfgu = "git -C ~/cfg f && git -C ~/cfg g";
-    nou = "cfgu && noa";
+    nou = "git -C ~/cfg g && noa";
     nod = ''delete-old-generations "$@" && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}'';
     noc = "cd ~/cfg && gh workflow run updates.yml";
     nb = nixPkgAlias "build" "";
