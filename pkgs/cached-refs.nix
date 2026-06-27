@@ -31,6 +31,7 @@ let
       links = linkFarmOfHashes "${pname}-links"
         ([ flakeBuild ] ++ map (ref: getAttrFromPath ref flake.packages.${system}) refs);
       push = writeBash "push-cached-refs" ''
+        set -xeuo pipefail
         git fetch origin ${refspec}:${refspec}
         git notes --ref=${pname} add --force --message test
         git push origin ${refspec}
