@@ -160,21 +160,27 @@
     );
   };
 
-  services.caddy.subdomains.actions = ''
+  services.olivetin.enable = true;
+  services.olivetin.user = "root";
+  services.olivetin.settings = {
+    ListenAddressSingleHTTPFrontend = "localhost:13001";
+    actions = [
+      {
+        title = "Start/Restart Palworld";
+        icon = ''<iconify-icon icon="cil:animal"></iconify-icon>'';
+        shell = "systemctl restart palworld";
+      }
+      {
+        title = "Start/Restart Valheim";
+        icon = ''<iconify-icon icon="game-icons:viking-helmet"></iconify-icon>'';
+        shell = "systemctl restart valheim";
+      }
+    ];
+  };
+  services.caddy.subdomains.olivetin = ''
     basic_auth {
-      {env.ACTIONS_USERNAME} {env.ACTIONS_HASHED_PASSWORD}
+      {env.OLIVETIN_USERNAME} {env.OLIVETIN_HASHED_PASSWORD}
     }
     reverse_proxy http://localhost:13001
   '';
-  systemd.services.personal-actions = {
-    wantedBy = [ "multi-user.target" ];
-    script = getExe (
-      writePython3Bin "main.py"
-        {
-          libraries = ps: [ ps.uvicorn ps.fastapi ];
-          doCheck = false;
-        }
-        ./personal-actions.py
-    );
-  };
 }
