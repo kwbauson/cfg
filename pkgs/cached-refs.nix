@@ -27,9 +27,10 @@ let
           )
           with open("${refsJson}") as f:
               for item in json.load(f):
-                  print('Pushing', item["path"])
+                  path = f"${sourceHash}/{item["path"]}"
+                  print('Pushing', path)
                   s3.put_object(
-                      Key=f"${sourceHash}/{item["path"]}",
+                      Key=path,
                       Body=item["attrs"].replace("attrsType", "type"),
                       Bucket="${bucket}",
                   )
