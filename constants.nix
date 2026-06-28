@@ -16,4 +16,5 @@ rec {
     exporters.node.port = 9002;
   };
   loki.port = 9091;
+  cloudflare.account_id = "8f363d22bedef7fc30df7bfac405283f";
 }
