@@ -36,7 +36,7 @@ let
         '';
     in
     runCommandLocal "${pname}-build" { passthru = { inherit refsJson push; }; } ''
-      mkdir -p $out
+      mkdir -p $out/bin
       ln -s ${push}/bin/* $out/bin
       ${postBuild}
     '';
