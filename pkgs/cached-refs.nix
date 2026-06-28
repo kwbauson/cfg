@@ -5,8 +5,8 @@ let
       sourceHash = getDrvHash flake;
       refsJson = (formats.json { }).generate "cached-refs.json" (map
         (ref: {
-          path = concatStringsSep "." ref;
-          pkgOutPath = (getAttrFromPath ref flake).outPath;
+          key = concatStringsSep "." ref;
+          pkg = getAttrFromPath ref flake;
         })
         refs);
       push = writePython3Bin "${pname}-push"
@@ -20,11 +20,11 @@ let
           )
           with open("${refsJson}") as f:
               for item in json.load(f):
-                  path = f"${sourceHash}/{item["path"]}"
-                  print('Pushing', path)
+                  key = f"${sourceHash}/{item["key"]}"
+                  print('Pushing', key)
                   s3.put_object(
-                      Key=path,
-                      Body=item["pkgOutPath"],
+                      Key=key,
+                      Body=item["pkg"],
                       Bucket="${bucket}",
                   )
         '';
