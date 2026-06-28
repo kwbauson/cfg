@@ -1,14 +1,14 @@
 scope: with scope;
 (writeBashBin pname ''
   set -eou pipefail
-  outPath=$(nix build --no-link --print-out-paths --file ${cfg} tfn.build --arg configPath ./config.nix)
+  outPath=$(nix build --no-link --print-out-paths --file ''${CFG_PATH-~/cfg} tfn.build --arg configPath ./config.nix)
   trap 'unlink config.tf.json' EXIT
   ln -s "$outPath"/config.tf.json config.tf.json
   "$outPath"/bin/tofu "$@"
 '').overrideAttrs {
   passthru.checkScript = /* bash */ ''
     echo '{}' > config.nix
-    tfn --version
+    CFG_PATH=${cfg} tfn --version
   '';
   passthru.baseModules = [
     "${terranix.src}/modules"
