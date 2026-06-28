@@ -6,14 +6,7 @@ let
       refsJson = (formats.json { }).generate "cached-refs.json" (map
         (ref: {
           path = concatStringsSep "." ref;
-          attrs = let pkg = getAttrFromPath ref flake; in toPretty { multiline = false; } {
-            # a type attr makes the json serialization just a store path
-            attrsType = pkg.type;
-            outPath = pkg.outPath;
-            drvPath = unsafeDiscardStringContext pkg.drvPath;
-            inherit (pkg) name outputName;
-            ${attrIf (pkg.meta ? mainProgram) "meta"} = { inherit (pkg.meta) mainProgram; };
-          };
+          pkg = { inherit (pkg) outPath; };
         })
         refs);
       push = writePython3Bin "${pname}-push"
@@ -31,7 +24,7 @@ let
                   print('Pushing', path)
                   s3.put_object(
                       Key=path,
-                      Body=item["attrs"].replace("attrsType", "type"),
+                      Body=item["pkgOutPath"],
                       Bucket="${bucket}",
                   )
         '';
@@ -64,14 +57,13 @@ in
 
     # FIXME make this not hard coded
     baseUrl=https://pub-404f73faa0964c73b37ec30873b983bc.r2.dev
-    attrs=$(curl -sf "$baseUrl/$sourceHash/$ref" || true)
+    outPath=$(curl -sf "$baseUrl/$sourceHash/$ref" || true)
 
     if [[ -n $attrs ]];then
       errorPattern="don't know how to build these paths:"
-      outPath=$(nix eval --raw --expr "$attrs.outPath")
       if ! nix build "$outPath" --dry-run --log-format internal-json |& grep -qF "$errorPattern";then
         nix build --no-link "$outPath"
-        exec nix "$cmd" --expr "$attrs" "$@"
+        exec nix "$cmd" "$outPath" "$@"
       fi
     fi
   fi

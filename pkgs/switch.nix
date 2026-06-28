@@ -30,7 +30,7 @@ let
     set -euo pipefail
     cd ~/cfg
     ${getExe git} add --all -N
-    ${getExe cached-refs} "$@" . "packages.${system}.switch.scripts.$(machine-name).${name}" run
+    ${getExe cached-refs} "$@" . "packages.${system}.switch.scripts.$(machine-name).${name}" shell -c switch
   '';
 in
 buildEnv {
