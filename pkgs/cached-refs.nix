@@ -9,7 +9,7 @@ let
           attrs = let pkg = getAttrFromPath ref flake; in toPretty { multiline = false; } {
             # a type attr makes the json serialization just a store path
             attrsType = pkg.type;
-            outPath = unsafeDiscardStringContext pkg.outPath;
+            outPath = pkg.outPath;
             drvPath = unsafeDiscardStringContext pkg.drvPath;
             inherit (pkg) name outputName;
             ${attrIf (pkg.meta ? mainProgram) "meta"} = { inherit (pkg.meta) mainProgram; };
