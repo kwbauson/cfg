@@ -6,7 +6,7 @@ let
       refsJson = (formats.json { }).generate "cached-refs.json" (map
         (ref: {
           path = concatStringsSep "." ref;
-          pkgOutPath = ref.outPath;
+          pkgOutPath = (getAttrFromPath ref flake).outPath;
         })
         refs);
       push = writePython3Bin "${pname}-push"
