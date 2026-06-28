@@ -6,7 +6,7 @@ let
       refsJson = (formats.json { }).generate "cached-refs.json" (map
         (ref: {
           path = concatStringsSep "." ref;
-          pkg = { inherit (pkg) outPath; };
+          pkgOutPath = ref.outPath;
         })
         refs);
       push = writePython3Bin "${pname}-push"
@@ -24,7 +24,7 @@ let
                   print('Pushing', path)
                   s3.put_object(
                       Key=path,
-                      Body=item["pkg"],
+                      Body=item["pkgOutPath"],
                       Bucket="${bucket}",
                   )
         '';
