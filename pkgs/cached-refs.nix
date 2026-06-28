@@ -24,7 +24,7 @@ let
                   print('Pushing', path)
                   s3.put_object(
                       Key=path,
-                      Body=item["pkgOutPath"],
+                      Body=item["pkg"],
                       Bucket="${bucket}",
                   )
         '';
