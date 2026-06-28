@@ -215,6 +215,7 @@
   dconf.enable = false;
 
   services.picom.enable = isGraphical && isLinux;
+  services.picom.vSync = true;
 
   services.flameshot = {
     enable = isGraphical && isLinux;
