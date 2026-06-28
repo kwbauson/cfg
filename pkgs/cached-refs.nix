@@ -51,6 +51,7 @@ in
   ref=$1 && shift
   cmd=$1 && shift
 
+  target=$flake#$ref
   if [[ $force != 1 ]];then
     sourceStorePath=$(nix flake metadata --no-warn-dirty --json "$flake" | jq -r .path)
     sourceHash=''${sourceStorePath:11:32}
@@ -62,12 +63,11 @@ in
     if [[ -n $outPath ]];then
       errorPattern="don't know how to build these paths:"
       if ! nix build "$outPath" --dry-run --log-format internal-json |& grep -qF "$errorPattern";then
-        nix build --no-link "$outPath"
-        exec nix "$cmd" "$outPath" "$@"
+        target=$outPath
       fi
     fi
   fi
-  exec nix "$cmd" "$flake"#"$ref" "$@"
+  exec nix "$cmd" "$target" "$@"
 '').overrideAttrs {
   passthru = { inherit build; };
 }
