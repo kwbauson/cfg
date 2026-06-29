@@ -29,8 +29,8 @@ in
       if [[ $changed = true ]];then
         echo updating hash
         nixOutput=$(nix build .#${pname}.src 2>&1 || true)
-        oldHash=$(echo "$nixOutput" | sed -En 's/\s*specified: (\S+)$/\1/p')
-        newHash=$(echo "$nixOutput" | sed -En 's/\s*got: (\S+)$/\1/p')
+        oldHash=$(echo "$nixOutput" | sed -En 's/\s+specified:\s+(\S+)$/\1/p')
+        newHash=$(echo "$nixOutput" | sed -En 's/\s+got:\s+(\S+)$/\1/p')
         sed -i "s;$oldHash;$newHash;" "$pkgFile"
       fi
     '';
