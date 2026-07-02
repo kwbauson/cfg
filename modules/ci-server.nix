@@ -13,5 +13,6 @@
     enable = true;
     signKeyPaths = [ config.secrets.harmonia-sign-key.path ];
     settings.bind = "${machine.tailscale.ip}:5000";
+    settings.enable_compression = true;
   };
 }
