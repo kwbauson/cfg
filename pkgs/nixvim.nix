@@ -264,7 +264,11 @@ importPackage rec {
         fortune_use_unicode = true;
         session_persistence = true;
         lists = [
-          { type = "sessions"; header = [ "   Sessions" ]; }
+          {
+            type = "sessions";
+            header = [ "   Sessions" ];
+            indices = [ "c" "n" "p" ];
+          }
           { type = "dir"; header = [ (mkRaw "'   MRU ' .. vim.loop.cwd()") ]; }
         ];
         session_number = 4;

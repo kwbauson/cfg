@@ -67,13 +67,14 @@ in
   ];
   importPackage = arg:
     (attrs: mergeAttrsList [
+      attrs
       { name = "${attrs.pname}-${attrs.version or "unstable"}"; }
-      (optionalAttrs (attrs ? package) {
+      (optionalAttrs (attrs ? package) rec {
         type = "derivation";
-        inherit (attrs.package) drvPath outPath out outputName meta;
+        package = addMetaAttrs (attrs.meta or { }) attrs.package;
+        inherit (package) drvPath outPath out outputName meta;
       })
       (filterAttrs (n: _: elem n [ "package" "__functor" ]) attrs)
-      attrs
       (attrs.passthru or { })
     ]) ((if isFunction arg then fix else id) arg);
 } // patched-packages // extra-packages

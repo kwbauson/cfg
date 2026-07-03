@@ -47,7 +47,7 @@ mode "programs" {
   bindsym Escape mode "default"
   bindsym f exec --no-startup-id firefox; mode "default"
   bindsym c exec --no-startup-id chromium; mode "default"
-  bindsym n exec --no-startup-id term --name termnotes --directory sync/notes nvim; mode "default"
+  bindsym n exec --no-startup-id term --name termnotes nvim -S ~/sync/nvim-notes-session; mode "default"
   bindsym d exec --no-startup-id discord; mode "default"
   bindsym t exec --no-startup-id kitty; mode "default"
   bindsym s exec --no-startup-id steam; mode "default"

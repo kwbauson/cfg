@@ -197,6 +197,8 @@
     };
     dataFile = {
       "xmonad/.keep".text = "";
+      "nvim/session/notes".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/sync/nvim-notes-session";
     };
   };
 
