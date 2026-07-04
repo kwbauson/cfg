@@ -60,10 +60,10 @@ in
     baseUrl=https://pub-404f73faa0964c73b37ec30873b983bc.r2.dev
     outPath=$(curl -sf "$baseUrl/$sourceHash/$ref" || true)
 
-    if [[ -n $outPath && ! -e $outPath ]];then
+    if [[ -n $outPath ]];then
       # assume we're using ncro and narinfo means full closure
       outHash=''${outPath:11:32}
-      if curl --head -sfo /dev/null http://localhost:9180/$outHash.narinfo;then
+      if [[ -e $outPath ]] || curl --head -sfo /dev/null http://localhost:9180/$outHash.narinfo;then
         target=$outPath
       fi
     fi
