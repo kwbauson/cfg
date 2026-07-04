@@ -7,7 +7,7 @@
     enable = true;
     settings.server.listen = "localhost:9180";
     settings.cache.negative_ttl = "${toString config.nix.settings.narinfo-cache-negative-ttl}s";
-    settings.upstreams = imap (i: a: { priority = i; } // a) [
+    settings.upstreams = [
       {
         url = "http://${machines.keith-server.tailscale.fqdn}:5000";
         public_key = "${machines.keith-server.tailscale.fqdn}:amORAvA0d0VWxUnZyLPJXEY7QEKebU4SqURpe1CbsDY=";
@@ -27,18 +27,6 @@
       {
         url = "https://kwbauson.cachix.org";
         public_key = "kwbauson.cachix.org-1:a6RuFyeJKSShV8LAUw3Jx8z48luiCU755DkweAAkwX0=";
-      }
-      {
-        url = "https://benaduggan.cachix.org";
-        public_key = "benaduggan.cachix.org-1:BY2tmi++VqJD6My4kB/dXGfxT7nJqrOtRVNn9UhgrHE=";
-      }
-      {
-        url = "https://cache.g7c.us";
-        public_key = "cache.g7c.us:dSWpE2B5zK/Fahd7npIQWM4izRnVL+a4LiCAnrjdoFY=";
-      }
-      {
-        url = "https://devenv.cachix.org";
-        public_key = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
       }
     ];
   };
