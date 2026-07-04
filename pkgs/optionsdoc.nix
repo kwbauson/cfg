@@ -98,6 +98,7 @@ let inherit (finalAttrs) passthru; in with passthru; {
     extra = {
       nixvim = inputs.nixvim.lib.evalNixvim {
         modules = [{
+          isDocs = true;
           nixpkgs = { inherit pkgs; };
         }];
       };
