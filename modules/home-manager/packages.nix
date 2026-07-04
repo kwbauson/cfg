@@ -48,6 +48,7 @@
         if isFunction i then i machine else i
       )
       extra-packages;
+    machine-info = machine-info { inherit machine; };
   };
   excluded-packages = optionalAttrs isDarwin
     {

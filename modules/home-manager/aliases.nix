@@ -26,7 +26,7 @@ in
 {
   included-packages = alias {
     undup = ''tac "$@" | awk '!x[$0]++' | tac'';
-    machine-name = "echo ${machine.name}";
+    machine-name = "machine name";
     check-hardware-config = /* bash */ ''
       set -euo pipefail
       cd ~/cfg/machines/"$(machine-name)"
@@ -36,6 +36,13 @@ in
     nou = "git -C ~/cfg g && noa";
     nod = ''delete-old-generations "$@" && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}'';
     noc = "cd ~/cfg && gh workflow run updates.yml";
+    noa-remote = /* bash */ ''
+      set -euo pipefail
+      machine=$1
+      outPath=$(nix build --no-link --print-out-paths ~/cfg#switch.scripts."$machine".noa)
+      nix copy --no-check-sigs "$outPath" --to ssh-ng://"$machine"
+      ssh "$machine" -t "$outPath"/bin/switch
+    '';
     nb = nixPkgAlias "build" "";
     ns = nixPkgAlias "shell" "";
     nr = nixPkgAlias "run" "--";
