@@ -59,28 +59,43 @@
       dr = "direnv reload";
     };
     initExtra = ''
-      [[ $UID -eq 0 ]] && _color=31 _prompt=# || _color=32 _prompt=$
-      [[ -n $SSH_CLIENT ]] && _host="${machine.name} " || _host=
-      PS1="\[\e[1;''${_color}m\]''${_host}\[\e[s\e[\''${_place}C\e[1;31m\''${_status}\e[u\e[0;34m\]\w \[\e[0;''${_color}m\]''${_prompt}\[\e[m\] "
-
       set -o vi
       set +h
+
+      _set_ps1() {
+        local result color prompt
+        if [[ $UID -eq 0 ]];then
+          color=31
+          prompt=#
+        else
+          color=32
+          prompt=$
+        fi
+        PS1=
+        if [[ -n $SSH_CLIENT ]];then
+          PS1+="\[\e[1;''${color}m\]\h "
+        fi
+        if [[ $_exit_code -ne 0 ]];then
+          PS1+="\[\e[0;31m\]($_exit_code) "
+        fi
+        PS1+="\[\e[0;34m\]\w \[\e[0;''${color}m\]''${prompt}\[\e[m\] "
+        PS1="\$(_new_line_ps1)$PS1"
+      }
+
+      _new_line_ps1() {
+        local _ y x _
+        local LIGHT_YELLOW="\001\033[1;93m\002"
+        local     RESET="\001\e[0m\002"
+
+        IFS='[;' read -p $'\e[6n' -d R -rs _ y x _
+        if [[ "$x" != 1 ]]; then
+          printf "\n''${LIGHT_YELLOW}^^ no newline at end of output ^^\n''${RESET}"
+        fi
+      }
+
       _promptcmd() {
-          ret=$?
-          [[ $ret -eq 0 || $ret -eq 148 ]] && rstat= || rstat=$ret
-
-          if [[ -z $rstat && -z $jstat ]];then
-            _status=
-          elif [[ -z $rstat ]];then
-            _status=$jstat
-          elif [[ -z $jstat ]];then
-            _status=$rstat
-          else
-            _status="$rstat $jstat"
-          fi
-
-          _place=$(($COLUMNS - $((''${#_host} + ''${#_status}))))
-
+          _exit_code=$?
+          _set_ps1
           history -a
           tail -n1 ~/.bash_history >> ~/.bash_history-all
           echo "$PWD"/ >> ~/.kjump_history
@@ -101,17 +116,6 @@
       _completion_loader git
       ___git_complete g __git_main
 
-      new_line_ps1() {
-        local _ y x _
-        local LIGHT_YELLOW="\001\033[1;93m\002"
-        local     RESET="\001\e[0m\002"
-
-        IFS='[;' read -p $'\e[6n' -d R -rs _ y x _
-        if [[ "$x" != 1 ]]; then
-          printf "\n''${LIGHT_YELLOW}^^ no newline at end of output ^^\n''${RESET}"
-        fi
-      }
-      PS1="\$(new_line_ps1)$PS1"
       eval "$(kjump hook)"
     '' + optionalString (!isNixOS) ''
       export GPG_TTY=$(tty)

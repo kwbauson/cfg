@@ -28,8 +28,13 @@
   };
 
   users.users.${username}.openssh.authorizedKeys.keys =
-    let names = [ "keith-desktop" "keith-xps" "keith-server" ]; in
-    mapAttrsToList (_: m: m.public.key) (getAttrs names machines);
+    let
+      names = [ "keith-desktop" "keith-xps" "keith-server" ];
+      machineKeys = mapAttrsToList (_: m: m.public.key) (getAttrs names machines);
+    in
+    machineKeys ++ [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXnCWxJTyJFiLPmxKuAiN12Tq8fTLshB4zhfX2Zx7gM keith-pixel"
+    ];
 
   secrets.cachix.user = true;
 }
