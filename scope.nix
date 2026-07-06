@@ -117,7 +117,7 @@ cfg.lib.mapAttrs (s: _: mkSystemScope s) cfg.legacyPackages //
     let pkgs = legacyPackages.${system}; in
     pkgs // pkgs.formats // pkgs.writers // packages.${system} // scope // {
       inherit system;
-      inherit (stdenv) isLinux isDarwin;
+      inherit (pkgs.stdenv) isLinux isDarwin;
       importNixpkgs = args: importNixpkgs ({ inherit system; } // args);
     };
 })
