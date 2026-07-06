@@ -45,16 +45,6 @@ cfg.lib.mapAttrs (s: _: mkSystemScope s) cfg.legacyPackages //
   attrIf = check: name: if check then name else null;
   userName = "Keith Bauson";
   userEmail = "kwbauson@gmail.com";
-  alias = name:
-    if isString name
-    then arg:
-      let
-        cmd = if isDerivation arg then getExe arg else arg;
-        pre = if any (s: hasInfix s arg) [ "&&" "||" ";" "|" "\n" ] then "" else "exec";
-        post = if any (s: hasInfix s arg) [ ''"$@"'' "\n" ] then "" else ''"$@"'';
-      in
-      writeBashBin name "${pre} ${cmd} ${post}"
-    else mapAttrs alias name;
   nixpkgsPath = inputs.nixpkgs.outPath;
   importNixpkgs = args:
     let
@@ -114,10 +104,20 @@ cfg.lib.mapAttrs (s: _: mkSystemScope s) cfg.legacyPackages //
     ]);
 
   mkSystemScope = system:
-    let pkgs = legacyPackages.${system}; in
+    let pkgs = legacyPackages.${system}; in fix (pkgsScope: with pkgsScope; with scope;
     pkgs // pkgs.formats // pkgs.writers // packages.${system} // scope // {
       inherit system;
-      inherit (pkgs.stdenv) isLinux isDarwin;
+      inherit (stdenv) isLinux isDarwin;
       importNixpkgs = args: importNixpkgs ({ inherit system; } // args);
-    };
+      alias = name:
+        if isString name
+        then arg:
+          let
+            cmd = if isDerivation arg then getExe arg else arg;
+            pre = if any (s: hasInfix s arg) [ "&&" "||" ";" "|" "\n" ] then "" else "exec";
+            post = if any (s: hasInfix s arg) [ ''"$@"'' "\n" ] then "" else ''"$@"'';
+          in
+          writeBashBin name "${pre} ${cmd} ${post}"
+        else mapAttrs alias name;
+    });
 })
