@@ -13,13 +13,11 @@
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; cfg = self; };
 
-    packages = genAttrs systems.flakeExposed (system: import nixpkgs {
+    packages = mapAttrValues (ps: ps.extra-packages) legacyPackages;
+    legacyPackages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
       config = root.config;
-      overlays = [
-        (final: prev: { scope = root.scope (final // { inherit cfg; }); })
-        root.overlays
-      ];
+      overlays = [ root.overlays ];
     });
 
     nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
