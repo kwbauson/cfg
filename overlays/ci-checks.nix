@@ -44,11 +44,11 @@ in
 
   checks = cached-refs.build {
     flake = cfg;
-    refs = map (p: [ "packages" system ] ++ p) ([ [ "hello" ] ] ++ rec {
-      getPaths = ns: cs: concatMap (m: map (n: [ "switch" "scripts" m n ]) ns) (attrNames cs);
+    refs = [ [ "legacyPackages" system "hello" ] ] ++ rec {
+      getPaths = ns: cs: concatMap (m: map (n: [ "packages" system "switch" "scripts" m n ]) ns) (attrNames cs);
       x86_64-linux = getPaths [ "noa" "nob" ] nixosConfigurations;
       aarch64-darwin = getPaths [ "noa" ] darwinConfigurations;
-    }.${system});
+    }.${system};
     bucket = "kwbauson-cached-refs";
     endpoint_url = "https://${constants.cloudflare.account_id}.r2.cloudflarestorage.com";
 
