@@ -1,5 +1,4 @@
-final: prev: with final.scope; {
-  unstableGitUpdater = args: prev.unstableGitUpdater ({ shallowClone = false; } // args);
+final: _: with final.scope; {
   updater = names:
     let
       packages = map (attrPath: { inherit attrPath; package = pkgs.${attrPath}; }) (toList names);

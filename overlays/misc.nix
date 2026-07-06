@@ -1,4 +1,4 @@
-final: prev: with final.scope; {
+final: _: with final.scope; {
   pkgsUnsupported = importNixpkgs { config = c: c // { allowUnsupportedSystem = true; }; };
   pkgsInsecure = importNixpkgs { config = c: c // { allowInsecurePredicate = _: true; }; };
   inherit (extra-bin-packages) fordir;

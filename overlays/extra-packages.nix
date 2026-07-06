@@ -21,7 +21,6 @@ let
       (final.scope // {
         inherit pname;
         version = "unstable";
-        prev = prevPkgs.${pname};
         package = extra-packages.${pname};
         exe = getExe extra-packages.${pname};
       })
@@ -29,7 +28,6 @@ let
       (callPackage path)
       (addMetaAttrs { position = "${toString path}:1"; })
       (p: addMetaAttrs (optionalAttrs (p.meta.mainProgram or null == null) { mainProgram = pname; }) p)
-      (attrs: attrs // optionalAttrs (hasAttr pname prev) { prev = prev.${pname}; })
     ]))
   ];
 in

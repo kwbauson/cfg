@@ -109,6 +109,7 @@ cfg.lib.mapAttrs (s: _: mkSystemScope s) cfg.legacyPackages //
       inherit system;
       inherit (stdenv) isLinux isDarwin;
       importNixpkgs = args: importNixpkgs ({ inherit system; } // args);
+      unstableGitUpdater = args: pkgs.unstableGitUpdater ({ shallowClone = false; } // args);
       alias = name:
         if isString name
         then arg:
