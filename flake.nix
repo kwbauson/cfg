@@ -13,7 +13,7 @@
   outputs = { self, ... }: with self.scope; {
     scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; cfg = self; };
 
-    packages = mapAttrValues (ps: ps.extra-packages) legacyPackages;
+    packages = mapAttrValues (ps: ps.customPackages) legacyPackages;
     legacyPackages = genAttrs systems.flakeExposed (system: import nixpkgs {
       inherit system;
       config = root.config;
