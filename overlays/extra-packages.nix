@@ -1,13 +1,5 @@
 final: prev: with final.scope;
 let
-  patched-packages = with prev.scope'; pipeValue [
-    (readDir ../pkgs)
-    (filterAttrs (n: _: hasSuffix ".patch" n))
-    (mapAttrs' (n: _: rec {
-      name = removeSuffix ".patch" n;
-      value = prev.${name}.overrideAttrs (old: { patches = old.patches or [ ] ++ [ ../pkgs/${n} ]; });
-    }))
-  ];
   extra-packages = with prev.scope'; pipeValue [
     (readDir ../pkgs)
     attrNames
@@ -29,12 +21,12 @@ let
       (final.scope // {
         inherit pname;
         version = "unstable";
-        prev = prev.${pname};
+        prev = prevPkgs.${pname};
         package = extra-packages.${pname};
         exe = getExe extra-packages.${pname};
       })
       (optionalAttrs (functionArgs (import path) == { }))
-      (prev.callPackage path)
+      (callPackage path)
       (addMetaAttrs { position = "${toString path}:1"; })
       (p: addMetaAttrs (optionalAttrs (p.meta.mainProgram or null == null) { mainProgram = pname; }) p)
       (attrs: attrs // optionalAttrs (hasAttr pname prev) { prev = prev.${pname}; })
@@ -77,4 +69,4 @@ in
       (filterAttrs (n: _: elem n [ "package" "__functor" ]) attrs)
       (attrs.passthru or { })
     ]) ((if isFunction arg then fix else id) arg);
-} // patched-packages // extra-packages
+} // extra-packages

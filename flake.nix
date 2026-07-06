@@ -11,24 +11,22 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }: with self.scope; {
-    scope = import ./scope.nix { inherit (self.inputs.nixpkgs) lib; cfg = self; };
+    inherit (self.inputs.nixpkgs) lib;
+    legacyPackages = self.lib.genAttrs (self.lib.attrNames self.inputs.nixpkgs.legacyPackages)
+      (system: importNixpkgs { inherit system; });
 
-    packages = mapAttrValues (ps: ps.customPackages) legacyPackages;
-    legacyPackages = genAttrs systems.flakeExposed (system: import nixpkgs {
-      inherit system;
-      config = root.config;
-      overlays = [ root.overlays ];
-    });
+    scope = import ./scope.nix self;
+    packages = forAttrValues legacyPackages mkCustomPackages;
 
     nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
       nixpkgs.lib.nixosSystem {
-        specialArgs.scope = packages.${machine.system}.scope // machine.scope;
+        specialArgs.scope = scope.${machine.system} // machine.scope;
         modules = [ modules.nixos ];
       });
 
     darwinConfigurations = forAttrValuesFlagged machines "isNixDarwin" (machine:
       nix-darwin.lib.darwinSystem {
-        specialArgs.scope = packages.${machine.system}.scope // machine.scope;
+        specialArgs.scope = scope.${machine.system} // machine.scope;
         modules = [ modules.nix-darwin ];
       });
   };

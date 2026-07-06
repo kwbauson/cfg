@@ -1,6 +1,6 @@
 final: prev: with final.scope; {
-  pkgsUnsupported = importNixpkgs { config = root.config // { allowUnsupportedSystem = true; }; };
-  pkgsInsecure = importNixpkgs { config = root.config // { allowInsecurePredicate = _: true; }; };
+  pkgsUnsupported = importNixpkgs { config = c: c // { allowUnsupportedSystem = true; }; };
+  pkgsInsecure = importNixpkgs { config = c: c // { allowInsecurePredicate = _: true; }; };
   inherit (extra-bin-packages) fordir;
   configdiffNix = cfg.outPath;
   configdiffNixAttr = "configdiff";
