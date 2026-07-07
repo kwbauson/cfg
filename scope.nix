@@ -1,6 +1,6 @@
 cfg: cfg.lib.fix (scope: with scope;
 cfg.lib.generators // cfg.inputs // cfg.outputs // cfg.lib //
-cfg.lib.mapAttrs (s: _: mkSystemScope s) cfg.legacyPackages //
+cfg.lib.mapAttrs (s: _: cfg.packages.${s}.scope) cfg.legacyPackages //
 {
   scope' = scope;
   inherit cfg;
@@ -86,39 +86,4 @@ cfg.lib.mapAttrs (s: _: mkSystemScope s) cfg.legacyPackages //
     type = types.attrsOf (types.submodule module);
   };
   mkTypeOption = type: mkOption { inherit type; };
-
-  mkCustomPackages = pkgs:
-    let
-      overlays = importDir ./overlays;
-    in
-    (makeScope pkgs.newScope (_: { })).overrideScope (composeManyExtensions [
-      (_: _: {
-        scope = scope.${pkgs.stdenv.hostPlatform.system};
-        prevPkgs = pkgs;
-        inherit scope';
-      })
-      overlays.misc
-      overlays.extra-packages
-      overlays.ci-checks
-      overlays.updates
-    ]);
-
-  mkSystemScope = system:
-    let pkgs = legacyPackages.${system}; in fix (pkgsScope: with pkgsScope; with scope;
-    pkgs // pkgs.formats // pkgs.writers // packages.${system} // scope // {
-      inherit system;
-      inherit (stdenv) isLinux isDarwin;
-      importNixpkgs = args: importNixpkgs ({ inherit system; } // args);
-      unstableGitUpdater = args: pkgs.unstableGitUpdater ({ shallowClone = false; } // args);
-      alias = name:
-        if isString name
-        then arg:
-          let
-            cmd = if isDerivation arg then getExe arg else arg;
-            pre = if any (s: hasInfix s arg) [ "&&" "||" ";" "|" "\n" ] then "" else "exec";
-            post = if any (s: hasInfix s arg) [ ''"$@"'' "\n" ] then "" else ''"$@"'';
-          in
-          writeBashBin name "${pre} ${cmd} ${post}"
-        else mapAttrs alias name;
-    });
 })

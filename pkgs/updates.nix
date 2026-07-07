@@ -1,7 +1,9 @@
-final: _: with final.scope; {
+{ _set, scope }: with scope;
+{
+  unstableGitUpdater = args: pkgs.unstableGitUpdater ({ shallowClone = false; } // args);
   updater = names:
     let
-      packages = map (attrPath: { inherit attrPath; package = pkgs.${attrPath}; }) (toList names);
+      packages = map (attrPath: { inherit attrPath; package = extra-packages.${attrPath}; }) (toList names);
       # modified from nixpkgs/maintainers/script/update.nix
       packageData = { package, attrPath }: {
         inherit (package) name;
@@ -20,7 +22,7 @@ final: _: with final.scope; {
       echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py ${jsonFile}
     '';
   update-extra-packages =
-    let updatable = attrNames (filterAttrs (_: p: hasAttr "updateScript" p && !p.meta.skipUpdate or false) extra-packages);
+    let updatable = attrNames (filterAttrs (_: p: p ? updateScript && !p.meta.skipUpdate or false) extra-packages);
     in (updater updatable).overrideAttrs (_: {
       passthru = genAttrs updatable updater;
     });
@@ -53,5 +55,8 @@ final: _: with final.scope; {
   ] // pipe extra-packages [
     (filterAttrs (_: pkg: pkg ? src.repo))
     (mapAttrValues (pkg: { inherit (pkg.src) owner repo rev; }))
+  ];
+  sourcesInfo' = pipe extra-packages [
+    (filterAttrs (_: pkg: pkg ? src.repo))
   ];
 }

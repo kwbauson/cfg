@@ -1,4 +1,4 @@
-final: _: with final.scope;
+{ _set, scope }: with scope;
 let
   checked-pkgs = linkFarmOfHashes "checked-pkgs" (flatten [
     (attrValues check-all)

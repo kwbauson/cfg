@@ -1,4 +1,4 @@
-scope: with scope;
+{ _overlay, scope }: with scope;
 (prev.override {
   shlib = prev.pythonModule.pkgs.shlib.overrideAttrs (attrs: {
     postPatch = ''
