@@ -11,6 +11,10 @@ importPackage rec {
   inherit (config.build) package;
   meta.includePackage = true;
 
+  nixvim-extended = cfgRunner "${pname}.nixvim-extended"
+    "--arg file ./nixvim-configuration.nix"
+    ({ file }: (configuration.extendModules { modules = [ file ]; }).config.build.package);
+
   lib = inputs.nixvim.lib.nixvim.extend (final: prev: with final; {
     mkKeyMaps = mapAttrsToList (
       key: value: { inherit key; } // (
@@ -46,6 +50,7 @@ importPackage rec {
       byteCompileLua.nvimRuntime = true;
       byteCompileLua.plugins = true;
       combinePlugins.enable = true;
+      combinePlugins.standalonePlugins = [ "conform.nvim" ];
     };
     colorschemes.vscode.enable = true;
     opts = rec {
@@ -143,12 +148,6 @@ importPackage rec {
       none-ls.enable = true;
       conform-nvim.enable = true;
       conform-nvim.settings.format_on_save.lsp_format = "fallback";
-      conform-nvim.package = vimPlugins.conform-nvim.overrideAttrs (old: {
-        postInstall = ''
-          ${old.postInstall}
-          rm $out/doc/recipes.md
-        '';
-      });
       treesitter.enable = true;
       treesitter.nixvimInjections = false;
       treesitter.highlight.enable = true;

@@ -75,10 +75,11 @@
         if [[ -n $SSH_CLIENT ]];then
           PS1+="\[\e[1;''${color}m\]\h "
         fi
+        PS1+="\[\e[0;34m\]\w "
         if [[ $_exit_code -ne 0 ]];then
           PS1+="\[\e[0;31m\]($_exit_code) "
         fi
-        PS1+="\[\e[0;34m\]\w \[\e[0;''${color}m\]''${prompt}\[\e[m\] "
+        PS1+="\[\e[0;''${color}m\]''${prompt}\[\e[m\] "
         PS1="\$(_new_line_ps1)$PS1"
       }
 

@@ -38,4 +38,13 @@
       in
       writeBashBin name "${pre} ${cmd} ${post}"
     else mapAttrs alias name;
+
+  cfgRunner = loc: args: run: (
+    let name = last (splitString "." loc); in
+    writeBashBin name ''
+      set -euo pipefail
+      outPath=$(nix build --no-link --print-out-paths --file ${cfg} ${loc}.run ${args})
+      exec "$outPath"/bin/run "$@"
+    ''
+  ).overrideAttrs { passthru.run = args@{ ... }: writeBashBin "run" "exec ${getExe (run args)}"; };
 }
