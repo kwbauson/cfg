@@ -106,14 +106,14 @@
     },
     "nixpkgs-lib": {
       "inputs": {
-        "cfg": []
+        "root": []
       },
       "locked": {
-        "path": "pkgs/nixpkgs-lib",
+        "path": "nixpkgs/lib",
         "type": "path"
       },
       "original": {
-        "path": "pkgs/nixpkgs-lib",
+        "path": "nixpkgs/lib",
         "type": "path"
       },
       "parent": []
@@ -122,7 +122,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-lib"
         ],
         "systems": "systems"
       },

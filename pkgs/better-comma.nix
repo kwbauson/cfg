@@ -1,4 +1,5 @@
-scope: with scope; stdenvNoCC.mkDerivation {
+scope: with scope;
+stdenvNoCC.mkDerivation {
   inherit pname version;
   preferLocalBuild = true;
   allowSubstitutes = false;

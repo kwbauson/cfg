@@ -1,14 +1,12 @@
-args: args.lib.fix (scope: with scope;
-args.lib.generators // args.formats or { } // args.writers or { } //
-args.cfg.inputs or { } // args.cfg.outputs or { } //
-removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
-  inherit (import ./. { inherit system; }) getFlakeCompat;
+cfg: cfg.lib.fix (scope: with scope;
+cfg.lib.generators // cfg.inputs // cfg.outputs // cfg.lib //
+cfg.lib.mapAttrs (s: _: cfg.packages.${s}.scope) cfg.legacyPackages //
+{
+  inherit cfg;
   inherit (cfg) inputs outPath;
-  inherit (stdenv.hostPlatform) system;
-  inherit (stdenv) isLinux isDarwin;
+  inherit (import ./. { }) getFlakeCompat;
   root = importDir ./.;
   inherit (root) constants modules machines;
-  scope' = root.scope { inherit lib cfg; };
   mapAttrNames = f: mapAttrs (n: _: f n);
   mapAttrValues = f: mapAttrs (_: v: f v);
   forAttrs = flip mapAttrs;
@@ -46,23 +44,13 @@ removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
   attrIf = check: name: if check then name else null;
   userName = "Keith Bauson";
   userEmail = "kwbauson@gmail.com";
-  alias = name:
-    if isString name
-    then arg:
-      let
-        cmd = if isDerivation arg then getExe arg else arg;
-        pre = if any (s: hasInfix s arg) [ "&&" "||" ";" "|" "\n" ] then "" else "exec";
-        post = if any (s: hasInfix s arg) [ ''"$@"'' "\n" ] then "" else ''"$@"'';
-      in
-      writeBashBin name "${pre} ${cmd} ${post}"
-    else mapAttrs alias name;
   nixpkgsPath = inputs.nixpkgs.outPath;
   importNixpkgs = args:
     let
       helper =
-        { system ? scope.system
-        , config ? { }
-        , overlays ? [ ]
+        { system
+        , config ? id
+        , overlays ? id
         , rev ? null
         , sha256 ? null
         , path ? nixpkgsPath
@@ -71,7 +59,11 @@ removeAttrs builtins [ "fetchurl" ] // args // args.lib // {
         , src ? if sha256 != null then fetchFromGitHub { inherit owner repo rev sha256; }
           else if rev != null then fetchTree { type = "github"; inherit owner repo rev; }
           else path
-        }: import src { inherit system config overlays; };
+        }: import src {
+          inherit system;
+          overlays = (if isList overlays then const overlays else overlays) root.nixpkgs.overlays;
+          config = (if isAttrs config then const config else config) root.nixpkgs.config;
+        };
     in
     helper (
       if isPath args then { path = args; }
