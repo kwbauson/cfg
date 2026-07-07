@@ -1,10 +1,10 @@
 { _set, scope }: with scope;
 {
-  inherit (pkgs.stdenv.hostPlatform) system isLinux isDarwin;
+  inherit (stdenv.hostPlatform) system isLinux isDarwin;
   importNixpkgs = args: cfg.scope.importNixpkgs ({ inherit system; } // args);
   pkgsUnsupported = importNixpkgs { config = c: c // { allowUnsupportedSystem = true; }; };
   pkgsInsecure = importNixpkgs { config = c: c // { allowInsecurePredicate = _: true; }; };
-  inherit (binPackages) fordir;
+  inherit (extra-bin-packages) fordir;
   callPackage = callPackageWith (pkgs // {
     configdiffNix = cfg.outPath;
     configdiffNixAttr = "configdiff";

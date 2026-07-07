@@ -12,7 +12,7 @@
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
         doggo dasel configdiff;
-      inherit binPackages;
+      inherit extra-bin-packages;
     };
     graphical = optionalAttrs isGraphical {
       graphical-core = {
@@ -50,15 +50,15 @@
       extra-packages;
     machine-info = machine-info { inherit machine; };
   };
-  excluded-packages = { } //
-    optionalAttrs isDarwin {
+  excluded-packages = optionalAttrs isDarwin
+    {
       inherit iproute2 iputils pavucontrol strace time dzen2
         maim acpi usbutils xdotool qtbr discord zathura xdg-utils;
       inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
       inherit man-pages ncdu bitwarden-cli remmina ffmpeg yt-dlp procps;
-    } //
-    optionalAttrs isMinimal {
-      inherit imgloc yt-dlp;
-      inherit (binPackages) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
-    };
+    }
+  // optionalAttrs isMinimal {
+    inherit imgloc yt-dlp;
+    inherit (extra-bin-packages) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
+  };
 }

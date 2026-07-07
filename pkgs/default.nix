@@ -1,6 +1,5 @@
 { _auto, scope }: with scope;
-system:
-pipeValue [
+system: pipeValue [
   (readDir ./.)
   (filterAttrs (n: _: n != "default.nix"))
   (mapAttrsToList (name: _: rec {
@@ -25,7 +24,6 @@ pipeValue [
       });
       overlay = prev: imported { _overlay = true; scope = scope // { inherit prev; }; };
       set = imported { _set = true; inherit scope; };
-      # TODO meta
       scopePackage = fix (package:
         let
           pkg = imported (scope // {
@@ -47,8 +45,8 @@ pipeValue [
     pkgs = cfg.legacyPackages.${system};
     scope = pkgs // pkgs.formats // pkgs.writers // cfg.scope // packages.${system};
     overlayFns = groups.patch // groups.overlay;
-    extra-packages = groups.package // groups.scopePackage;
-    merge = concatMapAttrs (_: id) groups.set // mapAttrNames (n: pkgs.${n}) overlayFns // extra-packages;
-  })
-  (x: x.merge // { inherit (x) scope overlayFns extra-packages; })
+    extra-packages = mapAttrNames (n: pkgs.${n}) overlayFns // groups.package // groups.scopePackage;
+    final = concatMapAttrs (_: id) groups.set
+      // extra-packages // { inherit scope overlayFns extra-packages; };
+  }.final)
 ]
