@@ -21,6 +21,7 @@ system: pipeValue [
     result.${pname} = scope: {
       patch = prev: prev.overrideAttrs (old: {
         patches = old.patches or [ ] ++ [ file ];
+        meta = old.meta or { } // { skipUpdate = true; };
       });
       overlay = prev: imported { _overlay = true; scope = scope // { inherit prev; }; };
       set = imported { _set = true; inherit scope; };
