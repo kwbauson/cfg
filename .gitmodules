@@ -1,3 +1,6 @@
 [submodule "pkgs/configdiff"]
 	path = pkgs/configdiff
 	url = https://github.com/kwbauson/configdiff.git
+[submodule "pkgs/shared-eval-cache"]
+	path = pkgs/shared-eval-cache
+	url = https://github.com/kwbauson/shared-eval-cache.git

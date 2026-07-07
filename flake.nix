@@ -12,8 +12,7 @@
   };
   outputs = { self, ... }: with self.scope; {
     inherit (self.inputs.nixpkgs) lib;
-    legacyPackages = self.lib.genAttrs (self.lib.attrNames self.inputs.nixpkgs.legacyPackages)
-      (system: importNixpkgs { inherit system; });
+    legacyPackages = self.lib.mapAttrs (system: _: importNixpkgs { inherit system; }) self.inputs.nixpkgs.legacyPackages;
 
     scope = import ./scope.nix self;
     packages = forAttrNames legacyPackages root.pkgs;
