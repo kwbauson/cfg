@@ -40,7 +40,7 @@ in
       (!pkg.meta.skipBuild or false)
       (elem system pkg.meta.platforms or [ system ])
     ])
-    extra-packages;
+    (removeAttrs extra-packages (optionals isDarwin [ "qutebrowser" ]));
 
   checks = cached-refs.build {
     flake = cfg;

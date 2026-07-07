@@ -17,7 +17,6 @@
 
     scope = import ./scope.nix self;
     packages = forAttrNames legacyPackages root.pkgs;
-    # packages = forAttrNames legacyPackages (_: { });
 
     nixosConfigurations = forAttrValuesFlagged machines "isNixOS" (machine:
       nixpkgs.lib.nixosSystem {

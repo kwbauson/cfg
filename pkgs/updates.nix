@@ -56,7 +56,4 @@
     (filterAttrs (_: pkg: pkg ? src.repo))
     (mapAttrValues (pkg: { inherit (pkg.src) owner repo rev; }))
   ];
-  sourcesInfo' = pipe extra-packages [
-    (filterAttrs (_: pkg: pkg ? src.repo))
-  ];
 }
