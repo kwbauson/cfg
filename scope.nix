@@ -2,7 +2,6 @@ cfg: cfg.lib.fix (scope: with scope;
 cfg.lib.generators // cfg.inputs // cfg.outputs // cfg.lib //
 cfg.lib.mapAttrs (s: _: cfg.packages.${s}.scope) cfg.legacyPackages //
 {
-  scope' = scope;
   inherit cfg;
   inherit (cfg) inputs outPath;
   inherit (import ./. { }) getFlakeCompat;
