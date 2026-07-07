@@ -12,7 +12,7 @@
         strace time unzip usbutils watch wget which xdg-utils xxd xz zip
         bitwarden-cli libqalculate yt-dlp speedtest-cli tldr nix-top jless
         doggo dasel configdiff;
-      inherit extra-bin-packages;
+      inherit bin;
     };
     graphical = optionalAttrs isGraphical {
       graphical-core = {
@@ -59,6 +59,6 @@
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
-    inherit (extra-bin-packages) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
+    inherit (bin) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
   };
 }

@@ -1,7 +1,7 @@
 scope: with scope;
 pipeValue [
-  (readDir ../bin)
-  (mapAttrs (n: _: readFile ../bin/${n}))
+  (removeAttrs (readDir ./.) [ "default.nix" ])
+  (mapAttrs (n: _: readFile ./${n}))
   (filterAttrs (_: t: isLinux || !hasInfix "ONLY_LINUX" t))
   (mapAttrs (name: text: (writeScriptBin name text).overrideAttrs (old: {
     nativeBuildInputs = [ makeWrapper ];

@@ -4,7 +4,7 @@
   importNixpkgs = args: cfg.scope.importNixpkgs ({ inherit system; } // args);
   pkgsUnsupported = importNixpkgs { config = c: c // { allowUnsupportedSystem = true; }; };
   pkgsInsecure = importNixpkgs { config = c: c // { allowInsecurePredicate = _: true; }; };
-  inherit (extra-bin-packages) fordir;
+  inherit (bin) fordir;
   callPackage = callPackageWith (pkgs // {
     configdiffNix = cfg.outPath;
     configdiffNixAttr = "configdiff";
