@@ -19,11 +19,13 @@
         graphviz imagemagick xterm
         ffmpeg mediainfo pavucontrol qtbr
         discord zathura
-        headsetcontrol arduino remmina playerctl;
+        headsetcontrol arduino remmina;
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {
         inherit (kdePackages) breeze-icons;
-        inherit keyd imv wdisplays xlsclients wofi wl-clipboard wlrctl wlprop steamtinkerlaunch;
+        inherit
+          keyd imv wdisplays xlsclients wofi wl-clipboard wlrctl wlprop
+          steamtinkerlaunch playerctl;
       };
     };
     development = {
