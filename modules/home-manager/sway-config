@@ -16,7 +16,7 @@ bindsym $mod+e           exec term nvim
 bindsym $mod+Control+e   exec term ssh keith-server -t sh -lc nvim
 bindsym $mod+f           exec term ranger
 bindsym $mod+w           exec qtbr
-bindsym $mod+u           exec qutebrowser ':undo --window'
+bindsym $mod+u           exec qtbr ':undo --window'
 bindsym $mod+space       exec bl sleep
 bindsym $mod+z           exec "sleep .5; systemctl suspend"
 bindsym $mod+m           exec togpointer

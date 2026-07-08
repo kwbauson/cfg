@@ -25,7 +25,7 @@
     };
     settings = {
       confirm_quit = [ "downloads" ];
-      new_instance_open_target = "window";
+      new_instance_open_target = "tab-silent";
       session.default_name = "default";
       auto_save.session = true;
       content.cache.size = null;
@@ -74,7 +74,6 @@
       O = "cmd-set-text :open {url:pretty}";
       P = "open -t {primary}";
       T = "cmd-set-text :open -t {url:pretty}";
-      Y = "yank";
       b = "cmd-set-text -s :open -b";
       c = "tab-clone";
       gb = "open qute:bookmarks";
@@ -92,7 +91,7 @@
       s = "stop";
       t = "cmd-set-text -s :open -t";
       w = "open -t";
-      y = "yank --sel";
+      y = "yank";
       u = "undo --window";
     };
     keyBindings.insert = {

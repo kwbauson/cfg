@@ -1,16 +1,15 @@
 diff --git a/qutebrowser/mainwindow/tabbedbrowser.py b/qutebrowser/mainwindow/tabbedbrowser.py
-index 770e6a039..dde53b9a6 100644
+index 5110a2d69..9b3dbaa84 100644
 --- a/qutebrowser/mainwindow/tabbedbrowser.py
 +++ b/qutebrowser/mainwindow/tabbedbrowser.py
-@@ -640,6 +640,11 @@ class TabbedBrowser(QWidget):
+@@ -638,6 +638,10 @@ class TabbedBrowser(QWidget):
  
+         prev_focus = QApplication.focusWidget()
+ 
++        if background:
++            objects.qapp.setDesktopFileName('qutebrowser_background')
++        else:
++            objects.qapp.setDesktopFileName('qutebrowser')
          if config.val.tabs.tabs_are_windows and self.widget.count() > 0:
              window = mainwindow.MainWindow(private=self.is_private)
-+            role_background = background if background is not None else config.val.tabs.background
-+            if role_background:
-+                objects.qapp.setDesktopFileName('qutebrowser_background')
-+            else:
-+                objects.qapp.setDesktopFileName('qutebrowser')
              tab = window.tabbed_browser.tabopen(
-                 url=url, background=background, related=related)
-             window.show()

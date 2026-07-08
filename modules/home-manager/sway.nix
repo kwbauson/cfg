@@ -36,7 +36,7 @@ optionalAttrs (isLinux && isGraphical) {
   programs.sway-easyfocus = {
     enable = true;
     settings = let bg = "ffff00"; fg = "000000"; in {
-      chars = "asdfghjkl;";
+      chars = "asdfghjklqwertyuipzxcbvnm1234567890";
       window_background_opacity = 0;
       label_background_color = bg;
       label_text_color = fg;
