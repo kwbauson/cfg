@@ -15,8 +15,8 @@
       bell-style = false;
       show-mode-in-prompt = true;
       revert-all-at-newline = true;
-      vi-ins-mode-string = "\\1\\e[6 q\\2";
-      vi-cmd-mode-string = "\\1\\e[2 q\\2";
+      vi-ins-mode-string = ''\1\e[6 q\2'';
+      vi-cmd-mode-string = ''\1\e[2 q\2'';
     };
     bindings = {
       "\\C-p" = "history-search-backward";
@@ -59,8 +59,13 @@
       dr = "direnv reload";
     };
     initExtra = ''
-      set -o vi
       set +h
+      set -o vi
+      if [[ $TERMBAR = 1 ]];then
+        bind 'set vi-ins-mode-string'
+        bind 'set vi-cmd-mode-string'
+        echo -ne '\e[6 q'
+      fi
 
       _set_ps1() {
         local result color prompt

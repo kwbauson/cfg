@@ -1,0 +1,155 @@
+# settings
+set $mod Mod4
+set $float_move_pixels 100
+floating_minimum_size 0 x 10
+titlebar_padding 5 3
+bar {
+  position top
+  status_command statusline sway
+}
+
+# programs
+bindsym $mod+p           exec termbar
+bindsym $mod+t           exec term
+bindsym $mod+Control+t   exec term ssh keith-server
+bindsym $mod+e           exec term nvim
+bindsym $mod+Control+e   exec term ssh keith-server -t sh -lc nvim
+bindsym $mod+f           exec term ranger
+bindsym $mod+w           exec qtbr
+bindsym $mod+u           exec qutebrowser ':undo --window'
+bindsym $mod+space       exec bl sleep
+bindsym $mod+z           exec "sleep .5; systemctl suspend"
+bindsym $mod+m           exec togpointer
+bindsym $mod+Shift+space exec swaylock --color 000000
+bindsym XF86AudioMute               exec vol m
+bindsym $mod+XF86AudioMute          exec vol mc
+bindsym XF86AudioLowerVolume        exec vol - 5
+bindsym XF86AudioRaiseVolume        exec vol + 5
+bindsym Shift+XF86AudioLowerVolume  exec vol - 1
+bindsym Shift+XF86AudioRaiseVolume  exec vol + 1
+bindsym XF86AudioPlay               exec playerctl play-pause
+bindsym XF86AudioPrev               exec playerctl position 10-
+bindsym XF86AudioNext               exec playerctl position 10+
+bindsym XF86MonBrightnessDown       exec bl - 5
+bindsym XF86MonBrightnessUp         exec bl + 5
+bindsym Shift+XF86MonBrightnessDown exec bl - 1
+bindsym Shift+XF86MonBrightnessUp   exec bl + 1
+bindsym $mod+c exec flameshot gui
+bindsym $mod+x exec runner
+bindsym $mod+n [app_id="^termnotes$"] scratchpad show
+
+# more programs
+bindsym $mod+Control+p mode "programs"
+mode "programs" {
+  bindsym Escape mode "default"
+  bindsym f exec firefox; mode "default"
+  bindsym c exec chromium; mode "default"
+  bindsym n exec term --app-id termnotes nvim -S ~/sync/nvim-notes-session; mode "default"
+  bindsym d exec discord; mode "default"
+  bindsym t exec kitty; mode "default"
+  bindsym s exec steam; mode "default"
+}
+
+bindsym $mod+Control+s mode "ssh"
+mode "ssh" {
+  bindsym Escape mode "default"
+  bindsym d exec term ssh keith-desktop; mode "default"
+  bindsym x exec term ssh keith-xps; mode "default"
+  bindsym s exec term ssh keith-server; mode "default"
+  bindsym r exec term ssh readlee-mac-m1; mode "default"
+  bindsym w exec term ssh kwbauson; mode "default"
+}
+
+bindsym XF86PowerOff mode "poweroff"
+mode "poweroff" {
+  bindsym Escape mode "default"
+  bindsym XF86PowerOff exec poweroff
+}
+
+# windows
+bindsym $mod+q kill
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Shift+h move left $float_move_pixels
+bindsym $mod+Shift+j move down $float_move_pixels
+bindsym $mod+Shift+k move up $float_move_pixels
+bindsym $mod+Shift+l move right $float_move_pixels
+bindsym $mod+apostrophe exec sway-easyfocus
+bindsym $mod+Return fullscreen toggle
+bindsym $mod+Tab exec swayr switch-to-urgent-or-lru-window
+bindsym $mod+semicolon exec rofi -show window
+bindsym $mod+r mode "resize"
+mode "resize" {
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym h resize shrink width 1 px or 1 ppt
+  bindsym j resize grow height 1 px or 1 ppt
+  bindsym k resize shrink height 1 px or 1 ppt
+  bindsym l resize grow width 1 px or 1 ppt
+}
+bindsym $mod+Shift+f floating enable; resize set 2560 px 1440 px; move position center; move up 12 px
+bindsym $mod+Shift+b floating enable; resize set 1366 px 768 px; exec sway-move-top-right 1366
+bindsym $mod+Control+minus move scratchpad
+bindsym $mod+Control+Shift+underscore scratchpad show
+
+# layout and containers
+bindsym $mod+s split vertical
+#bindsym $mod+Control+s layout stacking
+bindsym $mod+v split horizontal
+bindsym $mod+d split vertical; layout tabbed
+bindsym $mod+Shift+d layout tabbed
+bindsym $mod+Shift+s layout splitv
+bindsym $mod+Shift+v layout splith
+bindsym $mod+o focus parent
+bindsym $mod+i focus child
+bindsym $mod+grave focus mode_toggle
+bindsym $mod+Shift+grave floating toggle; sticky toggle
+bindsym $mod+Control+grave sticky toggle
+
+# workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+Escape workspace blank
+bindsym $mod+minus workspace floating
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+underscore move container to workspace floating
+
+# misc
+bindsym $mod+Control+r reload
+bindsym $mod+Control+q exit
+
+# rules
+for_window [app_id="^termbar$"] floating enable, border none, resize set 800 24, move position 0 -24
+for_window [title="^Picture-in-Picture$"] sticky enable
+no_focus [workspace="background"]
+no_focus [app_id="qutebrowser_background"]
+for_window [workspace="floating"] floating enable
+for_window [title="^[Zz]oom$"] floating enable
+for_window [title="^Zoom .* Meetings?$"] floating enable
+for_window [title="^Developer Tools —.*$"] floating enable
+for_window [title="^.*action=.*confno=.*$"] floating enable, no_focus
+for_window [class="^steam$"] border normal
+for_window [app_id="^termnotes$"] border normal, move scratchpad, scratchpad show
+
+include /etc/sway/config.d/*
+
+# vim:ft=swayconfig

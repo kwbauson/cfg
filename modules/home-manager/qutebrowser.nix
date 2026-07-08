@@ -78,7 +78,6 @@
       b = "cmd-set-text -s :open -b";
       c = "tab-clone";
       gb = "open qute:bookmarks";
-      gp = "spawn -u login-fill";
       gq = "open https://github.com/qutebrowser/qutebrowser/commits/master";
       gc = "open https://github.com/kwbauson/cfg";
       gn = "open https://github.com/NixOS/nix/commits/master";
@@ -105,33 +104,6 @@
     };
     extraConfig = ''
       config.unbind("<Ctrl+w>")
-    '';
-  };
-  xdg.dataFile."qutebrowser/userscripts/login-fill" = {
-    executable = true;
-    source = writeBash "login-fill" ''
-      set -e
-      if [[ -e ~/cfg/secrets/bw-session ]];then
-        export BW_SESSION=$(< ~/cfg/secrets/bw-session)
-      fi
-      items=$(bw list items --url "$QUTE_URL" | jq 'map(.login) | map({ username, password, url: .uris[0].uri })')
-      count=$(echo "$items" | jq length)
-      if [[ $count -eq 1 ]];then
-        choice=1
-      elif [[ $count -gt 1 ]];then
-        choices=$(echo "$items" | jq -r 'map([.username, .url]) | map(join(" | ")) | join("\n")' | nl)
-        choice=$(echo "$choices" | rofi -dmenu | awk '{ print $1 }')
-      else
-        echo no matching logins
-        exit 1
-      fi
-      if [[ -n $choice ]];then
-        item=$(echo "$items" | jq ".[$choice - 1]")
-        username=$(echo "$item" | jq -r '.username')
-        password=$(echo "$item" | jq -r '.password')
-        echo "jseval -q document.querySelectorAll('input[type=password]')[0].focus()" > "$QUTE_FIFO"
-        echo "fake-key $password<shift-tab>$username<tab>" > "$QUTE_FIFO"
-      fi
     '';
   };
 }

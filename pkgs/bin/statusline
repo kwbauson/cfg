@@ -77,8 +77,8 @@ blocks = [
   interval { Time.now.strftime('%a %b %_d %_I:%M %p') },
 ]
 
-for_i3 = ARGV[0] == 'i3'
-puts "{\"version\": 1}\n[" if for_i3
+for_sway = ARGV[0] == 'sway'
+puts "{\"version\": 1}\n[" if for_sway
 
 Thread.abort_on_exception = true
 status = {}
@@ -89,7 +89,7 @@ blocks.each_with_index.map do |block, index|
       status[index] = result.to_s.chomp
       line = status.to_a.sort.map(&:last).compact.reject(&:empty?)
         .join(' │ ').gsub(/\s+/, ' ') + ' '
-      puts(if for_i3 then '[{"full_text": "' + line + '"}],' else line end)
+      puts(if for_sway then '[{"full_text": "' + line + '"}],' else line end)
       STDOUT.flush
     end
   end

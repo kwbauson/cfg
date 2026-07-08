@@ -14,7 +14,7 @@ let
     exec ${getExe kitty} --single-instance "$@"
   '';
   termbar = writeBashBin "termbar" ''
-    exec ${getExe kitty} --single-instance --name termbar bash --init-file ${init-file}
+    TERMBAR=1 exec ${getExe kitty} --single-instance --app-id termbar bash --init-file ${init-file}
   '';
 in
 buildEnv {

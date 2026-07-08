@@ -7,13 +7,12 @@ addMetaAttrs { includePackage = true; } (pog {
       bool = true;
     };
   };
-  script = h: ''
+  script = h: /* bash */ ''
     set -euo pipefail
-    ${pathAdd [ clipnotify xsel osc ]}
+    ${pathAdd ([ clipnotify osc ] ++ optionals isLinux [ wl-clipboard ])}
     if ${h.flag "sync_primary"};then
-      export DISPLAY=:0
       while read -r;do
-        xsel --output --clipboard | xsel --input --primary
+        wl-paste | wl-copy --primary
       done < <(clipnotify -s clipboard -l)
     else
       if [[ -t 0 ]];then

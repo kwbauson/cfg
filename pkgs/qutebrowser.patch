@@ -8,9 +8,9 @@ index 770e6a039..dde53b9a6 100644
              window = mainwindow.MainWindow(private=self.is_private)
 +            role_background = background if background is not None else config.val.tabs.background
 +            if role_background:
-+                window.setWindowRole('qutebrowser_background')
++                objects.qapp.setDesktopFileName('qutebrowser_background')
 +            else:
-+                window.setWindowRole('qutebrowser')
++                objects.qapp.setDesktopFileName('qutebrowser')
              tab = window.tabbed_browser.tabopen(
                  url=url, background=background, related=related)
              window.show()

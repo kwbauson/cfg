@@ -36,7 +36,7 @@ in
     nou = "git -C ~/cfg g && noa";
     nod = ''delete-old-generations "$@" && nix store gc -v ${optionalString isNixOS "&& sudo /nix/var/nix/profiles/system/bin/switch-to-configuration boot"}'';
     noc = "cd ~/cfg && gh workflow run updates.yml";
-    noa-remote = /* bash */ ''
+    remote-noa = /* bash */ ''
       set -euo pipefail
       machine=$1
       outPath=$(nix build --no-link --print-out-paths ~/cfg#switch.scripts."$machine".noa)

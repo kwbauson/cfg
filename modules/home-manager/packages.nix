@@ -15,20 +15,17 @@
       inherit bin;
     };
     graphical = optionalAttrs isGraphical {
-      graphical-core = {
-        inherit
-          dzen2 graphviz imagemagick nsxiv
-          xclip xdotool xsel xterm maim w3m
-          xdpyinfo xev xfontsel xmodmap;
-      };
       inherit
+        graphviz imagemagick xterm
         ffmpeg mediainfo pavucontrol qtbr
-        discord zathura steamtinkerlaunch
+        discord zathura
         headsetcontrol arduino remmina;
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {
         inherit (kdePackages) breeze-icons;
-        inherit i3-easyfocus keyd;
+        inherit
+          keyd imv wdisplays xlsclients wofi wl-clipboard wlrctl wlprop
+          steamtinkerlaunch playerctl;
       };
     };
     development = {
@@ -53,13 +50,13 @@
   };
   excluded-packages = optionalAttrs isDarwin
     {
-      inherit iproute2 iputils pavucontrol strace time dzen2
-        maim acpi usbutils xdotool qtbr discord zathura xdg-utils;
-      inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
+      inherit iproute2 iputils pavucontrol strace time
+        acpi usbutils qtbr discord zathura xdg-utils;
+      inherit nixos-install-tools arduino util-linux gnutar;
       inherit man-pages ncdu bitwarden-cli remmina ffmpeg yt-dlp procps;
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
-    inherit (bin) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
+    inherit (bin) ytdl-format mpv-ytdl-format sway-move-top-right statusline vol;
   };
 }

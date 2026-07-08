@@ -5,6 +5,13 @@ set -e
 if [[ -z $1 ]];then
   echo no command
   exit 1
+elif [[ $1 = sleep ]];then
+  sleep 1
+  systemctl --user kill --signal=USR1 swayidle
+elif [[ $1 = on ]];then
+  swaymsg 'output * power on'
+elif [[ $1 = off ]];then
+  swaymsg 'output * power off'
 elif [[ $1 == "+" ]];then
   brightnessctl -q set +$2%
 elif [[ $1 == "-" ]];then
