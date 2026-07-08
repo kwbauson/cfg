@@ -105,16 +105,6 @@
     delta.options.paging = "always";
     bat.enable = true;
     bat.config.paging = "always";
-    rofi = {
-      enable = isNixOS && isGraphical;
-      theme = "solarized";
-      location = "top";
-      extraConfig = {
-        show-icons = true;
-        scroll-method = 1;
-        monitor = "-1";
-      };
-    };
     vscode.enable = isGraphical && isLinux;
     # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
     mpv.enable = isGraphical && isLinux;

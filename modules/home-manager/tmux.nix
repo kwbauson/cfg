@@ -26,7 +26,6 @@
       set -g status-left ""
       set -g status-right ""
       set -g default-command "''${SHELL}"
-      ${optionalString (isLinux && isGraphical) ''bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel"''}
     '';
     plugins = with tmuxPlugins; [ jump ];
   };

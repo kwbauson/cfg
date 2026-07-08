@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages pamixer pulseaudioFull xdotool
+# with-packages pamixer pulseaudioFull jq
+set -eo pipefail
 cmd=$1
 [[ -n $1 ]] && shift
 
@@ -15,7 +16,8 @@ elif [[ $cmd == '-' ]];then
   pamixer --allow-boost --decrease $1
 elif [[ $cmd == 'mc' ]];then
   # FIXME
-  pid=$(xdotool getactivewindow getwindowpid)
+  exit 1
+  pid=$(swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .pid')
   sink=$(
     pactl list sink-inputs |
     sed "/application.process.id = \"$pid\"/q" |

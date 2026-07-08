@@ -33,7 +33,17 @@ optionalAttrs isGraphical {
     };
     extraConfig = readFile ./sway-config;
   };
-  programs.sway-easyfocus.enable = true;
+  programs.sway-easyfocus = {
+    enable = true;
+    settings = let bg = "ffff00"; fg = "000000"; in {
+      chars = "asdfghjkl;";
+      window_background_opacity = 0;
+      label_background_color = bg;
+      label_text_color = fg;
+      focused_background_color = bg;
+      focused_text_color = fg;
+    };
+  };
   services.swayidle = {
     enable = true;
     timeouts = [{
@@ -42,4 +52,6 @@ optionalAttrs isGraphical {
       resumeCommand = "${sway}/bin/swaymsg 'output * power on'";
     }];
   };
+  programs.swayr.enable = true;
+  programs.swayr.systemd.enable = true;
 }

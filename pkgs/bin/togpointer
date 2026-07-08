@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# FIXME
 # ONLY_LINUX
-# with-packages xinput xdotool
 pad=$(xinput list | sed -En '/Touchpad/s/.*id=([0-9]+).*/\1/p')
 
 if [[ -z $1 ]];then
@@ -17,7 +15,7 @@ fi
 if [[ $state == on ]];then
   xinput enable "$pad"
 elif [[ $state == off ]];then
-  xdotool mousemove 10000 0
+  wlrctl pointer move 10000 -10000
   xinput disable "$pad"
 else
   echo invalid touchpad state

@@ -17,9 +17,9 @@ bindsym $mod+Control+e   exec term ssh keith-server -t sh -lc nvim
 bindsym $mod+f           exec term ranger
 bindsym $mod+w           exec qtbr
 bindsym $mod+u           exec qutebrowser ':undo --window'
-bindsym $mod+space       exec bl off
+bindsym $mod+space       exec bl sleep
 bindsym $mod+z           exec "sleep .5; systemctl suspend"
-bindsym $mod+m           exec togpad
+bindsym $mod+m           exec togpointer
 bindsym $mod+Shift+space exec swaylock --color 000000
 bindsym XF86AudioMute               exec vol m
 bindsym $mod+XF86AudioMute          exec vol mc
@@ -27,9 +27,9 @@ bindsym XF86AudioLowerVolume        exec vol - 5
 bindsym XF86AudioRaiseVolume        exec vol + 5
 bindsym Shift+XF86AudioLowerVolume  exec vol - 1
 bindsym Shift+XF86AudioRaiseVolume  exec vol + 1
-bindsym XF86AudioPlay               exec medctl play
-bindsym XF86AudioPrev               exec medctl prev
-bindsym XF86AudioNext               exec medctl next
+bindsym XF86AudioPlay               exec playerctl play-pause
+bindsym XF86AudioPrev               exec playerctl position 10-
+bindsym XF86AudioNext               exec playerctl position 10+
 bindsym XF86MonBrightnessDown       exec bl - 5
 bindsym XF86MonBrightnessUp         exec bl + 5
 bindsym Shift+XF86MonBrightnessDown exec bl - 1
@@ -78,7 +78,7 @@ bindsym $mod+Shift+k move up $float_move_pixels
 bindsym $mod+Shift+l move right $float_move_pixels
 bindsym $mod+apostrophe exec sway-easyfocus
 bindsym $mod+Return fullscreen toggle
-bindsym $mod+Tab exec togwin
+bindsym $mod+Tab exec swayr switch-to-urgent-or-lru-window
 bindsym $mod+semicolon exec rofi -show window
 bindsym $mod+r mode "resize"
 mode "resize" {
@@ -138,7 +138,6 @@ bindsym $mod+Control+r reload
 bindsym $mod+Control+q exit
 
 # rules
-#for_window [title="^.*$"] title_window_icon on # FIXME
 for_window [app_id="^termbar$"] floating enable, border none, resize set 800 24, move position 0 -24
 for_window [title="^Picture-in-Picture$"] sticky enable
 no_focus [workspace="background"]
@@ -150,5 +149,7 @@ for_window [title="^Developer Tools —.*$"] floating enable
 for_window [title="^.*action=.*confno=.*$"] floating enable, no_focus
 for_window [class="^steam$"] border normal
 for_window [app_id="^termnotes$"] border normal, move scratchpad, scratchpad show
+
+include /etc/sway/config.d/*
 
 # vim:ft=swayconfig
