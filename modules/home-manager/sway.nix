@@ -30,6 +30,9 @@ optionalAttrs (isLinux && isGraphical) {
       modes = { };
       bars = [ ];
       keybindings = { };
+      workspaceOutputAssign =
+        map (i: { output = "DP-1"; workspace = toString i; }) [ 1 3 4 10 ]
+        ++ [{ output = "DP-2"; workspace = "2"; }];
     };
     extraConfig = readFile ./sway-config;
   };
