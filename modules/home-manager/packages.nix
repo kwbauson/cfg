@@ -15,18 +15,15 @@
       inherit bin;
     };
     graphical = optionalAttrs isGraphical {
-      graphical-core = {
-        inherit graphviz imagemagick imv xterm w3m wlrctl wlprop wdisplays
-          xlsclients wofi wl-clipboard;
-      };
       inherit
+        graphviz imagemagick xterm
         ffmpeg mediainfo pavucontrol qtbr
-        discord zathura steamtinkerlaunch
+        discord zathura
         headsetcontrol arduino remmina playerctl;
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {
         inherit (kdePackages) breeze-icons;
-        inherit keyd;
+        inherit keyd imv wdisplays xlsclients wofi wl-clipboard wlrctl wlprop steamtinkerlaunch;
       };
     };
     development = {
@@ -51,9 +48,9 @@
   };
   excluded-packages = optionalAttrs isDarwin
     {
-      inherit iproute2 iputils pavucontrol strace time dzen2
+      inherit iproute2 iputils pavucontrol strace time
         acpi usbutils qtbr discord zathura xdg-utils;
-      inherit nixos-install-tools arduino util-linux steamtinkerlaunch gnutar;
+      inherit nixos-install-tools arduino util-linux gnutar;
       inherit man-pages ncdu bitwarden-cli remmina ffmpeg yt-dlp procps;
     }
   // optionalAttrs isMinimal {

@@ -9,7 +9,7 @@ addMetaAttrs { includePackage = true; } (pog {
   };
   script = h: /* bash */ ''
     set -euo pipefail
-    ${pathAdd [ clipnotify osc wl-clipboard ]}
+    ${pathAdd ([ clipnotify osc ] ++ optionals isLinux [ wl-clipboard ])}
     if ${h.flag "sync_primary"};then
       while read -r;do
         wl-paste | wl-copy --primary
