@@ -203,6 +203,7 @@
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   qt.enable = isGraphical && isLinux;
   qt.style.name = "adwaita-dark";
+  dconf.enable = isGraphical;
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
   services.flameshot = {
