@@ -1,5 +1,5 @@
 { scope, ... }: with scope;
-optionalAttrs isGraphical {
+optionalAttrs (isLinux && isGraphical) {
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;

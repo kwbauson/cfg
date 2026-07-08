@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
+wlrctl pointer move 10000 -10000
+exit 0
+
+# FIXME
 pad=$(xinput list | sed -En '/Touchpad/s/.*id=([0-9]+).*/\1/p')
 
 if [[ -z $1 ]];then
