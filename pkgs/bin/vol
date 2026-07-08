@@ -14,6 +14,7 @@ elif [[ $cmd == '+' ]];then
 elif [[ $cmd == '-' ]];then
   pamixer --allow-boost --decrease $1
 elif [[ $cmd == 'mc' ]];then
+  # FIXME
   pid=$(xdotool getactivewindow getwindowpid)
   sink=$(
     pactl list sink-inputs |

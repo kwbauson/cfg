@@ -7,7 +7,7 @@ index 770e6a039..dde53b9a6 100644
          if config.val.tabs.tabs_are_windows and self.widget.count() > 0:
              window = mainwindow.MainWindow(private=self.is_private)
 +            role_background = background if background is not None else config.val.tabs.background
-+            if role_background:
++            if role_background: # FIXME
 +                window.setWindowRole('qutebrowser_background')
 +            else:
 +                window.setWindowRole('qutebrowser')

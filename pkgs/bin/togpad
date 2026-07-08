@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# FIXME
 # ONLY_LINUX
 # with-packages xinput xdotool
 pad=$(xinput list | sed -En '/Touchpad/s/.*id=([0-9]+).*/\1/p')

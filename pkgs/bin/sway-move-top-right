@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+offset=$1
+width=$(swaymsg -t get_outputs | jq '.[0].rect.width')
+
+swaymsg move position $(("$width" - "$offset")) px 48 px

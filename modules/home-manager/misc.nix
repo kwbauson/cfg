@@ -32,7 +32,6 @@
     dircolors.enable = true;
     firefox.enable = !isDarwin && isGraphical;
     chromium.enable = !isDarwin && isGraphical;
-    autorandr.enable = isLinux && isGraphical;
     helix.enable = true;
     ssh = {
       enable = true;
@@ -214,10 +213,7 @@
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   qt.enable = isGraphical && isLinux;
   qt.style.name = "adwaita-dark";
-  dconf.enable = false;
-
-  services.picom.enable = isGraphical && isLinux;
-  services.picom.vSync = true;
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
   services.flameshot = {
     enable = isGraphical && isLinux;
@@ -229,15 +225,4 @@
   };
 
   services.clip.sync-primary.enable = isGraphical && isLinux;
-
-  xsession = {
-    enable = isNixOS && isGraphical;
-    initExtra = ''
-      ${hsetroot}/bin/hsetroot -solid black &
-      xsetroot -cursor_name left_ptr &
-      togpad off &
-      autorandr --change &
-      ${optionalString (machine.name == "keith-desktop") "(sleep 5; openrgb --profile default) &"}
-    '';
-  };
 }

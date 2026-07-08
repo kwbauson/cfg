@@ -7,12 +7,13 @@ addMetaAttrs { includePackage = true; } (pog {
       bool = true;
     };
   };
-  script = h: ''
+  script = h: /* bash */ ''
     set -euo pipefail
     ${pathAdd [ clipnotify xsel osc ]}
     if ${h.flag "sync_primary"};then
       export DISPLAY=:0
       while read -r;do
+        # FIXME
         xsel --output --clipboard | xsel --input --primary
       done < <(clipnotify -s clipboard -l)
     else

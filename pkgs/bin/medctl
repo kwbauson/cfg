@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages i3 xdotool
+# with-packages xdotool
 cmd=$1
 
 if [[ -z $cmd ]];then
@@ -20,6 +20,7 @@ names=(
   ' | Nebula'
 )
 
+# FIXME
 winlist | while read wid title;do
   for name in "${names[@]}";do
     if [[ $title =~ "$name" ]];then
@@ -40,10 +41,10 @@ winlist | while read wid title;do
       fi
 
       if [[ $(xdotool getactivewindow getwindowpid) == $(xdotool getwindowpid $wid) ]];then
-        i3-msg -q 'focus parent'
+        swaymsg -q 'focus parent'
         sleep 0.2
         xdotool key --window $wid $key
-        i3-msg -q 'focus child'
+        swaymsg -q 'focus child'
       else
         echo $title
         xdotool key --window $wid $key

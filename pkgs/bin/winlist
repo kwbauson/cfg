@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# FIXME
 # with-packages xprop wmctrl
 join -1 2 \
   <(xprop -root _NET_CLIENT_LIST_STACKING |

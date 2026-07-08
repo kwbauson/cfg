@@ -18,7 +18,7 @@
       graphical-core = {
         inherit
           dzen2 graphviz imagemagick nsxiv
-          xclip xdotool xsel xterm maim w3m
+          xclip xdotool xsel xterm maim w3m# FIXME
           xdpyinfo xev xfontsel xmodmap;
       };
       inherit
@@ -28,7 +28,7 @@
       sox = sox.override { enableLame = true; };
       linuxOnly = optionalAttrs isLinux {
         inherit (kdePackages) breeze-icons;
-        inherit i3-easyfocus keyd;
+        inherit keyd;
       };
     };
     development = {
@@ -60,6 +60,6 @@
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
-    inherit (bin) ytdl-format mpv-ytdl-format slopcast i3-move-top-right statusline vol;
+    inherit (bin) ytdl-format mpv-ytdl-format slopcast sway-move-top-right statusline vol;
   };
 }

@@ -73,25 +73,18 @@
       HandleLidSwitch = "ignore";
     };
     journald.extraConfig = "SystemMaxUse=100M";
-    displayManager = mkIf isGraphical {
-      defaultSession = "none+xsession";
-      autoLogin = {
-        enable = mkDefault true;
-        user = username;
-      };
-    };
-    xserver.enable = mkDefault isGraphical;
-    xserver.displayManager = mkIf isGraphical {
-      session = [
-        {
-          manage = "window";
-          name = "xsession";
-          start = "exec ~/.xsession";
-        }
-      ];
-      lightdm.enable = mkDefault true;
+  };
+
+  services.greetd = {
+    enable = isGraphical;
+    settings = {
+      default_session.command = "${greetd}/bin/agreety --cmd bash";
+      initial_session = { user = username; command = "sway"; };
     };
   };
+
+  programs.sway.enable = isGraphical;
+  programs.sway.wrapperFeatures.gtk = true;
 
   users.mutableUsers = false;
   secrets.password.neededForUsers = true;
@@ -112,7 +105,6 @@
   services.tailscale.useRoutingFeatures = mkDefault "client";
   systemd.services.tailscaled.after = [ "systemd-networkd-wait-online.service" ];
   hardware.bluetooth.enable = mkDefault isGraphical;
-  programs.i3lock.enable = true;
   services.smartd.enable = mkDefault true;
 
   services.udev.packages = optionals isGraphical [ headsetcontrol ];
@@ -124,6 +116,12 @@
 
   services.caddy.email = "kwbauson@gmail.com";
 
+  environment.etc."libinput/local-overrides.quirks".text = ''
+    [Serial Keyboards]
+    MatchUdevType=keyboard
+    MatchName=keyd*keyboard
+    AttrKeyboardIntegration=internal
+  '';
   services.keyd.keyboards.default.settings = {
     main = {
       capslock = "leftcontrol";
