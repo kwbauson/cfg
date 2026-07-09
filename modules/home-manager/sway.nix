@@ -45,6 +45,7 @@ optionalAttrs (isLinux && isGraphical) {
       label_text_color = fg;
       focused_background_color = bg;
       focused_text_color = fg;
+      show_confirmation = false;
     };
   };
   services.swayidle = {
