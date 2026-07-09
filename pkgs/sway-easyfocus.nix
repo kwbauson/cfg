@@ -11,4 +11,5 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   nativeBuildInputs = [ pkg-config wrapGAppsHook4 ];
   buildInputs = [ gtk4 gtk4-layer-shell ];
+  meta.platforms = platforms.linux;
 })
