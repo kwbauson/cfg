@@ -1,0 +1,38 @@
+diff --git a/direnvrc b/direnvrc
+index 6704644..0b5ce7c 100644
+--- a/direnvrc
++++ b/direnvrc
+@@ -399,7 +399,7 @@ use_nix() {
+   local layout_dir path version
+   layout_dir=$(direnv_layout_dir)
+   # NB: macOS has realpath, but only supports -q
+-  if path=$(realpath "$(_nix eval --impure --expr "<nixpkgs>" 2>/dev/null)"); then
++  if false && path=$(realpath "$(_nix eval --impure --expr "<nixpkgs>" 2>/dev/null)"); then
+     if [[ -f "${path}/.version-suffix" ]]; then
+       version=$(<"${path}/.version-suffix")
+     elif [[ -f "${path}/.git/HEAD" ]]; then
+@@ -422,10 +422,6 @@ use_nix() {
+     fi
+   fi
+ 
+-  local profile
+-  profile="${layout_dir}/nix-profile-${version:-unknown}$(_nix_argsum_suffix "$*")"
+-  local profile_rc="${profile}.rc"
+-
+   local in_packages=0
+   local attribute=
+   local packages=""
+@@ -438,6 +434,13 @@ use_nix() {
+     nixfile="./default.nix"
+   fi
+ 
++  if [[ -v nixfile ]];then
++    version=$(nix hash file --base32 "$nixfile")
++  fi
++  local profile
++  profile="${layout_dir}/nix-profile-${version:-unknown}$(_nix_argsum_suffix "$*")"
++  local profile_rc="${profile}.rc"
++
+   while [[ $# -gt 0 ]]; do
+     i="$1"
+     shift
