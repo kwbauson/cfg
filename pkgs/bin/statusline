@@ -14,8 +14,11 @@ if ARGV[0] == 'watch'
   end
   notifier = INotify::Notifier.new
   notifier.watch(OUTPUT_PATH, :modify) do
-    puts File.read(OUTPUT_PATH)
-    STDOUT.flush
+    text = File.read(OUTPUT_PATH)
+    unless text.strip.empty?
+      puts text
+      STDOUT.flush
+    end
   end
   notifier.run
   exit 1
