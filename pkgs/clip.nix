@@ -12,7 +12,7 @@ addMetaAttrs { includePackage = true; } (pog {
     ${pathAdd ([ clipnotify osc ] ++ optionals isLinux [ wl-clipboard ])}
     if ${h.flag "sync_primary"};then
       while read -r;do
-        wl-paste | wl-copy --primary
+        wl-paste -n | wl-copy --primary
       done < <(clipnotify -s clipboard -l)
     else
       if [[ -t 0 ]];then

@@ -6,11 +6,9 @@ let cfg = config.services.clip; in
   };
   config = {
     systemd.user.services.clip-sync-primary = mkIf cfg.sync-primary.enable {
-      Unit = {
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Unit.PartOf = [ "graphical-session.target" ];
+      Unit.After = [ "graphical-session.target" ];
+      Install.WantedBy = [ "graphical-session.target" ];
       Service.ExecStart = "${getExe clip} --sync_primary";
     };
   };

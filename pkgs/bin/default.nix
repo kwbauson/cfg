@@ -10,7 +10,7 @@ pipeValue [
       (filter (hasInfix " with-packages "))
       (map (s: elemAt (splitString " with-packages " s) 1))
       (concatMap (splitString " "))
-      (map (n: getAttrFromPath (splitString "." n) pkgs))
+      (map (n: getAttrFromPath (splitString "." n) scope))
       makeBinPath
     ];
     buildCommand = /* bash */ ''

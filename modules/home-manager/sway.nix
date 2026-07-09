@@ -1,4 +1,5 @@
-{ scope, ... }: with scope;
+{ config, scope, ... }: with scope;
+let swayConfig = config.wayland.windowManager.sway.config; in
 optionalAttrs (isLinux && isGraphical) {
   wayland.windowManager.sway = {
     enable = true;
@@ -58,4 +59,69 @@ optionalAttrs (isLinux && isGraphical) {
   };
   programs.swayr.enable = true;
   programs.swayr.systemd.enable = true;
+  programs.waybar.enable = true;
+  programs.waybar.systemd.enable = true;
+  programs.waybar.settings.mainBar = {
+    position = "top";
+    layer = "bottom";
+    height = 24;
+    modules-left = [ "sway/workspaces" "sway/mode" ];
+    modules-right = [ "custom/statusline" "tray" ];
+    "custom/statusline" = {
+      exec = "${getExe bin.statusline} watch";
+      return-type = "json";
+    };
+    tray.icon-size = 20;
+  };
+  programs.waybar.style = /* css */ ''
+    * {
+        border: none;
+        border-radius: 0px;
+        min-height: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #waybar {
+        background: black;
+        color: white;
+        font-family: ${head swayConfig.fonts.names};
+        font-size: ${swayConfig.fonts.size}pt;
+    }
+
+    #workspaces button {
+        border: 1px solid transparent;
+        padding-left: 2px;
+        padding-right: 1px;
+        color: white;
+        background: #285577;
+        border-color: #4c7899;
+    }
+
+    #workspaces button:not(.focused) {
+        color: #888888;
+        background: #222222;
+        border-color: #333333;
+    }
+
+    #workspaces button.visible:not(.focused) {
+        color: white;
+        background: #5f676a;
+    }
+
+    #workspaces button.urgent {
+        background: #900000;
+    }
+
+    #mode {
+        background: #900000;
+    }
+  '';
+  systemd.user.services.statusline = {
+    Unit.PartOf = [ "graphical-session.target" ];
+    Unit.After = [ "graphical-session.target" ];
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service.ExecStart = "${getExe bin.statusline} sway";
+    # Service.StandardOutput = "file:/tmp/statusline-output";
+  };
 }

@@ -1,9 +1,25 @@
 #!/usr/bin/env ruby
 # ONLY_LINUX
-# with-packages acpi pamixer pulseaudioFull sysstat headsetcontrol
+# with-packages acpi pamixer pulseaudioFull sysstat headsetcontrol bin.has-updates
 require 'rb-inotify'
 require 'open-uri'
 require 'json'
+
+OUTPUT_PATH = '/tmp/statusline-output'
+
+if ARGV[0] == 'watch'
+  loop do
+    break if File.exist?(OUTPUT_PATH)
+    sleep 1
+  end
+  notifier = INotify::Notifier.new
+  notifier.watch(OUTPUT_PATH, :modify) do
+    puts File.read(OUTPUT_PATH)
+    STDOUT.flush
+  end
+  notifier.run
+  exit 1
+end
 
 def interval(time = 60, &block1)
   proc { |&block2|
@@ -78,19 +94,30 @@ blocks = [
 ]
 
 for_sway = ARGV[0] == 'sway'
-puts "{\"version\": 1}\n[" if for_sway
 
 Thread.abort_on_exception = true
 status = {}
+
+queue = Thread::Queue.new
 
 blocks.each_with_index.map do |block, index|
   Thread.new do
     block.call do |result|
       status[index] = result.to_s.chomp
-      line = status.to_a.sort.map(&:last).compact.reject(&:empty?)
-        .join(' │ ').gsub(/\s+/, ' ') + ' '
-      puts(if for_sway then '[{"full_text": "' + line + '"}],' else line end)
-      STDOUT.flush
+      queue << true
+    end
+  end
+end
+
+Thread.new do
+  loop do
+    queue.pop
+    line = status.to_a.sort.map(&:last).compact.reject(&:empty?)
+      .join(' │ ').gsub(/\s+/, ' ') + ' '
+    if for_sway
+      File.write(OUTPUT_PATH, %Q@{"text": "#{line}"}@)
+    else
+      puts line
     end
   end
 end
