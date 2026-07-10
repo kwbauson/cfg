@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # ONLY_LINUX
-# with-packages acpi pamixer pulseaudioFull sysstat headsetcontrol bin.has-updates
+# pathAdd acpi pamixer pulseaudioFull sysstat headsetcontrol bin.has-updates
 require 'rb-inotify'
 require 'open-uri'
 require 'json'
@@ -116,9 +116,9 @@ Thread.new do
   loop do
     queue.pop
     line = status.to_a.sort.map(&:last).compact.reject(&:empty?)
-      .join(' │ ').gsub(/\s+/, ' ') + ' '
+      .join(' │ ').gsub(/\s+/, ' ')
     if for_sway
-      File.write(OUTPUT_PATH, %Q@{"text": "#{line}"}@)
+      File.write(OUTPUT_PATH, %Q@{"text": " #{line}"}@)
     else
       puts line
     end

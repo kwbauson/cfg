@@ -7,8 +7,8 @@ pipeValue [
     nativeBuildInputs = [ makeWrapper ];
     PATH_ADD = pipeValue [
       (splitString "\n" text)
-      (filter (hasInfix " with-packages "))
-      (map (s: elemAt (splitString " with-packages " s) 1))
+      (filter (hasInfix " pathAdd "))
+      (map (s: elemAt (splitString " pathAdd " s) 1))
       (concatMap (splitString " "))
       (map (n: getAttrFromPath (splitString "." n) scope))
       makeBinPath

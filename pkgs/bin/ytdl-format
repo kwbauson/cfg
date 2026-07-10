@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages yt-dlp
+# pathAdd yt-dlp
 filter=$1
 if [[ $2 = -f ]];then
   urls=$(< "$3")

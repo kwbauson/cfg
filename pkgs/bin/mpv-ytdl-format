@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages yt-dlp mpv
+# pathAdd yt-dlp mpv
 filter=$1
 url=$2
 shift

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages pamixer pulseaudioFull jq
+# pathAdd pamixer pulseaudioFull jq
 set -eo pipefail
 cmd=$1
 [[ -n $1 ]] && shift

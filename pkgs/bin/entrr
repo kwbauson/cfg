@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages fd entr
+# pathAdd fd entr
 if [[ $1 == "-f" ]];then
   shift
   filescmd="echo $1"

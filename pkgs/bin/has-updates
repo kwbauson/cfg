@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# with-packages git
+# pathAdd git
 branch=${1:-main}
 set -e
 join_by() {

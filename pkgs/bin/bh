@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ONLY_LINUX
-# with-packages bluez
+# pathAdd bluez
 touch ~/.bh_latest
 latest=$(< ~/.bh_latest)
 [[ -n $1 ]] && name=$1 || name=$latest
