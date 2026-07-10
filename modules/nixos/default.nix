@@ -79,7 +79,10 @@
     enable = isGraphical;
     settings = {
       default_session.command = "${greetd}/bin/agreety --cmd bash";
-      initial_session = { user = username; command = "sway"; };
+      initial_session = {
+        user = username;
+        command = "systemd-cat -t sway sway";
+      };
     };
   };
 

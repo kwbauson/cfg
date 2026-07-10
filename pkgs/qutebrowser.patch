@@ -9,7 +9,7 @@ index 5110a2d69..9b3dbaa84 100644
 +        if background:
 +            objects.qapp.setDesktopFileName('qutebrowser_background')
 +        else:
-+            objects.qapp.setDesktopFileName('qutebrowser')
++            objects.qapp.setDesktopFileName(objects.args.desktop_file_name)
          if config.val.tabs.tabs_are_windows and self.widget.count() > 0:
              window = mainwindow.MainWindow(private=self.is_private)
              tab = window.tabbed_browser.tabopen(

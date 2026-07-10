@@ -215,5 +215,5 @@
     };
   };
 
-  services.clip.sync-primary.enable = isGraphical && isLinux;
+  services.clip.sync.enable = isGraphical && isLinux;
 }

@@ -1,5 +1,7 @@
 { scope, ... }: with scope;
 {
+  # FIXME remove this after https://github.com/qutebrowser/qutebrowser/issues/8908
+  home.sessionVariables.QTWEBENGINE_FORCE_USE_GBM = 0;
   programs.qutebrowser = {
     enable = isGraphical && isLinux;
     loadAutoconfig = true;

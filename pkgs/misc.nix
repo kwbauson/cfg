@@ -47,4 +47,9 @@
       exec "$outPath"/bin/run "$@"
     ''
   ).overrideAttrs { passthru.run = args@{ ... }: writeBashBin "run" "exec ${getExe (run args)}"; };
+
+  # for repl inspection
+  configs = forAttrs (nixosConfigurations // darwinConfigurations) (name: c:
+    c.config // { hm = c.config.home-manager.users.${machines.${name}.username}; }
+  );
 }

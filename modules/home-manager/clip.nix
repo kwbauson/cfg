@@ -2,14 +2,14 @@
 let cfg = config.services.clip; in
 {
   options.services.clip = {
-    sync-primary.enable = mkEnableOption "sync-primary";
+    sync.enable = mkEnableOption "sync";
   };
   config = {
-    systemd.user.services.clip-sync-primary = mkIf cfg.sync-primary.enable {
+    systemd.user.services.clip-sync = mkIf cfg.sync.enable {
       Unit.PartOf = [ "graphical-session.target" ];
       Unit.After = [ "graphical-session.target" ];
       Install.WantedBy = [ "graphical-session.target" ];
-      Service.ExecStart = "${getExe clip} --sync_primary";
+      Service.ExecStart = "${getExe clip} sync";
     };
   };
 }

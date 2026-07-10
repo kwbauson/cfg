@@ -12,11 +12,9 @@ mkMerge [
         "ssh://keith-server/sync"
       ];
     };
-    systemd.user.services = forAttrs' config.services.unison.pairs (name: _: {
-      name = "unison-pair-${name}";
-      value = {
-        Unit.After = [ "network-online.target" ];
-      };
-    });
+    systemd.user.services = forAttrs' config.services.unison.pairs (name: _:
+      nameValuePair "unison-pair-${name}"
+        { Unit.After = [ "tailscaled.service" ]; }
+    );
   })
 ]

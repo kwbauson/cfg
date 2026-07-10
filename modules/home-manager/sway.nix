@@ -57,6 +57,7 @@ optionalAttrs (isLinux && isGraphical) {
       resumeCommand = "${sway}/bin/swaymsg 'output * power on'";
     }];
   };
+  services.swaync.enable = true;
   programs.swayr.enable = true;
   programs.swayr.systemd.enable = true;
   programs.waybar.enable = true;
@@ -66,7 +67,7 @@ optionalAttrs (isLinux && isGraphical) {
     layer = "bottom";
     height = 24;
     modules-left = [ "sway/workspaces" "sway/mode" ];
-    modules-right = [ "custom/statusline" "tray" ];
+    modules-right = [ "tray" "custom/statusline" ];
     "custom/statusline" = {
       exec = "${getExe bin.statusline} watch";
       return-type = "json";

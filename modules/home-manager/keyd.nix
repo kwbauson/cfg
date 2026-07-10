@@ -47,17 +47,15 @@ let
 in
 {
   systemd.user.services.keyd-application-mapper = mkIf enable {
-    Unit = {
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
-      X-Restart-Triggers = [ config.xdg.configFile."keyd/base.conf".source ];
-    };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Unit.PartOf = [ "graphical-session.target" ];
+    Unit.After = [ "graphical-session.target" ];
+    Install.WantedBy = [ "graphical-session.target" ];
+    Unit.X-Restart-Triggers = [ config.xdg.configFile."keyd/base.conf".source ];
     Service = {
       Environment = [ "PATH=${makeBinPath [ keyd ]}" "PYTHONUNBUFFERED=1" ];
       Type = "exec";
       ExecStartPre = keyd-generate-config;
-      ExecStart = "${keyd}/bin/keyd-application-mapper -v";
+      ExecStart = "${keyd}/bin/keyd-application-mapper";
     };
   };
   xdg.configFile."keyd/base.conf".text = ''
