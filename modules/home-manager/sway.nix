@@ -32,7 +32,7 @@ optionalAttrs (isLinux && isGraphical) {
       bars = [ ];
       keybindings = { };
       workspaceOutputAssign =
-        map (i: { output = "DP-1"; workspace = toString i; }) [ 1 3 4 10 ]
+        concatMap (i: map (d: { output = d; workspace = toString i; }) [ "DP-1" "eDP-1" ]) [ 1 3 4 10 ]
         ++ [{ output = "DP-2"; workspace = "2"; }];
     };
     extraConfig = readFile ./sway-config;
