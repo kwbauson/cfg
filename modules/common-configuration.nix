@@ -19,6 +19,8 @@
     extra-experimental-features = [ "nix-command" "flakes" ];
     narinfo-cache-negative-ttl = 10;
     warn-dirty = false;
+    lint-short-path-literals = "fatal";
+    lint-url-literals = "fatal";
   };
 
   home-manager = {

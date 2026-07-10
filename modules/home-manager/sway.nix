@@ -1,16 +1,24 @@
 { config, scope, ... }: with scope;
-let swayConfig = config.wayland.windowManager.sway.config; in
+let
+  swayConfig = config.wayland.windowManager.sway.config;
+  outputs = {
+    keith-desktop = {
+      primary = { name = "DP-1"; position = "0,0"; };
+      secondary = { name = "DP-2"; position = "3440,0"; };
+    };
+    keith-xps = {
+      primary = { name = "eDP-1"; position = "0,0"; };
+      secondary = { name = "DP-1"; position = "1920,0"; };
+    };
+  }.${machine.name} or { };
+in
 optionalAttrs (isLinux && isGraphical) {
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
     config = {
       input."type:touchpad".tap = "enabled";
-      output = {
-        # desktop
-        DP-1.position = "0,0";
-        DP-2.position = "3440,0";
-      };
+      output = forAttrs' outputs (_: o: nameValuePair o.name { inherit (o) position; });
       workspaceLayout = "tabbed";
       workspaceAutoBackAndForth = true;
       fonts = {
@@ -31,9 +39,10 @@ optionalAttrs (isLinux && isGraphical) {
       bars = [ ];
       keybindings = { };
       workspaceOutputAssign =
-        concatMap (i: map (d: { output = d; workspace = toString i; }) [ "DP-1" "eDP-1" ]) [ 1 3 4 10 ]
-        ++ [{ output = "DP-2"; workspace = "2"; }];
-
+        let
+          workspaceAssign = n: map (w: { output = outputs.${n}.name or "*"; workspace = toString w; });
+        in
+        workspaceAssign "primary" [ 1 3 4 10 ] ++ workspaceAssign "secondary" [ 2 ];
       window.commands = mapAttrsToList
         (app_id: x: {
           criteria = { inherit app_id; };

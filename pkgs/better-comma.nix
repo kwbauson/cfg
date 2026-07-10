@@ -8,7 +8,7 @@ stdenvNoCC.mkDerivation {
   script = ''
     #!${getExe bash}
     ${pathAdd [ gnused coreutils fzy ]}
-    set -o pipefail
+    set -eo pipefail
     source=${cfg}
     [[ $1 = -u ]] && uncache=1 && shift
     [[ $1 = -d ]] && desc=1 && shift
