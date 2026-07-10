@@ -195,7 +195,7 @@ importPackage rec {
           let
             names = flatten [
               [ "default.nix" "shell.nix" "flake.nix" "package.nix" ]
-              [ "configuration.nix" "darwin-configuration.nix" ]
+              [ "configuration.nix" "darwin-configuration.nix" "module.nix" ]
               [ "index.html" "index.css" "index.ts" "index.tsx" ]
               [ "config.nix" "secrets.yaml" "main.tf" "misc.nix" "main.py" ]
             ];

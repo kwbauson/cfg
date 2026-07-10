@@ -52,7 +52,7 @@ optionalAttrs (isLinux && isGraphical) {
   services.swayidle = {
     enable = true;
     timeouts = [{
-      timeout = 300;
+      timeout = 900;
       command = "${sway}/bin/swaymsg 'output * power off'";
       resumeCommand = "${sway}/bin/swaymsg 'output * power on'";
     }];
@@ -110,6 +110,7 @@ optionalAttrs (isLinux && isGraphical) {
     }
 
     #workspaces button.urgent {
+        color: white;
         background: #900000;
     }
 
@@ -122,6 +123,6 @@ optionalAttrs (isLinux && isGraphical) {
     Unit.After = [ "graphical-session.target" ];
     Install.WantedBy = [ "graphical-session.target" ];
     Service.ExecStart = "${getExe bin.statusline} sway";
-    # Service.StandardOutput = "file:/tmp/statusline-output";
   };
+  home.sessionVariables.NIXOS_OZONE_WL = 1;
 }
