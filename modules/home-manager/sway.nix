@@ -7,15 +7,14 @@ optionalAttrs (isLinux && isGraphical) {
     config = {
       input."type:touchpad".tap = "enabled";
       output = {
-        keith-desktop = {
-          DP-1.position = "0,0";
-          DP-2.position = "3440,0";
-        };
-      }.${machine.name} or { };
+        # desktop
+        DP-1.position = "0,0";
+        DP-2.position = "3440,0";
+      };
       workspaceLayout = "tabbed";
       workspaceAutoBackAndForth = true;
       fonts = {
-        names = [ "DejaVu Sans Mono" ];
+        names = [ "DejaVuSansMono" ];
         size = "11";
       };
       focus = {
@@ -34,6 +33,21 @@ optionalAttrs (isLinux && isGraphical) {
       workspaceOutputAssign =
         concatMap (i: map (d: { output = d; workspace = toString i; }) [ "DP-1" "eDP-1" ]) [ 1 3 4 10 ]
         ++ [{ output = "DP-2"; workspace = "2"; }];
+
+      window.commands = mapAttrsToList
+        (app_id: x: {
+          criteria = { inherit app_id; };
+          command = "title_format <span ${optionalString (length x > 1) "color='#${last x}'"}>${head x}</span> %title";
+        })
+        {
+          "" = [ "󰖯" ];
+          kitty = [ "" ];
+          firefox = [ "" "ff8817" ];
+          discord = [ "" "404eed" ];
+          chromium-browser = [ "" "a1c2fa" ];
+          "org.qutebrowser.qutebrowser" = [ "󰖟" "1f80b7" ];
+          qutebrowser_background = [ "󰖟" "1f80b7" ];
+        };
     };
     extraConfig = readFile ./sway-config;
   };
@@ -119,10 +133,7 @@ optionalAttrs (isLinux && isGraphical) {
         background: #900000;
     }
   '';
-  systemd.user.services.statusline = {
-    Unit.PartOf = [ "graphical-session.target" ];
-    Unit.After = [ "graphical-session.target" ];
-    Install.WantedBy = [ "graphical-session.target" ];
+  systemd.user.services.statusline = mkGraphicalService config {
     Service.ExecStart = "${getExe bin.statusline} sway";
   };
   home.sessionVariables.NIXOS_OZONE_WL = 1;

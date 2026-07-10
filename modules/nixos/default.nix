@@ -48,7 +48,7 @@
 
   fonts = optionalAttrs isGraphical {
     enableDefaultPackages = true;
-    packages = [ corefonts ];
+    packages = [ corefonts nerd-fonts.dejavu-sans-mono ];
   };
 
   time.timeZone = mkDefault "America/Indianapolis";

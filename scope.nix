@@ -85,4 +85,15 @@ cfg.lib.mapAttrs (s: _: cfg.packages.${s}.scope) cfg.legacyPackages //
     type = types.attrsOf (types.submodule module);
   };
   mkTypeOption = type: mkOption { inherit type; };
+  mkGraphicalService = config: extra: mkMerge [
+    (
+      let target = "sway-session.target";
+      in {
+        Unit.PartOf = [ target ];
+        Unit.After = [ target ];
+        Install.WantedBy = [ target ];
+      }
+    )
+    extra
+  ];
 })

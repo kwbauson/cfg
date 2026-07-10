@@ -46,10 +46,7 @@ let
   };
 in
 {
-  systemd.user.services.keyd-application-mapper = mkIf enable {
-    Unit.PartOf = [ "graphical-session.target" ];
-    Unit.After = [ "graphical-session.target" ];
-    Install.WantedBy = [ "graphical-session.target" ];
+  systemd.user.services.keyd-application-mapper = mkIf enable (mkGraphicalService config {
     Unit.X-Restart-Triggers = [ config.xdg.configFile."keyd/base.conf".source ];
     Service = {
       Environment = [ "PATH=${makeBinPath [ keyd ]}" "PYTHONUNBUFFERED=1" ];
@@ -57,7 +54,7 @@ in
       ExecStartPre = keyd-generate-config;
       ExecStart = "${keyd}/bin/keyd-application-mapper";
     };
-  };
+  });
   xdg.configFile."keyd/base.conf".text = ''
     [steam-app-418530|spelunky-2]
     $viNav
