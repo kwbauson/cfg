@@ -88,6 +88,10 @@
 
   programs.sway.enable = isGraphical;
   programs.sway.wrapperFeatures.gtk = true;
+  xdg.portal.wlr.settings.screencast = {
+    chooser_type = "dmenu";
+    chooser_cmd = "${getExe fuzzel} --dmenu";
+  };
 
   users.mutableUsers = false;
   secrets.password.neededForUsers = true;
