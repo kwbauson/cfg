@@ -1,21 +1,20 @@
 scope: with scope;
 addMetaAttrs { includePackage = true; } (pog {
   name = "clip";
+  runtimeInputs = [ osc ] ++ optionals isLinux [ wl-clipboard ];
   flags = [ ];
-  commands = [{
-    name = "sync";
-    description = "Listens and syncs the primary selection to the clipboard when the clipboard changes.";
-    script = ''
-      ${pathAdd (optionals isLinux [ wl-clipboard ])}
-      exec wl-paste -nw wl-copy -p
-    '';
-  }];
   script = ''
-    ${pathAdd [ osc ]}
     if [[ -t 0 ]];then
       osc paste -cp
     else
       osc copy -cp
     fi
   '';
+  commands = [{
+    name = "sync";
+    description = "Listens and syncs the primary selection to the clipboard when the clipboard changes.";
+    script = ''
+      exec wl-paste -nw wl-copy -p
+    '';
+  }];
 })
