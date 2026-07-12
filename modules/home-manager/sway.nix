@@ -50,7 +50,7 @@ optionalAttrs (isLinux && isGraphical) {
         })
         {
           "" = [ "󰖯" ];
-          kitty = [ "" ];
+          kitty = [ "" "0d8700" ];
           firefox = [ "" "ff8817" ];
           discord = [ "" "404eed" ];
           chromium-browser = [ "" "a1c2fa" ];
