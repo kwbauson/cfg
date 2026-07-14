@@ -159,7 +159,7 @@
       export PATH="$PATH":/opt/homebrew/bin
     '' + ''
       _debug_trap() {
-        if [[ $_after_setup = 1 && ! $BASH_COMMAND = _"*" ]];then
+        if [[ $_after_setup = 1 && ! $BASH_COMMAND == _* ]];then
           _set_terminal_title "$BASH_COMMAND"
         fi
       }
