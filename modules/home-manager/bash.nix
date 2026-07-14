@@ -69,9 +69,9 @@
       _exit_code=
       _title=
       _after_setup=
+
       _set_ps1() {
-        _after_setup=
-        local result color prompt
+        local result color prompt wd
         if [[ $UID -eq 0 ]];then
           color=31
           prompt=#
@@ -82,20 +82,20 @@
         PS1=
         _title=
         if [[ -n $SSH_CLIENT ]];then
-          PS1+="\[\e[1;''${color}m\]\h "
-          _title+="$HOSTNAME "
+          PS1+="\[\e[1;''${color}m\]${machine.name} "
+          _title+="${machine.name} "
         fi
-        PS1+="\[\e[0;34m\]\w "
-        _title+="$(dirs +0) "
+        wd=$(dirs +0)
+        PS1+="\[\e[0;34m\]$wd "
+        _title+="$wd "
         if [[ $_exit_code -ne 0 ]];then
           PS1+="\[\e[0;31m\]($_exit_code) "
         fi
         PS1+="\[\e[0;''${color}m\]''${prompt}\[\e[m\] "
         _title+="$prompt"
-        PS1="\$(_new_line_ps1)$PS1"
       }
 
-      _new_line_ps1() {
+      _new_line_check() {
         local _ y x _
         local LIGHT_YELLOW="\001\033[1;93m\002"
         local     RESET="\001\e[0m\002"
@@ -116,6 +116,7 @@
           tail -n1 ~/.bash_history >> ~/.bash_history-all
           echo "$PWD"/ >> ~/.kjump_history
           _set_terminal_title
+          _new_line_check
           _after_setup=1
       }
       PROMPT_COMMAND='_promptcmd'
@@ -161,6 +162,7 @@
       _debug_trap() {
         if [[ $_after_setup = 1 && ! $BASH_COMMAND == _* ]];then
           _set_terminal_title "$BASH_COMMAND"
+          _after_setup=
         fi
       }
       trap _debug_trap DEBUG
