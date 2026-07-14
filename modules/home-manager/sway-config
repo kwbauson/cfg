@@ -3,6 +3,7 @@ set $mod Mod4
 set $float_move_pixels 100
 floating_minimum_size 0 x 10
 titlebar_padding 5 3
+tiling_drag disabled
 workspace 1
 
 # programs

@@ -55,7 +55,6 @@
         paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local .dir_colors";
       }; "sudo ln -sft /root ${config.home.homeDirectory}/{${concatStringsSep "," paths}}";
       qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
-      zd = ''_dir=~/$(cd ~ && FZF_DEFAULT_COMMAND="fd -c always -H --ignore-file ${../../ignore} -E .git -td | sort -V" fzf) && cd "$_dir"'';
       dr = "direnv reload";
     };
     initExtra = ''
@@ -67,7 +66,11 @@
         echo -ne '\e[6 q'
       fi
 
+      _exit_code=
+      _title=
+      _after_setup=
       _set_ps1() {
+        _after_setup=
         local result color prompt
         if [[ $UID -eq 0 ]];then
           color=31
@@ -77,14 +80,18 @@
           prompt=$
         fi
         PS1=
+        _title=
         if [[ -n $SSH_CLIENT ]];then
           PS1+="\[\e[1;''${color}m\]\h "
+          _title+="$HOSTNAME "
         fi
         PS1+="\[\e[0;34m\]\w "
+        _title+="$(dirs +0) "
         if [[ $_exit_code -ne 0 ]];then
           PS1+="\[\e[0;31m\]($_exit_code) "
         fi
         PS1+="\[\e[0;''${color}m\]''${prompt}\[\e[m\] "
+        _title+="$prompt"
         PS1="\$(_new_line_ps1)$PS1"
       }
 
@@ -99,12 +106,17 @@
         fi
       }
 
+      _set_terminal_title() {
+        echo -ne "\e]0;$_title $1\007"
+      }
       _promptcmd() {
           _exit_code=$?
           _set_ps1
           history -a
           tail -n1 ~/.bash_history >> ~/.bash_history-all
           echo "$PWD"/ >> ~/.kjump_history
+          _set_terminal_title
+          _after_setup=1
       }
       PROMPT_COMMAND='_promptcmd'
 
@@ -145,7 +157,13 @@
       unset OLDIFS NEWPATH
     '' + optionalString isDarwin ''
       export PATH="$PATH":/opt/homebrew/bin
+    '' + ''
+      _debug_trap() {
+        if [[ $_after_setup = 1 && ! $BASH_COMMAND = _"*" ]];then
+          _set_terminal_title "$BASH_COMMAND"
+        fi
+      }
+      trap _debug_trap DEBUG
     '';
   };
-  programs.zoxide.enable = true;
 }
