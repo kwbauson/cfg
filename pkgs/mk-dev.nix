@@ -111,7 +111,7 @@ stdenv.mkDerivation {
   '';
   meta.includePackage = true;
   passthru = {
-    inherit pkgs;
+    inherit scope;
     __functor = _: mkDev;
   };
 }
