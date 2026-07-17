@@ -151,7 +151,8 @@
   systemd.services.personal-api = {
     wantedBy = [ "multi-user.target" ];
     environment.PORT = toString constants.personal-api.port;
-    script = getExe (writePython3Bin "main.py"
+    serviceConfig.DynamicUser = true;
+    serviceConfig.ExecStart = getExe (writePython3Bin "main.py"
       {
         libraries = ps: [ ps.uvicorn ps.fastapi ];
         doCheck = false;
