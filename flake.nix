@@ -3,7 +3,7 @@
     self.submodules = true;
     nixpkgs.url = "nixpkgs/nixos-unstable-small";
     nixpkgs-lib.url = ./nixpkgs/lib;
-    nixpkgs-lib.inputs.root.follows = "";
+    nixpkgs-lib.inputs.nixpkgs.follows = "nixpkgs";
     flake-compat.url = "https://github.com/NixOS/flake-compat/archive/master.tar.gz";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-lib";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-lib";
