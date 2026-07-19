@@ -45,8 +45,8 @@ system: pipeValue [
     groups = mapAttrValues (mapAttrValues (f: f scope)) groups';
     pkgs = cfg.legacyPackages.${system};
     scope = pkgs // pkgs.formats // pkgs.writers // cfg.scope // packages.${system};
-    overlayFns = groups.patch // groups.overlay;
-    extra-packages = mapAttrNames (n: pkgs.${n}) overlayFns // groups.package // groups.scopePackage;
+    overlayFns = groups.patch or { } // groups.overlay or { };
+    extra-packages = mapAttrNames (n: pkgs.${n}) overlayFns // groups.package or { } // groups.scopePackage or { };
     final = concatMapAttrs (_: id) groups.set
       // extra-packages // { inherit scope overlayFns extra-packages; };
   }.final)

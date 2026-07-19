@@ -17,7 +17,7 @@
       aur = "https://aur.archlinux.org/packages/?K={}";
       aw = "https://wiki.archlinux.org/index.php?search={}";
       g = "https://www.google.com/search?q={}";
-      nw = "https://nixos.wiki/index.php?search={}&go=Go";
+      nw = "https://wiki.nixos.org/w/index.php?search={}";
       tv = "https://www.google.com/search?q=site:tvtropes.org+{}";
       w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
       yt = "http://www.youtube.com/results?search_query={}";

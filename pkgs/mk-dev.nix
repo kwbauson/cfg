@@ -18,7 +18,7 @@ let
       isMinimal = !any (a: hasAttr a attrs) expectedMkShellArgs && attrs.isMinimal or true;
       mergeableAttrs = removeAttrs attrs (expectedArgs ++ [ "shellHook" "passthru" "meta" "isMinimal" ]);
       passthru = {
-        inherit pkgs;
+        inherit scope;
         env = buildEnv {
           name = "${name}-build-env";
           paths = attrs.packages or [ ]
@@ -94,8 +94,7 @@ stdenv.mkDerivation {
     echo 'use nix' > .envrc
     cat > shell.nix <<-EOF
     { mk-dev ? (import (fetchTarball "$latestUrl") {}).mk-dev
-    , pkgs ? mk-dev.pkgs
-    }: with pkgs; mk-dev {
+    }: with mk-dev.scope; mk-dev {
       packages = [
       ];
     }
@@ -112,7 +111,7 @@ stdenv.mkDerivation {
   '';
   meta.includePackage = true;
   passthru = {
-    inherit pkgs;
+    inherit scope;
     __functor = _: mkDev;
   };
 }

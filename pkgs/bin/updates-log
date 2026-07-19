@@ -26,8 +26,15 @@ logs+=$(
     done
   ) | while read source url current_rev new_rev;do
     echo Fetching "$source" 1>&2
-    mkdir -p "$cache/$source"
-    cd "$cache/$source"
+    if [[ -e ~/src/$source ]];then
+      dir=~/src/$source
+    else
+      dir=$cache/$source
+    fi
+    if [[ ! -e $dir ]];then
+      mkdir -p "$dir"
+    fi
+    cd "$dir"
     if [[ ! -d .git ]];then
       git init -q
       git remote add origin "$url"

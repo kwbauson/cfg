@@ -150,6 +150,7 @@ for_window [all] inhibit_idle fullscreen
 for_window [title="^Developer Tools —.*$"] floating enable
 for_window [title="^.*action=.*confno=.*$"] floating enable, no_focus
 for_window [class="^steam$"] border normal
+for_window [class="^steam_app_.*$"] floating disable, fullscreen disable
 for_window [app_id="^termnotes$"] border normal, move scratchpad, scratchpad show
 
 include /etc/sway/config.d/*

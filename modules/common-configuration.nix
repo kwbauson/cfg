@@ -10,6 +10,7 @@
   nixpkgs.pkgs = scope.pkgs;
   environment.etc.cfg-path.source = cfg.outPath;
   environment.etc.nixpkgs-path.source = nixpkgsPath;
+  nix.package = nixVersions.latest;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.settings = {
     max-jobs = "auto";
