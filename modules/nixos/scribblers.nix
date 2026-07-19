@@ -10,6 +10,7 @@ let cfg = config.services.scribblers; in
   config = mkIf cfg.enable {
     systemd.services.scribblers = {
       wantedBy = [ "multi-user.target" ];
+      serviceConfig.DynamicUser = true;
       script = ''
         export PORT=${toString cfg.port}
         export NETWORK_ADDRESS=${cfg.address}
