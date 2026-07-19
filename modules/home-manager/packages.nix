@@ -54,7 +54,6 @@
         acpi usbutils qtbr discord zathura xdg-utils;
       inherit nixos-install-tools arduino util-linux gnutar;
       inherit man-pages ncdu bitwarden-cli remmina ffmpeg yt-dlp procps;
-      inherit watchexec;
     }
   // optionalAttrs isMinimal {
     inherit imgloc yt-dlp;
