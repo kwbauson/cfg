@@ -25,7 +25,7 @@
         inherit (kdePackages) breeze-icons;
         inherit
           keyd imv wdisplays xlsclients wofi wl-clipboard wlrctl wlprop
-          steamtinkerlaunch playerctl;
+          steamtinkerlaunch playerctl waypipe;
       };
     };
     development = {
