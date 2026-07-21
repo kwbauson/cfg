@@ -43,6 +43,10 @@ let
       main.leftalt = leftalt
       meta.leftalt = M-escape
     '';
+    tapEscape = ''
+      main.leftalt = overload(alt, escape)
+      meta.leftalt = M-escape
+    '';
   };
 in
 {
@@ -63,5 +67,7 @@ in
     g = a
     [steam-app-3041230|windrose]
     $noEscape
+    [com-factorio-factorio]
+    $tapEscape
   '';
 }
