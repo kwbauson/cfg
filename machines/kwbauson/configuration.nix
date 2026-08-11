@@ -17,10 +17,14 @@
   services.tailscale.useRoutingFeatures = "both";
   networking = with constants; {
     networkmanager.enable = false;
-    firewall.allowedTCPPorts = [ http.port https.port ];
+    firewall.allowedTCPPorts = [ http.port https.port 8211 ];
     firewall.allowedUDPPorts = config.networking.firewall.allowedTCPPorts;
   };
   services._3proxy.enable = true;
+  services._3proxy.extraConfig = ''
+    tcppm 8211 ${machines.keith-server.tailscale.ip} 8211
+    udppm 8211 ${machines.keith-server.tailscale.ip} 8211
+  '';
   services.smartd.enable = false;
 
   services.caddy = with constants; {
