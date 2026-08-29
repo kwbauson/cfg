@@ -7,7 +7,7 @@ let
     cd $HOME/cfg
     if [[ $(git rev-parse --abbrev-ref HEAD) = main ]];then
       if [[ -z $(git status -s) ]];then
-        nou
+        nou || true
         nod ${optionalString (machine.name == "kwbauson") "--delete-booted-system"}
       else
         echo working branch dirty, skipping

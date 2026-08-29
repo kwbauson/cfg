@@ -184,4 +184,14 @@
     }
     reverse_proxy http://localhost:13001
   '';
+
+  services.ddns-updater = {
+    enable = true;
+    environment = {
+      SERVER_ENABLED = "no";
+      CONFIG_FILEPATH = config.secrets.ddns-updater.path;
+      PERIOD = "5m";
+    };
+  };
+  secrets.ddns-updater.loadCredential = "ddns-updater";
 }
