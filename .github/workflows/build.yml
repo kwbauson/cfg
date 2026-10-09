@@ -1,5 +1,8 @@
 name: build
 on: { workflow_dispatch, push }
+defaults:
+  run:
+    shell: script -- {0}
 jobs:
   checks:
     strategy:
