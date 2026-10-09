@@ -11,7 +11,7 @@
       {
         disabledModules = [ "${ncro.src}/nix/module.nix" ];
         inherit (nixosModule) options;
-        config = mkIf cfg.enable (removeAttrs nixosModule.config.content [ "systemd" ] // {
+        config = mkIf cfg.enable (removeAttrs nixosModule.config.content [ "systemd" "networking" ] // {
           launchd.daemons.ncro = {
             script = "${getExe' cfg.package "ncro"} --config ${configFile}";
             serviceConfig = {
