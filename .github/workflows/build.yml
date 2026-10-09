@@ -2,7 +2,7 @@ name: build
 on: { workflow_dispatch, push }
 defaults:
   run:
-    shell: script -q -- {0}
+    shell: script -q output -- {0}
 jobs:
   checks:
     strategy:
