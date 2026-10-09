@@ -1,8 +1,5 @@
 name: build
 on: { workflow_dispatch, push }
-defaults:
-  run:
-    shell: script -q output -- {0}
 jobs:
   checks:
     strategy:
@@ -12,9 +9,9 @@ jobs:
     runs-on: [nix, "${{ matrix.system }}"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - run: nix -L build --impure .#required-substitutes
-      - run: nix -L build .#checks
-      - run: ./result/bin/checks
+      - run: script -q -- nix -L build --impure .#required-substitutes
+      - run: script -q -- nix -L build .#checks
+      - run: script -q -- ./result/bin/checks
       - run: ./result/bin/cached-refs-push
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
