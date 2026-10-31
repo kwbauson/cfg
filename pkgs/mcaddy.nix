@@ -1,10 +1,10 @@
 scope: with scope;
 let
-  plugins = [ "github.com/greenpau/caddy-security@v1.4.1" ];
+  plugins = [ "github.com/greenpau/caddy-security@v1.6.2" ];
 in
 (caddy.withPlugins {
   inherit plugins;
-  hash = "sha256-4Z3EibZn10fsWCTX9hQXz8a0cpvarECikHyFHtLSwro=";
+  hash = "sha256-DKuYSDleJfcmVeneA9/ksjJDIvUtY7tykVZssx694BA=";
 }).overrideAttrs (old: {
   meta = old.meta // {
     skipBuild = isDarwin;
