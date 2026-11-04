@@ -37,5 +37,8 @@ buildEnv {
   name = pname;
   paths = map makeBin (attrNames scripts.${head (attrNames scripts)});
   passthru = { inherit scripts; };
+  passthru.checkScript = /* bash */ ''
+    ${getExe dix} ${hello} ${hello-cpp}
+  '';
   meta.includePackage = true;
 }
