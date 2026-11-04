@@ -12,7 +12,7 @@ let
       mkAction = action: (writeBashBin "switch" (''
         set -euo pipefail
         profile=/nix/var/nix/profiles/system
-        ${getExe dix} "$profile" ${toplevel}
+        ${getExe dix} diff "$profile" ${toplevel}
       '' + optionalString isNixOS ''
         sudo ${getExe build.nixos-rebuild} --no-reexec --store-path ${toplevel} ${action}
       '' + optionalString isNixDarwin ''
@@ -38,7 +38,7 @@ buildEnv {
   paths = map makeBin (attrNames scripts.${head (attrNames scripts)});
   passthru = { inherit scripts; };
   passthru.checkScript = /* bash */ ''
-    ${getExe dix} ${hello} ${hello-cpp}
+    ${getExe dix} diff ${hello} ${hello-cpp}
   '';
   meta.includePackage = true;
 }
