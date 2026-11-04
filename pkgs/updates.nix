@@ -34,7 +34,10 @@
         nix run .#updates.actions
         nix run .#update-extra-packages
       '';
-      actions = writeBashBin "update-actions" "${getExe pinact} run --update";
+      actions = writeBashBin "update-actions" ''
+        ${getExe pinact} run --update
+        ${getExe gh-actions-lock}
+      '';
     }
     (forAttrNames
       inputs
