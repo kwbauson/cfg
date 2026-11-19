@@ -5,6 +5,7 @@
     replace = true;
     extraLabels = [ "nix" system ];
     extraPackages = [ gh cachix ];
+    extraEnvironment.NIX_PATH = nixpkgsPath;
     tokenFile = config.secrets.github-runner-token.path;
     url = "https://github.com/kwbauson/cfg";
   };
