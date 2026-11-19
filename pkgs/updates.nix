@@ -19,6 +19,7 @@
       set -euo pipefail
       echo 'import ${nixpkgsPath}/shell.nix' > shell.nix
       trap 'rm shell.nix' EXIT
+      nix flake archive
       echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py ${jsonFile}
     '';
   update-extra-packages =

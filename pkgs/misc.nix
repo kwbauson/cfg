@@ -26,6 +26,7 @@
     hardware.enableRedistributableFirmware = true;
     hardware.enableAllFirmware = true;
     environment.systemPackages = [ better-comma ];
+    nix.settings.extra-experimental-features = [ "nix-command" "flakes" ];
   })).config.system.build.isoImage;
 
   alias = name:
