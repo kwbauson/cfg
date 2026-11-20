@@ -17,10 +17,6 @@
     in
     writeBashBin "updater" ''
       set -euo pipefail
-      echo 'import ${nixpkgsPath}/shell.nix' > shell.nix
-      trap 'rm shell.nix' EXIT
-      git add -N shell.nix
-      nix flake archive
       echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py ${jsonFile}
     '';
   update-extra-packages =
