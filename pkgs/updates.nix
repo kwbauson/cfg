@@ -17,6 +17,7 @@
     in
     writeBashBin "updater" ''
       set -euo pipefail
+      nix flake archive
       echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py ${jsonFile}
     '';
   update-extra-packages =
