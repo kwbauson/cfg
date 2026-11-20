@@ -13,12 +13,18 @@
         supportedFeatures = [ ];
         inherit attrPath;
       };
-      jsonFile = writeText "packageData.json" (toJSON (map packageData packages));
+      jsonFile = p: writeText "packageData.json" (toJSON (map packageData [ p ]));
     in
     writeBashBin "updater" ''
       set -euo pipefail
+      echo 'import ${nixpkgsPath}/shell.nix' > shell.nix
+      trap 'rm shell.nix' EXIT
+      # FIXME very hacky drop of concurrency because after https://github.com/NixOS/nixpkgs/commit/bd5484983ef5783b71b5f254eb06aae3ad52e46e
+      # meta.position doesn't force store files to exist, which is required at pkgs/common-updater/scripts/update-source-version:124
+      ${concatMapStringsSep "\n" (p: ''
       nix flake archive
-      echo | ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py ${jsonFile}
+      ${getExe python3} ${nixpkgsPath}/maintainers/scripts/update.py --skip-prompt --max-workers 1 ${jsonFile p}
+      '') packages}
     '';
   update-extra-packages =
     let updatable = attrNames (filterAttrs (_: p: p ? updateScript && !p.meta.skipUpdate or false) extra-packages);
